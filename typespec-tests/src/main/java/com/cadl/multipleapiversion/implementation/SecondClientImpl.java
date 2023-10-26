@@ -19,7 +19,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -27,17 +26,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.multipleapiversion.SecondServiceVersion;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -112,7 +106,8 @@ public final class SecondClientImpl {
      * @param serviceVersion Service version.
      */
     public SecondClientImpl(String endpoint, SecondServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -134,7 +129,8 @@ public final class SecondClientImpl {
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public SecondClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, SecondServiceVersion serviceVersion) {
+    public SecondClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        SecondServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
@@ -149,25 +145,31 @@ public final class SecondClientImpl {
     @ServiceInterface(name = "SecondClient")
     public interface SecondClientService {
         @Get("/client2/resources/{name}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/client2/resources/{name}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Resource read operation template.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -187,12 +189,15 @@ public final class SecondClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            name, accept, requestOptions, context));
     }
 
     /**
      * Resource read operation template.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -212,6 +217,7 @@ public final class SecondClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
+        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions,
+            Context.NONE);
     }
 }

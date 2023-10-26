@@ -8,44 +8,29 @@ package com.client.structure.service.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.client.structure.service.ClientAAsyncClient;
 import com.client.structure.service.ClientAClient;
 import com.client.structure.service.ClientAClientBuilder;
-import com.client.structure.service.ClientBAsyncClient;
 import com.client.structure.service.ClientBClient;
 import com.client.structure.service.ClientBClientBuilder;
-import com.client.structure.service.implementation.ClientAClientImpl;
-import com.client.structure.service.implementation.ClientBClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class ClientAClientTestBase extends TestProxyTestBase {
+class ClientAClientTestBase extends TestProxyTestBase {
     protected ClientAClient clientAClient;
 
     protected ClientBClient clientBClient;
 
     @Override
     protected void beforeTest() {
-        ClientAClientBuilder clientAClientbuilder = new ClientAClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ClientAClientBuilder clientAClientbuilder
+            = new ClientAClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientAClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -53,11 +38,11 @@ import reactor.core.publisher.Mono;
         }
         clientAClient = clientAClientbuilder.buildClient();
 
-        ClientBClientBuilder clientBClientbuilder = new ClientBClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ClientBClientBuilder clientBClientbuilder
+            = new ClientBClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientBClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

@@ -8,36 +8,20 @@ package com._specs_.azure.core.traits.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com._specs_.azure.core.traits.TraitsAsyncClient;
 import com._specs_.azure.core.traits.TraitsClient;
 import com._specs_.azure.core.traits.TraitsClientBuilder;
-import com._specs_.azure.core.traits.TraitsServiceVersion;
-import com._specs_.azure.core.traits.implementation.TraitsClientImpl;
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class TraitsClientTestBase extends TestProxyTestBase {
+class TraitsClientTestBase extends TestProxyTestBase {
     protected TraitsClient traitsClient;
 
     @Override
     protected void beforeTest() {
-        TraitsClientBuilder traitsClientbuilder = new TraitsClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        TraitsClientBuilder traitsClientbuilder = new TraitsClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             traitsClientbuilder.httpClient(interceptorManager.getPlaybackClient());

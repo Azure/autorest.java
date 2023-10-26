@@ -4,12 +4,10 @@
 
 package com.type.model.inheritance.notdiscriminated.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * The third level model in the normal multiple levels inheritance.
@@ -32,7 +30,8 @@ public final class Siamese extends Cat {
      */
     @Generated
     @JsonCreator
-    public Siamese(@JsonProperty(value = "name") String name, @JsonProperty(value = "age") int age, @JsonProperty(value = "smart") boolean smart) {
+    public Siamese(@JsonProperty(value = "name") String name, @JsonProperty(value = "age") int age,
+        @JsonProperty(value = "smart") boolean smart) {
         super(name, age);
         this.smart = smart;
     }

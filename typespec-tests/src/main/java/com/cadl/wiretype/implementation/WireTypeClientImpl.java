@@ -18,7 +18,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -26,16 +25,11 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -95,7 +89,8 @@ public final class WireTypeClientImpl {
      * @param endpoint Server parameter.
      */
     public WireTypeClientImpl(String endpoint) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -130,64 +125,80 @@ public final class WireTypeClientImpl {
     @ServiceInterface(name = "WireTypeClient")
     public interface WireTypeClientService {
         @Put("/wireType/superClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> superClassMismatch(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClass, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> superClassMismatch(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClass,
+            RequestOptions requestOptions, Context context);
 
         @Put("/wireType/superClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> superClassMismatchSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClass, RequestOptions requestOptions, Context context);
+        Response<BinaryData> superClassMismatchSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClass,
+            RequestOptions requestOptions, Context context);
 
         @Put("/wireType/subClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> subClassMismatch(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassMismatch, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> subClassMismatch(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassMismatch,
+            RequestOptions requestOptions, Context context);
 
         @Put("/wireType/subClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> subClassMismatchSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassMismatch, RequestOptions requestOptions, Context context);
+        Response<BinaryData> subClassMismatchSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassMismatch,
+            RequestOptions requestOptions, Context context);
 
         @Put("/wireType/bothClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> bothClassMismatch(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassBothMismatch, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> bothClassMismatch(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassBothMismatch,
+            RequestOptions requestOptions, Context context);
 
         @Put("/wireType/bothClassMismatch")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> bothClassMismatchSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassBothMismatch, RequestOptions requestOptions, Context context);
+        Response<BinaryData> bothClassMismatchSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData subClassBothMismatch,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * The superClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -204,21 +215,27 @@ public final class WireTypeClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> superClassMismatchWithResponseAsync(BinaryData subClass, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> superClassMismatchWithResponseAsync(BinaryData subClass,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.superClassMismatch(this.getEndpoint(), accept, subClass, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.superClassMismatch(this.getEndpoint(), accept, subClass, requestOptions, context));
     }
 
     /**
      * The superClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -242,14 +259,18 @@ public final class WireTypeClientImpl {
 
     /**
      * The subClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
@@ -266,21 +287,27 @@ public final class WireTypeClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> subClassMismatchWithResponseAsync(BinaryData subClassMismatch, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> subClassMismatchWithResponseAsync(BinaryData subClassMismatch,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.subClassMismatch(this.getEndpoint(), accept, subClassMismatch, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.subClassMismatch(this.getEndpoint(), accept, subClassMismatch, requestOptions, context));
     }
 
     /**
      * The subClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
@@ -297,21 +324,26 @@ public final class WireTypeClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> subClassMismatchWithResponse(BinaryData subClassMismatch, RequestOptions requestOptions) {
+    public Response<BinaryData> subClassMismatchWithResponse(BinaryData subClassMismatch,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.subClassMismatchSync(this.getEndpoint(), accept, subClassMismatch, requestOptions, Context.NONE);
     }
 
     /**
      * The bothClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -328,21 +360,27 @@ public final class WireTypeClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bothClassMismatchWithResponseAsync(BinaryData subClassBothMismatch, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> bothClassMismatchWithResponseAsync(BinaryData subClassBothMismatch,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.bothClassMismatch(this.getEndpoint(), accept, subClassBothMismatch, requestOptions, context));
+        return FluxUtil.withContext(context -> service.bothClassMismatch(this.getEndpoint(), accept,
+            subClassBothMismatch, requestOptions, context));
     }
 
     /**
      * The bothClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -359,8 +397,10 @@ public final class WireTypeClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData subClassBothMismatch, RequestOptions requestOptions) {
+    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData subClassBothMismatch,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.bothClassMismatchSync(this.getEndpoint(), accept, subClassBothMismatch, requestOptions, Context.NONE);
+        return service.bothClassMismatchSync(this.getEndpoint(), accept, subClassBothMismatch, requestOptions,
+            Context.NONE);
     }
 }

@@ -17,7 +17,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -25,17 +24,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.apiversion.ApiVersionServiceVersion;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -105,18 +99,19 @@ public final class ApiVersionClientImpl {
     /**
      * Initializes an instance of ApiVersionClient client.
      * 
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public ApiVersionClientImpl(String endpoint, ApiVersionServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of ApiVersionClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public ApiVersionClientImpl(HttpPipeline httpPipeline, String endpoint, ApiVersionServiceVersion serviceVersion) {
@@ -128,10 +123,11 @@ public final class ApiVersionClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
-    public ApiVersionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, ApiVersionServiceVersion serviceVersion) {
+    public ApiVersionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        ApiVersionServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
@@ -147,25 +143,31 @@ public final class ApiVersionClientImpl {
     @ServiceInterface(name = "ApiVersionClient")
     public interface ApiVersionClientService {
         @Get("/apiversion")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint,
+            @HostParam("ApiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/apiversion")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint,
+            @HostParam("ApiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * The read operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
@@ -180,12 +182,15 @@ public final class ApiVersionClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.read(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.read(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            accept, requestOptions, context));
     }
 
     /**
      * The read operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
@@ -200,6 +205,7 @@ public final class ApiVersionClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.readSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.readSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions,
+            Context.NONE);
     }
 }

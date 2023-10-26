@@ -8,39 +8,23 @@ package com.parameters.spread.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.parameters.spread.AliasAsyncClient;
 import com.parameters.spread.AliasClient;
-import com.parameters.spread.ModelAsyncClient;
 import com.parameters.spread.ModelClient;
 import com.parameters.spread.SpreadClientBuilder;
-import com.parameters.spread.implementation.SpreadClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class SpreadClientTestBase extends TestProxyTestBase {
+class SpreadClientTestBase extends TestProxyTestBase {
     protected ModelClient modelClient;
 
     protected AliasClient aliasClient;
 
     @Override
     protected void beforeTest() {
-        SpreadClientBuilder modelClientbuilder = new SpreadClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        SpreadClientBuilder modelClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -49,8 +33,7 @@ import reactor.core.publisher.Mono;
         }
         modelClient = modelClientbuilder.buildModelClient();
 
-        SpreadClientBuilder aliasClientbuilder = new SpreadClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        SpreadClientBuilder aliasClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             aliasClientbuilder.httpClient(interceptorManager.getPlaybackClient());

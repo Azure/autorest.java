@@ -4,13 +4,11 @@
 
 package com.type.property.nullable.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Model with collection models properties.
@@ -39,7 +37,8 @@ public final class CollectionsModelProperty {
      */
     @Generated
     @JsonCreator
-    public CollectionsModelProperty(@JsonProperty(value = "requiredProperty") String requiredProperty, @JsonProperty(value = "nullableProperty") List<InnerModel> nullableProperty) {
+    public CollectionsModelProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") List<InnerModel> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }

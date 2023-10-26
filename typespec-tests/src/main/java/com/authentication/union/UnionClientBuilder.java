@@ -22,10 +22,9 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.KeyCredentialPolicy;
@@ -39,19 +38,17 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * A builder for creating a new instance of the UnionClient type.
  */
-@ServiceClientBuilder(serviceClients = {UnionClient.class, UnionAsyncClient.class})
-public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder>, TokenCredentialTrait<UnionClientBuilder>, KeyCredentialTrait<UnionClientBuilder> {
+@ServiceClientBuilder(serviceClients = { UnionClient.class, UnionAsyncClient.class })
+public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder>,
+    TokenCredentialTrait<UnionClientBuilder>, KeyCredentialTrait<UnionClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -59,7 +56,7 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final String[] DEFAULT_SCOPES = new String[] {"https://security.microsoft.com/.default"};
+    private static final String[] DEFAULT_SCOPES = new String[] { "https://security.microsoft.com/.default" };
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-union.properties");
@@ -249,7 +246,8 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -260,11 +258,13 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL).forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
@@ -274,10 +274,12 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
         if (tokenCredential != null) {
             policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, DEFAULT_SCOPES));
         }
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY).forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).clientOptions(localClientOptions).build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 

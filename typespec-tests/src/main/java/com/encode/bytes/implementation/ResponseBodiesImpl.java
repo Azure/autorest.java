@@ -16,18 +16,12 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,8 +43,9 @@ public final class ResponseBodiesImpl {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-     ResponseBodiesImpl(BytesClientImpl client) {
-        this.service = RestProxy.create(ResponseBodiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    ResponseBodiesImpl(BytesClientImpl client) {
+        this.service
+            = RestProxy.create(ResponseBodiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -62,89 +57,101 @@ public final class ResponseBodiesImpl {
     @ServiceInterface(name = "BytesClientResponseB")
     public interface ResponseBodiesService {
         @Get("/encode/bytes/body/response/default")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/default")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> defaultMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> defaultMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/octet-stream")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> octetStream(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> octetStream(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/octet-stream")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> octetStreamSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> octetStreamSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/custom-content-type")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> customContentType(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> customContentType(@HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/body/response/custom-content-type")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> customContentTypeSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> customContentTypeSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/base64")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> base64(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/base64")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64Sync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> base64Sync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/base64url")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64Url(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> base64Url(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/bytes/body/response/base64url")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64UrlSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> base64UrlSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * The defaultMethod operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -164,7 +171,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -184,7 +193,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -204,7 +215,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -224,7 +237,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -244,7 +259,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -264,7 +281,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -284,7 +303,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -304,7 +325,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64Url operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -324,7 +347,9 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64Url operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Base64Url
      * }</pre>

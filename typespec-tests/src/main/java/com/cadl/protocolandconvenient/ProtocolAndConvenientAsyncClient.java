@@ -4,53 +4,23 @@
 
 package com.cadl.protocolandconvenient;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.Put;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.experimental.models.PollResult;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.polling.LocationPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
-import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncPoller;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenientClientImpl;
 import com.cadl.protocolandconvenient.models.ResourceA;
 import com.cadl.protocolandconvenient.models.ResourceB;
@@ -58,12 +28,6 @@ import com.cadl.protocolandconvenient.models.ResourceE;
 import com.cadl.protocolandconvenient.models.ResourceF;
 import com.cadl.protocolandconvenient.models.ResourceI;
 import com.cadl.protocolandconvenient.models.ResourceJ;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -82,20 +46,24 @@ public final class ProtocolAndConvenientAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     ProtocolAndConvenientAsyncClient(ProtocolAndConvenientClientImpl serviceClient) {
+    ProtocolAndConvenientAsyncClient(ProtocolAndConvenientClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -113,20 +81,25 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Mono<Response<BinaryData>> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
+    Mono<Response<BinaryData>> onlyConvenientWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.onlyConvenientWithResponseAsync(body, requestOptions);
     }
 
     /**
-     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated.
-     * <p><strong>Request Body Schema</strong></p>
+     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
+     * ResourceD should not be generated.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -150,14 +123,18 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -175,20 +152,25 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
         return this.serviceClient.bothConvenientAndProtocolWithResponseAsync(body, requestOptions);
     }
 
     /**
      * When set protocol false and convenient false.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -206,13 +188,15 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Mono<Response<BinaryData>> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
+    Mono<Response<BinaryData>> errorSettingWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.errorSettingWithResponseAsync(body, requestOptions);
     }
 
     /**
      * Long running operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -220,7 +204,9 @@ public final class ProtocolAndConvenientAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -240,20 +226,36 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-     PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource, RequestOptions requestOptions) {
+    PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginCreateOrReplaceAsync(name, resource, requestOptions);
     }
 
     /**
      * Paging operation.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -271,7 +273,7 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-     PagedFlux<BinaryData> list(RequestOptions requestOptions) {
+    PagedFlux<BinaryData> list(RequestOptions requestOptions) {
         return this.serviceClient.listAsync(requestOptions);
     }
 
@@ -292,7 +294,8 @@ public final class ProtocolAndConvenientAsyncClient {
     public Mono<ResourceB> onlyConvenient(ResourceA body) {
         // Generated convenience method for onlyConvenientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return onlyConvenientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(ResourceB.class));
+        return onlyConvenientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ResourceB.class));
     }
 
     /**
@@ -312,7 +315,8 @@ public final class ProtocolAndConvenientAsyncClient {
     public Mono<ResourceF> bothConvenientAndProtocol(ResourceE body) {
         // Generated convenience method for bothConvenientAndProtocolWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return bothConvenientAndProtocolWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
+        return bothConvenientAndProtocolWithResponse(BinaryData.fromObject(body), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
     }
 
     /**
@@ -353,15 +357,14 @@ public final class ProtocolAndConvenientAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
-                ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, ResourceJ>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(),
-                pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(ResourceJ.class)).collect(Collectors.toList()),
-                pagedResponse.getContinuationToken(),
-                null));
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(ResourceJ.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
         });
     }
 }

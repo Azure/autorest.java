@@ -6,10 +6,8 @@ package com.cadl.flatten.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * Options for sendLong API.
@@ -81,7 +79,8 @@ public final class SendLongOptions {
      */
     @Generated
     @JsonCreator
-    public SendLongOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "input") String input, @JsonProperty(value = "dataInt") int dataInt) {
+    public SendLongOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "input") String input,
+        @JsonProperty(value = "dataInt") int dataInt) {
         this.id = id;
         this.input = input;
         this.dataInt = dataInt;

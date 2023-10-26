@@ -25,7 +25,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.experimental.models.PollResult;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -33,13 +32,9 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.polling.LocationPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
@@ -47,8 +42,6 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -108,7 +101,8 @@ public final class StandardClientImpl {
      * @param serviceVersion Service version.
      */
     public StandardClientImpl(StandardServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
     }
 
     /**
@@ -128,7 +122,8 @@ public final class StandardClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param serviceVersion Service version.
      */
-    public StandardClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, StandardServiceVersion serviceVersion) {
+    public StandardClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        StandardServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.serviceVersion = serviceVersion;
@@ -143,66 +138,80 @@ public final class StandardClientImpl {
     @ServiceInterface(name = "StandardClient")
     public interface StandardClientService {
         @Put("/azure/core/lro/standard/users/{name}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
+            @PathParam("name") String name, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/lro/standard/users/{name}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+        Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion,
+            @PathParam("name") String name, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> delete(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> delete(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/standard/users/{name}:export")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/azure/core/lro/standard/users/{name}:export")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name, @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -220,23 +229,29 @@ public final class StandardClientImpl {
      * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource, RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), name,
+            accept, resource, requestOptions, context));
     }
 
     /**
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -254,23 +269,29 @@ public final class StandardClientImpl {
      * @return details about a user along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
+    private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), name, accept, resource, requestOptions, Context.NONE);
+        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), name, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -288,13 +309,15 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String name, BinaryData resource, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -302,14 +325,18 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -327,13 +354,15 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -341,14 +370,18 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -366,13 +399,15 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, User> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, User> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(User.class));
     }
 
@@ -380,14 +415,18 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -405,13 +444,15 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, User> beginCreateOrReplaceWithModel(String name, BinaryData resource, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, User> beginCreateOrReplaceWithModel(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(User.class));
     }
 
@@ -419,7 +460,9 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -441,19 +484,23 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
+     * @return provides status details for long running operations along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete(this.getServiceVersion().getVersion(), name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.delete(this.getServiceVersion().getVersion(), name, accept, requestOptions, context));
     }
 
     /**
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -487,7 +534,9 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -513,12 +562,12 @@ public final class StandardClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsync(String name, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.deleteWithResponseAsync(name, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
@@ -526,7 +575,9 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -552,12 +603,12 @@ public final class StandardClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.deleteWithResponse(name, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
@@ -565,7 +616,9 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -591,12 +644,12 @@ public final class StandardClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollResult, Void> beginDeleteWithModelAsync(String name, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.deleteWithResponseAsync(name, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(Void.class));
     }
 
@@ -604,7 +657,9 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -630,12 +685,12 @@ public final class StandardClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.deleteWithResponse(name, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(Void.class));
     }
 
@@ -643,7 +698,9 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -666,19 +723,24 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format, RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.export(this.getServiceVersion().getVersion(), name, format, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.export(this.getServiceVersion().getVersion(), name, format,
+            accept, requestOptions, context));
     }
 
     /**
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -706,14 +768,17 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(String name, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.exportSync(this.getServiceVersion().getVersion(), name, format, accept, requestOptions, Context.NONE);
+        return service.exportSync(this.getServiceVersion().getVersion(), name, format, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -739,13 +804,15 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginExportAsync(String name, String format, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginExportAsync(String name, String format,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.exportWithResponseAsync(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -753,7 +820,9 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -782,10 +851,11 @@ public final class StandardClientImpl {
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.exportWithResponse(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -793,7 +863,9 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -819,13 +891,15 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedUser> beginExportWithModelAsync(String name, String format, RequestOptions requestOptions) {
+    public PollerFlux<PollResult, ExportedUser> beginExportWithModelAsync(String name, String format,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.exportWithResponseAsync(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedUser.class));
     }
 
@@ -833,7 +907,9 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -859,13 +935,15 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedUser> beginExportWithModel(String name, String format, RequestOptions requestOptions) {
+    public SyncPoller<PollResult, ExportedUser> beginExportWithModel(String name, String format,
+        RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.exportWithResponse(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedUser.class));
     }
 }

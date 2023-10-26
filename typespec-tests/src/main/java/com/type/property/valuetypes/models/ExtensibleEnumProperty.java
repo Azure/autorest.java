@@ -4,13 +4,10 @@
 
 package com.type.property.valuetypes.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Model with extensible enum properties.

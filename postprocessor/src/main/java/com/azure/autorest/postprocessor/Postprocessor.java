@@ -308,7 +308,7 @@ public class Postprocessor extends NewPlugin {
 
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
-                throw new RuntimeException("Spotless failed to complete within 30 seconds or failed with an error code. "
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
                         + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {

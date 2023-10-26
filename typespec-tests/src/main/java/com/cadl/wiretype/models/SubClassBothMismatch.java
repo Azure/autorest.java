@@ -4,16 +4,13 @@
 
 package com.cadl.wiretype.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
-import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.regex.Pattern;
 
 /**
  * The SubClassBothMismatch model.
@@ -41,7 +38,8 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
 
     @Generated
     @JsonCreator
-    private SubClassBothMismatch(@JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231, @JsonProperty(value = "base64url") Base64Url base64Url) {
+    private SubClassBothMismatch(@JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231,
+        @JsonProperty(value = "base64url") Base64Url base64Url) {
         this(dateTimeRfc7231.getDateTime(), base64Url.decodedBytes());
     }
 

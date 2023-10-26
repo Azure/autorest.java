@@ -4,54 +4,20 @@
 
 package com.type.model.visibility;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.Delete;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Patch;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.type.model.visibility.implementation.VisibilityClientImpl;
 import com.type.model.visibility.models.VisibilityModel;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -68,13 +34,15 @@ public final class VisibilityAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     VisibilityAsyncClient(VisibilityClientImpl serviceClient) {
+    VisibilityAsyncClient(VisibilityClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The getModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -88,7 +56,9 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -109,7 +79,8 @@ public final class VisibilityAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with visibility properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return output model with visibility properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -119,7 +90,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The headModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -150,7 +123,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The putModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -181,7 +156,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The patchModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -212,7 +189,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The postModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -243,7 +222,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The deleteModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -289,7 +270,8 @@ public final class VisibilityAsyncClient {
     public Mono<VisibilityModel> getModel(VisibilityModel input) {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(VisibilityModel.class));
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(VisibilityModel.class));
     }
 
     /**

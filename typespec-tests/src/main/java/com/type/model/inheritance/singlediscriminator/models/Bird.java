@@ -4,7 +4,6 @@
 
 package com.type.model.inheritance.singlediscriminator.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,19 +11,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.regex.Pattern;
 
 /**
  * This is base model for polymorphic single level inheritance with a discriminator.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = Bird.class)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Bird.class)
 @JsonTypeName("Bird")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
+@JsonSubTypes({ @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
     @JsonSubTypes.Type(name = "sparrow", value = Sparrow.class),
-    @JsonSubTypes.Type(name = "goose", value = Goose.class),
-    @JsonSubTypes.Type(name = "eagle", value = Eagle.class)
-})
+    @JsonSubTypes.Type(name = "goose", value = Goose.class), @JsonSubTypes.Type(name = "eagle", value = Eagle.class) })
 @Immutable
 public class Bird {
     /*

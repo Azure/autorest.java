@@ -8,40 +8,25 @@ package com.parameters.collectionformat.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.parameters.collectionformat.CollectionFormatClientBuilder;
-import com.parameters.collectionformat.HeaderAsyncClient;
 import com.parameters.collectionformat.HeaderClient;
-import com.parameters.collectionformat.QueryAsyncClient;
 import com.parameters.collectionformat.QueryClient;
-import com.parameters.collectionformat.implementation.CollectionFormatClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class CollectionFormatClientTestBase extends TestProxyTestBase {
+class CollectionFormatClientTestBase extends TestProxyTestBase {
     protected QueryClient queryClient;
 
     protected HeaderClient headerClient;
 
     @Override
     protected void beforeTest() {
-        CollectionFormatClientBuilder queryClientbuilder = new CollectionFormatClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        CollectionFormatClientBuilder queryClientbuilder
+            = new CollectionFormatClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -49,9 +34,9 @@ import reactor.core.publisher.Mono;
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        CollectionFormatClientBuilder headerClientbuilder = new CollectionFormatClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        CollectionFormatClientBuilder headerClientbuilder
+            = new CollectionFormatClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

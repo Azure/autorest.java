@@ -6,54 +6,22 @@ package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
 import com._specs_.azure.core.basic.models.User;
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.Delete;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Patch;
-import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.Put;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -72,7 +40,7 @@ public final class BasicAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     BasicAsyncClient(BasicClientImpl serviceClient) {
+    BasicAsyncClient(BasicClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -80,7 +48,9 @@ public final class BasicAsyncClient {
      * Adds a user or updates a user's fields.
      * 
      * Creates or updates a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -95,7 +65,9 @@ public final class BasicAsyncClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -122,7 +94,8 @@ public final class BasicAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrUpdateWithResponse(int id, BinaryData resource,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponseAsync(id, resource, requestOptions);
     }
@@ -131,7 +104,9 @@ public final class BasicAsyncClient {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -146,7 +121,9 @@ public final class BasicAsyncClient {
      *     etag: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -173,7 +150,8 @@ public final class BasicAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrReplaceWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrReplaceWithResponse(int id, BinaryData resource,
+        RequestOptions requestOptions) {
         return this.serviceClient.createOrReplaceWithResponseAsync(id, resource, requestOptions);
     }
 
@@ -181,7 +159,9 @@ public final class BasicAsyncClient {
      * Gets a user.
      * 
      * Gets a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -215,20 +195,67 @@ public final class BasicAsyncClient {
      * Lists all users.
      * 
      * Lists all Users.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
-     *     <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>top</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to return.</td>
+     * </tr>
+     * <tr>
+     * <td>skip</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to skip.</td>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
+     * <tr>
+     * <td>orderby</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>expand</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to
+     * array.</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -259,7 +286,9 @@ public final class BasicAsyncClient {
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -290,7 +319,9 @@ public final class BasicAsyncClient {
 
     /**
      * List with custom page model.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -342,7 +373,9 @@ public final class BasicAsyncClient {
      * Exports a user.
      * 
      * Exports a User.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -393,7 +426,8 @@ public final class BasicAsyncClient {
     public Mono<User> createOrReplace(int id, User resource) {
         // Generated convenience method for createOrReplaceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
+        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
     /**
@@ -415,7 +449,8 @@ public final class BasicAsyncClient {
     public Mono<User> get(int id) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(id, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
+        return getWithResponse(id, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
     /**
@@ -439,7 +474,8 @@ public final class BasicAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<User> list(Integer top, Integer skip, List<String> orderBy, String filter, List<String> select, List<String> expand) {
+    public PagedFlux<User> list(Integer top, Integer skip, List<String> orderBy, String filter, List<String> select,
+        List<String> expand) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (top != null) {
@@ -474,15 +510,12 @@ public final class BasicAsyncClient {
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
-                ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(),
-                pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
-                pagedResponse.getContinuationToken(),
-                null));
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
         });
     }
 
@@ -505,15 +538,12 @@ public final class BasicAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
-                ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(),
-                pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
-                pagedResponse.getContinuationToken(),
-                null));
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
         });
     }
 
@@ -534,15 +564,12 @@ public final class BasicAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = listWithPage(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
-                ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(),
-                pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
-                pagedResponse.getContinuationToken(),
-                null));
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
         });
     }
 
@@ -563,15 +590,12 @@ public final class BasicAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = listWithCustomPageModel(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
-                ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(),
-                pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
-                pagedResponse.getContinuationToken(),
-                null));
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
         });
     }
 
@@ -617,6 +641,7 @@ public final class BasicAsyncClient {
     public Mono<User> export(int id, String format) {
         // Generated convenience method for exportWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return exportWithResponse(id, format, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
+        return exportWithResponse(id, format, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 }

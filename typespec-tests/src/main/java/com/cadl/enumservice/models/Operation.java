@@ -4,13 +4,10 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * The Operation model.
@@ -82,7 +79,8 @@ public final class Operation {
      */
     @Generated
     @JsonCreator
-    private Operation(@JsonProperty(value = "name") NameModel name, @JsonProperty(value = "priority") Priority priority, @JsonProperty(value = "color") ColorModel color) {
+    private Operation(@JsonProperty(value = "name") NameModel name, @JsonProperty(value = "priority") Priority priority,
+        @JsonProperty(value = "color") ColorModel color) {
         best = true;
         age = 50L;
         priorityValue = Priority.LOW;

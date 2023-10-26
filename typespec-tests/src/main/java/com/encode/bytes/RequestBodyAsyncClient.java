@@ -4,43 +4,20 @@
 
 package com.encode.bytes;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.encode.bytes.implementation.RequestBodiesImpl;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -57,13 +34,15 @@ public final class RequestBodyAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     RequestBodyAsyncClient(RequestBodiesImpl serviceClient) {
+    RequestBodyAsyncClient(RequestBodiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -84,7 +63,9 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The octetStream operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -105,7 +86,9 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The customContentType operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -126,7 +109,9 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64 operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -147,7 +132,9 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64Url operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -263,6 +250,7 @@ public final class RequestBodyAsyncClient {
     public Mono<Void> base64Url(byte[] value) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions).flatMap(FluxUtil::toMono);
+        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 }

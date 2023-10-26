@@ -4,7 +4,6 @@
 
 package com.encode.datetime.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,7 +12,6 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * The UnixTimestampArrayDatetimeProperty model.
@@ -48,6 +46,7 @@ public final class UnixTimestampArrayDatetimeProperty {
         if (this.value == null) {
             return null;
         }
-        return this.value.stream().map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC)).collect(java.util.stream.Collectors.toList());
+        return this.value.stream().map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
+            .collect(java.util.stream.Collectors.toList());
     }
 }

@@ -8,39 +8,20 @@ package com.type.property.nullable.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.type.property.nullable.BytesAsyncClient;
 import com.type.property.nullable.BytesClient;
-import com.type.property.nullable.CollectionsByteAsyncClient;
 import com.type.property.nullable.CollectionsByteClient;
-import com.type.property.nullable.CollectionsModelAsyncClient;
 import com.type.property.nullable.CollectionsModelClient;
-import com.type.property.nullable.DatetimeOperationAsyncClient;
 import com.type.property.nullable.DatetimeOperationClient;
-import com.type.property.nullable.DurationOperationAsyncClient;
 import com.type.property.nullable.DurationOperationClient;
 import com.type.property.nullable.NullableClientBuilder;
-import com.type.property.nullable.StringOperationAsyncClient;
 import com.type.property.nullable.StringOperationClient;
-import com.type.property.nullable.implementation.NullableClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class NullableClientTestBase extends TestProxyTestBase {
+class NullableClientTestBase extends TestProxyTestBase {
     protected StringOperationClient stringOperationClient;
 
     protected BytesClient bytesClient;
@@ -55,9 +36,9 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        NullableClientBuilder stringOperationClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NullableClientBuilder stringOperationClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -65,8 +46,7 @@ import reactor.core.publisher.Mono;
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        NullableClientBuilder bytesClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        NullableClientBuilder bytesClientbuilder = new NullableClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bytesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -75,9 +55,9 @@ import reactor.core.publisher.Mono;
         }
         bytesClient = bytesClientbuilder.buildBytesClient();
 
-        NullableClientBuilder datetimeOperationClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NullableClientBuilder datetimeOperationClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -85,9 +65,9 @@ import reactor.core.publisher.Mono;
         }
         datetimeOperationClient = datetimeOperationClientbuilder.buildDatetimeOperationClient();
 
-        NullableClientBuilder durationOperationClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NullableClientBuilder durationOperationClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -95,9 +75,9 @@ import reactor.core.publisher.Mono;
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        NullableClientBuilder collectionsByteClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NullableClientBuilder collectionsByteClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsByteClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -105,9 +85,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsByteClient = collectionsByteClientbuilder.buildCollectionsByteClient();
 
-        NullableClientBuilder collectionsModelClientbuilder = new NullableClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NullableClientBuilder collectionsModelClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

@@ -26,8 +26,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,7 +63,8 @@ public class Preprocessor extends NewPlugin {
       if (!tempFile.exists()) {
         tempFile.createNewFile();
       }
-      new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
+
+      Files.writeString(tempFile.toPath(), file);
     } catch (Exception e) {
       //
     }
@@ -111,7 +111,7 @@ public class Preprocessor extends NewPlugin {
       if (!tempFile.exists()) {
         tempFile.createNewFile();
       }
-      new FileOutputStream(tempFile).write(output.getBytes(StandardCharsets.UTF_8));
+      Files.writeString(tempFile.toPath(), output);
       writeFile(tempFile.getName(), output, null);
     } catch (Exception e) {
       logger.error("Failed to pre-process the code model.", e);

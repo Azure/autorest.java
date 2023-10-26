@@ -4,25 +4,15 @@
 
 package com.cadl.specialchars.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.specialchars.SpecialCharsAsyncClient;
 import com.cadl.specialchars.SpecialCharsClient;
 import com.cadl.specialchars.SpecialCharsClientBuilder;
-import com.cadl.specialchars.implementation.SpecialCharsClientImpl;
 import com.cadl.specialchars.models.Resource;
-import org.junit.jupiter.api.Assertions;
 
 public class BuiltinOpRead {
     public static void main(String[] args) {
-        SpecialCharsClient specialCharsClient = new SpecialCharsClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        SpecialCharsClient specialCharsClient = new SpecialCharsClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.specialchars.generated.read.builtinopread
         Resource response = specialCharsClient.read(null);
         // END:com.cadl.specialchars.generated.read.builtinopread

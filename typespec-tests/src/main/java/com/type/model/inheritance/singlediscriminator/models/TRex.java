@@ -4,14 +4,12 @@
 
 package com.type.model.inheritance.singlediscriminator.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.regex.Pattern;
 
 /**
  * The second level legacy model in polymorphic single level inheritance.

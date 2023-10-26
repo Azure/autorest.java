@@ -4,25 +4,14 @@
 
 package com.cadl.response.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.response.ResponseAsyncClient;
 import com.cadl.response.ResponseClient;
 import com.cadl.response.ResponseClientBuilder;
-import com.cadl.response.ResponseServiceVersion;
-import com.cadl.response.implementation.ResponseClientImpl;
-import org.junit.jupiter.api.Assertions;
 
 public class ResponseOpExists {
     public static void main(String[] args) {
-        ResponseClient responseClient = new ResponseClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        ResponseClient responseClient = new ResponseClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.response.generated.exists.responseopexists
         boolean response = responseClient.exists();
         // END:com.cadl.response.generated.exists.responseopexists

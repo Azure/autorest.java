@@ -6,16 +6,13 @@ package com.cadl.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * The Optional model.
@@ -151,7 +148,10 @@ public final class Optional {
      */
     @Generated
     @JsonCreator
-    public Optional(@JsonProperty(value = "booleanRequired") boolean booleanRequired, @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable, @JsonProperty(value = "stringRequired") String stringRequired, @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
+    public Optional(@JsonProperty(value = "booleanRequired") boolean booleanRequired,
+        @JsonProperty(value = "booleanRequiredNullable") Boolean booleanRequiredNullable,
+        @JsonProperty(value = "stringRequired") String stringRequired,
+        @JsonProperty(value = "stringRequiredNullable") String stringRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;

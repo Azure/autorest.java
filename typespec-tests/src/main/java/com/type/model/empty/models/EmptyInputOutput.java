@@ -4,11 +4,8 @@
 
 package com.type.model.empty.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.regex.Pattern;
 
 /**
  * Empty model used in both parameter and return type.

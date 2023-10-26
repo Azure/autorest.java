@@ -17,7 +17,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -25,15 +24,10 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -108,7 +102,8 @@ public final class ClientAClientImpl {
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
     public ClientAClientImpl(String endpoint, String client) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -130,7 +125,8 @@ public final class ClientAClientImpl {
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    public ClientAClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String client) {
+    public ClientAClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
@@ -145,52 +141,58 @@ public final class ClientAClientImpl {
     @ServiceInterface(name = "ClientAClient")
     public interface ClientAClientService {
         @Post("/one")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> renamedOne(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> renamedOne(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/one")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> renamedOneSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> renamedOneSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/three")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> renamedThree(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> renamedThree(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/three")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> renamedThreeSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> renamedThreeSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> renamedFive(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> renamedFive(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> renamedFiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> renamedFiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -206,7 +208,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedOneWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedOne(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.renamedOne(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -238,7 +241,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedThreeWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedThree(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.renamedThree(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -270,7 +274,8 @@ public final class ClientAClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedFiveWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.renamedFive(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.renamedFive(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**

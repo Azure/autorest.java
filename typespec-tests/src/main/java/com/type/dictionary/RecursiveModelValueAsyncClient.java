@@ -4,45 +4,22 @@
 
 package com.type.dictionary;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.type.dictionary.implementation.RecursiveModelValuesImpl;
 import com.type.dictionary.models.InnerModel;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -59,13 +36,15 @@ public final class RecursiveModelValueAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     RecursiveModelValueAsyncClient(RecursiveModelValuesImpl serviceClient) {
+    RecursiveModelValueAsyncClient(RecursiveModelValuesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The get operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String (Required): {
@@ -92,7 +71,9 @@ public final class RecursiveModelValueAsyncClient {
 
     /**
      * The put operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String (Required): {
@@ -133,7 +114,8 @@ public final class RecursiveModelValueAsyncClient {
     public Mono<Map<String, InnerModel>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INNER_MODEL));
     }
 
     /**
@@ -157,5 +139,7 @@ public final class RecursiveModelValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL = new TypeReference<Map<String, InnerModel>>() {};
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL
+        = new TypeReference<Map<String, InnerModel>>() {
+        };
 }

@@ -4,12 +4,10 @@
 
 package com.parameters.spread.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * Options for spreadWithMultipleParameters API.
@@ -86,7 +84,11 @@ public final class SpreadWithMultipleParametersOptions {
      */
     @Generated
     @JsonCreator
-    public SpreadWithMultipleParametersOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "x-ms-test-header") String xMsTestHeader, @JsonProperty(value = "prop1") String prop1, @JsonProperty(value = "prop2") String prop2, @JsonProperty(value = "prop3") String prop3, @JsonProperty(value = "prop4") String prop4, @JsonProperty(value = "prop5") String prop5, @JsonProperty(value = "prop6") String prop6) {
+    public SpreadWithMultipleParametersOptions(@JsonProperty(value = "id") String id,
+        @JsonProperty(value = "x-ms-test-header") String xMsTestHeader, @JsonProperty(value = "prop1") String prop1,
+        @JsonProperty(value = "prop2") String prop2, @JsonProperty(value = "prop3") String prop3,
+        @JsonProperty(value = "prop4") String prop4, @JsonProperty(value = "prop5") String prop5,
+        @JsonProperty(value = "prop6") String prop6) {
         this.id = id;
         this.xMsTestHeader = xMsTestHeader;
         this.prop1 = prop1;

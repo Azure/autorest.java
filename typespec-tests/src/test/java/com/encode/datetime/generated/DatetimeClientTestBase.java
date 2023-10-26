@@ -8,35 +8,18 @@ package com.encode.datetime.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.encode.datetime.DatetimeClientBuilder;
-import com.encode.datetime.HeaderAsyncClient;
 import com.encode.datetime.HeaderClient;
-import com.encode.datetime.PropertyAsyncClient;
 import com.encode.datetime.PropertyClient;
-import com.encode.datetime.QueryAsyncClient;
 import com.encode.datetime.QueryClient;
-import com.encode.datetime.ResponseHeaderAsyncClient;
 import com.encode.datetime.ResponseHeaderClient;
-import com.encode.datetime.implementation.DatetimeClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class DatetimeClientTestBase extends TestProxyTestBase {
+class DatetimeClientTestBase extends TestProxyTestBase {
     protected QueryClient queryClient;
 
     protected PropertyClient propertyClient;
@@ -47,8 +30,7 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        DatetimeClientBuilder queryClientbuilder = new DatetimeClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        DatetimeClientBuilder queryClientbuilder = new DatetimeClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -57,8 +39,7 @@ import reactor.core.publisher.Mono;
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        DatetimeClientBuilder propertyClientbuilder = new DatetimeClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        DatetimeClientBuilder propertyClientbuilder = new DatetimeClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             propertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -67,8 +48,7 @@ import reactor.core.publisher.Mono;
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
 
-        DatetimeClientBuilder headerClientbuilder = new DatetimeClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        DatetimeClientBuilder headerClientbuilder = new DatetimeClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -77,9 +57,9 @@ import reactor.core.publisher.Mono;
         }
         headerClient = headerClientbuilder.buildHeaderClient();
 
-        DatetimeClientBuilder responseHeaderClientbuilder = new DatetimeClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DatetimeClientBuilder responseHeaderClientbuilder
+            = new DatetimeClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             responseHeaderClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

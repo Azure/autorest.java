@@ -4,12 +4,10 @@
 
 package com.type.property.nullable.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
@@ -38,7 +36,8 @@ public final class StringProperty {
      */
     @Generated
     @JsonCreator
-    public StringProperty(@JsonProperty(value = "requiredProperty") String requiredProperty, @JsonProperty(value = "nullableProperty") String nullableProperty) {
+    public StringProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") String nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }

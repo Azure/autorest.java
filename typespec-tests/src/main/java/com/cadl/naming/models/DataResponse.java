@@ -4,13 +4,10 @@
 
 package com.cadl.naming.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * summary of Response
@@ -65,7 +62,8 @@ public final class DataResponse {
      */
     @Generated
     @JsonCreator
-    private DataResponse(@JsonProperty(value = "name") String name, @JsonProperty(value = "data") BinaryData data, @JsonProperty(value = "type") TypesModel dataType, @JsonProperty(value = "status") DataStatus status) {
+    private DataResponse(@JsonProperty(value = "name") String name, @JsonProperty(value = "data") BinaryData data,
+        @JsonProperty(value = "type") TypesModel dataType, @JsonProperty(value = "status") DataStatus status) {
         this.name = name;
         this.data = data;
         this.dataType = dataType;

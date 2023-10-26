@@ -4,51 +4,22 @@
 
 package com.cadl.optional;
 
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Put;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.cadl.optional.implementation.OptionalClientImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -65,29 +36,65 @@ public final class OptionalAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     OptionalAsyncClient(OptionalClientImpl serviceClient) {
+    OptionalAsyncClient(OptionalClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The put operation.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>booleanNullable</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * <tr>
+     * <td>string</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>stringNullable</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>request-header-optional</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -113,7 +120,9 @@ public final class OptionalAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -158,8 +167,11 @@ public final class OptionalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithResponse(String requestHeaderRequired, boolean booleanRequired, Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable, RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponseAsync(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable, requestOptions);
+    public Mono<Response<BinaryData>> putWithResponse(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponseAsync(requestHeaderRequired, booleanRequired, booleanRequiredNullable,
+            stringRequired, stringRequiredNullable, requestOptions);
     }
 
     /**
@@ -185,7 +197,10 @@ public final class OptionalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<AllPropertiesOptional> put(String requestHeaderRequired, boolean booleanRequired, Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable, String requestHeaderOptional, Boolean booleanNullable, String string, String stringNullable, Optional optional) {
+    public Mono<AllPropertiesOptional> put(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        String requestHeaderOptional, Boolean booleanNullable, String string, String stringNullable,
+        Optional optional) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
@@ -203,7 +218,9 @@ public final class OptionalAsyncClient {
         if (optional != null) {
             requestOptions.setBody(BinaryData.fromObject(optional));
         }
-        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
+        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired,
+            stringRequiredNullable, requestOptions).flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 
     /**
@@ -224,9 +241,12 @@ public final class OptionalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<AllPropertiesOptional> put(String requestHeaderRequired, boolean booleanRequired, Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable) {
+    public Mono<AllPropertiesOptional> put(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
+        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired,
+            stringRequiredNullable, requestOptions).flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(AllPropertiesOptional.class));
     }
 }

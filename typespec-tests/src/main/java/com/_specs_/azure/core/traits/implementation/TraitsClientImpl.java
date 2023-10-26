@@ -29,19 +29,14 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -101,7 +96,8 @@ public final class TraitsClientImpl {
      * @param serviceVersion Service version.
      */
     public TraitsClientImpl(TraitsServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
     }
 
     /**
@@ -121,7 +117,8 @@ public final class TraitsClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param serviceVersion Service version.
      */
-    public TraitsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, TraitsServiceVersion serviceVersion) {
+    public TraitsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        TraitsServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.serviceVersion = serviceVersion;
@@ -135,51 +132,88 @@ public final class TraitsClientImpl {
     @ServiceInterface(name = "TraitsClient")
     public interface TraitsClientService {
         @Get("/azure/core/traits/user/{id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> smokeTest(@QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> smokeTest(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/core/traits/user/{id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> smokeTestSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> smokeTestSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
+            @PathParam("id") int id, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
+        Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get a resource, sending and receiving headers.
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this string.</td></tr>
-     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
-     *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
-     *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>If-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if an entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-None-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if no entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Unmodified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was not modified after this time.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Modified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was modified after this time.</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -194,27 +228,58 @@ public final class TraitsClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a resource, sending and receiving headers along with {@link Response} on successful completion of {@link Mono}.
+     * @return a resource, sending and receiving headers along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> smokeTestWithResponseAsync(int id, String foo, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.smokeTest(this.getServiceVersion().getVersion(), id, foo, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.smokeTest(this.getServiceVersion().getVersion(), id, foo, accept,
+            requestOptions, context));
     }
 
     /**
      * Get a resource, sending and receiving headers.
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this string.</td></tr>
-     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
-     *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
-     *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>If-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if an entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-None-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if no entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Unmodified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was not modified after this time.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Modified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was modified after this time.</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -234,26 +299,48 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> smokeTestWithResponse(int id, String foo, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.smokeTestSync(this.getServiceVersion().getVersion(), id, foo, accept, requestOptions, Context.NONE);
+        return service.smokeTestSync(this.getServiceVersion().getVersion(), id, foo, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Test for repeatable requests.
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionValue: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionResult: String (Required)
@@ -270,41 +357,66 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData userActionParam, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData userActionParam,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
             }
         });
-        return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id, accept, userActionParam, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
+            accept, userActionParam, requestOptionsLocal, context));
     }
 
     /**
      * Test for repeatable requests.
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionValue: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionResult: String (Required)
@@ -321,21 +433,25 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam, RequestOptions requestOptions) {
+    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, userActionParam, requestOptionsLocal, Context.NONE);
+        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, userActionParam,
+            requestOptionsLocal, Context.NONE);
     }
 }

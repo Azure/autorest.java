@@ -8,35 +8,18 @@ package com.specialwords.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.specialwords.ModelPropertiesAsyncClient;
 import com.specialwords.ModelPropertiesClient;
-import com.specialwords.ModelsAsyncClient;
 import com.specialwords.ModelsClient;
-import com.specialwords.OperationsAsyncClient;
 import com.specialwords.OperationsClient;
-import com.specialwords.ParametersAsyncClient;
 import com.specialwords.ParametersClient;
 import com.specialwords.SpecialWordsClientBuilder;
-import com.specialwords.implementation.SpecialWordsClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class SpecialWordsClientTestBase extends TestProxyTestBase {
+class SpecialWordsClientTestBase extends TestProxyTestBase {
     protected ModelsClient modelsClient;
 
     protected ModelPropertiesClient modelPropertiesClient;
@@ -47,9 +30,9 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        SpecialWordsClientBuilder modelsClientbuilder = new SpecialWordsClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder modelsClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -57,9 +40,9 @@ import reactor.core.publisher.Mono;
         }
         modelsClient = modelsClientbuilder.buildModelsClient();
 
-        SpecialWordsClientBuilder modelPropertiesClientbuilder = new SpecialWordsClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder modelPropertiesClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelPropertiesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -67,9 +50,9 @@ import reactor.core.publisher.Mono;
         }
         modelPropertiesClient = modelPropertiesClientbuilder.buildModelPropertiesClient();
 
-        SpecialWordsClientBuilder operationsClientbuilder = new SpecialWordsClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder operationsClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             operationsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -77,9 +60,9 @@ import reactor.core.publisher.Mono;
         }
         operationsClient = operationsClientbuilder.buildOperationsClient();
 
-        SpecialWordsClientBuilder parametersClientbuilder = new SpecialWordsClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder parametersClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             parametersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

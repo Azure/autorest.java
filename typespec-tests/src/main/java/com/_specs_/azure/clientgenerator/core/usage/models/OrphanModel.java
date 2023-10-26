@@ -4,12 +4,10 @@
 
 package com._specs_.azure.clientgenerator.core.usage.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * Not used anywhere, but access is override to public so still need to be generated and exported with serialization.

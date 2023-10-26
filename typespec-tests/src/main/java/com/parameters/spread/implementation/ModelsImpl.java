@@ -17,18 +17,12 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,7 +44,7 @@ public final class ModelsImpl {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-     ModelsImpl(SpreadClientImpl client) {
+    ModelsImpl(SpreadClientImpl client) {
         this.service = RestProxy.create(ModelsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
@@ -63,25 +57,29 @@ public final class ModelsImpl {
     @ServiceInterface(name = "SpreadClientModels")
     public interface ModelsService {
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
+        Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -97,14 +95,18 @@ public final class ModelsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(BinaryData bodyParameter, RequestOptions requestOptions) {
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(BinaryData bodyParameter,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.spreadAsRequestBody(accept, bodyParameter, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.spreadAsRequestBody(accept, bodyParameter, requestOptions, context));
     }
 
     /**
      * The spreadAsRequestBody operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)

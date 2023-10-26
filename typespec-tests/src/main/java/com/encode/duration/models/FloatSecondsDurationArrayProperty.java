@@ -4,14 +4,12 @@
 
 package com.encode.duration.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * The FloatSecondsDurationArrayProperty model.
@@ -33,7 +31,8 @@ public final class FloatSecondsDurationArrayProperty {
     @Generated
     @JsonCreator
     public FloatSecondsDurationArrayProperty(@JsonProperty(value = "value") List<Duration> value) {
-        this.value = value.stream().map(el -> (double) el.toNanos() / 1000_000_000L).collect(java.util.stream.Collectors.toList());
+        this.value = value.stream().map(el -> (double) el.toNanos() / 1000_000_000L)
+            .collect(java.util.stream.Collectors.toList());
     }
 
     /**
@@ -46,6 +45,7 @@ public final class FloatSecondsDurationArrayProperty {
         if (this.value == null) {
             return null;
         }
-        return this.value.stream().map(el -> Duration.ofNanos((long) (el * 1000_000_000L))).collect(java.util.stream.Collectors.toList());
+        return this.value.stream().map(el -> Duration.ofNanos((long) (el * 1000_000_000L)))
+            .collect(java.util.stream.Collectors.toList());
     }
 }

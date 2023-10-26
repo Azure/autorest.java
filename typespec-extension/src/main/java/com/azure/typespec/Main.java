@@ -26,8 +26,9 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,6 +37,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -110,7 +112,7 @@ public class Main {
         // format
         // write output
         // java files
-        javaFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        formatAndWriteJavaFiles(typeSpecPlugin, javaFiles, settings);
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
@@ -123,6 +125,69 @@ public class Main {
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
         System.exit(0);
+    }
+
+    private static void formatAndWriteJavaFiles(TypeSpecPlugin typeSpecPlugin, Map<String, String> javaFiles,
+                                                JavaSettings settings) {
+        if (!settings.isSkipFormatting()) {
+            try {
+                Path tmpDir = Files.createTempDirectory("spotless");
+                tmpDir.toFile().deleteOnExit();
+
+                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                    Path file = tmpDir.resolve(javaFile.getKey());
+                    Files.createDirectories(file.getParent());
+                    Files.writeString(file, javaFile.getValue()).toFile().deleteOnExit();
+                }
+
+                Path pomPath = tmpDir.resolve("pom.xml");
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
+                        pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
+
+                attemptMavenSpotless(pomPath, LOGGER);
+
+                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                    Path file = tmpDir.resolve(javaFile.getKey());
+                    typeSpecPlugin.writeFile(javaFile.getKey(), Files.readString(file), null);
+                }
+            } catch (IOException ex) {
+                throw new UncheckedIOException(ex);
+            }
+        } else {
+            for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                typeSpecPlugin.writeFile(javaFile.getValue(), javaFile.getKey(), null);
+            }
+        }
+    }
+
+    private static void attemptMavenSpotless(Path pomPath, Logger logger) {
+        String[] command = isWindows()
+                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-f", pomPath.toString() }
+                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-f", pomPath.toString() };
+
+        try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                    .redirectErrorStream(true)
+                    .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                    .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
+                        + Files.readString(outputFile.toPath()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            logger.warn("Failed to run Spotless on generated code.");
+        }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
@@ -163,7 +228,7 @@ public class Main {
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
-        String file = readFile(filename);
+        String file = Files.readString(Paths.get(filename));
 
         Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
@@ -176,9 +241,5 @@ public class Main {
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
         return yamlMapper.loadAs(file, CodeModel.class);
-    }
-
-    private static String readFile(String path) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
     }
 }

@@ -6,42 +6,18 @@ package com._specs_.azure.clientgenerator.core.access;
 
 import com._specs_.azure.clientgenerator.core.access.implementation.SharedModelInOperationsImpl;
 import com._specs_.azure.clientgenerator.core.access.models.SharedModel;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -58,13 +34,15 @@ public final class SharedModelInOperationAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     SharedModelInOperationAsyncClient(SharedModelInOperationsImpl serviceClient) {
+    SharedModelInOperationAsyncClient(SharedModelInOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The publicMethod operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -77,7 +55,8 @@ public final class SharedModelInOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response} on successful completion of {@link Mono}.
+     * @return used by both public and internal operation along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -87,7 +66,9 @@ public final class SharedModelInOperationAsyncClient {
 
     /**
      * The internal operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -100,11 +81,12 @@ public final class SharedModelInOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response} on successful completion of {@link Mono}.
+     * @return used by both public and internal operation along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Mono<Response<BinaryData>> internalWithResponse(String name, RequestOptions requestOptions) {
+    Mono<Response<BinaryData>> internalWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.internalWithResponseAsync(name, requestOptions);
     }
 
@@ -125,7 +107,8 @@ public final class SharedModelInOperationAsyncClient {
     public Mono<SharedModel> publicMethod(String name) {
         // Generated convenience method for publicMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return publicMethodWithResponse(name, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
+        return publicMethodWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
     }
 
     /**
@@ -142,9 +125,10 @@ public final class SharedModelInOperationAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Mono<SharedModel> internal(String name) {
+    Mono<SharedModel> internal(String name) {
         // Generated convenience method for internalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return internalWithResponse(name, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
+        return internalWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(SharedModel.class));
     }
 }

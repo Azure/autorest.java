@@ -4,45 +4,20 @@
 
 package com.type.property.optional;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.type.property.optional.implementation.CollectionsModelsImpl;
 import com.type.property.optional.models.CollectionsModelProperty;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -59,13 +34,15 @@ public final class CollectionsModelAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     CollectionsModelAsyncClient(CollectionsModelsImpl serviceClient) {
+    CollectionsModelAsyncClient(CollectionsModelsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * Get models that will return all properties in the model.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -81,7 +58,8 @@ public final class CollectionsModelAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,7 +69,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Get models that will return the default object.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -107,7 +87,8 @@ public final class CollectionsModelAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -117,7 +98,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Put a body with all properties present.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -144,7 +127,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Put a body with default properties.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Optional): [
@@ -184,7 +169,8 @@ public final class CollectionsModelAsyncClient {
     public Mono<CollectionsModelProperty> getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAllWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
+        return getAllWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
     }
 
     /**
@@ -202,7 +188,8 @@ public final class CollectionsModelAsyncClient {
     public Mono<CollectionsModelProperty> getDefault() {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getDefaultWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
+        return getDefaultWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
     }
 
     /**

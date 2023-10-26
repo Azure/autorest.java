@@ -4,7 +4,6 @@
 
 package com.type.model.inheritance.nesteddiscriminator.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,17 +11,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.regex.Pattern;
 
 /**
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "sharktype", defaultImpl = Shark.class)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "sharktype",
+    defaultImpl = Shark.class)
 @JsonTypeName("shark")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "saw", value = SawShark.class),
-    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "saw", value = SawShark.class),
+    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class) })
 @Immutable
 public class Shark extends Fish {
     /*

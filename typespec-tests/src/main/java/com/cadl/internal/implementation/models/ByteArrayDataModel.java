@@ -5,8 +5,6 @@
 package com.cadl.internal.implementation.models;
 
 import com.azure.core.annotation.Immutable;
-import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**

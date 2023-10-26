@@ -4,7 +4,6 @@
 
 package com.cadl.internal.implementation.models;
 
-import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 

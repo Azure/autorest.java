@@ -4,7 +4,6 @@
 
 package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,16 +11,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.regex.Pattern;
 
 /**
  * Used in internal operations, should be generated but not exported.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = AbstractModel.class)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = AbstractModel.class)
 @JsonTypeName("AbstractModel")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "real", value = RealModel.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "real", value = RealModel.class) })
 @Immutable
 public class AbstractModel {
     /*

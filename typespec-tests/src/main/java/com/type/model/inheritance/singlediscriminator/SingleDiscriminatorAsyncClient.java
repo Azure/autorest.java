@@ -4,51 +4,21 @@
 
 package com.type.model.inheritance.singlediscriminator;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.type.model.inheritance.singlediscriminator.implementation.SingleDiscriminatorClientImpl;
 import com.type.model.inheritance.singlediscriminator.models.Bird;
 import com.type.model.inheritance.singlediscriminator.models.Dinosaur;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -65,13 +35,15 @@ public final class SingleDiscriminatorAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     SingleDiscriminatorAsyncClient(SingleDiscriminatorClientImpl serviceClient) {
+    SingleDiscriminatorAsyncClient(SingleDiscriminatorClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The getModel operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -83,7 +55,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -93,7 +66,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The putModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -116,7 +91,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The getRecursiveModel operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -128,7 +105,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -138,7 +116,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The putRecursiveModel operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -161,7 +141,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The getMissingDiscriminator operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -173,7 +155,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -183,7 +166,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The getWrongDiscriminator operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
@@ -195,7 +180,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -205,7 +191,9 @@ public final class SingleDiscriminatorAsyncClient {
 
     /**
      * The getLegacyModel operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     size: int (Required)
@@ -217,7 +205,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link Mono}.
+     * @return define a base class in the legacy way along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -233,14 +222,16 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Bird> getModel() {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
+        return getModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
     }
 
     /**
@@ -271,14 +262,16 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Bird> getRecursiveModel() {
         // Generated convenience method for getRecursiveModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getRecursiveModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
+        return getRecursiveModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
     }
 
     /**
@@ -309,14 +302,16 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Bird> getMissingDiscriminator() {
         // Generated convenience method for getMissingDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getMissingDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
+        return getMissingDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
     }
 
     /**
@@ -327,14 +322,16 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Bird> getWrongDiscriminator() {
         // Generated convenience method for getWrongDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWrongDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
+        return getWrongDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Bird.class));
     }
 
     /**
@@ -352,6 +349,7 @@ public final class SingleDiscriminatorAsyncClient {
     public Mono<Dinosaur> getLegacyModel() {
         // Generated convenience method for getLegacyModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getLegacyModelWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Dinosaur.class));
+        return getLegacyModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dinosaur.class));
     }
 }

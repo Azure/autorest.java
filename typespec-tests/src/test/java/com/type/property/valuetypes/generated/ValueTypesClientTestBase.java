@@ -8,65 +8,33 @@ package com.type.property.valuetypes.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.type.property.valuetypes.BooleanOperationAsyncClient;
 import com.type.property.valuetypes.BooleanOperationClient;
-import com.type.property.valuetypes.BytesAsyncClient;
 import com.type.property.valuetypes.BytesClient;
-import com.type.property.valuetypes.CollectionsIntAsyncClient;
 import com.type.property.valuetypes.CollectionsIntClient;
-import com.type.property.valuetypes.CollectionsModelAsyncClient;
 import com.type.property.valuetypes.CollectionsModelClient;
-import com.type.property.valuetypes.CollectionsStringAsyncClient;
 import com.type.property.valuetypes.CollectionsStringClient;
-import com.type.property.valuetypes.DatetimeOperationAsyncClient;
 import com.type.property.valuetypes.DatetimeOperationClient;
-import com.type.property.valuetypes.DictionaryStringAsyncClient;
 import com.type.property.valuetypes.DictionaryStringClient;
-import com.type.property.valuetypes.DurationOperationAsyncClient;
 import com.type.property.valuetypes.DurationOperationClient;
-import com.type.property.valuetypes.EnumAsyncClient;
 import com.type.property.valuetypes.EnumClient;
-import com.type.property.valuetypes.ExtensibleEnumAsyncClient;
 import com.type.property.valuetypes.ExtensibleEnumClient;
-import com.type.property.valuetypes.FloatOperationAsyncClient;
 import com.type.property.valuetypes.FloatOperationClient;
-import com.type.property.valuetypes.IntAsyncClient;
 import com.type.property.valuetypes.IntClient;
-import com.type.property.valuetypes.ModelAsyncClient;
 import com.type.property.valuetypes.ModelClient;
-import com.type.property.valuetypes.NeverAsyncClient;
 import com.type.property.valuetypes.NeverClient;
-import com.type.property.valuetypes.StringOperationAsyncClient;
 import com.type.property.valuetypes.StringOperationClient;
-import com.type.property.valuetypes.UnknownArrayAsyncClient;
 import com.type.property.valuetypes.UnknownArrayClient;
-import com.type.property.valuetypes.UnknownDictAsyncClient;
 import com.type.property.valuetypes.UnknownDictClient;
-import com.type.property.valuetypes.UnknownIntAsyncClient;
 import com.type.property.valuetypes.UnknownIntClient;
-import com.type.property.valuetypes.UnknownStringAsyncClient;
 import com.type.property.valuetypes.UnknownStringClient;
 import com.type.property.valuetypes.ValueTypesClientBuilder;
-import com.type.property.valuetypes.implementation.ValueTypesClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class ValueTypesClientTestBase extends TestProxyTestBase {
+class ValueTypesClientTestBase extends TestProxyTestBase {
     protected BooleanOperationClient booleanOperationClient;
 
     protected StringOperationClient stringOperationClient;
@@ -107,9 +75,9 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        ValueTypesClientBuilder booleanOperationClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder booleanOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -117,9 +85,9 @@ import reactor.core.publisher.Mono;
         }
         booleanOperationClient = booleanOperationClientbuilder.buildBooleanOperationClient();
 
-        ValueTypesClientBuilder stringOperationClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder stringOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -127,9 +95,9 @@ import reactor.core.publisher.Mono;
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        ValueTypesClientBuilder bytesClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder bytesClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bytesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -137,8 +105,7 @@ import reactor.core.publisher.Mono;
         }
         bytesClient = bytesClientbuilder.buildBytesClient();
 
-        ValueTypesClientBuilder intClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ValueTypesClientBuilder intClientbuilder = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             intClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -147,9 +114,9 @@ import reactor.core.publisher.Mono;
         }
         intClient = intClientbuilder.buildIntClient();
 
-        ValueTypesClientBuilder floatOperationClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder floatOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             floatOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -157,9 +124,9 @@ import reactor.core.publisher.Mono;
         }
         floatOperationClient = floatOperationClientbuilder.buildFloatOperationClient();
 
-        ValueTypesClientBuilder datetimeOperationClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder datetimeOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -167,9 +134,9 @@ import reactor.core.publisher.Mono;
         }
         datetimeOperationClient = datetimeOperationClientbuilder.buildDatetimeOperationClient();
 
-        ValueTypesClientBuilder durationOperationClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder durationOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -177,8 +144,7 @@ import reactor.core.publisher.Mono;
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        ValueTypesClientBuilder enumClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ValueTypesClientBuilder enumClientbuilder = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -187,9 +153,9 @@ import reactor.core.publisher.Mono;
         }
         enumClient = enumClientbuilder.buildEnumClient();
 
-        ValueTypesClientBuilder extensibleEnumClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder extensibleEnumClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extensibleEnumClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -197,9 +163,9 @@ import reactor.core.publisher.Mono;
         }
         extensibleEnumClient = extensibleEnumClientbuilder.buildExtensibleEnumClient();
 
-        ValueTypesClientBuilder modelClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder modelClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -207,9 +173,9 @@ import reactor.core.publisher.Mono;
         }
         modelClient = modelClientbuilder.buildModelClient();
 
-        ValueTypesClientBuilder collectionsStringClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -217,9 +183,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsStringClient = collectionsStringClientbuilder.buildCollectionsStringClient();
 
-        ValueTypesClientBuilder collectionsIntClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsIntClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsIntClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -227,9 +193,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsIntClient = collectionsIntClientbuilder.buildCollectionsIntClient();
 
-        ValueTypesClientBuilder collectionsModelClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsModelClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -237,9 +203,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
 
-        ValueTypesClientBuilder dictionaryStringClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder dictionaryStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             dictionaryStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -247,9 +213,9 @@ import reactor.core.publisher.Mono;
         }
         dictionaryStringClient = dictionaryStringClientbuilder.buildDictionaryStringClient();
 
-        ValueTypesClientBuilder neverClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder neverClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             neverClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -257,9 +223,9 @@ import reactor.core.publisher.Mono;
         }
         neverClient = neverClientbuilder.buildNeverClient();
 
-        ValueTypesClientBuilder unknownStringClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -267,9 +233,9 @@ import reactor.core.publisher.Mono;
         }
         unknownStringClient = unknownStringClientbuilder.buildUnknownStringClient();
 
-        ValueTypesClientBuilder unknownIntClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownIntClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownIntClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -277,9 +243,9 @@ import reactor.core.publisher.Mono;
         }
         unknownIntClient = unknownIntClientbuilder.buildUnknownIntClient();
 
-        ValueTypesClientBuilder unknownDictClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownDictClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownDictClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -287,9 +253,9 @@ import reactor.core.publisher.Mono;
         }
         unknownDictClient = unknownDictClientbuilder.buildUnknownDictClient();
 
-        ValueTypesClientBuilder unknownArrayClientbuilder = new ValueTypesClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownArrayClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

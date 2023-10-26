@@ -4,41 +4,18 @@
 
 package com.type.union;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.serializer.SerializerAdapter;
 import com.type.union.implementation.UnionClientImpl;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -54,13 +31,15 @@ public final class UnionClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     UnionClient(UnionClientImpl serviceClient) {
+    UnionClient(UnionClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The sendInt operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: SimpleUnionModelBase (Required)
@@ -84,7 +63,9 @@ public final class UnionClient {
 
     /**
      * The sendIntArray operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: SimpleUnionModelBase (Required)
@@ -108,7 +89,9 @@ public final class UnionClient {
 
     /**
      * The sendFirstNamedUnionValue operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: NamedUnionModelBase (Required)
@@ -132,7 +115,9 @@ public final class UnionClient {
 
     /**
      * The sendSecondNamedUnionValue operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: NamedUnionModelBase (Required)
@@ -156,7 +141,9 @@ public final class UnionClient {
 
     /**
      * The receiveString operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: SimpleUnionModelBase (Required)
@@ -179,7 +166,9 @@ public final class UnionClient {
 
     /**
      * The receiveIntArray operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: SimpleUnionModelBase (Required)
@@ -202,7 +191,9 @@ public final class UnionClient {
 
     /**
      * The receiveFirstNamedUnionValue operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: NamedUnionModelBase (Required)
@@ -225,7 +216,9 @@ public final class UnionClient {
 
     /**
      * The receiveSecondNamedUnionValue operation.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: NamedUnionModelBase (Required)

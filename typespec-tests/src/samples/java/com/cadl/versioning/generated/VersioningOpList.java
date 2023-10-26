@@ -4,28 +4,17 @@
 
 package com.cadl.versioning.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.versioning.VersioningAsyncClient;
 import com.cadl.versioning.VersioningClient;
 import com.cadl.versioning.VersioningClientBuilder;
-import com.cadl.versioning.VersioningServiceVersion;
-import com.cadl.versioning.implementation.VersioningClientImpl;
 import com.cadl.versioning.models.Resource;
 import java.util.Arrays;
-import org.junit.jupiter.api.Assertions;
 
 public class VersioningOpList {
     public static void main(String[] args) {
-        VersioningClient versioningClient = new VersioningClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        VersioningClient versioningClient = new VersioningClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.versioning.generated.list.versioningoplist
         PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), "age gt 18");
         // END:com.cadl.versioning.generated.list.versioningoplist

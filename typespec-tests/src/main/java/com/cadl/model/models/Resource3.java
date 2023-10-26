@@ -4,12 +4,10 @@
 
 package com.cadl.model.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * The Resource3 model.
@@ -38,7 +36,8 @@ public final class Resource3 {
      */
     @Generated
     @JsonCreator
-    private Resource3(@JsonProperty(value = "name") String name, @JsonProperty(value = "outputData3") OutputData3 outputData3) {
+    private Resource3(@JsonProperty(value = "name") String name,
+        @JsonProperty(value = "outputData3") OutputData3 outputData3) {
         this.name = name;
         this.outputData3 = outputData3;
     }

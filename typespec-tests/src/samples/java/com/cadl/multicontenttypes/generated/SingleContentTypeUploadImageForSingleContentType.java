@@ -4,28 +4,19 @@
 
 package com.cadl.multicontenttypes.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.multicontenttypes.MultiContentTypesAsyncClient;
 import com.cadl.multicontenttypes.MultiContentTypesClient;
 import com.cadl.multicontenttypes.MultiContentTypesClientBuilder;
-import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
 import java.nio.charset.StandardCharsets;
-import org.junit.jupiter.api.Assertions;
 
 public class SingleContentTypeUploadImageForSingleContentType {
     public static void main(String[] args) {
-        MultiContentTypesClient multiContentTypesClient = new MultiContentTypesClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        MultiContentTypesClient multiContentTypesClient = new MultiContentTypesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
-        multiContentTypesClient.uploadImageForSingleContentType(BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));
+        multiContentTypesClient.uploadImageForSingleContentType(
+            BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));
         // END:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
     }
 }

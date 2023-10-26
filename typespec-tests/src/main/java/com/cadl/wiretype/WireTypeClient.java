@@ -4,51 +4,21 @@
 
 package com.cadl.wiretype;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.cadl.wiretype.implementation.WireTypeClientImpl;
 import com.cadl.wiretype.models.SubClass;
 import com.cadl.wiretype.models.SubClassBothMismatch;
 import com.cadl.wiretype.models.SubClassMismatch;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the synchronous WireTypeClient type.
@@ -64,20 +34,24 @@ public final class WireTypeClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     WireTypeClient(WireTypeClientImpl serviceClient) {
+    WireTypeClient(WireTypeClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The superClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -101,14 +75,18 @@ public final class WireTypeClient {
 
     /**
      * The subClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
@@ -126,20 +104,25 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> subClassMismatchWithResponse(BinaryData subClassMismatch, RequestOptions requestOptions) {
+    public Response<BinaryData> subClassMismatchWithResponse(BinaryData subClassMismatch,
+        RequestOptions requestOptions) {
         return this.serviceClient.subClassMismatchWithResponse(subClassMismatch, requestOptions);
     }
 
     /**
      * The bothClassMismatch operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -157,7 +140,8 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData subClassBothMismatch, RequestOptions requestOptions) {
+    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData subClassBothMismatch,
+        RequestOptions requestOptions) {
         return this.serviceClient.bothClassMismatchWithResponse(subClassBothMismatch, requestOptions);
     }
 
@@ -178,7 +162,8 @@ public final class WireTypeClient {
     public SubClass superClassMismatch(SubClass subClass) {
         // Generated convenience method for superClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return superClassMismatchWithResponse(BinaryData.fromObject(subClass), requestOptions).getValue().toObject(SubClass.class);
+        return superClassMismatchWithResponse(BinaryData.fromObject(subClass), requestOptions).getValue()
+            .toObject(SubClass.class);
     }
 
     /**
@@ -198,7 +183,8 @@ public final class WireTypeClient {
     public SubClassMismatch subClassMismatch(SubClassMismatch subClassMismatch) {
         // Generated convenience method for subClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return subClassMismatchWithResponse(BinaryData.fromObject(subClassMismatch), requestOptions).getValue().toObject(SubClassMismatch.class);
+        return subClassMismatchWithResponse(BinaryData.fromObject(subClassMismatch), requestOptions).getValue()
+            .toObject(SubClassMismatch.class);
     }
 
     /**
@@ -218,6 +204,7 @@ public final class WireTypeClient {
     public SubClassBothMismatch bothClassMismatch(SubClassBothMismatch subClassBothMismatch) {
         // Generated convenience method for bothClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return bothClassMismatchWithResponse(BinaryData.fromObject(subClassBothMismatch), requestOptions).getValue().toObject(SubClassBothMismatch.class);
+        return bothClassMismatchWithResponse(BinaryData.fromObject(subClassBothMismatch), requestOptions).getValue()
+            .toObject(SubClassBothMismatch.class);
     }
 }

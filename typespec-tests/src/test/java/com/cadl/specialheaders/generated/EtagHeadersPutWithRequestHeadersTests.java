@@ -4,31 +4,11 @@
 
 package com.cadl.specialheaders.generated;
 
-import com.azure.core.credential.AccessToken;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.RequestConditions;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.test.TestMode;
-import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.specialheaders.SpecialHeadersAsyncClient;
-import com.cadl.specialheaders.SpecialHeadersClient;
-import com.cadl.specialheaders.SpecialHeadersClientBuilder;
-import com.cadl.specialheaders.SpecialHeadersServiceVersion;
-import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
-import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
 @Disabled
 public final class EtagHeadersPutWithRequestHeadersTests extends SpecialHeadersClientTestBase {
@@ -36,7 +16,9 @@ public final class EtagHeadersPutWithRequestHeadersTests extends SpecialHeadersC
     @Disabled
     public void testEtagHeadersPutWithRequestHeadersTests() {
         // method invocation
-        Resource response = specialHeadersClient.putWithRequestHeaders("name", new Resource("myType").setDescription("This is sample for Etag headers"), new RequestConditions().setIfMatch("64e005"));
+        Resource response = specialHeadersClient.putWithRequestHeaders("name",
+            new Resource("myType").setDescription("This is sample for Etag headers"),
+            new RequestConditions().setIfMatch("64e005"));
 
         // response assertion
         Assertions.assertNotNull(response);

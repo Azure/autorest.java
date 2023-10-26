@@ -4,27 +4,15 @@
 
 package com.cadl.model.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.model.ModelAsyncClient;
 import com.cadl.model.ModelClient;
 import com.cadl.model.ModelClientBuilder;
-import com.cadl.model.implementation.ModelClientImpl;
 import com.cadl.model.models.NestedModel;
-import com.cadl.model.models.NestedModel1;
-import com.cadl.model.models.NestedModel2;
-import org.junit.jupiter.api.Assertions;
 
 public class ModelOpPutNested {
     public static void main(String[] args) {
-        ModelClient modelClient = new ModelClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        ModelClient modelClient
+            = new ModelClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.model.generated.putnested.modelopputnested
         NestedModel response = modelClient.putNested(null);
         // END:com.cadl.model.generated.putnested.modelopputnested

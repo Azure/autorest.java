@@ -7,41 +7,17 @@ package com._specs_.azure.clientgenerator.core.access;
 import com._specs_.azure.clientgenerator.core.access.implementation.RelativeModelInOperationsImpl;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.AbstractModel;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.OuterModel;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the synchronous AccessClient type.
@@ -57,7 +33,7 @@ public final class RelativeModelInOperationClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     RelativeModelInOperationClient(RelativeModelInOperationsImpl serviceClient) {
+    RelativeModelInOperationClient(RelativeModelInOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -66,14 +42,16 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -93,7 +71,7 @@ public final class RelativeModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Response<BinaryData> operationWithResponse(String name, RequestOptions requestOptions) {
+    Response<BinaryData> operationWithResponse(String name, RequestOptions requestOptions) {
         return this.serviceClient.operationWithResponse(name, requestOptions);
     }
 
@@ -102,11 +80,13 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -123,7 +103,7 @@ public final class RelativeModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     Response<BinaryData> discriminatorWithResponse(String kind, RequestOptions requestOptions) {
+    Response<BinaryData> discriminatorWithResponse(String kind, RequestOptions requestOptions) {
         return this.serviceClient.discriminatorWithResponse(kind, requestOptions);
     }
 
@@ -132,11 +112,11 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
      * 
@@ -151,7 +131,7 @@ public final class RelativeModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     OuterModel operation(String name) {
+    OuterModel operation(String name) {
         // Generated convenience method for operationWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return operationWithResponse(name, requestOptions).getValue().toObject(OuterModel.class);
@@ -162,8 +142,8 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
      * 
@@ -178,7 +158,7 @@ public final class RelativeModelInOperationClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-     AbstractModel discriminator(String kind) {
+    AbstractModel discriminator(String kind) {
         // Generated convenience method for discriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return discriminatorWithResponse(kind, requestOptions).getValue().toObject(AbstractModel.class);

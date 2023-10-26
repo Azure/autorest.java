@@ -4,54 +4,23 @@
 
 package com.cadl.builtin;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Post;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.cadl.builtin.implementation.BuiltinClientImpl;
 import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -68,29 +37,65 @@ public final class BuiltinAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     BuiltinAsyncClient(BuiltinClientImpl serviceClient) {
+    BuiltinAsyncClient(BuiltinClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The read operation.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by https://url.spec.whatwg.org/</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>query-opt</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>query-opt-encoded</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Represent a URL string as described by https://url.spec.whatwg.org/</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p><strong>Header Parameters</strong></p>
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time (UTC)"</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>x-ms-date</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>An instant in coordinated universal time (UTC)"</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -137,13 +142,16 @@ public final class BuiltinAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponse(String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> readWithResponse(String queryParam, String queryParamEncoded,
+        RequestOptions requestOptions) {
         return this.serviceClient.readWithResponseAsync(queryParam, queryParamEncoded, requestOptions);
     }
 
     /**
      * The write operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -212,11 +220,13 @@ public final class BuiltinAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Builtin> read(String queryParam, String queryParamEncoded, OffsetDateTime dateTime, String filter, String queryParamOptional, String queryParamOptionalEncoded) {
+    public Mono<Builtin> read(String queryParam, String queryParamEncoded, OffsetDateTime dateTime, String filter,
+        String queryParamOptional, String queryParamOptionalEncoded) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
-            requestOptions.setHeader(HttpHeaderName.fromString("x-ms-date"), String.valueOf(new DateTimeRfc1123(dateTime)));
+            requestOptions.setHeader(HttpHeaderName.fromString("x-ms-date"),
+                String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
@@ -227,7 +237,8 @@ public final class BuiltinAsyncClient {
         if (queryParamOptionalEncoded != null) {
             requestOptions.addQueryParam("query-opt-encoded", queryParamOptionalEncoded, true);
         }
-        return readWithResponse(queryParam, queryParamEncoded, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
+        return readWithResponse(queryParam, queryParamEncoded, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
     }
 
     /**
@@ -248,6 +259,7 @@ public final class BuiltinAsyncClient {
     public Mono<Builtin> read(String queryParam, String queryParamEncoded) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(queryParam, queryParamEncoded, requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
+        return readWithResponse(queryParam, queryParamEncoded, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Builtin.class));
     }
 }

@@ -4,47 +4,23 @@
 
 package com.encode.datetime;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.encode.datetime.implementation.PropertiesImpl;
 import com.encode.datetime.models.DefaultDatetimeProperty;
 import com.encode.datetime.models.Rfc3339DatetimeProperty;
 import com.encode.datetime.models.Rfc7231DatetimeProperty;
 import com.encode.datetime.models.UnixTimestampArrayDatetimeProperty;
 import com.encode.datetime.models.UnixTimestampDatetimeProperty;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the synchronous DatetimeClient type.
@@ -60,19 +36,23 @@ public final class PropertyClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     PropertyClient(PropertiesImpl serviceClient) {
+    PropertyClient(PropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -95,13 +75,17 @@ public final class PropertyClient {
 
     /**
      * The rfc3339 operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -124,13 +108,17 @@ public final class PropertyClient {
 
     /**
      * The rfc7231 operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
@@ -153,13 +141,17 @@ public final class PropertyClient {
 
     /**
      * The unixTimestamp operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
@@ -182,7 +174,9 @@ public final class PropertyClient {
 
     /**
      * The unixTimestampArray operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -190,7 +184,9 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -230,7 +226,8 @@ public final class PropertyClient {
     public DefaultDatetimeProperty defaultMethod(DefaultDatetimeProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(DefaultDatetimeProperty.class);
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(DefaultDatetimeProperty.class);
     }
 
     /**
@@ -250,7 +247,8 @@ public final class PropertyClient {
     public Rfc3339DatetimeProperty rfc3339(Rfc3339DatetimeProperty body) {
         // Generated convenience method for rfc3339WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return rfc3339WithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Rfc3339DatetimeProperty.class);
+        return rfc3339WithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Rfc3339DatetimeProperty.class);
     }
 
     /**
@@ -270,7 +268,8 @@ public final class PropertyClient {
     public Rfc7231DatetimeProperty rfc7231(Rfc7231DatetimeProperty body) {
         // Generated convenience method for rfc7231WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return rfc7231WithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Rfc7231DatetimeProperty.class);
+        return rfc7231WithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Rfc7231DatetimeProperty.class);
     }
 
     /**
@@ -290,7 +289,8 @@ public final class PropertyClient {
     public UnixTimestampDatetimeProperty unixTimestamp(UnixTimestampDatetimeProperty body) {
         // Generated convenience method for unixTimestampWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return unixTimestampWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(UnixTimestampDatetimeProperty.class);
+        return unixTimestampWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(UnixTimestampDatetimeProperty.class);
     }
 
     /**
@@ -310,6 +310,7 @@ public final class PropertyClient {
     public UnixTimestampArrayDatetimeProperty unixTimestampArray(UnixTimestampArrayDatetimeProperty body) {
         // Generated convenience method for unixTimestampArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return unixTimestampArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(UnixTimestampArrayDatetimeProperty.class);
+        return unixTimestampArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(UnixTimestampArrayDatetimeProperty.class);
     }
 }

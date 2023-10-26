@@ -4,48 +4,24 @@
 
 package com.encode.duration;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 import com.encode.duration.implementation.PropertiesImpl;
 import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -62,19 +38,23 @@ public final class PropertyAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-     PropertyAsyncClient(PropertiesImpl serviceClient) {
+    PropertyAsyncClient(PropertiesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
      * The defaultMethod operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
@@ -97,13 +77,17 @@ public final class PropertyAsyncClient {
 
     /**
      * The iso8601 operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
@@ -126,13 +110,17 @@ public final class PropertyAsyncClient {
 
     /**
      * The int32Seconds operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
@@ -155,13 +143,17 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSeconds operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: double (Required)
@@ -184,7 +176,9 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSecondsArray operation.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -192,7 +186,9 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -232,7 +228,8 @@ public final class PropertyAsyncClient {
     public Mono<DefaultDurationProperty> defaultMethod(DefaultDurationProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(DefaultDurationProperty.class));
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(DefaultDurationProperty.class));
     }
 
     /**
@@ -252,7 +249,8 @@ public final class PropertyAsyncClient {
     public Mono<Iso8601DurationProperty> iso8601(Iso8601DurationProperty body) {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Iso8601DurationProperty.class));
+        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Iso8601DurationProperty.class));
     }
 
     /**
@@ -272,7 +270,8 @@ public final class PropertyAsyncClient {
     public Mono<Int32SecondsDurationProperty> int32Seconds(Int32SecondsDurationProperty body) {
         // Generated convenience method for int32SecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Int32SecondsDurationProperty.class));
+        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Int32SecondsDurationProperty.class));
     }
 
     /**
@@ -292,7 +291,8 @@ public final class PropertyAsyncClient {
     public Mono<FloatSecondsDurationProperty> floatSeconds(FloatSecondsDurationProperty body) {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationProperty.class));
+        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationProperty.class));
     }
 
     /**
@@ -312,6 +312,7 @@ public final class PropertyAsyncClient {
     public Mono<FloatSecondsDurationArrayProperty> floatSecondsArray(FloatSecondsDurationArrayProperty body) {
         // Generated convenience method for floatSecondsArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationArrayProperty.class));
+        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationArrayProperty.class));
     }
 }

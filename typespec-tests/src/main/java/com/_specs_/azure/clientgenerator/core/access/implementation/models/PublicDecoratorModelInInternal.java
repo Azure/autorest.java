@@ -4,12 +4,10 @@
 
 package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * Used in an internal operation but with public decorator, should be generated and exported.

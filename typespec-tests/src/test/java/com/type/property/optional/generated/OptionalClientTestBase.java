@@ -8,41 +8,21 @@ package com.type.property.optional.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.type.property.optional.BytesAsyncClient;
 import com.type.property.optional.BytesClient;
-import com.type.property.optional.CollectionsByteAsyncClient;
 import com.type.property.optional.CollectionsByteClient;
-import com.type.property.optional.CollectionsModelAsyncClient;
 import com.type.property.optional.CollectionsModelClient;
-import com.type.property.optional.DatetimeOperationAsyncClient;
 import com.type.property.optional.DatetimeOperationClient;
-import com.type.property.optional.DurationOperationAsyncClient;
 import com.type.property.optional.DurationOperationClient;
 import com.type.property.optional.OptionalClientBuilder;
-import com.type.property.optional.RequiredAndOptionalAsyncClient;
 import com.type.property.optional.RequiredAndOptionalClient;
-import com.type.property.optional.StringOperationAsyncClient;
 import com.type.property.optional.StringOperationClient;
-import com.type.property.optional.implementation.OptionalClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class OptionalClientTestBase extends TestProxyTestBase {
+class OptionalClientTestBase extends TestProxyTestBase {
     protected StringOperationClient stringOperationClient;
 
     protected BytesClient bytesClient;
@@ -59,9 +39,9 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        OptionalClientBuilder stringOperationClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder stringOperationClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -69,8 +49,7 @@ import reactor.core.publisher.Mono;
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        OptionalClientBuilder bytesClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        OptionalClientBuilder bytesClientbuilder = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bytesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -79,9 +58,9 @@ import reactor.core.publisher.Mono;
         }
         bytesClient = bytesClientbuilder.buildBytesClient();
 
-        OptionalClientBuilder datetimeOperationClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder datetimeOperationClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -89,9 +68,9 @@ import reactor.core.publisher.Mono;
         }
         datetimeOperationClient = datetimeOperationClientbuilder.buildDatetimeOperationClient();
 
-        OptionalClientBuilder durationOperationClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder durationOperationClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -99,9 +78,9 @@ import reactor.core.publisher.Mono;
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        OptionalClientBuilder collectionsByteClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder collectionsByteClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsByteClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -109,9 +88,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsByteClient = collectionsByteClientbuilder.buildCollectionsByteClient();
 
-        OptionalClientBuilder collectionsModelClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder collectionsModelClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -119,9 +98,9 @@ import reactor.core.publisher.Mono;
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
 
-        OptionalClientBuilder requiredAndOptionalClientbuilder = new OptionalClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder requiredAndOptionalClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             requiredAndOptionalClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

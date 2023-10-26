@@ -24,9 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,9 +44,7 @@ public class TypeSpecPlugin extends Javagen {
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model
-        Client client = Mappers.getClientMapper().map(codeModel);
-
-        return client;
+        return Mappers.getClientMapper().map(codeModel);
     }
 
     public JavaPackage processTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
@@ -85,8 +81,8 @@ public class TypeSpecPlugin extends Javagen {
         if (!parentFile.exists()) {
             parentFile.mkdirs();
         }
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-            writer.write(content);
+        try {
+            Files.writeString(outputFile.toPath(), content);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
@@ -99,9 +95,8 @@ public class TypeSpecPlugin extends Javagen {
             Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath), StandardCharsets.UTF_8);
-                    String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
-                    return updatedContent;
+                    String existingFileContent = Files.readString(absoluteFilePath);
+                    return PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

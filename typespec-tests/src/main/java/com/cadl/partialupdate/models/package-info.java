@@ -5,4 +5,3 @@
  * Package containing the data models for PartialUpdate.
  */
 package com.cadl.partialupdate.models;
-

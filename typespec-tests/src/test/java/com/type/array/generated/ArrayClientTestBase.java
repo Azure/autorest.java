@@ -8,47 +8,24 @@ package com.type.array.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.type.array.ArrayClientBuilder;
-import com.type.array.BooleanValueAsyncClient;
 import com.type.array.BooleanValueClient;
-import com.type.array.DatetimeValueAsyncClient;
 import com.type.array.DatetimeValueClient;
-import com.type.array.DurationValueAsyncClient;
 import com.type.array.DurationValueClient;
-import com.type.array.Float32ValueAsyncClient;
 import com.type.array.Float32ValueClient;
-import com.type.array.Int32ValueAsyncClient;
 import com.type.array.Int32ValueClient;
-import com.type.array.Int64ValueAsyncClient;
 import com.type.array.Int64ValueClient;
-import com.type.array.ModelValueAsyncClient;
 import com.type.array.ModelValueClient;
-import com.type.array.NullableFloatValueAsyncClient;
 import com.type.array.NullableFloatValueClient;
-import com.type.array.StringValueAsyncClient;
 import com.type.array.StringValueClient;
-import com.type.array.UnknownValueAsyncClient;
 import com.type.array.UnknownValueClient;
-import com.type.array.implementation.ArrayClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class ArrayClientTestBase extends TestProxyTestBase {
+class ArrayClientTestBase extends TestProxyTestBase {
     protected Int32ValueClient int32ValueClient;
 
     protected Int64ValueClient int64ValueClient;
@@ -71,8 +48,7 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        ArrayClientBuilder int32ValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder int32ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -81,8 +57,7 @@ import reactor.core.publisher.Mono;
         }
         int32ValueClient = int32ValueClientbuilder.buildInt32ValueClient();
 
-        ArrayClientBuilder int64ValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder int64ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int64ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -91,8 +66,7 @@ import reactor.core.publisher.Mono;
         }
         int64ValueClient = int64ValueClientbuilder.buildInt64ValueClient();
 
-        ArrayClientBuilder booleanValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder booleanValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -101,8 +75,7 @@ import reactor.core.publisher.Mono;
         }
         booleanValueClient = booleanValueClientbuilder.buildBooleanValueClient();
 
-        ArrayClientBuilder stringValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder stringValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -111,8 +84,7 @@ import reactor.core.publisher.Mono;
         }
         stringValueClient = stringValueClientbuilder.buildStringValueClient();
 
-        ArrayClientBuilder float32ValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder float32ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             float32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -121,8 +93,7 @@ import reactor.core.publisher.Mono;
         }
         float32ValueClient = float32ValueClientbuilder.buildFloat32ValueClient();
 
-        ArrayClientBuilder datetimeValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder datetimeValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -131,8 +102,7 @@ import reactor.core.publisher.Mono;
         }
         datetimeValueClient = datetimeValueClientbuilder.buildDatetimeValueClient();
 
-        ArrayClientBuilder durationValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder durationValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -141,8 +111,7 @@ import reactor.core.publisher.Mono;
         }
         durationValueClient = durationValueClientbuilder.buildDurationValueClient();
 
-        ArrayClientBuilder unknownValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder unknownValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -151,8 +120,7 @@ import reactor.core.publisher.Mono;
         }
         unknownValueClient = unknownValueClientbuilder.buildUnknownValueClient();
 
-        ArrayClientBuilder modelValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
+        ArrayClientBuilder modelValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -161,9 +129,9 @@ import reactor.core.publisher.Mono;
         }
         modelValueClient = modelValueClientbuilder.buildModelValueClient();
 
-        ArrayClientBuilder nullableFloatValueClientbuilder = new ArrayClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder nullableFloatValueClientbuilder
+            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableFloatValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

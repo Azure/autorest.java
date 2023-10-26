@@ -4,13 +4,11 @@
 
 package com.type.model.visibility.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Output model with visibility properties.
@@ -62,7 +60,10 @@ public final class VisibilityModel {
      */
     @Generated
     @JsonCreator
-    public VisibilityModel(@JsonProperty(value = "queryProp") Integer queryProp, @JsonProperty(value = "createProp") List<String> createProp, @JsonProperty(value = "updateProp") List<Integer> updateProp, @JsonProperty(value = "deleteProp") Boolean deleteProp) {
+    public VisibilityModel(@JsonProperty(value = "queryProp") Integer queryProp,
+        @JsonProperty(value = "createProp") List<String> createProp,
+        @JsonProperty(value = "updateProp") List<Integer> updateProp,
+        @JsonProperty(value = "deleteProp") Boolean deleteProp) {
         this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;

@@ -4,12 +4,10 @@
 
 package com._specs_.azure.core.lro.standard.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.regex.Pattern;
 
 /**
  * The exported user data.
@@ -38,7 +36,8 @@ public final class ExportedUser {
      */
     @Generated
     @JsonCreator
-    private ExportedUser(@JsonProperty(value = "name") String name, @JsonProperty(value = "resourceUri") String resourceUri) {
+    private ExportedUser(@JsonProperty(value = "name") String name,
+        @JsonProperty(value = "resourceUri") String resourceUri) {
         this.name = name;
         this.resourceUri = resourceUri;
     }

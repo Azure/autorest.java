@@ -16,21 +16,15 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -52,7 +46,7 @@ public final class HeadersImpl {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-     HeadersImpl(DurationClientImpl client) {
+    HeadersImpl(DurationClientImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
@@ -65,84 +59,94 @@ public final class HeadersImpl {
     @ServiceInterface(name = "DurationClientHeader")
     public interface HeadersService {
         @Get("/encode/duration/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> defaultMethod(@HeaderParam("duration") Duration duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> defaultMethodSync(@HeaderParam("duration") Duration duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> iso8601(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601Sync(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> iso8601Sync(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601Array(@HeaderParam("duration") String duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> iso8601Array(@HeaderParam("duration") String duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601ArraySync(@HeaderParam("duration") String duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> iso8601ArraySync(@HeaderParam("duration") String duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> int32Seconds(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> int32Seconds(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> int32SecondsSync(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> int32SecondsSync(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatSeconds(@HeaderParam("duration") double duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> floatSeconds(@HeaderParam("duration") double duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatSecondsSync(@HeaderParam("duration") double duration, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> floatSecondsSync(@HeaderParam("duration") double duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -227,8 +231,10 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> iso8601ArrayWithResponseAsync(List<Duration> duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String durationConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
-        return FluxUtil.withContext(context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
+        String durationConverted
+            = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return FluxUtil
+            .withContext(context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
     }
 
     /**
@@ -245,7 +251,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String durationConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        String durationConverted
+            = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
         return service.iso8601ArraySync(durationConverted, accept, requestOptions, Context.NONE);
     }
 
@@ -264,7 +271,8 @@ public final class HeadersImpl {
     public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
         long durationConverted = duration.getSeconds();
-        return FluxUtil.withContext(context -> service.int32Seconds(durationConverted, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.int32Seconds(durationConverted, accept, requestOptions, context));
     }
 
     /**
@@ -300,7 +308,8 @@ public final class HeadersImpl {
     public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(context -> service.floatSeconds(durationConverted, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.floatSeconds(durationConverted, accept, requestOptions, context));
     }
 
     /**

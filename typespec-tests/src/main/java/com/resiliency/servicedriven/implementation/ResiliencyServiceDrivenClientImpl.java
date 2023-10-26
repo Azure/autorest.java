@@ -20,7 +20,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -28,16 +27,11 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.resiliency.servicedriven.ServiceDrivenServiceVersion;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -64,12 +58,16 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      */
     private final String serviceDeploymentVersion;
 
     /**
-     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      * 
      * @return the serviceDeploymentVersion value.
      */
@@ -123,11 +121,15 @@ public final class ResiliencyServiceDrivenClientImpl {
      * Initializes an instance of ResiliencyServiceDrivenClient client.
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
-    public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion, serviceVersion);
+    public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion,
+        ServiceDrivenServiceVersion serviceVersion) {
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion, serviceVersion);
     }
 
     /**
@@ -135,11 +137,15 @@ public final class ResiliencyServiceDrivenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
-    public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion, serviceVersion);
+    public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, String endpoint,
+        String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion,
+            serviceVersion);
     }
 
     /**
@@ -148,16 +154,20 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
-    public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
+    public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.serviceDeploymentVersion = serviceDeploymentVersion;
         this.serviceVersion = serviceVersion;
-        this.service = RestProxy.create(ResiliencyServiceDrivenClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(ResiliencyServiceDrivenClientService.class, this.httpPipeline,
+            this.getSerializerAdapter());
     }
 
     /**
@@ -168,68 +178,92 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceInterface(name = "ResiliencyServiceDri")
     public interface ResiliencyServiceDrivenClientService {
         @Delete("/add-operation")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> addOperation(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> addOperation(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Delete("/add-operation")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> addOperationSync(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> addOperationSync(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Head("/add-optional-param/from-none")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> fromNone(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> fromNone(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Head("/add-optional-param/from-none")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> fromNoneSync(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> fromNoneSync(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-required")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> fromOneRequired(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> fromOneRequired(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-required")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> fromOneRequiredSync(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> fromOneRequiredSync(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-optional")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> fromOneOptional(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> fromOneOptional(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-optional")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> fromOneOptionalSync(@HostParam("endpoint") String endpoint, @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion, @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> fromOneOptionalSync(@HostParam("endpoint") String endpoint,
+            @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -245,7 +279,9 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> addOperationWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.addOperation(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.addOperation(this.getEndpoint(), this.getServiceDeploymentVersion(),
+                this.getServiceVersion().getVersion(), accept, requestOptions, context));
     }
 
     /**
@@ -261,16 +297,29 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> addOperationWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.addOperationSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.addOperationSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
+            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
     }
 
     /**
      * Test that grew up from accepting no parameters to an optional input parameter.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -284,16 +333,29 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromNoneWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.fromNone(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.fromNone(this.getEndpoint(), this.getServiceDeploymentVersion(),
+            this.getServiceVersion().getVersion(), accept, requestOptions, context));
     }
 
     /**
      * Test that grew up from accepting no parameters to an optional input parameter.
-     * <p><strong>Query Parameters</strong></p>
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -307,16 +369,30 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromNoneWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fromNoneSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.fromNoneSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
+            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
     }
 
     /**
-     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional parameter.
-     * <p><strong>Query Parameters</strong></p>
+     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional
+     * parameter.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -331,16 +407,31 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromOneRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.fromOneRequired(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), parameter, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.fromOneRequired(this.getEndpoint(), this.getServiceDeploymentVersion(),
+                this.getServiceVersion().getVersion(), parameter, accept, requestOptions, context));
     }
 
     /**
-     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional parameter.
-     * <p><strong>Query Parameters</strong></p>
+     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional
+     * parameter.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -355,17 +446,36 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromOneRequiredWithResponse(String parameter, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fromOneRequiredSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), parameter, accept, requestOptions, Context.NONE);
+        return service.fromOneRequiredSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
+            this.getServiceVersion().getVersion(), parameter, accept, requestOptions, Context.NONE);
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
-     * <p><strong>Query Parameters</strong></p>
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I am an optional parameter</td>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -379,17 +489,37 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromOneOptionalWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.fromOneOptional(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.fromOneOptional(this.getEndpoint(), this.getServiceDeploymentVersion(),
+                this.getServiceVersion().getVersion(), accept, requestOptions, context));
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
-     * <p><strong>Query Parameters</strong></p>
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I am an optional parameter</td>
+     * </tr>
+     * <tr>
+     * <td>new-parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I'm a new input optional parameter</td>
+     * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -403,6 +533,7 @@ public final class ResiliencyServiceDrivenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromOneOptionalWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.fromOneOptionalSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.fromOneOptionalSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
+            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
     }
 }

@@ -4,14 +4,12 @@
 
 package com.cadl.wiretype.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.regex.Pattern;
 
 /**
  * The SubClassMismatch model.
@@ -39,7 +37,8 @@ public final class SubClassMismatch extends SuperClass {
 
     @Generated
     @JsonCreator
-    private SubClassMismatch(@JsonProperty(value = "dateTime") OffsetDateTime dateTime, @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
+    private SubClassMismatch(@JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+        @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
         this(dateTime, dateTimeRfc7231.getDateTime());
     }
 

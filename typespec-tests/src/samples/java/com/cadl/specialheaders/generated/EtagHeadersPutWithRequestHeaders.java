@@ -4,29 +4,20 @@
 
 package com.cadl.specialheaders.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.RequestConditions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.specialheaders.SpecialHeadersAsyncClient;
 import com.cadl.specialheaders.SpecialHeadersClient;
 import com.cadl.specialheaders.SpecialHeadersClientBuilder;
-import com.cadl.specialheaders.SpecialHeadersServiceVersion;
-import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
-import org.junit.jupiter.api.Assertions;
 
 public class EtagHeadersPutWithRequestHeaders {
     public static void main(String[] args) {
-        SpecialHeadersClient specialHeadersClient = new SpecialHeadersClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        SpecialHeadersClient specialHeadersClient = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
-        Resource response = specialHeadersClient.putWithRequestHeaders("name", new Resource("myType").setDescription("This is sample for Etag headers"), new RequestConditions().setIfMatch("64e005"));
+        Resource response = specialHeadersClient.putWithRequestHeaders("name",
+            new Resource("myType").setDescription("This is sample for Etag headers"),
+            new RequestConditions().setIfMatch("64e005"));
         // END:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
     }
 }

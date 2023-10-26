@@ -4,7 +4,6 @@
 
 package com.type.model.inheritance.enumdiscriminator.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -12,16 +11,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.regex.Pattern;
 
 /**
  * Test extensible enum type for discriminator.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = Dog.class)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Dog.class)
 @JsonTypeName("Dog")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "golden", value = Golden.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "golden", value = Golden.class) })
 @Immutable
 public class Dog {
     /*

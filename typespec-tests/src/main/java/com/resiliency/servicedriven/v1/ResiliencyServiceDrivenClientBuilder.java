@@ -18,13 +18,10 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.AzureKeyCredentialPolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
-import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
@@ -35,20 +32,19 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.builder.ClientBuilderUtil;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import com.resiliency.servicedriven.v1.implementation.ResiliencyServiceDrivenClientImpl;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * A builder for creating a new instance of the ResiliencyServiceDrivenClient type.
  */
-@ServiceClientBuilder(serviceClients = {ResiliencyServiceDrivenClient.class, ResiliencyServiceDrivenAsyncClient.class})
-public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<ResiliencyServiceDrivenClientBuilder>, ConfigurationTrait<ResiliencyServiceDrivenClientBuilder>, EndpointTrait<ResiliencyServiceDrivenClientBuilder> {
+@ServiceClientBuilder(
+    serviceClients = { ResiliencyServiceDrivenClient.class, ResiliencyServiceDrivenAsyncClient.class })
+public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<ResiliencyServiceDrivenClientBuilder>,
+    ConfigurationTrait<ResiliencyServiceDrivenClientBuilder>, EndpointTrait<ResiliencyServiceDrivenClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -56,7 +52,8 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
     private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("resiliency-servicedriven-v1.properties");
+    private static final Map<String, String> PROPERTIES
+        = CoreUtils.getProperties("resiliency-servicedriven-v1.properties");
 
     @Generated
     private final List<HttpPipelinePolicy> pipelinePolicies;
@@ -204,7 +201,9 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
     private String serviceDeploymentVersion;
 
     /**
-     * Sets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Sets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      * 
      * @param serviceDeploymentVersion the serviceDeploymentVersion value.
      * @return the ResiliencyServiceDrivenClientBuilder.
@@ -259,14 +258,18 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
     @Generated
     private ResiliencyServiceDrivenClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceDrivenServiceVersion localServiceVersion = (serviceVersion != null) ? serviceVersion : ServiceDrivenServiceVersion.getLatest();
-        ResiliencyServiceDrivenClientImpl client = new ResiliencyServiceDrivenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.serviceDeploymentVersion, localServiceVersion);
+        ServiceDrivenServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ServiceDrivenServiceVersion.getLatest();
+        ResiliencyServiceDrivenClientImpl client
+            = new ResiliencyServiceDrivenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+                this.endpoint, this.serviceDeploymentVersion, localServiceVersion);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -277,18 +280,22 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL).forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY).forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0])).httpClient(httpClient).clientOptions(localClientOptions).build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 

@@ -4,29 +4,19 @@
 
 package com.cadl.flatten.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.flatten.FlattenAsyncClient;
 import com.cadl.flatten.FlattenClient;
 import com.cadl.flatten.FlattenClientBuilder;
-import com.cadl.flatten.FlattenServiceVersion;
-import com.cadl.flatten.implementation.FlattenClientImpl;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
-import org.junit.jupiter.api.Assertions;
 
 public class FlattenOpSendLong {
     public static void main(String[] args) {
-        FlattenClient flattenClient = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        FlattenClient flattenClient
+            = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.flatten.generated.sendlong.flattenopsendlong
-        flattenClient.sendLong(new SendLongOptions("myRequiredId", "myRequiredInput", 11).setFilter("name=myName").setUser(new User("myOptionalUser")).setDataIntOptional(12).setDataLong(13L).setDataFloat(14.0D));
+        flattenClient.sendLong(new SendLongOptions("myRequiredId", "myRequiredInput", 11).setFilter("name=myName")
+            .setUser(new User("myOptionalUser")).setDataIntOptional(12).setDataLong(13L).setDataFloat(14.0D));
         // END:com.cadl.flatten.generated.sendlong.flattenopsendlong
     }
 }

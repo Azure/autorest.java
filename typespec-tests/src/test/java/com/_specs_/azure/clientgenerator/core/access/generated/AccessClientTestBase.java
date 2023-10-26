@@ -9,34 +9,17 @@ package com._specs_.azure.clientgenerator.core.access.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com._specs_.azure.clientgenerator.core.access.AccessClientBuilder;
-import com._specs_.azure.clientgenerator.core.access.InternalOperationAsyncClient;
 import com._specs_.azure.clientgenerator.core.access.InternalOperationClient;
-import com._specs_.azure.clientgenerator.core.access.PublicOperationAsyncClient;
 import com._specs_.azure.clientgenerator.core.access.PublicOperationClient;
-import com._specs_.azure.clientgenerator.core.access.RelativeModelInOperationAsyncClient;
 import com._specs_.azure.clientgenerator.core.access.RelativeModelInOperationClient;
-import com._specs_.azure.clientgenerator.core.access.SharedModelInOperationAsyncClient;
 import com._specs_.azure.clientgenerator.core.access.SharedModelInOperationClient;
-import com._specs_.azure.clientgenerator.core.access.implementation.AccessClientImpl;
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class AccessClientTestBase extends TestProxyTestBase {
+class AccessClientTestBase extends TestProxyTestBase {
     protected PublicOperationClient publicOperationClient;
 
     protected InternalOperationClient internalOperationClient;
@@ -47,9 +30,9 @@ import reactor.core.publisher.Mono;
 
     @Override
     protected void beforeTest() {
-        AccessClientBuilder publicOperationClientbuilder = new AccessClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder publicOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             publicOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -57,9 +40,9 @@ import reactor.core.publisher.Mono;
         }
         publicOperationClient = publicOperationClientbuilder.buildPublicOperationClient();
 
-        AccessClientBuilder internalOperationClientbuilder = new AccessClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder internalOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             internalOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -67,9 +50,9 @@ import reactor.core.publisher.Mono;
         }
         internalOperationClient = internalOperationClientbuilder.buildInternalOperationClient();
 
-        AccessClientBuilder sharedModelInOperationClientbuilder = new AccessClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder sharedModelInOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             sharedModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -77,9 +60,9 @@ import reactor.core.publisher.Mono;
         }
         sharedModelInOperationClient = sharedModelInOperationClientbuilder.buildSharedModelInOperationClient();
 
-        AccessClientBuilder relativeModelInOperationClientbuilder = new AccessClientBuilder()
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder relativeModelInOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             relativeModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

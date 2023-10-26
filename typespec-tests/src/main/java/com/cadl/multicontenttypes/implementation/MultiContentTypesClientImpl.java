@@ -19,7 +19,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -27,16 +26,11 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -96,7 +90,8 @@ public final class MultiContentTypesClientImpl {
      * @param endpoint Server parameter.
      */
     public MultiContentTypesClientImpl(String endpoint) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -116,11 +111,13 @@ public final class MultiContentTypesClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      */
-    public MultiContentTypesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public MultiContentTypesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.service = RestProxy.create(MultiContentTypesClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service
+            = RestProxy.create(MultiContentTypesClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
@@ -131,126 +128,157 @@ public final class MultiContentTypesClientImpl {
     @ServiceInterface(name = "MultiContentTypesCli")
     public interface MultiContentTypesClientService {
         @Post("/upload/overload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadWithOverload(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadWithOverload(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/upload/overload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadWithOverloadSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadWithOverloadSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Get("/single/request/download/image")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> downloadImageForSingleContentType(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> downloadImageForSingleContentType(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/single/request/download/image")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> downloadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> downloadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/single/request/upload/image")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadImageForSingleContentType(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadImageForSingleContentType(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/single/request/upload/image")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/single-body-type")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypes(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypes(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/single-body-type")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(
+            @HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data,
+            RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
+        Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesSync(
+            @HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * multiple data types map to multiple content types.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * DataModelBase
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
+     * "application/octet-stream", "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -260,19 +288,24 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadWithOverloadWithResponseAsync(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadWithOverloadWithResponseAsync(String contentType, BinaryData data,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadWithOverload(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil.withContext(context -> service.uploadWithOverload(this.getEndpoint(), contentType, accept, data,
+            requestOptions, context));
     }
 
     /**
      * multiple data types map to multiple content types.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * DataModelBase
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
+     * "application/octet-stream", "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -282,14 +315,18 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadWithOverloadWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Response<Void> uploadWithOverloadWithResponse(String contentType, BinaryData data,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.uploadWithOverloadSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadWithOverloadSync(this.getEndpoint(), contentType, accept, data, requestOptions,
+            Context.NONE);
     }
 
     /**
      * response is binary.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -302,14 +339,18 @@ public final class MultiContentTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> downloadImageForSingleContentTypeWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>>
+        downloadImageForSingleContentTypeWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json, image/png";
-        return FluxUtil.withContext(context -> service.downloadImageForSingleContentType(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.downloadImageForSingleContentType(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
      * response is binary.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -329,7 +370,9 @@ public final class MultiContentTypesClientImpl {
 
     /**
      * request is binary.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -343,15 +386,19 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadImageForSingleContentTypeWithResponseAsync(BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadImageForSingleContentTypeWithResponseAsync(BinaryData data,
+        RequestOptions requestOptions) {
         final String contentType = "image/png";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadImageForSingleContentType(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil.withContext(context -> service.uploadImageForSingleContentType(this.getEndpoint(), contentType,
+            accept, data, requestOptions, context));
     }
 
     /**
      * request is binary.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -368,17 +415,21 @@ public final class MultiContentTypesClientImpl {
     public Response<Void> uploadImageForSingleContentTypeWithResponse(BinaryData data, RequestOptions requestOptions) {
         final String contentType = "image/png";
         final String accept = "application/json";
-        return service.uploadImageForSingleContentTypeSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadImageForSingleContentTypeSync(this.getEndpoint(), contentType, accept, data,
+            requestOptions, Context.NONE);
     }
 
     /**
      * one data type maps to multiple content types.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -388,19 +439,25 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponseAsync(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponseAsync(String contentType,
+        BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadBytesWithSingleBodyTypeForMultiContentTypes(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.uploadBytesWithSingleBodyTypeForMultiContentTypes(this.getEndpoint(),
+                contentType, accept, data, requestOptions, context));
     }
 
     /**
      * one data type maps to multiple content types.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -410,19 +467,24 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(String contentType,
+        BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.uploadBytesWithSingleBodyTypeForMultiContentTypesSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadBytesWithSingleBodyTypeForMultiContentTypesSync(this.getEndpoint(), contentType, accept,
+            data, requestOptions, Context.NONE);
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -432,19 +494,25 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(String contentType,
+        BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadBytesWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.uploadBytesWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(),
+                contentType, accept, data, requestOptions, context));
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -454,14 +522,18 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType,
+        BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.uploadBytesWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadBytesWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType, accept,
+            data, requestOptions, Context.NONE);
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -478,15 +550,20 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponseAsync(BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponseAsync(BinaryData data,
+        RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadJsonWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.uploadJsonWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(),
+                contentType, accept, data, requestOptions, context));
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -503,20 +580,25 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(BinaryData data, RequestOptions requestOptions) {
+    public Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesWithResponse(BinaryData data,
+        RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.uploadJsonWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadJsonWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType, accept,
+            data, requestOptions, Context.NONE);
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * DataModelBase
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     * "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -526,19 +608,25 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponseAsync(
+        String contentType, BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(), contentType, accept, data, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(this.getEndpoint(),
+                contentType, accept, data, requestOptions, context));
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * DataModelBase
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     * "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -548,8 +636,10 @@ public final class MultiContentTypesClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType, BinaryData data, RequestOptions requestOptions) {
+    public Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType,
+        BinaryData data, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesSync(this.getEndpoint(), contentType,
+            accept, data, requestOptions, Context.NONE);
     }
 }

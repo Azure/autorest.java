@@ -4,7 +4,6 @@
 
 package com.cadl.builtin.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
@@ -16,7 +15,6 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * The Builtin model.
@@ -158,7 +156,16 @@ public final class Builtin {
      */
     @Generated
     @JsonCreator
-    public Builtin(@JsonProperty(value = "boolean") boolean booleanProperty, @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes, @JsonProperty(value = "int") int intProperty, @JsonProperty(value = "safeint") long safeint, @JsonProperty(value = "long") long longProperty, @JsonProperty(value = "float") double floatProperty, @JsonProperty(value = "double") double doubleProperty, @JsonProperty(value = "duration") Duration duration, @JsonProperty(value = "date") LocalDate date, @JsonProperty(value = "dateTime") OffsetDateTime dateTime, @JsonProperty(value = "stringList") List<String> stringList, @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict, @JsonProperty(value = "url") String url, @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict, @JsonProperty(value = "encoded") Encoded encoded) {
+    public Builtin(@JsonProperty(value = "boolean") boolean booleanProperty,
+        @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes,
+        @JsonProperty(value = "int") int intProperty, @JsonProperty(value = "safeint") long safeint,
+        @JsonProperty(value = "long") long longProperty, @JsonProperty(value = "float") double floatProperty,
+        @JsonProperty(value = "double") double doubleProperty, @JsonProperty(value = "duration") Duration duration,
+        @JsonProperty(value = "date") LocalDate date, @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+        @JsonProperty(value = "stringList") List<String> stringList,
+        @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict, @JsonProperty(value = "url") String url,
+        @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
+        @JsonProperty(value = "encoded") Encoded encoded) {
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;

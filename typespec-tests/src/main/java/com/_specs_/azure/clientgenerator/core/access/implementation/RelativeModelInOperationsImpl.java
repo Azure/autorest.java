@@ -17,18 +17,12 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,8 +44,9 @@ public final class RelativeModelInOperationsImpl {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-     RelativeModelInOperationsImpl(AccessClientImpl client) {
-        this.service = RestProxy.create(RelativeModelInOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    RelativeModelInOperationsImpl(AccessClientImpl client) {
+        this.service = RestProxy.create(RelativeModelInOperationsService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -63,36 +58,40 @@ public final class RelativeModelInOperationsImpl {
     @ServiceInterface(name = "AccessClientRelative")
     public interface RelativeModelInOperationsService {
         @Get("/azure/client-generator-core/access/relativeModelInOperation/operation")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> operation(@QueryParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> operation(@QueryParam("name") String name, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/operation")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> operationSync(@QueryParam("name") String name, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> operationSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> discriminator(@QueryParam("kind") String kind, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> discriminator(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> discriminatorSync(@QueryParam("kind") String kind, @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> discriminatorSync(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -100,14 +99,16 @@ public final class RelativeModelInOperationsImpl {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -123,7 +124,8 @@ public final class RelativeModelInOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in internal operations, should be generated but not exported along with {@link Response} on successful completion of {@link Mono}.
+     * @return used in internal operations, should be generated but not exported along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> operationWithResponseAsync(String name, RequestOptions requestOptions) {
@@ -136,14 +138,16 @@ public final class RelativeModelInOperationsImpl {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -172,11 +176,13 @@ public final class RelativeModelInOperationsImpl {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -189,7 +195,8 @@ public final class RelativeModelInOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in internal operations, should be generated but not exported along with {@link Response} on successful completion of {@link Mono}.
+     * @return used in internal operations, should be generated but not exported along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> discriminatorWithResponseAsync(String kind, RequestOptions requestOptions) {
@@ -202,11 +209,13 @@ public final class RelativeModelInOperationsImpl {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)

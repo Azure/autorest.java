@@ -20,7 +20,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -28,12 +27,9 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
@@ -43,8 +39,6 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -104,7 +98,8 @@ public final class LegacyClientImpl {
      * @param serviceVersion Service version.
      */
     public LegacyClientImpl(LegacyServiceVersion serviceVersion) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(), JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
     }
 
     /**
@@ -124,7 +119,8 @@ public final class LegacyClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param serviceVersion Service version.
      */
-    public LegacyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, LegacyServiceVersion serviceVersion) {
+    public LegacyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        LegacyServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.serviceVersion = serviceVersion;
@@ -138,31 +134,39 @@ public final class LegacyClientImpl {
     @ServiceInterface(name = "LegacyClient")
     public interface LegacyClientService {
         @Post("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs")
-        @ExpectedResponses({200, 202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createJob(@QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> createJob(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
+            RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs")
-        @ExpectedResponses({200, 202})
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {401})
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {404})
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {409})
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createJobSync(@QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+        Response<BinaryData> createJobSync(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -201,18 +205,23 @@ public final class LegacyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createJob(this.getServiceVersion().getVersion(), accept, jobData, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createJob(this.getServiceVersion().getVersion(), accept, jobData,
+            requestOptions, context));
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -251,18 +260,23 @@ public final class LegacyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.createJobSync(this.getServiceVersion().getVersion(), accept, jobData, requestOptions, Context.NONE);
+        return service.createJobSync(this.getServiceVersion().getVersion(), accept, jobData, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -300,24 +314,27 @@ public final class LegacyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.createJobWithResponseAsync(jobData, requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -355,24 +372,27 @@ public final class LegacyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.createJobWithResponse(jobData, requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -409,25 +429,29 @@ public final class LegacyClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResult> beginCreateJobWithModelAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.createJobWithResponseAsync(jobData, requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
+    public PollerFlux<JobResult, JobResult> beginCreateJobWithModelAsync(BinaryData jobData,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResult.class));
     }
 
     /**
      * Creates a Job.
-     * <p><strong>Request Body Schema</strong></p>
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p><strong>Response Body Schema</strong></p>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -465,11 +489,10 @@ public final class LegacyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobResult, JobResult> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.createJobWithResponse(jobData, requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint(null)
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE)
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline()).setEndpoint(null)
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResult.class));
     }

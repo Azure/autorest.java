@@ -300,7 +300,7 @@ public class FluentGen extends Javagen {
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.writeString(pomPath, FluentUtils.loadTextFromResource("pom.xml"))
+                Files.writeString(pomPath, FluentUtils.loadTextFromResource("spotless-pom.xml"))
                     .toFile().deleteOnExit();
                 Files.writeString(pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
                         FluentUtils.loadTextFromResource("eclipse-format-azure-sdk-for-java.xml"))
@@ -324,8 +324,8 @@ public class FluentGen extends Javagen {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() }
-                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() };
+                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-f", pomPath.toString() }
+                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-f", pomPath.toString() };
 
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
@@ -338,7 +338,7 @@ public class FluentGen extends Javagen {
 
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
-                throw new RuntimeException("Spotless failed to complete within 30 seconds or failed with an error code. "
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
                         + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {

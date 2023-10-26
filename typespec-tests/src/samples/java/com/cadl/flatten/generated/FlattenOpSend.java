@@ -4,26 +4,15 @@
 
 package com.cadl.flatten.generated;
 
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.cadl.flatten.FlattenAsyncClient;
 import com.cadl.flatten.FlattenClient;
 import com.cadl.flatten.FlattenClientBuilder;
-import com.cadl.flatten.FlattenServiceVersion;
-import com.cadl.flatten.implementation.FlattenClientImpl;
 import com.cadl.flatten.models.User;
-import org.junit.jupiter.api.Assertions;
 
 public class FlattenOpSend {
     public static void main(String[] args) {
-        FlattenClient flattenClient = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
+        FlattenClient flattenClient
+            = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.flatten.generated.send.flattenopsend
         flattenClient.send("myRequiredId", "myRequiredInput", new User("myOptionalUser"));
         // END:com.cadl.flatten.generated.send.flattenopsend

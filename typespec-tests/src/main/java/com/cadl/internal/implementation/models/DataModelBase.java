@@ -4,9 +4,6 @@
 
 package com.cadl.internal.implementation.models;
 
-import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * The DataModelBase model.
  */

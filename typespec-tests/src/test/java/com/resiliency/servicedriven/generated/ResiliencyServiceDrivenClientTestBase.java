@@ -8,39 +8,27 @@ package com.resiliency.servicedriven.generated;
 // If you wish to modify these files, please copy them out of the 'generated' package, and modify there.
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.resiliency.servicedriven.ResiliencyServiceDrivenAsyncClient;
 import com.resiliency.servicedriven.ResiliencyServiceDrivenClient;
 import com.resiliency.servicedriven.ResiliencyServiceDrivenClientBuilder;
-import com.resiliency.servicedriven.ServiceDrivenServiceVersion;
-import com.resiliency.servicedriven.implementation.ResiliencyServiceDrivenClientImpl;
-import java.time.OffsetDateTime;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Mono;
 
- class ResiliencyServiceDrivenClientTestBase extends TestProxyTestBase {
+class ResiliencyServiceDrivenClientTestBase extends TestProxyTestBase {
     protected ResiliencyServiceDrivenClient resiliencyServiceDrivenClient;
 
     @Override
     protected void beforeTest() {
-        ResiliencyServiceDrivenClientBuilder resiliencyServiceDrivenClientbuilder = new ResiliencyServiceDrivenClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-            .serviceDeploymentVersion(Configuration.getGlobalConfiguration().get("SERVICEDEPLOYMENTVERSION", "servicedeploymentversion"))
-            .httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ResiliencyServiceDrivenClientBuilder resiliencyServiceDrivenClientbuilder
+            = new ResiliencyServiceDrivenClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .serviceDeploymentVersion(
+                    Configuration.getGlobalConfiguration().get("SERVICEDEPLOYMENTVERSION", "servicedeploymentversion"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             resiliencyServiceDrivenClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
