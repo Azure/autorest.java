@@ -34,6 +34,7 @@ public class JavaSettings {
 
     private static Logger logger;
     private final boolean useKeyCredential;
+    private final boolean generic;
     private boolean noCustomHeaders;
 
     static void setHeader(String value) {
@@ -172,7 +173,8 @@ public class JavaSettings {
                 getBooleanValue(host, "enable-page-size", false),
                 getBooleanValue(host, "use-key-credential", false),
                 getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
-                getBooleanValue(host, "graal-vm-config", false)
+                getBooleanValue(host, "graal-vm-config", false),
+                getBooleanValue(host, "generic", false)
             );
         }
         return instance;
@@ -329,7 +331,8 @@ public class JavaSettings {
         boolean pageSizeEnabled,
         boolean useKeyCredential,
         boolean nullByteArrayMapsToEmptyArray,
-        boolean generateGraalVmConfig) {
+        boolean generateGraalVmConfig,
+        boolean generic) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -429,8 +432,17 @@ public class JavaSettings {
         this.useKeyCredential = useKeyCredential;
         this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
         this.generateGraalVmConfig = generateGraalVmConfig;
+        this.generic = generic;
+        if (this.generic) {
+            this.syncMethods = SyncMethodsGeneration.SYNC_ONLY;
+            this.streamStyleSerialization = true;
+            this.sdkIntegration = false;
+        }
     }
 
+    public boolean isGeneric() {
+        return generic;
+    }
 
     private final String keyCredentialHeaderName;
     public String getKeyCredentialHeaderName() {
@@ -565,7 +577,7 @@ public class JavaSettings {
         return SIMPLE_JAVA_SETTINGS;
     }
 
-    private final boolean sdkIntegration;
+    private boolean sdkIntegration;
 
     public boolean isSdkIntegration() {
         return sdkIntegration;
@@ -1076,7 +1088,7 @@ public class JavaSettings {
         return genericResponseTypes;
     }
 
-    private final boolean streamStyleSerialization;
+    private boolean streamStyleSerialization;
 
     /**
      * Whether models will handle serialization themselves using stream-style serialization instead of relying on

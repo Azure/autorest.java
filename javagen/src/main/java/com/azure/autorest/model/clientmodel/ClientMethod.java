@@ -349,8 +349,8 @@ public class ClientMethod {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
-        imports.add("com.azure.core.annotation.ServiceMethod");
-        imports.add("com.azure.core.annotation.ReturnType");
+        imports.add(ClassType.ServiceMethod.getFullName());
+        imports.add(ClassType.ReturnType.getFullName());
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");

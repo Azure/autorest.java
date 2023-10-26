@@ -215,6 +215,10 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
         }
 
+        if (options.getGeneric() != null) {
+            SETTINGS_MAP.put("generic", options.getGeneric());
+        }
+
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());

@@ -290,7 +290,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         JavaSettings settings = JavaSettings.getInstance();
 
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty()) {
-            imports.add(HeaderCollection.class.getName());
+            imports.add(ClassType.HeaderCollection.getFullName());
         }
         if (isAdditionalProperties) {
             imports.add(JsonIgnore.class.getName());
@@ -314,7 +314,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.BYTE_ARRAY)) {
-            imports.add(CoreUtils.class.getName());
+            imports.add(ClassType.CoreUtils.getFullName());
         }
 
         if (shouldGenerateXmlSerialization) {

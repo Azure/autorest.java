@@ -107,6 +107,21 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     }
 
     protected ClientMethodParameter createSerializerAdapterParameter() {
+        if (JavaSettings.getInstance().isGeneric()) {
+            return new ClientMethodParameter.Builder()
+                    .description("The serializer to serialize an object into a string")
+                    .finalParameter(false)
+                    .wireType(ClassType.JsonSerializer)
+                    .name("serializerAdapter")
+                    .required(true)
+                    .constant(false)
+                    .fromClient(true)
+                    .defaultValue(null)
+                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
+                            ? Collections.singletonList(ClassType.NonNull)
+                            : new ArrayList<>())
+                    .build();
+        }
         return new ClientMethodParameter.Builder()
                 .description("The serializer to serialize an object into a string")
                 .finalParameter(false)

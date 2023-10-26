@@ -19,6 +19,13 @@ public class PomMapper implements IMapper<Project, Pom> {
 
     @Override
     public Pom map(Project project) {
+        if (JavaSettings.getInstance().isGeneric()) {
+            return createGenericPom(project);
+        }
+        return createAzurePom(project);
+    }
+
+    private Pom createAzurePom(Project project) {
         Pom pom = new Pom();
         pom.setGroupId(project.getGroupId());
         pom.setArtifactId(project.getArtifactId());
@@ -68,6 +75,33 @@ public class PomMapper implements IMapper<Project, Pom> {
 
         pom.setRequireCompilerPlugins(!project.isIntegratedWithSdk());
 
+        return pom;
+    }
+
+    private Pom createGenericPom(Project project) {
+        Pom pom = new Pom();
+        pom.setGroupId(project.getGroupId());
+        pom.setArtifactId(project.getArtifactId());
+        pom.setVersion(project.getVersion());
+
+        pom.setServiceName(project.getServiceName());
+        pom.setServiceDescription(project.getServiceDescriptionForPom());
+
+        Set<String> addedDependencyPrefixes = new HashSet<>();
+        List<String> dependencyIdentifiers = new ArrayList<>();
+        // for generic pom, stream style is always true
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.GENERIC_CORE, false);
+        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                Project.Dependency.GENERIC_JSON, false);
+
+        // merge dependencies in POM and dependencies added above
+        dependencyIdentifiers.addAll(project.getPomDependencyIdentifiers().stream()
+                .filter(dependencyIdentifier -> addedDependencyPrefixes.stream().noneMatch(dependencyIdentifier::startsWith))
+                .collect(Collectors.toList()));
+
+        pom.setDependencyIdentifiers(dependencyIdentifiers);
+        pom.setRequireCompilerPlugins(true);
         return pom;
     }
 

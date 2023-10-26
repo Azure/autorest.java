@@ -127,7 +127,7 @@ public class Main {
 
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource.replaceAll("com.azure", "com.generic"), null));
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));

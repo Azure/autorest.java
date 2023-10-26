@@ -76,7 +76,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
+            TemplateHelper.getPomProjectName(pom, projectBlock);
             projectBlock.tag("description", pom.getServiceDescription());
             projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 

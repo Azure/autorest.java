@@ -313,52 +313,62 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             if (JavaSettings.getInstance().isGenerateSyncAsyncClients()) {
                 if (!settings.isFluentLite()) {
-                    for (AsyncSyncClient asyncClient : asyncClients) {
-                        final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
-
-                        classBlock.javadocComment(comment ->
-                        {
-                            comment.description(String
-                                    .format("Builds an instance of %1$s class", asyncClient.getClassName()));
-                            comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
-                        });
-                        addGeneratedAnnotation(classBlock);
-                        classBlock.publicMethod(String.format("%1$s %2$s()", asyncClient.getClassName(), clientBuilder.getBuilderMethodNameForAsyncClient(asyncClient)),
-                                function -> {
-                                    if (wrapServiceClient) {
-                                        function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
-                                    } else {
-                                        function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
-                                                CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
-                                    }
-                                });
-                    }
+                    addBuildAsyncClientMethods(clientBuilder, asyncClients, classBlock, buildMethodName);
                 }
-
-                int syncClientIndex = 0;
-                for (AsyncSyncClient syncClient : syncClients) {
-                    final boolean wrapServiceClient = syncClient.getMethodGroupClient() == null;
-
-                    AsyncSyncClient asyncClient = (asyncClients.size() == syncClients.size()) ? asyncClients.get(syncClientIndex) : null;
-
-                    classBlock.javadocComment(comment ->
-                    {
-                        comment.description(String
-                                .format("Builds an instance of %1$s class", syncClient.getClassName()));
-                        comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
-                    });
-                    addGeneratedAnnotation(classBlock);
-                    classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
-                            function -> {
-                                writeSyncClientBuildMethod(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
-                            });
-
-                    ++syncClientIndex;
-                }
+                addBuildSyncClientMethods(clientBuilder, asyncClients, syncClients, classBlock, buildMethodName);
             }
-
             TemplateUtil.addClientLogger(classBlock, serviceClientBuilderName, javaFile.getContents());
         });
+    }
+
+    private void addBuildAsyncClientMethods(ClientBuilder clientBuilder, List<AsyncSyncClient> asyncClients, JavaClass classBlock, String buildMethodName) {
+        if(JavaSettings.getInstance().isGeneric()){
+            return;
+        }
+
+        for (AsyncSyncClient asyncClient : asyncClients) {
+            final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
+
+            classBlock.javadocComment(comment ->
+            {
+                comment.description(String
+                        .format("Builds an instance of %1$s class", asyncClient.getClassName()));
+                comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
+            });
+            addGeneratedAnnotation(classBlock);
+            classBlock.publicMethod(String.format("%1$s %2$s()", asyncClient.getClassName(), clientBuilder.getBuilderMethodNameForAsyncClient(asyncClient)),
+                    function -> {
+                        if (wrapServiceClient) {
+                            function.line("return new %1$s(%2$s());", asyncClient.getClassName(), buildMethodName);
+                        } else {
+                            function.line("return new %1$s(%2$s().get%3$s());", asyncClient.getClassName(), buildMethodName,
+                                    CodeNamer.toPascalCase(asyncClient.getMethodGroupClient().getVariableName()));
+                        }
+                    });
+        }
+    }
+
+    private void addBuildSyncClientMethods(ClientBuilder clientBuilder, List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients, JavaClass classBlock, String buildMethodName) {
+        int syncClientIndex = 0;
+        for (AsyncSyncClient syncClient : syncClients) {
+            final boolean wrapServiceClient = syncClient.getMethodGroupClient() == null;
+
+            AsyncSyncClient asyncClient = (asyncClients.size() == syncClients.size()) ? asyncClients.get(syncClientIndex) : null;
+
+            classBlock.javadocComment(comment ->
+            {
+                comment.description(String
+                        .format("Builds an instance of %1$s class", syncClient.getClassName()));
+                comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
+            });
+            addGeneratedAnnotation(classBlock);
+            classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
+                    function -> {
+                        writeSyncClientBuildMethod(syncClient, asyncClient, function, buildMethodName, wrapServiceClient);
+                    });
+
+            ++syncClientIndex;
+        }
     }
 
     /**
@@ -490,102 +500,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                                PipelinePolicyDetails pipelinePolicyDetails) {
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
-            function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
-                    + ".getGlobalConfiguration() : configuration;");
-
-
-            String localHttpOptionsName = getLocalBuildVariableName("httpLogOptions");
-            String localClientOptionsName = getLocalBuildVariableName("ClientOptions");
-            function.line(String.format("HttpLogOptions %s = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;", localHttpOptionsName));
-            function.line(String.format("ClientOptions %s = this.clientOptions == null ? new ClientOptions() : this.clientOptions;", localClientOptionsName));
-
-            function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
-
-            function.line("String clientName = PROPERTIES.getOrDefault(SDK_NAME, \"UnknownName\");");
-            function.line("String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
-
-            function.line(String.format("String applicationId = CoreUtils.getApplicationId(%s, %s);", localClientOptionsName, localHttpOptionsName));
-            function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
-                    + "clientVersion, buildConfiguration));");
-
-            if (pipelinePolicyDetails != null && !CoreUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
-                function.line(String.format("policies.add(new RequestIdPolicy(\"%s\"));", pipelinePolicyDetails.getRequestIdHeaderName()));
-            } else {
-                function.line("policies.add(new RequestIdPolicy());");
-            }
-            function.line("policies.add(new AddHeadersFromContextPolicy());");
-
-            // clientOptions header
-            function.line("HttpHeaders headers = new HttpHeaders();");
-            function.line(String.format("%s.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));", localClientOptionsName));
-            function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
-
-            function.line("this.pipelinePolicies.stream()" +
-                    ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)" +
-                    ".forEach(p -> policies.add(p));");
-            function.line("HttpPolicyProviders.addBeforeRetryPolicies(policies);");
-            function.line("policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new " +
-                    "RetryPolicy()));");
-            function.line("policies.add(new AddDatePolicy());");
-
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
-                    logger.error("key-credential-header-name is required for " +
-                            "key-based credential type");
-                    throw new IllegalStateException("key-credential-header-name is required for " +
-                            "key-based credential type");
-                }
-
-                if (settings.isUseKeyCredential()) {
-                    function.ifBlock("keyCredential != null", action -> {
-                        if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
-                            function.line("policies.add(new KeyCredentialPolicy(\""
-                                    + securityInfo.getHeaderName()
-                                    + "\", keyCredential));");
-                        } else {
-                            function.line("policies.add(new KeyCredentialPolicy(\""
-                                    + securityInfo.getHeaderName()
-                                    + "\", keyCredential, \""
-                                    + securityInfo.getHeaderValuePrefix()
-                                    + "\"));");
-                        }
-                    });
-                } else {
-                    function.ifBlock("azureKeyCredential != null", action -> {
-                        if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
-                            function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                                    + securityInfo.getHeaderName()
-                                    + "\", azureKeyCredential));");
-                        } else {
-                            function.line("policies.add(new AzureKeyCredentialPolicy(\""
-                                    + securityInfo.getHeaderName()
-                                    + "\", azureKeyCredential, \""
-                                    + securityInfo.getHeaderValuePrefix()
-                                    + "\"));");
-                        }
-                    });
-                }
-            }
-            if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
-                function.ifBlock("tokenCredential != null", action -> {
-                    function.line("policies.add(new BearerTokenAuthenticationPolicy(tokenCredential, %s));", defaultCredentialScopes);
-                });
-            }
-            function.line("this.pipelinePolicies.stream()" +
-                    ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)" +
-                    ".forEach(p -> policies.add(p));");
-            function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
-
-            function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
-
-            function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
-                    ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
-                    ".httpClient(httpClient)" +
-                    String.format(".clientOptions(%s)", localClientOptionsName) +
-                    ".build();");
-            function.methodReturn("httpPipeline");
+            TemplateHelper.createHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
         });
     }
+
+
 
     protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings, SecurityInfo securityInfo) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();

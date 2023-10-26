@@ -57,7 +57,7 @@ public class GenericType implements IType {
     }
 
     public static GenericType Response(IType bodyType) {
-        return new GenericType("com.azure.core.http.rest", "Response", bodyType);
+        return new GenericType(ClassType.Response.getPackage(), ClassType.Response.getName(), bodyType);
     }
 
     public static GenericType RestResponse(IType headersType, IType bodyType) {

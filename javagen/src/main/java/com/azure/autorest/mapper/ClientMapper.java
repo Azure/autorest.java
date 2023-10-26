@@ -578,7 +578,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
-        requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
+        if (settings.isGeneric()) {
+            requireModules.add(new ModuleInfo.RequireModule("com.generic.core", true));
+        } else {
+            requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
+        }
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
@@ -590,8 +594,11 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 exportModules.add(new ModuleInfo.ExportModule(modelsPackage));
             }
 
-            // open models package to azure-core and jaskson
+            // open models package to azure-core and jackson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
+            if(settings.isGeneric()) {
+                openToModules = Arrays.asList("com.generic.core");
+            }
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
             openModules.add(new ModuleInfo.OpenModule(modelsPackage, openToModules));
         }
@@ -628,7 +635,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             packages.addAll(enumTypes.stream()
                 .map(EnumType::getPackage)
                 .collect(Collectors.toSet()));
-
             packages.addAll(responseModels.stream()
                 .map(ClientResponse::getPackage)
                 .collect(Collectors.toSet()));

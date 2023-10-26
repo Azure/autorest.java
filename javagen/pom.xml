@@ -23,8 +23,20 @@
       <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
     </repository>
   </repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <dependencies>
+    <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
@@ -49,6 +61,17 @@
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
     </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>com.generic</groupId>-->
+<!--      <artifactId>generic-json</artifactId>-->
+<!--      <version>1.0.0-beta.1</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>com.generic</groupId>
+      <artifactId>generic-core</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.atteo</groupId>
       <artifactId>evo-inflector</artifactId>

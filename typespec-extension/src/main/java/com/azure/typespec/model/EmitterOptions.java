@@ -52,6 +52,9 @@ public class EmitterOptions {
     @JsonProperty(value="customization-class")
     private String customizationClass;
 
+    @JsonProperty(value = "generic")
+    private Boolean generic;
+
     public String getNamespace() {
         return namespace;
     }
@@ -108,6 +111,10 @@ public class EmitterOptions {
 
     public String getCustomizationClass() {
         return customizationClass;
+    }
+
+    public Boolean getGeneric() {
+        return generic;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

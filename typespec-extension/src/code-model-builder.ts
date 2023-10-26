@@ -2187,6 +2187,8 @@ export class CodeModelBuilder {
       }
       case "Enum":
         return pascalCase(type.name);
+      case "String":
+        return pascalCase(type.value);
       case "Model":
         if (isArrayModelType(this.program, type)) {
           ++option.depth;
