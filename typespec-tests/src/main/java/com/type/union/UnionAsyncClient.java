@@ -40,7 +40,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -66,7 +66,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -92,7 +92,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -118,7 +118,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -144,7 +144,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -169,7 +169,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     simpleUnion: SimpleUnionModelBase (Required)
+     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -194,7 +194,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
      *
@@ -219,7 +219,7 @@ public final class UnionAsyncClient {
      *
      * <pre>{@code
      * {
-     *     namedUnion: NamedUnionModelBase (Required)
+     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
      *
