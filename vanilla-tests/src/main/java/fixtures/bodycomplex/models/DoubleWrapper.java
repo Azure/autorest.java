@@ -28,7 +28,8 @@ public final class DoubleWrapper {
     /**
      * Creates an instance of DoubleWrapper class.
      */
-    public DoubleWrapper() {}
+    public DoubleWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -80,5 +81,6 @@ public final class DoubleWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

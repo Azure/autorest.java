@@ -21,7 +21,8 @@ public final class NoModelAsStringNoRequiredTwoValueNoDefault {
     /**
      * Creates an instance of NoModelAsStringNoRequiredTwoValueNoDefault class.
      */
-    public NoModelAsStringNoRequiredTwoValueNoDefault() {}
+    public NoModelAsStringNoRequiredTwoValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
@@ -49,5 +50,6 @@ public final class NoModelAsStringNoRequiredTwoValueNoDefault {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

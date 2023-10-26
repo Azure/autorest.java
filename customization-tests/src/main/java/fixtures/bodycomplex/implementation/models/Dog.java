@@ -21,7 +21,8 @@ public final class Dog extends Pet {
     /**
      * Creates an instance of Dog class.
      */
-    public Dog() {}
+    public Dog() {
+    }
 
     /**
      * Get the food property: The food property.

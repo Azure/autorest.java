@@ -21,7 +21,8 @@ public final class Horse extends Pet {
     /**
      * Creates an instance of Horse class.
      */
-    public Horse() {}
+    public Horse() {
+    }
 
     /**
      * Get the isAShowHorse property: The isAShowHorse property.

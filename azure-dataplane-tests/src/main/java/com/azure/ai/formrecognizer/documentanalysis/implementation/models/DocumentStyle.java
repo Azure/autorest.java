@@ -34,7 +34,8 @@ public final class DocumentStyle {
     /**
      * Creates an instance of DocumentStyle class.
      */
-    public DocumentStyle() {}
+    public DocumentStyle() {
+    }
 
     /**
      * Get the isHandwritten property: Is content handwritten?.

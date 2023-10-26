@@ -27,7 +27,8 @@ public final class BooleanWrapper {
     /**
      * Creates an instance of BooleanWrapper class.
      */
-    public BooleanWrapper() {}
+    public BooleanWrapper() {
+    }
 
     /**
      * Get the fieldTrue property: The field_true property.

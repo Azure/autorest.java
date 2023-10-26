@@ -26,7 +26,8 @@ public final class ManifestAttributesManifest implements JsonSerializable<Manife
     /**
      * Creates an instance of ManifestAttributesManifest class.
      */
-    public ManifestAttributesManifest() {}
+    public ManifestAttributesManifest() {
+    }
 
     /**
      * Get the references property: List of manifest attributes details.

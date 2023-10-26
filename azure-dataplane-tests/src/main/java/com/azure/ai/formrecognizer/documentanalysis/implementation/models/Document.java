@@ -47,7 +47,8 @@ public final class Document {
     /**
      * Creates an instance of Document class.
      */
-    public Document() {}
+    public Document() {
+    }
 
     /**
      * Get the docType property: Document type.

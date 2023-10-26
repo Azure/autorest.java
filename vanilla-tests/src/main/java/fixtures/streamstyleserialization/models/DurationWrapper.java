@@ -26,7 +26,8 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     /**
      * Creates an instance of DurationWrapper class.
      */
-    public DurationWrapper() {}
+    public DurationWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -53,7 +54,8 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

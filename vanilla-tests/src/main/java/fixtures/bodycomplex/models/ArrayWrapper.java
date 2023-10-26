@@ -22,7 +22,8 @@ public final class ArrayWrapper {
     /**
      * Creates an instance of ArrayWrapper class.
      */
-    public ArrayWrapper() {}
+    public ArrayWrapper() {
+    }
 
     /**
      * Get the array property: The array property.
@@ -49,5 +50,6 @@ public final class ArrayWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

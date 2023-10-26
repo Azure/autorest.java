@@ -27,7 +27,8 @@ public final class ParameterGroupingPostOptionalParameters {
     /**
      * Creates an instance of ParameterGroupingPostOptionalParameters class.
      */
-    public ParameterGroupingPostOptionalParameters() {}
+    public ParameterGroupingPostOptionalParameters() {
+    }
 
     /**
      * Get the customHeader property: The customHeader property.
@@ -74,5 +75,6 @@ public final class ParameterGroupingPostOptionalParameters {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

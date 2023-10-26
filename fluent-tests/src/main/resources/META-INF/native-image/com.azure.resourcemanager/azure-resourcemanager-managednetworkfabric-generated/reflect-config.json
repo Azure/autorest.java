@@ -1,0 +1,256 @@
+[ {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkFabricInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkFabricProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.TerminalServerConfiguration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.TerminalServerPatchableProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.Layer3IpPrefixProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ManagementNetworkConfigurationProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.VpnConfigurationProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.OptionBProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.RouteTargetInformation",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.VpnConfigurationPropertiesOptionAProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.OptionAProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.BfdConfiguration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.AnnotationResource",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkFabricPatch",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkFabricPatchProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkFabricPatchableProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ManagementNetworkConfigurationPatchableProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.VpnConfigurationPatchableProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.VpnConfigurationPatchablePropertiesOptionAProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.TagsUpdate",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkFabricsListResult",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.CommonPostActionResponseForDeviceUpdateInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.UpdateVersion",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.CommonPostActionResponseForStateUpdateInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.UpdateAdministrativeState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.EnableDisableOnResources",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ValidateConfigurationProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.ValidateConfigurationResponseInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkToNetworkInterconnectInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkToNetworkInterconnectProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.Layer2Configuration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkToNetworkInterconnectPropertiesOptionBLayer3Configuration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.OptionBLayer3Configuration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NpbStaticRouteConfiguration",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.StaticRouteProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ImportRoutePolicyInformation",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ExportRoutePolicyInformation",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkToNetworkInterconnectPatch",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.fluent.models.NetworkToNetworkInterconnectPatchableProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NetworkToNetworkInterconnectsList",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.AdministrativeState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.PeeringOption",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.BfdAdministrativeState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ConfigurationState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ProvisioningState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.EnableDisableState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.ValidateAction",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.NniType",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.IsManagementType",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.azure.mgmtlitetest.managednetworkfabric.models.BooleanEnumProperty",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+} ]

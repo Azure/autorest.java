@@ -45,7 +45,8 @@ public final class OciDescriptor implements JsonSerializable<OciDescriptor> {
     /**
      * Creates an instance of OciDescriptor class.
      */
-    public OciDescriptor() {}
+    public OciDescriptor() {
+    }
 
     /**
      * Get the mediaType property: Layer media type.

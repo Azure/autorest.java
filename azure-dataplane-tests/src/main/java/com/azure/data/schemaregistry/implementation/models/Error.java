@@ -21,7 +21,8 @@ public final class Error {
     /**
      * Creates an instance of Error class.
      */
-    public Error() {}
+    public Error() {
+    }
 
     /**
      * Get the error property: Error response returned from Azure Schema Registry service.

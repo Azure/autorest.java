@@ -96,7 +96,8 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     /**
      * Creates an instance of ArtifactManifestPropertiesInternal class.
      */
-    public ArtifactManifestPropertiesInternal() {}
+    public ArtifactManifestPropertiesInternal() {
+    }
 
     /**
      * Get the registryLoginServer property: Registry login server name. This is likely to be similar to

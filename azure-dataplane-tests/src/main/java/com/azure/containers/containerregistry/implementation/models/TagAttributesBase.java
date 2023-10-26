@@ -61,7 +61,8 @@ public class TagAttributesBase implements JsonSerializable<TagAttributesBase> {
     /**
      * Creates an instance of TagAttributesBase class.
      */
-    public TagAttributesBase() {}
+    public TagAttributesBase() {
+    }
 
     /**
      * Get the name property: Tag name.

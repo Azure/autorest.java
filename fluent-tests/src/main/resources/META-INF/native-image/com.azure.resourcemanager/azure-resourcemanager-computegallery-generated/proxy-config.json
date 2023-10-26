@@ -1,0 +1,1 @@
+[ [ "com.azure.mgmttest.computegallery.implementation.SharedGalleriesClientImpl$SharedGalleriesService" ], [ "com.azure.mgmttest.computegallery.implementation.SharedGalleryImagesClientImpl$SharedGalleryImagesService" ], [ "com.azure.mgmttest.computegallery.implementation.SharedGalleryImageVersionsClientImpl$SharedGalleryImageVersionsService" ] ]

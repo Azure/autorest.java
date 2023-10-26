@@ -61,7 +61,8 @@ public final class ListBlobsResponse implements XmlSerializable<ListBlobsRespons
     /**
      * Creates an instance of ListBlobsResponse class.
      */
-    public ListBlobsResponse() {}
+    public ListBlobsResponse() {
+    }
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.

@@ -71,7 +71,8 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
     /**
      * Creates an instance of ArtifactTagPropertiesInternal class.
      */
-    public ArtifactTagPropertiesInternal() {}
+    public ArtifactTagPropertiesInternal() {
+    }
 
     /**
      * Get the registryLoginServer property: Registry login server name. This is likely to be similar to

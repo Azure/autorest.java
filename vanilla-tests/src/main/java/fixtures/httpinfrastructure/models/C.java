@@ -21,7 +21,8 @@ public final class C {
     /**
      * Creates an instance of C class.
      */
-    public C() {}
+    public C() {
+    }
 
     /**
      * Get the httpCode property: The httpCode property.
@@ -48,5 +49,6 @@ public final class C {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

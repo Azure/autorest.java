@@ -67,7 +67,8 @@ public final class AccessTier extends ExpandableStringEnum<AccessTier> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public AccessTier() {}
+    public AccessTier() {
+    }
 
     /**
      * Creates or finds a AccessTier from its string representation.

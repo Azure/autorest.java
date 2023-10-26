@@ -42,7 +42,8 @@ public class MetricAlertCriteria {
     /**
      * Creates an instance of MetricAlertCriteria class.
      */
-    public MetricAlertCriteria() {}
+    public MetricAlertCriteria() {
+    }
 
     /**
      * Get the additionalProperties property: The rule criteria that defines the conditions of the alert rule.
@@ -78,5 +79,6 @@ public class MetricAlertCriteria {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

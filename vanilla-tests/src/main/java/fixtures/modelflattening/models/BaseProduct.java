@@ -28,7 +28,8 @@ public class BaseProduct {
     /**
      * Creates an instance of BaseProduct class.
      */
-    public BaseProduct() {}
+    public BaseProduct() {
+    }
 
     /**
      * Get the productId property: Unique identifier representing a specific product for a given latitude &amp;

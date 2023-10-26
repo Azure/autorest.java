@@ -73,7 +73,8 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public OperationResultStatus() {}
+    public OperationResultStatus() {
+    }
 
     /**
      * Creates or finds a OperationResultStatus from its string representation.

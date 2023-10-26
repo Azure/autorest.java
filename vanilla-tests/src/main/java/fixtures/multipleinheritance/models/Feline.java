@@ -27,7 +27,8 @@ public class Feline {
     /**
      * Creates an instance of Feline class.
      */
-    public Feline() {}
+    public Feline() {
+    }
 
     /**
      * Get the meows property: The meows property.
@@ -74,5 +75,6 @@ public class Feline {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

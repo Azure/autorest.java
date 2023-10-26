@@ -33,7 +33,8 @@ public class DotFish {
     /**
      * Creates an instance of DotFish class.
      */
-    protected DotFish() {}
+    protected DotFish() {
+    }
 
     /**
      * Get the species property: The species property.
@@ -49,5 +50,6 @@ public class DotFish {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

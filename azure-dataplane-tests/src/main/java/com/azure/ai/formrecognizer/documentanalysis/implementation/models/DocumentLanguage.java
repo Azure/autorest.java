@@ -35,7 +35,8 @@ public final class DocumentLanguage {
     /**
      * Creates an instance of DocumentLanguage class.
      */
-    public DocumentLanguage() {}
+    public DocumentLanguage() {
+    }
 
     /**
      * Get the locale property: Detected language. Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47

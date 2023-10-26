@@ -21,7 +21,8 @@ public final class SchemaId {
     /**
      * Creates an instance of SchemaId class.
      */
-    public SchemaId() {}
+    public SchemaId() {
+    }
 
     /**
      * Get the id property: Schema ID that uniquely identifies a schema in the registry namespace.

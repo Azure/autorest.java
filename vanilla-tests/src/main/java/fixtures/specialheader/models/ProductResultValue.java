@@ -28,7 +28,8 @@ public final class ProductResultValue {
     /**
      * Creates an instance of ProductResultValue class.
      */
-    public ProductResultValue() {}
+    public ProductResultValue() {
+    }
 
     /**
      * Get the value property: The value property.
@@ -75,5 +76,6 @@ public final class ProductResultValue {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

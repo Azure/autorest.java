@@ -21,7 +21,8 @@ public final class BodyParamModel {
     /**
      * Creates an instance of BodyParamModel class.
      */
-    public BodyParamModel() {}
+    public BodyParamModel() {
+    }
 
     /**
      * Get the name property: The name property.
@@ -48,5 +49,6 @@ public final class BodyParamModel {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

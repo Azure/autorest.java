@@ -28,7 +28,8 @@ public final class PublicAccessType extends ExpandableStringEnum<PublicAccessTyp
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public PublicAccessType() {}
+    public PublicAccessType() {
+    }
 
     /**
      * Creates or finds a PublicAccessType from its string representation.

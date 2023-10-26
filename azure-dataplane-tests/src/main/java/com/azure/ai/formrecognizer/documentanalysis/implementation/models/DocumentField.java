@@ -126,7 +126,8 @@ public final class DocumentField {
     /**
      * Creates an instance of DocumentField class.
      */
-    public DocumentField() {}
+    public DocumentField() {
+    }
 
     /**
      * Get the type property: Data type of the field value.

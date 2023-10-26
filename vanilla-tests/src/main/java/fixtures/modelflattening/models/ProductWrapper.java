@@ -23,7 +23,8 @@ public class ProductWrapper {
     /**
      * Creates an instance of ProductWrapper class.
      */
-    public ProductWrapper() {}
+    public ProductWrapper() {
+    }
 
     /**
      * Get the value property: the product value.
@@ -50,5 +51,6 @@ public class ProductWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

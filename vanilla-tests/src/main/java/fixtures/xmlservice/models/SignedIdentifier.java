@@ -29,7 +29,8 @@ public final class SignedIdentifier {
     /**
      * Creates an instance of SignedIdentifier class.
      */
-    public SignedIdentifier() {}
+    public SignedIdentifier() {
+    }
 
     /**
      * Get the id property: a unique id.

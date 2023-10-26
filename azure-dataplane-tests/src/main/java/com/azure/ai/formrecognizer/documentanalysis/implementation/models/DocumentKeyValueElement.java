@@ -34,7 +34,8 @@ public final class DocumentKeyValueElement {
     /**
      * Creates an instance of DocumentKeyValueElement class.
      */
-    public DocumentKeyValueElement() {}
+    public DocumentKeyValueElement() {
+    }
 
     /**
      * Get the content property: Concatenated content of the key-value element in reading order.

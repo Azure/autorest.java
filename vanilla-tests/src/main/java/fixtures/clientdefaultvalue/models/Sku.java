@@ -46,7 +46,8 @@ public final class Sku {
     /**
      * Creates an instance of Sku class.
      */
-    public Sku() {}
+    public Sku() {
+    }
 
     /**
      * Get the family property: SKU family name.

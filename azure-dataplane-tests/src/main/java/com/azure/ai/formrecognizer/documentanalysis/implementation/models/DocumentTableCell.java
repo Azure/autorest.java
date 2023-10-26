@@ -64,7 +64,8 @@ public final class DocumentTableCell {
     /**
      * Creates an instance of DocumentTableCell class.
      */
-    public DocumentTableCell() {}
+    public DocumentTableCell() {
+    }
 
     /**
      * Get the kind property: Table cell kind.

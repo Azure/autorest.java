@@ -53,7 +53,8 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public DaysOfWeekExtensibleEnum() {}
+    public DaysOfWeekExtensibleEnum() {
+    }
 
     /**
      * Creates or finds a DaysOfWeekExtensibleEnum from its string representation.

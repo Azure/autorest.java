@@ -41,7 +41,8 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     /**
      * Creates an instance of ManifestListAttributes class.
      */
-    public ManifestListAttributes() {}
+    public ManifestListAttributes() {
+    }
 
     /**
      * Get the mediaType property: The MIME type of the referenced object. This will generally be

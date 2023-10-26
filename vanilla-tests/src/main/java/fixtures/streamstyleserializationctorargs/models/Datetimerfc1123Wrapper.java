@@ -32,7 +32,8 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
     /**
      * Creates an instance of Datetimerfc1123Wrapper class.
      */
-    public Datetimerfc1123Wrapper() {}
+    public Datetimerfc1123Wrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -93,7 +94,8 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

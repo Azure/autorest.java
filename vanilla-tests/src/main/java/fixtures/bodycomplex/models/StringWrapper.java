@@ -33,7 +33,8 @@ public final class StringWrapper {
     /**
      * Creates an instance of StringWrapper class.
      */
-    public StringWrapper() {}
+    public StringWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -100,5 +101,6 @@ public final class StringWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

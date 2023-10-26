@@ -27,7 +27,8 @@ public final class PagingGetMultiplePagesOptions {
     /**
      * Creates an instance of PagingGetMultiplePagesOptions class.
      */
-    public PagingGetMultiplePagesOptions() {}
+    public PagingGetMultiplePagesOptions() {
+    }
 
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
@@ -76,5 +77,6 @@ public final class PagingGetMultiplePagesOptions {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

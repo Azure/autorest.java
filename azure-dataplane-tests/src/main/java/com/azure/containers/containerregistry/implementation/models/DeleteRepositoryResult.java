@@ -30,7 +30,8 @@ public final class DeleteRepositoryResult implements JsonSerializable<DeleteRepo
     /**
      * Creates an instance of DeleteRepositoryResult class.
      */
-    public DeleteRepositoryResult() {}
+    public DeleteRepositoryResult() {
+    }
 
     /**
      * Get the deletedManifests property: SHA of the deleted image.

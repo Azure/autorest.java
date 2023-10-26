@@ -29,7 +29,8 @@ public final class Datetimerfc1123Wrapper {
     /**
      * Creates an instance of Datetimerfc1123Wrapper class.
      */
-    public Datetimerfc1123Wrapper() {}
+    public Datetimerfc1123Wrapper() {
+    }
 
     /**
      * Get the field property: The field property.

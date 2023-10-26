@@ -21,7 +21,8 @@ public final class WrappedProduct {
     /**
      * Creates an instance of WrappedProduct class.
      */
-    public WrappedProduct() {}
+    public WrappedProduct() {
+    }
 
     /**
      * Get the value property: the product value.
@@ -48,5 +49,6 @@ public final class WrappedProduct {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

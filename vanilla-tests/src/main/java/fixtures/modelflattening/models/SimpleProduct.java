@@ -41,7 +41,8 @@ public class SimpleProduct extends BaseProduct {
     /**
      * Creates an instance of SimpleProduct class.
      */
-    public SimpleProduct() {}
+    public SimpleProduct() {
+    }
 
     /**
      * Get the maxProductDisplayName property: Display name of product.

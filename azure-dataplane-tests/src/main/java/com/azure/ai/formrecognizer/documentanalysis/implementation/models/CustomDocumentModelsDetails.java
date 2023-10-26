@@ -27,7 +27,8 @@ public final class CustomDocumentModelsDetails {
     /**
      * Creates an instance of CustomDocumentModelsDetails class.
      */
-    public CustomDocumentModelsDetails() {}
+    public CustomDocumentModelsDetails() {
+    }
 
     /**
      * Get the count property: Number of custom document models in the current resource.

@@ -39,7 +39,8 @@ public class MyBaseType {
     /**
      * Creates an instance of MyBaseType class.
      */
-    public MyBaseType() {}
+    public MyBaseType() {
+    }
 
     /**
      * Get the propB1 property: The propB1 property.

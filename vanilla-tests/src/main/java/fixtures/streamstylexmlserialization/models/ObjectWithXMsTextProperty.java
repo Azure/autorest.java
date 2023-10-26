@@ -29,7 +29,8 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
     /**
      * Creates an instance of ObjectWithXMsTextProperty class.
      */
-    public ObjectWithXMsTextProperty() {}
+    public ObjectWithXMsTextProperty() {
+    }
 
     /**
      * Get the language property: Returned value should be 'english'.
@@ -76,7 +77,8 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

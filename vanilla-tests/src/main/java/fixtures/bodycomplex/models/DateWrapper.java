@@ -28,7 +28,8 @@ public final class DateWrapper {
     /**
      * Creates an instance of DateWrapper class.
      */
-    public DateWrapper() {}
+    public DateWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -75,5 +76,6 @@ public final class DateWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

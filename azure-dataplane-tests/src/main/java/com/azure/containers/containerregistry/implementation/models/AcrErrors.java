@@ -25,7 +25,8 @@ public final class AcrErrors implements JsonSerializable<AcrErrors> {
     /**
      * Creates an instance of AcrErrors class.
      */
-    public AcrErrors() {}
+    public AcrErrors() {
+    }
 
     /**
      * Get the errors property: Array of detailed error.

@@ -29,7 +29,8 @@ public class SubProduct extends SubResource {
     /**
      * Creates an instance of SubProduct class.
      */
-    public SubProduct() {}
+    public SubProduct() {
+    }
 
     /**
      * Get the provisioningState property: The provisioningState property.

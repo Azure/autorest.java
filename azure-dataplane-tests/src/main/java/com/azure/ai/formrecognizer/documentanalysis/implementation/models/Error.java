@@ -46,7 +46,8 @@ public final class Error {
     /**
      * Creates an instance of Error class.
      */
-    public Error() {}
+    public Error() {
+    }
 
     /**
      * Get the code property: Error code.

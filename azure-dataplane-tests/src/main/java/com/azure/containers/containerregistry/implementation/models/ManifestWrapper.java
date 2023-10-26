@@ -76,7 +76,8 @@ public final class ManifestWrapper extends Manifest {
     /**
      * Creates an instance of ManifestWrapper class.
      */
-    public ManifestWrapper() {}
+    public ManifestWrapper() {
+    }
 
     /**
      * Get the mediaType property: Media type for this Manifest.

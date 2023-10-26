@@ -6,7 +6,7 @@
     "autorest": "autorest",
     "start": "java -jar target/azure-autorest-fluentnamer-jar-with-dependencies.jar",
     "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar target/azure-autorest-fluentnamer-jar-with-dependencies.jar",
-    "build": "mvn package -P local"
+    "build": "mvn package -Dlocal"
   },
   "repository": {
     "type": "git",

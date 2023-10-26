@@ -30,7 +30,8 @@ public final class RepositoryTags implements JsonSerializable<RepositoryTags> {
     /**
      * Creates an instance of RepositoryTags class.
      */
-    public RepositoryTags() {}
+    public RepositoryTags() {
+    }
 
     /**
      * Get the name property: Name of the image.

@@ -21,7 +21,8 @@ public final class CatAPTrue extends PetAPTrue {
     /**
      * Creates an instance of CatAPTrue class.
      */
-    public CatAPTrue() {}
+    public CatAPTrue() {
+    }
 
     /**
      * Get the friendly property: The friendly property.

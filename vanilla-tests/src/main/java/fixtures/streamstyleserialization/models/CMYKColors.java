@@ -37,7 +37,8 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public CMYKColors() {}
+    public CMYKColors() {
+    }
 
     /**
      * Creates or finds a CMYKColors from its string representation.

@@ -39,7 +39,8 @@ public final class ReadonlyObj {
     /**
      * Creates an instance of ReadonlyObj class.
      */
-    public ReadonlyObj() {}
+    public ReadonlyObj() {
+    }
 
     /**
      * Get the ID of the object.

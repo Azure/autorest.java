@@ -38,7 +38,8 @@ public class Salmon extends Fish {
     /**
      * Creates an instance of Salmon class.
      */
-    public Salmon() {}
+    public Salmon() {
+    }
 
     /**
      * Get the location property: The location property.

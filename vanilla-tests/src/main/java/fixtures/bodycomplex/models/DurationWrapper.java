@@ -22,7 +22,8 @@ public final class DurationWrapper {
     /**
      * Creates an instance of DurationWrapper class.
      */
-    public DurationWrapper() {}
+    public DurationWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -49,5 +50,6 @@ public final class DurationWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

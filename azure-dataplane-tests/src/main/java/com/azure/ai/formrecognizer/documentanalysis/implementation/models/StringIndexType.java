@@ -33,7 +33,8 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public StringIndexType() {}
+    public StringIndexType() {
+    }
 
     /**
      * Creates or finds a StringIndexType from its string representation.

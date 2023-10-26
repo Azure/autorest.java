@@ -41,7 +41,8 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     /**
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
-    public MetricAlertSingleResourceMultipleMetricCriteria() {}
+    public MetricAlertSingleResourceMultipleMetricCriteria() {
+    }
 
     /**
      * Get the odataType property: specifies the type of the alert criteria.

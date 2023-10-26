@@ -31,7 +31,8 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
     /**
      * Creates an instance of RootWithRefAndNoMeta class.
      */
-    public RootWithRefAndNoMeta() {}
+    public RootWithRefAndNoMeta() {
+    }
 
     /**
      * Get the refToModel property: XML will use RefToModel.

@@ -21,7 +21,8 @@ public class MyException {
     /**
      * Creates an instance of MyException class.
      */
-    public MyException() {}
+    public MyException() {
+    }
 
     /**
      * Get the statusCode property: The statusCode property.
@@ -48,5 +49,6 @@ public class MyException {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

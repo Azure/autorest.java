@@ -27,7 +27,8 @@ public final class LongWrapper {
     /**
      * Creates an instance of LongWrapper class.
      */
-    public LongWrapper() {}
+    public LongWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -74,5 +75,6 @@ public final class LongWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

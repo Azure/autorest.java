@@ -21,7 +21,8 @@ public final class JsonOutput {
     /**
      * Creates an instance of JsonOutput class.
      */
-    public JsonOutput() {}
+    public JsonOutput() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -48,5 +49,6 @@ public final class JsonOutput {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

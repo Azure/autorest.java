@@ -42,7 +42,8 @@ public class FlattenedProduct extends Resource {
     /**
      * Creates an instance of FlattenedProduct class.
      */
-    public FlattenedProduct() {}
+    public FlattenedProduct() {
+    }
 
     /**
      * Get the pName property: The p.name property.

@@ -27,7 +27,8 @@ public final class IntWrapper {
     /**
      * Creates an instance of IntWrapper class.
      */
-    public IntWrapper() {}
+    public IntWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.

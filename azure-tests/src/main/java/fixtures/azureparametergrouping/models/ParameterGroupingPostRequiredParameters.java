@@ -39,7 +39,8 @@ public final class ParameterGroupingPostRequiredParameters {
     /**
      * Creates an instance of ParameterGroupingPostRequiredParameters class.
      */
-    public ParameterGroupingPostRequiredParameters() {}
+    public ParameterGroupingPostRequiredParameters() {
+    }
 
     /**
      * Get the customHeader property: The customHeader property.

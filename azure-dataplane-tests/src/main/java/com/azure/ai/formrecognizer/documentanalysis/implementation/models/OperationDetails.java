@@ -83,7 +83,8 @@ public class OperationDetails {
     /**
      * Creates an instance of OperationDetails class.
      */
-    public OperationDetails() {}
+    public OperationDetails() {
+    }
 
     /**
      * Get the operationId property: Operation ID.

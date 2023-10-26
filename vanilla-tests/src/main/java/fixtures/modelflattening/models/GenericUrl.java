@@ -21,7 +21,8 @@ public class GenericUrl {
     /**
      * Creates an instance of GenericUrl class.
      */
-    public GenericUrl() {}
+    public GenericUrl() {
+    }
 
     /**
      * Get the genericValue property: Generic URL value.
@@ -48,5 +49,6 @@ public class GenericUrl {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

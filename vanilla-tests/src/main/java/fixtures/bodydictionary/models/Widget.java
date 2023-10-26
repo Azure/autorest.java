@@ -27,7 +27,8 @@ public final class Widget {
     /**
      * Creates an instance of Widget class.
      */
-    public Widget() {}
+    public Widget() {
+    }
 
     /**
      * Get the integer property: The integer property.
@@ -74,5 +75,6 @@ public final class Widget {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

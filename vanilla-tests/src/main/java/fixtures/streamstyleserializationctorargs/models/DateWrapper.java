@@ -31,7 +31,8 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     /**
      * Creates an instance of DateWrapper class.
      */
-    public DateWrapper() {}
+    public DateWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -78,7 +79,8 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

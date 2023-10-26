@@ -21,7 +21,8 @@ public final class ResourceDetails {
     /**
      * Creates an instance of ResourceDetails class.
      */
-    public ResourceDetails() {}
+    public ResourceDetails() {
+    }
 
     /**
      * Get the customDocumentModels property: Details regarding custom document models.

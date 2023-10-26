@@ -21,7 +21,8 @@ public final class Kitten extends Cat {
     /**
      * Creates an instance of Kitten class.
      */
-    public Kitten() {}
+    public Kitten() {
+    }
 
     /**
      * Get the eatsMiceYet property: The eatsMiceYet property.

@@ -42,7 +42,8 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     /**
      * Creates an instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
-    public PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {}
+    public PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
+    }
 
     /**
      * Get the service property: Indicates the name of your Azure container registry.

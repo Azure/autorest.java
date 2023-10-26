@@ -33,7 +33,8 @@ public final class OperationKind extends ExpandableStringEnum<OperationKind> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public OperationKind() {}
+    public OperationKind() {
+    }
 
     /**
      * Creates or finds a OperationKind from its string representation.

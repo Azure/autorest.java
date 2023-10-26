@@ -66,7 +66,8 @@ public final class ListBlobsResponse {
     /**
      * Creates an instance of ListBlobsResponse class.
      */
-    public ListBlobsResponse() {}
+    public ListBlobsResponse() {
+    }
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.

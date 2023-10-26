@@ -29,7 +29,8 @@ public final class RootWithRefAndMeta {
     /**
      * Creates an instance of RootWithRefAndMeta class.
      */
-    public RootWithRefAndMeta() {}
+    public RootWithRefAndMeta() {
+    }
 
     /**
      * Get the refToModel property: XML will use XMLComplexTypeWithMeta.

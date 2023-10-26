@@ -24,7 +24,8 @@ public final class FsLayer implements JsonSerializable<FsLayer> {
     /**
      * Creates an instance of FsLayer class.
      */
-    public FsLayer() {}
+    public FsLayer() {
+    }
 
     /**
      * Get the blobSum property: SHA of an image layer.

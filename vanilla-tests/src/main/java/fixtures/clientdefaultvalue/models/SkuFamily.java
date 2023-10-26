@@ -23,7 +23,8 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public SkuFamily() {}
+    public SkuFamily() {
+    }
 
     /**
      * Creates or finds a SkuFamily from its string representation.

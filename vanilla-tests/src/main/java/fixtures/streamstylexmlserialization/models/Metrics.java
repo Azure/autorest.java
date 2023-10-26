@@ -41,7 +41,8 @@ public final class Metrics implements XmlSerializable<Metrics> {
     /**
      * Creates an instance of Metrics class.
      */
-    public Metrics() {}
+    public Metrics() {
+    }
 
     /**
      * Get the version property: The version of Storage Analytics to configure.

@@ -44,7 +44,8 @@ public class PetAPTrue {
     /**
      * Creates an instance of PetAPTrue class.
      */
-    public PetAPTrue() {}
+    public PetAPTrue() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -129,5 +130,6 @@ public class PetAPTrue {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

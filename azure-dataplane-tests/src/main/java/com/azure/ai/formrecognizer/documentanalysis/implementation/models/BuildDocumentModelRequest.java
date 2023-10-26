@@ -46,7 +46,8 @@ public final class BuildDocumentModelRequest {
     /**
      * Creates an instance of BuildDocumentModelRequest class.
      */
-    public BuildDocumentModelRequest() {}
+    public BuildDocumentModelRequest() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

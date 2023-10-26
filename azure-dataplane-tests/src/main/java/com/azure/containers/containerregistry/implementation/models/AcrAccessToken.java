@@ -24,7 +24,8 @@ public final class AcrAccessToken implements JsonSerializable<AcrAccessToken> {
     /**
      * Creates an instance of AcrAccessToken class.
      */
-    public AcrAccessToken() {}
+    public AcrAccessToken() {
+    }
 
     /**
      * Get the accessToken property: The access token for performing authenticated requests.

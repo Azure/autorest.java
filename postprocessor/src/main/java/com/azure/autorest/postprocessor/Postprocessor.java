@@ -127,6 +127,7 @@ public class Postprocessor extends NewPlugin {
             handlePartialUpdate(fileContents);
         }
 
+        //Step 4: Print to files
         if (!settings.isSkipFormatting()) {
             try {
                 Path tmpDir = Files.createTempDirectory("spotless");
@@ -135,7 +136,8 @@ public class Postprocessor extends NewPlugin {
                 for (Map.Entry<String, String> entry : fileContents.entrySet()) {
                     Path file = tmpDir.resolve(entry.getKey());
                     Files.createDirectories(file.getParent());
-                    Files.writeString(file, entry.getValue());
+                    Files.writeString(file, entry.getValue())
+                        .toFile().deleteOnExit();
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
@@ -146,16 +148,14 @@ public class Postprocessor extends NewPlugin {
                 attemptMavenSpotless(pomPath, logger);
 
                 for (Map.Entry<String, String> entry : fileContents.entrySet()) {
-                    Path file = tmpDir.resolve(entry.getKey());
-                    fileContents.put(entry.getKey(), Files.readString(file));
+                    writeFile(entry.getKey(), Files.readString(tmpDir.resolve(entry.getKey())), null);
                 }
             } catch (IOException ex) {
                 throw new UncheckedIOException(ex);
             }
+        } else {
+            fileContents.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
         }
-
-        //Step 4: Print to files
-        fileContents.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
     }
 
     private String getReadme() {
@@ -298,17 +298,23 @@ public class Postprocessor extends NewPlugin {
         }
 
         try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
             Process process = new ProcessBuilder(command)
-                .redirectOutput(ProcessBuilder.Redirect.DISCARD)
-                .redirectError(ProcessBuilder.Redirect.DISCARD)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
                 .start();
-            process.waitFor(30, TimeUnit.SECONDS);
-            process.exitValue();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 30 seconds or failed with an error code. "
+                        + Files.readString(outputFile.toPath()));
+            }
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
         }
     }
-
 
     private void clear() {
         JavaSettings.clear();

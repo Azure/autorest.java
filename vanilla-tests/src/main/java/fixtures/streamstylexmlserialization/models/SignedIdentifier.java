@@ -31,7 +31,8 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
     /**
      * Creates an instance of SignedIdentifier class.
      */
-    public SignedIdentifier() {}
+    public SignedIdentifier() {
+    }
 
     /**
      * Get the id property: a unique id.

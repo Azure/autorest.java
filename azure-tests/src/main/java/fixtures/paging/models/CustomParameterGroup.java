@@ -27,7 +27,8 @@ public final class CustomParameterGroup {
     /**
      * Creates an instance of CustomParameterGroup class.
      */
-    public CustomParameterGroup() {}
+    public CustomParameterGroup() {
+    }
 
     /**
      * Get the apiVersion property: Sets the api version to use.

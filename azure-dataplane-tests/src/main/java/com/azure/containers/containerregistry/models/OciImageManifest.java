@@ -40,7 +40,8 @@ public final class OciImageManifest implements JsonSerializable<OciImageManifest
     /**
      * Creates an instance of OciImageManifest class.
      */
-    public OciImageManifest() {}
+    public OciImageManifest() {
+    }
 
     /**
      * Get the configuration property: V2 image config descriptor.

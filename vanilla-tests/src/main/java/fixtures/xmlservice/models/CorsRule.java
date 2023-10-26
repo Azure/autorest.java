@@ -54,7 +54,8 @@ public final class CorsRule {
     /**
      * Creates an instance of CorsRule class.
      */
-    public CorsRule() {}
+    public CorsRule() {
+    }
 
     /**
      * Get the allowedOrigins property: The origin domains that are permitted to make a request against the storage

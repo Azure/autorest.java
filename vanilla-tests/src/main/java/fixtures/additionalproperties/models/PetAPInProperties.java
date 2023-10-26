@@ -40,7 +40,8 @@ public final class PetAPInProperties {
     /**
      * Creates an instance of PetAPInProperties class.
      */
-    public PetAPInProperties() {}
+    public PetAPInProperties() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -116,5 +117,6 @@ public final class PetAPInProperties {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

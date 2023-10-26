@@ -55,7 +55,8 @@ public final class ContainerProperties {
     /**
      * Creates an instance of ContainerProperties class.
      */
-    public ContainerProperties() {}
+    public ContainerProperties() {
+    }
 
     /**
      * Get the lastModified property: The Last-Modified property.

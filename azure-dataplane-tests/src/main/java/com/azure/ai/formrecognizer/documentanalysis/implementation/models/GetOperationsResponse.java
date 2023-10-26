@@ -28,7 +28,8 @@ public final class GetOperationsResponse {
     /**
      * Creates an instance of GetOperationsResponse class.
      */
-    public GetOperationsResponse() {}
+    public GetOperationsResponse() {
+    }
 
     /**
      * Get the value property: List of operations.

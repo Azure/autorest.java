@@ -24,7 +24,8 @@ public final class History implements JsonSerializable<History> {
     /**
      * Creates an instance of History class.
      */
-    public History() {}
+    public History() {
+    }
 
     /**
      * Get the v1Compatibility property: The raw v1 compatibility information.

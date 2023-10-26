@@ -46,7 +46,8 @@ public class Resource {
     /**
      * Creates an instance of Resource class.
      */
-    public Resource() {}
+    public Resource() {
+    }
 
     /**
      * Get the id property: Resource Id.
@@ -120,5 +121,6 @@ public class Resource {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

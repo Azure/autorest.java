@@ -21,7 +21,8 @@ public final class StringOptionalWrapper {
     /**
      * Creates an instance of StringOptionalWrapper class.
      */
-    public StringOptionalWrapper() {}
+    public StringOptionalWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
@@ -48,5 +49,6 @@ public final class StringOptionalWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

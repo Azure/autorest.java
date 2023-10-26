@@ -29,7 +29,8 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
     /**
      * Creates an instance of BooleanWrapper class.
      */
-    public BooleanWrapper() {}
+    public BooleanWrapper() {
+    }
 
     /**
      * Get the fieldTrue property: The field_true property.
@@ -76,7 +77,8 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

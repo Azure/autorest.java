@@ -22,7 +22,8 @@ public final class DictionaryWrapper {
     /**
      * Creates an instance of DictionaryWrapper class.
      */
-    public DictionaryWrapper() {}
+    public DictionaryWrapper() {
+    }
 
     /**
      * Get the defaultProgram property: Dictionary of &lt;string&gt;.
@@ -49,5 +50,6 @@ public final class DictionaryWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

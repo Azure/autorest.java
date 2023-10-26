@@ -52,7 +52,8 @@ public final class CopyAuthorization {
     /**
      * Creates an instance of CopyAuthorization class.
      */
-    public CopyAuthorization() {}
+    public CopyAuthorization() {
+    }
 
     /**
      * Get the targetResourceId property: ID of the target Azure resource where the document model should be copied to.

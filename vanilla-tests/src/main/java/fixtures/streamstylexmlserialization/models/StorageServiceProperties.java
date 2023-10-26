@@ -54,7 +54,8 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     /**
      * Creates an instance of StorageServiceProperties class.
      */
-    public StorageServiceProperties() {}
+    public StorageServiceProperties() {
+    }
 
     /**
      * Get the logging property: Azure Analytics Logging settings.

@@ -27,7 +27,8 @@ public final class PagingGetOdataMultiplePagesOptions {
     /**
      * Creates an instance of PagingGetOdataMultiplePagesOptions class.
      */
-    public PagingGetOdataMultiplePagesOptions() {}
+    public PagingGetOdataMultiplePagesOptions() {
+    }
 
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
@@ -76,5 +77,6 @@ public final class PagingGetOdataMultiplePagesOptions {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

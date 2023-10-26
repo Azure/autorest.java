@@ -38,7 +38,8 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     /**
      * Creates an instance of AccessPolicy class.
      */
-    public AccessPolicy() {}
+    public AccessPolicy() {
+    }
 
     /**
      * Get the start property: the date-time the policy is active.

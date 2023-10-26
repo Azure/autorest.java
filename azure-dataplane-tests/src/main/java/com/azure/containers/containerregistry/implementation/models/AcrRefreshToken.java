@@ -24,7 +24,8 @@ public final class AcrRefreshToken implements JsonSerializable<AcrRefreshToken> 
     /**
      * Creates an instance of AcrRefreshToken class.
      */
-    public AcrRefreshToken() {}
+    public AcrRefreshToken() {
+    }
 
     /**
      * Get the refreshToken property: The refresh token to be used for generating access tokens.

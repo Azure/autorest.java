@@ -30,7 +30,8 @@ public class Product extends Resource {
     /**
      * Creates an instance of Product class.
      */
-    public Product() {}
+    public Product() {
+    }
 
     /**
      * Get the provisioningState property: The provisioningState property.

@@ -31,7 +31,8 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
     /**
      * Creates an instance of RootWithRefAndMeta class.
      */
-    public RootWithRefAndMeta() {}
+    public RootWithRefAndMeta() {
+    }
 
     /**
      * Get the refToModel property: XML will use XMLComplexTypeWithMeta.

@@ -29,7 +29,8 @@ public class Pet implements JsonSerializable<Pet> {
     /**
      * Creates an instance of Pet class.
      */
-    public Pet() {}
+    public Pet() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -76,7 +77,8 @@ public class Pet implements JsonSerializable<Pet> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

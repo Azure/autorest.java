@@ -34,7 +34,8 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
     /**
      * Creates an instance of AcrErrorInfo class.
      */
-    public AcrErrorInfo() {}
+    public AcrErrorInfo() {
+    }
 
     /**
      * Get the code property: Error code.

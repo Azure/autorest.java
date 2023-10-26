@@ -43,7 +43,8 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public GoblinSharkColor() {}
+    public GoblinSharkColor() {
+    }
 
     /**
      * Creates or finds a GoblinSharkColor from its string representation.

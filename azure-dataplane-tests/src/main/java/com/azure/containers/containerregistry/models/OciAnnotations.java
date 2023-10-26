@@ -90,7 +90,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     /**
      * Creates an instance of OciAnnotations class.
      */
-    public OciAnnotations() {}
+    public OciAnnotations() {
+    }
 
     /**
      * Get the createdOn property: Date and time on which the image was built (string, date-time as defined by

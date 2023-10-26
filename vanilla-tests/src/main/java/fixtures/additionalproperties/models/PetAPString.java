@@ -44,7 +44,8 @@ public final class PetAPString {
     /**
      * Creates an instance of PetAPString class.
      */
-    public PetAPString() {}
+    public PetAPString() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -129,5 +130,6 @@ public final class PetAPString {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

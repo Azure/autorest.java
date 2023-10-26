@@ -27,7 +27,8 @@ public final class CurrencyValue {
     /**
      * Creates an instance of CurrencyValue class.
      */
-    public CurrencyValue() {}
+    public CurrencyValue() {
+    }
 
     /**
      * Get the amount property: Currency amount.

@@ -30,7 +30,8 @@ public final class OCIIndex extends Manifest {
     /**
      * Creates an instance of OCIIndex class.
      */
-    public OCIIndex() {}
+    public OCIIndex() {
+    }
 
     /**
      * Get the manifests property: List of OCI image layer information.

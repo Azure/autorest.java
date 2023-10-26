@@ -68,7 +68,8 @@ public final class StorageServiceProperties {
     /**
      * Creates an instance of StorageServiceProperties class.
      */
-    public StorageServiceProperties() {}
+    public StorageServiceProperties() {
+    }
 
     /**
      * Get the logging property: Azure Analytics Logging settings.

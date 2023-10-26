@@ -21,7 +21,8 @@ public final class OperationResult {
     /**
      * Creates an instance of OperationResult class.
      */
-    public OperationResult() {}
+    public OperationResult() {
+    }
 
     /**
      * Get the status property: The status of the request.
@@ -48,5 +49,6 @@ public final class OperationResult {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -24,7 +24,8 @@ public final class ModelAsStringRequiredOneValueDefaultEnum
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringRequiredOneValueDefaultEnum() {}
+    public ModelAsStringRequiredOneValueDefaultEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringRequiredOneValueDefaultEnum from its string representation.

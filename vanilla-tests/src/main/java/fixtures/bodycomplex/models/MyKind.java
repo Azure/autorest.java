@@ -23,7 +23,8 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public MyKind() {}
+    public MyKind() {
+    }
 
     /**
      * Creates or finds a MyKind from its string representation.

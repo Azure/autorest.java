@@ -22,7 +22,8 @@ public final class ArrayOptionalWrapper {
     /**
      * Creates an instance of ArrayOptionalWrapper class.
      */
-    public ArrayOptionalWrapper() {}
+    public ArrayOptionalWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
@@ -49,5 +50,6 @@ public final class ArrayOptionalWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

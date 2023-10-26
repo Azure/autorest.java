@@ -21,7 +21,8 @@ public final class VirtualMachineScaleSet {
     /**
      * Creates an instance of VirtualMachineScaleSet class.
      */
-    public VirtualMachineScaleSet() {}
+    public VirtualMachineScaleSet() {
+    }
 
     /**
      * Get the properties property: Describes the properties of a Virtual Machine Scale Set.

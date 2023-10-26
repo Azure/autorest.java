@@ -21,7 +21,8 @@ public final class NoModelAsStringRequiredTwoValueDefault {
     /**
      * Creates an instance of NoModelAsStringRequiredTwoValueDefault class.
      */
-    public NoModelAsStringRequiredTwoValueDefault() {}
+    public NoModelAsStringRequiredTwoValueDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.

@@ -21,7 +21,8 @@ public final class ComponentDocumentModelDetails {
     /**
      * Creates an instance of ComponentDocumentModelDetails class.
      */
-    public ComponentDocumentModelDetails() {}
+    public ComponentDocumentModelDetails() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

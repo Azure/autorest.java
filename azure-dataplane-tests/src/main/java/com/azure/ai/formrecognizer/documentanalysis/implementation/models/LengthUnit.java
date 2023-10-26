@@ -29,7 +29,8 @@ public final class LengthUnit extends ExpandableStringEnum<LengthUnit> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public LengthUnit() {}
+    public LengthUnit() {
+    }
 
     /**
      * Creates or finds a LengthUnit from its string representation.

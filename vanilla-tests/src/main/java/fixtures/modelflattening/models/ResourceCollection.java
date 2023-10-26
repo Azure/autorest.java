@@ -35,7 +35,8 @@ public final class ResourceCollection {
     /**
      * Creates an instance of ResourceCollection class.
      */
-    public ResourceCollection() {}
+    public ResourceCollection() {
+    }
 
     /**
      * Get the productresource property: Flattened product.

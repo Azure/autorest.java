@@ -23,7 +23,8 @@ public class BackendAddressPool {
     /**
      * Creates an instance of BackendAddressPool class.
      */
-    public BackendAddressPool() {}
+    public BackendAddressPool() {
+    }
 
     /**
      * Get the location property: The location of the backend address pool.
@@ -50,5 +51,6 @@ public class BackendAddressPool {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

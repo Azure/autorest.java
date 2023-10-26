@@ -21,7 +21,8 @@ public final class ClassWrapper {
     /**
      * Creates an instance of ClassWrapper class.
      */
-    public ClassWrapper() {}
+    public ClassWrapper() {
+    }
 
     /**
      * Get the value property: The value property.

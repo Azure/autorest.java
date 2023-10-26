@@ -43,7 +43,8 @@ public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
      * @deprecated Use the {@link #fromFloat(float)} factory method.
      */
     @Deprecated
-    public FloatEnum() {}
+    public FloatEnum() {
+    }
 
     /**
      * Creates or finds a FloatEnum from its string representation.

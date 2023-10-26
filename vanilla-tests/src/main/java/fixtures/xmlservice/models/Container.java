@@ -36,7 +36,8 @@ public final class Container {
     /**
      * Creates an instance of Container class.
      */
-    public Container() {}
+    public Container() {
+    }
 
     /**
      * Get the name property: The Name property.

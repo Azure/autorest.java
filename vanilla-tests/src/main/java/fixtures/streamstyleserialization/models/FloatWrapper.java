@@ -29,7 +29,8 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
     /**
      * Creates an instance of FloatWrapper class.
      */
-    public FloatWrapper() {}
+    public FloatWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -76,7 +77,8 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -29,7 +29,8 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkConfiguration class.
      */
-    public VirtualMachineScaleSetNetworkConfiguration() {}
+    public VirtualMachineScaleSetNetworkConfiguration() {
+    }
 
     /**
      * Get the name property: The network configuration name.
@@ -78,5 +79,6 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

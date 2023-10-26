@@ -39,7 +39,8 @@ public class MyBaseType {
     /**
      * Creates an instance of MyBaseType class.
      */
-    protected MyBaseType() {}
+    protected MyBaseType() {
+    }
 
     /**
      * Get the propB1 property: The propB1 property.
@@ -64,5 +65,6 @@ public class MyBaseType {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

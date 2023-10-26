@@ -43,7 +43,8 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
     /**
      * Creates an instance of Slideshow class.
      */
-    public Slideshow() {}
+    public Slideshow() {
+    }
 
     /**
      * Get the title property: The title property.

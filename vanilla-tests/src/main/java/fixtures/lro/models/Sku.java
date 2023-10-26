@@ -27,7 +27,8 @@ public final class Sku {
     /**
      * Creates an instance of Sku class.
      */
-    public Sku() {}
+    public Sku() {
+    }
 
     /**
      * Get the name property: The name property.
@@ -74,5 +75,6 @@ public final class Sku {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

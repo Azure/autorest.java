@@ -33,7 +33,8 @@ public final class Enum1 extends ExpandableStringEnum<Enum1> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public Enum1() {}
+    public Enum1() {
+    }
 
     /**
      * Creates or finds a Enum1 from its string representation.

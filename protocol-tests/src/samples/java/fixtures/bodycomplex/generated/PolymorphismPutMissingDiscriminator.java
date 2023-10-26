@@ -4,41 +4,22 @@
 
 package fixtures.bodycomplex.generated;
 
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.polling.LongRunningOperationStatus;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
-import fixtures.bodycomplex.PolymorphismAsyncClient;
 import fixtures.bodycomplex.PolymorphismClient;
 import fixtures.bodycomplex.PolymorphismClientBuilder;
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceClientImpl;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
 
 public class PolymorphismPutMissingDiscriminator {
     public static void main(String[] args) {
-        PolymorphismClient polymorphismClient = new PolymorphismClientBuilder().host("http://localhost:3000").buildClient();
+        PolymorphismClient polymorphismClient
+            = new PolymorphismClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodycomplex.generated.polymorphismputmissingdiscriminator.polymorphismputmissingdiscriminator
-        BinaryData complexBody = BinaryData.fromString("{\"fishtype\":\"salmon\",\"iswild\":true,\"length\":1,\"location\":\"alaska\",\"siblings\":[{\"age\":6,\"birthday\":\"2012-01-05T01:00:00Z\",\"fishtype\":\"shark\",\"length\":20,\"species\":\"predator\"},{\"age\":105,\"birthday\":\"1900-01-05T01:00:00Z\",\"fishtype\":\"sawshark\",\"length\":10,\"picture\":\"//////4=\",\"species\":\"dangerous\"},{\"age\":1,\"birthday\":\"2012-01-05T01:00:00Z\",\"color\":\"pinkish-gray\",\"fishtype\":\"goblin\",\"jawsize\":5,\"length\":30,\"species\":\"scary\"}],\"species\":\"king\"}");
+        BinaryData complexBody = BinaryData.fromString(
+            "{\"fishtype\":\"salmon\",\"iswild\":true,\"length\":1,\"location\":\"alaska\",\"siblings\":[{\"age\":6,\"birthday\":\"2012-01-05T01:00:00Z\",\"fishtype\":\"shark\",\"length\":20,\"species\":\"predator\"},{\"age\":105,\"birthday\":\"1900-01-05T01:00:00Z\",\"fishtype\":\"sawshark\",\"length\":10,\"picture\":\"//////4=\",\"species\":\"dangerous\"},{\"age\":1,\"birthday\":\"2012-01-05T01:00:00Z\",\"color\":\"pinkish-gray\",\"fishtype\":\"goblin\",\"jawsize\":5,\"length\":30,\"species\":\"scary\"}],\"species\":\"king\"}");
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = polymorphismClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions);
+        Response<BinaryData> response
+            = polymorphismClient.putMissingDiscriminatorWithResponse(complexBody, requestOptions);
         // END:fixtures.bodycomplex.generated.polymorphismputmissingdiscriminator.polymorphismputmissingdiscriminator
     }
 }

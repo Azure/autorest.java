@@ -26,7 +26,8 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
     /**
      * Creates an instance of ComplexTypeWithMeta class.
      */
-    public ComplexTypeWithMeta() {}
+    public ComplexTypeWithMeta() {
+    }
 
     /**
      * Get the id property: The id of the res.
@@ -53,7 +54,8 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

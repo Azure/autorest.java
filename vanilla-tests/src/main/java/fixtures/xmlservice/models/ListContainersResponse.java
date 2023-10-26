@@ -67,7 +67,8 @@ public final class ListContainersResponse {
     /**
      * Creates an instance of ListContainersResponse class.
      */
-    public ListContainersResponse() {}
+    public ListContainersResponse() {
+    }
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.

@@ -39,7 +39,8 @@ public final class TagWriteableProperties implements JsonSerializable<TagWriteab
     /**
      * Creates an instance of TagWriteableProperties class.
      */
-    public TagWriteableProperties() {}
+    public TagWriteableProperties() {
+    }
 
     /**
      * Get the deleteEnabled property: Delete enabled.

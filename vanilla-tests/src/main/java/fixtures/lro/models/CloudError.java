@@ -27,7 +27,8 @@ public final class CloudError {
     /**
      * Creates an instance of CloudError class.
      */
-    public CloudError() {}
+    public CloudError() {
+    }
 
     /**
      * Get the code property: The code property.
@@ -74,5 +75,6 @@ public final class CloudError {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -27,7 +27,8 @@ public class Pet {
     /**
      * Creates an instance of Pet class.
      */
-    public Pet() {}
+    public Pet() {
+    }
 
     /**
      * Get the id property: The id property.

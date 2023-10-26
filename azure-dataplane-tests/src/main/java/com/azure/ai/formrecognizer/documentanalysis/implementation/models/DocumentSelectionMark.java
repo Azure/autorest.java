@@ -40,7 +40,8 @@ public final class DocumentSelectionMark {
     /**
      * Creates an instance of DocumentSelectionMark class.
      */
-    public DocumentSelectionMark() {}
+    public DocumentSelectionMark() {
+    }
 
     /**
      * Get the state property: State of the selection mark.

@@ -4,41 +4,26 @@
 
 package fixtures.requiredheaderquery.generated;
 
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.polling.LongRunningOperationStatus;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import fixtures.requiredheaderquery.DpgRequiredHeaderQueryAsyncClient;
 import fixtures.requiredheaderquery.DpgRequiredHeaderQueryClient;
 import fixtures.requiredheaderquery.DpgRequiredHeaderQueryClientBuilder;
-import fixtures.requiredheaderquery.implementation.DpgRequiredHeaderQueryClientImpl;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
 
 public class QueryParamters {
     public static void main(String[] args) {
-        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
+        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient
+            = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
-        RequestOptions requestOptions = new RequestOptions().addQueryParam("parameter_optional_csv_int_array", "6,7,8").addQueryParam("parameter_optional_multi_int_array", "9").addQueryParam("parameter_optional_multi_int_array", "10");
-        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(17, true, Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), Arrays.asList("four", "five"), Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z"), requestOptions);
+        RequestOptions requestOptions = new RequestOptions().addQueryParam("parameter_optional_csv_int_array", "6,7,8")
+            .addQueryParam("parameter_optional_multi_int_array", "9")
+            .addQueryParam("parameter_optional_multi_int_array", "10");
+        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(17, true,
+            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), Arrays.asList("four", "five"),
+            Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z"),
+            requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
     }
 }

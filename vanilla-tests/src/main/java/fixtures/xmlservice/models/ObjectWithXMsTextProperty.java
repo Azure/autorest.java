@@ -30,7 +30,8 @@ public final class ObjectWithXMsTextProperty {
     /**
      * Creates an instance of ObjectWithXMsTextProperty class.
      */
-    public ObjectWithXMsTextProperty() {}
+    public ObjectWithXMsTextProperty() {
+    }
 
     /**
      * Get the language property: Returned value should be 'english'.
@@ -77,5 +78,6 @@ public final class ObjectWithXMsTextProperty {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

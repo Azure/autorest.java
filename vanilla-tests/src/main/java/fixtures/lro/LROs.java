@@ -6173,6 +6173,6 @@ public final class LROs {
         return this.beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
     }
 
-    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT
-        = new TypeReference<List<Product>>() {};
+    private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT = new TypeReference<List<Product>>() {
+    };
 }

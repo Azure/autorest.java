@@ -21,7 +21,8 @@ public final class ErrorResponse {
     /**
      * Creates an instance of ErrorResponse class.
      */
-    public ErrorResponse() {}
+    public ErrorResponse() {
+    }
 
     /**
      * Get the error property: Error info.

@@ -28,7 +28,8 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     /**
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
-    public MetricAlertSingleResourceMultipleMetricCriteria() {}
+    public MetricAlertSingleResourceMultipleMetricCriteria() {
+    }
 
     /**
      * Get the allOf property: The list of metric criteria for this 'all of' operation.

@@ -22,7 +22,8 @@ public final class LoadBalancerPropertiesFormat {
     /**
      * Creates an instance of LoadBalancerPropertiesFormat class.
      */
-    public LoadBalancerPropertiesFormat() {}
+    public LoadBalancerPropertiesFormat() {
+    }
 
     /**
      * Get the backendAddressPools property: Collection of backend address pools used by a load balancer.

@@ -33,7 +33,8 @@ public class DotFish {
     /**
      * Creates an instance of DotFish class.
      */
-    public DotFish() {}
+    public DotFish() {
+    }
 
     /**
      * Get the species property: The species property.

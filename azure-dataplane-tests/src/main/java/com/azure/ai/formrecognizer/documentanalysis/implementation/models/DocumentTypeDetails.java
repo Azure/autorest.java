@@ -40,7 +40,8 @@ public final class DocumentTypeDetails {
     /**
      * Creates an instance of DocumentTypeDetails class.
      */
-    public DocumentTypeDetails() {}
+    public DocumentTypeDetails() {
+    }
 
     /**
      * Get the description property: Document model description.

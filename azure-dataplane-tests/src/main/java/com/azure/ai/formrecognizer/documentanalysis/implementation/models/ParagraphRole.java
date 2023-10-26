@@ -48,7 +48,8 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ParagraphRole() {}
+    public ParagraphRole() {
+    }
 
     /**
      * Creates or finds a ParagraphRole from its string representation.

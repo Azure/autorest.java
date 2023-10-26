@@ -40,7 +40,8 @@ public final class TagList implements JsonSerializable<TagList> {
     /**
      * Creates an instance of TagList class.
      */
-    public TagList() {}
+    public TagList() {
+    }
 
     /**
      * Get the registryLoginServer property: Registry login server name. This is likely to be similar to

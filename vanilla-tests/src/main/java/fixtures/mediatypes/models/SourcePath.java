@@ -21,7 +21,8 @@ public final class SourcePath {
     /**
      * Creates an instance of SourcePath class.
      */
-    public SourcePath() {}
+    public SourcePath() {
+    }
 
     /**
      * Get the source property: File source path.
@@ -48,5 +49,6 @@ public final class SourcePath {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

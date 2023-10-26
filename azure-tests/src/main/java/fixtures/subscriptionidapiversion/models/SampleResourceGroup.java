@@ -27,7 +27,8 @@ public final class SampleResourceGroup {
     /**
      * Creates an instance of SampleResourceGroup class.
      */
-    public SampleResourceGroup() {}
+    public SampleResourceGroup() {
+    }
 
     /**
      * Get the name property: resource group name 'testgroup101'.
@@ -74,5 +75,6 @@ public final class SampleResourceGroup {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

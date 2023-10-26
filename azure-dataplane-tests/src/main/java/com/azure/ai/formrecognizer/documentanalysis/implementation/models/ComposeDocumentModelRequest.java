@@ -41,7 +41,8 @@ public final class ComposeDocumentModelRequest {
     /**
      * Creates an instance of ComposeDocumentModelRequest class.
      */
-    public ComposeDocumentModelRequest() {}
+    public ComposeDocumentModelRequest() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

@@ -28,7 +28,8 @@ public final class OdataProductResult {
     /**
      * Creates an instance of OdataProductResult class.
      */
-    public OdataProductResult() {}
+    public OdataProductResult() {
+    }
 
     /**
      * Get the values property: The values property.

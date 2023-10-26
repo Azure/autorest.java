@@ -29,7 +29,8 @@ public class Cat extends Pet {
     /**
      * Creates an instance of Cat class.
      */
-    public Cat() {}
+    public Cat() {
+    }
 
     /**
      * Get the color property: The color property.

@@ -36,7 +36,8 @@ public final class Banana {
     /**
      * Creates an instance of Banana class.
      */
-    public Banana() {}
+    public Banana() {
+    }
 
     /**
      * Get the name property: The name property.
@@ -103,5 +104,6 @@ public final class Banana {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

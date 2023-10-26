@@ -27,7 +27,8 @@ public final class ReadonlyObj {
     /**
      * Creates an instance of ReadonlyObj class.
      */
-    public ReadonlyObj() {}
+    public ReadonlyObj() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -63,5 +64,6 @@ public final class ReadonlyObj {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

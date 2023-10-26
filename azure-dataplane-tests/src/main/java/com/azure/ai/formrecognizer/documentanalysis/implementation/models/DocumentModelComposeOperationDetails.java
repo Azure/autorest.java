@@ -27,7 +27,8 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
     /**
      * Creates an instance of DocumentModelComposeOperationDetails class.
      */
-    public DocumentModelComposeOperationDetails() {}
+    public DocumentModelComposeOperationDetails() {
+    }
 
     /**
      * Get the result property: Operation result upon success.

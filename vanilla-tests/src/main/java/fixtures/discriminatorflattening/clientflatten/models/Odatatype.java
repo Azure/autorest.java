@@ -36,7 +36,8 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public Odatatype() {}
+    public Odatatype() {
+    }
 
     /**
      * Creates or finds a Odatatype from its string representation.

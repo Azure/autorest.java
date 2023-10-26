@@ -39,7 +39,8 @@ public final class ManifestWriteableProperties implements JsonSerializable<Manif
     /**
      * Creates an instance of ManifestWriteableProperties class.
      */
-    public ManifestWriteableProperties() {}
+    public ManifestWriteableProperties() {
+    }
 
     /**
      * Get the deleteEnabled property: Delete enabled.

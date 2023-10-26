@@ -23,7 +23,8 @@ public final class MetricAlertResource {
     /**
      * Creates an instance of MetricAlertResource class.
      */
-    public MetricAlertResource() {}
+    public MetricAlertResource() {
+    }
 
     /**
      * Get the criteria property: defines the specific alert criteria information.

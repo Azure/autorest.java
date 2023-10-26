@@ -40,7 +40,8 @@ public final class DotFishMarket {
     /**
      * Creates an instance of DotFishMarket class.
      */
-    private DotFishMarket() {}
+    private DotFishMarket() {
+    }
 
     /**
      * Get the sampleSalmon property: The sampleSalmon property.

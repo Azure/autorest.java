@@ -34,7 +34,7 @@ public class JavaSettings {
 
     private static Logger logger;
     private final boolean useKeyCredential;
-    private boolean noCustomHeaders;
+    private final boolean noCustomHeaders;
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -185,37 +185,43 @@ public class JavaSettings {
      * @param modelerSettings
      * @param azure
      * @param sdkIntegration
-     * @param fluent
+     * @param fluent The type of fluent code generation to use, if any.
      * @param regeneratePom
      * @param fileHeaderText
-     * @param maximumJavadocCommentWidth
+     * @param maximumJavadocCommentWidth The maximum width of a javadoc comment before it will be wrapped. This may be
+     *                                   deprecated in the future and hard-coded to 120.
      * @param serviceName
      * @param packageKeyword
      * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
-     * @param clientSideValidations
+     * @param clientSideValidations Whether client side validations will be generated based on the Swagger/TypeSpec
+     *                              spec. This generally should be unset or false, relying on the service to perform
+     *                              validation.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
      * @param generateClientAsImpl
      * @param implementationSubpackage The sub-package that the Service and Method Group client implementation classes
      * will be put into.
      * @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
-     * @param customTypes
-     * @param customTypesSubpackage
-     * @param fluentSubpackage
+     * @param customTypes A comma-separated list of custom types that will generate into the customTypesSubpackage.
+     * @param customTypesSubpackage The sub-package that custom types will be put into.
+     * @param fluentSubpackage The sub-package that fluent types will be put into.
      * @param requiredParameterClientMethods Whether Service and Method Group client method overloads that omit optional
      * parameters will be created.
      * @param generateSyncAsyncClients
      * @param generateBuilderPerClient
      * @param syncMethods
      * @param clientLogger
-     * @param requiredFieldsAsConstructorArgs
+     * @param requiredFieldsAsConstructorArgs Whether required fields will be passed to the constructor of generated
+     *                                        models.
      * @param serviceInterfaceAsPublic If set to true, proxy method service interface will be marked as public.
      * @param artifactId
      * @param credentialType
      * @param credentialScopes
-     * @param customizationJarPath
-     * @param customizationClass
+     * @param customizationJarPath Path to the postprocessor code customization Java jar. If both customizationJarPath
+     *                             and customizationClass are set, the customizationJar will be used.
+     * @param customizationClass Path to the postprocessor code customization Java class. If both customizationJarPath
+     *                           and customizationClass are set, the customizationJar will be used.
      * @param optionalConstantAsEnum
      * @param dataPlaneClient
      * @param useIterable
@@ -224,8 +230,11 @@ public class JavaSettings {
      * JsonFlatten.
      * @param clientFlattenAnnotationTarget
      * @param keyCredentialHeaderName
-     * @param clientBuilderDisabled
-     * @param skipFormatting
+     * @param clientBuilderDisabled Whether client builders will be generated. When set to true, the generated service
+     *                              clients will have public constructors instead of relying on client builders to
+     *                              create them. For SDKs that have handwritten client builders and service clients the
+     *                              recommendation is to set this to true.
+     * @param skipFormatting Whether generated code won't be automatically formatted.
      * @param pollingConfig
      * @param generateSamples
      * @param generateTests
@@ -243,7 +252,6 @@ public class JavaSettings {
      * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
      * thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
-     * @param handlePartialUpdate
      * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
      * PagedResponseBase types with generics instead of creating a specific named type that extends one of those types.
      * @param streamStyleSerialization If set to true, models will handle serialization themselves using stream-style

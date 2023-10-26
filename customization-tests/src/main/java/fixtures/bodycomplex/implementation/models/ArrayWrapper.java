@@ -22,7 +22,8 @@ public final class ArrayWrapper {
     /**
      * Creates an instance of ArrayWrapper class.
      */
-    public ArrayWrapper() {}
+    public ArrayWrapper() {
+    }
 
     /**
      * Get the array property: The array property.

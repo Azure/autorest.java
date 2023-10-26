@@ -48,7 +48,8 @@ public final class Blob implements XmlSerializable<Blob> {
     /**
      * Creates an instance of Blob class.
      */
-    public Blob() {}
+    public Blob() {
+    }
 
     /**
      * Get the name property: The Name property.

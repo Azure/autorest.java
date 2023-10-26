@@ -39,7 +39,8 @@ public final class RepositoryWriteableProperties implements JsonSerializable<Rep
     /**
      * Creates an instance of RepositoryWriteableProperties class.
      */
-    public RepositoryWriteableProperties() {}
+    public RepositoryWriteableProperties() {
+    }
 
     /**
      * Get the deleteEnabled property: Delete enabled.

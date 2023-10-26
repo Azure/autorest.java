@@ -38,7 +38,8 @@ public final class Slide {
     /**
      * Creates an instance of Slide class.
      */
-    public Slide() {}
+    public Slide() {
+    }
 
     /**
      * Get the type property: The type property.
@@ -105,5 +106,6 @@ public final class Slide {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

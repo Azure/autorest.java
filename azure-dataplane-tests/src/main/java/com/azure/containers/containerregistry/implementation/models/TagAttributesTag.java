@@ -24,7 +24,8 @@ public final class TagAttributesTag implements JsonSerializable<TagAttributesTag
     /**
      * Creates an instance of TagAttributesTag class.
      */
-    public TagAttributesTag() {}
+    public TagAttributesTag() {
+    }
 
     /**
      * Get the signatureRecord property: SignatureRecord value.

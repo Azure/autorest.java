@@ -25,7 +25,8 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     /**
      * Creates an instance of ArrayWrapper class.
      */
-    public ArrayWrapper() {}
+    public ArrayWrapper() {
+    }
 
     /**
      * Get the array property: The array property.
@@ -52,7 +53,8 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

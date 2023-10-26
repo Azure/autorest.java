@@ -64,7 +64,8 @@ public final class FlattenParameterGroup {
     /**
      * Creates an instance of FlattenParameterGroup class.
      */
-    public FlattenParameterGroup() {}
+    public FlattenParameterGroup() {
+    }
 
     /**
      * Get the name property: Product name with value 'groupproduct'.

@@ -29,7 +29,8 @@ public final class RootWithRefAndNoMeta {
     /**
      * Creates an instance of RootWithRefAndNoMeta class.
      */
-    public RootWithRefAndNoMeta() {}
+    public RootWithRefAndNoMeta() {
+    }
 
     /**
      * Get the refToModel property: XML will use RefToModel.

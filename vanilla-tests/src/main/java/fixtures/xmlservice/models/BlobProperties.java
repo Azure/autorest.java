@@ -187,7 +187,8 @@ public final class BlobProperties {
     /**
      * Creates an instance of BlobProperties class.
      */
-    public BlobProperties() {}
+    public BlobProperties() {
+    }
 
     /**
      * Get the lastModified property: The Last-Modified property.

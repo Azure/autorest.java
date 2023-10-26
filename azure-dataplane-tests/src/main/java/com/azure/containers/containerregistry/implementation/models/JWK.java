@@ -29,7 +29,8 @@ public final class JWK implements JsonSerializable<JWK> {
     /**
      * Creates an instance of JWK class.
      */
-    public JWK() {}
+    public JWK() {
+    }
 
     /**
      * Get the jwk property: JSON web key parameter.

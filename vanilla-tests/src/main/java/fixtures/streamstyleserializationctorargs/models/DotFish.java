@@ -24,7 +24,8 @@ public class DotFish implements JsonSerializable<DotFish> {
     /**
      * Creates an instance of DotFish class.
      */
-    public DotFish() {}
+    public DotFish() {
+    }
 
     /**
      * Get the species property: The species property.
@@ -51,7 +52,8 @@ public class DotFish implements JsonSerializable<DotFish> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -21,7 +21,8 @@ public final class MetricAlertProperties {
     /**
      * Creates an instance of MetricAlertProperties class.
      */
-    public MetricAlertProperties() {}
+    public MetricAlertProperties() {
+    }
 
     /**
      * Get the criteria property: defines the specific alert criteria information.

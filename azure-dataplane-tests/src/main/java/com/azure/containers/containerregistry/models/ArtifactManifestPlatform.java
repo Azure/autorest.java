@@ -34,7 +34,8 @@ public final class ArtifactManifestPlatform implements JsonSerializable<Artifact
     /**
      * Creates an instance of ArtifactManifestPlatform class.
      */
-    public ArtifactManifestPlatform() {}
+    public ArtifactManifestPlatform() {
+    }
 
     /**
      * Get the digest property: Manifest digest.

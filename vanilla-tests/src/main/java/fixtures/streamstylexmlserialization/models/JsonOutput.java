@@ -24,7 +24,8 @@ public final class JsonOutput implements JsonSerializable<JsonOutput> {
     /**
      * Creates an instance of JsonOutput class.
      */
-    public JsonOutput() {}
+    public JsonOutput() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -51,7 +52,8 @@ public final class JsonOutput implements JsonSerializable<JsonOutput> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -33,7 +33,8 @@ public final class Basic {
     /**
      * Creates an instance of Basic class.
      */
-    public Basic() {}
+    public Basic() {
+    }
 
     /**
      * Get the id property: Basic Id.
@@ -102,5 +103,6 @@ public final class Basic {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

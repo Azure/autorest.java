@@ -21,7 +21,8 @@ public final class ClassOptionalWrapper {
     /**
      * Creates an instance of ClassOptionalWrapper class.
      */
-    public ClassOptionalWrapper() {}
+    public ClassOptionalWrapper() {
+    }
 
     /**
      * Get the value property: The value property.

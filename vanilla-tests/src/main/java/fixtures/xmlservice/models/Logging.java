@@ -47,7 +47,8 @@ public final class Logging {
     /**
      * Creates an instance of Logging class.
      */
-    public Logging() {}
+    public Logging() {
+    }
 
     /**
      * Get the version property: The version of Storage Analytics to configure.

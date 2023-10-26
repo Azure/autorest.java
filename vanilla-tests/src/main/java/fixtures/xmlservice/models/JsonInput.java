@@ -21,7 +21,8 @@ public final class JsonInput {
     /**
      * Creates an instance of JsonInput class.
      */
-    public JsonInput() {}
+    public JsonInput() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -48,5 +49,6 @@ public final class JsonInput {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

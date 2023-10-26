@@ -29,7 +29,8 @@ public final class ModelAsStringRequiredTwoValueDefaultEnum
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringRequiredTwoValueDefaultEnum() {}
+    public ModelAsStringRequiredTwoValueDefaultEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringRequiredTwoValueDefaultEnum from its string representation.

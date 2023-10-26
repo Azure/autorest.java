@@ -28,7 +28,8 @@ public final class DocumentSignatureType extends ExpandableStringEnum<DocumentSi
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public DocumentSignatureType() {}
+    public DocumentSignatureType() {
+    }
 
     /**
      * Creates or finds a DocumentSignatureType from its string representation.

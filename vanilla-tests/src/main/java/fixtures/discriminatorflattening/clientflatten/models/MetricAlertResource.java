@@ -21,7 +21,8 @@ public final class MetricAlertResource {
     /**
      * Creates an instance of MetricAlertResource class.
      */
-    public MetricAlertResource() {}
+    public MetricAlertResource() {
+    }
 
     /**
      * Get the innerProperties property: The alert rule properties of the resource.

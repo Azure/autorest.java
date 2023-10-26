@@ -31,18 +31,17 @@ public final class CookiecuttersharkTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Cookiecuttershark model = new Cookiecuttershark(5.423278f, OffsetDateTime.parse("2021-07-24T18:44:29Z"))
-            .setSpecies("pbtoqcjmkl")
-            .setSiblings(Arrays.asList(
-                new Fish(17.32046f).setSpecies("idtqajzyu")
-                    .setSiblings(Arrays.asList(new Fish(58.94148f).setSpecies("jkrlkhbzhfepg")
-                        .setSiblings(Arrays.asList(new Fish(53.090946f))))),
-                new Fish(3.4862816f).setSpecies("locx")
-                    .setSiblings(Arrays.asList(
+        Cookiecuttershark model
+            = new Cookiecuttershark(5.423278f, OffsetDateTime.parse("2021-07-24T18:44:29Z")).setSpecies("pbtoqcjmkl")
+                .setSiblings(Arrays.asList(
+                    new Fish(17.32046f).setSpecies("idtqajzyu")
+                        .setSiblings(Arrays.asList(new Fish(58.94148f).setSpecies("jkrlkhbzhfepg")
+                            .setSiblings(Arrays.asList(new Fish(53.090946f))))),
+                    new Fish(3.4862816f).setSpecies("locx").setSiblings(Arrays.asList(
                         new Fish(91.597664f).setSpecies("erhhbcsglumm").setSiblings(Arrays.asList(new Fish(29.64415f))),
                         new Fish(62.736557f).setSpecies("dxob")
                             .setSiblings(Arrays.asList(new Fish(1.4938772f), new Fish(12.01387f)))))))
-            .setAge(1085002799);
+                .setAge(1085002799);
         model = BinaryData.fromObject(model).toObject(Cookiecuttershark.class);
         Assertions.assertEquals("pbtoqcjmkl", model.getSpecies());
         Assertions.assertEquals(5.423278f, model.getLength());

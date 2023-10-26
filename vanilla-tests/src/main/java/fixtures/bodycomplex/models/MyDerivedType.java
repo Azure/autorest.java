@@ -25,7 +25,8 @@ public final class MyDerivedType extends MyBaseType {
     /**
      * Creates an instance of MyDerivedType class.
      */
-    private MyDerivedType() {}
+    private MyDerivedType() {
+    }
 
     /**
      * Get the propD1 property: The propD1 property.

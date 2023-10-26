@@ -71,7 +71,8 @@ public final class DocumentPage {
     /**
      * Creates an instance of DocumentPage class.
      */
-    public DocumentPage() {}
+    public DocumentPage() {
+    }
 
     /**
      * Get the pageNumber property: 1-based page number in the input document.

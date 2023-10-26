@@ -24,7 +24,8 @@ public class Manifest implements JsonSerializable<Manifest> {
     /**
      * Creates an instance of Manifest class.
      */
-    public Manifest() {}
+    public Manifest() {
+    }
 
     /**
      * Get the schemaVersion property: Schema version.

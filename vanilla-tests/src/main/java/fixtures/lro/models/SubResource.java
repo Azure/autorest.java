@@ -21,7 +21,8 @@ public class SubResource {
     /**
      * Creates an instance of SubResource class.
      */
-    public SubResource() {}
+    public SubResource() {
+    }
 
     /**
      * Get the id property: Sub Resource Id.
@@ -37,5 +38,6 @@ public class SubResource {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

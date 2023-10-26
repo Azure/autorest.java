@@ -38,7 +38,8 @@ public final class Slide implements XmlSerializable<Slide> {
     /**
      * Creates an instance of Slide class.
      */
-    public Slide() {}
+    public Slide() {
+    }
 
     /**
      * Get the type property: The type property.
@@ -105,7 +106,8 @@ public final class Slide implements XmlSerializable<Slide> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

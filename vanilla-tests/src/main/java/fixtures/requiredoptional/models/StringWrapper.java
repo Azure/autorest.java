@@ -21,7 +21,8 @@ public final class StringWrapper {
     /**
      * Creates an instance of StringWrapper class.
      */
-    public StringWrapper() {}
+    public StringWrapper() {
+    }
 
     /**
      * Get the value property: The value property.

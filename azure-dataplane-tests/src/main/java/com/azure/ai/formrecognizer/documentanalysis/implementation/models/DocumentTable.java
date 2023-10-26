@@ -46,7 +46,8 @@ public final class DocumentTable {
     /**
      * Creates an instance of DocumentTable class.
      */
-    public DocumentTable() {}
+    public DocumentTable() {
+    }
 
     /**
      * Get the rowCount property: Number of rows in the table.

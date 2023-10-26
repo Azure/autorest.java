@@ -29,7 +29,8 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     /**
      * Creates an instance of MyBaseType class.
      */
-    public MyBaseType() {}
+    public MyBaseType() {
+    }
 
     /**
      * Get the propB1 property: The propB1 property.
@@ -76,7 +77,8 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

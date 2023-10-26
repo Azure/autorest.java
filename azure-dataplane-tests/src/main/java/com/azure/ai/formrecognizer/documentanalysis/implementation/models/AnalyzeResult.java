@@ -82,7 +82,8 @@ public final class AnalyzeResult {
     /**
      * Creates an instance of AnalyzeResult class.
      */
-    public AnalyzeResult() {}
+    public AnalyzeResult() {
+    }
 
     /**
      * Get the apiVersion property: API version used to produce this result.

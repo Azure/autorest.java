@@ -23,7 +23,8 @@ public final class ComplexTypeWithMeta {
     /**
      * Creates an instance of ComplexTypeWithMeta class.
      */
-    public ComplexTypeWithMeta() {}
+    public ComplexTypeWithMeta() {
+    }
 
     /**
      * Get the id property: The id of the res.
@@ -50,5 +51,6 @@ public final class ComplexTypeWithMeta {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

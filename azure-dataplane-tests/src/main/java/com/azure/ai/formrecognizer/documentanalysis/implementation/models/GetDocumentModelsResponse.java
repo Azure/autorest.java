@@ -28,7 +28,8 @@ public final class GetDocumentModelsResponse {
     /**
      * Creates an instance of GetDocumentModelsResponse class.
      */
-    public GetDocumentModelsResponse() {}
+    public GetDocumentModelsResponse() {
+    }
 
     /**
      * Get the value property: List of document models.

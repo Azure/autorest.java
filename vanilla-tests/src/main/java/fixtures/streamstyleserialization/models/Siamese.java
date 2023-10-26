@@ -24,7 +24,8 @@ public final class Siamese extends Cat {
     /**
      * Creates an instance of Siamese class.
      */
-    public Siamese() {}
+    public Siamese() {
+    }
 
     /**
      * Get the breed property: The breed property.

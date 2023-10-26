@@ -34,7 +34,8 @@ public final class DocumentLine {
     /**
      * Creates an instance of DocumentLine class.
      */
-    public DocumentLine() {}
+    public DocumentLine() {
+    }
 
     /**
      * Get the content property: Concatenated content of the contained elements in reading order.

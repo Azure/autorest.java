@@ -27,7 +27,8 @@ public final class Error {
     /**
      * Creates an instance of Error class.
      */
-    public Error() {}
+    public Error() {
+    }
 
     /**
      * Get the status property: The status property.

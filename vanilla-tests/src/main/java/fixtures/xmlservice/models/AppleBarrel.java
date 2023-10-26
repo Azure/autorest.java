@@ -53,7 +53,8 @@ public final class AppleBarrel {
     /**
      * Creates an instance of AppleBarrel class.
      */
-    public AppleBarrel() {}
+    public AppleBarrel() {
+    }
 
     /**
      * Get the goodApples property: The GoodApples property.
@@ -106,5 +107,6 @@ public final class AppleBarrel {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

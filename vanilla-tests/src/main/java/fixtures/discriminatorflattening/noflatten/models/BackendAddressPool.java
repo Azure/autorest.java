@@ -21,7 +21,8 @@ public final class BackendAddressPool {
     /**
      * Creates an instance of BackendAddressPool class.
      */
-    public BackendAddressPool() {}
+    public BackendAddressPool() {
+    }
 
     /**
      * Get the properties property: Properties of load balancer backend address pool.

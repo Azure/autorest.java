@@ -23,7 +23,8 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ApiVersion() {}
+    public ApiVersion() {
+    }
 
     /**
      * Creates or finds a ApiVersion from its string representation.

@@ -28,7 +28,8 @@ public final class ProductResult {
     /**
      * Creates an instance of ProductResult class.
      */
-    public ProductResult() {}
+    public ProductResult() {
+    }
 
     /**
      * Get the values property: The values property.

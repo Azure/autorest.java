@@ -85,5 +85,6 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

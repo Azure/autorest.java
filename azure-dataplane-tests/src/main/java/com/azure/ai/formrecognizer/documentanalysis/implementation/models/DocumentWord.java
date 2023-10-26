@@ -41,7 +41,8 @@ public final class DocumentWord {
     /**
      * Creates an instance of DocumentWord class.
      */
-    public DocumentWord() {}
+    public DocumentWord() {
+    }
 
     /**
      * Get the content property: Text content of the word.

@@ -21,7 +21,8 @@ public final class B extends MyException {
     /**
      * Creates an instance of B class.
      */
-    public B() {}
+    public B() {
+    }
 
     /**
      * Get the textStatusCode property: The textStatusCode property.

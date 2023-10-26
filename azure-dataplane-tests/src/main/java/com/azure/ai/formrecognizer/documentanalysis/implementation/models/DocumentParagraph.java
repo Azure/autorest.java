@@ -40,7 +40,8 @@ public final class DocumentParagraph {
     /**
      * Creates an instance of DocumentParagraph class.
      */
-    public DocumentParagraph() {}
+    public DocumentParagraph() {
+    }
 
     /**
      * Get the role property: Semantic role of the paragraph.

@@ -21,7 +21,8 @@ public final class LoadBalancer {
     /**
      * Creates an instance of LoadBalancer class.
      */
-    public LoadBalancer() {}
+    public LoadBalancer() {
+    }
 
     /**
      * Get the properties property: Properties of load balancer.

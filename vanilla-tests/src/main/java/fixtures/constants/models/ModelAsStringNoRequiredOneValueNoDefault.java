@@ -21,7 +21,8 @@ public final class ModelAsStringNoRequiredOneValueNoDefault {
     /**
      * Creates an instance of ModelAsStringNoRequiredOneValueNoDefault class.
      */
-    public ModelAsStringNoRequiredOneValueNoDefault() {}
+    public ModelAsStringNoRequiredOneValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
@@ -49,5 +50,6 @@ public final class ModelAsStringNoRequiredOneValueNoDefault {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

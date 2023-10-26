@@ -28,7 +28,8 @@ public final class SchemaGroups {
     /**
      * Creates an instance of SchemaGroups class.
      */
-    public SchemaGroups() {}
+    public SchemaGroups() {
+    }
 
     /**
      * Get the groups property: Array of schema groups.

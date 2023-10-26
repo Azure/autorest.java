@@ -33,7 +33,8 @@ public final class InnerError {
     /**
      * Creates an instance of InnerError class.
      */
-    public InnerError() {}
+    public InnerError() {
+    }
 
     /**
      * Get the code property: Error code.

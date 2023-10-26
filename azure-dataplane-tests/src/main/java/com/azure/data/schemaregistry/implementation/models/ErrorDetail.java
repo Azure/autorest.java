@@ -34,7 +34,8 @@ public final class ErrorDetail {
     /**
      * Creates an instance of ErrorDetail class.
      */
-    public ErrorDetail() {}
+    public ErrorDetail() {
+    }
 
     /**
      * Get the code property: Server-defined error code.

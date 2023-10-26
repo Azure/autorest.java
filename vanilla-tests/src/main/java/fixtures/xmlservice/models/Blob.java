@@ -48,7 +48,8 @@ public final class Blob {
     /**
      * Creates an instance of Blob class.
      */
-    public Blob() {}
+    public Blob() {
+    }
 
     /**
      * Get the name property: The Name property.

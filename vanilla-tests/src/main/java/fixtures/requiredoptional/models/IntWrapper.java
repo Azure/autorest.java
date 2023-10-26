@@ -21,7 +21,8 @@ public final class IntWrapper {
     /**
      * Creates an instance of IntWrapper class.
      */
-    public IntWrapper() {}
+    public IntWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
@@ -48,5 +49,6 @@ public final class IntWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -33,7 +33,8 @@ public final class Basic {
     /**
      * Creates an instance of Basic class.
      */
-    public Basic() {}
+    public Basic() {
+    }
 
     /**
      * Get the id property: Basic Id.

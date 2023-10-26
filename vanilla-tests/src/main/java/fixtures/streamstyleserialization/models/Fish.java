@@ -35,7 +35,8 @@ public class Fish implements JsonSerializable<Fish> {
     /**
      * Creates an instance of Fish class.
      */
-    public Fish() {}
+    public Fish() {
+    }
 
     /**
      * Get the species property: The species property.

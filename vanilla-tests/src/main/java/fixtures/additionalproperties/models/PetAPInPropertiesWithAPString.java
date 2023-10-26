@@ -56,7 +56,8 @@ public final class PetAPInPropertiesWithAPString {
     /**
      * Creates an instance of PetAPInPropertiesWithAPString class.
      */
-    public PetAPInPropertiesWithAPString() {}
+    public PetAPInPropertiesWithAPString() {
+    }
 
     /**
      * Get the id property: The id property.

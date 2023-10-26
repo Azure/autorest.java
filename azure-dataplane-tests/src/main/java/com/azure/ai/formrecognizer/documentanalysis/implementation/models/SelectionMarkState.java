@@ -28,7 +28,8 @@ public final class SelectionMarkState extends ExpandableStringEnum<SelectionMark
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public SelectionMarkState() {}
+    public SelectionMarkState() {
+    }
 
     /**
      * Creates or finds a SelectionMarkState from its string representation.

@@ -27,7 +27,8 @@ public final class DocumentSpan {
     /**
      * Creates an instance of DocumentSpan class.
      */
-    public DocumentSpan() {}
+    public DocumentSpan() {
+    }
 
     /**
      * Get the offset property: Zero-based index of the content represented by the span.

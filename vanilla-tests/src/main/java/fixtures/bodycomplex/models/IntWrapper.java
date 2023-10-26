@@ -27,7 +27,8 @@ public final class IntWrapper {
     /**
      * Creates an instance of IntWrapper class.
      */
-    public IntWrapper() {}
+    public IntWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -74,5 +75,6 @@ public final class IntWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -44,7 +44,8 @@ public final class JWKHeader implements JsonSerializable<JWKHeader> {
     /**
      * Creates an instance of JWKHeader class.
      */
-    public JWKHeader() {}
+    public JWKHeader() {
+    }
 
     /**
      * Get the crv property: crv value.

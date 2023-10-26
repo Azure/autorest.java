@@ -34,7 +34,8 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public IntEnum() {}
+    public IntEnum() {
+    }
 
     /**
      * Creates or finds a IntEnum from its string representation.

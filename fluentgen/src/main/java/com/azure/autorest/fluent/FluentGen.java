@@ -57,11 +57,13 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class FluentGen extends Javagen {
@@ -118,11 +120,8 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String content = javaFile.getContents().toString();
-                String path = javaFile.getFilePath();
-                writeFile(path, content, null);
-            }
+            formatAndWriteJavaFiles(javaPackage.getJavaFiles(), settings);
+
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
@@ -140,11 +139,7 @@ public class FluentGen extends Javagen {
     }
 
     private void createInputCodeModelFile(String file) throws IOException {
-        File tempFile = new File("code-model.yaml");
-        if (!tempFile.exists()) {
-            tempFile.createNewFile();
-        }
-        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
+        Files.writeString(Path.of("code-model.yaml"), file);
     }
 
     CodeModel handleYaml(String yamlContent) {
@@ -166,8 +161,7 @@ public class FluentGen extends Javagen {
         loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
-        return codeModel;
+        return newYaml.loadAs(yamlContent, CodeModel.class);
     }
 
     Client handleMap(CodeModel codeModel) {
@@ -290,6 +284,71 @@ public class FluentGen extends Javagen {
         }
 
         return javaPackage;
+    }
+
+    private void formatAndWriteJavaFiles(List<JavaFile> javaFiles, JavaSettings settings) {
+        if (!settings.isSkipFormatting()) {
+            try {
+                Path tmpDir = Files.createTempDirectory("spotless");
+                tmpDir.toFile().deleteOnExit();
+
+                for (JavaFile javaFile : javaFiles) {
+                    Path file = tmpDir.resolve(javaFile.getFilePath());
+                    Files.createDirectories(file.getParent());
+                    Files.writeString(file, javaFile.getContents().toString())
+                        .toFile().deleteOnExit();
+                }
+
+                Path pomPath = tmpDir.resolve("pom.xml");
+                Files.writeString(pomPath, FluentUtils.loadTextFromResource("pom.xml"))
+                    .toFile().deleteOnExit();
+                Files.writeString(pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
+                        FluentUtils.loadTextFromResource("eclipse-format-azure-sdk-for-java.xml"))
+                    .toFile().deleteOnExit();
+
+                attemptMavenSpotless(pomPath, logger);
+
+                for (JavaFile javaFile : javaFiles) {
+                    Path file = tmpDir.resolve(javaFile.getFilePath());
+                    writeFile(javaFile.getFilePath(), Files.readString(file), null);
+                }
+            } catch (IOException ex) {
+                throw new UncheckedIOException(ex);
+            }
+        } else {
+            for (JavaFile javaFile : javaFiles) {
+                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+            }
+        }
+    }
+
+    private static void attemptMavenSpotless(Path pomPath, Logger logger) {
+        String[] command = isWindows()
+                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() }
+                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() };
+
+        try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                    .redirectErrorStream(true)
+                    .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                    .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 30 seconds or failed with an error code. "
+                        + Files.readString(outputFile.toPath()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            logger.warn("Failed to run Spotless on generated code.");
+        }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {

@@ -63,7 +63,8 @@ public final class AddressValue {
     /**
      * Creates an instance of AddressValue class.
      */
-    public AddressValue() {}
+    public AddressValue() {
+    }
 
     /**
      * Get the houseNumber property: House or building number.

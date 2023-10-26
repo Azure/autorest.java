@@ -21,7 +21,8 @@ public final class ModelAsStringRequiredOneValueNoDefault {
     /**
      * Creates an instance of ModelAsStringRequiredOneValueNoDefault class.
      */
-    public ModelAsStringRequiredOneValueNoDefault() {}
+    public ModelAsStringRequiredOneValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.

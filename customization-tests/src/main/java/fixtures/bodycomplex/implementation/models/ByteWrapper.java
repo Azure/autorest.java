@@ -22,7 +22,8 @@ public final class ByteWrapper {
     /**
      * Creates an instance of ByteWrapper class.
      */
-    public ByteWrapper() {}
+    public ByteWrapper() {
+    }
 
     /**
      * Get the field property: The field property.

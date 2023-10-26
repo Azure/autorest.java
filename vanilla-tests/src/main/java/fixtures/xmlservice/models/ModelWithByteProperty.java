@@ -24,7 +24,8 @@ public final class ModelWithByteProperty {
     /**
      * Creates an instance of ModelWithByteProperty class.
      */
-    public ModelWithByteProperty() {}
+    public ModelWithByteProperty() {
+    }
 
     /**
      * Get the bytes property: The Bytes property.
@@ -51,5 +52,6 @@ public final class ModelWithByteProperty {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -21,7 +21,8 @@ public final class VirtualMachineScaleSetVMProfile {
     /**
      * Creates an instance of VirtualMachineScaleSetVMProfile class.
      */
-    public VirtualMachineScaleSetVMProfile() {}
+    public VirtualMachineScaleSetVMProfile() {
+    }
 
     /**
      * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the

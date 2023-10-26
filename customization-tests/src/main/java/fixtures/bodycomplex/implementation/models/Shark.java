@@ -41,7 +41,8 @@ public class Shark extends Fish {
     /**
      * Creates an instance of Shark class.
      */
-    public Shark() {}
+    public Shark() {
+    }
 
     /**
      * Get the age property: The age property.

@@ -29,7 +29,8 @@ public final class ManifestList extends Manifest {
     /**
      * Creates an instance of ManifestList class.
      */
-    public ManifestList() {}
+    public ManifestList() {
+    }
 
     /**
      * Get the mediaType property: Media type for this Manifest.

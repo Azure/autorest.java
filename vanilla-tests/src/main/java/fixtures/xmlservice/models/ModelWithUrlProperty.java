@@ -24,7 +24,8 @@ public final class ModelWithUrlProperty {
     /**
      * Creates an instance of ModelWithUrlProperty class.
      */
-    public ModelWithUrlProperty() {}
+    public ModelWithUrlProperty() {
+    }
 
     /**
      * Get the url property: The Url property.
@@ -51,5 +52,6 @@ public final class ModelWithUrlProperty {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

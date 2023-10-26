@@ -30,7 +30,8 @@ public final class Repositories implements JsonSerializable<Repositories> {
     /**
      * Creates an instance of Repositories class.
      */
-    public Repositories() {}
+    public Repositories() {
+    }
 
     /**
      * Get the repositories property: Repository names.

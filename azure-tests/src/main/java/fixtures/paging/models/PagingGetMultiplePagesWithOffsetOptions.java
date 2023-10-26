@@ -33,7 +33,8 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     /**
      * Creates an instance of PagingGetMultiplePagesWithOffsetOptions class.
      */
-    public PagingGetMultiplePagesWithOffsetOptions() {}
+    public PagingGetMultiplePagesWithOffsetOptions() {
+    }
 
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
@@ -102,5 +103,6 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -71,7 +71,8 @@ public final class OperationSummary {
     /**
      * Creates an instance of OperationSummary class.
      */
-    public OperationSummary() {}
+    public OperationSummary() {
+    }
 
     /**
      * Get the operationId property: Operation ID.

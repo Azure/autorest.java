@@ -28,7 +28,8 @@ public final class DocumentBuildMode extends ExpandableStringEnum<DocumentBuildM
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public DocumentBuildMode() {}
+    public DocumentBuildMode() {
+    }
 
     /**
      * Creates or finds a DocumentBuildMode from its string representation.

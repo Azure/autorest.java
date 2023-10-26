@@ -33,7 +33,8 @@ public final class DocumentKeyValuePair {
     /**
      * Creates an instance of DocumentKeyValuePair class.
      */
-    public DocumentKeyValuePair() {}
+    public DocumentKeyValuePair() {
+    }
 
     /**
      * Get the key property: Field label of the key-value pair.

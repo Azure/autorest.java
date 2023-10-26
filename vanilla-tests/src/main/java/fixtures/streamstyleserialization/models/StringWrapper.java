@@ -34,7 +34,8 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /**
      * Creates an instance of StringWrapper class.
      */
-    public StringWrapper() {}
+    public StringWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
@@ -101,7 +102,8 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

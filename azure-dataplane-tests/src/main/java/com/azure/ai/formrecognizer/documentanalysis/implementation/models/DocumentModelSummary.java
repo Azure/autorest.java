@@ -47,7 +47,8 @@ public final class DocumentModelSummary {
     /**
      * Creates an instance of DocumentModelSummary class.
      */
-    public DocumentModelSummary() {}
+    public DocumentModelSummary() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

@@ -33,7 +33,8 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     /**
      * Creates an instance of AppleBarrel class.
      */
-    public AppleBarrel() {}
+    public AppleBarrel() {
+    }
 
     /**
      * Get the goodApples property: The GoodApples property.
@@ -86,7 +87,8 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

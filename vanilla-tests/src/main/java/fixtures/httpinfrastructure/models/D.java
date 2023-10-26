@@ -21,7 +21,8 @@ public final class D {
     /**
      * Creates an instance of D class.
      */
-    public D() {}
+    public D() {
+    }
 
     /**
      * Get the httpStatusCode property: The httpStatusCode property.
@@ -48,5 +49,6 @@ public final class D {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

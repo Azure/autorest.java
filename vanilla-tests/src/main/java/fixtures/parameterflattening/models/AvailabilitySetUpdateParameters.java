@@ -22,7 +22,8 @@ public final class AvailabilitySetUpdateParameters {
     /**
      * Creates an instance of AvailabilitySetUpdateParameters class.
      */
-    public AvailabilitySetUpdateParameters() {}
+    public AvailabilitySetUpdateParameters() {
+    }
 
     /**
      * Get the tags property: A description about the set of tags.

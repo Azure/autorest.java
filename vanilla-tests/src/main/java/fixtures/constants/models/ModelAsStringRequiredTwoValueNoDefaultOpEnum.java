@@ -29,7 +29,8 @@ public final class ModelAsStringRequiredTwoValueNoDefaultOpEnum
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringRequiredTwoValueNoDefaultOpEnum() {}
+    public ModelAsStringRequiredTwoValueNoDefaultOpEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringRequiredTwoValueNoDefaultOpEnum from its string representation.

@@ -31,7 +31,8 @@ public final class Blobs {
     /**
      * Creates an instance of Blobs class.
      */
-    public Blobs() {}
+    public Blobs() {
+    }
 
     /**
      * Get the blobPrefix property: The BlobPrefix property.

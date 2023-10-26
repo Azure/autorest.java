@@ -28,7 +28,8 @@ public final class AnalyzeDocumentRequest {
     /**
      * Creates an instance of AnalyzeDocumentRequest class.
      */
-    public AnalyzeDocumentRequest() {}
+    public AnalyzeDocumentRequest() {
+    }
 
     /**
      * Get the urlSource property: Document URL to analyze.

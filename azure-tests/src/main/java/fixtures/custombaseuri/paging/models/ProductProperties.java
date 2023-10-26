@@ -27,7 +27,8 @@ public final class ProductProperties {
     /**
      * Creates an instance of ProductProperties class.
      */
-    public ProductProperties() {}
+    public ProductProperties() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -74,5 +75,6 @@ public final class ProductProperties {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

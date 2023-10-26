@@ -35,7 +35,8 @@ public final class FishTests {
                     new Fish(26.373684f).setSpecies("ccsnhsjc")
                         .setSiblings(Arrays.asList(new Fish(68.2114f).setSpecies("kryhtnapczwlokj").setSiblings(
                             Arrays.asList(new Fish(52.976006f), new Fish(38.78496f), new Fish(10.636175f))))),
-                    new Fish(62.1013f).setSpecies("pjoxzjnch")
+                    new Fish(62.1013f)
+                        .setSpecies("pjoxzjnch")
                         .setSiblings(Arrays.asList(
                             new Fish(2.2013366f).setSpecies("odmailzyd")
                                 .setSiblings(Arrays.asList(new Fish(81.72188f), new Fish(29.215246f),

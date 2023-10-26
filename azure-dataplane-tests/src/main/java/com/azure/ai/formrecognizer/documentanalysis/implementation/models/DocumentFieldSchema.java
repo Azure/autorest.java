@@ -46,7 +46,8 @@ public final class DocumentFieldSchema {
     /**
      * Creates an instance of DocumentFieldSchema class.
      */
-    public DocumentFieldSchema() {}
+    public DocumentFieldSchema() {
+    }
 
     /**
      * Get the type property: Semantic data type of the field value.

@@ -27,7 +27,8 @@ public final class Product {
     /**
      * Creates an instance of Product class.
      */
-    public Product() {}
+    public Product() {
+    }
 
     /**
      * Get the integer property: The integer property.
@@ -74,5 +75,6 @@ public final class Product {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -31,7 +31,8 @@ public final class Goblinshark extends Shark {
     /**
      * Creates an instance of Goblinshark class.
      */
-    public Goblinshark() {}
+    public Goblinshark() {
+    }
 
     /**
      * Get the jawsize property: The jawsize property.

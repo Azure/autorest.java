@@ -28,7 +28,8 @@ public final class DateWrapper {
     /**
      * Creates an instance of DateWrapper class.
      */
-    public DateWrapper() {}
+    public DateWrapper() {
+    }
 
     /**
      * Get the field property: The field property.

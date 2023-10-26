@@ -35,7 +35,8 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public SchemaFormat() {}
+    public SchemaFormat() {
+    }
 
     /**
      * Creates or finds a SchemaFormat from its string representation.

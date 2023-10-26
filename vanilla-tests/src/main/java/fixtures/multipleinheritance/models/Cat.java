@@ -33,7 +33,8 @@ public class Cat extends Pet {
     /**
      * Creates an instance of Cat class.
      */
-    public Cat() {}
+    public Cat() {
+    }
 
     /**
      * Get the likesMilk property: The likesMilk property.

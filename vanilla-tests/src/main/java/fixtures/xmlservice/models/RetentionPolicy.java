@@ -30,7 +30,8 @@ public final class RetentionPolicy {
     /**
      * Creates an instance of RetentionPolicy class.
      */
-    public RetentionPolicy() {}
+    public RetentionPolicy() {
+    }
 
     /**
      * Get the enabled property: Indicates whether a retention policy is enabled for the storage service.
@@ -79,5 +80,6 @@ public final class RetentionPolicy {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

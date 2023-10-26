@@ -33,7 +33,8 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public PetFood() {}
+    public PetFood() {
+    }
 
     /**
      * Creates or finds a PetFood from its string representation.

@@ -74,7 +74,8 @@ public final class ProductPropertiesProvisioningStateValues
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ProductPropertiesProvisioningStateValues() {}
+    public ProductPropertiesProvisioningStateValues() {
+    }
 
     /**
      * Creates or finds a ProductPropertiesProvisioningStateValues from its string representation.

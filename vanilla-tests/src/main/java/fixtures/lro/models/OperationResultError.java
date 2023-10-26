@@ -27,7 +27,8 @@ public final class OperationResultError {
     /**
      * Creates an instance of OperationResultError class.
      */
-    public OperationResultError() {}
+    public OperationResultError() {
+    }
 
     /**
      * Get the code property: The error code for an operation failure.
@@ -74,5 +75,6 @@ public final class OperationResultError {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

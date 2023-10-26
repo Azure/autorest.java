@@ -47,7 +47,8 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
      * Creates an instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * class.
      */
-    public Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {}
+    public Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
+    }
 
     /**
      * Get the grantType property: Can take a value of access_token_refresh_token, or access_token, or refresh_token.

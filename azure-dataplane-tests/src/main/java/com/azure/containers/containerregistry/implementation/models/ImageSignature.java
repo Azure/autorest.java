@@ -34,7 +34,8 @@ public final class ImageSignature implements JsonSerializable<ImageSignature> {
     /**
      * Creates an instance of ImageSignature class.
      */
-    public ImageSignature() {}
+    public ImageSignature() {
+    }
 
     /**
      * Get the headerProperty property: A JSON web signature.

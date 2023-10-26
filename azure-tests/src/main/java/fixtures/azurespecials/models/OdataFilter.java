@@ -27,7 +27,8 @@ public final class OdataFilter {
     /**
      * Creates an instance of OdataFilter class.
      */
-    public OdataFilter() {}
+    public OdataFilter() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -74,5 +75,6 @@ public final class OdataFilter {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

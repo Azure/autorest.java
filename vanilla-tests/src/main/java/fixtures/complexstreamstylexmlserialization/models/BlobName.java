@@ -29,7 +29,8 @@ public final class BlobName implements XmlSerializable<BlobName> {
     /**
      * Creates an instance of BlobName class.
      */
-    public BlobName() {}
+    public BlobName() {
+    }
 
     /**
      * Get the encoded property: Indicates if the blob name is encoded.
@@ -76,7 +77,8 @@ public final class BlobName implements XmlSerializable<BlobName> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

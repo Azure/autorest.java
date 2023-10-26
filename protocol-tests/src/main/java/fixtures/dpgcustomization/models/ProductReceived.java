@@ -32,7 +32,8 @@ public final class ProductReceived extends ExpandableStringEnum<ProductReceived>
      */
     @Generated
     @Deprecated
-    public ProductReceived() {}
+    public ProductReceived() {
+    }
 
     /**
      * Creates or finds a ProductReceived from its string representation.

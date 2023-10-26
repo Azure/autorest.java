@@ -34,7 +34,8 @@ public final class AuthorizeCopyRequest {
     /**
      * Creates an instance of AuthorizeCopyRequest class.
      */
-    public AuthorizeCopyRequest() {}
+    public AuthorizeCopyRequest() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

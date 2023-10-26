@@ -4,42 +4,24 @@
 
 package fixtures.requiredheaderquery.generated;
 
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.polling.LongRunningOperationStatus;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-import fixtures.requiredheaderquery.DpgRequiredHeaderQueryAsyncClient;
 import fixtures.requiredheaderquery.DpgRequiredHeaderQueryClient;
 import fixtures.requiredheaderquery.DpgRequiredHeaderQueryClientBuilder;
-import fixtures.requiredheaderquery.implementation.DpgRequiredHeaderQueryClientImpl;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
 
 public class HeaderParamters {
     public static void main(String[] args) {
-        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
+        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient
+            = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(31, false, Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), OffsetDateTime.parse("2019-03-01T15:00Z"), Duration.parse("P1DT30H4S"), requestOptions);
+        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(31, false,
+            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), OffsetDateTime.parse("2019-03-01T15:00Z"),
+            Duration.parse("P1DT30H4S"), requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
     }
 }

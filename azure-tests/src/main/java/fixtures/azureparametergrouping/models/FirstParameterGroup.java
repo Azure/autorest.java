@@ -27,7 +27,8 @@ public final class FirstParameterGroup {
     /**
      * Creates an instance of FirstParameterGroup class.
      */
-    public FirstParameterGroup() {}
+    public FirstParameterGroup() {
+    }
 
     /**
      * Get the headerOne property: The header-one property.
@@ -74,5 +75,6 @@ public final class FirstParameterGroup {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

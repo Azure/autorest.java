@@ -28,7 +28,8 @@ public class DotSalmon extends DotFish {
     /**
      * Creates an instance of DotSalmon class.
      */
-    public DotSalmon() {}
+    public DotSalmon() {
+    }
 
     /**
      * Get the location property: The location property.

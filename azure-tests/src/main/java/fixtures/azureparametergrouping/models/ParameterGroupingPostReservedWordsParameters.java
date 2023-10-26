@@ -27,7 +27,8 @@ public final class ParameterGroupingPostReservedWordsParameters {
     /**
      * Creates an instance of ParameterGroupingPostReservedWordsParameters class.
      */
-    public ParameterGroupingPostReservedWordsParameters() {}
+    public ParameterGroupingPostReservedWordsParameters() {
+    }
 
     /**
      * Get the from property: 'from' is a reserved word. Pass in 'bob' to pass.
@@ -74,5 +75,6 @@ public final class ParameterGroupingPostReservedWordsParameters {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

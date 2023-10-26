@@ -40,7 +40,8 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     /**
      * Creates an instance of DotFishMarket class.
      */
-    public DotFishMarket() {}
+    public DotFishMarket() {
+    }
 
     /**
      * Get the sampleSalmon property: The sampleSalmon property.

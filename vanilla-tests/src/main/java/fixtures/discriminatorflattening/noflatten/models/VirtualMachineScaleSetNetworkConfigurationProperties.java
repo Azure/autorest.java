@@ -21,7 +21,8 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkConfigurationProperties class.
      */
-    public VirtualMachineScaleSetNetworkConfigurationProperties() {}
+    public VirtualMachineScaleSetNetworkConfigurationProperties() {
+    }
 
     /**
      * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
@@ -50,5 +51,6 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -21,7 +21,8 @@ public final class VirtualMachineScaleSetProperties {
     /**
      * Creates an instance of VirtualMachineScaleSetProperties class.
      */
-    public VirtualMachineScaleSetProperties() {}
+    public VirtualMachineScaleSetProperties() {
+    }
 
     /**
      * Get the virtualMachineProfile property: The virtual machine profile.

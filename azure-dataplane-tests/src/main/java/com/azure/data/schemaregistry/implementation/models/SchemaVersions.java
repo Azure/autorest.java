@@ -28,7 +28,8 @@ public final class SchemaVersions {
     /**
      * Creates an instance of SchemaVersions class.
      */
-    public SchemaVersions() {}
+    public SchemaVersions() {
+    }
 
     /**
      * Get the versions property: Array of schema version integers.

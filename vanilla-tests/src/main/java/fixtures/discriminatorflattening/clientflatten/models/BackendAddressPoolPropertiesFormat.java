@@ -21,7 +21,8 @@ public final class BackendAddressPoolPropertiesFormat {
     /**
      * Creates an instance of BackendAddressPoolPropertiesFormat class.
      */
-    public BackendAddressPoolPropertiesFormat() {}
+    public BackendAddressPoolPropertiesFormat() {
+    }
 
     /**
      * Get the location property: The location of the backend address pool.
@@ -48,5 +49,6 @@ public final class BackendAddressPoolPropertiesFormat {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

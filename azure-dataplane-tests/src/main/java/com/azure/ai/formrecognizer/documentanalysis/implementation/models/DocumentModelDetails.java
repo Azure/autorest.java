@@ -53,7 +53,8 @@ public final class DocumentModelDetails {
     /**
      * Creates an instance of DocumentModelDetails class.
      */
-    public DocumentModelDetails() {}
+    public DocumentModelDetails() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.

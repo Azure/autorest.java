@@ -62,7 +62,8 @@ public final class SawsharkTests {
                                     new Fish(15.329713f).setSpecies("qawrlyxwj")
                                         .setSiblings(Arrays.asList(new Fish(99.249115f), new Fish(89.70539f),
                                             new Fish(40.196205f), new Fish(4.2197704f))),
-                                    new Fish(77.91465f).setSpecies("gjvtbv")
+                                    new Fish(77.91465f).setSpecies(
+                                        "gjvtbv")
                                         .setSiblings(Arrays.asList(new Fish(15.425348f), new Fish(97.266785f))),
                                     new Fish(84.77632f).setSpecies("rujqg")
                                         .setSiblings(Arrays.asList(new Fish(44.637882f))),

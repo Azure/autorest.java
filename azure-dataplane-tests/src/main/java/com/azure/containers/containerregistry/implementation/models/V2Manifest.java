@@ -35,7 +35,8 @@ public final class V2Manifest extends Manifest {
     /**
      * Creates an instance of V2Manifest class.
      */
-    public V2Manifest() {}
+    public V2Manifest() {
+    }
 
     /**
      * Get the mediaType property: Media type for this Manifest.

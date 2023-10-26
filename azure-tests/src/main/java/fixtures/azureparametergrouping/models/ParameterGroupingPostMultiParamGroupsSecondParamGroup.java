@@ -27,7 +27,8 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     /**
      * Creates an instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
      */
-    public ParameterGroupingPostMultiParamGroupsSecondParamGroup() {}
+    public ParameterGroupingPostMultiParamGroupsSecondParamGroup() {
+    }
 
     /**
      * Get the headerTwo property: The header-two property.
@@ -74,5 +75,6 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

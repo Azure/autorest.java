@@ -54,7 +54,8 @@ public final class Platform implements JsonSerializable<Platform> {
     /**
      * Creates an instance of Platform class.
      */
-    public Platform() {}
+    public Platform() {
+    }
 
     /**
      * Get the architecture property: Specifies the CPU architecture, for example amd64 or ppc64le.

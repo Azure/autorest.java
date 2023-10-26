@@ -31,7 +31,8 @@ public final class ApplicationPackageReference {
     /**
      * Creates an instance of ApplicationPackageReference class.
      */
-    public ApplicationPackageReference() {}
+    public ApplicationPackageReference() {
+    }
 
     /**
      * Get the id property: The ID of the application package to install. This must be inside the same batch account as

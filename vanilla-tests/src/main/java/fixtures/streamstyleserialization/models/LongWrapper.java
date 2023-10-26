@@ -29,7 +29,8 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
     /**
      * Creates an instance of LongWrapper class.
      */
-    public LongWrapper() {}
+    public LongWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -76,7 +77,8 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

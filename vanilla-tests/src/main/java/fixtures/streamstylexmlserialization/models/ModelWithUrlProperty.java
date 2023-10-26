@@ -28,7 +28,8 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     /**
      * Creates an instance of ModelWithUrlProperty class.
      */
-    public ModelWithUrlProperty() {}
+    public ModelWithUrlProperty() {
+    }
 
     /**
      * Get the url property: The Url property.
@@ -55,7 +56,8 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

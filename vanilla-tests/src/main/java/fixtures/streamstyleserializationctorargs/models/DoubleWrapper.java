@@ -29,7 +29,8 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     /**
      * Creates an instance of DoubleWrapper class.
      */
-    public DoubleWrapper() {}
+    public DoubleWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -81,7 +82,8 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

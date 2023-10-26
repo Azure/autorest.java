@@ -21,7 +21,8 @@ public final class IntOptionalWrapper {
     /**
      * Creates an instance of IntOptionalWrapper class.
      */
-    public IntOptionalWrapper() {}
+    public IntOptionalWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
@@ -48,5 +49,6 @@ public final class IntOptionalWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

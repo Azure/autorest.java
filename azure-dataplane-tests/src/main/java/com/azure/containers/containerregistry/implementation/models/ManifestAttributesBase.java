@@ -86,7 +86,8 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
     /**
      * Creates an instance of ManifestAttributesBase class.
      */
-    public ManifestAttributesBase() {}
+    public ManifestAttributesBase() {
+    }
 
     /**
      * Get the digest property: Manifest.

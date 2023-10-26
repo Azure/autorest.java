@@ -21,7 +21,8 @@ public final class Product {
     /**
      * Creates an instance of Product class.
      */
-    public Product() {}
+    public Product() {
+    }
 
     /**
      * Get the properties property: The properties property.

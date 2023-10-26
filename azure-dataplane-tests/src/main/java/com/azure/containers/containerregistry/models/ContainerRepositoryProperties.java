@@ -70,7 +70,8 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
     /**
      * Creates an instance of ContainerRepositoryProperties class.
      */
-    public ContainerRepositoryProperties() {}
+    public ContainerRepositoryProperties() {
+    }
 
     /**
      * Get the registryLoginServer property: Registry login server name. This is likely to be similar to

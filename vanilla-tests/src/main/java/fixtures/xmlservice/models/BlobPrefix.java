@@ -23,7 +23,8 @@ public final class BlobPrefix {
     /**
      * Creates an instance of BlobPrefix class.
      */
-    public BlobPrefix() {}
+    public BlobPrefix() {
+    }
 
     /**
      * Get the name property: The Name property.

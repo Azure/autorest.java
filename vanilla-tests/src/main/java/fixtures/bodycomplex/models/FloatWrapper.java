@@ -27,7 +27,8 @@ public final class FloatWrapper {
     /**
      * Creates an instance of FloatWrapper class.
      */
-    public FloatWrapper() {}
+    public FloatWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
@@ -74,5 +75,6 @@ public final class FloatWrapper {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

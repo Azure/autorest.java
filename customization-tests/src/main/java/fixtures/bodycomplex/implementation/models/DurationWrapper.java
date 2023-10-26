@@ -22,7 +22,8 @@ public final class DurationWrapper {
     /**
      * Creates an instance of DurationWrapper class.
      */
-    public DurationWrapper() {}
+    public DurationWrapper() {
+    }
 
     /**
      * Get the field property: The field property.

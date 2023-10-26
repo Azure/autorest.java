@@ -27,7 +27,8 @@ public final class Error {
     /**
      * Creates an instance of Error class.
      */
-    private Error() {}
+    private Error() {
+    }
 
     /**
      * Get the status property: The status property.
@@ -52,5 +53,6 @@ public final class Error {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

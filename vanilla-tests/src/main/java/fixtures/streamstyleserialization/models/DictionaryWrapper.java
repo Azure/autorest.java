@@ -25,7 +25,8 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     /**
      * Creates an instance of DictionaryWrapper class.
      */
-    public DictionaryWrapper() {}
+    public DictionaryWrapper() {
+    }
 
     /**
      * Get the defaultProgram property: Dictionary of &lt;string&gt;.
@@ -52,7 +53,8 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -24,7 +24,8 @@ public final class ModelAsStringNoRequiredOneValueDefaultOpEnum
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringNoRequiredOneValueDefaultOpEnum() {}
+    public ModelAsStringNoRequiredOneValueDefaultOpEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringNoRequiredOneValueDefaultOpEnum from its string representation.

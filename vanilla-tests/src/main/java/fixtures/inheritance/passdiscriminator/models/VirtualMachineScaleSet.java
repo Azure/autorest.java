@@ -23,7 +23,8 @@ public class VirtualMachineScaleSet {
     /**
      * Creates an instance of VirtualMachineScaleSet class.
      */
-    public VirtualMachineScaleSet() {}
+    public VirtualMachineScaleSet() {
+    }
 
     /**
      * Get the virtualMachineProfile property: The virtual machine profile.

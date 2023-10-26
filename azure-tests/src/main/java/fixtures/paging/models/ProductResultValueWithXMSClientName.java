@@ -28,7 +28,8 @@ public final class ProductResultValueWithXMSClientName {
     /**
      * Creates an instance of ProductResultValueWithXMSClientName class.
      */
-    public ProductResultValueWithXMSClientName() {}
+    public ProductResultValueWithXMSClientName() {
+    }
 
     /**
      * Get the indexes property: The values property.

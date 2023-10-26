@@ -33,7 +33,8 @@ public final class PostContentSchemaGrantType extends ExpandableStringEnum<PostC
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public PostContentSchemaGrantType() {}
+    public PostContentSchemaGrantType() {
+    }
 
     /**
      * Creates or finds a PostContentSchemaGrantType from its string representation.

@@ -54,7 +54,8 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
     /**
      * Creates an instance of ContainerProperties class.
      */
-    public ContainerProperties() {}
+    public ContainerProperties() {
+    }
 
     /**
      * Get the lastModified property: The Last-Modified property.

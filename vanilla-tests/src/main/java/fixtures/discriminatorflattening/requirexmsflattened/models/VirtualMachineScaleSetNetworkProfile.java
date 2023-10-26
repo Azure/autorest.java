@@ -22,7 +22,8 @@ public final class VirtualMachineScaleSetNetworkProfile {
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkProfile class.
      */
-    public VirtualMachineScaleSetNetworkProfile() {}
+    public VirtualMachineScaleSetNetworkProfile() {
+    }
 
     /**
      * Get the networkInterfaceConfigurations property: The list of network configurations.

@@ -49,7 +49,8 @@ public final class V1Manifest extends Manifest {
     /**
      * Creates an instance of V1Manifest class.
      */
-    public V1Manifest() {}
+    public V1Manifest() {
+    }
 
     /**
      * Get the architecture property: CPU architecture.

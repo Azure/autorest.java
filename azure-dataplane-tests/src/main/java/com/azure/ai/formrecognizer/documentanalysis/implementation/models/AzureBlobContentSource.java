@@ -27,7 +27,8 @@ public final class AzureBlobContentSource {
     /**
      * Creates an instance of AzureBlobContentSource class.
      */
-    public AzureBlobContentSource() {}
+    public AzureBlobContentSource() {
+    }
 
     /**
      * Get the containerUrl property: Azure Blob Storage container URL.

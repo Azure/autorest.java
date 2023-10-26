@@ -29,7 +29,8 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     /**
      * Creates an instance of ReadonlyObj class.
      */
-    public ReadonlyObj() {}
+    public ReadonlyObj() {
+    }
 
     /**
      * Get the id property: The id property.
@@ -65,7 +66,8 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -28,7 +28,8 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ArchiveStatus() {}
+    public ArchiveStatus() {
+    }
 
     /**
      * Creates or finds a ArchiveStatus from its string representation.

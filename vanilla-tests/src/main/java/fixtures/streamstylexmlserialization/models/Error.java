@@ -31,7 +31,8 @@ public final class Error implements XmlSerializable<Error> {
     /**
      * Creates an instance of Error class.
      */
-    public Error() {}
+    public Error() {
+    }
 
     /**
      * Get the status property: The status property.
@@ -78,7 +79,8 @@ public final class Error implements XmlSerializable<Error> {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {

@@ -40,7 +40,8 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
     /**
      * Creates an instance of AcrManifests class.
      */
-    public AcrManifests() {}
+    public AcrManifests() {
+    }
 
     /**
      * Get the registryLoginServer property: Registry login server name. This is likely to be similar to

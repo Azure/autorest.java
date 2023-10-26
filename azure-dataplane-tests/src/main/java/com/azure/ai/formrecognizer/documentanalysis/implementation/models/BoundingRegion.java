@@ -28,7 +28,8 @@ public final class BoundingRegion {
     /**
      * Creates an instance of BoundingRegion class.
      */
-    public BoundingRegion() {}
+    public BoundingRegion() {
+    }
 
     /**
      * Get the pageNumber property: 1-based page number of page containing the bounding region.

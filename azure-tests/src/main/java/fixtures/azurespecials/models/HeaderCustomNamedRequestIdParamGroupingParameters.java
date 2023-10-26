@@ -21,7 +21,8 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     /**
      * Creates an instance of HeaderCustomNamedRequestIdParamGroupingParameters class.
      */
-    public HeaderCustomNamedRequestIdParamGroupingParameters() {}
+    public HeaderCustomNamedRequestIdParamGroupingParameters() {
+    }
 
     /**
      * Get the fooClientRequestId property: The fooRequestId.

@@ -21,7 +21,8 @@ public final class ProductUrl extends GenericUrl {
     /**
      * Creates an instance of ProductUrl class.
      */
-    public ProductUrl() {}
+    public ProductUrl() {
+    }
 
     /**
      * Get the odataValue property: URL value.
