@@ -526,12 +526,10 @@ public final class LroRetrysImpl {
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -601,12 +599,10 @@ public final class LroRetrysImpl {
                 () -> this.put201CreatingSucceeded200WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -824,12 +820,10 @@ public final class LroRetrysImpl {
                 () -> this.putAsyncRelativeRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -899,12 +893,10 @@ public final class LroRetrysImpl {
                 () -> this.putAsyncRelativeRetrySucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1024,12 +1016,10 @@ public final class LroRetrysImpl {
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1071,12 +1061,10 @@ public final class LroRetrysImpl {
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1134,12 +1122,10 @@ public final class LroRetrysImpl {
                 () -> this.delete202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1162,12 +1148,10 @@ public final class LroRetrysImpl {
                 () -> this.delete202Retry200WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1228,12 +1212,10 @@ public final class LroRetrysImpl {
                 () -> this.deleteAsyncRelativeRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1256,12 +1238,10 @@ public final class LroRetrysImpl {
                 () -> this.deleteAsyncRelativeRetrySucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -1419,12 +1399,10 @@ public final class LroRetrysImpl {
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1475,12 +1453,10 @@ public final class LroRetrysImpl {
                 () -> this.post202Retry200WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1644,12 +1620,10 @@ public final class LroRetrysImpl {
                 () -> this.postAsyncRelativeRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1701,12 +1675,10 @@ public final class LroRetrysImpl {
                 () -> this.postAsyncRelativeRetrySucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

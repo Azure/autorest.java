@@ -649,8 +649,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -688,8 +687,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -725,8 +723,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -764,8 +761,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -893,8 +889,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -943,8 +938,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1116,8 +1110,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1166,8 +1159,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1214,8 +1206,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1264,8 +1255,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1467,8 +1457,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1494,8 +1483,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1519,8 +1507,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1546,8 +1533,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1632,8 +1618,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1659,8 +1644,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1684,8 +1668,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1711,8 +1694,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1926,8 +1908,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1954,8 +1935,7 @@ public final class FormRecognizerClientImpl {
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1981,8 +1961,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                                .setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -2009,8 +1988,7 @@ public final class FormRecognizerClientImpl {
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
                                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                                .setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
