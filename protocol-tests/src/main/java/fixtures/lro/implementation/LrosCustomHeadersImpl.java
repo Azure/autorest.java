@@ -419,12 +419,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.putAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -495,12 +493,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.putAsyncRetrySucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -720,12 +716,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.put201CreatingSucceeded200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -796,12 +790,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.put201CreatingSucceeded200WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -962,12 +954,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.post202Retry200WithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1019,12 +1009,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.post202Retry200WithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1189,12 +1177,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.postAsyncRetrySucceededWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1247,12 +1233,10 @@ public final class LrosCustomHeadersImpl {
                 () -> this.postAsyncRetrySucceededWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

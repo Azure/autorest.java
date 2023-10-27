@@ -185,10 +185,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -209,10 +206,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -235,10 +229,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product, context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -360,10 +351,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetrySucceededWithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -384,10 +372,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetrySucceededWithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -410,10 +395,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRelativeRetrySucceededWithResponseAsync(product, context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -524,10 +506,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -549,10 +528,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -639,10 +615,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -663,10 +636,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -754,10 +724,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetrySucceededWithResponseAsync(),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -778,10 +745,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRelativeRetrySucceededWithResponseAsync(context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -878,10 +842,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -901,10 +862,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -926,10 +884,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product, context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1048,10 +1003,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetrySucceededWithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1072,10 +1024,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetrySucceededWithResponseAsync(product),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(Context.NONE)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -1099,10 +1048,7 @@ public final class LRORetrys {
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRelativeRetrySucceededWithResponseAsync(product, context),
                 new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
-                                .setContext(context)
-                                .setServiceVersion(null)),
+                        new PollingStrategyOptions(this.client.getHttpPipeline()).setContext(context)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
