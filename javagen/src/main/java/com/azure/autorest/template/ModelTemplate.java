@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -28,7 +29,6 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -307,7 +307,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
         if (model.isStronglyTypedHeader()) {
             ClassType.HttpHeaders.addImportsTo(imports, false);
-            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+            ClassType.HttpHeaderName.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.
@@ -880,7 +880,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
-            expression = String.format("CoreUtils.clone(%s)", expression);
+            expression = TemplateHelper.getByteCloneExpression(expression);
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
@@ -926,7 +926,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
-            ? "CoreUtils.clone(" + property.getName() + ")"
+            ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();
 
         if (propertyClientType != propertyWireType) {
@@ -1102,13 +1102,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            imports.add(Generated.class.getName());
+            Annotation.GENERATED.addImportsTo(imports);
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation(Generated.class.getSimpleName());
+            classBlock.annotation(Annotation.GENERATED.getName());
         }
     }
 

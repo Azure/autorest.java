@@ -15,7 +15,6 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Flux;
@@ -127,7 +126,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         // no need to care about LRO
         // Mono<T> / PagedFlux<T>
         IType type = ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
-        if (type instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) type).getName())) {
+        if (type instanceof GenericType && ClassType.Response.getName().equals(((GenericType) type).getName())) {
             // Mono<Response<T>>
             type = ((GenericType) type).getTypeArguments()[0];
         }

@@ -15,7 +15,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.UrlBuilder;
@@ -349,17 +348,17 @@ public class ClientMethod {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
-        imports.add("com.azure.core.annotation.ServiceMethod");
-        imports.add("com.azure.core.annotation.ReturnType");
+        Annotation.SERVICE_METHOD.addImportsTo(imports);
+        Annotation.RETURN_TYPE.addImportsTo(imports);
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
-        imports.add(Response.class.getName());
-        imports.add(SimpleResponse.class.getName());
+        ClassType.Response.addImportsTo(imports, includeImplementationImports);
+        ClassType.SimpleResponse.addImportsTo(imports, includeImplementationImports);
 
         if (settings.isDataPlaneClient()) {
             // for some processing on RequestOptions (get/set header)
-            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+            ClassType.HttpHeaderName.addImportsTo(imports, false);
 
             // for query parameter modification in RequestOptions (UrlBuilder.parse)
             imports.add(UrlBuilder.class.getName());

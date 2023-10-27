@@ -3,14 +3,13 @@
 
 package com.azure.autorest.template;
 
-
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlProviders;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -47,7 +46,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
         javaFile.declareImport(xmlSequenceWrapper.getImports());
 
         if (settings.isStreamStyleSerialization()) {
-            javaFile.declareImport(ArrayList.class.getName(), CoreUtils.class.getName(), QName.class.getName(),
+            javaFile.declareImport(ArrayList.class.getName(), ClassType.CoreUtils.getFullName(), QName.class.getName(),
                 XmlProviders.class.getName(), XmlReader.class.getName(), XmlSerializable.class.getName(),
                 XMLStreamException.class.getName(), XmlToken.class.getName(), XmlWriter.class.getName());
         }

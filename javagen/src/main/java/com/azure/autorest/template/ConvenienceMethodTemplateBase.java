@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -27,7 +28,6 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
@@ -280,7 +280,7 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 });
 
-        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+        ClassType.HttpHeaderName.addImportsTo(imports, false);
         ClassType.BinaryData.addImportsTo(imports, false);
         ClassType.RequestOptions.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
@@ -304,7 +304,7 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation(Generated.class.getSimpleName());
+        typeBlock.annotation(Annotation.GENERATED.getName());
     }
 
     /**

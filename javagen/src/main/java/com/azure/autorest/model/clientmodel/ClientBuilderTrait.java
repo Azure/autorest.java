@@ -12,15 +12,7 @@ import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.client.traits.KeyCredentialTrait;
 import com.azure.core.client.traits.TokenCredentialTrait;
 import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.KeyCredential;
 import com.azure.core.credential.TokenCredential;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.HttpPipelinePolicy;
-import com.azure.core.http.policy.RetryOptions;
-import com.azure.core.util.ClientOptions;
-import com.azure.core.util.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +115,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod pipelineMethod = createTraitMethod("pipeline", "pipeline", ClassType.HttpPipeline ,
                 pipelineProperty, "{@inheritDoc}", pipelineMethodImpl);
-        importPackages.add(HttpPipeline.class.getName());
+        importPackages.add(ClassType.HttpPipeline.getFullName());
 
         httpClientBuilderTraitMethods.add(pipelineMethod);
 
@@ -136,7 +128,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod httpClientMethod = createTraitMethod("httpClient", "httpClient", ClassType.HttpClient,
                 httpClientProperty, "{@inheritDoc}", httpClientMethodImpl);
-        importPackages.add(HttpClient.class.getName());
+        importPackages.add(ClassType.HttpClient.getFullName());
 
         httpClientBuilderTraitMethods.add(httpClientMethod);
 
@@ -150,7 +142,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod httpLogOptionsMethod = createTraitMethod("httpLogOptions", "httpLogOptions", ClassType.HttpLogOptions,
                 httpLogOptionsProperty, "{@inheritDoc}", httpLogOptionsMethodImpl);
-        importPackages.add(HttpLogOptions.class.getName());
+        importPackages.add(ClassType.HttpLogOptions.getFullName());
 
         httpClientBuilderTraitMethods.add(httpLogOptionsMethod);
 
@@ -163,7 +155,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod clientOptionsMethod = createTraitMethod("clientOptions", "clientOptions", ClassType.ClientOptions,
                 clientOptionsProperty, "{@inheritDoc}", clientOptionsMethodImpl);
-        importPackages.add(ClientOptions.class.getName());
+        importPackages.add(ClassType.ClientOptions.getFullName());
 
         httpClientBuilderTraitMethods.add(clientOptionsMethod);
 
@@ -178,7 +170,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod retryOptionsMethod = createTraitMethod("retryOptions", "retryOptions", ClassType.RetryOptions,
                 retryOptionsProperty, "{@inheritDoc}", retryOptionsMethodImpl);
-        importPackages.add(RetryOptions.class.getName());
+        importPackages.add(ClassType.RetryOptions.getFullName());
         httpClientBuilderTraitMethods.add(retryOptionsMethod);
 
         // addPolicy
@@ -189,7 +181,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod addPolicyMethod = createTraitMethod("addPolicy", "customPolicy", ClassType.HttpPipelinePolicy,
                 null, "{@inheritDoc}", addPolicyMethodImpl);
-        importPackages.add(HttpPipelinePolicy.class.getName());
+        importPackages.add(ClassType.HttpPipelinePolicy.getFullName());
         httpClientBuilderTraitMethods.add(addPolicyMethod);
         return httpTrait;
     }
@@ -215,7 +207,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod configurationMethod = createTraitMethod(propertyName, propertyName, ClassType.Configuration,
                 configurationProperty, "{@inheritDoc}", configurationMethodImpl);
-        importPackages.add(Configuration.class.getName());
+        importPackages.add(ClassType.Configuration.getFullName());
 
         configurationClientBuilderTraitMethods.add(configurationMethod);
         return configurationTrait;
@@ -330,7 +322,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.KeyCredential,
                 property, "{@inheritDoc}", methodImpl);
-        importPackages.add(KeyCredential.class.getName());
+        importPackages.add(ClassType.KeyCredential.getFullName());
 
         clientBuilderTraitMethods.add(clientMethod);
         return keyCredentialTrait;

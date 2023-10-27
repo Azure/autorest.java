@@ -12,6 +12,7 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
@@ -272,7 +273,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), getSerializerPhrase());
+                                TemplateHelper.createRestProxyInstance(this, serviceClient, constructorBlock);
                             }
                         }
                     }
@@ -298,7 +299,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
-        constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+        if (!JavaSettings.getInstance().isBranded()) {
+            constructorBlock.line("this.jsonSerializer = jsonSerializer;");
+        } else {
+            constructorBlock.line("this.serializerAdapter = serializerAdapter;");
+        }
     }
 
     protected String writeRetryPolicyInitialization() {
@@ -306,15 +311,25 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected String writeSerializerInitialization() {
-        return "JacksonAdapter.createDefaultSerializerAdapter()";
+        if (!JavaSettings.getInstance().isBranded()) {
+            return "JsonSerializerProvider.createInstance()";
+        } else {
+            return "JacksonAdapter.createDefaultSerializerAdapter()";
+        }
     }
 
     protected void addSerializerImport(Set<String> imports) {
-        imports.add("com.azure.core.util.serializer.JacksonAdapter");
+        if (!JavaSettings.getInstance().isBranded()) {
+            ClassType.JsonSerializer.addImportsTo(imports, false);
+            // TODO: generic
+//            imports.add(JsonSerializerProvider.class.getName());
+        } else {
+            imports.add("com.azure.core.util.serializer.JacksonAdapter");
+        }
     }
 
     protected void addServiceClientAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.ServiceClient");
+        Annotation.SERVICE_CLIENT.addImportsTo(imports);
     }
 
     /**

@@ -215,6 +215,18 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
         }
 
+        if (options.getBranded() == Boolean.FALSE) {
+            SETTINGS_MAP.put("branded", options.getBranded());
+
+            SETTINGS_MAP.put("sdk-integration", false);
+            SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
+
+            SETTINGS_MAP.put("sync-methods", "sync-only");
+            SETTINGS_MAP.put("stream-style-serialization", true);
+            SETTINGS_MAP.put("generate-samples", false);
+            SETTINGS_MAP.put("generate-tests", false);
+        }
+
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", options.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());

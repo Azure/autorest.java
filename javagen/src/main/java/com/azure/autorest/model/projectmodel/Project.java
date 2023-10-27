@@ -8,7 +8,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.template.TemplateHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -40,7 +42,7 @@ public class Project {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
-    public static final String AZURE_GROUP_ID = "com.azure";
+    public static final String AZURE_GROUP_ID = ExternalPackage.CORE.getGroupId();
 
     protected String serviceName;
     protected String serviceDescription;
@@ -66,6 +68,9 @@ public class Project {
         AZURE_CORE_TEST("com.azure", "azure-core-test", "1.21.1"),
         AZURE_IDENTITY("com.azure", "azure-identity", "1.10.4"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.45"),
+
+        GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
+        GENERIC_JSON("com.generic", "generic-json", "1.0.0-beta.1"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
@@ -118,7 +123,7 @@ public class Project {
         this.namespace = JavaSettings.getInstance().getPackage();
         this.artifactId = ClientModelUtil.getArtifactId();
 
-        this.serviceDescription = String.format("This package contains Microsoft Azure %1$s client library.", serviceName);
+        this.serviceDescription = TemplateHelper.getPomProjectDescription(serviceName);
 
         this.apiVersions = apiVersions;
     }
