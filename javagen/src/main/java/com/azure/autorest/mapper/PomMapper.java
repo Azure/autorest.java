@@ -41,8 +41,6 @@ public class PomMapper implements IMapper<Project, Pom> {
                     Project.Dependency.AZURE_JSON, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.AZURE_XML, true);
-            dependencyIdentifiers.add(Project.Dependency.AZURE_JSON.getDependencyIdentifier());
-            dependencyIdentifiers.add(Project.Dependency.AZURE_XML.getDependencyIdentifier());
         }
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                 Project.Dependency.AZURE_CORE, false);

@@ -36,6 +36,7 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -578,10 +579,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
-        if (!settings.isBranded()) {
-            requireModules.add(new ModuleInfo.RequireModule("com.generic.core", true));
-        } else {
-            requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
+        requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.CORE.getPackageName(), true));
+        if (settings.isStreamStyleSerialization()) {
+            requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.JSON.getPackageName(), false));
         }
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
@@ -595,9 +595,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
 
             // open models package to azure-core and jackson
-            List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
-            if (!settings.isBranded()) {
-                openToModules = Arrays.asList("com.generic.core");
+            List<String> openToModules = new ArrayList<>();
+            openToModules.add(ExternalPackage.CORE.getPackageName());
+            if (!settings.isStreamStyleSerialization()) {
+                openToModules.add("com.fasterxml.jackson.databind");
             }
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
             openModules.add(new ModuleInfo.OpenModule(modelsPackage, openToModules));

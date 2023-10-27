@@ -67,13 +67,14 @@ public class Project {
         AZURE_IDENTITY("com.azure", "azure-identity", "1.10.4"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.45"),
 
+        GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
+        GENERIC_JSON("com.generic", "generic-json", "1.0.0-beta.1"),
+
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
         JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.5.1"),
-        SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36"),
-        GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
-        GENERIC_JSON("com.generic", "generic-json", "1.0.0-beta.1"),;
+        SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
         private final String groupId;
         private final String artifactId;

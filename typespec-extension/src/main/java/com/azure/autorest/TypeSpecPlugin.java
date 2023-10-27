@@ -215,7 +215,7 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
         }
 
-        if (options.getBranded() != null) {
+        if (options.getBranded() == Boolean.FALSE) {
             SETTINGS_MAP.put("branded", options.getBranded());
 
             SETTINGS_MAP.put("sdk-integration", false);
