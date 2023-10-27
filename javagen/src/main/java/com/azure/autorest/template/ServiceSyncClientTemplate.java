@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
@@ -169,12 +170,12 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   }
 
   protected void addServiceClientAnnotationImport(Set<String> imports) {
-    imports.add("com.azure.core.annotation.ServiceClient");
-    imports.add("com.azure.core.annotation.Generated");
+    Annotation.SERVICE_CLIENT.addImportsTo(imports);
+    Annotation.GENERATED.addImportsTo(imports);
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation(Generated.class.getSimpleName());
+    classBlock.annotation(Annotation.GENERATED.getName());
   }
 
   private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {

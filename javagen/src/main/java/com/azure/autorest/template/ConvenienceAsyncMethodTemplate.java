@@ -127,7 +127,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         // no need to care about LRO
         // Mono<T> / PagedFlux<T>
         IType type = ((GenericType) method.getReturnValue().getType()).getTypeArguments()[0];
-        if (type instanceof GenericType && Response.class.getSimpleName().equals(((GenericType) type).getName())) {
+        if (type instanceof GenericType && ClassType.Response.getName().equals(((GenericType) type).getName())) {
             // Mono<Response<T>>
             type = ((GenericType) type).getTypeArguments()[0];
         }

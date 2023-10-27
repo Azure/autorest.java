@@ -4,9 +4,9 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.Javagen;
-import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
@@ -24,7 +24,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
@@ -88,7 +87,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
         ClassType.HttpHeaders.addImportsTo(imports, false);
-        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+        ClassType.HttpHeaderName.addImportsTo(imports, false);
         imports.add("java.util.Objects");
         if (settings.isUseClientLogger()) {
             ClassType.ClientLogger.addImportsTo(imports, false);
@@ -322,10 +321,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     private void addBuildAsyncClientMethods(ClientBuilder clientBuilder, List<AsyncSyncClient> asyncClients, JavaClass classBlock, String buildMethodName) {
-        if (!JavaSettings.getInstance().isBranded()){
-            return;
-        }
-
         for (AsyncSyncClient asyncClient : asyncClients) {
             final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
 
@@ -464,7 +459,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addImportForCoreUtils(Set<String> imports) {
-        imports.add("com.azure.core.util.CoreUtils");
+        ClassType.CoreUtils.addImportsTo(imports, false);
         imports.add("com.azure.core.util.builder.ClientBuilderUtil");
     }
 
@@ -492,7 +487,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addServiceClientBuilderAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.ServiceClientBuilder");
+        Annotation.SERVICE_CLIENT_BUILDER.addImportsTo(imports);
     }
 
     protected void addCreateHttpPipelineMethod(JavaSettings settings, JavaClass classBlock,
@@ -543,11 +538,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addGeneratedImport(Set<String> imports) {
-        imports.add(Generated.class.getName());
+        Annotation.GENERATED.addImportsTo(imports);
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-        classBlock.annotation(Generated.class.getSimpleName());
+        classBlock.annotation(Annotation.GENERATED.getName());
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -179,7 +180,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     }
 
     protected String getStringEnumImport() {
-        return "com.azure.core.util.ExpandableStringEnum";
+        return ClassType.ExpandableStringEnum.getFullName();
     }
 
     /**
@@ -207,19 +208,19 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            imports.add(Generated.class.getName());
+            Annotation.GENERATED.addImportsTo(imports);
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation(Generated.class.getSimpleName());
+            classBlock.annotation(Annotation.GENERATED.getName());
         }
     }
 
     protected void addGeneratedAnnotation(JavaEnum enumBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            enumBlock.annotation(Generated.class.getSimpleName());
+            enumBlock.annotation(Annotation.GENERATED.getName());
         }
     }
 

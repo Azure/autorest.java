@@ -21,17 +21,17 @@ public final class TemplateHelper {
     public static void getPomProjectName(Pom pom, XmlBlock projectBlock) {
         if (!JavaSettings.getInstance().isBranded()) {
             projectBlock.tag("name", String.format("SDK for %s", pom.getServiceName()));
-            return;
+        } else {
+            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
         }
-        projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
     }
 
     public static void createHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
         if (!settings.isBranded()) {
             createGenericHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
-            return;
+        } else {
+            createAzureHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
         }
-        createAzureHttpPipelineMethod(settings,defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
     }
 
     private static void createGenericHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
@@ -140,8 +140,8 @@ public final class TemplateHelper {
     public static void createRestProxyInstance(ServiceClientTemplate template, ServiceClient serviceClient, JavaBlock constructorBlock) {
         if (!JavaSettings.getInstance().isBranded()) {
             constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), "JsonSerializerProvider.createInstance()");
-            return;
+        } else {
+            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), template.getSerializerPhrase());
         }
-        constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), template.getSerializerPhrase());
     }
 }

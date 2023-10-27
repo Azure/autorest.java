@@ -8,8 +8,6 @@ import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.MatchConditions;
-import com.azure.core.http.RequestConditions;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -55,11 +53,14 @@ public class ClassType implements IType {
         put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
         put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
         put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
+        // TODO: generic
 //        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
         put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
         put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));
         put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, com.generic.core.http.policy.retry.RetryOptions.class));
         put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, com.generic.core.http.Response.class));
+        put(com.azure.core.http.rest.SimpleResponse.class, new ClassDetails(com.azure.core.http.rest.SimpleResponse.class, com.generic.core.http.SimpleResponse.class));
+        put(com.azure.core.util.ExpandableStringEnum.class, new ClassDetails(com.azure.core.util.ExpandableStringEnum.class, com.generic.core.models.ExpandableStringEnum.class));
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
@@ -69,7 +70,10 @@ public class ClassType implements IType {
                         .knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());
             } else {
                 return new Builder(false)
-                        .packageName(classKey.getPackage().getName().replace("com.azure.core", "com.generic.core")).name(classKey.getSimpleName());
+                        .packageName(classKey.getPackage().getName()
+                                .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
+                                .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME))
+                        .name(classKey.getSimpleName());
             }
         } else {
             if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
@@ -273,7 +277,6 @@ public class ClassType implements IType {
     public static final ClassType JsonSerializer = getClassTypeBuilder(com.azure.core.util.serializer.JsonSerializer.class)
             .build();
 
-
     public static final ClassType AndroidJacksonSerder = new ClassType.Builder(false)
         .packageName("com.azure.android.core.serde.jackson").name("JacksonSerder")
         .build();
@@ -389,7 +392,7 @@ public class ClassType implements IType {
     public static final ClassType HttpHeaders = getClassTypeBuilder(com.azure.core.http.HttpHeaders.class)
         .build();
 
-    public static final ClassType HTTP_HEADER_NAME = getClassTypeBuilder(HttpHeaderName.class).build();
+    public static final ClassType HttpHeaderName = getClassTypeBuilder(HttpHeaderName.class).build();
 
     // Java exception types
     public static final ClassType HttpResponseException = getClassTypeBuilder(com.azure.core.exception.HttpResponseException.class)
@@ -417,72 +420,37 @@ public class ClassType implements IType {
         .packageName("com.azure.core.models").name("ResponseInnerError")
         .build();
 
-    public static final ClassType REQUEST_CONDITIONS = new Builder()
-        .knownClass(RequestConditions.class)
+    public static final ClassType RequestConditions = new Builder()
+        .knownClass(com.azure.core.http.RequestConditions.class)
         .build();
 
-    public static final ClassType MATCH_CONDITIONS = new Builder()
-            .knownClass(MatchConditions.class)
-            .build();
+    public static final ClassType MatchConditions = new Builder()
+        .knownClass(com.azure.core.http.MatchConditions.class)
+        .build();
 
     public static final ClassType CoreUtils = getClassTypeBuilder(com.azure.core.util.CoreUtils.class)
-            .build();
-    public static final ClassType Response = getClassTypeBuilder(com.azure.core.http.rest.Response.class)
-            .build();
-
-    // Annotations
-    public static final ClassType BodyParam = getClassTypeBuilder(com.azure.core.annotation.BodyParam.class)
-            .build();
-    public static final ClassType Delete = getClassTypeBuilder(com.azure.core.annotation.Delete.class)
-            .build();
-    public static final ClassType ExpectedResponse = getClassTypeBuilder(com.azure.core.annotation.ExpectedResponses.class)
-            .build();
-    public static final ClassType Fluent = getClassTypeBuilder(com.azure.core.annotation.Fluent.class)
-            .build();
-    public static final ClassType Generated = getClassTypeBuilder(com.azure.core.annotation.Generated.class)
         .build();
-    public static final ClassType Get = getClassTypeBuilder(com.azure.core.annotation.Get.class)
-            .build();
-    public static final ClassType Head = getClassTypeBuilder(com.azure.core.annotation.Head.class)
-            .build();
-    public static ClassType HeaderCollection = getClassTypeBuilder(com.azure.core.annotation.HeaderCollection.class)
-            .build();
-    public static final ClassType HeaderParam = getClassTypeBuilder(com.azure.core.annotation.HeaderParam.class)
-            .build();
-    public static final ClassType Headers = getClassTypeBuilder(com.azure.core.annotation.Headers.class)
-            .build();
-    public static final ClassType Host = getClassTypeBuilder(com.azure.core.annotation.Host.class)
-            .build();
-    public static final ClassType Immutable = getClassTypeBuilder(com.azure.core.annotation.Immutable.class)
-            .build();
-    public static final ClassType JsonFlatten = getClassTypeBuilder(com.azure.core.annotation.JsonFlatten.class)
-            .build();
-    public static final ClassType Options = getClassTypeBuilder(com.azure.core.annotation.Options.class)
-            .build();
-    public static final ClassType Patch = getClassTypeBuilder(com.azure.core.annotation.Patch.class)
-            .build();
-    public static final ClassType PathParam = getClassTypeBuilder(com.azure.core.annotation.PathParam.class)
-            .build();
-    public static final ClassType Post = getClassTypeBuilder(com.azure.core.annotation.Post.class)
-            .build();
-    public static final ClassType Put = getClassTypeBuilder(com.azure.core.annotation.Put.class)
-            .build();
-    public static final ClassType QueryParam = getClassTypeBuilder(com.azure.core.annotation.QueryParam.class)
-            .build();
-    public static final ClassType ReturnType = getClassTypeBuilder(com.azure.core.annotation.ReturnType.class)
-            .build();
-    public static final ClassType ReturnValueWireType = getClassTypeBuilder(com.azure.core.annotation.ReturnValueWireType.class)
-            .build();
-    public static final ClassType ServiceClientBuilder = getClassTypeBuilder(com.azure.core.annotation.ServiceClientBuilder.class)
-            .build();
-    public static final ClassType ServiceClientProtocol = getClassTypeBuilder(com.azure.core.annotation.ServiceClientProtocol.class)
-            .build();
-    public static final ClassType ServiceInterface = getClassTypeBuilder(com.azure.core.annotation.ServiceInterface.class)
-            .build();
-    public static final ClassType ServiceMethod = getClassTypeBuilder(com.azure.core.annotation.ServiceMethod.class)
-            .build();
-    public static final ClassType UnexpectedResponseExceptionType = getClassTypeBuilder(com.azure.core.annotation.UnexpectedResponseExceptionType.class)
-            .build();
+
+    public static final ClassType Response = getClassTypeBuilder(com.azure.core.http.rest.Response.class)
+        .build();
+
+    public static final ClassType SimpleResponse = getClassTypeBuilder(com.azure.core.http.rest.SimpleResponse.class)
+        .build();
+
+    public static final ClassType ExpandableStringEnum = getClassTypeBuilder(com.azure.core.util.ExpandableStringEnum.class)
+        .build();
+
+    public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)
+        .build();
+
+    public static final ClassType JsonWriter = getClassTypeBuilder(com.azure.json.JsonWriter.class)
+        .build();
+
+    public static final ClassType JsonReader = getClassTypeBuilder(com.azure.json.JsonReader.class)
+        .build();
+
+    public static final ClassType JsonToken = getClassTypeBuilder(com.azure.json.JsonToken.class)
+        .build();
 
     private final String fullName;
     private final String packageName;

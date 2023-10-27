@@ -349,17 +349,17 @@ public class ClientMethod {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
-        imports.add(ClassType.ServiceMethod.getFullName());
-        imports.add(ClassType.ReturnType.getFullName());
+        Annotation.SERVICE_METHOD.addImportsTo(imports);
+        Annotation.RETURN_TYPE.addImportsTo(imports);
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
-        imports.add(Response.class.getName());
-        imports.add(SimpleResponse.class.getName());
+        ClassType.Response.addImportsTo(imports, includeImplementationImports);
+        ClassType.SimpleResponse.addImportsTo(imports, includeImplementationImports);
 
         if (settings.isDataPlaneClient()) {
             // for some processing on RequestOptions (get/set header)
-            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+            ClassType.HttpHeaderName.addImportsTo(imports, false);
 
             // for query parameter modification in RequestOptions (UrlBuilder.parse)
             imports.add(UrlBuilder.class.getName());

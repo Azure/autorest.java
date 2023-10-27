@@ -267,15 +267,15 @@ public class ClientModel {
     }
 
     protected void addJsonFlattenAnnotationImport(Set<String> imports) {
-        imports.add(ClassType.JsonFlatten.getFullName());
+        imports.add("com.azure.core.annotation.JsonFlatten");
     }
 
     protected void addImmutableAnnotationImport(Set<String> imports) {
-        imports.add(ClassType.Immutable.getFullName());
+        Annotation.IMMUTABLE.addImportsTo(imports);
     }
 
     protected void addFluentAnnotationImport(Set<String> imports) {
-        imports.add(ClassType.Fluent.getFullName());
+        Annotation.FLUENT.addImportsTo(imports);
     }
 
     /**

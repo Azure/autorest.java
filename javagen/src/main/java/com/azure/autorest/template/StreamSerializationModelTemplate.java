@@ -77,13 +77,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else {
             imports.add(IOException.class.getName());
 
-            imports.add(JsonSerializable.class.getName());
-            imports.add(JsonWriter.class.getName());
-            imports.add(JsonReader.class.getName());
-            imports.add(JsonToken.class.getName());
+            ClassType.JsonSerializable.addImportsTo(imports, false);
+            ClassType.JsonWriter.addImportsTo(imports, false);
+            ClassType.JsonReader.addImportsTo(imports, false);
+            ClassType.JsonToken.addImportsTo(imports, false);
         }
 
-        imports.add(CoreUtils.class.getName());
+        ClassType.CoreUtils.addImportsTo(imports, false);
 
         imports.add(ArrayList.class.getName());
         imports.add(Base64.class.getName());

@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -124,6 +125,6 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation(Generated.class.getSimpleName());
+        typeBlock.annotation(Annotation.GENERATED.getName());
     }
 }

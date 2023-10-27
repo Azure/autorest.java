@@ -121,20 +121,21 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                             ? Collections.singletonList(ClassType.NonNull)
                             : new ArrayList<>())
                     .build();
+        } else {
+            return new ClientMethodParameter.Builder()
+                    .description("The serializer to serialize an object into a string")
+                    .finalParameter(false)
+                    .wireType(ClassType.SerializerAdapter)
+                    .name("serializerAdapter")
+                    .required(true)
+                    .constant(false)
+                    .fromClient(true)
+                    .defaultValue(null)
+                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
+                            ? Collections.singletonList(ClassType.NonNull)
+                            : new ArrayList<>())
+                    .build();
         }
-        return new ClientMethodParameter.Builder()
-                .description("The serializer to serialize an object into a string")
-                .finalParameter(false)
-                .wireType(ClassType.SerializerAdapter)
-                .name("serializerAdapter")
-                .required(true)
-                .constant(false)
-                .fromClient(true)
-                .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NonNull)
-                        : new ArrayList<>())
-                .build();
     }
 
     protected IType getHttpPipelineClassType() {

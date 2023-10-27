@@ -290,7 +290,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         JavaSettings settings = JavaSettings.getInstance();
 
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty()) {
-            imports.add(ClassType.HeaderCollection.getFullName());
+            Annotation.HEADER_COLLECTION.addImportsTo(imports);
         }
         if (isAdditionalProperties) {
             imports.add(JsonIgnore.class.getName());

@@ -12,6 +12,7 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
@@ -321,7 +322,8 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
     protected void addSerializerImport(Set<String> imports) {
         if (!JavaSettings.getInstance().isBranded()) {
-            imports.add(JsonSerializer.class.getName());
+            ClassType.JsonSerializer.addImportsTo(imports, false);
+            // TODO: generic
 //            imports.add(JsonSerializerProvider.class.getName());
         } else {
             imports.add("com.azure.core.util.serializer.JacksonAdapter");
@@ -329,7 +331,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void addServiceClientAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.ServiceClient");
+        Annotation.SERVICE_CLIENT.addImportsTo(imports);
     }
 
     /**
