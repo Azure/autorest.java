@@ -31,6 +31,15 @@ public final class TemplateHelper {
                 serviceName);
     }
 
+    public static String getByteCloneExpression(String propertyName) {
+        if (JavaSettings.getInstance().isBranded()) {
+            return String.format("CoreUtils.clone(%s)", propertyName);
+        } else {
+            // TODO: generic
+            return propertyName;
+        }
+    }
+
     public static void createHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
         if (!settings.isBranded()) {
             createGenericHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);

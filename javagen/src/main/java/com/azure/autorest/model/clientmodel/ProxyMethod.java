@@ -400,7 +400,7 @@ public class ProxyMethod {
             if (isResumable()) {
                 imports.add("com.azure.core.annotation.ResumeOperation");
             }
-            imports.add(String.format("%1$s.annotation.%2$sParam",
+            imports.add(String.format("%1$s.annotation.%2$s",
                     ExternalPackage.CORE.getPackageName(),
                     CodeNamer.toPascalCase(getHttpMethod().toString().toLowerCase())));
 

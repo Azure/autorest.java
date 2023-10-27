@@ -880,7 +880,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
-            expression = String.format("CoreUtils.clone(%s)", expression);
+            expression = TemplateHelper.getByteCloneExpression(expression);
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
@@ -926,7 +926,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
-            ? "CoreUtils.clone(" + property.getName() + ")"
+            ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();
 
         if (propertyClientType != propertyWireType) {
