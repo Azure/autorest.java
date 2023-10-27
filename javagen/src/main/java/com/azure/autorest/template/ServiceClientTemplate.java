@@ -28,7 +28,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.generic.core.util.serializer.JsonSerializer;
-import com.generic.core.util.serializer.JsonSerializerProvider;
+//import com.generic.core.util.serializer.JsonSerializerProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -322,7 +322,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     protected void addSerializerImport(Set<String> imports) {
         if (JavaSettings.getInstance().isGeneric()) {
             imports.add(JsonSerializer.class.getName());
-            imports.add(JsonSerializerProvider.class.getName());
+//            imports.add(JsonSerializerProvider.class.getName());
         } else {
             imports.add("com.azure.core.util.serializer.JacksonAdapter");
         }

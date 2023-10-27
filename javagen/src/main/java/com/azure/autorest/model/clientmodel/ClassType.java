@@ -10,7 +10,6 @@ import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
-import com.azure.core.util.CoreUtils;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -26,7 +25,6 @@ import java.util.Set;
  * The details of a class type that is used by a client.
  */
 public class ClassType implements IType {
-
 
     private static class ClassDetails {
 
@@ -47,7 +45,7 @@ public class ClassType implements IType {
 
     }
 
-    public static final Map<Class<?>, ClassDetails> classTypeMapping = new HashMap<Class<?>, ClassDetails>() {{
+    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<>() {{
         put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, com.generic.core.http.RestProxy.class));
         put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, com.generic.core.http.pipeline.HttpPipeline.class));
         put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, com.generic.core.models.Context.class));
@@ -57,7 +55,7 @@ public class ClassType implements IType {
         put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
         put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
         put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
-        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
+//        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
         put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
         put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));
         put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, com.generic.core.http.policy.retry.RetryOptions.class));
@@ -66,15 +64,15 @@ public class ClassType implements IType {
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
         if (JavaSettings.getInstance().isGeneric()) {
-            if (classTypeMapping.containsKey(classKey)) {
+            if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
                 return new ClassType.Builder(false)
-                        .knownClass(classTypeMapping.get(classKey).getGenericClass());
+                        .knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());
             }
             return new Builder(false)
                     .packageName(classKey.getPackage().getName().replace("com.azure.core", "com.generic.core")).name(classKey.getSimpleName());
         }
         return new ClassType.Builder(false)
-                .knownClass(classTypeMapping.get(classKey).getAzureClass());
+                .knownClass(CLASS_TYPE_MAPPING.get(classKey).getAzureClass());
     }
 
 
