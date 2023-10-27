@@ -34,10 +34,13 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {
+        JavaSettings settings = JavaSettings.getInstance();
+        boolean branded = settings.isBranded();
+
         // copyright
         xmlFile.blockComment(xmlLineComment -> {
             xmlLineComment.line(
-                    Arrays.stream(JavaSettings.getInstance()
+                    Arrays.stream(settings
                             .getFileHeaderText()
                             .split(System.lineSeparator()))
                             .map(line -> " ~ " + line)
@@ -76,9 +79,11 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            TemplateHelper.getPomProjectName(pom, projectBlock);
+            projectBlock.tag("name", TemplateHelper.getPomProjectName(pom.getServiceName()));
             projectBlock.tag("description", pom.getServiceDescription());
-            projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            if (branded) {
+                projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            }
 
             projectBlock.line();
 
@@ -92,19 +97,21 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.block("scm", scmBlock -> {
-                scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
-                scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("tag", "HEAD");
-            });
-
-            projectBlock.block("developers", developersBlock -> {
-                developersBlock.block("developer", developerBlock -> {
-                    developerBlock.tag("id", "microsoft");
-                    developerBlock.tag("name", "Microsoft");
+            if (branded) {
+                projectBlock.block("scm", scmBlock -> {
+                    scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+                    scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("tag", "HEAD");
                 });
-            });
+
+                projectBlock.block("developers", developersBlock -> {
+                    developersBlock.block("developer", developerBlock -> {
+                        developerBlock.tag("id", "microsoft");
+                        developerBlock.tag("name", "Microsoft");
+                    });
+                });
+            }
 
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");

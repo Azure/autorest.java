@@ -21,8 +21,9 @@ public class PomMapper implements IMapper<Project, Pom> {
     public Pom map(Project project) {
         if (!JavaSettings.getInstance().isBranded()) {
             return createGenericPom(project);
+        } else {
+            return createAzurePom(project);
         }
-        return createAzurePom(project);
     }
 
     private Pom createAzurePom(Project project) {

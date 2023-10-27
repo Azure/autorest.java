@@ -18,12 +18,16 @@ import org.slf4j.Logger;
 public final class TemplateHelper {
     private final static Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
-    public static void getPomProjectName(Pom pom, XmlBlock projectBlock) {
-        if (!JavaSettings.getInstance().isBranded()) {
-            projectBlock.tag("name", String.format("SDK for %s", pom.getServiceName()));
-        } else {
-            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
-        }
+    public static String getPomProjectName(String serviceName) {
+        return String.format(
+                JavaSettings.getInstance().isBranded() ? "Microsoft Azure SDK for %s" : "SDK for %s",
+                serviceName);
+    }
+
+    public static String getPomProjectDescription(String serviceName) {
+        return String.format(
+                JavaSettings.getInstance().isBranded() ? "This package contains Microsoft Azure %1$s client library." : "This package contains %1$s client library.",
+                serviceName);
     }
 
     public static void createHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
