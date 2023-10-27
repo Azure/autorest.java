@@ -24,43 +24,82 @@ import java.util.Set;
  */
 public class ClassType implements IType {
 
+//    private static class ClassDetails {
+//
+//        private final Class<?> azureClass;
+//        private final Class<?> genericClass;
+//
+//        public ClassDetails(Class<?> azureClass, Class<?> genericClass) {
+//            this.azureClass = azureClass;
+//            this.genericClass = genericClass;
+//        }
+//
+//        public Class<?> getAzureClass() {
+//            return azureClass;
+//        }
+//
+//        public Class<?> getGenericClass() {
+//            return genericClass;
+//        }
+//
+//    }
+//
+//    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<>() {{
+//        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, com.generic.core.http.RestProxy.class));
+//        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, com.generic.core.http.pipeline.HttpPipeline.class));
+//        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, com.generic.core.models.Context.class));
+//        put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, com.generic.core.http.client.HttpClient.class));
+//        put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, com.generic.core.http.policy.logging.HttpLogOptions.class));
+//        put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, com.generic.core.util.configuration.Configuration.class));
+//        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
+//        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
+//        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
+//        // TODO: generic
+////        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
+//        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
+//        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));
+//        put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, com.generic.core.http.policy.retry.RetryOptions.class));
+//        put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, com.generic.core.http.Response.class));
+//        put(com.azure.core.http.rest.SimpleResponse.class, new ClassDetails(com.azure.core.http.rest.SimpleResponse.class, com.generic.core.http.SimpleResponse.class));
+//        put(com.azure.core.util.ExpandableStringEnum.class, new ClassDetails(com.azure.core.util.ExpandableStringEnum.class, com.generic.core.models.ExpandableStringEnum.class));
+//    }};
+
     private static class ClassDetails {
 
-        private Class<?> azureClass;
-        private Class<?> genericClass;
-        public ClassDetails(Class<?> azureClass, Class<?> genericClass) {
+        private final Class<?> azureClass;
+        private final String genericClass;
+
+        public ClassDetails(Class<?> azureClass, String genericClass) {
             this.azureClass = azureClass;
             this.genericClass = genericClass;
         }
 
-        public Class<?> getAzureClass() {
-            return azureClass;
+        public String getAzureClass() {
+            return azureClass.getName();
         }
 
-        public Class<?> getGenericClass() {
+        public String getGenericClass() {
             return genericClass;
         }
 
     }
 
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<>() {{
-        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, com.generic.core.http.RestProxy.class));
-        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, com.generic.core.http.pipeline.HttpPipeline.class));
-        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, com.generic.core.models.Context.class));
-        put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, com.generic.core.http.client.HttpClient.class));
-        put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, com.generic.core.http.policy.logging.HttpLogOptions.class));
-        put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, com.generic.core.util.configuration.Configuration.class));
-        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
-        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
-        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
-        // TODO: generic
-//        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
-        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
-        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));
-        put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, com.generic.core.http.policy.retry.RetryOptions.class));
-        put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, com.generic.core.http.Response.class));
-        put(com.azure.core.http.rest.SimpleResponse.class, new ClassDetails(com.azure.core.http.rest.SimpleResponse.class, com.generic.core.http.SimpleResponse.class));
-        put(com.azure.core.util.ExpandableStringEnum.class, new ClassDetails(com.azure.core.util.ExpandableStringEnum.class, com.generic.core.models.ExpandableStringEnum.class));
+        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, "com.generic.core.http.RestProxy"));
+        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
+        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, "com.generic.core.models.Context"));
+        put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, "com.generic.core.http.client.HttpClient"));
+        put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, "com.generic.core.http.policy.logging.HttpLogOptions"));
+        put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, "com.generic.core.util.configuration.Configuration"));
+        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, "com.generic.core.models.Headers"));
+        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
+        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
+        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, "com.generic.core.http.models.RequestOptions"));
+        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, "com.generic.core.models.BinaryData"));
+        put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, "com.generic.core.http.policy.retry.RetryOptions"));
+        put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, "com.generic.core.http.Response"));
+        put(com.azure.core.http.rest.SimpleResponse.class, new ClassDetails(com.azure.core.http.rest.SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
+        put(com.azure.core.util.ExpandableStringEnum.class, new ClassDetails(com.azure.core.util.ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
@@ -766,6 +805,12 @@ public class ClassType implements IType {
         public Builder knownClass(Class<?> clazz) {
             return packageName(clazz.getPackage().getName())
                 .name(clazz.getSimpleName());
+        }
+
+        private Builder knownClass(String fullName) {
+            int index = fullName.lastIndexOf(".");
+            return packageName(fullName.substring(0, index))
+                    .name(fullName.substring(index + 1));
         }
 
         public Builder implementationImports(String... implementationImports) {

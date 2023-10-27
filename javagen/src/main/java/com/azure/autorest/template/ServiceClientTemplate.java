@@ -28,8 +28,6 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.generic.core.util.serializer.JsonSerializer;
-//import com.generic.core.util.serializer.JsonSerializerProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
