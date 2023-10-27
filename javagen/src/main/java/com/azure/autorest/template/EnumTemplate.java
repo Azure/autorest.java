@@ -15,7 +15,6 @@ import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;

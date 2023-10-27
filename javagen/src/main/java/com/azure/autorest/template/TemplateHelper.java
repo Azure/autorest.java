@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.template;
 
 import com.azure.autorest.Javagen;
@@ -6,11 +9,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
-import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;

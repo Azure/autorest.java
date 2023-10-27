@@ -17,7 +17,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1175,10 +1175,6 @@ public class JavaSettings {
         "Licensed under the MIT License.",
         "");
 
-    private static final String MIT_SMALL_LICENSE_HEADER = String.join("\r\n",
-            "Licensed under the MIT License.",
-            "");
-
     private static void loadStringSetting(String settingName, Consumer<String> action) {
         String settingValue = host.getStringValue(settingName);
         if (settingValue != null) {

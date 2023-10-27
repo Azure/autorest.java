@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -11,7 +10,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlProviders;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;

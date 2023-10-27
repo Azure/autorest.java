@@ -16,7 +16,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 
 import java.util.List;

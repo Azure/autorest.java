@@ -15,7 +15,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.UrlBuilder;

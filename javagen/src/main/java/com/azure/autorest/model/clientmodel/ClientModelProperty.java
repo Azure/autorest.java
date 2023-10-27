@@ -5,8 +5,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.annotation.HeaderCollection;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -20,10 +20,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -111,7 +107,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         String interfaceName = (model.getXmlName() != null)
             ? XmlSerializable.class.getSimpleName()
-            : JsonSerializable.class.getSimpleName();
+            : ClassType.JsonSerializable.getName();
 
         return classSignature + " implements " + interfaceName + "<" + model.getName() + ">";
     }

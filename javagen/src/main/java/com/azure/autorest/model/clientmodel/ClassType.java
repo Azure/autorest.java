@@ -44,7 +44,7 @@ public class ClassType implements IType {
 //
 //    }
 //
-//    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<>() {{
+//    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
 //        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, com.generic.core.http.RestProxy.class));
 //        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, com.generic.core.http.pipeline.HttpPipeline.class));
 //        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, com.generic.core.models.Context.class));
@@ -84,7 +84,7 @@ public class ClassType implements IType {
 
     }
 
-    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<>() {{
+    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
         put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, "com.generic.core.http.RestProxy"));
         put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
         put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, "com.generic.core.models.Context"));
