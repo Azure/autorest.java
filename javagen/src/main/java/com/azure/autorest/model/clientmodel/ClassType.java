@@ -63,7 +63,7 @@ public class ClassType implements IType {
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
                 return new ClassType.Builder(false)
                         .knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());

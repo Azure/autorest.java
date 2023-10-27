@@ -21,6 +21,9 @@ public class EmitterOptions {
     @JsonProperty(value="output-dir")
     private String outputDir;
 
+    @JsonProperty(value = "branded")
+    private Boolean branded = true;
+
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
     private String serviceName;
@@ -51,9 +54,6 @@ public class EmitterOptions {
 
     @JsonProperty(value="customization-class")
     private String customizationClass;
-
-    @JsonProperty(value = "generic")
-    private Boolean generic;
 
     public String getNamespace() {
         return namespace;
@@ -113,8 +113,8 @@ public class EmitterOptions {
         return customizationClass;
     }
 
-    public Boolean getGeneric() {
-        return generic;
+    public Boolean getBranded() {
+        return branded;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

@@ -19,7 +19,7 @@ public final class TemplateHelper {
     private final static Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ServiceClientBuilderTemplate.class);
 
     public static void getPomProjectName(Pom pom, XmlBlock projectBlock) {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             projectBlock.tag("name", String.format("SDK for %s", pom.getServiceName()));
             return;
         }
@@ -27,7 +27,7 @@ public final class TemplateHelper {
     }
 
     public static void createHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
-        if (settings.isGeneric()) {
+        if (!settings.isBranded()) {
             createGenericHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
             return;
         }
@@ -138,7 +138,7 @@ public final class TemplateHelper {
 
 
     public static void createRestProxyInstance(ServiceClientTemplate template, ServiceClient serviceClient, JavaBlock constructorBlock) {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), "JsonSerializerProvider.createInstance()");
             return;
         }

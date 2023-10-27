@@ -322,7 +322,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     private void addBuildAsyncClientMethods(ClientBuilder clientBuilder, List<AsyncSyncClient> asyncClients, JavaClass classBlock, String buildMethodName) {
-        if(JavaSettings.getInstance().isGeneric()){
+        if (!JavaSettings.getInstance().isBranded()){
             return;
         }
 

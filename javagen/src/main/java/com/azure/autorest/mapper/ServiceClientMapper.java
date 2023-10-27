@@ -107,7 +107,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     }
 
     protected ClientMethodParameter createSerializerAdapterParameter() {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             return new ClientMethodParameter.Builder()
                     .description("The serializer to serialize an object into a string")
                     .finalParameter(false)

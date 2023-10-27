@@ -300,7 +300,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             constructorBlock.line("this.jsonSerializer = jsonSerializer;");
         } else {
             constructorBlock.line("this.serializerAdapter = serializerAdapter;");
@@ -312,7 +312,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected String writeSerializerInitialization() {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             return "JsonSerializerProvider.createInstance()";
         } else {
             return "JacksonAdapter.createDefaultSerializerAdapter()";
@@ -320,7 +320,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void addSerializerImport(Set<String> imports) {
-        if (JavaSettings.getInstance().isGeneric()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             imports.add(JsonSerializer.class.getName());
 //            imports.add(JsonSerializerProvider.class.getName());
         } else {

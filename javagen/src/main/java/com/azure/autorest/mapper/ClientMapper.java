@@ -578,7 +578,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
-        if (settings.isGeneric()) {
+        if (!settings.isBranded()) {
             requireModules.add(new ModuleInfo.RequireModule("com.generic.core", true));
         } else {
             requireModules.add(new ModuleInfo.RequireModule("com.azure.core", true));
@@ -596,7 +596,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
             // open models package to azure-core and jackson
             List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
-            if(settings.isGeneric()) {
+            if (!settings.isBranded()) {
                 openToModules = Arrays.asList("com.generic.core");
             }
             List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();

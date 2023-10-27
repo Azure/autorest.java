@@ -45,7 +45,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
 
   @Override
   public final void write(AsyncSyncClient asyncClient, JavaFile javaFile) {
-    if (JavaSettings.getInstance().isGeneric()) {
+    if (!JavaSettings.getInstance().isBranded()) {
       return;
     }
     ServiceClient serviceClient = asyncClient.getServiceClient();
