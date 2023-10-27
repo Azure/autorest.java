@@ -67,12 +67,19 @@ public class ClassType implements IType {
             if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
                 return new ClassType.Builder(false)
                         .knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());
+            } else {
+                return new Builder(false)
+                        .packageName(classKey.getPackage().getName().replace("com.azure.core", "com.generic.core")).name(classKey.getSimpleName());
             }
-            return new Builder(false)
-                    .packageName(classKey.getPackage().getName().replace("com.azure.core", "com.generic.core")).name(classKey.getSimpleName());
+        } else {
+            if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
+                return new ClassType.Builder(false)
+                        .knownClass(CLASS_TYPE_MAPPING.get(classKey).getAzureClass());
+            } else {
+                return new Builder(false)
+                        .packageName(classKey.getPackage().getName()).name(classKey.getSimpleName());
+            }
         }
-        return new ClassType.Builder(false)
-                .knownClass(CLASS_TYPE_MAPPING.get(classKey).getAzureClass());
     }
 
 
