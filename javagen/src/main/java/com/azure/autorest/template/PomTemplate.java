@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.core.util.CoreUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -119,7 +120,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                 writeRevapi(propertiesBlock, pom);
             });
 
-            if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
+            if (!CoreUtils.isNullOrEmpty(pom.getDependencyIdentifiers())) {
                 projectBlock.block("dependencies", dependenciesBlock -> {
                     for (String dependency : pom.getDependencyIdentifiers()) {
                         String[] parts = dependency.split(":");
