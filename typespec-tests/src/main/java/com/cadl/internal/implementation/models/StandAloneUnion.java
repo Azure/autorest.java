@@ -17,7 +17,7 @@ public final class StandAloneUnion {
      */
     @Generated
     @JsonProperty(value = "data")
-    private DataModelBase data;
+    private StandAloneUnionDataModelBase data;
 
     /**
      * Creates an instance of StandAloneUnion class.
@@ -26,7 +26,7 @@ public final class StandAloneUnion {
      */
     @Generated
     @JsonCreator
-    private StandAloneUnion(@JsonProperty(value = "data") DataModelBase data) {
+    private StandAloneUnion(@JsonProperty(value = "data") StandAloneUnionDataModelBase data) {
         this.data = data;
     }
 
@@ -36,7 +36,7 @@ public final class StandAloneUnion {
      * @return the data value.
      */
     @Generated
-    public DataModelBase getData() {
+    public StandAloneUnionDataModelBase getData() {
         return this.data;
     }
 }

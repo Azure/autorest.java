@@ -960,7 +960,8 @@ public class JavaSettings {
         public static final String DEFAULT_POLLING_STRATEGY_FORMAT = String.join("\n",
                 "new %s<>(new PollingStrategyOptions({httpPipeline})",
                 "    .setEndpoint({endpoint})",
-                "    .setContext({context}))");
+                "    .setContext({context})",
+                "    .setServiceVersion({serviceVersion}))");
 
         private static final String DEFAULT_POLLING_CODE = String.format(DEFAULT_POLLING_STRATEGY_FORMAT, "DefaultPollingStrategy");
 

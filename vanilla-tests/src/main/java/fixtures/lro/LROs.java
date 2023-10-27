@@ -23,9 +23,11 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.ChainedPollingStrategy;
+import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.LocationPollingStrategy;
 import com.azure.core.util.polling.OperationResourcePollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.StatusCheckPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
@@ -668,12 +670,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch200SucceededIgnoreHeadersWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -692,12 +693,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch200SucceededIgnoreHeadersWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -718,12 +718,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch200SucceededIgnoreHeadersWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -835,12 +834,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -858,12 +856,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -883,12 +880,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch201RetryWithAsyncHeaderWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -999,12 +995,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1022,12 +1017,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1048,12 +1042,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1163,12 +1156,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201SucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1187,12 +1179,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201SucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1213,12 +1204,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201SucceededWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1319,12 +1309,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202ListWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TYPE_REFERENCE_LIST_PRODUCT,
                 TYPE_REFERENCE_LIST_PRODUCT);
     }
@@ -1344,12 +1333,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202ListWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TYPE_REFERENCE_LIST_PRODUCT,
                 TYPE_REFERENCE_LIST_PRODUCT);
     }
@@ -1445,12 +1433,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededNoStateWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1469,12 +1456,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededNoStateWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1495,12 +1481,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200SucceededNoStateWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1612,12 +1597,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put202Retry200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1636,12 +1620,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put202Retry200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1662,12 +1645,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put202Retry200WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1783,12 +1765,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1808,12 +1789,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1835,12 +1815,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingSucceeded200WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1959,12 +1938,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200UpdatingSucceeded204WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -1984,12 +1962,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200UpdatingSucceeded204WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2011,12 +1988,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200UpdatingSucceeded204WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2135,12 +2111,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingFailed200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2160,12 +2135,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingFailed200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2187,12 +2161,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put201CreatingFailed200WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2311,12 +2284,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200Acceptedcanceled200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2336,12 +2308,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200Acceptedcanceled200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2363,12 +2334,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.put200Acceptedcanceled200WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2484,12 +2454,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNoHeaderInRetryWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2508,12 +2477,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNoHeaderInRetryWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2534,12 +2502,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNoHeaderInRetryWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2656,12 +2623,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2681,12 +2647,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2708,12 +2673,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetrySucceededWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2833,12 +2797,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2858,12 +2821,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -2885,12 +2847,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrySucceededWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3010,12 +2971,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetryFailedWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3035,12 +2995,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetryFailedWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3062,12 +3021,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncRetryFailedWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3187,12 +3145,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrycanceledWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3212,12 +3169,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrycanceledWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3239,12 +3195,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoRetrycanceledWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3361,12 +3316,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoHeaderInRetryWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3385,12 +3339,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoHeaderInRetryWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3411,12 +3364,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNoHeaderInRetryWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -3525,12 +3477,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonResourceWithResponseAsync(sku),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3548,12 +3499,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonResourceWithResponseAsync(sku),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3573,12 +3523,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putNonResourceWithResponseAsync(sku, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3685,12 +3634,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNonResourceWithResponseAsync(sku),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3708,12 +3656,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNonResourceWithResponseAsync(sku),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3733,12 +3680,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncNonResourceWithResponseAsync(sku, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -3844,12 +3790,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putSubResourceWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -3867,12 +3812,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putSubResourceWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -3892,12 +3836,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putSubResourceWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -4004,12 +3947,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncSubResourceWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -4027,12 +3969,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncSubResourceWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -4052,12 +3993,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.putAsyncSubResourceWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(SubProduct.class),
                 TypeReference.createInstance(SubProduct.class));
     }
@@ -4161,12 +4101,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4187,12 +4126,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Accepted200SucceededWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4284,12 +4222,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202DeletingFailed200WithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4310,12 +4247,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202DeletingFailed200WithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4407,12 +4343,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Deletingcanceled200WithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4433,12 +4368,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteProvisioning202Deletingcanceled200WithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4521,12 +4455,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4545,12 +4478,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete204SucceededWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4632,12 +4564,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4657,12 +4588,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202Retry200WithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4746,12 +4676,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NoRetry204WithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4771,12 +4700,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.delete202NoRetry204WithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4860,12 +4788,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNoHeaderInRetryWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4885,12 +4812,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteNoHeaderInRetryWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -4975,12 +4901,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5000,12 +4925,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoHeaderInRetryWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5090,12 +5014,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrySucceededWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5115,12 +5038,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrySucceededWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5205,12 +5127,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5230,12 +5151,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncNoRetrySucceededWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5319,12 +5239,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetryFailedWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5344,12 +5263,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetryFailedWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5434,12 +5352,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5459,12 +5376,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.deleteAsyncRetrycanceledWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(Void.class));
     }
@@ -5548,12 +5464,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post200WithPayloadWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -5573,12 +5488,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post200WithPayloadWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Sku.class),
                 TypeReference.createInstance(Sku.class));
     }
@@ -5674,12 +5588,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5698,12 +5611,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5724,12 +5636,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202Retry200WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -5842,12 +5753,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoRetry204WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -5866,12 +5776,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoRetry204WithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -5892,12 +5801,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.post202NoRetry204WithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -5999,12 +5907,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalLocationGetWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6024,12 +5931,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalLocationGetWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6114,12 +6020,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6139,12 +6044,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6232,12 +6136,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6258,12 +6161,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6365,12 +6267,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6390,12 +6291,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6417,12 +6317,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrySucceededWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6542,12 +6441,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncNoRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6567,12 +6465,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncNoRetrySucceededWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6594,12 +6491,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncNoRetrySucceededWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(Product.class),
                 TypeReference.createInstance(Product.class));
     }
@@ -6719,12 +6615,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetryFailedWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6744,12 +6639,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetryFailedWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6771,12 +6665,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetryFailedWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6896,12 +6789,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrycanceledWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6921,12 +6813,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrycanceledWithResponseAsync(product),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", Context.NONE),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, Context.NONE),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(Context.NONE)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -6948,12 +6839,11 @@ public final class LROs {
         return PollerFlux.create(
                 Duration.ofSeconds(1),
                 () -> this.postAsyncRetrycanceledWithResponseAsync(product, context),
-                new ChainedPollingStrategy<>(
-                        java.util.Arrays.asList(
-                                new OperationResourcePollingStrategy<>(
-                                        this.client.getHttpPipeline(), null, "Azure-AsyncOperation", context),
-                                new LocationPollingStrategy<>(this.client.getHttpPipeline(), null, context),
-                                new StatusCheckPollingStrategy<>())),
+                new DefaultPollingStrategy<>(
+                        new PollingStrategyOptions(this.client.getHttpPipeline())
+                                .setEndpoint(null)
+                                .setContext(context)
+                                .setServiceVersion(null)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

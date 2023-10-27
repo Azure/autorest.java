@@ -146,8 +146,9 @@ import {
   getAccess,
   getUsage,
   unionReferredByType,
-  getUnionName,
+  getUnionDescription,
   modelIs,
+  getModelNameForProperty,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -389,7 +390,7 @@ export class CodeModelBuilder {
           const errorMsg = `Model '${getTypeName(
             model,
             this.typeNameOptions,
-          )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+          )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
           throw new Error(errorMsg);
         }
 
@@ -638,7 +639,7 @@ export class CodeModelBuilder {
           generateConvenienceApi = false;
           apiComment = `Convenience API is not generated, as operation '${
             op.operation.name
-          }' refers Union '${getUnionName(union, this.typeNameOptions)}'`;
+          }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
           this.logWarning(apiComment);
         }
       }
@@ -1530,7 +1531,8 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint + "Model");
+          const schemaNameHint = pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
+          schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
@@ -1793,6 +1795,9 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+    variants = variants.filter(
+      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
+    );
     const kind = variants[0].type.kind;
     const valueType =
       kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
@@ -2120,18 +2125,21 @@ export class CodeModelBuilder {
 
     if (isSameLiteralTypes(nonNullVariants)) {
       // enum
+      this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
-    const unionSchema = new OrSchema(pascalCase(name) + "Base", this.getDoc(type), {
+    const baseName = pascalCase(name) + "Model";
+    this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
+    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + pascalCase(name);
+      const modelName = variantName + baseName;
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
@@ -2207,6 +2215,10 @@ export class CodeModelBuilder {
         } else {
           return pascalCase(type.name);
         }
+      case "String":
+        return pascalCase(type.value);
+      case "Number":
+        return pascalCase(type.valueAsString);
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
@@ -2265,13 +2277,13 @@ export class CodeModelBuilder {
     ) {
       const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
+      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
       return newName;
     }
 
-    if (!target.name && nameHint && this.options["namer"]) {
+    if (!target.name && nameHint) {
       const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
+      this.logWarning(`Rename anonymous TypeSpec Model to '${newName}'`);
       return newName;
     }
     return target.name;

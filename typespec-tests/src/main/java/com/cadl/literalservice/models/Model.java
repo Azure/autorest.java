@@ -23,7 +23,7 @@ public final class Model {
      */
     @Generated
     @JsonProperty(value = "optionalLiteral")
-    private OptionalLiteralModel optionalLiteral;
+    private ModelOptionalLiteral optionalLiteral;
 
     /** Creates an instance of Model class. */
     @Generated
@@ -47,7 +47,7 @@ public final class Model {
      * @return the optionalLiteral value.
      */
     @Generated
-    public OptionalLiteralModel getOptionalLiteral() {
+    public ModelOptionalLiteral getOptionalLiteral() {
         return this.optionalLiteral;
     }
 
@@ -58,7 +58,7 @@ public final class Model {
      * @return the Model object itself.
      */
     @Generated
-    public Model setOptionalLiteral(OptionalLiteralModel optionalLiteral) {
+    public Model setOptionalLiteral(ModelOptionalLiteral optionalLiteral) {
         this.optionalLiteral = optionalLiteral;
         return this;
     }
