@@ -8,12 +8,12 @@ import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.core.util.CoreUtils;
-import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
 import org.slf4j.Logger;
@@ -60,7 +60,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
         LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
 
-        Mappers.setFactory(new TypeSpecMapperFactory());
+        Mappers.setFactory(new TypeSpecFluentMapperFactory());
     }
 
     public Client processClient(CodeModel codeModel) {
@@ -86,6 +86,13 @@ public class TypeSpecFluentPlugin extends FluentGen {
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
+    @Override
+    protected FluentMapper getFluentMapper() {
+        FluentMapper fluentMapper = super.getFluentMapper();
+        Mappers.setFactory(new TypeSpecFluentMapperFactory());
+        return fluentMapper;
+    }
+
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
 
     static {
@@ -95,11 +102,12 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("regenerate-pom", true);
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
-        SETTINGS_MAP.put("enable-sync-stack", true);
+        SETTINGS_MAP.put("enable-sync-stack", false);
         SETTINGS_MAP.put("enable-page-size", true);
 
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
 
+        SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("client-logger", true);
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
         SETTINGS_MAP.put("required-parameter-client-methods", true);

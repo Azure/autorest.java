@@ -25,6 +25,7 @@ import com.azure.autorest.fluent.model.projectmodel.FluentProject;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
@@ -46,6 +47,7 @@ import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -209,12 +211,14 @@ public class FluentGen extends Javagen {
 
         // Service client
         String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-        javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                        client.getServiceClient());
-        if (javaSettings.isGenerateClientInterfaces()) {
-            javaPackage
-                    .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
+        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            ServiceClient serviceClient = client.getServiceClient();
+            addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
+        } else {
+            // multi-client from TypeSpec
+            for (ServiceClient serviceClient : client.getServiceClients()) {
+                addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
+            }
         }
 
         // Async/sync service clients
@@ -298,6 +302,16 @@ public class FluentGen extends Javagen {
         }
 
         return javaPackage;
+    }
+
+    private void addServiceClient(JavaSettings javaSettings, FluentJavaPackage javaPackage, String interfacePackage, ServiceClient serviceClient) {
+        javaPackage
+                .addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(),
+                        serviceClient);
+        if (javaSettings.isGenerateClientInterfaces()) {
+            javaPackage
+                    .addServiceClientInterface(interfacePackage, serviceClient.getInterfaceName(), serviceClient);
+        }
     }
 
     protected FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
