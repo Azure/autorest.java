@@ -193,7 +193,7 @@ public class Postprocessor extends NewPlugin {
                 process.destroyForcibly();
                 throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
                     + Files.readString(outputFile.toPath())
-                    + "\nThe command ran was: " + process.info().commandLine());
+                    + "\nThe command ran was: " + process.toHandle().info().arguments());
             }
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
