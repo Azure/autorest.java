@@ -177,6 +177,8 @@ public class FluentGen extends Javagen {
             ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-f", pomPath.toString() }
             : new String[] { "sh", "-c", "mvn", "spotless:apply", "-f", pomPath.toString() };
 
+        logger.info("Running command: " + String.join(" ", command));
+
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
@@ -189,8 +191,7 @@ public class FluentGen extends Javagen {
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
                 throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                    + Files.readString(outputFile.toPath())
-                    + "\nThe command ran was: " + process.toHandle().info().arguments());
+                    + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
