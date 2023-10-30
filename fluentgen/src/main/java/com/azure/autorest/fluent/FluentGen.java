@@ -72,10 +72,6 @@ public class FluentGen extends Javagen {
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
 
-    static {
-        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
-    }
-
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
 
@@ -85,6 +81,7 @@ public class FluentGen extends Javagen {
         super(connection, plugin, sessionId);
         instance = this;
         Javagen.instance = this;
+        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
     }
 
     public static FluentGen getPluginInstance() {

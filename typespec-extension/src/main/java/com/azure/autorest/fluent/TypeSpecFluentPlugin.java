@@ -52,6 +52,9 @@ public class TypeSpecFluentPlugin extends FluentGen {
         if (emitterOptions.getEnableSyncStack() != null) {
             SETTINGS_MAP.put("enable-sync-stack", emitterOptions.getEnableSyncStack());
         }
+        if (emitterOptions.getFluent() != null) {
+            SETTINGS_MAP.put("fluent", emitterOptions.getFluent());
+        }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
@@ -59,8 +62,6 @@ public class TypeSpecFluentPlugin extends FluentGen {
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
-
-        Mappers.setFactory(new TypeSpecFluentMapperFactory());
     }
 
     public Client processClient(CodeModel codeModel) {
