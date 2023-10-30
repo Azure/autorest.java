@@ -23,10 +23,7 @@ public final class ConstantProduct {
     private String constProperty2 = "constant2";
 
     /** Creates an instance of ConstantProduct class. */
-    public ConstantProduct() {
-        constProperty = "constant";
-        constProperty2 = "constant2";
-    }
+    public ConstantProduct() {}
 
     /**
      * Get the constProperty property: Constant string.

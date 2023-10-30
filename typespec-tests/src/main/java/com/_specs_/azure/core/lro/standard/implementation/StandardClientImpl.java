@@ -374,7 +374,6 @@ public final class StandardClientImpl {
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -424,7 +423,6 @@ public final class StandardClientImpl {
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -474,7 +472,6 @@ public final class StandardClientImpl {
                 () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -524,7 +521,6 @@ public final class StandardClientImpl {
                 () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -646,7 +642,6 @@ public final class StandardClientImpl {
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -693,7 +688,6 @@ public final class StandardClientImpl {
                 () -> this.deleteWithResponse(name, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -740,7 +734,6 @@ public final class StandardClientImpl {
                 () -> this.deleteWithResponseAsync(name, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -787,7 +780,6 @@ public final class StandardClientImpl {
                 () -> this.deleteWithResponse(name, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -916,7 +908,6 @@ public final class StandardClientImpl {
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -964,7 +955,6 @@ public final class StandardClientImpl {
                 () -> this.exportWithResponse(name, format, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -1013,7 +1003,6 @@ public final class StandardClientImpl {
                 () -> this.exportWithResponseAsync(name, format, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -1062,7 +1051,6 @@ public final class StandardClientImpl {
                 () -> this.exportWithResponse(name, format, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()

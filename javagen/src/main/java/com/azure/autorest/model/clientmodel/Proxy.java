@@ -67,8 +67,8 @@ public class Proxy {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (includeImplementationImports) {
-            imports.add("com.azure.core.annotation.Host");
-            imports.add("com.azure.core.annotation.ServiceInterface");
+            Annotation.HOST.addImportsTo(imports);
+            Annotation.SERVICE_INTERFACE.addImportsTo(imports);
         }
 
         for (ProxyMethod method : getMethods()) {

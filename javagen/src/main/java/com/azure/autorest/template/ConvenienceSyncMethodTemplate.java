@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.util.CoreUtils;
 
@@ -188,7 +187,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         IType type = method.getReturnValue().getType();
         if (type instanceof GenericType
                 && (
-                Response.class.getSimpleName().equals(((GenericType) type).getName())
+                ClassType.Response.getName().equals(((GenericType) type).getName())
                         || (PagedIterable.class.getSimpleName().equals(((GenericType) type).getName())))) {
             type = ((GenericType) type).getTypeArguments()[0];
         } else if (isResponseBase(type)) {

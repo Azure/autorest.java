@@ -1530,7 +1530,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-            .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+            .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString())
+            .replace(".setServiceVersion(null)", "")
+            .replace(".setEndpoint(null)", "");
     }
 
     private String getSyncPollingStrategy(ClientMethod clientMethod, String contextParam) {
@@ -1560,7 +1562,9 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString())
+                .replace(".setServiceVersion(null)", "")
+                .replace(".setEndpoint(null)", "");
     }
 
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {

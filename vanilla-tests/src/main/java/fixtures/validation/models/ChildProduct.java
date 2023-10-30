@@ -23,9 +23,7 @@ public final class ChildProduct {
     private Integer count;
 
     /** Creates an instance of ChildProduct class. */
-    public ChildProduct() {
-        constProperty = "constant";
-    }
+    public ChildProduct() {}
 
     /**
      * Get the constProperty property: Constant string.

@@ -300,7 +300,6 @@ public final class RpcClientImpl {
                 () -> this.longRunningRpcWithResponseAsync(generationOptions, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -354,7 +353,6 @@ public final class RpcClientImpl {
                 () -> this.longRunningRpcWithResponse(generationOptions, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -408,7 +406,6 @@ public final class RpcClientImpl {
                 () -> this.longRunningRpcWithResponseAsync(generationOptions, requestOptions),
                 new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
@@ -462,7 +459,6 @@ public final class RpcClientImpl {
                 () -> this.longRunningRpcWithResponse(generationOptions, requestOptions),
                 new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                         new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()

@@ -60,11 +60,7 @@ public final class Product {
     private String constStringAsEnum = "constant_string_as_enum";
 
     /** Creates an instance of Product class. */
-    public Product() {
-        constInt = 0;
-        constString = "constant";
-        constStringAsEnum = "constant_string_as_enum";
-    }
+    public Product() {}
 
     /**
      * Get the displayNames property: Non required array of unique items from 0 to 6 elements.

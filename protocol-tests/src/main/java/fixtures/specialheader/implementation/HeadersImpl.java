@@ -692,12 +692,10 @@ public final class HeadersImpl {
                 () -> this.paramRepeatabilityRequestLroWithResponseAsync(requestOptions),
                 new DefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }
@@ -736,12 +734,10 @@ public final class HeadersImpl {
                 () -> this.paramRepeatabilityRequestLroWithResponse(requestOptions),
                 new SyncDefaultPollingStrategy<>(
                         new PollingStrategyOptions(this.client.getHttpPipeline())
-                                .setEndpoint(null)
                                 .setContext(
                                         requestOptions != null && requestOptions.getContext() != null
                                                 ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(null)),
+                                                : Context.NONE)),
                 TypeReference.createInstance(BinaryData.class),
                 TypeReference.createInstance(BinaryData.class));
     }

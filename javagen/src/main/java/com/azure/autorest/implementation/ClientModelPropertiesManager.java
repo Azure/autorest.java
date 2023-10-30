@@ -168,10 +168,12 @@ public final class ClientModelPropertiesManager {
                 hasRequiredProperties = true;
                 requiredProperties.add(property);
 
-                if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                    constructorProperties.add(property);
-                } else {
-                    readOnlyProperties.add(property);
+                if (!property.isConstant()) {
+                    if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
+                        constructorProperties.add(property);
+                    } else {
+                        readOnlyProperties.add(property);
+                    }
                 }
             } else if (property.isAdditionalProperties()) {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization

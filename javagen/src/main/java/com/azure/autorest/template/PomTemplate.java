@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.core.util.CoreUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,10 +35,13 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     }
 
     public final void write(Pom pom, XmlFile xmlFile) {
+        JavaSettings settings = JavaSettings.getInstance();
+        boolean branded = settings.isBranded();
+
         // copyright
         xmlFile.blockComment(xmlLineComment -> {
             xmlLineComment.line(
-                    Arrays.stream(JavaSettings.getInstance()
+                    Arrays.stream(settings
                             .getFileHeaderText()
                             .split(System.lineSeparator()))
                             .map(line -> " ~ " + line)
@@ -76,9 +80,11 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.tag("name", String.format("Microsoft Azure SDK for %s", pom.getServiceName()));
+            projectBlock.tag("name", TemplateHelper.getPomProjectName(pom.getServiceName()));
             projectBlock.tag("description", pom.getServiceDescription());
-            projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            if (branded) {
+                projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            }
 
             projectBlock.line();
 
@@ -92,19 +98,21 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
 
             projectBlock.line();
 
-            projectBlock.block("scm", scmBlock -> {
-                scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
-                scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.tag("tag", "HEAD");
-            });
-
-            projectBlock.block("developers", developersBlock -> {
-                developersBlock.block("developer", developerBlock -> {
-                    developerBlock.tag("id", "microsoft");
-                    developerBlock.tag("name", "Microsoft");
+            if (branded) {
+                projectBlock.block("scm", scmBlock -> {
+                    scmBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
+                    scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("developerConnection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                    scmBlock.tag("tag", "HEAD");
                 });
-            });
+
+                projectBlock.block("developers", developersBlock -> {
+                    developersBlock.block("developer", developerBlock -> {
+                        developerBlock.tag("id", "microsoft");
+                        developerBlock.tag("name", "Microsoft");
+                    });
+                });
+            }
 
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
@@ -112,7 +120,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                 writeRevapi(propertiesBlock, pom);
             });
 
-            if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
+            if (!CoreUtils.isNullOrEmpty(pom.getDependencyIdentifiers())) {
                 projectBlock.block("dependencies", dependenciesBlock -> {
                     for (String dependency : pom.getDependencyIdentifiers()) {
                         String[] parts = dependency.split(":");

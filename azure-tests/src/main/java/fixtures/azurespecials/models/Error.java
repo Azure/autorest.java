@@ -29,9 +29,7 @@ public final class Error {
     private String message;
 
     /** Creates an instance of Error class. */
-    public Error() {
-        constantId = 1;
-    }
+    public Error() {}
 
     /**
      * Get the status property: The status property.

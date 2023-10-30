@@ -17,6 +17,8 @@ export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
 
+  "branded"?: boolean;
+
   "service-name"?: string;
   "service-versions"?: string[];
 
@@ -51,6 +53,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
+
+    "branded": { type: "boolean", nullable: true, default: true },
 
     // service
     "service-name": { type: "string", nullable: true },
