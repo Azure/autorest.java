@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-/** SKU details. */
+/**
+ * SKU details.
+ */
 @Fluent
 public final class Sku {
     /*
@@ -43,12 +45,15 @@ public final class Sku {
     @JsonProperty(value = "testString", access = JsonProperty.Access.WRITE_ONLY)
     private String testString = "test string";
 
-    /** Creates an instance of Sku class. */
-    public Sku() {}
+    /**
+     * Creates an instance of Sku class.
+     */
+    public Sku() {
+    }
 
     /**
      * Get the family property: SKU family name.
-     *
+     * 
      * @return the family value.
      */
     @JsonGetter("family")
@@ -58,7 +63,7 @@ public final class Sku {
 
     /**
      * Set the family property: SKU family name.
-     *
+     * 
      * @param family the family value to set.
      * @return the Sku object itself.
      */
@@ -70,7 +75,7 @@ public final class Sku {
 
     /**
      * Get the name property: SKU name to specify whether the key vault is a standard vault or a premium vault.
-     *
+     * 
      * @return the name value.
      */
     @JsonGetter("name")
@@ -80,7 +85,7 @@ public final class Sku {
 
     /**
      * Set the name property: SKU name to specify whether the key vault is a standard vault or a premium vault.
-     *
+     * 
      * @param name the name value to set.
      * @return the Sku object itself.
      */
@@ -93,7 +98,7 @@ public final class Sku {
     /**
      * Get the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
      * retrieve certificates stored as secrets from the key vault.
-     *
+     * 
      * @return the enabledForDeployment value.
      */
     @JsonGetter("enabledForDeployment")
@@ -104,7 +109,7 @@ public final class Sku {
     /**
      * Set the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
      * retrieve certificates stored as secrets from the key vault.
-     *
+     * 
      * @param enabledForDeployment the enabledForDeployment value to set.
      * @return the Sku object itself.
      */
@@ -116,7 +121,7 @@ public final class Sku {
 
     /**
      * Get the softDeleteRetentionInDays property: softDelete data retention days. It accepts &gt;=7 and &lt;=90.
-     *
+     * 
      * @return the softDeleteRetentionInDays value.
      */
     @JsonGetter("softDeleteRetentionInDays")
@@ -126,7 +131,7 @@ public final class Sku {
 
     /**
      * Set the softDeleteRetentionInDays property: softDelete data retention days. It accepts &gt;=7 and &lt;=90.
-     *
+     * 
      * @param softDeleteRetentionInDays the softDeleteRetentionInDays value to set.
      * @return the Sku object itself.
      */
@@ -138,7 +143,7 @@ public final class Sku {
 
     /**
      * Get the testString property: test string description.
-     *
+     * 
      * @return the testString value.
      */
     public String getTestString() {
@@ -147,7 +152,7 @@ public final class Sku {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

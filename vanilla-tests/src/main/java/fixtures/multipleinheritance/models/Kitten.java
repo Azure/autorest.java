@@ -7,7 +7,9 @@ package fixtures.multipleinheritance.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Kitten model. */
+/**
+ * The Kitten model.
+ */
 @Fluent
 public final class Kitten extends Cat {
     /*
@@ -16,12 +18,15 @@ public final class Kitten extends Cat {
     @JsonProperty(value = "eatsMiceYet")
     private Boolean eatsMiceYet;
 
-    /** Creates an instance of Kitten class. */
-    public Kitten() {}
+    /**
+     * Creates an instance of Kitten class.
+     */
+    public Kitten() {
+    }
 
     /**
      * Get the eatsMiceYet property: The eatsMiceYet property.
-     *
+     * 
      * @return the eatsMiceYet value.
      */
     public Boolean isEatsMiceYet() {
@@ -30,7 +35,7 @@ public final class Kitten extends Cat {
 
     /**
      * Set the eatsMiceYet property: The eatsMiceYet property.
-     *
+     * 
      * @param eatsMiceYet the eatsMiceYet value to set.
      * @return the Kitten object itself.
      */
@@ -39,28 +44,36 @@ public final class Kitten extends Cat {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Kitten setLikesMilk(Boolean likesMilk) {
         super.setLikesMilk(likesMilk);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Kitten setMeows(Boolean meows) {
         super.setMeows(meows);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Kitten setHisses(Boolean hisses) {
         super.setHisses(hisses);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Kitten setName(String name) {
         super.setName(name);
@@ -69,7 +82,7 @@ public final class Kitten extends Cat {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

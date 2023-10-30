@@ -6,9 +6,13 @@ package fixtures.lro;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of AutoRestLongRunningOperationTestServiceClient. */
+/**
+ * Service version of AutoRestLongRunningOperationTestServiceClient.
+ */
 public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVersion {
-    /** Enum value 1.0.0. */
+    /**
+     * Enum value 1.0.0.
+     */
     V1_0_0("1.0.0");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVer
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVer
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link AutoRestLongRunningOperationTestServiceVersion}.
      */
     public static AutoRestLongRunningOperationTestServiceVersion getLatest() {

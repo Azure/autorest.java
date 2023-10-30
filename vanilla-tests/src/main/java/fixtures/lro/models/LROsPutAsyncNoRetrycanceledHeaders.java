@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPutAsyncNoRetrycanceledHeaders model. */
+/**
+ * The LROsPutAsyncNoRetrycanceledHeaders model.
+ */
 @Fluent
 public final class LROsPutAsyncNoRetrycanceledHeaders {
     /*
@@ -29,7 +31,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPutAsyncNoRetrycanceledHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPutAsyncNoRetrycanceledHeaders(HttpHeaders rawHeaders) {
@@ -39,7 +41,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -48,7 +50,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeaders object itself.
      */
@@ -59,7 +61,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -68,7 +70,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeaders object itself.
      */
@@ -79,8 +81,9 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

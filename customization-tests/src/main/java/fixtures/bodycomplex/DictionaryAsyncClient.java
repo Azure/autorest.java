@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.models.DictionaryWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class DictionaryAsyncClient {
-    @Generated private final DictionariesImpl serviceClient;
+    @Generated
+    private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of DictionaryAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,11 +34,11 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -45,7 +48,7 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property on successful completion of {@link Mono}.
@@ -58,9 +61,9 @@ public final class DictionaryAsyncClient {
 
     /**
      * Put complex types with dictionary property.
-     *
+     * 
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
+     * "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -74,9 +77,9 @@ public final class DictionaryAsyncClient {
 
     /**
      * Put complex types with dictionary property.
-     *
+     * 
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     *     "xls":"excel", "exe":"", "":null.
+     * "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -90,11 +93,11 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property which is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -104,7 +107,7 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property which is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is empty on successful completion of {@link Mono}.
@@ -117,7 +120,7 @@ public final class DictionaryAsyncClient {
 
     /**
      * Put complex types with dictionary property which is empty.
-     *
+     * 
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -132,7 +135,7 @@ public final class DictionaryAsyncClient {
 
     /**
      * Put complex types with dictionary property which is empty.
-     *
+     * 
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -147,11 +150,11 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property which is null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -161,7 +164,7 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property which is null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property which is null on successful completion of {@link Mono}.
@@ -174,11 +177,11 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -188,11 +191,11 @@ public final class DictionaryAsyncClient {
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with dictionary property while server doesn't provide a response payload on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class ParameterGroupingPostReservedWordsParameters {
     /*
@@ -22,12 +24,15 @@ public final class ParameterGroupingPostReservedWordsParameters {
     @JsonProperty(value = "accept")
     private String accept;
 
-    /** Creates an instance of ParameterGroupingPostReservedWordsParameters class. */
-    public ParameterGroupingPostReservedWordsParameters() {}
+    /**
+     * Creates an instance of ParameterGroupingPostReservedWordsParameters class.
+     */
+    public ParameterGroupingPostReservedWordsParameters() {
+    }
 
     /**
      * Get the from property: 'from' is a reserved word. Pass in 'bob' to pass.
-     *
+     * 
      * @return the from value.
      */
     public String getFrom() {
@@ -36,7 +41,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
 
     /**
      * Set the from property: 'from' is a reserved word. Pass in 'bob' to pass.
-     *
+     * 
      * @param from the from value to set.
      * @return the ParameterGroupingPostReservedWordsParameters object itself.
      */
@@ -47,7 +52,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
 
     /**
      * Get the accept property: 'accept' is a reserved word. Pass in 'yes' to pass.
-     *
+     * 
      * @return the accept value.
      */
     public String getAccept() {
@@ -56,7 +61,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
 
     /**
      * Set the accept property: 'accept' is a reserved word. Pass in 'yes' to pass.
-     *
+     * 
      * @param accept the accept value to set.
      * @return the ParameterGroupingPostReservedWordsParameters object itself.
      */
@@ -67,8 +72,9 @@ public final class ParameterGroupingPostReservedWordsParameters {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

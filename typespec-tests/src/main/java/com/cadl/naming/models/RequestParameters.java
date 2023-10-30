@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The RequestParameters model. */
+/**
+ * The RequestParameters model.
+ */
 @Immutable
 public final class RequestParameters {
     /*
@@ -21,7 +23,7 @@ public final class RequestParameters {
 
     /**
      * Creates an instance of RequestParameters class.
-     *
+     * 
      * @param type the type value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class RequestParameters {
 
     /**
      * Get the type property: The type property.
-     *
+     * 
      * @return the type value.
      */
     @Generated

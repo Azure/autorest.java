@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ModelAsStringNoRequiredOneValueNoDefault model. */
+/**
+ * The ModelAsStringNoRequiredOneValueNoDefault model.
+ */
 @Fluent
 public final class ModelAsStringNoRequiredOneValueNoDefault {
     /*
@@ -16,12 +18,15 @@ public final class ModelAsStringNoRequiredOneValueNoDefault {
     @JsonProperty(value = "parameter")
     private ModelAsStringNoRequiredOneValueNoDefaultEnum parameter;
 
-    /** Creates an instance of ModelAsStringNoRequiredOneValueNoDefault class. */
-    public ModelAsStringNoRequiredOneValueNoDefault() {}
+    /**
+     * Creates an instance of ModelAsStringNoRequiredOneValueNoDefault class.
+     */
+    public ModelAsStringNoRequiredOneValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public ModelAsStringNoRequiredOneValueNoDefaultEnum getParameter() {
@@ -30,20 +35,21 @@ public final class ModelAsStringNoRequiredOneValueNoDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the ModelAsStringNoRequiredOneValueNoDefault object itself.
      */
-    public ModelAsStringNoRequiredOneValueNoDefault setParameter(
-            ModelAsStringNoRequiredOneValueNoDefaultEnum parameter) {
+    public ModelAsStringNoRequiredOneValueNoDefault
+        setParameter(ModelAsStringNoRequiredOneValueNoDefaultEnum parameter) {
         this.parameter = parameter;
         return this;
     }
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

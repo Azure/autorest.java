@@ -24,10 +24,8 @@ class SpreadClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SpreadClientBuilder modelClientbuilder =
-                new SpreadClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpreadClientBuilder modelClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -35,15 +33,14 @@ class SpreadClientTestBase extends TestProxyTestBase {
         }
         modelClient = modelClientbuilder.buildModelClient();
 
-        SpreadClientBuilder aliasClientbuilder =
-                new SpreadClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpreadClientBuilder aliasClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             aliasClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             aliasClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         aliasClient = aliasClientbuilder.buildAliasClient();
+
     }
 }

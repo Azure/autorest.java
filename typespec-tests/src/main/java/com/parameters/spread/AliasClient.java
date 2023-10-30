@@ -20,14 +20,17 @@ import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Initializes a new instance of the synchronous SpreadClient type. */
+/**
+ * Initializes a new instance of the synchronous SpreadClient type.
+ */
 @ServiceClient(builder = SpreadClientBuilder.class)
 public final class AliasClient {
-    @Generated private final AliasImpl serviceClient;
+    @Generated
+    private final AliasImpl serviceClient;
 
     /**
      * Initializes an instance of AliasClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class AliasClient {
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,15 +65,15 @@ public final class AliasClient {
 
     /**
      * The spreadAsRequestParameter operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
@@ -83,16 +86,16 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestParameterWithResponse(
-            String id, String xMsTestHeader, BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
         return this.serviceClient.spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions);
     }
 
     /**
      * The spreadWithMultipleParameters operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prop1: String (Required)
@@ -103,7 +106,7 @@ public final class AliasClient {
      *     prop6: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
@@ -116,14 +119,14 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadWithMultipleParametersWithResponse(
-            String id, String xMsTestHeader, BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
         return this.serviceClient.spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -145,7 +148,7 @@ public final class AliasClient {
 
     /**
      * The spreadAsRequestParameter operation.
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param name A sequence of textual characters.
@@ -169,7 +172,7 @@ public final class AliasClient {
 
     /**
      * The spreadWithMultipleParameters operation.
-     *
+     * 
      * @param options Options for spreadWithMultipleParameters API.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

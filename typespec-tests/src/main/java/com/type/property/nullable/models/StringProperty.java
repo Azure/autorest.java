@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Template type for testing models with nullable property. Pass in the type of the property you are looking for. */
+/**
+ * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+ */
 @Immutable
 public final class StringProperty {
     /*
@@ -28,22 +30,21 @@ public final class StringProperty {
 
     /**
      * Creates an instance of StringProperty class.
-     *
+     * 
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
     @JsonCreator
-    public StringProperty(
-            @JsonProperty(value = "requiredProperty") String requiredProperty,
-            @JsonProperty(value = "nullableProperty") String nullableProperty) {
+    public StringProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") String nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
 
     /**
      * Get the requiredProperty property: Required property.
-     *
+     * 
      * @return the requiredProperty value.
      */
     @Generated
@@ -53,7 +54,7 @@ public final class StringProperty {
 
     /**
      * Get the nullableProperty property: Property.
-     *
+     * 
      * @return the nullableProperty value.
      */
     @Generated

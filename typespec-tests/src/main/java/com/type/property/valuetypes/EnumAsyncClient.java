@@ -20,14 +20,17 @@ import com.type.property.valuetypes.implementation.EnumsImpl;
 import com.type.property.valuetypes.models.EnumProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ValueTypesClient type. */
+/**
+ * Initializes a new instance of the asynchronous ValueTypesClient type.
+ */
 @ServiceClient(builder = ValueTypesClientBuilder.class, isAsync = true)
 public final class EnumAsyncClient {
-    @Generated private final EnumsImpl serviceClient;
+    @Generated
+    private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of EnumAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class EnumAsyncClient {
 
     /**
      * Get call.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,15 +64,15 @@ public final class EnumAsyncClient {
 
     /**
      * Put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,7 +89,7 @@ public final class EnumAsyncClient {
 
     /**
      * Get call.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -99,14 +102,13 @@ public final class EnumAsyncClient {
     public Mono<EnumProperty> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(EnumProperty.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(EnumProperty.class));
     }
 
     /**
      * Put operation.
-     *
+     * 
      * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

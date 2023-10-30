@@ -22,14 +22,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AccessClient type. */
+/**
+ * Initializes a new instance of the asynchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class, isAsync = true)
 public final class InternalOperationAsyncClient {
-    @Generated private final InternalOperationsImpl serviceClient;
+    @Generated
+    private final InternalOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of InternalOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -39,15 +42,15 @@ public final class InternalOperationAsyncClient {
 
     /**
      * The noDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -55,7 +58,7 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in an internal operation, should be generated but not exported along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -65,15 +68,15 @@ public final class InternalOperationAsyncClient {
 
     /**
      * The internalDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,7 +84,7 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in an internal operation, should be generated but not exported along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,15 +94,15 @@ public final class InternalOperationAsyncClient {
 
     /**
      * The publicDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -107,7 +110,7 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in an internal operation but with public decorator, should be generated and exported along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -117,7 +120,7 @@ public final class InternalOperationAsyncClient {
 
     /**
      * The noDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -125,22 +128,21 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used in an internal operation, should be generated but not exported on successful completion of {@link
-     *     Mono}.
+     * @return used in an internal operation, should be generated but not exported on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<NoDecoratorModelInInternal> noDecoratorInInternal(String name) {
         // Generated convenience method for noDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return noDecoratorInInternalWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(NoDecoratorModelInInternal.class));
+        return noDecoratorInInternalWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(NoDecoratorModelInInternal.class));
     }
 
     /**
      * The internalDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -148,22 +150,21 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used in an internal operation, should be generated but not exported on successful completion of {@link
-     *     Mono}.
+     * @return used in an internal operation, should be generated but not exported on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<InternalDecoratorModelInInternal> internalDecoratorInInternal(String name) {
         // Generated convenience method for internalDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return internalDecoratorInInternalWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(InternalDecoratorModelInInternal.class));
+        return internalDecoratorInInternalWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(InternalDecoratorModelInInternal.class));
     }
 
     /**
      * The publicDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -172,15 +173,14 @@ public final class InternalOperationAsyncClient {
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return used in an internal operation but with public decorator, should be generated and exported on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<PublicDecoratorModelInInternal> publicDecoratorInInternal(String name) {
         // Generated convenience method for publicDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return publicDecoratorInInternalWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(PublicDecoratorModelInInternal.class));
+        return publicDecoratorInInternalWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(PublicDecoratorModelInInternal.class));
     }
 }

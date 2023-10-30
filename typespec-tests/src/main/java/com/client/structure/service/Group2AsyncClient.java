@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.client.structure.service.implementation.Group2sImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous TwoOperationGroupClient type. */
+/**
+ * Initializes a new instance of the asynchronous TwoOperationGroupClient type.
+ */
 @ServiceClient(builder = TwoOperationGroupClientBuilder.class, isAsync = true)
 public final class Group2AsyncClient {
-    @Generated private final Group2sImpl serviceClient;
+    @Generated
+    private final Group2sImpl serviceClient;
 
     /**
      * Initializes an instance of Group2AsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class Group2AsyncClient {
 
     /**
      * The two operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class Group2AsyncClient {
 
     /**
      * The five operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +70,7 @@ public final class Group2AsyncClient {
 
     /**
      * The six operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,7 +86,7 @@ public final class Group2AsyncClient {
 
     /**
      * The two operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -101,7 +104,7 @@ public final class Group2AsyncClient {
 
     /**
      * The five operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -119,7 +122,7 @@ public final class Group2AsyncClient {
 
     /**
      * The six operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

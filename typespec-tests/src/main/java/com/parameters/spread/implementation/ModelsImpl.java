@@ -25,17 +25,23 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Models. */
+/**
+ * An instance of this class provides access to all the operations defined in Models.
+ */
 public final class ModelsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ModelsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final SpreadClientImpl client;
 
     /**
      * Initializes an instance of ModelsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     ModelsImpl(SpreadClientImpl client) {
@@ -51,53 +57,35 @@ public final class ModelsImpl {
     @ServiceInterface(name = "SpreadClientModels")
     public interface ModelsService {
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> spreadAsRequestBody(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData bodyParameter,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> spreadAsRequestBodySync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData bodyParameter,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -107,24 +95,24 @@ public final class ModelsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(
-            BinaryData bodyParameter, RequestOptions requestOptions) {
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(BinaryData bodyParameter,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.spreadAsRequestBody(accept, bodyParameter, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.spreadAsRequestBody(accept, bodyParameter, requestOptions, context));
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

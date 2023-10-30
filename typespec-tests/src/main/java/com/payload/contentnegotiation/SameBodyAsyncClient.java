@@ -19,14 +19,17 @@ import com.azure.core.util.FluxUtil;
 import com.payload.contentnegotiation.implementation.SameBodiesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ContentNegotiationClient type. */
+/**
+ * Initializes a new instance of the asynchronous ContentNegotiationClient type.
+ */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class, isAsync = true)
 public final class SameBodyAsyncClient {
-    @Generated private final SameBodiesImpl serviceClient;
+    @Generated
+    private final SameBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of SameBodyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,13 +39,13 @@ public final class SameBodyAsyncClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,13 +61,13 @@ public final class SameBodyAsyncClient {
 
     /**
      * The getAvatarAsJpeg operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -80,7 +83,7 @@ public final class SameBodyAsyncClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -98,7 +101,7 @@ public final class SameBodyAsyncClient {
 
     /**
      * The getAvatarAsJpeg operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

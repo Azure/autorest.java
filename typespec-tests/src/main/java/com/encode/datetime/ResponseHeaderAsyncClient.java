@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.encode.datetime.implementation.ResponseHeadersImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DatetimeClient type. */
+/**
+ * Initializes a new instance of the asynchronous DatetimeClient type.
+ */
 @ServiceClient(builder = DatetimeClientBuilder.class, isAsync = true)
 public final class ResponseHeaderAsyncClient {
-    @Generated private final ResponseHeadersImpl serviceClient;
+    @Generated
+    private final ResponseHeadersImpl serviceClient;
 
     /**
      * Initializes an instance of ResponseHeaderAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +70,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,7 +86,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,7 +102,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -117,7 +120,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -135,7 +138,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -153,7 +156,7 @@ public final class ResponseHeaderAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

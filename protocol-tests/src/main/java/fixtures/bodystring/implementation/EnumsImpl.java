@@ -27,17 +27,23 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Enums. */
+/**
+ * An instance of this class provides access to all the operations defined in Enums.
+ */
 public final class EnumsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final EnumsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerBatServiceClientImpl client;
 
     /**
      * Initializes an instance of EnumsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     EnumsImpl(AutoRestSwaggerBatServiceClientImpl client) {
@@ -53,268 +59,160 @@ public final class EnumsImpl {
     @ServiceInterface(name = "AutoRestSwaggerBatSe")
     public interface EnumsService {
         @Get("/string/enum/notExpandable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getNotExpandable(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getNotExpandable(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/string/enum/notExpandable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getNotExpandableSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getNotExpandableSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/notExpandable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNotExpandable(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNotExpandable(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData stringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/notExpandable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNotExpandableSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData stringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNotExpandableSync(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData stringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/string/enum/Referenced")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getReferenced(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getReferenced(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/string/enum/Referenced")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getReferencedSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getReferencedSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/Referenced")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putReferenced(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putReferenced(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData enumStringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/Referenced")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putReferencedSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putReferencedSync(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData enumStringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/string/enum/ReferencedConstant")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getReferencedConstant(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> getReferencedConstant(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/string/enum/ReferencedConstant")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getReferencedConstantSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getReferencedConstantSync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/ReferencedConstant")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putReferencedConstant(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData enumStringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/string/enum/ReferencedConstant")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putReferencedConstantSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") BinaryData enumStringBody,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putReferencedConstantSync(@HostParam("$host") String host,
+            @BodyParam("application/json") BinaryData enumStringBody, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNotExpandable(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getNotExpandable(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotExpandableWithResponse(RequestOptions requestOptions) {
@@ -324,13 +222,13 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -340,23 +238,22 @@ public final class EnumsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNotExpandableWithResponseAsync(
-            BinaryData stringBody, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putNotExpandableWithResponseAsync(BinaryData stringBody,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context));
+            context -> service.putNotExpandable(this.client.getHost(), stringBody, accept, requestOptions, context));
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -373,44 +270,44 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getReferenced(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getReferenced(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedWithResponse(RequestOptions requestOptions) {
@@ -420,13 +317,13 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -436,23 +333,22 @@ public final class EnumsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putReferencedWithResponseAsync(
-            BinaryData enumStringBody, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putReferencedWithResponseAsync(BinaryData enumStringBody,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
+            context -> service.putReferenced(this.client.getHost(), enumStringBody, accept, requestOptions, context));
     }
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
-     *
+     * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -469,43 +365,43 @@ public final class EnumsImpl {
 
     /**
      * Get value 'green-color' from the constant.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return value 'green-color' from the constant along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return value 'green-color' from the constant along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedConstantWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getReferencedConstant(this.client.getHost(), accept, requestOptions, context));
+            context -> service.getReferencedConstant(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get value 'green-color' from the constant.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -521,16 +417,16 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'green-color' from a constant.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -540,27 +436,25 @@ public final class EnumsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putReferencedConstantWithResponseAsync(
-            BinaryData enumStringBody, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putReferencedConstantWithResponseAsync(BinaryData enumStringBody,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.putReferencedConstant(
-                                this.client.getHost(), enumStringBody, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putReferencedConstant(this.client.getHost(), enumStringBody,
+            accept, requestOptions, context));
     }
 
     /**
      * Sends value 'green-color' from a constant.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -572,7 +466,7 @@ public final class EnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putReferencedConstantWithResponse(BinaryData enumStringBody, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putReferencedConstantSync(
-                this.client.getHost(), enumStringBody, accept, requestOptions, Context.NONE);
+        return service.putReferencedConstantSync(this.client.getHost(), enumStringBody, accept, requestOptions,
+            Context.NONE);
     }
 }

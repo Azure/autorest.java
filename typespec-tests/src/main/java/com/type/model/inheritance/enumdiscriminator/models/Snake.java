@@ -12,14 +12,16 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** Test fixed enum type for discriminator. */
+/**
+ * Test fixed enum type for discriminator.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Snake.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Snake.class)
 @JsonTypeName("Snake")
-@JsonSubTypes({@JsonSubTypes.Type(name = "cobra", value = Cobra.class)})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "cobra", value = Cobra.class) })
 @Immutable
 public class Snake {
     /*
@@ -31,7 +33,7 @@ public class Snake {
 
     /**
      * Creates an instance of Snake class.
-     *
+     * 
      * @param length the length value to set.
      */
     @Generated
@@ -42,7 +44,7 @@ public class Snake {
 
     /**
      * Get the length property: Length of the snake.
-     *
+     * 
      * @return the length value.
      */
     @Generated

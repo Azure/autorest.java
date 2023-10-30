@@ -12,8 +12,8 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetMbcs {
     public static void main(String[] args) {
-        StringOperationClient stringOperationClient =
-                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient
+            = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringgetmbcs.stringgetmbcs
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getMbcsWithResponse(requestOptions);

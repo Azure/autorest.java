@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** Model with a duration property. */
+/**
+ * Model with a duration property.
+ */
 @Immutable
 public final class DurationProperty {
     /*
@@ -29,22 +31,21 @@ public final class DurationProperty {
 
     /**
      * Creates an instance of DurationProperty class.
-     *
+     * 
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
     @JsonCreator
-    public DurationProperty(
-            @JsonProperty(value = "requiredProperty") String requiredProperty,
-            @JsonProperty(value = "nullableProperty") Duration nullableProperty) {
+    public DurationProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") Duration nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
 
     /**
      * Get the requiredProperty property: Required property.
-     *
+     * 
      * @return the requiredProperty value.
      */
     @Generated
@@ -54,7 +55,7 @@ public final class DurationProperty {
 
     /**
      * Get the nullableProperty property: Property.
-     *
+     * 
      * @return the nullableProperty value.
      */
     @Generated

@@ -26,23 +26,28 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in DatetimeOperations. */
+/**
+ * An instance of this class provides access to all the operations defined in DatetimeOperations.
+ */
 public final class DatetimeOperationsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final DatetimeOperationsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final OptionalClientImpl client;
 
     /**
      * Initializes an instance of DatetimeOperationsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     DatetimeOperationsImpl(OptionalClientImpl client) {
-        this.service =
-                RestProxy.create(
-                        DatetimeOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(DatetimeOperationsService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -54,156 +59,96 @@ public final class DatetimeOperationsImpl {
     @ServiceInterface(name = "OptionalClientDateti")
     public interface DatetimeOperationsService {
         @Get("/type/property/optional/datetime/all")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAll(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getAll(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/type/property/optional/datetime/all")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAllSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getAllSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/type/property/optional/datetime/default")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getDefault(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getDefault(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/type/property/optional/datetime/default")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getDefaultSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getDefaultSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Put("/type/property/optional/datetime/all")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putAll(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putAll(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/datetime/all")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putAllSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putAllSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/datetime/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putDefault(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putDefault(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/datetime/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putDefaultSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putDefaultSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAllWithResponseAsync(RequestOptions requestOptions) {
@@ -213,15 +158,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -237,22 +182,22 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultWithResponseAsync(RequestOptions requestOptions) {
@@ -262,15 +207,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -286,15 +231,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -311,15 +256,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -336,15 +281,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -361,15 +306,15 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

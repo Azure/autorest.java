@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The third level model in the normal multiple levels inheritance. */
+/**
+ * The third level model in the normal multiple levels inheritance.
+ */
 @Immutable
 public final class Siamese extends Cat {
     /*
@@ -21,24 +23,22 @@ public final class Siamese extends Cat {
 
     /**
      * Creates an instance of Siamese class.
-     *
+     * 
      * @param name the name value to set.
      * @param age the age value to set.
      * @param smart the smart value to set.
      */
     @Generated
     @JsonCreator
-    public Siamese(
-            @JsonProperty(value = "name") String name,
-            @JsonProperty(value = "age") int age,
-            @JsonProperty(value = "smart") boolean smart) {
+    public Siamese(@JsonProperty(value = "name") String name, @JsonProperty(value = "age") int age,
+        @JsonProperty(value = "smart") boolean smart) {
         super(name, age);
         this.smart = smart;
     }
 
     /**
      * Get the smart property: The smart property.
-     *
+     * 
      * @return the smart value.
      */
     @Generated

@@ -19,14 +19,17 @@ import com.type.model.inheritance.singlediscriminator.implementation.SingleDiscr
 import com.type.model.inheritance.singlediscriminator.models.Bird;
 import com.type.model.inheritance.singlediscriminator.models.Dinosaur;
 
-/** Initializes a new instance of the synchronous SingleDiscriminatorClient type. */
+/**
+ * Initializes a new instance of the synchronous SingleDiscriminatorClient type.
+ */
 @ServiceClient(builder = SingleDiscriminatorClientBuilder.class)
 public final class SingleDiscriminatorClient {
-    @Generated private final SingleDiscriminatorClientImpl serviceClient;
+    @Generated
+    private final SingleDiscriminatorClientImpl serviceClient;
 
     /**
      * Initializes an instance of SingleDiscriminatorClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,22 +39,22 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -61,15 +64,15 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,22 +89,22 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getRecursiveModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,15 +114,15 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The putRecursiveModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -136,22 +139,22 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getMissingDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -161,22 +164,22 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getWrongDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wingspan: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -186,15 +189,15 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getLegacyModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     size: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -210,7 +213,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -228,7 +231,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The putModel operation.
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -247,7 +250,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getRecursiveModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -265,7 +268,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The putRecursiveModel operation.
-     *
+     * 
      * @param input This is base model for polymorphic single level inheritance with a discriminator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -284,7 +287,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getMissingDiscriminator operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -302,7 +305,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getWrongDiscriminator operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -320,7 +323,7 @@ public final class SingleDiscriminatorClient {
 
     /**
      * The getLegacyModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.scalar.implementation.UnknownsImpl;
 
-/** Initializes a new instance of the synchronous ScalarClient type. */
+/**
+ * Initializes a new instance of the synchronous ScalarClient type.
+ */
 @ServiceClient(builder = ScalarClientBuilder.class)
 public final class UnknownClient {
-    @Generated private final UnknownsImpl serviceClient;
+    @Generated
+    private final UnknownsImpl serviceClient;
 
     /**
      * Initializes an instance of UnknownClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,13 +37,13 @@ public final class UnknownClient {
 
     /**
      * get unknown value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,13 +59,13 @@ public final class UnknownClient {
 
     /**
      * put unknown value.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -79,7 +82,7 @@ public final class UnknownClient {
 
     /**
      * get unknown value.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -97,7 +100,7 @@ public final class UnknownClient {
 
     /**
      * put unknown value.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -23,23 +23,28 @@ import fixtures.bodyformdataurlencoded.models.PetFood;
 import fixtures.bodyformdataurlencoded.models.PetType;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Formdataurlencodeds. */
+/**
+ * An instance of this class provides access to all the operations defined in Formdataurlencodeds.
+ */
 public final class Formdataurlencodeds {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final FormdataurlencodedsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final BodyFormsDataURLEncoded client;
 
     /**
      * Initializes an instance of Formdataurlencodeds.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Formdataurlencodeds(BodyFormsDataURLEncoded client) {
-        this.service =
-                RestProxy.create(
-                        FormdataurlencodedsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(FormdataurlencodedsService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -52,33 +57,25 @@ public final class Formdataurlencodeds {
     public interface FormdataurlencodedsService {
         // @Multipart not supported by RestProxy
         @Post("/formsdataurlencoded/pet/add/{petId}")
-        @ExpectedResponses({200, 405})
+        @ExpectedResponses({ 200, 405 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> updatePetWithForm(
-                @HostParam("$host") String host,
-                @PathParam("petId") int petId,
-                @FormParam("pet_type") PetType petType,
-                @FormParam("pet_food") PetFood petFood,
-                @FormParam("pet_age") int petAge,
-                @FormParam("name") String name,
-                @FormParam("status") String status,
-                Context context);
+        Mono<Response<Void>> updatePetWithForm(@HostParam("$host") String host, @PathParam("petId") int petId,
+            @FormParam("pet_type") PetType petType, @FormParam("pet_food") PetFood petFood,
+            @FormParam("pet_age") int petAge, @FormParam("name") String name, @FormParam("status") String status,
+            Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/formsdataurlencoded/partialConstantBody")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> partialConstantBody(
-                @HostParam("$host") String host,
-                @FormParam("grant_type") String grantType,
-                @FormParam("service") String service,
-                @FormParam("access_token") String accessToken,
-                Context context);
+        Mono<Response<Void>> partialConstantBody(@HostParam("$host") String host,
+            @FormParam("grant_type") String grantType, @FormParam("service") String service,
+            @FormParam("access_token") String accessToken, Context context);
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -91,11 +88,11 @@ public final class Formdataurlencodeds {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> updatePetWithFormWithResponseAsync(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
+    public Mono<Response<Void>> updatePetWithFormWithResponseAsync(int petId, PetType petType, PetFood petFood,
+        int petAge, String name, String status) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petType == null) {
             return Mono.error(new IllegalArgumentException("Parameter petType is required and cannot be null."));
@@ -103,15 +100,13 @@ public final class Formdataurlencodeds {
         if (petFood == null) {
             return Mono.error(new IllegalArgumentException("Parameter petFood is required and cannot be null."));
         }
-        return FluxUtil.withContext(
-                context ->
-                        service.updatePetWithForm(
-                                this.client.getHost(), petId, petType, petFood, petAge, name, status, context));
+        return FluxUtil.withContext(context -> service.updatePetWithForm(this.client.getHost(), petId, petType, petFood,
+            petAge, name, status, context));
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -125,11 +120,11 @@ public final class Formdataurlencodeds {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> updatePetWithFormWithResponseAsync(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+    public Mono<Response<Void>> updatePetWithFormWithResponseAsync(int petId, PetType petType, PetFood petFood,
+        int petAge, String name, String status, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petType == null) {
             return Mono.error(new IllegalArgumentException("Parameter petType is required and cannot be null."));
@@ -142,7 +137,7 @@ public final class Formdataurlencodeds {
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -155,15 +150,15 @@ public final class Formdataurlencodeds {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> updatePetWithFormAsync(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status) {
+    public Mono<Void> updatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, String name,
+        String status) {
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -178,12 +173,12 @@ public final class Formdataurlencodeds {
         final String name = null;
         final String status = null;
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -197,15 +192,15 @@ public final class Formdataurlencodeds {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> updatePetWithFormAsync(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+    public Mono<Void> updatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, String name,
+        String status, Context context) {
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -219,14 +214,14 @@ public final class Formdataurlencodeds {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> updatePetWithFormWithResponse(
-            int petId, PetType petType, PetFood petFood, int petAge, String name, String status, Context context) {
+    public Response<Void> updatePetWithFormWithResponse(int petId, PetType petType, PetFood petFood, int petAge,
+        String name, String status, Context context) {
         return updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status, context).block();
     }
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -244,7 +239,7 @@ public final class Formdataurlencodeds {
 
     /**
      * Updates a pet in the store with form data.
-     *
+     * 
      * @param petId ID of pet that needs to be updated.
      * @param petType Can take a value of dog, or cat, or fish.
      * @param petFood Can take a value of meat, or fish, or plant.
@@ -263,7 +258,7 @@ public final class Formdataurlencodeds {
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -274,8 +269,8 @@ public final class Formdataurlencodeds {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> partialConstantBodyWithResponseAsync(String serviceParam, String accessToken) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (serviceParam == null) {
             return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
@@ -284,16 +279,14 @@ public final class Formdataurlencodeds {
             return Mono.error(new IllegalArgumentException("Parameter accessToken is required and cannot be null."));
         }
         final String grantType = "access_token";
-        return FluxUtil.withContext(
-                context ->
-                        service.partialConstantBody(
-                                this.client.getHost(), grantType, serviceParam, accessToken, context));
+        return FluxUtil.withContext(context -> service.partialConstantBody(this.client.getHost(), grantType,
+            serviceParam, accessToken, context));
     }
 
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @param context The context to associate with this operation.
@@ -303,11 +296,11 @@ public final class Formdataurlencodeds {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> partialConstantBodyWithResponseAsync(
-            String serviceParam, String accessToken, Context context) {
+    public Mono<Response<Void>> partialConstantBodyWithResponseAsync(String serviceParam, String accessToken,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (serviceParam == null) {
             return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
@@ -322,7 +315,7 @@ public final class Formdataurlencodeds {
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -338,7 +331,7 @@ public final class Formdataurlencodeds {
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @param context The context to associate with this operation.
@@ -350,13 +343,13 @@ public final class Formdataurlencodeds {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> partialConstantBodyAsync(String serviceParam, String accessToken, Context context) {
         return partialConstantBodyWithResponseAsync(serviceParam, accessToken, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @param context The context to associate with this operation.
@@ -373,7 +366,7 @@ public final class Formdataurlencodeds {
     /**
      * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
      * 'bar' } to pass the test.
-     *
+     * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

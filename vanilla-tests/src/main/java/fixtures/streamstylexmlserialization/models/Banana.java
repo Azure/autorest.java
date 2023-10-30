@@ -15,7 +15,9 @@ import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** A banana. */
+/**
+ * A banana.
+ */
 @Fluent
 public final class Banana implements XmlSerializable<Banana> {
     /*
@@ -33,12 +35,15 @@ public final class Banana implements XmlSerializable<Banana> {
      */
     private OffsetDateTime expiration;
 
-    /** Creates an instance of Banana class. */
-    public Banana() {}
+    /**
+     * Creates an instance of Banana class.
+     */
+    public Banana() {
+    }
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -47,7 +52,7 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Banana object itself.
      */
@@ -58,7 +63,7 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Get the flavor property: The flavor property.
-     *
+     * 
      * @return the flavor value.
      */
     public String getFlavor() {
@@ -67,7 +72,7 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Set the flavor property: The flavor property.
-     *
+     * 
      * @param flavor the flavor value to set.
      * @return the Banana object itself.
      */
@@ -78,7 +83,7 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Get the expiration property: The time at which you should reconsider eating this banana.
-     *
+     * 
      * @return the expiration value.
      */
     public OffsetDateTime getExpiration() {
@@ -87,7 +92,7 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Set the expiration property: The time at which you should reconsider eating this banana.
-     *
+     * 
      * @param expiration the expiration value to set.
      * @return the Banana object itself.
      */
@@ -98,10 +103,11 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
@@ -120,10 +126,10 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Reads an instance of Banana from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Banana.
      */
     public static Banana fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -132,35 +138,33 @@ public final class Banana implements XmlSerializable<Banana> {
 
     /**
      * Reads an instance of Banana from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Banana if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Banana.
      */
     public static Banana fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "banana" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Banana deserializedBanana = new Banana();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Banana deserializedBanana = new Banana();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("name".equals(elementName.getLocalPart())) {
-                            deserializedBanana.name = reader.getStringElement();
-                        } else if ("flavor".equals(elementName.getLocalPart())) {
-                            deserializedBanana.flavor = reader.getStringElement();
-                        } else if ("expiration".equals(elementName.getLocalPart())) {
-                            deserializedBanana.expiration = reader.getNullableElement(OffsetDateTime::parse);
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("name".equals(elementName.getLocalPart())) {
+                    deserializedBanana.name = reader.getStringElement();
+                } else if ("flavor".equals(elementName.getLocalPart())) {
+                    deserializedBanana.flavor = reader.getStringElement();
+                } else if ("expiration".equals(elementName.getLocalPart())) {
+                    deserializedBanana.expiration = reader.getNullableElement(OffsetDateTime::parse);
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedBanana;
-                });
+            return deserializedBanana;
+        });
     }
 }

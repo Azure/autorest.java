@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.UnionClientImpl;
 
-/** Initializes a new instance of the synchronous UnionClient type. */
+/**
+ * Initializes a new instance of the synchronous UnionClient type.
+ */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {
-    @Generated private final UnionClientImpl serviceClient;
+    @Generated
+    private final UnionClientImpl serviceClient;
 
     /**
      * Initializes an instance of UnionClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,15 +37,15 @@ public final class UnionClient {
 
     /**
      * The sendInt operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,15 +63,15 @@ public final class UnionClient {
 
     /**
      * The sendIntArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,15 +89,15 @@ public final class UnionClient {
 
     /**
      * The sendFirstNamedUnionValue operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,15 +115,15 @@ public final class UnionClient {
 
     /**
      * The sendSecondNamedUnionValue operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,15 +141,15 @@ public final class UnionClient {
 
     /**
      * The receiveString operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -163,15 +166,15 @@ public final class UnionClient {
 
     /**
      * The receiveIntArray operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,15 +191,15 @@ public final class UnionClient {
 
     /**
      * The receiveFirstNamedUnionValue operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -213,15 +216,15 @@ public final class UnionClient {
 
     /**
      * The receiveSecondNamedUnionValue operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

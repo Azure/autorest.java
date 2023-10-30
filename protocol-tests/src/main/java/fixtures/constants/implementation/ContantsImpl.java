@@ -26,17 +26,23 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Contants. */
+/**
+ * An instance of this class provides access to all the operations defined in Contants.
+ */
 public final class ContantsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ContantsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerConstantServiceClientImpl client;
 
     /**
      * Initializes an instance of ContantsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     ContantsImpl(AutoRestSwaggerConstantServiceClientImpl client) {
@@ -52,599 +58,336 @@ public final class ContantsImpl {
     @ServiceInterface(name = "AutoRestSwaggerConst")
     public interface ContantsService {
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringNoRequiredOneValueDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringNoRequiredOneValueDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringRequiredTwoValueDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringRequiredTwoValueDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringRequiredOneValueNoDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringRequiredOneValueNoDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putNoModelAsStringRequiredOneValueDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putNoModelAsStringRequiredOneValueDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringNoRequiredTwoValueDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putModelAsStringNoRequiredTwoValueDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringNoRequiredOneValueNoDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putModelAsStringNoRequiredOneValueNoDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefault(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefault(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringNoRequiredOneValueDefaultSync(
-                @HostParam("$host") String host, RequestOptions requestOptions, Context context);
+        Response<Void> putModelAsStringNoRequiredOneValueDefaultSync(@HostParam("$host") String host,
+            RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringRequiredTwoValueNoDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putModelAsStringRequiredTwoValueNoDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringRequiredTwoValueDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putModelAsStringRequiredTwoValueDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringRequiredTwoValueDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putModelAsStringRequiredTwoValueDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringRequiredOneValueNoDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putModelAsStringRequiredOneValueNoDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModelAsStringRequiredOneValueDefault(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putModelAsStringRequiredOneValueDefault(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelAsStringRequiredOneValueDefaultSync(
-                @HostParam("$host") String host,
-                @QueryParam("input") String input,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putModelAsStringRequiredOneValueDefaultSync(@HostParam("$host") String host,
+            @QueryParam("input") String input, RequestOptions requestOptions, Context context);
 
         @Put("/constants/clientConstants/{path-constant}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putClientConstants(
-                @HostParam("$host") String host,
-                @HeaderParam("header-constant") boolean headerConstant,
-                @QueryParam("query-constant") int queryConstant,
-                @PathParam("path-constant") String pathConstant,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> putClientConstants(@HostParam("$host") String host,
+            @HeaderParam("header-constant") boolean headerConstant, @QueryParam("query-constant") int queryConstant,
+            @PathParam("path-constant") String pathConstant, RequestOptions requestOptions, Context context);
 
         @Put("/constants/clientConstants/{path-constant}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putClientConstantsSync(
-                @HostParam("$host") String host,
-                @HeaderParam("header-constant") boolean headerConstant,
-                @QueryParam("query-constant") int queryConstant,
-                @PathParam("path-constant") String pathConstant,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> putClientConstantsSync(@HostParam("$host") String host,
+            @HeaderParam("header-constant") boolean headerConstant, @QueryParam("query-constant") int queryConstant,
+            @PathParam("path-constant") String pathConstant, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -653,27 +396,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringNoRequiredTwoValueNoDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -683,23 +433,32 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putNoModelAsStringNoRequiredTwoValueNoDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putNoModelAsStringNoRequiredTwoValueNoDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -708,27 +467,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringNoRequiredTwoValueDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -738,13 +504,13 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putNoModelAsStringNoRequiredTwoValueDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putNoModelAsStringNoRequiredTwoValueDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -753,18 +519,16 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String input = "value1";
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringNoRequiredOneValueNoDefault(
-                                this.client.getHost(), input, requestOptions, context));
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -775,13 +539,13 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
         final String input = "value1";
-        return service.putNoModelAsStringNoRequiredOneValueNoDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+        return service.putNoModelAsStringNoRequiredOneValueNoDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -790,18 +554,16 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String input = "value1";
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringNoRequiredOneValueDefault(
-                                this.client.getHost(), input, requestOptions, context));
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -812,13 +574,13 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
         final String input = "value1";
-        return service.putNoModelAsStringNoRequiredOneValueDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+        return service.putNoModelAsStringNoRequiredOneValueDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -828,17 +590,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringRequiredTwoValueNoDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringRequiredTwoValueNoDefault(this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -848,15 +608,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putNoModelAsStringRequiredTwoValueNoDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putNoModelAsStringRequiredTwoValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putNoModelAsStringRequiredTwoValueNoDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -866,17 +626,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringRequiredTwoValueDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putNoModelAsStringRequiredTwoValueDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -886,15 +644,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putNoModelAsStringRequiredTwoValueDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putNoModelAsStringRequiredTwoValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putNoModelAsStringRequiredTwoValueDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -903,18 +661,16 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String input = "value1";
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringRequiredOneValueNoDefault(
-                                this.client.getHost(), input, requestOptions, context));
+        return FluxUtil.withContext(context -> service
+            .putNoModelAsStringRequiredOneValueNoDefault(this.client.getHost(), input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -925,13 +681,13 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
         final String input = "value1";
-        return service.putNoModelAsStringRequiredOneValueNoDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+        return service.putNoModelAsStringRequiredOneValueNoDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -940,18 +696,16 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
+    public Mono<Response<Void>>
+        putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String input = "value1";
-        return FluxUtil.withContext(
-                context ->
-                        service.putNoModelAsStringRequiredOneValueDefault(
-                                this.client.getHost(), input, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putNoModelAsStringRequiredOneValueDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -962,23 +716,32 @@ public final class ContantsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNoModelAsStringRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
         final String input = "value1";
-        return service.putNoModelAsStringRequiredOneValueDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+        return service.putNoModelAsStringRequiredOneValueDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -987,27 +750,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringNoRequiredTwoValueNoDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service
+            .putModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1017,23 +787,32 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putModelAsStringNoRequiredTwoValueNoDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putModelAsStringNoRequiredTwoValueNoDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1042,27 +821,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringNoRequiredTwoValueDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringNoRequiredTwoValueDefault(this.client.getHost(),
+            requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1", "value2".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1072,23 +858,32 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredTwoValueDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putModelAsStringNoRequiredTwoValueDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putModelAsStringNoRequiredTwoValueDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1097,27 +892,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringNoRequiredOneValueNoDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service
+            .putModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1127,23 +929,32 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueNoDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putModelAsStringNoRequiredOneValueNoDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putModelAsStringNoRequiredOneValueNoDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1152,27 +963,34 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(
-            RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringNoRequiredOneValueDefault(
-                                this.client.getHost(), requestOptions, context));
+    public Mono<Response<Void>>
+        putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringNoRequiredOneValueDefault(this.client.getHost(),
+            requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>input</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The input parameter. Allowed values: "value1".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1182,13 +1000,13 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelAsStringNoRequiredOneValueDefaultWithResponse(RequestOptions requestOptions) {
-        return service.putModelAsStringNoRequiredOneValueDefaultSync(
-                this.client.getHost(), requestOptions, Context.NONE);
+        return service.putModelAsStringNoRequiredOneValueDefaultSync(this.client.getHost(), requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1198,17 +1016,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringRequiredTwoValueNoDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringRequiredTwoValueNoDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1218,15 +1034,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putModelAsStringRequiredTwoValueNoDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putModelAsStringRequiredTwoValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putModelAsStringRequiredTwoValueNoDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1236,17 +1052,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringRequiredTwoValueDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putModelAsStringRequiredTwoValueDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringRequiredTwoValueDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1256,15 +1070,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putModelAsStringRequiredTwoValueDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putModelAsStringRequiredTwoValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putModelAsStringRequiredTwoValueDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1274,17 +1088,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringRequiredOneValueNoDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringRequiredOneValueNoDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1294,15 +1106,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putModelAsStringRequiredOneValueNoDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putModelAsStringRequiredOneValueNoDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putModelAsStringRequiredOneValueNoDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1312,17 +1124,15 @@ public final class ContantsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponseAsync(
-            String input, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putModelAsStringRequiredOneValueDefault(
-                                this.client.getHost(), input, requestOptions, context));
+    public Mono<Response<Void>> putModelAsStringRequiredOneValueDefaultWithResponseAsync(String input,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.putModelAsStringRequiredOneValueDefault(this.client.getHost(),
+            input, requestOptions, context));
     }
 
     /**
      * Puts constants to the testserver.
-     *
+     * 
      * @param input The input parameter. Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1332,15 +1142,15 @@ public final class ContantsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(
-            String input, RequestOptions requestOptions) {
-        return service.putModelAsStringRequiredOneValueDefaultSync(
-                this.client.getHost(), input, requestOptions, Context.NONE);
+    public Response<Void> putModelAsStringRequiredOneValueDefaultWithResponse(String input,
+        RequestOptions requestOptions) {
+        return service.putModelAsStringRequiredOneValueDefaultSync(this.client.getHost(), input, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1350,20 +1160,14 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putClientConstantsWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-                context ->
-                        service.putClientConstants(
-                                this.client.getHost(),
-                                this.client.isHeaderConstant(),
-                                this.client.getQueryConstant(),
-                                this.client.getPathConstant(),
-                                requestOptions,
-                                context));
+        return FluxUtil
+            .withContext(context -> service.putClientConstants(this.client.getHost(), this.client.isHeaderConstant(),
+                this.client.getQueryConstant(), this.client.getPathConstant(), requestOptions, context));
     }
 
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1373,12 +1177,7 @@ public final class ContantsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putClientConstantsWithResponse(RequestOptions requestOptions) {
-        return service.putClientConstantsSync(
-                this.client.getHost(),
-                this.client.isHeaderConstant(),
-                this.client.getQueryConstant(),
-                this.client.getPathConstant(),
-                requestOptions,
-                Context.NONE);
+        return service.putClientConstantsSync(this.client.getHost(), this.client.isHeaderConstant(),
+            this.client.getQueryConstant(), this.client.getPathConstant(), requestOptions, Context.NONE);
     }
 }

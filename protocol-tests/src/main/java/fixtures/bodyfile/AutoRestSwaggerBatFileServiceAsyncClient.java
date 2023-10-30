@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodyfile.implementation.FilesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestSwaggerBatFileServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestSwaggerBatFileServiceClient type.
+ */
 @ServiceClient(builder = AutoRestSwaggerBatFileServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBatFileServiceAsyncClient {
-    @Generated private final FilesImpl serviceClient;
+    @Generated
+    private final FilesImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestSwaggerBatFileServiceAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class AutoRestSwaggerBatFileServiceAsyncClient {
 
     /**
      * Get file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,13 +60,13 @@ public final class AutoRestSwaggerBatFileServiceAsyncClient {
 
     /**
      * Get a large file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -79,13 +82,13 @@ public final class AutoRestSwaggerBatFileServiceAsyncClient {
 
     /**
      * Get empty file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

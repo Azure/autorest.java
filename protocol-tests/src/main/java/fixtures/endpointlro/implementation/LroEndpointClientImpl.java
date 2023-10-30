@@ -11,62 +11,74 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the LroEndpointClient type. */
+/**
+ * Initializes a new instance of the LroEndpointClient type.
+ */
 public final class LroEndpointClientImpl {
-    /** The endpoint. */
+    /**
+     * The endpoint.
+     */
     private final String endpoint;
 
     /**
      * Gets The endpoint.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** Project name. */
+    /**
+     * Project name.
+     */
     private final String projectName;
 
     /**
      * Gets Project name.
-     *
+     * 
      * @return the projectName value.
      */
     public String getProjectName() {
         return this.projectName;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The LROsImpl object to access its operations. */
+    /**
+     * The LROsImpl object to access its operations.
+     */
     private final LROsImpl lROs;
 
     /**
      * Gets the LROsImpl object to access its operations.
-     *
+     * 
      * @return the LROsImpl object.
      */
     public LROsImpl getLROs() {
@@ -75,21 +87,18 @@ public final class LroEndpointClientImpl {
 
     /**
      * Initializes an instance of LroEndpointClient client.
-     *
+     * 
      * @param endpoint The endpoint.
      * @param projectName Project name.
      */
     public LroEndpointClientImpl(String endpoint, String projectName) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                projectName);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
     }
 
     /**
      * Initializes an instance of LroEndpointClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The endpoint.
      * @param projectName Project name.
@@ -100,14 +109,14 @@ public final class LroEndpointClientImpl {
 
     /**
      * Initializes an instance of LroEndpointClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The endpoint.
      * @param projectName Project name.
      */
-    public LroEndpointClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String projectName) {
+    public LroEndpointClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        String projectName) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;

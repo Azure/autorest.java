@@ -24,14 +24,17 @@ import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.Iso8601DurationProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DurationClient type. */
+/**
+ * Initializes a new instance of the asynchronous DurationClient type.
+ */
 @ServiceClient(builder = DurationClientBuilder.class, isAsync = true)
 public final class PropertyAsyncClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -41,23 +44,23 @@ public final class PropertyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -74,23 +77,23 @@ public final class PropertyAsyncClient {
 
     /**
      * The iso8601 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -107,23 +110,23 @@ public final class PropertyAsyncClient {
 
     /**
      * The int32Seconds operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -140,23 +143,23 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSeconds operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -173,9 +176,9 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSecondsArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -183,9 +186,9 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -193,7 +196,7 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -210,7 +213,7 @@ public final class PropertyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -225,14 +228,13 @@ public final class PropertyAsyncClient {
     public Mono<DefaultDurationProperty> defaultMethod(DefaultDurationProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(DefaultDurationProperty.class));
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(DefaultDurationProperty.class));
     }
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -247,14 +249,13 @@ public final class PropertyAsyncClient {
     public Mono<Iso8601DurationProperty> iso8601(Iso8601DurationProperty body) {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Iso8601DurationProperty.class));
+        return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Iso8601DurationProperty.class));
     }
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -269,14 +270,13 @@ public final class PropertyAsyncClient {
     public Mono<Int32SecondsDurationProperty> int32Seconds(Int32SecondsDurationProperty body) {
         // Generated convenience method for int32SecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Int32SecondsDurationProperty.class));
+        return int32SecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Int32SecondsDurationProperty.class));
     }
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -291,14 +291,13 @@ public final class PropertyAsyncClient {
     public Mono<FloatSecondsDurationProperty> floatSeconds(FloatSecondsDurationProperty body) {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationProperty.class));
+        return floatSecondsWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationProperty.class));
     }
 
     /**
      * The floatSecondsArray operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -313,8 +312,7 @@ public final class PropertyAsyncClient {
     public Mono<FloatSecondsDurationArrayProperty> floatSecondsArray(FloatSecondsDurationArrayProperty body) {
         // Generated convenience method for floatSecondsArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationArrayProperty.class));
+        return floatSecondsArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(FloatSecondsDurationArrayProperty.class));
     }
 }

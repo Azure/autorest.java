@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.noflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** LoadBalancer resource. */
+/**
+ * LoadBalancer resource.
+ */
 @Fluent
 public final class LoadBalancer {
     /*
@@ -16,12 +18,15 @@ public final class LoadBalancer {
     @JsonProperty(value = "properties")
     private LoadBalancerPropertiesFormat properties;
 
-    /** Creates an instance of LoadBalancer class. */
-    public LoadBalancer() {}
+    /**
+     * Creates an instance of LoadBalancer class.
+     */
+    public LoadBalancer() {
+    }
 
     /**
      * Get the properties property: Properties of load balancer.
-     *
+     * 
      * @return the properties value.
      */
     public LoadBalancerPropertiesFormat getProperties() {
@@ -30,7 +35,7 @@ public final class LoadBalancer {
 
     /**
      * Set the properties property: Properties of load balancer.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the LoadBalancer object itself.
      */
@@ -41,7 +46,7 @@ public final class LoadBalancer {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

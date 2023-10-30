@@ -37,19 +37,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the DpgClient type. */
-@ServiceClientBuilder(serviceClients = {DpgClient.class, DpgAsyncClient.class})
+/**
+ * A builder for creating a new instance of the DpgClient type.
+ */
+@ServiceClientBuilder(serviceClients = { DpgClient.class, DpgAsyncClient.class })
 public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, ConfigurationTrait<DpgClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-llcupdate1.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the DpgClientBuilder. */
+    /**
+     * Create an instance of the DpgClientBuilder.
+     */
     @Generated
     public DpgClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -58,9 +65,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder pipeline(HttpPipeline pipeline) {
@@ -74,9 +84,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder httpClient(HttpClient httpClient) {
@@ -87,9 +100,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -100,9 +116,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -113,9 +132,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -123,7 +145,9 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -135,9 +159,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public DpgClientBuilder configuration(Configuration configuration) {
@@ -148,11 +175,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * server parameter
      */
-    @Generated private String host;
+    @Generated
+    private String host;
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the DpgClientBuilder.
      */
@@ -165,11 +193,12 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the DpgClientBuilder.
      */
@@ -181,22 +210,22 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
 
     /**
      * Builds an instance of DpgClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of DpgClientImpl.
      */
     @Generated
     private DpgClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        DpgClientImpl client =
-                new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+        DpgClientImpl client
+            = new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -207,35 +236,28 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of DpgAsyncClient class.
-     *
+     * 
      * @return an instance of DpgAsyncClient.
      */
     @Generated
@@ -245,7 +267,7 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
 
     /**
      * Builds an instance of DpgClient class.
-     *
+     * 
      * @return an instance of DpgClient.
      */
     @Generated

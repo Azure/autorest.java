@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The InputOutputData2 model. */
+/**
+ * The InputOutputData2 model.
+ */
 @Immutable
 public final class InputOutputData2 {
     /*
@@ -21,7 +23,7 @@ public final class InputOutputData2 {
 
     /**
      * Creates an instance of InputOutputData2 class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class InputOutputData2 {
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated

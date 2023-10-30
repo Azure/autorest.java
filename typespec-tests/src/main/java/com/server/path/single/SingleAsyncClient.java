@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.server.path.single.implementation.SingleClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SingleClient type. */
+/**
+ * Initializes a new instance of the asynchronous SingleClient type.
+ */
 @ServiceClient(builder = SingleClientBuilder.class, isAsync = true)
 public final class SingleAsyncClient {
-    @Generated private final SingleClientImpl serviceClient;
+    @Generated
+    private final SingleClientImpl serviceClient;
 
     /**
      * Initializes an instance of SingleAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class SingleAsyncClient {
 
     /**
      * The myOp operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class SingleAsyncClient {
 
     /**
      * The myOp operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

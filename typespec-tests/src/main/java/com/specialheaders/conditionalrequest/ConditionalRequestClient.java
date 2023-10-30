@@ -17,14 +17,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.specialheaders.conditionalrequest.implementation.ConditionalRequestClientImpl;
 
-/** Initializes a new instance of the synchronous ConditionalRequestClient type. */
+/**
+ * Initializes a new instance of the synchronous ConditionalRequestClient type.
+ */
 @ServiceClient(builder = ConditionalRequestClientBuilder.class)
 public final class ConditionalRequestClient {
-    @Generated private final ConditionalRequestClientImpl serviceClient;
+    @Generated
+    private final ConditionalRequestClientImpl serviceClient;
 
     /**
      * Initializes an instance of ConditionalRequestClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,17 +37,26 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-Match in header is defined.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this string.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>If-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if an entity matches this string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,17 +72,26 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-None-Match in header is defined.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>If-None-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if no entity matches this string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -86,7 +107,7 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-Match in header is defined.
-     *
+     * 
      * @param ifMatch The request should only proceed if an entity matches this string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -108,7 +129,7 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-Match in header is defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -125,7 +146,7 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-None-Match in header is defined.
-     *
+     * 
      * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -147,7 +168,7 @@ public final class ConditionalRequestClient {
 
     /**
      * Check when only If-None-Match in header is defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

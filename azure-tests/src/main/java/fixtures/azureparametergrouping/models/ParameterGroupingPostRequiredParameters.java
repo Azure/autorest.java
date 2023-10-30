@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class ParameterGroupingPostRequiredParameters {
     /*
@@ -34,12 +36,15 @@ public final class ParameterGroupingPostRequiredParameters {
     @JsonProperty(value = "body", required = true)
     private int body;
 
-    /** Creates an instance of ParameterGroupingPostRequiredParameters class. */
-    public ParameterGroupingPostRequiredParameters() {}
+    /**
+     * Creates an instance of ParameterGroupingPostRequiredParameters class.
+     */
+    public ParameterGroupingPostRequiredParameters() {
+    }
 
     /**
      * Get the customHeader property: The customHeader property.
-     *
+     * 
      * @return the customHeader value.
      */
     public String getCustomHeader() {
@@ -48,7 +53,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Set the customHeader property: The customHeader property.
-     *
+     * 
      * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
@@ -59,7 +64,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Get the query property: Query parameter with default.
-     *
+     * 
      * @return the query value.
      */
     public Integer getQuery() {
@@ -68,7 +73,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Set the query property: Query parameter with default.
-     *
+     * 
      * @param query the query value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
@@ -79,7 +84,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Get the path property: Path parameter.
-     *
+     * 
      * @return the path value.
      */
     public String getPath() {
@@ -88,7 +93,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Set the path property: Path parameter.
-     *
+     * 
      * @param path the path value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
@@ -99,7 +104,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Get the body property: The body property.
-     *
+     * 
      * @return the body value.
      */
     public int getBody() {
@@ -108,7 +113,7 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Set the body property: The body property.
-     *
+     * 
      * @param body the body value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
@@ -119,13 +124,13 @@ public final class ParameterGroupingPostRequiredParameters {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getPath() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property path in model ParameterGroupingPostRequiredParameters");
+                "Missing required property path in model ParameterGroupingPostRequiredParameters");
         }
     }
 }

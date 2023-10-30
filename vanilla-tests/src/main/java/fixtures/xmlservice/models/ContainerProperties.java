@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
-/** Properties of a container. */
+/**
+ * Properties of a container.
+ */
 @JacksonXmlRootElement(localName = "ContainerProperties")
 @Fluent
 public final class ContainerProperties {
@@ -50,12 +52,15 @@ public final class ContainerProperties {
     @JsonProperty(value = "PublicAccess")
     private PublicAccessType publicAccess;
 
-    /** Creates an instance of ContainerProperties class. */
-    public ContainerProperties() {}
+    /**
+     * Creates an instance of ContainerProperties class.
+     */
+    public ContainerProperties() {
+    }
 
     /**
      * Get the lastModified property: The Last-Modified property.
-     *
+     * 
      * @return the lastModified value.
      */
     public OffsetDateTime getLastModified() {
@@ -67,7 +72,7 @@ public final class ContainerProperties {
 
     /**
      * Set the lastModified property: The Last-Modified property.
-     *
+     * 
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
      */
@@ -82,7 +87,7 @@ public final class ContainerProperties {
 
     /**
      * Get the etag property: The Etag property.
-     *
+     * 
      * @return the etag value.
      */
     public String getEtag() {
@@ -91,7 +96,7 @@ public final class ContainerProperties {
 
     /**
      * Set the etag property: The Etag property.
-     *
+     * 
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
      */
@@ -102,7 +107,7 @@ public final class ContainerProperties {
 
     /**
      * Get the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @return the leaseStatus value.
      */
     public LeaseStatusType getLeaseStatus() {
@@ -111,7 +116,7 @@ public final class ContainerProperties {
 
     /**
      * Set the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
      */
@@ -122,7 +127,7 @@ public final class ContainerProperties {
 
     /**
      * Get the leaseState property: The LeaseState property.
-     *
+     * 
      * @return the leaseState value.
      */
     public LeaseStateType getLeaseState() {
@@ -131,7 +136,7 @@ public final class ContainerProperties {
 
     /**
      * Set the leaseState property: The LeaseState property.
-     *
+     * 
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
      */
@@ -142,7 +147,7 @@ public final class ContainerProperties {
 
     /**
      * Get the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @return the leaseDuration value.
      */
     public LeaseDurationType getLeaseDuration() {
@@ -151,7 +156,7 @@ public final class ContainerProperties {
 
     /**
      * Set the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
      */
@@ -162,7 +167,7 @@ public final class ContainerProperties {
 
     /**
      * Get the publicAccess property: The PublicAccess property.
-     *
+     * 
      * @return the publicAccess value.
      */
     public PublicAccessType getPublicAccess() {
@@ -171,7 +176,7 @@ public final class ContainerProperties {
 
     /**
      * Set the publicAccess property: The PublicAccess property.
-     *
+     * 
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.
      */
@@ -182,7 +187,7 @@ public final class ContainerProperties {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

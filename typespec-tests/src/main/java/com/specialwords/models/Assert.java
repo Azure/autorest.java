@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Assert model. */
+/**
+ * The Assert model.
+ */
 @Immutable
 public final class Assert {
     /*
@@ -21,7 +23,7 @@ public final class Assert {
 
     /**
      * Creates an instance of Assert class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Assert {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

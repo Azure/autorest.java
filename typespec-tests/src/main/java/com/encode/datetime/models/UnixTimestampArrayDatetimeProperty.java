@@ -13,7 +13,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 
-/** The UnixTimestampArrayDatetimeProperty model. */
+/**
+ * The UnixTimestampArrayDatetimeProperty model.
+ */
 @Immutable
 public final class UnixTimestampArrayDatetimeProperty {
     /*
@@ -25,7 +27,7 @@ public final class UnixTimestampArrayDatetimeProperty {
 
     /**
      * Creates an instance of UnixTimestampArrayDatetimeProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -36,7 +38,7 @@ public final class UnixTimestampArrayDatetimeProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated
@@ -44,8 +46,7 @@ public final class UnixTimestampArrayDatetimeProperty {
         if (this.value == null) {
             return null;
         }
-        return this.value.stream()
-                .map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
-                .collect(java.util.stream.Collectors.toList());
+        return this.value.stream().map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
+            .collect(java.util.stream.Collectors.toList());
     }
 }

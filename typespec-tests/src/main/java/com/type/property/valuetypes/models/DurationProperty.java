@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** Model with a duration property. */
+/**
+ * Model with a duration property.
+ */
 @Immutable
 public final class DurationProperty {
     /*
@@ -22,7 +24,7 @@ public final class DurationProperty {
 
     /**
      * Creates an instance of DurationProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class DurationProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

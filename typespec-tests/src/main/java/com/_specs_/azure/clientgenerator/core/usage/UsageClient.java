@@ -19,14 +19,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous UsageClient type. */
+/**
+ * Initializes a new instance of the synchronous UsageClient type.
+ */
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {
-    @Generated private final UsageClientImpl serviceClient;
+    @Generated
+    private final UsageClientImpl serviceClient;
 
     /**
      * Initializes an instance of UsageClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,16 +38,21 @@ public final class UsageClient {
     }
 
     /**
-     * Expected body parameter: ```json { "name": &lt;any string&gt; } ```.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * Expected body parameter:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Usage override to roundtrip.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,16 +68,21 @@ public final class UsageClient {
     }
 
     /**
-     * Expected response body: ```json { "name": &lt;any string&gt; } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -84,8 +97,13 @@ public final class UsageClient {
     }
 
     /**
-     * Expected body parameter: ```json { "name": &lt;any string&gt; } ```.
-     *
+     * Expected body parameter:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * 
      * @param body Usage override to roundtrip.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -103,8 +121,13 @@ public final class UsageClient {
     }
 
     /**
-     * Expected response body: ```json { "name": &lt;any string&gt; } ```.
-     *
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

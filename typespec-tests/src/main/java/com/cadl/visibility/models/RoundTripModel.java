@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The RoundTripModel model. */
+/**
+ * The RoundTripModel model.
+ */
 @Immutable
 public final class RoundTripModel {
     /*
@@ -28,21 +30,21 @@ public final class RoundTripModel {
 
     /**
      * Creates an instance of RoundTripModel class.
-     *
+     * 
      * @param name the name value to set.
      * @param secretName the secretName value to set.
      */
     @Generated
     @JsonCreator
-    public RoundTripModel(
-            @JsonProperty(value = "name") String name, @JsonProperty(value = "secretName") String secretName) {
+    public RoundTripModel(@JsonProperty(value = "name") String name,
+        @JsonProperty(value = "secretName") String secretName) {
         this.name = name;
         this.secretName = secretName;
     }
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -52,7 +54,7 @@ public final class RoundTripModel {
 
     /**
      * Get the secretName property: The secretName property.
-     *
+     * 
      * @return the secretName value.
      */
     @Generated

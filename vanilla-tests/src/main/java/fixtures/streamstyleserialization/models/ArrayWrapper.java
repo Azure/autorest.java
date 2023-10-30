@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.List;
 
-/** The ArrayWrapper model. */
+/**
+ * The ArrayWrapper model.
+ */
 @Fluent
 public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     /*
@@ -20,12 +22,15 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      */
     private List<String> array;
 
-    /** Creates an instance of ArrayWrapper class. */
-    public ArrayWrapper() {}
+    /**
+     * Creates an instance of ArrayWrapper class.
+     */
+    public ArrayWrapper() {
+    }
 
     /**
      * Get the array property: The array property.
-     *
+     * 
      * @return the array value.
      */
     public List<String> getArray() {
@@ -34,7 +39,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
 
     /**
      * Set the array property: The array property.
-     *
+     * 
      * @param array the array value to set.
      * @return the ArrayWrapper object itself.
      */
@@ -45,10 +50,11 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -59,29 +65,28 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
 
     /**
      * Reads an instance of ArrayWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of ArrayWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ArrayWrapper.
      */
     public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("array".equals(fieldName)) {
-                            List<String> array = reader.readArray(reader1 -> reader1.getString());
-                            deserializedArrayWrapper.array = array;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("array".equals(fieldName)) {
+                    List<String> array = reader.readArray(reader1 -> reader1.getString());
+                    deserializedArrayWrapper.array = array;
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedArrayWrapper;
-                });
+            return deserializedArrayWrapper;
+        });
     }
 }

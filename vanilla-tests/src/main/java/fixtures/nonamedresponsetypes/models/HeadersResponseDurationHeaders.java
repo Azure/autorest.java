@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** The HeadersResponseDurationHeaders model. */
+/**
+ * The HeadersResponseDurationHeaders model.
+ */
 @Fluent
 public final class HeadersResponseDurationHeaders {
     /*
@@ -24,7 +26,7 @@ public final class HeadersResponseDurationHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDurationHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDurationHeaders(HttpHeaders rawHeaders) {
@@ -36,7 +38,7 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public Duration getValue() {
@@ -45,7 +47,7 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the HeadersResponseDurationHeaders object itself.
      */
@@ -56,8 +58,9 @@ public final class HeadersResponseDurationHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

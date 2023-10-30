@@ -34,65 +34,79 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the VisibilityClient type. */
+/**
+ * Initializes a new instance of the VisibilityClient type.
+ */
 public final class VisibilityClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final VisibilityClientService service;
 
-    /** Server parameter. */
+    /**
+     * Server parameter.
+     */
     private final String endpoint;
 
     /**
      * Gets Server parameter.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The VisibilityReadsImpl object to access its operations. */
+    /**
+     * The VisibilityReadsImpl object to access its operations.
+     */
     private final VisibilityReadsImpl visibilityReads;
 
     /**
      * Gets the VisibilityReadsImpl object to access its operations.
-     *
+     * 
      * @return the VisibilityReadsImpl object.
      */
     public VisibilityReadsImpl getVisibilityReads() {
         return this.visibilityReads;
     }
 
-    /** The VisibilityWritesImpl object to access its operations. */
+    /**
+     * The VisibilityWritesImpl object to access its operations.
+     */
     private final VisibilityWritesImpl visibilityWrites;
 
     /**
      * Gets the VisibilityWritesImpl object to access its operations.
-     *
+     * 
      * @return the VisibilityWritesImpl object.
      */
     public VisibilityWritesImpl getVisibilityWrites() {
@@ -101,19 +115,17 @@ public final class VisibilityClientImpl {
 
     /**
      * Initializes an instance of VisibilityClient client.
-     *
+     * 
      * @param endpoint Server parameter.
      */
     public VisibilityClientImpl(String endpoint) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of VisibilityClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      */
@@ -123,7 +135,7 @@ public final class VisibilityClientImpl {
 
     /**
      * Initializes an instance of VisibilityClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
@@ -145,161 +157,84 @@ public final class VisibilityClientImpl {
     @ServiceInterface(name = "VisibilityClient")
     public interface VisibilityClientService {
         @Get("/visibility/read")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/visibility/read")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/visibility/write")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> create(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData dog,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> create(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
 
         @Put("/visibility/write")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData dog,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
 
         @Post("/visibility/query")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> query(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData dog,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> query(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
 
         @Post("/visibility/query")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> querySync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData dog,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> querySync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
 
         @Put("/visibility/roundtrip")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> roundtrip(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> roundtrip(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/visibility/roundtrip")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> roundtripSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> roundtripSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -307,7 +242,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -323,9 +258,9 @@ public final class VisibilityClientImpl {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -333,7 +268,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -349,17 +284,17 @@ public final class VisibilityClientImpl {
 
     /**
      * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -367,7 +302,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -379,23 +314,23 @@ public final class VisibilityClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createWithResponseAsync(BinaryData dog, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.create(this.getEndpoint(), accept, dog, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.create(this.getEndpoint(), accept, dog, requestOptions, context));
     }
 
     /**
      * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -403,7 +338,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -420,18 +355,18 @@ public final class VisibilityClientImpl {
 
     /**
      * The query operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -439,7 +374,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -456,18 +391,18 @@ public final class VisibilityClientImpl {
 
     /**
      * The query operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -475,7 +410,7 @@ public final class VisibilityClientImpl {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -492,25 +427,25 @@ public final class VisibilityClientImpl {
 
     /**
      * The roundtrip operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -522,31 +457,31 @@ public final class VisibilityClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> roundtripWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.roundtrip(this.getEndpoint(), accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.roundtrip(this.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * The roundtrip operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

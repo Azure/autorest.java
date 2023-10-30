@@ -28,17 +28,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Queries. */
+/**
+ * An instance of this class provides access to all the operations defined in Queries.
+ */
 public final class Queries {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final QueriesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestUrlTestService client;
 
     /**
      * Initializes an instance of Queries.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Queries(AutoRestUrlTestService client) {
@@ -54,324 +60,221 @@ public final class Queries {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface QueriesService {
         @Get("/queries/bool/true")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/bool/false")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host,
+            @QueryParam("boolQuery") boolean boolQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/bool/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanNull(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") Boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getBooleanNull(@HostParam("$host") String host, @QueryParam("boolQuery") Boolean boolQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/1000000")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/-1000000")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host,
+            @QueryParam("intQuery") int intQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntNull(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") Integer intQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getIntNull(@HostParam("$host") String host, @QueryParam("intQuery") Integer intQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/10000000000")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/-10000000000")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host,
+            @QueryParam("longQuery") long longQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getLongNull(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") Long longQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getLongNull(@HostParam("$host") String host, @QueryParam("longQuery") Long longQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/1.034E+20")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/-1.034E-20")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatNull(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") Float floatQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> floatNull(@HostParam("$host") String host, @QueryParam("floatQuery") Float floatQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/9999999.999")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/-9999999.999")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleNull(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") Double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> doubleNull(@HostParam("$host") String host, @QueryParam("doubleQuery") Double doubleQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/unicode/")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host,
+            @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host,
+            @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/enum/green%20color")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumValid(
-                @HostParam("$host") String host,
-                @QueryParam("enumQuery") UriColor enumQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/enum/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumNull(
-                @HostParam("$host") String host,
-                @QueryParam("enumQuery") UriColor enumQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/multibyte")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host,
-                @QueryParam("byteQuery") String byteQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("byteQuery") String byteQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteNull(
-                @HostParam("$host") String host,
-                @QueryParam("byteQuery") String byteQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/date/2012-01-01")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateValid(
-                @HostParam("$host") String host,
-                @QueryParam("dateQuery") LocalDate dateQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/date/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateNull(
-                @HostParam("$host") String host,
-                @QueryParam("dateQuery") LocalDate dateQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeValid(
-                @HostParam("$host") String host,
-                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host,
+            @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/queries/datetime/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeNull(
-                @HostParam("$host") String host,
-                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host,
+            @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/queries/array/csv/string/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringCsvValid(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvValid(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/csv/string/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringCsvNull(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvNull(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/csv/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringCsvEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvEmpty(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/none/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/ssv/string/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringSsvValid(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringSsvValid(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/tsv/string/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringTsvValid(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringTsvValid(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/pipes/string/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayStringPipesValid(
-                @HostParam("$host") String host,
-                @QueryParam("arrayQuery") String arrayQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayStringPipesValid(@HostParam("$host") String host,
+            @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
@@ -379,18 +282,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = true;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -400,8 +303,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = true;
         final String accept = "application/json";
@@ -410,7 +313,7 @@ public final class Queries {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path on successful completion of {@link Mono}.
@@ -422,7 +325,7 @@ public final class Queries {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -436,7 +339,7 @@ public final class Queries {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -450,7 +353,7 @@ public final class Queries {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -461,7 +364,7 @@ public final class Queries {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
@@ -469,18 +372,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = false;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -490,8 +393,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolQuery = false;
         final String accept = "application/json";
@@ -500,7 +403,7 @@ public final class Queries {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value on path on successful completion of {@link Mono}.
@@ -512,7 +415,7 @@ public final class Queries {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -526,7 +429,7 @@ public final class Queries {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -540,7 +443,7 @@ public final class Queries {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -551,41 +454,41 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(Boolean boolQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanNull(this.client.getHost(), boolQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanNull(this.client.getHost(), boolQuery, accept, context));
     }
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(Boolean boolQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getBooleanNull(this.client.getHost(), boolQuery, accept, context);
@@ -593,7 +496,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -607,7 +510,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Boolean value on query (query string should be absent) on successful completion of {@link Mono}.
@@ -620,7 +523,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -635,7 +538,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -650,7 +553,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -663,7 +566,7 @@ public final class Queries {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -675,7 +578,7 @@ public final class Queries {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -683,18 +586,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = 1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, context));
     }
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -704,8 +607,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = 1000000;
         final String accept = "application/json";
@@ -714,7 +617,7 @@ public final class Queries {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1000000' integer value on successful completion of {@link Mono}.
@@ -726,7 +629,7 @@ public final class Queries {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -740,7 +643,7 @@ public final class Queries {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -754,7 +657,7 @@ public final class Queries {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -765,7 +668,7 @@ public final class Queries {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -773,18 +676,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = -1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept, context));
     }
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -794,8 +697,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intQuery = -1000000;
         final String accept = "application/json";
@@ -804,7 +707,7 @@ public final class Queries {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1000000' integer value on successful completion of {@link Mono}.
@@ -816,7 +719,7 @@ public final class Queries {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -830,7 +733,7 @@ public final class Queries {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -844,7 +747,7 @@ public final class Queries {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -855,19 +758,19 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getIntNull(this.client.getHost(), intQuery, accept, context));
@@ -875,20 +778,20 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getIntNull(this.client.getHost(), intQuery, accept, context);
@@ -896,7 +799,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -910,7 +813,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null integer value (no query parameter) on successful completion of {@link Mono}.
@@ -923,7 +826,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -938,7 +841,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -953,7 +856,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -966,7 +869,7 @@ public final class Queries {
 
     /**
      * Get null integer value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -978,7 +881,7 @@ public final class Queries {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -986,18 +889,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = 10000000000L;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getTenBillion(this.client.getHost(), longQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getTenBillion(this.client.getHost(), longQuery, accept, context));
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1007,8 +910,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = 10000000000L;
         final String accept = "application/json";
@@ -1017,7 +920,7 @@ public final class Queries {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '10000000000' 64 bit integer value on successful completion of {@link Mono}.
@@ -1029,7 +932,7 @@ public final class Queries {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1043,7 +946,7 @@ public final class Queries {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1057,7 +960,7 @@ public final class Queries {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1068,7 +971,7 @@ public final class Queries {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -1076,18 +979,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = -10000000000L;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, accept, context));
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1097,8 +1000,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longQuery = -10000000000L;
         final String accept = "application/json";
@@ -1107,7 +1010,7 @@ public final class Queries {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-10000000000' 64 bit integer value on successful completion of {@link Mono}.
@@ -1119,7 +1022,7 @@ public final class Queries {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1133,7 +1036,7 @@ public final class Queries {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1147,7 +1050,7 @@ public final class Queries {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1158,19 +1061,19 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(Long longQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getLongNull(this.client.getHost(), longQuery, accept, context));
@@ -1178,20 +1081,20 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(Long longQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getLongNull(this.client.getHost(), longQuery, accept, context);
@@ -1199,7 +1102,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1213,7 +1116,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'null 64 bit integer value (no query param in uri) on successful completion of {@link Mono}.
@@ -1226,7 +1129,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1241,7 +1144,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1256,7 +1159,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1269,7 +1172,7 @@ public final class Queries {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1281,7 +1184,7 @@ public final class Queries {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1.034E+20' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1289,18 +1192,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = 103400000000000000000f;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificPositive(this.client.getHost(), floatQuery, accept, context));
+            context -> service.floatScientificPositive(this.client.getHost(), floatQuery, accept, context));
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1310,8 +1213,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = 103400000000000000000f;
         final String accept = "application/json";
@@ -1320,7 +1223,7 @@ public final class Queries {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1.034E+20' numeric value on successful completion of {@link Mono}.
@@ -1332,7 +1235,7 @@ public final class Queries {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1346,7 +1249,7 @@ public final class Queries {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1360,7 +1263,7 @@ public final class Queries {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1371,7 +1274,7 @@ public final class Queries {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1.034E-20' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1379,18 +1282,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = -1.034E-20f;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.floatScientificNegative(this.client.getHost(), floatQuery, accept, context));
+            context -> service.floatScientificNegative(this.client.getHost(), floatQuery, accept, context));
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1400,8 +1303,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatQuery = -1.034E-20f;
         final String accept = "application/json";
@@ -1410,7 +1313,7 @@ public final class Queries {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1.034E-20' numeric value on successful completion of {@link Mono}.
@@ -1422,7 +1325,7 @@ public final class Queries {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1436,7 +1339,7 @@ public final class Queries {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1450,7 +1353,7 @@ public final class Queries {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1461,19 +1364,19 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.floatNull(this.client.getHost(), floatQuery, accept, context));
@@ -1481,20 +1384,20 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.floatNull(this.client.getHost(), floatQuery, accept, context);
@@ -1502,7 +1405,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1516,7 +1419,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null numeric value (no query parameter) on successful completion of {@link Mono}.
@@ -1529,7 +1432,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1544,7 +1447,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1559,7 +1462,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1572,7 +1475,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1584,7 +1487,7 @@ public final class Queries {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1592,18 +1495,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = 9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept, context));
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1613,8 +1516,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = 9999999.999;
         final String accept = "application/json";
@@ -1623,7 +1526,7 @@ public final class Queries {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '9999999.999' numeric value on successful completion of {@link Mono}.
@@ -1635,7 +1538,7 @@ public final class Queries {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1649,7 +1552,7 @@ public final class Queries {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1663,7 +1566,7 @@ public final class Queries {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1674,7 +1577,7 @@ public final class Queries {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1682,18 +1585,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = -9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept, context));
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1703,8 +1606,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doubleQuery = -9999999.999;
         final String accept = "application/json";
@@ -1713,7 +1616,7 @@ public final class Queries {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-9999999.999' numeric value on successful completion of {@link Mono}.
@@ -1725,7 +1628,7 @@ public final class Queries {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1739,7 +1642,7 @@ public final class Queries {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1753,7 +1656,7 @@ public final class Queries {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1764,19 +1667,19 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.doubleNull(this.client.getHost(), doubleQuery, accept, context));
@@ -1784,20 +1687,20 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.doubleNull(this.client.getHost(), doubleQuery, accept, context);
@@ -1805,7 +1708,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1819,7 +1722,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null numeric value (no query parameter) on successful completion of {@link Mono}.
@@ -1832,7 +1735,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1847,7 +1750,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1862,7 +1765,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1875,7 +1778,7 @@ public final class Queries {
 
     /**
      * Get null numeric value (no query parameter).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1887,39 +1790,39 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
@@ -1928,7 +1831,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value on successful completion of {@link Mono}.
@@ -1940,7 +1843,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1954,7 +1857,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1968,7 +1871,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1979,7 +1882,7 @@ public final class Queries {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
@@ -1987,18 +1890,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2008,8 +1911,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
@@ -2018,7 +1921,7 @@ public final class Queries {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end on successful completion of {@link Mono}.
@@ -2030,7 +1933,7 @@ public final class Queries {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2044,7 +1947,7 @@ public final class Queries {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2058,7 +1961,7 @@ public final class Queries {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2069,7 +1972,7 @@ public final class Queries {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' along with {@link Response} on successful completion of {@link Mono}.
@@ -2077,18 +1980,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, context));
     }
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2098,8 +2001,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringQuery = "";
         final String accept = "application/json";
@@ -2108,7 +2011,7 @@ public final class Queries {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' on successful completion of {@link Mono}.
@@ -2120,7 +2023,7 @@ public final class Queries {
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2134,7 +2037,7 @@ public final class Queries {
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2148,7 +2051,7 @@ public final class Queries {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2159,7 +2062,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2169,8 +2072,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), stringQuery, accept, context));
@@ -2178,7 +2081,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2189,8 +2092,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.stringNull(this.client.getHost(), stringQuery, accept, context);
@@ -2198,7 +2101,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2212,7 +2115,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (no query parameter in url) on successful completion of {@link Mono}.
@@ -2225,7 +2128,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2240,7 +2143,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2255,7 +2158,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2268,7 +2171,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2280,19 +2183,19 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), enumQuery, accept, context));
@@ -2300,20 +2203,20 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.enumValid(this.client.getHost(), enumQuery, accept, context);
@@ -2321,7 +2224,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2335,7 +2238,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with query parameter 'green color' on successful completion of {@link Mono}.
@@ -2348,7 +2251,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2363,7 +2266,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2378,7 +2281,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @param enumQuery 'green color' enum value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2391,7 +2294,7 @@ public final class Queries {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2403,7 +2306,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2413,8 +2316,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), enumQuery, accept, context));
@@ -2422,7 +2325,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2433,8 +2336,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.enumNull(this.client.getHost(), enumQuery, accept, context);
@@ -2442,7 +2345,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2456,7 +2359,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (no query parameter in url) on successful completion of {@link Mono}.
@@ -2469,7 +2372,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2484,7 +2387,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2499,7 +2402,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @param enumQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2512,7 +2415,7 @@ public final class Queries {
 
     /**
      * Get null (no query parameter in url).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2524,42 +2427,42 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] byteQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), byteQueryConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteMultiByte(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] byteQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
@@ -2568,7 +2471,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2582,7 +2485,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array on successful completion of {@link Mono}.
@@ -2595,7 +2498,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2610,7 +2513,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2625,7 +2528,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2638,7 +2541,7 @@ public final class Queries {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2650,7 +2553,7 @@ public final class Queries {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' as byte array along with {@link Response} on successful completion of {@link Mono}.
@@ -2658,19 +2561,19 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] byteQuery = "".getBytes();
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return FluxUtil.withContext(
-                context -> service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2680,8 +2583,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] byteQuery = "".getBytes();
         final String accept = "application/json";
@@ -2691,7 +2594,7 @@ public final class Queries {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' as byte array on successful completion of {@link Mono}.
@@ -2703,7 +2606,7 @@ public final class Queries {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2717,7 +2620,7 @@ public final class Queries {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2731,7 +2634,7 @@ public final class Queries {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2742,42 +2645,42 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] byteQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), byteQueryConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteNull(this.client.getHost(), byteQueryConverted, accept, context));
     }
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] byteQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
@@ -2786,7 +2689,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2800,7 +2703,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as byte array (no query parameters in uri) on successful completion of {@link Mono}.
@@ -2813,7 +2716,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2828,7 +2731,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2843,7 +2746,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2856,7 +2759,7 @@ public final class Queries {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2868,7 +2771,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01' as date along with {@link Response} on successful completion of {@link Mono}.
@@ -2876,8 +2779,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         final String accept = "application/json";
@@ -2886,7 +2789,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2896,8 +2799,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         final String accept = "application/json";
@@ -2906,7 +2809,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01' as date on successful completion of {@link Mono}.
@@ -2918,7 +2821,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2932,7 +2835,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2946,7 +2849,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2957,19 +2860,19 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), dateQuery, accept, context));
@@ -2977,20 +2880,20 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.dateNull(this.client.getHost(), dateQuery, accept, context);
@@ -2998,7 +2901,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3012,7 +2915,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should result in no query parameters in uri on successful completion of {@link Mono}.
@@ -3025,7 +2928,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3040,7 +2943,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3055,7 +2958,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3068,7 +2971,7 @@ public final class Queries {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3080,7 +2983,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
@@ -3088,18 +2991,18 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context));
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3109,8 +3012,8 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
@@ -3119,7 +3022,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time on successful completion of {@link Mono}.
@@ -3131,7 +3034,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3145,7 +3048,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3159,7 +3062,7 @@ public final class Queries {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3170,41 +3073,41 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimeQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateTimeNull(this.client.getHost(), dateTimeQuery, accept, context));
+        return FluxUtil
+            .withContext(context -> service.dateTimeNull(this.client.getHost(), dateTimeQuery, accept, context));
     }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimeQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.dateTimeNull(this.client.getHost(), dateTimeQuery, accept, context);
@@ -3212,7 +3115,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3226,7 +3129,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should result in no query parameters in uri on successful completion of {@link Mono}.
@@ -3239,7 +3142,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3254,7 +3157,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3269,7 +3172,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3282,7 +3185,7 @@ public final class Queries {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3294,70 +3197,62 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
@@ -3366,11 +3261,11 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync() {
@@ -3380,15 +3275,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery, Context context) {
@@ -3397,15 +3292,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -3414,9 +3309,9 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3428,7 +3323,7 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3440,61 +3335,53 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3508,7 +3395,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array of string using the csv-array format on successful completion of {@link Mono}.
@@ -3521,7 +3408,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3536,7 +3423,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3551,7 +3438,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3564,7 +3451,7 @@ public final class Queries {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3576,61 +3463,53 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the csv-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the csv-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3644,7 +3523,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty array [] of string using the csv-array format on successful completion of {@link Mono}.
@@ -3657,7 +3536,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3672,7 +3551,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3687,7 +3566,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3700,7 +3579,7 @@ public final class Queries {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3713,7 +3592,7 @@ public final class Queries {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3723,26 +3602,20 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context ->
-                        service.arrayStringNoCollectionFormatEmpty(
-                                this.client.getHost(), arrayQueryConverted, accept, context));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
+        return FluxUtil.withContext(context -> service.arrayStringNoCollectionFormatEmpty(this.client.getHost(),
+            arrayQueryConverted, accept, context));
     }
 
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3751,26 +3624,22 @@ public final class Queries {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(
-            List<String> arrayQuery, Context context) {
+    public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(List<String> arrayQuery,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(","));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
         return service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3785,7 +3654,7 @@ public final class Queries {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -3799,7 +3668,7 @@ public final class Queries {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3810,13 +3679,13 @@ public final class Queries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringNoCollectionFormatEmptyAsync(List<String> arrayQuery, Context context) {
         return arrayStringNoCollectionFormatEmptyWithResponseAsync(arrayQuery, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3832,7 +3701,7 @@ public final class Queries {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @param arrayQuery Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour'].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3846,7 +3715,7 @@ public final class Queries {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -3858,70 +3727,62 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(" "));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(" "));
         return FluxUtil.withContext(
-                context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining(" "));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(" "));
         return service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
@@ -3930,11 +3791,11 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync() {
@@ -3944,15 +3805,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery, Context context) {
@@ -3961,15 +3822,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -3978,9 +3839,9 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     ssv-array format.
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3992,7 +3853,7 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4004,70 +3865,62 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining("	"));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining("	"));
         return FluxUtil.withContext(
-                context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining("	"));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining("	"));
         return service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
@@ -4076,11 +3929,11 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync() {
@@ -4090,15 +3943,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery, Context context) {
@@ -4107,15 +3960,15 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -4124,9 +3977,9 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     tsv-array format.
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4138,7 +3991,7 @@ public final class Queries {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -4151,72 +4004,64 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(List<String> arrayQuery) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining("|"));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining("|"));
         return FluxUtil.withContext(
-                context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
+            context -> service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(List<String> arrayQuery, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayQueryConverted =
-                (arrayQuery == null)
-                        ? null
-                        : arrayQuery.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.joining("|"));
+        String arrayQueryConverted = (arrayQuery == null) ? null : arrayQuery.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining("|"));
         return service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
@@ -4226,11 +4071,11 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync() {
@@ -4241,15 +4086,15 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery, Context context) {
@@ -4259,15 +4104,15 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(List<String> arrayQuery, Context context) {
@@ -4277,9 +4122,9 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     pipes-array format.
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4292,7 +4137,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

@@ -20,14 +20,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous AccessClient type. */
+/**
+ * Initializes a new instance of the synchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class)
 public final class InternalOperationClient {
-    @Generated private final InternalOperationsImpl serviceClient;
+    @Generated
+    private final InternalOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of InternalOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class InternalOperationClient {
 
     /**
      * The noDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,15 +65,15 @@ public final class InternalOperationClient {
 
     /**
      * The internalDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,15 +90,15 @@ public final class InternalOperationClient {
 
     /**
      * The publicDecoratorInInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -103,7 +106,7 @@ public final class InternalOperationClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in an internal operation but with public decorator, should be generated and exported along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -113,7 +116,7 @@ public final class InternalOperationClient {
 
     /**
      * The noDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -128,14 +131,13 @@ public final class InternalOperationClient {
     NoDecoratorModelInInternal noDecoratorInInternal(String name) {
         // Generated convenience method for noDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return noDecoratorInInternalWithResponse(name, requestOptions)
-                .getValue()
-                .toObject(NoDecoratorModelInInternal.class);
+        return noDecoratorInInternalWithResponse(name, requestOptions).getValue()
+            .toObject(NoDecoratorModelInInternal.class);
     }
 
     /**
      * The internalDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -150,14 +152,13 @@ public final class InternalOperationClient {
     InternalDecoratorModelInInternal internalDecoratorInInternal(String name) {
         // Generated convenience method for internalDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return internalDecoratorInInternalWithResponse(name, requestOptions)
-                .getValue()
-                .toObject(InternalDecoratorModelInInternal.class);
+        return internalDecoratorInInternalWithResponse(name, requestOptions).getValue()
+            .toObject(InternalDecoratorModelInInternal.class);
     }
 
     /**
      * The publicDecoratorInInternal operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -172,8 +173,7 @@ public final class InternalOperationClient {
     PublicDecoratorModelInInternal publicDecoratorInInternal(String name) {
         // Generated convenience method for publicDecoratorInInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return publicDecoratorInInternalWithResponse(name, requestOptions)
-                .getValue()
-                .toObject(PublicDecoratorModelInInternal.class);
+        return publicDecoratorInInternalWithResponse(name, requestOptions).getValue()
+            .toObject(PublicDecoratorModelInInternal.class);
     }
 }

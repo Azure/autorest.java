@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import fixtures.constantandclientparam.implementation.ConstantAndClientParameterServiceClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ConstantAndClientParameterServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous ConstantAndClientParameterServiceClient type.
+ */
 @ServiceClient(builder = ConstantAndClientParameterServiceClientBuilder.class, isAsync = true)
 public final class ConstantAndClientParameterServiceAsyncClient {
-    @Generated private final ConstantAndClientParameterServiceClientImpl serviceClient;
+    @Generated
+    private final ConstantAndClientParameterServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of ConstantAndClientParameterServiceAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,7 +37,7 @@ public final class ConstantAndClientParameterServiceAsyncClient {
 
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

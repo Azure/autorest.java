@@ -28,11 +28,10 @@ class VisibilityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        VisibilityClientBuilder visibilityClientbuilder =
-                new VisibilityClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        VisibilityClientBuilder visibilityClientbuilder
+            = new VisibilityClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             visibilityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -40,11 +39,10 @@ class VisibilityClientTestBase extends TestProxyTestBase {
         }
         visibilityClient = visibilityClientbuilder.buildClient();
 
-        VisibilityClientBuilder visibilityReadClientbuilder =
-                new VisibilityClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        VisibilityClientBuilder visibilityReadClientbuilder
+            = new VisibilityClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             visibilityReadClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -52,16 +50,16 @@ class VisibilityClientTestBase extends TestProxyTestBase {
         }
         visibilityReadClient = visibilityReadClientbuilder.buildVisibilityReadClient();
 
-        VisibilityClientBuilder visibilityWriteClientbuilder =
-                new VisibilityClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        VisibilityClientBuilder visibilityWriteClientbuilder
+            = new VisibilityClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             visibilityWriteClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             visibilityWriteClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         visibilityWriteClient = visibilityWriteClientbuilder.buildVisibilityWriteClient();
+
     }
 }

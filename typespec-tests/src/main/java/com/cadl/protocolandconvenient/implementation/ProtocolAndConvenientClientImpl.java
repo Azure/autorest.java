@@ -52,53 +52,65 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the ProtocolAndConvenientClient type. */
+/**
+ * Initializes a new instance of the ProtocolAndConvenientClient type.
+ */
 public final class ProtocolAndConvenientClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ProtocolAndConvenientClientService service;
 
-    /** Server parameter. */
+    /**
+     * Server parameter.
+     */
     private final String endpoint;
 
     /**
      * Gets Server parameter.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** Service version. */
+    /**
+     * Service version.
+     */
     private final ProtocolAndConvenientServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
-     *
+     * 
      * @return the serviceVersion value.
      */
     public ProtocolAndConvenientServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -107,50 +119,43 @@ public final class ProtocolAndConvenientClientImpl {
 
     /**
      * Initializes an instance of ProtocolAndConvenientClient client.
-     *
+     * 
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public ProtocolAndConvenientClientImpl(String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of ProtocolAndConvenientClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public ProtocolAndConvenientClientImpl(
-            HttpPipeline httpPipeline, String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
+    public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, String endpoint,
+        ProtocolAndConvenientServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of ProtocolAndConvenientClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public ProtocolAndConvenientClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            ProtocolAndConvenientServiceVersion serviceVersion) {
+    public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
-        this.service =
-                RestProxy.create(
-                        ProtocolAndConvenientClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(ProtocolAndConvenientClientService.class, this.httpPipeline,
+            this.getSerializerAdapter());
     }
 
     /**
@@ -161,297 +166,169 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceInterface(name = "ProtocolAndConvenien")
     public interface ProtocolAndConvenientClientService {
         @Post("/protocolandconvenient/onlyConvenient")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> onlyConvenient(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> onlyConvenient(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/onlyConvenient")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> onlyConvenientSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> onlyConvenientSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/onlyProtocol")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> onlyProtocol(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> onlyProtocol(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/onlyProtocol")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> onlyProtocolSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> onlyProtocolSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/bothConvenientAndProtocol")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> bothConvenientAndProtocol(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> bothConvenientAndProtocol(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/bothConvenientAndProtocol")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> bothConvenientAndProtocolSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> bothConvenientAndProtocolSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/errorSetting")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> errorSetting(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> errorSetting(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/protocolandconvenient/errorSetting")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> errorSettingSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData body,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> errorSettingSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/protocolandconvenient/resources/{name}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrReplace(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("name") String name,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> createOrReplace(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Put("/protocolandconvenient/resources/{name}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrReplaceSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("name") String name,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createOrReplaceSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Get("/protocolandconvenient/resources")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> list(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/protocolandconvenient/resources")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -463,31 +340,31 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> onlyConvenientWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.onlyConvenient(this.getEndpoint(), accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.onlyConvenient(this.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -505,25 +382,25 @@ public final class ProtocolAndConvenientClientImpl {
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -535,32 +412,32 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> onlyProtocolWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.onlyProtocol(this.getEndpoint(), accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.onlyProtocol(this.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -577,25 +454,25 @@ public final class ProtocolAndConvenientClientImpl {
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -605,35 +482,34 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponseAsync(
-            BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.bothConvenientAndProtocol(this.getEndpoint(), accept, body, requestOptions, context));
+            context -> service.bothConvenientAndProtocol(this.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -650,25 +526,25 @@ public final class ProtocolAndConvenientClientImpl {
 
     /**
      * When set protocol false and convenient false.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -680,31 +556,31 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> errorSettingWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.errorSetting(this.getEndpoint(), accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.errorSetting(this.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * When set protocol false and convenient false.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -721,9 +597,9 @@ public final class ProtocolAndConvenientClientImpl {
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -731,9 +607,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -741,7 +617,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -752,26 +628,18 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.createOrReplace(
-                                this.getEndpoint(),
-                                this.getServiceVersion().getVersion(),
-                                name,
-                                accept,
-                                resource,
-                                requestOptions,
-                                context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
     }
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -779,9 +647,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -789,7 +657,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -800,24 +668,18 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createOrReplaceWithResponse(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.createOrReplaceSync(
-                this.getEndpoint(),
-                this.getServiceVersion().getVersion(),
-                name,
-                accept,
-                resource,
-                requestOptions,
-                Context.NONE);
+        return service.createOrReplaceSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept,
+            resource, requestOptions, Context.NONE);
     }
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -825,9 +687,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -835,7 +697,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -846,28 +708,24 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(
-            String name, BinaryData resource, RequestOptions requestOptions) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -875,9 +733,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -885,7 +743,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -896,28 +754,24 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
-            String name, BinaryData resource, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -925,9 +779,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -935,7 +789,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -946,28 +800,24 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ResourceI> beginCreateOrReplaceWithModelAsync(
-            String name, BinaryData resource, RequestOptions requestOptions) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(ResourceI.class));
+    public PollerFlux<PollResult, ResourceI> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ResourceI.class));
     }
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -975,9 +825,9 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -985,7 +835,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -996,38 +846,44 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ResourceI> beginCreateOrReplaceWithModel(
-            String name, BinaryData resource, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(ResourceI.class));
+    public SyncPoller<PollResult, ResourceI> beginCreateOrReplaceWithModel(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ResourceI.class));
     }
 
     /**
      * Paging operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1035,52 +891,50 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.list(
-                                        this.getEndpoint(),
-                                        this.getServiceVersion().getVersion(),
-                                        accept,
-                                        requestOptions,
-                                        context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.list(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+                requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Paging operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1088,7 +942,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1100,52 +954,56 @@ public final class ProtocolAndConvenientClientImpl {
     public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePageAsync(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePageAsync(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * Paging operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1153,7 +1011,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1164,37 +1022,37 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listSync(
-                        this.getEndpoint(),
-                        this.getServiceVersion().getVersion(),
-                        accept,
-                        requestOptions,
-                        Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res = service.listSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+            requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * Paging operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1202,7 +1060,7 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1214,42 +1072,36 @@ public final class ProtocolAndConvenientClientImpl {
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePage(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePage(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePage(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxresults", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePage(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1257,38 +1109,32 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.listNext(nextLink, this.getEndpoint(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.listNext(nextLink, this.getEndpoint(), accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1296,9 +1142,10 @@ public final class ProtocolAndConvenientClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1309,15 +1156,10 @@ public final class ProtocolAndConvenientClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listNextSync(nextLink, this.getEndpoint(), accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res
+            = service.listNextSync(nextLink, this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

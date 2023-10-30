@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class ParameterGroupingPostOptionalParameters {
     /*
@@ -22,12 +24,15 @@ public final class ParameterGroupingPostOptionalParameters {
     @JsonProperty(value = "query")
     private Integer query;
 
-    /** Creates an instance of ParameterGroupingPostOptionalParameters class. */
-    public ParameterGroupingPostOptionalParameters() {}
+    /**
+     * Creates an instance of ParameterGroupingPostOptionalParameters class.
+     */
+    public ParameterGroupingPostOptionalParameters() {
+    }
 
     /**
      * Get the customHeader property: The customHeader property.
-     *
+     * 
      * @return the customHeader value.
      */
     public String getCustomHeader() {
@@ -36,7 +41,7 @@ public final class ParameterGroupingPostOptionalParameters {
 
     /**
      * Set the customHeader property: The customHeader property.
-     *
+     * 
      * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
@@ -47,7 +52,7 @@ public final class ParameterGroupingPostOptionalParameters {
 
     /**
      * Get the query property: Query parameter with default.
-     *
+     * 
      * @return the query value.
      */
     public Integer getQuery() {
@@ -56,7 +61,7 @@ public final class ParameterGroupingPostOptionalParameters {
 
     /**
      * Set the query property: Query parameter with default.
-     *
+     * 
      * @param query the query value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
@@ -67,8 +72,9 @@ public final class ParameterGroupingPostOptionalParameters {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

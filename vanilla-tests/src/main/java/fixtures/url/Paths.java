@@ -29,17 +29,23 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Paths. */
+/**
+ * An instance of this class provides access to all the operations defined in Paths.
+ */
 public final class Paths {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PathsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestUrlTestService client;
 
     /**
      * Initializes an instance of Paths.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Paths(AutoRestUrlTestService client) {
@@ -55,253 +61,174 @@ public final class Paths {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface PathsService {
         @Get("/paths/bool/true/{boolPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/bool/false/{boolPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host,
-                @PathParam("boolPath") boolean boolPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/int/1000000/{intPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @PathParam("intPath") int intPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/int/-1000000/{intPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host,
-                @PathParam("intPath") int intPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host,
+            @PathParam("intPath") int intPath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/long/10000000000/{longPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @PathParam("longPath") long longPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/long/-10000000000/{longPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host,
-                @PathParam("longPath") long longPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host,
+            @PathParam("longPath") long longPath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/float/1.034E+20/{floatPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/float/-1.034E-20/{floatPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host,
-                @PathParam("floatPath") float floatPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host,
+            @PathParam("floatPath") float floatPath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/double/9999999.999/{doublePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/double/-9999999.999/{doublePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host,
-                @PathParam("doublePath") double doublePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host,
+            @PathParam("doublePath") double doublePath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/string/unicode/{stringPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host,
+            @PathParam("stringPath") String stringPath, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUrlNonEncoded(
-                @HostParam("$host") String host,
-                @PathParam(value = "stringPath", encoded = true) String stringPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringUrlNonEncoded(@HostParam("$host") String host,
+            @PathParam(value = "stringPath", encoded = true) String stringPath, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/paths/string/empty/{stringPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/string/null/{stringPath}")
-        @ExpectedResponses({400})
+        @ExpectedResponses({ 400 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host,
-                @PathParam("stringPath") String stringPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @PathParam("stringPath") String stringPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/enum/green%20color/{enumPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumValid(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") UriColor enumPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/string/null/{enumPath}")
-        @ExpectedResponses({400})
+        @ExpectedResponses({ 400 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumNull(
-                @HostParam("$host") String host,
-                @PathParam("enumPath") UriColor enumPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/byte/multibyte/{bytePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/byte/empty/{bytePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteEmpty(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/byte/null/{bytePath}")
-        @ExpectedResponses({400})
+        @ExpectedResponses({ 400 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteNull(
-                @HostParam("$host") String host,
-                @PathParam("bytePath") String bytePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @PathParam("bytePath") String bytePath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/date/2012-01-01/{datePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateValid(
-                @HostParam("$host") String host,
-                @PathParam("datePath") LocalDate datePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/date/null/{datePath}")
-        @ExpectedResponses({400})
+        @ExpectedResponses({ 400 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateNull(
-                @HostParam("$host") String host,
-                @PathParam("datePath") LocalDate datePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeValid(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/paths/datetime/null/{dateTimePath}")
-        @ExpectedResponses({400})
+        @ExpectedResponses({ 400 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeNull(
-                @HostParam("$host") String host,
-                @PathParam("dateTimePath") OffsetDateTime dateTimePath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host,
+            @PathParam("dateTimePath") OffsetDateTime dateTimePath, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> base64Url(
-                @HostParam("$host") String host,
-                @PathParam("base64UrlPath") Base64Url base64UrlPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> base64Url(@HostParam("$host") String host,
+            @PathParam("base64UrlPath") Base64Url base64UrlPath, @HeaderParam("Accept") String accept, Context context);
 
-        @Get(
-                "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
-        @ExpectedResponses({200})
+        @Get("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayCsvInPath(
-                @HostParam("$host") String host,
-                @PathParam("arrayPath") String arrayPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> arrayCsvInPath(@HostParam("$host") String host, @PathParam("arrayPath") String arrayPath,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> unixTimeUrl(
-                @HostParam("$host") String host,
-                @PathParam("unixTimeUrlPath") long unixTimeUrlPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> unixTimeUrl(@HostParam("$host") String host,
+            @PathParam("unixTimeUrlPath") long unixTimeUrlPath, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
@@ -309,18 +236,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = true;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanTrue(this.client.getHost(), boolPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanTrue(this.client.getHost(), boolPath, accept, context));
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -330,8 +257,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = true;
         final String accept = "application/json";
@@ -340,7 +267,7 @@ public final class Paths {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return true Boolean value on path on successful completion of {@link Mono}.
@@ -352,7 +279,7 @@ public final class Paths {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -366,7 +293,7 @@ public final class Paths {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -380,7 +307,7 @@ public final class Paths {
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -391,7 +318,7 @@ public final class Paths {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value on path along with {@link Response} on successful completion of {@link Mono}.
@@ -399,18 +326,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = false;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanFalse(this.client.getHost(), boolPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanFalse(this.client.getHost(), boolPath, accept, context));
     }
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -420,8 +347,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final boolean boolPath = false;
         final String accept = "application/json";
@@ -430,7 +357,7 @@ public final class Paths {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return false Boolean value on path on successful completion of {@link Mono}.
@@ -442,7 +369,7 @@ public final class Paths {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -456,7 +383,7 @@ public final class Paths {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -470,7 +397,7 @@ public final class Paths {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -481,7 +408,7 @@ public final class Paths {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -489,18 +416,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = 1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getIntOneMillion(this.client.getHost(), intPath, accept, context));
     }
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -510,8 +437,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = 1000000;
         final String accept = "application/json";
@@ -520,7 +447,7 @@ public final class Paths {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1000000' integer value on successful completion of {@link Mono}.
@@ -532,7 +459,7 @@ public final class Paths {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -546,7 +473,7 @@ public final class Paths {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -560,7 +487,7 @@ public final class Paths {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -571,7 +498,7 @@ public final class Paths {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1000000' integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -579,18 +506,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = -1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getIntNegativeOneMillion(this.client.getHost(), intPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intPath, accept, context));
     }
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -600,8 +527,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final int intPath = -1000000;
         final String accept = "application/json";
@@ -610,7 +537,7 @@ public final class Paths {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1000000' integer value on successful completion of {@link Mono}.
@@ -622,7 +549,7 @@ public final class Paths {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -636,7 +563,7 @@ public final class Paths {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -650,7 +577,7 @@ public final class Paths {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -661,7 +588,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -669,8 +596,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = 10000000000L;
         final String accept = "application/json";
@@ -679,7 +606,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -689,8 +616,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = 10000000000L;
         final String accept = "application/json";
@@ -699,7 +626,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '10000000000' 64 bit integer value on successful completion of {@link Mono}.
@@ -711,7 +638,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -725,7 +652,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -739,7 +666,7 @@ public final class Paths {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -750,7 +677,7 @@ public final class Paths {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
@@ -758,18 +685,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = -10000000000L;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getNegativeTenBillion(this.client.getHost(), longPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getNegativeTenBillion(this.client.getHost(), longPath, accept, context));
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -779,8 +706,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final long longPath = -10000000000L;
         final String accept = "application/json";
@@ -789,7 +716,7 @@ public final class Paths {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-10000000000' 64 bit integer value on successful completion of {@link Mono}.
@@ -801,7 +728,7 @@ public final class Paths {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -815,7 +742,7 @@ public final class Paths {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -829,7 +756,7 @@ public final class Paths {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -840,7 +767,7 @@ public final class Paths {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1.034E+20' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -848,18 +775,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = 103400000000000000000f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.floatScientificPositive(this.client.getHost(), floatPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.floatScientificPositive(this.client.getHost(), floatPath, accept, context));
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -869,8 +796,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = 103400000000000000000f;
         final String accept = "application/json";
@@ -879,7 +806,7 @@ public final class Paths {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '1.034E+20' numeric value on successful completion of {@link Mono}.
@@ -891,7 +818,7 @@ public final class Paths {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -905,7 +832,7 @@ public final class Paths {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -919,7 +846,7 @@ public final class Paths {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -930,7 +857,7 @@ public final class Paths {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1.034E-20' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -938,18 +865,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = -1.034E-20f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.floatScientificNegative(this.client.getHost(), floatPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.floatScientificNegative(this.client.getHost(), floatPath, accept, context));
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -959,8 +886,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final float floatPath = -1.034E-20f;
         final String accept = "application/json";
@@ -969,7 +896,7 @@ public final class Paths {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-1.034E-20' numeric value on successful completion of {@link Mono}.
@@ -981,7 +908,7 @@ public final class Paths {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -995,7 +922,7 @@ public final class Paths {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1009,7 +936,7 @@ public final class Paths {
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1020,7 +947,7 @@ public final class Paths {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1028,18 +955,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = 9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.doubleDecimalPositive(this.client.getHost(), doublePath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.doubleDecimalPositive(this.client.getHost(), doublePath, accept, context));
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1049,8 +976,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = 9999999.999;
         final String accept = "application/json";
@@ -1059,7 +986,7 @@ public final class Paths {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '9999999.999' numeric value on successful completion of {@link Mono}.
@@ -1071,7 +998,7 @@ public final class Paths {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1085,7 +1012,7 @@ public final class Paths {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1099,7 +1026,7 @@ public final class Paths {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1110,7 +1037,7 @@ public final class Paths {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-9999999.999' numeric value along with {@link Response} on successful completion of {@link Mono}.
@@ -1118,18 +1045,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = -9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.doubleDecimalNegative(this.client.getHost(), doublePath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.doubleDecimalNegative(this.client.getHost(), doublePath, accept, context));
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1139,8 +1066,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final double doublePath = -9999999.999;
         final String accept = "application/json";
@@ -1149,7 +1076,7 @@ public final class Paths {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '-9999999.999' numeric value on successful completion of {@link Mono}.
@@ -1161,7 +1088,7 @@ public final class Paths {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1175,7 +1102,7 @@ public final class Paths {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1189,7 +1116,7 @@ public final class Paths {
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1200,39 +1127,39 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringUnicode(this.client.getHost(), stringPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringUnicode(this.client.getHost(), stringPath, accept, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
@@ -1241,7 +1168,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value on successful completion of {@link Mono}.
@@ -1253,7 +1180,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1267,7 +1194,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1281,7 +1208,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1292,7 +1219,7 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
@@ -1300,18 +1227,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringUrlEncoded(this.client.getHost(), stringPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringUrlEncoded(this.client.getHost(), stringPath, accept, context));
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1321,8 +1248,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
@@ -1331,7 +1258,7 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'begin!*'();:@ &amp;=+$,/?#[]end on successful completion of {@link Mono}.
@@ -1343,7 +1270,7 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1357,7 +1284,7 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1371,7 +1298,7 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1382,9 +1309,9 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1392,20 +1319,20 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@&=+$,end";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringUrlNonEncoded(this.client.getHost(), stringPath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.stringUrlNonEncoded(this.client.getHost(), stringPath, accept, context));
     }
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1415,8 +1342,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "begin!*'();:@&=+$,end";
         final String accept = "application/json";
@@ -1425,9 +1352,9 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1439,9 +1366,9 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1455,9 +1382,9 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1471,9 +1398,9 @@ public final class Paths {
 
     /**
      * Get 'begin!*'();:@&amp;=+$,end
-     *
-     * <p>https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
-     *
+     * 
+     * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1484,7 +1411,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' along with {@link Response} on successful completion of {@link Mono}.
@@ -1492,8 +1419,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "";
         final String accept = "application/json";
@@ -1502,7 +1429,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1512,8 +1439,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringPath = "";
         final String accept = "application/json";
@@ -1522,7 +1449,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' on successful completion of {@link Mono}.
@@ -1534,7 +1461,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1548,7 +1475,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1562,7 +1489,7 @@ public final class Paths {
 
     /**
      * Get ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1573,7 +1500,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1583,8 +1510,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
@@ -1595,7 +1522,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1606,8 +1533,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
@@ -1618,7 +1545,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1632,7 +1559,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1647,7 +1574,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1662,7 +1589,7 @@ public final class Paths {
 
     /**
      * Get null (should throw).
-     *
+     * 
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1675,19 +1602,19 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
@@ -1698,20 +1625,20 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
@@ -1722,7 +1649,7 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1736,7 +1663,7 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1751,7 +1678,7 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1766,7 +1693,7 @@ public final class Paths {
 
     /**
      * Get using uri with 'green color' in path parameter.
-     *
+     * 
      * @param enumPath send the value green.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1779,19 +1706,19 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
@@ -1802,20 +1729,20 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (enumPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
@@ -1826,13 +1753,13 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link
-     *     Mono}.
+     * @return null (should throw on the client before the request is sent on wire) on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath) {
@@ -1841,14 +1768,14 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link
-     *     Mono}.
+     * @return null (should throw on the client before the request is sent on wire) on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath, Context context) {
@@ -1857,7 +1784,7 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1872,7 +1799,7 @@ public final class Paths {
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
-     *
+     * 
      * @param enumPath send null should throw.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1885,45 +1812,45 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), bytePathConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteMultiByte(this.client.getHost(), bytePathConverted, accept, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
@@ -1935,7 +1862,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1949,7 +1876,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1964,7 +1891,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1979,7 +1906,7 @@ public final class Paths {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
+     * 
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1992,7 +1919,7 @@ public final class Paths {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' as byte array along with {@link Response} on successful completion of {@link Mono}.
@@ -2000,19 +1927,19 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] bytePath = "".getBytes();
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return FluxUtil.withContext(
-                context -> service.byteEmpty(this.client.getHost(), bytePathConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteEmpty(this.client.getHost(), bytePathConverted, accept, context));
     }
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2022,8 +1949,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final byte[] bytePath = "".getBytes();
         final String accept = "application/json";
@@ -2033,7 +1960,7 @@ public final class Paths {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '' as byte array on successful completion of {@link Mono}.
@@ -2045,7 +1972,7 @@ public final class Paths {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2059,7 +1986,7 @@ public final class Paths {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2073,7 +2000,7 @@ public final class Paths {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2084,7 +2011,7 @@ public final class Paths {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2094,21 +2021,21 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
         }
         final String accept = "application/json";
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.byteNull(this.client.getHost(), bytePathConverted, accept, context));
     }
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2119,8 +2046,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (bytePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
@@ -2132,7 +2059,7 @@ public final class Paths {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2146,7 +2073,7 @@ public final class Paths {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2161,7 +2088,7 @@ public final class Paths {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2176,7 +2103,7 @@ public final class Paths {
 
     /**
      * Get null as byte array (should throw).
-     *
+     * 
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2189,7 +2116,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01' as date along with {@link Response} on successful completion of {@link Mono}.
@@ -2197,8 +2124,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         final String accept = "application/json";
@@ -2207,7 +2134,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2217,8 +2144,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         final String accept = "application/json";
@@ -2227,7 +2154,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01' as date on successful completion of {@link Mono}.
@@ -2239,7 +2166,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2253,7 +2180,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2267,7 +2194,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2278,19 +2205,19 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response} on successful completion of {@link Mono}.
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
@@ -2301,20 +2228,20 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response} on successful completion of {@link Mono}.
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (datePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
@@ -2325,13 +2252,13 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath) {
@@ -2340,14 +2267,14 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath, Context context) {
@@ -2356,14 +2283,14 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     *     along with {@link Response}.
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(LocalDate datePath, Context context) {
@@ -2372,7 +2299,7 @@ public final class Paths {
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
+     * 
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2385,7 +2312,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
@@ -2393,18 +2320,18 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, context));
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2414,8 +2341,8 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
@@ -2424,7 +2351,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return '2012-01-01T01:01:01Z' as date-time on successful completion of {@link Mono}.
@@ -2436,7 +2363,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2450,7 +2377,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2464,7 +2391,7 @@ public final class Paths {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2475,44 +2402,44 @@ public final class Paths {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (dateTimePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, context));
+        return FluxUtil
+            .withContext(context -> service.dateTimeNull(this.client.getHost(), dateTimePath, accept, context));
     }
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (dateTimePath == null) {
             return Mono.error(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
@@ -2523,13 +2450,13 @@ public final class Paths {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath) {
@@ -2538,14 +2465,14 @@ public final class Paths {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath, Context context) {
@@ -2554,14 +2481,14 @@ public final class Paths {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, Context context) {
@@ -2570,7 +2497,7 @@ public final class Paths {
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
+     * 
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2583,45 +2510,45 @@ public final class Paths {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (base64UrlPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null."));
         }
         final String accept = "application/json";
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        return FluxUtil.withContext(
-                context -> service.base64Url(this.client.getHost(), base64UrlPathConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.base64Url(this.client.getHost(), base64UrlPathConverted, accept, context));
     }
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (base64UrlPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null."));
@@ -2633,7 +2560,7 @@ public final class Paths {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2647,7 +2574,7 @@ public final class Paths {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2662,7 +2589,7 @@ public final class Paths {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2677,7 +2604,7 @@ public final class Paths {
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
+     * 
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2690,72 +2617,68 @@ public final class Paths {
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayPath is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayPathConverted =
-                arrayPath.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
-        return FluxUtil.withContext(
-                context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context));
+        String arrayPathConverted = arrayPath.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
+        return FluxUtil
+            .withContext(context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context));
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (arrayPath == null) {
             return Mono.error(new IllegalArgumentException("Parameter arrayPath is required and cannot be null."));
         }
         final String accept = "application/json";
-        String arrayPathConverted =
-                arrayPath.stream()
-                        .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                        .collect(Collectors.joining(","));
+        String arrayPathConverted = arrayPath.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, accept, context);
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath) {
@@ -2764,15 +2687,15 @@ public final class Paths {
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format on successful completion of {@link Mono}.
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath, Context context) {
@@ -2781,15 +2704,15 @@ public final class Paths {
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, Context context) {
@@ -2798,9 +2721,9 @@ public final class Paths {
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
+     * 
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
-     *     csv-array format.
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2812,50 +2735,50 @@ public final class Paths {
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (unixTimeUrlPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
         }
         final String accept = "application/json";
         long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
         return FluxUtil.withContext(
-                context -> service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted, accept, context));
+            context -> service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted, accept, context));
     }
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (unixTimeUrlPath == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
         }
         final String accept = "application/json";
         long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
@@ -2864,7 +2787,7 @@ public final class Paths {
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2878,7 +2801,7 @@ public final class Paths {
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2893,7 +2816,7 @@ public final class Paths {
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2908,7 +2831,7 @@ public final class Paths {
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
+     * 
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

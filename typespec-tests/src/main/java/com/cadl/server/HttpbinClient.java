@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.cadl.server.implementation.HttpbinClientImpl;
 
-/** Initializes a new instance of the synchronous HttpbinClient type. */
+/**
+ * Initializes a new instance of the synchronous HttpbinClient type.
+ */
 @ServiceClient(builder = HttpbinClientBuilder.class)
 public final class HttpbinClient {
-    @Generated private final HttpbinClientImpl serviceClient;
+    @Generated
+    private final HttpbinClientImpl serviceClient;
 
     /**
      * Initializes an instance of HttpbinClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class HttpbinClient {
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -50,7 +53,7 @@ public final class HttpbinClient {
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

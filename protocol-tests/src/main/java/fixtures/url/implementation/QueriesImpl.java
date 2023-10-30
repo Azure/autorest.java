@@ -27,17 +27,23 @@ import com.azure.core.util.FluxUtil;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Queries. */
+/**
+ * An instance of this class provides access to all the operations defined in Queries.
+ */
 public final class QueriesImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final QueriesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestUrlTestServiceClientImpl client;
 
     /**
      * Initializes an instance of QueriesImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     QueriesImpl(AutoRestUrlTestServiceClientImpl client) {
@@ -53,1301 +59,657 @@ public final class QueriesImpl {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface QueriesService {
         @Get("/queries/bool/true")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getBooleanTrue(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/bool/true")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getBooleanTrueSync(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getBooleanTrueSync(@HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/bool/false")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getBooleanFalse(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host,
+            @QueryParam("boolQuery") boolean boolQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/bool/false")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getBooleanFalseSync(
-                @HostParam("$host") String host,
-                @QueryParam("boolQuery") boolean boolQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getBooleanFalseSync(@HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/bool/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getBooleanNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getBooleanNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/bool/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getBooleanNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getBooleanNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/int/1000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getIntOneMillion(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/int/1000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getIntOneMillionSync(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getIntOneMillionSync(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/int/-1000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host,
+            @QueryParam("intQuery") int intQuery, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/queries/int/-1000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getIntNegativeOneMillionSync(
-                @HostParam("$host") String host,
-                @QueryParam("intQuery") int intQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getIntNegativeOneMillionSync(@HostParam("$host") String host,
+            @QueryParam("intQuery") int intQuery, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/queries/int/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getIntNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getIntNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/int/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getIntNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getIntNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/10000000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getTenBillion(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/10000000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getTenBillionSync(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getTenBillionSync(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/-10000000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getNegativeTenBillion(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host,
+            @QueryParam("longQuery") long longQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/-10000000000")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getNegativeTenBillionSync(
-                @HostParam("$host") String host,
-                @QueryParam("longQuery") long longQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getNegativeTenBillionSync(@HostParam("$host") String host,
+            @QueryParam("longQuery") long longQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getLongNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> getLongNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/long/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getLongNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> getLongNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/1.034E+20")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatScientificPositive(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/1.034E+20")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatScientificPositiveSync(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatScientificPositiveSync(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/-1.034E-20")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatScientificNegative(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/-1.034E-20")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatScientificNegativeSync(
-                @HostParam("$host") String host,
-                @QueryParam("floatQuery") float floatQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatScientificNegativeSync(@HostParam("$host") String host,
+            @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/float/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/9999999.999")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> doubleDecimalPositive(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/9999999.999")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> doubleDecimalPositiveSync(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> doubleDecimalPositiveSync(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/-9999999.999")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> doubleDecimalNegative(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/-9999999.999")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> doubleDecimalNegativeSync(
-                @HostParam("$host") String host,
-                @QueryParam("doubleQuery") double doubleQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> doubleDecimalNegativeSync(@HostParam("$host") String host,
+            @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> doubleNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> doubleNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/double/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> doubleNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> doubleNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/unicode/")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringUnicode(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host,
+            @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/unicode/")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringUnicodeSync(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringUnicodeSync(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringUrlEncoded(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host,
+            @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringUrlEncodedSync(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringUrlEncodedSync(@HostParam("$host") String host,
+            @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringEmptySync(
-                @HostParam("$host") String host,
-                @QueryParam("stringQuery") String stringQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringEmptySync(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> stringNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/string/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> stringNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> stringNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/enum/green%20color")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/enum/green%20color")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> enumValidSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> enumValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/enum/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> enumNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/enum/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> enumNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> enumNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/multibyte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteMultiByte(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/multibyte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteMultiByteSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteMultiByteSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteEmpty(
-                @HostParam("$host") String host,
-                @QueryParam("byteQuery") String byteQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteEmptySync(
-                @HostParam("$host") String host,
-                @QueryParam("byteQuery") String byteQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteEmptySync(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> byteNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/byte/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> byteNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> byteNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/date/2012-01-01")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateValid(
-                @HostParam("$host") String host,
-                @QueryParam("dateQuery") String dateQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @QueryParam("dateQuery") String dateQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/date/2012-01-01")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateValidSync(
-                @HostParam("$host") String host,
-                @QueryParam("dateQuery") String dateQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateValidSync(@HostParam("$host") String host, @QueryParam("dateQuery") String dateQuery,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/date/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/date/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateTimeValid(
-                @HostParam("$host") String host,
-                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host,
+            @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateTimeValidSync(
-                @HostParam("$host") String host,
-                @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateTimeValidSync(@HostParam("$host") String host,
+            @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/datetime/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> dateTimeNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/datetime/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> dateTimeNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> dateTimeNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringCsvValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringCsvValidSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringCsvValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringCsvNull(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/null")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringCsvNullSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringCsvNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringCsvEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringCsvEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/csv/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringCsvEmptySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringCsvEmptySync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/none/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/none/string/empty")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringNoCollectionFormatEmptySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringNoCollectionFormatEmptySync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/ssv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringSsvValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringSsvValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/ssv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringSsvValidSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringSsvValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/tsv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringTsvValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringTsvValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/tsv/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringTsvValidSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringTsvValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/pipes/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> arrayStringPipesValid(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> arrayStringPipesValid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/queries/array/pipes/string/valid")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> arrayStringPipesValidSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> arrayStringPipesValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1360,12 +722,12 @@ public final class QueriesImpl {
         final boolean boolQuery = true;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, requestOptions, context));
+            context -> service.getBooleanTrue(this.client.getHost(), boolQuery, accept, requestOptions, context));
     }
 
     /**
      * Get true Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1382,7 +744,7 @@ public final class QueriesImpl {
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1395,12 +757,12 @@ public final class QueriesImpl {
         final boolean boolQuery = false;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context));
+            context -> service.getBooleanFalse(this.client.getHost(), boolQuery, accept, requestOptions, context));
     }
 
     /**
      * Get false Boolean value on path.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1417,45 +779,63 @@ public final class QueriesImpl {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>boolQuery</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>null boolean value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getBooleanNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getBooleanNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>boolQuery</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>null boolean value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1471,7 +851,7 @@ public final class QueriesImpl {
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1484,12 +864,12 @@ public final class QueriesImpl {
         final int intQuery = 1000000;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context));
+            context -> service.getIntOneMillion(this.client.getHost(), intQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1506,7 +886,7 @@ public final class QueriesImpl {
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1518,15 +898,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync(RequestOptions requestOptions) {
         final int intQuery = -1000000;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getIntNegativeOneMillion(
-                                this.client.getHost(), intQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intQuery, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-1000000' integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1538,51 +916,69 @@ public final class QueriesImpl {
     public Response<Void> getIntNegativeOneMillionWithResponse(RequestOptions requestOptions) {
         final int intQuery = -1000000;
         final String accept = "application/json";
-        return service.getIntNegativeOneMillionSync(
-                this.client.getHost(), intQuery, accept, requestOptions, Context.NONE);
+        return service.getIntNegativeOneMillionSync(this.client.getHost(), intQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get null integer value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>intQuery</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>null integer value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getIntNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getIntNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null integer value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>intQuery</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>null integer value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1598,7 +994,7 @@ public final class QueriesImpl {
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1611,12 +1007,12 @@ public final class QueriesImpl {
         final long longQuery = 10000000000L;
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context));
+            context -> service.getTenBillion(this.client.getHost(), longQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1633,7 +1029,7 @@ public final class QueriesImpl {
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1645,15 +1041,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions) {
         final long longQuery = -10000000000L;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getNegativeTenBillion(
-                                this.client.getHost(), longQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getNegativeTenBillion(this.client.getHost(), longQuery, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1665,51 +1059,69 @@ public final class QueriesImpl {
     public Response<Void> getNegativeTenBillionWithResponse(RequestOptions requestOptions) {
         final long longQuery = -10000000000L;
         final String accept = "application/json";
-        return service.getNegativeTenBillionSync(
-                this.client.getHost(), longQuery, accept, requestOptions, Context.NONE);
+        return service.getNegativeTenBillionSync(this.client.getHost(), longQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>longQuery</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>null 64 bit integer value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getLongNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getLongNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>longQuery</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>null 64 bit integer value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1725,7 +1137,7 @@ public final class QueriesImpl {
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1737,15 +1149,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync(RequestOptions requestOptions) {
         final float floatQuery = 103400000000000000000f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.floatScientificPositive(
-                                this.client.getHost(), floatQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.floatScientificPositive(this.client.getHost(), floatQuery,
+            accept, requestOptions, context));
     }
 
     /**
      * Get '1.034E+20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1757,13 +1167,13 @@ public final class QueriesImpl {
     public Response<Void> floatScientificPositiveWithResponse(RequestOptions requestOptions) {
         final float floatQuery = 103400000000000000000f;
         final String accept = "application/json";
-        return service.floatScientificPositiveSync(
-                this.client.getHost(), floatQuery, accept, requestOptions, Context.NONE);
+        return service.floatScientificPositiveSync(this.client.getHost(), floatQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1775,15 +1185,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync(RequestOptions requestOptions) {
         final float floatQuery = -1.034E-20f;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.floatScientificNegative(
-                                this.client.getHost(), floatQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.floatScientificNegative(this.client.getHost(), floatQuery,
+            accept, requestOptions, context));
     }
 
     /**
      * Get '-1.034E-20' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1795,51 +1203,69 @@ public final class QueriesImpl {
     public Response<Void> floatScientificNegativeWithResponse(RequestOptions requestOptions) {
         final float floatQuery = -1.034E-20f;
         final String accept = "application/json";
-        return service.floatScientificNegativeSync(
-                this.client.getHost(), floatQuery, accept, requestOptions, Context.NONE);
+        return service.floatScientificNegativeSync(this.client.getHost(), floatQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>floatQuery</td>
+     * <td>Float</td>
+     * <td>No</td>
+     * <td>null numeric value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.floatNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.floatNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>floatQuery</td>
+     * <td>Float</td>
+     * <td>No</td>
+     * <td>null numeric value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1855,7 +1281,7 @@ public final class QueriesImpl {
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1867,15 +1293,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync(RequestOptions requestOptions) {
         final double doubleQuery = 9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.doubleDecimalPositive(
-                                this.client.getHost(), doubleQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.doubleDecimalPositive(this.client.getHost(), doubleQuery, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1887,13 +1311,13 @@ public final class QueriesImpl {
     public Response<Void> doubleDecimalPositiveWithResponse(RequestOptions requestOptions) {
         final double doubleQuery = 9999999.999;
         final String accept = "application/json";
-        return service.doubleDecimalPositiveSync(
-                this.client.getHost(), doubleQuery, accept, requestOptions, Context.NONE);
+        return service.doubleDecimalPositiveSync(this.client.getHost(), doubleQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1905,15 +1329,13 @@ public final class QueriesImpl {
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync(RequestOptions requestOptions) {
         final double doubleQuery = -9999999.999;
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.doubleDecimalNegative(
-                                this.client.getHost(), doubleQuery, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.doubleDecimalNegative(this.client.getHost(), doubleQuery, accept,
+            requestOptions, context));
     }
 
     /**
      * Get '-9999999.999' numeric value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1925,51 +1347,69 @@ public final class QueriesImpl {
     public Response<Void> doubleDecimalNegativeWithResponse(RequestOptions requestOptions) {
         final double doubleQuery = -9999999.999;
         final String accept = "application/json";
-        return service.doubleDecimalNegativeSync(
-                this.client.getHost(), doubleQuery, accept, requestOptions, Context.NONE);
+        return service.doubleDecimalNegativeSync(this.client.getHost(), doubleQuery, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>doubleQuery</td>
+     * <td>Double</td>
+     * <td>No</td>
+     * <td>null numeric value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.doubleNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.doubleNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null numeric value (no query parameter).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>doubleQuery</td>
+     * <td>Double</td>
+     * <td>No</td>
+     * <td>null numeric value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1985,26 +1425,26 @@ public final class QueriesImpl {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context));
+            context -> service.stringUnicode(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2021,7 +1461,7 @@ public final class QueriesImpl {
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2034,13 +1474,12 @@ public final class QueriesImpl {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, requestOptions, context));
+            context -> service.stringUrlEncoded(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2057,7 +1496,7 @@ public final class QueriesImpl {
 
     /**
      * Get ''.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2070,12 +1509,12 @@ public final class QueriesImpl {
         final String stringQuery = "";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context));
+            context -> service.stringEmpty(this.client.getHost(), stringQuery, accept, requestOptions, context));
     }
 
     /**
      * Get ''.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2092,17 +1531,26 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null string value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2113,23 +1561,32 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.stringNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.stringNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stringQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null string value</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2145,45 +1602,63 @@ public final class QueriesImpl {
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>enumQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.enumValid(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.enumValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get using uri with query parameter 'green color'.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>enumQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2199,17 +1674,26 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>enumQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null string value. Allowed values: "red color", "green color", "blue color".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2220,23 +1704,32 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.enumNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.enumNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null (no query parameter in url).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>enumQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null string value. Allowed values: "red color", "green color", "blue color".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2252,45 +1745,63 @@ public final class QueriesImpl {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>byteQuery</td>
+     * <td>byte[]</td>
+     * <td>No</td>
+     * <td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.byteMultiByte(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.byteMultiByte(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>byteQuery</td>
+     * <td>byte[]</td>
+     * <td>No</td>
+     * <td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2306,7 +1817,7 @@ public final class QueriesImpl {
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2320,13 +1831,12 @@ public final class QueriesImpl {
         final String accept = "application/json";
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return FluxUtil.withContext(
-                context ->
-                        service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context));
+            context -> service.byteEmpty(this.client.getHost(), byteQueryConverted, accept, requestOptions, context));
     }
 
     /**
      * Get '' as byte array.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2344,45 +1854,63 @@ public final class QueriesImpl {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>byteQuery</td>
+     * <td>byte[]</td>
+     * <td>No</td>
+     * <td>null as byte array (no query parameters in uri)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.byteNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.byteNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null as byte array (no query parameters in uri).
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>byteQuery</td>
+     * <td>byte[]</td>
+     * <td>No</td>
+     * <td>null as byte array (no query parameters in uri)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2398,7 +1926,7 @@ public final class QueriesImpl {
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2411,12 +1939,12 @@ public final class QueriesImpl {
         final String dateQuery = "2012-01-01";
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context));
+            context -> service.dateValid(this.client.getHost(), dateQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01' as date.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2433,45 +1961,63 @@ public final class QueriesImpl {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>dateQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null as date (no query parameters in uri)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.dateNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>dateQuery</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>null as date (no query parameters in uri)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2487,7 +2033,7 @@ public final class QueriesImpl {
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2500,13 +2046,12 @@ public final class QueriesImpl {
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
+            context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2523,45 +2068,63 @@ public final class QueriesImpl {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>dateTimeQuery</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>null as date-time (no query parameters)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.dateTimeNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.dateTimeNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>dateTimeQuery</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>null as date-time (no query parameters)</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2577,52 +2140,72 @@ public final class QueriesImpl {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context));
+            context -> service.arrayStringCsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
@@ -2632,45 +2215,63 @@ public final class QueriesImpl {
 
     /**
      * Get a null array of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>a null array of string using the csv-array format. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.arrayStringCsvNull(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.arrayStringCsvNull(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get a null array of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>a null array of string using the csv-array format. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2686,45 +2287,63 @@ public final class QueriesImpl {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an empty array [] of string using the csv-array format along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context));
+            context -> service.arrayStringCsvEmpty(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2741,17 +2360,26 @@ public final class QueriesImpl {
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2762,26 +2390,33 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringNoCollectionFormatEmptyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.arrayStringNoCollectionFormatEmpty(
-                                this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.arrayStringNoCollectionFormatEmpty(this.client.getHost(), accept,
+            requestOptions, context));
     }
 
     /**
      * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
      * the 'arrayQuery' parameter to the service.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2792,58 +2427,78 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringNoCollectionFormatEmptyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.arrayStringNoCollectionFormatEmptySync(
-                this.client.getHost(), accept, requestOptions, Context.NONE);
+        return service.arrayStringNoCollectionFormatEmptySync(this.client.getHost(), accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     * In the form of " " separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context));
+            context -> service.arrayStringSsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     * In the form of " " separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
@@ -2853,52 +2508,72 @@ public final class QueriesImpl {
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     * In the form of " " separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringTsvValid(this.client.getHost(), accept, requestOptions, context));
+            context -> service.arrayStringTsvValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     * In the form of " " separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
@@ -2909,53 +2584,73 @@ public final class QueriesImpl {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format. In the form of "|" separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response} on successful completion of {@link Mono}.
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context));
+            context -> service.arrayStringPipesValid(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>arrayQuery</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
+     * format. In the form of "|" separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     *     format along with {@link Response}.
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {

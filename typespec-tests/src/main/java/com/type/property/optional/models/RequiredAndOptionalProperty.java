@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Model with required and optional properties. */
+/**
+ * Model with required and optional properties.
+ */
 @Fluent
 public final class RequiredAndOptionalProperty {
     /*
@@ -28,7 +30,7 @@ public final class RequiredAndOptionalProperty {
 
     /**
      * Creates an instance of RequiredAndOptionalProperty class.
-     *
+     * 
      * @param requiredProperty the requiredProperty value to set.
      */
     @Generated
@@ -39,7 +41,7 @@ public final class RequiredAndOptionalProperty {
 
     /**
      * Get the optionalProperty property: optional string property.
-     *
+     * 
      * @return the optionalProperty value.
      */
     @Generated
@@ -49,7 +51,7 @@ public final class RequiredAndOptionalProperty {
 
     /**
      * Set the optionalProperty property: optional string property.
-     *
+     * 
      * @param optionalProperty the optionalProperty value to set.
      * @return the RequiredAndOptionalProperty object itself.
      */
@@ -61,7 +63,7 @@ public final class RequiredAndOptionalProperty {
 
     /**
      * Get the requiredProperty property: required int property.
-     *
+     * 
      * @return the requiredProperty value.
      */
     @Generated

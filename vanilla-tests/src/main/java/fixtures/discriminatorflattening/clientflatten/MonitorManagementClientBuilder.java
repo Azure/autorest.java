@@ -37,19 +37,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the MonitorManagementClient type. */
-@ServiceClientBuilder(serviceClients = {MonitorManagementClient.class})
+/**
+ * A builder for creating a new instance of the MonitorManagementClient type.
+ */
+@ServiceClientBuilder(serviceClients = { MonitorManagementClient.class })
 public final class MonitorManagementClientBuilder
-        implements HttpTrait<MonitorManagementClientBuilder>, ConfigurationTrait<MonitorManagementClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    implements HttpTrait<MonitorManagementClientBuilder>, ConfigurationTrait<MonitorManagementClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> PROPERTIES = new HashMap<>();
+    @Generated
+    private static final Map<String, String> PROPERTIES = new HashMap<>();
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the MonitorManagementClientBuilder. */
+    /**
+     * Create an instance of the MonitorManagementClientBuilder.
+     */
     @Generated
     public MonitorManagementClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -58,9 +66,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder pipeline(HttpPipeline pipeline) {
@@ -71,9 +82,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder httpClient(HttpClient httpClient) {
@@ -84,9 +98,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -97,9 +114,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -110,9 +130,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -120,7 +143,9 @@ public final class MonitorManagementClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -132,9 +157,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public MonitorManagementClientBuilder configuration(Configuration configuration) {
@@ -145,11 +173,12 @@ public final class MonitorManagementClientBuilder
     /*
      * server parameter
      */
-    @Generated private String host;
+    @Generated
+    private String host;
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the MonitorManagementClientBuilder.
      */
@@ -162,11 +191,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The serializer to serialize an object into a string
      */
-    @Generated private SerializerAdapter serializerAdapter;
+    @Generated
+    private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
-     *
+     * 
      * @param serializerAdapter the serializerAdapter value.
      * @return the MonitorManagementClientBuilder.
      */
@@ -179,11 +209,12 @@ public final class MonitorManagementClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the MonitorManagementClientBuilder.
      */
@@ -195,23 +226,23 @@ public final class MonitorManagementClientBuilder
 
     /**
      * Builds an instance of MonitorManagementClient with the provided parameters.
-     *
+     * 
      * @return an instance of MonitorManagementClient.
      */
     @Generated
     public MonitorManagementClient buildClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "https://management.azure.com";
-        SerializerAdapter localSerializerAdapter =
-                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        SerializerAdapter localSerializerAdapter
+            = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         MonitorManagementClient client = new MonitorManagementClient(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -222,29 +253,22 @@ public final class MonitorManagementClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 }
