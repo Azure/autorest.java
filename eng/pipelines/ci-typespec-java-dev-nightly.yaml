@@ -32,7 +32,7 @@ jobs:
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'clean verify package install'
+          goals: 'clean install'
           options: '-P local,tsp -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)

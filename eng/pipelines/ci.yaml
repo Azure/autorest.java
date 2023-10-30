@@ -43,7 +43,7 @@ jobs:
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'clean verify package install'
+          goals: 'clean install'
           options: '-P local -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
