@@ -335,6 +335,8 @@ public class Postprocessor extends NewPlugin {
                 ? new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() }
                 : new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
 
+        logger.info("Running command: " + String.join(" ", command));
+
         // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
         // necessary dependencies to run.
         try {
