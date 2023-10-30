@@ -144,7 +144,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     .map(trait -> trait.getTraitInterfaceName() + serviceClientBuilderGeneric)
                     .collect(Collectors.joining(", "));
 
-            classDefinition = serviceClientBuilderName + " implements " + interfaces;
+            if (!interfaces.isEmpty()) {
+                classDefinition = serviceClientBuilderName + " implements " + interfaces;
+            }
         }
 
         javaFile.publicFinalClass(classDefinition, classBlock ->
@@ -519,7 +521,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));
         }
 
-        if (!settings.isAzureOrFluent()) {
+        if (!settings.isAzureOrFluent() && settings.isBranded()) {
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
                     + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
         }
