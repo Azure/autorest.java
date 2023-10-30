@@ -26,6 +26,9 @@
             <goals>
               <goal>apply</goal>
             </goals>
+            <phase>
+              validate
+            </phase>
             <configuration>
               <java>
                 <includes>

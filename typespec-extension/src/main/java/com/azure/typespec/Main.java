@@ -162,8 +162,8 @@ public class Main {
 
     private static void attemptMavenSpotless(Path pomPath) {
         String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn", "spotless:apply" }
-            : new String[] { "sh", "-c", "mvn", "spotless:apply" };
+            ? new String[] { "cmd", "/c", "mvn", "validate" }
+            : new String[] { "sh", "-c", "mvn", "validate" };
 
         LOGGER.info("Running command: " + String.join(" ", command));
 

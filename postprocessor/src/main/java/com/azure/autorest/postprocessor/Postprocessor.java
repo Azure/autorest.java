@@ -177,8 +177,8 @@ public class Postprocessor extends NewPlugin {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = Utils.isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless" }
-                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-P", "spotless" };
+            ? new String[] { "cmd", "/c", "mvn", "validate", "-P", "spotless" }
+            : new String[] { "sh", "-c", "mvn", "validate", "-P", "spotless" };
 
         logger.info("Running command: " + String.join(" ", command));
 

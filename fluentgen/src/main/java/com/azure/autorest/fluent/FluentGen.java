@@ -174,8 +174,8 @@ public class FluentGen extends Javagen {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn", "spotless:apply" }
-            : new String[] { "sh", "-c", "mvn", "spotless:apply" };
+            ? new String[] { "cmd", "/c", "mvn", "validate" }
+            : new String[] { "sh", "-c", "mvn", "validate" };
 
         logger.info("Running command: " + String.join(" ", command));
 
