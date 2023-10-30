@@ -71,6 +71,7 @@ public class Postprocessor extends NewPlugin {
             try {
                 writeToFiles(fileContents);
             } catch (Exception e) {
+                logger.error("Failed to complete postprocessing.", e);
                 return false;
             }
             return true;
@@ -154,9 +155,9 @@ public class Postprocessor extends NewPlugin {
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.copy(Postprocessor.class.getResourceAsStream("/readme/pom.xml"), pomPath);
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
                 pomPath.toFile().deleteOnExit();
-                Files.copy(Postprocessor.class.getResourceAsStream("/readme/eclipse-format-azure-sdk-for-java.xml"),
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
                         pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
                 pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml").toFile().deleteOnExit();
 
@@ -176,8 +177,8 @@ public class Postprocessor extends NewPlugin {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = Utils.isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() }
-                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-Dspotless", "-f", pomPath.toString() };
+                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() }
+                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() };
 
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
@@ -191,7 +192,8 @@ public class Postprocessor extends NewPlugin {
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
                 throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                        + Files.readString(outputFile.toPath()));
+                    + Files.readString(outputFile.toPath())
+                    + "\nThe command ran was: " + process.info().commandLine());
             }
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
@@ -255,7 +257,7 @@ public class Postprocessor extends NewPlugin {
         try {
             tempDirWithPrefix = Files.createTempDirectory("temp");
             editor = new Editor(new HashMap<>(), tempDirWithPrefix);
-            byte[] buffer = Postprocessor.class.getResourceAsStream("/readme/pom.xml").readAllBytes();
+            byte[] buffer = Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml").readAllBytes();
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
             attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
             editor.addFile(fileName.substring(fileName.indexOf("src/")), code);

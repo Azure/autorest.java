@@ -144,7 +144,7 @@ public class Main {
                 Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
                         pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
 
-                attemptMavenSpotless(pomPath, LOGGER);
+                attemptMavenSpotless(pomPath);
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
                     Path file = tmpDir.resolve(javaFile.getKey());
@@ -160,7 +160,7 @@ public class Main {
         }
     }
 
-    private static void attemptMavenSpotless(Path pomPath, Logger logger) {
+    private static void attemptMavenSpotless(Path pomPath) {
         String[] command = isWindows()
             ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-f", pomPath.toString() }
             : new String[] { "sh", "-c", "mvn", "spotless:apply", "-f", pomPath.toString() };
@@ -177,10 +177,11 @@ public class Main {
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
                 throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                        + Files.readString(outputFile.toPath()));
+                    + Files.readString(outputFile.toPath())
+                    + "\nThe command ran was: " + process.info().commandLine());
             }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to run Spotless on generated code.");
+            Main.LOGGER.warn("Failed to run Spotless on generated code.");
         }
     }
 

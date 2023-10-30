@@ -189,7 +189,8 @@ public class FluentGen extends Javagen {
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
                 throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                        + Files.readString(outputFile.toPath()));
+                    + Files.readString(outputFile.toPath())
+                    + "\nThe command ran was: " + process.info().commandLine());
             }
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
