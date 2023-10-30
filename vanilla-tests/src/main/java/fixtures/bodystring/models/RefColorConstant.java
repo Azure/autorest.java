@@ -23,9 +23,7 @@ public final class RefColorConstant {
     private String field1;
 
     /** Creates an instance of RefColorConstant class. */
-    public RefColorConstant() {
-        colorConstant = "green-color";
-    }
+    public RefColorConstant() {}
 
     /**
      * Get the colorConstant property: Referenced Color Constant Description.

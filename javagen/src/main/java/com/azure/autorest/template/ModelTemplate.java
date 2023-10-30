@@ -562,7 +562,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (property.isPolymorphicDiscriminator()) {
                 classBlock.privateStaticFinalVariable(fieldSignature);
-            } else if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())) {
+            } else if (ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -768,10 +768,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
-            // Then, add all constant properties.
-            for (ClientModelProperty property : constantProperties) {
-                constructor.line(property.getName() + " = " + property.getDefaultValue() + ";");
-            }
+            // constant properties should already be initialized in class variable definition
+//            // Then, add all constant properties.
+//            for (ClientModelProperty property : constantProperties) {
+//                constructor.line(property.getName() + " = " + property.getDefaultValue() + ";");
+//            }
 
             // Finally, add all required properties.
             if (settings.isRequiredFieldsAsConstructorArgs()) {

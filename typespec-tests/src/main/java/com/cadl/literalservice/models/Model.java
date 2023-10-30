@@ -27,9 +27,7 @@ public final class Model {
 
     /** Creates an instance of Model class. */
     @Generated
-    public Model() {
-        literal = "literal";
-    }
+    public Model() {}
 
     /**
      * Get the literal property: The literal property.

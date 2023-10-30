@@ -81,11 +81,6 @@ public final class Operation {
             @JsonProperty(value = "name") OperationName name,
             @JsonProperty(value = "priority") Priority priority,
             @JsonProperty(value = "color") ColorModel color) {
-        best = true;
-        age = 50L;
-        priorityValue = Priority.LOW;
-        colorValue = Color.GREEN;
-        colorModelValue = ColorModel.BLUE;
         this.name = name;
         this.priority = priority;
         this.color = color;
