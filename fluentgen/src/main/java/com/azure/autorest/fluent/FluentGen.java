@@ -174,8 +174,8 @@ public class FluentGen extends Javagen {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-f", pomPath.toString() }
-            : new String[] { "sh", "-c", "mvn", "spotless:apply", "-f", pomPath.toString() };
+            ? new String[] { "cmd", "/c", "mvn", "spotless:apply" }
+            : new String[] { "sh", "-c", "mvn", "spotless:apply" };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -183,9 +183,10 @@ public class FluentGen extends Javagen {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
             Process process = new ProcessBuilder(command)
-                    .redirectErrorStream(true)
-                    .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                    .start();
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .directory(pomPath.getParent().toFile())
+                .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
             if (process.isAlive() || process.exitValue() != 0) {

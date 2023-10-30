@@ -177,8 +177,8 @@ public class Postprocessor extends NewPlugin {
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = Utils.isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() }
-                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() };
+                ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless" }
+                : new String[] { "sh", "-c", "mvn", "spotless:apply", "-P", "spotless" };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -186,9 +186,10 @@ public class Postprocessor extends NewPlugin {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
             Process process = new ProcessBuilder(command)
-                    .redirectErrorStream(true)
-                    .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                    .start();
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .directory(pomPath.getParent().toFile())
+                .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
             if (process.isAlive() || process.exitValue() != 0) {
