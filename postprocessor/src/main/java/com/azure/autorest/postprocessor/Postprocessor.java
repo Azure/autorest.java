@@ -4,11 +4,7 @@
 package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.customization.Customization;
-import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.BuildWorkspaceStatus;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -19,7 +15,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -29,7 +24,6 @@ import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionException;
@@ -222,50 +216,35 @@ public class Postprocessor extends NewPlugin {
     }
 
     @SuppressWarnings("unchecked")
-    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code, Logger logger) {
-        Path tempDirWithPrefix;
+    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code,
+        Logger logger) {
+        // Compile the customization code using Maven's compiler plugin. This will ensure that all dependencies
+        // are available to the customization code.
 
-        // Populate editor
-        Editor editor;
+        Path customizationCompile = null;
         try {
-            tempDirWithPrefix = Files.createTempDirectory("temp");
-            editor = new Editor(new HashMap<>(), tempDirWithPrefix);
-            InputStream pomStream = Postprocessor.class.getResourceAsStream("/readme/pom.xml");
-            byte[] buffer = new byte[pomStream.available()];
-            pomStream.read(buffer);
-            editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
-            editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            customizationCompile = Files.createTempDirectory("customizationCompile");
 
-        int javaVersion = getJavaVersion(logger);
-        if (javaVersion != -1 && javaVersion < 11) {
-            throw new IllegalStateException("Java version was '" + javaVersion + "', code customizations require "
-                + "Java 11+ to be used. Please update your environment to Java 11+, preferably Java 17, and run "
-                + "Autorest again.");
-        }
+            Path pomPath = customizationCompile.resolve("pom.xml");
+            Files.copy(Postprocessor.class.getResourceAsStream("/readme/pom.xml"), pomPath);
 
-        // Start language client
-        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString())) {
-            languageClient.initialize();
-            SymbolInformation classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
-                .findFirst().get();
-            URI fileUri = classSymbol.getLocation().getUri();
-            Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
-            BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
-            if (status == BuildWorkspaceStatus.SUCCEED) {
-                URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();
-                URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl}, ClassLoader.getSystemClassLoader());
-                return (Class<? extends Customization>) Class.forName(className, true, classLoader);
-            }
-            throw new RuntimeException("Failed to build with status code " + status);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            Path sourcePath = customizationCompile.resolve(fileName);
+            Files.createDirectories(sourcePath.getParent());
+
+            Files.writeString(sourcePath, code);
+
+            attemptMavenCompile(pomPath, logger);
+
+            URL fileUrl = customizationCompile.resolve("target/classes").toUri().toURL();
+            URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl},
+                ClassLoader.getSystemClassLoader());
+            return (Class<? extends Customization>) Class.forName(className, true, classLoader);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         } finally {
-            Utils.deleteDirectory(tempDirWithPrefix.toFile());
+            if (customizationCompile != null) {
+                Utils.deleteDirectory(customizationCompile.toFile());
+            }
         }
     }
 
@@ -303,21 +282,30 @@ public class Postprocessor extends NewPlugin {
         logger.info("Finish handle partial update.");
     }
 
-    private static void attemptMavenInstall(Path pomPath, Logger logger) {
+    private static void attemptMavenCompile(Path pomPath, Logger logger) {
         String[] command;
         if (Utils.isWindows()) {
-            command = new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() };
+            command = new String[] { "cmd", "/c", "mvn", "clean", "compile", "-f", pomPath.toString() };
         } else {
-            command = new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
+            command = new String[] { "sh", "-c", "mvn", "clean", "compile", "-f", pomPath.toString() };
         }
 
-        // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
-        // necessary dependencies to run.
         try {
-            Runtime.getRuntime().exec(command).waitFor(30, TimeUnit.SECONDS);
+            File outputFile = Files.createTempFile(pomPath.getParent(), "compile", ".log").toFile();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Compile failed to complete within 60 seconds or failed with an error code. "
+                    + Files.readString(outputFile.toPath())
+                    + "If this happens 'mvn compile -f " + pomPath + "' to install dependencies manually.");
+            }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing dependencies."
-                + "If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
+            logger.warn("Failed to run Spotless on generated code.");
         }
     }
 
