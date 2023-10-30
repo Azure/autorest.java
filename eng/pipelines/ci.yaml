@@ -25,7 +25,7 @@ jobs:
     timeoutInMinutes: 60
 
     variables:
-      JavaVersion: 1.8
+      JavaVersion: 1.11
       NodeVersion: '18.x'
 
     pool:
