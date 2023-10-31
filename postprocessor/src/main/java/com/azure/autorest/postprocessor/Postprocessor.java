@@ -332,18 +332,32 @@ public class Postprocessor extends NewPlugin {
 
     private static void attemptMavenInstall(Path pomPath, Logger logger) {
         String[] command = Utils.isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() }
-                : new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
+                ? new String[] { "cmd", "/c", "mvn", "clean", "install" }
+                : new String[] { "sh", "-c", "mvn", "clean", "install" };
 
         logger.info("Running command: " + String.join(" ", command));
 
         // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
         // necessary dependencies to run.
         try {
-            Runtime.getRuntime().exec(command).waitFor(30, TimeUnit.SECONDS);
+            File outputFile = Files.createTempFile(pomPath.getParent(), "install", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .directory(pomPath.getParent().toFile())
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing "
+                    + "dependencies. If this happens 'mvn install -f" + pomPath + "' to install dependencies manually."
+                    + Files.readString(outputFile.toPath()));
+            }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing dependencies."
-                + "If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
+            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing "
+                + "dependencies. If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
         }
     }
 
