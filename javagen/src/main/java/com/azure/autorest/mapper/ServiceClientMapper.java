@@ -107,45 +107,31 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     }
 
     protected ClientMethodParameter createSerializerAdapterParameter() {
-        if (!JavaSettings.getInstance().isBranded()) {
-            return new ClientMethodParameter.Builder()
-                    .description("The serializer to serialize an object into a string")
-                    .finalParameter(false)
-                    .wireType(ClassType.JsonSerializer)
-                    .name("serializerAdapter")
-                    .required(true)
-                    .constant(false)
-                    .fromClient(true)
-                    .defaultValue(null)
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NonNull)
-                            : new ArrayList<>())
-                    .build();
-        } else {
-            return new ClientMethodParameter.Builder()
-                    .description("The serializer to serialize an object into a string")
-                    .finalParameter(false)
-                    .wireType(ClassType.SerializerAdapter)
-                    .name("serializerAdapter")
-                    .required(true)
-                    .constant(false)
-                    .fromClient(true)
-                    .defaultValue(null)
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NonNull)
-                            : new ArrayList<>())
-                    .build();
-        }
+        return new ClientMethodParameter.Builder()
+                .description("The serializer to serialize an object into a string")
+                .finalParameter(false)
+                .wireType(ClassType.SerializerAdapter)
+                .name("serializerAdapter")
+                .required(true)
+                .constant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
+                        ? Collections.singletonList(ClassType.NonNull)
+                        : new ArrayList<>())
+                .build();
     }
 
     protected IType getHttpPipelineClassType() {
         return ClassType.HttpPipeline;
     }
 
-    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
-        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, JavaSettings settings) {
+        if (settings.isBranded()) {
+            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+        }
     }
 
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
@@ -393,7 +379,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
 
-        if (settings.isFluent()) {
+        if (!settings.isBranded()) {
+            serviceClientConstructors.add(new Constructor(Collections.singletonList(httpPipelineParameter)));
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .constructors(serviceClientConstructors);
+        } else if (settings.isFluent()) {
             ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter.Builder()
                     .description("The Azure environment")
                     .finalParameter(false)
