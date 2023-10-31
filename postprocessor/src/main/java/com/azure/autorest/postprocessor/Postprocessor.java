@@ -144,8 +144,9 @@ public class Postprocessor extends NewPlugin {
         }
 
         if (!settings.isSkipFormatting()) {
+            Path tmpDir = null;
             try {
-                Path tmpDir = Files.createTempDirectory("spotless");
+                tmpDir = Files.createTempDirectory("spotless");
                 tmpDir.toFile().deleteOnExit();
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
@@ -161,7 +162,7 @@ public class Postprocessor extends NewPlugin {
                         pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
                 pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml").toFile().deleteOnExit();
 
-                attemptMavenSpotless(pomPath, logger);
+                attemptMavenSpotless(pomPath);
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
                     Path file = tmpDir.resolve(javaFile.getKey());
@@ -169,14 +170,20 @@ public class Postprocessor extends NewPlugin {
                 }
             } catch (IOException ex) {
                 throw new UncheckedIOException(ex);
+            } finally {
+                if (tmpDir != null) {
+                    Utils.deleteDirectory(tmpDir.toFile());
+                }
             }
         } else {
             javaFiles.forEach((fileName, content) -> writeFile(fileName, content, null));
         }
     }
 
-    private static void attemptMavenSpotless(Path pomPath, Logger logger) {
-        String[] command = new String[] { "mvn", "spotless:apply", "-P", "spotless" };
+    private static void attemptMavenSpotless(Path pomPath) {
+        String[] command = Utils.isWindows()
+            ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() };
 
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
@@ -184,7 +191,6 @@ public class Postprocessor extends NewPlugin {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
@@ -227,7 +233,7 @@ public class Postprocessor extends NewPlugin {
             return null;
         }
 
-        return loadCustomizationClass(className, customizationFile, code, this.logger);
+        return loadCustomizationClass(className, customizationFile, code);
     }
 
     public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
@@ -239,7 +245,7 @@ public class Postprocessor extends NewPlugin {
         }
         try {
             String code = Files.readString(customizationFile);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code, logger);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
         } catch (IOException e) {
             logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
@@ -247,7 +253,7 @@ public class Postprocessor extends NewPlugin {
     }
 
     @SuppressWarnings("unchecked")
-    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code, Logger logger) {
+    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -257,7 +263,7 @@ public class Postprocessor extends NewPlugin {
             editor = new Editor(new HashMap<>(), tempDirWithPrefix);
             byte[] buffer = Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml").readAllBytes();
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
+            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"));
             editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -326,8 +332,10 @@ public class Postprocessor extends NewPlugin {
         logger.info("Finish handle partial update.");
     }
 
-    private static void attemptMavenInstall(Path pomPath, Logger logger) {
-        String[] command = new String[] { "mvn", "compiler:compile" };
+    private static void attemptMavenInstall(Path pomPath) {
+        String[] command = Utils.isWindows()
+            ? new String[] { "cmd", "/c", "mvn", "compiler:compile", "-f", pomPath.toString() }
+            : new String[] { "mvn", "compiler:compile", "-f", pomPath.toString() };
 
         // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
         // necessary dependencies to run.
@@ -337,7 +345,6 @@ public class Postprocessor extends NewPlugin {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 

@@ -161,7 +161,9 @@ public class Main {
     }
 
     private static void attemptMavenSpotless(Path pomPath) {
-        String[] command = new String[] { "mvn", "spotless:apply" };
+        String[] command = isWindows()
+            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
 
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
@@ -169,7 +171,6 @@ public class Main {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
@@ -181,6 +182,11 @@ public class Main {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {

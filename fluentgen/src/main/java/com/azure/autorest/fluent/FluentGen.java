@@ -158,7 +158,7 @@ public class FluentGen extends Javagen {
                         FluentUtils.loadTextFromResource("eclipse-format-azure-sdk-for-java.xml"))
                         .toFile().deleteOnExit();
 
-                attemptMavenSpotless(pomPath, logger);
+                attemptMavenSpotless(pomPath);
 
                 for (JavaFile javaFile : javaFiles) {
                     Path file = tmpDir.resolve(javaFile.getFilePath());
@@ -172,8 +172,10 @@ public class FluentGen extends Javagen {
         }
     }
 
-    private static void attemptMavenSpotless(Path pomPath, Logger logger) {
-        String[] command = new String[] { "mvn", "spotless:apply" };
+    private static void attemptMavenSpotless(Path pomPath) {
+        String[] command = isWindows()
+            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
 
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
@@ -181,7 +183,6 @@ public class FluentGen extends Javagen {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
@@ -193,6 +194,11 @@ public class FluentGen extends Javagen {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     CodeModel handleYaml(String yamlContent) {
