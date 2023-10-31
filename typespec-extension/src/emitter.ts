@@ -81,7 +81,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
 
-    "fluent": { type: "string", nullable: true},
+    "fluent": { type: "string", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
