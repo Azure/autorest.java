@@ -50,20 +50,10 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '11'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-
       - script: |
           npm install -g autorest
           npm install
         displayName: 'Prepare Environment for Generation'
-
-      - script: |
-          mvn -version
-        displayName: 'Maven Version'
 
       - task: PowerShell@2
         displayName: 'Generate Code'
