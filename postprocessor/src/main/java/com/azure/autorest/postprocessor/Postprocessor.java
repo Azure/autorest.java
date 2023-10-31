@@ -4,11 +4,7 @@
 package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.customization.Customization;
-import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.BuildWorkspaceStatus;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -20,15 +16,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -52,21 +44,6 @@ public class Postprocessor extends NewPlugin {
 
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
-        String readme = null;
-        try {
-            String readmePath = getReadme();
-            if (readmePath != null) {
-                logger.info("README found at: {}", readmePath);
-                readme = Files.readString(Paths.get(new URI(readmePath)));
-            }
-        } catch (IOException | URISyntaxException | IllegalArgumentException e) {
-            logger.warn("Location of README is not valid", e);
-            return false;
-        } catch (FileSystemNotFoundException e) {
-            // likely cause is the URI of the README is "https" scheme
-            logger.warn("File system of README not reachable, skip README", e);
-            // continue
-        }
 
         if (className == null) {
             try {
@@ -78,8 +55,8 @@ public class Postprocessor extends NewPlugin {
             return true;
         }
 
-        if (jarPath == null && readme == null) {
-            logger.warn("Must provide a JAR path or a README.md config containing the customization class {}", className);
+        if (jarPath == null && (!className.startsWith("src") || !className.endsWith(".java"))) {
+            logger.warn("Must provide a JAR path or a source file path containing the customization class {}", className);
             return false;
         }
 
@@ -100,7 +77,7 @@ public class Postprocessor extends NewPlugin {
                 } else {
                     jarUrl = new URI(jarPath).toURL();
                 }
-                if (jarUrl == null || !new File(jarUrl.getFile()).exists()) {
+                if (jarUrl == null || Files.notExists(Paths.get(jarUrl.toURI()))) {
                     new PluginLogger(this, Postprocessor.class, "LoadCustomizationJar")
                         .warn("Customization JAR {} not found. Customization skipped.", jarPath);
                     return true;
@@ -117,7 +94,7 @@ public class Postprocessor extends NewPlugin {
             } else if (className.startsWith("src") && className.endsWith(".java")) {
                 customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(), logger);
             } else {
-                customizationClass = loadCustomizationClassFromReadme(className, readme);
+                throw new RuntimeException("Invalid customization class " + className);
             }
 
             try {
@@ -217,23 +194,6 @@ public class Postprocessor extends NewPlugin {
         return null;
     }
 
-    private Class<? extends Customization> loadCustomizationClassFromReadme(String className, String readmeContent) {
-        String customizationFile = String.format("src/main/java/%s.java", className);
-        String code;
-        if (readmeContent.contains("public class " + className)) {
-            int classIndex = readmeContent.indexOf("public class " + className);
-            int startIndex = readmeContent.substring(0, classIndex).lastIndexOf("```java");
-            code = readmeContent.substring(startIndex).replaceFirst("```java.*([\r]?\n)", "");
-            int endIndex = code.indexOf("```");
-            code = code.substring(0, endIndex);
-        } else {
-            logger.warn("No customization class defined in README.");
-            return null;
-        }
-
-        return loadCustomizationClass(className, customizationFile, code);
-    }
-
     public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
         Path customizationFile = Paths.get(filePath);
         if (!customizationFile.isAbsolute()) {
@@ -241,9 +201,10 @@ public class Postprocessor extends NewPlugin {
                 customizationFile = Paths.get(baseDirectory, filePath);
             }
         }
+
         try {
             String code = Files.readString(customizationFile);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), code);
         } catch (IOException e) {
             logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
@@ -251,48 +212,31 @@ public class Postprocessor extends NewPlugin {
     }
 
     @SuppressWarnings("unchecked")
-    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
-        Path tempDirWithPrefix;
-
-        // Populate editor
-        Editor editor;
+    public static Class<? extends Customization> loadCustomizationClass(String className, String code) {
+        Path customizationCompile = null;
         try {
-            tempDirWithPrefix = Files.createTempDirectory("temp");
-            editor = new Editor(new HashMap<>(), tempDirWithPrefix);
-            byte[] buffer = Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml").readAllBytes();
-            editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"));
-            editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            customizationCompile = Files.createTempDirectory("customizationCompile" + UUID.randomUUID());
 
-        int javaVersion = Runtime.version().feature();
-        if (javaVersion != -1 && javaVersion < 11) {
-            throw new IllegalStateException("Java version was '" + javaVersion + "', code customizations require "
-                + "Java 11+ to be used. Please update your environment to Java 11+, preferably Java 17, and run "
-                + "Autorest again.");
-        }
+            Path pomPath = customizationCompile.resolve("compile-pom.xml");
+            Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
 
-        // Start language client
-        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(tempDirWithPrefix.toString())) {
-            languageClient.initialize();
-            SymbolInformation classSymbol = languageClient.findWorkspaceSymbol(className)
-                .stream().filter(si -> si.getLocation().getUri().toString().endsWith(className + ".java"))
-                .findFirst().get();
-            URI fileUri = classSymbol.getLocation().getUri();
-            Utils.organizeImportsOnRange(languageClient, editor, fileUri, classSymbol.getLocation().getRange());
-            BuildWorkspaceStatus status = languageClient.buildWorkspace(true);
-            if (status == BuildWorkspaceStatus.SUCCEED) {
-                URL fileUrl = new URI(Paths.get(tempDirWithPrefix.toString(), "target", "classes").toUri().toString()).toURL();
-                URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl}, ClassLoader.getSystemClassLoader());
-                return (Class<? extends Customization>) Class.forName(className, true, classLoader);
-            }
-            throw new RuntimeException("Failed to build with status code " + status);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            Path sourcePath = customizationCompile.resolve("src/main/java/" + className + ".java");
+            Files.createDirectories(sourcePath.getParent());
+
+            Files.writeString(sourcePath, code);
+
+            attemptMavenInstall(pomPath);
+
+            URL fileUrl = customizationCompile.resolve("target/classes").toUri().toURL();
+            URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{fileUrl},
+                ClassLoader.getSystemClassLoader());
+            return (Class<? extends Customization>) Class.forName(className, true, classLoader);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         } finally {
-            Utils.deleteDirectory(tempDirWithPrefix.toFile());
+            if (customizationCompile != null) {
+                Utils.deleteDirectory(customizationCompile.toFile());
+            }
         }
     }
 
@@ -335,11 +279,8 @@ public class Postprocessor extends NewPlugin {
             ? new String[] { "cmd", "/c", "mvn", "compiler:compile", "-f", pomPath.toString() }
             : new String[] { "mvn", "compiler:compile", "-f", pomPath.toString() };
 
-        // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
-        // necessary dependencies to run.
         try {
-            File outputFile = Files.createTempFile(pomPath.getParent(), "install", ".log").toFile();
-            outputFile.deleteOnExit();
+            File outputFile = Files.createTempFile(pomPath.getParent(), "compile", ".log").toFile();
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
@@ -348,11 +289,12 @@ public class Postprocessor extends NewPlugin {
 
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
-                throw new RuntimeException("Customization install failed to complete within 60 seconds or failed with "
-                    + "an error code." + Files.readString(outputFile.toPath()));
+                throw new RuntimeException("Compile failed to complete within 60 seconds or failed with an error code. "
+                    + Files.readString(outputFile.toPath())
+                    + "If this happens 'mvn compile -f " + pomPath + "' to install dependencies manually.");
             }
         } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException("Failed to install customization POM file.", ex);
+            throw new RuntimeException("Failed to run compile on generated code.", ex);
         }
     }
 

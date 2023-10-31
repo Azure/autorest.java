@@ -122,7 +122,7 @@ public class Main {
         String artifactId = ClientModelUtil.getArtifactId();
         if (!CoreUtils.isNullOrEmpty(artifactId)) {
             typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
         }
         System.exit(0);
     }
