@@ -32,9 +32,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
@@ -146,12 +145,13 @@ public class Postprocessor extends NewPlugin {
         }
 
         //Step 4: Print to files
-        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
         Formatter formatter = new Formatter();
+
 
         // Formatting Java source files can be expensive but can be run in parallel.
         // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
         // complete.
+        AtomicBoolean failedFormatting = new AtomicBoolean();
         fileContents.entrySet().parallelStream().forEach(javaFile -> {
             String formattedSource = javaFile.getValue();
             if (javaFile.getKey().endsWith(".java")) {
@@ -160,17 +160,17 @@ public class Postprocessor extends NewPlugin {
                         formattedSource = formatter.formatSourceAndFixImports(formattedSource);
                     } catch (Exception e) {
                         logger.error("Unable to format output file " + javaFile.getKey(), e);
-                        throw new CompletionException(e);
+                        failedFormatting.set(true);
                     }
                 }
             }
 
-            formattedFiles.put(javaFile.getKey(), formattedSource);
+            writeFile(javaFile.getKey(), formattedSource, null);
         });
 
-        // Then for each formatted file write the file. This is done synchronously as there is potential race
-        // conditions that can lead to deadlocking.
-        formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
+        if (failedFormatting.get()) {
+            throw new RuntimeException("Failed to format Java files.");
+        }
     }
 
     private String getReadme() {

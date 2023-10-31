@@ -63,6 +63,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class FluentGen extends Javagen {
@@ -119,18 +120,28 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String content = javaFile.getContents().toString();
-                String path = javaFile.getFilePath();
-
+            // Formatting Java source files can be expensive but can be run in parallel.
+            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
+            // complete.
+            AtomicBoolean failedFormatting = new AtomicBoolean();
+            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
+                String formattedSource = javaFile.getContents().toString();
                 if (!settings.isSkipFormatting()) {
-                    // formatter
-                    boolean isSampleOrTestJavaFile = path.contains("src/samples/java/") || path.contains("src/test/java/");
-                    content = new JavaFormatter(content, path).format();
+                    try {
+                        formattedSource = new JavaFormatter(formattedSource, javaFile.getFilePath()).format();
+                    } catch (Exception e) {
+                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
+                        failedFormatting.set(true);
+                    }
                 }
 
-                writeFile(path, content, null);
+                writeFile(javaFile.getFilePath(), formattedSource, null);
+            });
+
+            if (failedFormatting.get()) {
+                throw new RuntimeException("Failed to format Java files.");
             }
+
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);

@@ -15,10 +15,10 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -50,8 +50,6 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -92,7 +90,6 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = writeToTemplates(codeModel, client, settings, true);
 
             //Step 4: Print to files
-            Map<String, String> formattedFiles = new ConcurrentHashMap<>();
             Formatter formatter = new Formatter();
 
             // Formatting Java source files can be expensive but can be run in parallel.
@@ -110,16 +107,12 @@ public class Javagen extends NewPlugin {
                     }
                 }
 
-                formattedFiles.put(javaFile.getFilePath(), formattedSource);
+                writeFile(javaFile.getFilePath(), formattedSource, null);
             });
 
             if (failedFormatting.get()) {
                 throw new RuntimeException("Failed to format Java files.");
             }
-
-            // Then for each formatted file write the file. This is done synchronously as there is potential race
-            // conditions that can lead to deadlocking.
-            formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
 
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
@@ -131,7 +124,7 @@ public class Javagen extends NewPlugin {
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
         } catch (Exception ex) {
             logger.error("Failed to generate code.", ex);
@@ -226,7 +219,7 @@ public class Javagen extends NewPlugin {
                 if (CoreUtils.isNullOrEmpty(serviceClients)) {
                     serviceClients = Collections.singletonList(client.getServiceClient());
                 }
-                TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
+                TestContext<?> testContext = new TestContext<>(serviceClients, client.getSyncClients());
 
                 // base test class
                 javaPackage.addProtocolTestBase(testContext);
