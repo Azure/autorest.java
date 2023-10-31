@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = ReadonlypropertyClientBuilder.class, isAsync = true)
 public final class ReadonlypropertyAsyncClient {
-    @Generated private final ReadonlypropertiesImpl serviceClient;
+    @Generated
+    private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlypropertyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,23 +38,23 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -61,16 +64,16 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

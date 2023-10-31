@@ -11,10 +11,8 @@ import com.cadl.flatten.models.User;
 
 public class FlattenOpSend {
     public static void main(String[] args) {
-        FlattenClient flattenClient =
-                new FlattenClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
-                        .buildClient();
+        FlattenClient flattenClient
+            = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.flatten.generated.send.flattenopsend
         flattenClient.send("myRequiredId", "myRequiredInput", new User("myOptionalUser"));
         // END:com.cadl.flatten.generated.send.flattenopsend

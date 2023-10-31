@@ -20,14 +20,17 @@ import com.cadl.visibility.implementation.VisibilityReadsImpl;
 import com.cadl.visibility.models.Dog;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the asynchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
 public final class VisibilityReadAsyncClient {
-    @Generated private final VisibilityReadsImpl serviceClient;
+    @Generated
+    private final VisibilityReadsImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityReadAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class VisibilityReadAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -47,7 +50,7 @@ public final class VisibilityReadAsyncClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -63,7 +66,7 @@ public final class VisibilityReadAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -76,8 +79,7 @@ public final class VisibilityReadAsyncClient {
     public Mono<Dog> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

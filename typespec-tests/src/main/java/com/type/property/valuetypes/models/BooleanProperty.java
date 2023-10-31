@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Model with a boolean property. */
+/**
+ * Model with a boolean property.
+ */
 @Immutable
 public final class BooleanProperty {
     /*
@@ -21,7 +23,7 @@ public final class BooleanProperty {
 
     /**
      * Creates an instance of BooleanProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class BooleanProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

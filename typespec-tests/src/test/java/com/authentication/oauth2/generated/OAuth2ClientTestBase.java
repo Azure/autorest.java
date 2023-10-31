@@ -25,21 +25,18 @@ class OAuth2ClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        OAuth2ClientBuilder oAuth2Clientbuilder =
-                new OAuth2ClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OAuth2ClientBuilder oAuth2Clientbuilder = new OAuth2ClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            oAuth2Clientbuilder
-                    .httpClient(interceptorManager.getPlaybackClient())
-                    .credential(request -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)));
+            oAuth2Clientbuilder.httpClient(interceptorManager.getPlaybackClient())
+                .credential(request -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)));
         } else if (getTestMode() == TestMode.RECORD) {
-            oAuth2Clientbuilder
-                    .addPolicy(interceptorManager.getRecordPolicy())
-                    .credential(new DefaultAzureCredentialBuilder().build());
+            oAuth2Clientbuilder.addPolicy(interceptorManager.getRecordPolicy())
+                .credential(new DefaultAzureCredentialBuilder().build());
         } else if (getTestMode() == TestMode.LIVE) {
             oAuth2Clientbuilder.credential(new DefaultAzureCredentialBuilder().build());
         }
         oAuth2Client = oAuth2Clientbuilder.buildClient();
+
     }
 }

@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.server.path.single.implementation.SingleClientImpl;
 
-/** Initializes a new instance of the synchronous SingleClient type. */
+/**
+ * Initializes a new instance of the synchronous SingleClient type.
+ */
 @ServiceClient(builder = SingleClientBuilder.class)
 public final class SingleClient {
-    @Generated private final SingleClientImpl serviceClient;
+    @Generated
+    private final SingleClientImpl serviceClient;
 
     /**
      * Initializes an instance of SingleClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class SingleClient {
 
     /**
      * The myOp operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class SingleClient {
 
     /**
      * The myOp operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

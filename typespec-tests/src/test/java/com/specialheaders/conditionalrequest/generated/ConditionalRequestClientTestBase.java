@@ -21,15 +21,15 @@ class ConditionalRequestClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ConditionalRequestClientBuilder conditionalRequestClientbuilder =
-                new ConditionalRequestClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ConditionalRequestClientBuilder conditionalRequestClientbuilder
+            = new ConditionalRequestClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             conditionalRequestClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             conditionalRequestClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         conditionalRequestClient = conditionalRequestClientbuilder.buildClient();
+
     }
 }

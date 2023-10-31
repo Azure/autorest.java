@@ -21,15 +21,14 @@ class EmptyClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        EmptyClientBuilder emptyClientbuilder =
-                new EmptyClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        EmptyClientBuilder emptyClientbuilder = new EmptyClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             emptyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             emptyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         emptyClient = emptyClientbuilder.buildClient();
+
     }
 }

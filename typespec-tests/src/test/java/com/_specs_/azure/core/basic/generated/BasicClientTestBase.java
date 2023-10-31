@@ -21,15 +21,14 @@ class BasicClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BasicClientBuilder basicClientbuilder =
-                new BasicClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BasicClientBuilder basicClientbuilder = new BasicClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             basicClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             basicClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         basicClient = basicClientbuilder.buildClient();
+
     }
 }

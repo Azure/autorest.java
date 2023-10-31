@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.BasicsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = BasicClientBuilder.class)
 public final class BasicClient {
-    @Generated private final BasicsImpl serviceClient;
+    @Generated
+    private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of BasicClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,9 +37,9 @@ public final class BasicClient {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -44,7 +47,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,9 +63,9 @@ public final class BasicClient {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -70,7 +73,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,9 +90,9 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -97,7 +100,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,9 +116,9 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is empty.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -123,7 +126,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -139,9 +142,9 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -149,7 +152,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -165,9 +168,9 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -175,7 +178,7 @@ public final class BasicClient {
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

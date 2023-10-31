@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.RenamedOperationClientImpl;
 
-/** Initializes a new instance of the synchronous RenamedOperationClient type. */
+/**
+ * Initializes a new instance of the synchronous RenamedOperationClient type.
+ */
 @ServiceClient(builder = RenamedOperationClientBuilder.class)
 public final class RenamedOperationClient {
-    @Generated private final RenamedOperationClientImpl serviceClient;
+    @Generated
+    private final RenamedOperationClientImpl serviceClient;
 
     /**
      * Initializes an instance of RenamedOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedOne operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedThree operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +68,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedFive operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,7 +84,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedOne operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -98,7 +101,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedThree operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -115,7 +118,7 @@ public final class RenamedOperationClient {
 
     /**
      * The renamedFive operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

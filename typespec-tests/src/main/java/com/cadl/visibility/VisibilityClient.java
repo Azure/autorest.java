@@ -21,14 +21,17 @@ import com.cadl.visibility.models.ReadDog;
 import com.cadl.visibility.models.RoundTripModel;
 import com.cadl.visibility.models.WriteDog;
 
-/** Initializes a new instance of the synchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the synchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityClient {
-    @Generated private final VisibilityClientImpl serviceClient;
+    @Generated
+    private final VisibilityClientImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,9 +41,9 @@ public final class VisibilityClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -48,7 +51,7 @@ public final class VisibilityClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -64,17 +67,17 @@ public final class VisibilityClient {
 
     /**
      * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -82,7 +85,7 @@ public final class VisibilityClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -99,18 +102,18 @@ public final class VisibilityClient {
 
     /**
      * The query operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -118,7 +121,7 @@ public final class VisibilityClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -135,25 +138,25 @@ public final class VisibilityClient {
 
     /**
      * The roundtrip operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -170,7 +173,7 @@ public final class VisibilityClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -188,7 +191,7 @@ public final class VisibilityClient {
 
     /**
      * The create operation.
-     *
+     * 
      * @param dog The dog parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -208,7 +211,7 @@ public final class VisibilityClient {
 
     /**
      * The query operation.
-     *
+     * 
      * @param dog The dog parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -228,7 +231,7 @@ public final class VisibilityClient {
 
     /**
      * The roundtrip operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -243,8 +246,7 @@ public final class VisibilityClient {
     public RoundTripModel roundtrip(RoundTripModel body) {
         // Generated convenience method for roundtripWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return roundtripWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(RoundTripModel.class);
+        return roundtripWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(RoundTripModel.class);
     }
 }

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SchemasQueryIdByContentHeaders model. */
+/**
+ * The SchemasQueryIdByContentHeaders model.
+ */
 @Fluent
 public final class SchemasQueryIdByContentHeaders {
     /*
@@ -61,7 +63,7 @@ public final class SchemasQueryIdByContentHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of SchemasQueryIdByContentHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public SchemasQueryIdByContentHeaders(HttpHeaders rawHeaders) {
@@ -78,7 +80,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the schemaVersion property: The Schema-Version property.
-     *
+     * 
      * @return the schemaVersion value.
      */
     public Integer getSchemaVersion() {
@@ -87,7 +89,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the schemaVersion property: The Schema-Version property.
-     *
+     * 
      * @param schemaVersion the schemaVersion value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */
@@ -98,7 +100,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the schemaId property: The Schema-Id property.
-     *
+     * 
      * @return the schemaId value.
      */
     public String getSchemaId() {
@@ -107,7 +109,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the schemaId property: The Schema-Id property.
-     *
+     * 
      * @param schemaId the schemaId value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */
@@ -118,7 +120,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the schemaGroupName property: The Schema-Group-Name property.
-     *
+     * 
      * @return the schemaGroupName value.
      */
     public String getSchemaGroupName() {
@@ -127,7 +129,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the schemaGroupName property: The Schema-Group-Name property.
-     *
+     * 
      * @param schemaGroupName the schemaGroupName value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */
@@ -138,7 +140,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the schemaName property: The Schema-Name property.
-     *
+     * 
      * @return the schemaName value.
      */
     public String getSchemaName() {
@@ -147,7 +149,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the schemaName property: The Schema-Name property.
-     *
+     * 
      * @param schemaName the schemaName value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */
@@ -158,7 +160,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the schemaIdLocation property: The Schema-Id-Location property.
-     *
+     * 
      * @return the schemaIdLocation value.
      */
     public String getSchemaIdLocation() {
@@ -167,7 +169,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the schemaIdLocation property: The Schema-Id-Location property.
-     *
+     * 
      * @param schemaIdLocation the schemaIdLocation value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */
@@ -178,7 +180,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -187,7 +189,7 @@ public final class SchemasQueryIdByContentHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the SchemasQueryIdByContentHeaders object itself.
      */

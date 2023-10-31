@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The Base64UrlArrayBytesProperty model. */
+/**
+ * The Base64UrlArrayBytesProperty model.
+ */
 @Immutable
 public final class Base64UrlArrayBytesProperty {
 
@@ -33,7 +35,8 @@ public final class Base64UrlArrayBytesProperty {
     }
 
     @Generated
-    private Base64UrlArrayBytesProperty() {}
+    private Base64UrlArrayBytesProperty() {
+    }
 
     /**
      * Get the value property: The value property.

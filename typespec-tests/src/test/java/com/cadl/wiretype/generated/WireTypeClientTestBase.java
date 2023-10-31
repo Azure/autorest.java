@@ -22,16 +22,16 @@ class WireTypeClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        WireTypeClientBuilder wireTypeClientbuilder =
-                new WireTypeClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        WireTypeClientBuilder wireTypeClientbuilder
+            = new WireTypeClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             wireTypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             wireTypeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         wireTypeClient = wireTypeClientbuilder.buildClient();
+
     }
 }

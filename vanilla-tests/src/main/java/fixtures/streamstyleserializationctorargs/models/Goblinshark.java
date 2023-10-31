@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The Goblinshark model. */
+/**
+ * The Goblinshark model.
+ */
 @Fluent
 public final class Goblinshark extends Shark {
     /*
@@ -29,7 +31,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Creates an instance of Goblinshark class.
-     *
+     * 
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
@@ -39,7 +41,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Get the jawsize property: The jawsize property.
-     *
+     * 
      * @return the jawsize value.
      */
     public Integer getJawsize() {
@@ -48,7 +50,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the jawsize property: The jawsize property.
-     *
+     * 
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
@@ -59,7 +61,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Get the color property: Colors possible.
-     *
+     * 
      * @return the color value.
      */
     public GoblinSharkColor getColor() {
@@ -68,7 +70,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the color property: Colors possible.
-     *
+     * 
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
@@ -77,21 +79,27 @@ public final class Goblinshark extends Shark {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -100,7 +108,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -124,80 +132,76 @@ public final class Goblinshark extends Shark {
 
     /**
      * Reads an instance of Goblinshark from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    boolean birthdayFound = false;
-                    OffsetDateTime birthday = null;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    Integer age = null;
-                    Integer jawsize = null;
-                    GoblinSharkColor color = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean lengthFound = false;
+            float length = 0.0f;
+            boolean birthdayFound = false;
+            OffsetDateTime birthday = null;
+            String species = null;
+            List<Fish> siblings = null;
+            Integer age = null;
+            Integer jawsize = null;
+            GoblinSharkColor color = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("fishtype".equals(fieldName)) {
-                            String fishtype = reader.getString();
-                            if (!"goblin".equals(fishtype)) {
-                                throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
-                                                + fishtype
-                                                + "'.");
-                            }
-                        } else if ("length".equals(fieldName)) {
-                            length = reader.getFloat();
-                            lengthFound = true;
-                        } else if ("birthday".equals(fieldName)) {
-                            birthday =
-                                    reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                            birthdayFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                        } else if ("age".equals(fieldName)) {
-                            age = reader.getNullable(JsonReader::getInt);
-                        } else if ("jawsize".equals(fieldName)) {
-                            jawsize = reader.getNullable(JsonReader::getInt);
-                        } else if ("color".equals(fieldName)) {
-                            color = GoblinSharkColor.fromString(reader.getString());
-                        } else {
-                            reader.skipChildren();
-                        }
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"goblin".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
+                                + fishtype + "'.");
                     }
-                    if (lengthFound && birthdayFound) {
-                        Goblinshark deserializedGoblinshark = new Goblinshark(length, birthday);
-                        deserializedGoblinshark.setSpecies(species);
-                        deserializedGoblinshark.setSiblings(siblings);
-                        deserializedGoblinshark.setAge(age);
-                        deserializedGoblinshark.jawsize = jawsize;
-                        deserializedGoblinshark.color = color;
+                } else if ("length".equals(fieldName)) {
+                    length = reader.getFloat();
+                    lengthFound = true;
+                } else if ("birthday".equals(fieldName)) {
+                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthdayFound = true;
+                } else if ("species".equals(fieldName)) {
+                    species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getNullable(JsonReader::getInt);
+                } else if ("jawsize".equals(fieldName)) {
+                    jawsize = reader.getNullable(JsonReader::getInt);
+                } else if ("color".equals(fieldName)) {
+                    color = GoblinSharkColor.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (lengthFound && birthdayFound) {
+                Goblinshark deserializedGoblinshark = new Goblinshark(length, birthday);
+                deserializedGoblinshark.setSpecies(species);
+                deserializedGoblinshark.setSiblings(siblings);
+                deserializedGoblinshark.setAge(age);
+                deserializedGoblinshark.jawsize = jawsize;
+                deserializedGoblinshark.color = color;
 
-                        return deserializedGoblinshark;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-                    if (!birthdayFound) {
-                        missingProperties.add("birthday");
-                    }
+                return deserializedGoblinshark;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!lengthFound) {
+                missingProperties.add("length");
+            }
+            if (!birthdayFound) {
+                missingProperties.add("birthday");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

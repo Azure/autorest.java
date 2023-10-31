@@ -15,7 +15,9 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** Data about a slideshow. */
+/**
+ * Data about a slideshow.
+ */
 @Fluent
 public final class Slideshow implements XmlSerializable<Slideshow> {
     /*
@@ -38,12 +40,15 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      */
     private List<Slide> slides = new ArrayList<>();
 
-    /** Creates an instance of Slideshow class. */
-    public Slideshow() {}
+    /**
+     * Creates an instance of Slideshow class.
+     */
+    public Slideshow() {
+    }
 
     /**
      * Get the title property: The title property.
-     *
+     * 
      * @return the title value.
      */
     public String getTitle() {
@@ -52,7 +57,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Set the title property: The title property.
-     *
+     * 
      * @param title the title value to set.
      * @return the Slideshow object itself.
      */
@@ -63,7 +68,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Get the date property: The date property.
-     *
+     * 
      * @return the date value.
      */
     public String getDate() {
@@ -72,7 +77,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Set the date property: The date property.
-     *
+     * 
      * @param date the date value to set.
      * @return the Slideshow object itself.
      */
@@ -83,7 +88,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Get the author property: The author property.
-     *
+     * 
      * @return the author value.
      */
     public String getAuthor() {
@@ -92,7 +97,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Set the author property: The author property.
-     *
+     * 
      * @param author the author value to set.
      * @return the Slideshow object itself.
      */
@@ -103,7 +108,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Get the slides property: The slides property.
-     *
+     * 
      * @return the slides value.
      */
     public List<Slide> getSlides() {
@@ -112,7 +117,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Set the slides property: The slides property.
-     *
+     * 
      * @param slides the slides value to set.
      * @return the Slideshow object itself.
      */
@@ -123,7 +128,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -156,10 +161,10 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Reads an instance of Slideshow from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
+     * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Slideshow.
      */
     public static Slideshow fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -168,44 +173,42 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
 
     /**
      * Reads an instance of Slideshow from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
+     * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Slideshow.
      */
     public static Slideshow fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Slideshow deserializedSlideshow = new Slideshow();
-                    deserializedSlideshow.title = reader.getStringAttribute(null, "title");
-                    deserializedSlideshow.date = reader.getStringAttribute(null, "date");
-                    deserializedSlideshow.author = reader.getStringAttribute(null, "author");
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Slideshow deserializedSlideshow = new Slideshow();
+            deserializedSlideshow.title = reader.getStringAttribute(null, "title");
+            deserializedSlideshow.date = reader.getStringAttribute(null, "date");
+            deserializedSlideshow.author = reader.getStringAttribute(null, "author");
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("slides".equals(elementName.getLocalPart())) {
-                            if (deserializedSlideshow.slides == null) {
-                                deserializedSlideshow.slides = new ArrayList<>();
-                            }
-                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                elementName = reader.getElementName();
-                                if ("slide".equals(elementName.getLocalPart())) {
-                                    deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
-                                } else {
-                                    reader.skipElement();
-                                }
-                            }
+                if ("slides".equals(elementName.getLocalPart())) {
+                    if (deserializedSlideshow.slides == null) {
+                        deserializedSlideshow.slides = new ArrayList<>();
+                    }
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        elementName = reader.getElementName();
+                        if ("slide".equals(elementName.getLocalPart())) {
+                            deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
                         } else {
                             reader.skipElement();
                         }
                     }
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedSlideshow;
-                });
+            return deserializedSlideshow;
+        });
     }
 }

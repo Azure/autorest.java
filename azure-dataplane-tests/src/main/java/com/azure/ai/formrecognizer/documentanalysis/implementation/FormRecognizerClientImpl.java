@@ -65,57 +65,67 @@ import java.time.Duration;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the FormRecognizerClient type. */
+/**
+ * Initializes a new instance of the FormRecognizerClient type.
+ */
 public final class FormRecognizerClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final FormRecognizerClientService service;
 
     /**
-     * Supported Cognitive Services endpoints (protocol and hostname, for example:
-     * https://westus2.api.cognitive.microsoft.com).
+     * Supported Cognitive Services endpoints (protocol and hostname, for
+     * example: https://westus2.api.cognitive.microsoft.com).
      */
     private final String endpoint;
 
     /**
-     * Gets Supported Cognitive Services endpoints (protocol and hostname, for example:
-     * https://westus2.api.cognitive.microsoft.com).
-     *
+     * Gets Supported Cognitive Services endpoints (protocol and hostname, for
+     * example: https://westus2.api.cognitive.microsoft.com).
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** Api Version. */
+    /**
+     * Api Version.
+     */
     private final String apiVersion;
 
     /**
      * Gets Api Version.
-     *
+     * 
      * @return the apiVersion value.
      */
     public String getApiVersion() {
         return this.apiVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -124,25 +134,22 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Initializes an instance of FormRecognizerClient client.
-     *
-     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for example:
-     *     https://westus2.api.cognitive.microsoft.com).
+     * 
+     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for
+     * example: https://westus2.api.cognitive.microsoft.com).
      * @param apiVersion Api Version.
      */
     FormRecognizerClientImpl(String endpoint, String apiVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                apiVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion);
     }
 
     /**
      * Initializes an instance of FormRecognizerClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for example:
-     *     https://westus2.api.cognitive.microsoft.com).
+     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for
+     * example: https://westus2.api.cognitive.microsoft.com).
      * @param apiVersion Api Version.
      */
     FormRecognizerClientImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion) {
@@ -151,21 +158,21 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Initializes an instance of FormRecognizerClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for example:
-     *     https://westus2.api.cognitive.microsoft.com).
+     * @param endpoint Supported Cognitive Services endpoints (protocol and hostname, for
+     * example: https://westus2.api.cognitive.microsoft.com).
      * @param apiVersion Api Version.
      */
-    FormRecognizerClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String apiVersion) {
+    FormRecognizerClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.apiVersion = apiVersion;
-        this.service =
-                RestProxy.create(FormRecognizerClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service
+            = RestProxy.create(FormRecognizerClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
@@ -176,345 +183,249 @@ public final class FormRecognizerClientImpl {
     @ServiceInterface(name = "FormRecognizerClient")
     public interface FormRecognizerClientService {
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("pages") String pages,
-                @QueryParam("locale") String locale,
-                @QueryParam("stringIndexType") StringIndexType stringIndexType,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") AnalyzeDocumentRequest analyzeRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") AnalyzeDocumentRequest analyzeRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("pages") String pages,
-                @QueryParam("locale") String locale,
-                @QueryParam("stringIndexType") StringIndexType stringIndexType,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") AnalyzeDocumentRequest analyzeRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") AnalyzeDocumentRequest analyzeRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("pages") String pages,
-                @QueryParam("locale") String locale,
-                @QueryParam("stringIndexType") StringIndexType stringIndexType,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> analyzeRequest,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> analyzeRequest,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("pages") String pages,
-                @QueryParam("locale") String locale,
-                @QueryParam("stringIndexType") StringIndexType stringIndexType,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") BinaryData analyzeRequest,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") BinaryData analyzeRequest,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("pages") String pages,
-                @QueryParam("locale") String locale,
-                @QueryParam("stringIndexType") StringIndexType stringIndexType,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") BinaryData analyzeRequest,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") BinaryData analyzeRequest,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}/analyzeResults/{resultId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResult(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @PathParam("resultId") String resultId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResult(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @PathParam("resultId") String resultId,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}/analyzeResults/{resultId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<AnalyzeResultOperation> getAnalyzeDocumentResultSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @PathParam("resultId") String resultId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<AnalyzeResultOperation> getAnalyzeDocumentResultSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @PathParam("resultId") String resultId,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:build")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<ResponseBase<BuildDocumentModelHeaders, Void>> buildDocumentModel(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") BuildDocumentModelRequest buildRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<BuildDocumentModelHeaders, Void>> buildDocumentModel(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") BuildDocumentModelRequest buildRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/documentModels:build")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        ResponseBase<BuildDocumentModelHeaders, Void> buildDocumentModelSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") BuildDocumentModelRequest buildRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        ResponseBase<BuildDocumentModelHeaders, Void> buildDocumentModelSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") BuildDocumentModelRequest buildRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/documentModels:compose")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<ComposeDocumentModelHeaders, Void>> composeDocumentModel(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") ComposeDocumentModelRequest composeRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") ComposeDocumentModelRequest composeRequest,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:compose")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        ResponseBase<ComposeDocumentModelHeaders, Void> composeDocumentModelSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") ComposeDocumentModelRequest composeRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        ResponseBase<ComposeDocumentModelHeaders, Void> composeDocumentModelSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") ComposeDocumentModelRequest composeRequest,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:authorizeCopy")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<CopyAuthorization>> authorizeCopyDocumentModel(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") AuthorizeCopyRequest authorizeCopyRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<CopyAuthorization>> authorizeCopyDocumentModel(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") AuthorizeCopyRequest authorizeCopyRequest,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:authorizeCopy")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<CopyAuthorization> authorizeCopyDocumentModelSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") AuthorizeCopyRequest authorizeCopyRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<CopyAuthorization> authorizeCopyDocumentModelSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") AuthorizeCopyRequest authorizeCopyRequest,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:copyTo")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelTo(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") CopyAuthorization copyToRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelTo(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") CopyAuthorization copyToRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/documentModels/{modelId}:copyTo")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        ResponseBase<CopyDocumentModelToHeaders, Void> copyDocumentModelToSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") CopyAuthorization copyToRequest,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        ResponseBase<CopyDocumentModelToHeaders, Void> copyDocumentModelToSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") CopyAuthorization copyToRequest, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/operations")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<GetOperationsResponse>> getOperations(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<GetOperationsResponse>> getOperations(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<GetOperationsResponse> getOperationsSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<GetOperationsResponse> getOperationsSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations/{operationId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<OperationDetails>> getOperation(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("operationId") String operationId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<OperationDetails>> getOperation(@HostParam("endpoint") String endpoint,
+            @PathParam("operationId") String operationId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations/{operationId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<OperationDetails> getOperationSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("operationId") String operationId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<OperationDetails> getOperationSync(@HostParam("endpoint") String endpoint,
+            @PathParam("operationId") String operationId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<GetDocumentModelsResponse>> getDocumentModels(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<GetDocumentModelsResponse>> getDocumentModels(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<GetDocumentModelsResponse> getDocumentModelsSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<GetDocumentModelsResponse> getDocumentModelsSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<DocumentModelDetails>> getDocumentModel(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<DocumentModelDetails>> getDocumentModel(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<DocumentModelDetails> getDocumentModelSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<DocumentModelDetails> getDocumentModelSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/documentModels/{modelId}")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<Void>> deleteDocumentModel(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> deleteDocumentModel(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/documentModels/{modelId}")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<Void> deleteDocumentModelSync(
-                @HostParam("endpoint") String endpoint,
-                @PathParam("modelId") String modelId,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> deleteDocumentModelSync(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/info")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Mono<Response<ResourceDetails>> getResourceDetails(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<ResourceDetails>> getResourceDetails(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/info")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
-        Response<ResourceDetails> getResourceDetailsSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<ResourceDetails> getResourceDetailsSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetOperationsResponse>> getOperationsNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetOperationsResponse> getOperationsNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetDocumentModelsResponse>> getDocumentModelsNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetDocumentModelsResponse> getDocumentModelsNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -523,36 +434,22 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        String pages, String locale, StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.analyzeDocument(
-                                this.getEndpoint(),
-                                modelId,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                this.getApiVersion(),
-                                analyzeRequest,
-                                accept,
-                                context));
+        return FluxUtil.withContext(context -> service.analyzeDocument(this.getEndpoint(), modelId, pages, locale,
+            stringIndexType, this.getApiVersion(), analyzeRequest, accept, context));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -562,35 +459,23 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest,
-            Context context) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        String pages, String locale, StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest,
+        Context context) {
         final String accept = "application/json";
-        return service.analyzeDocument(
-                this.getEndpoint(),
-                modelId,
-                pages,
-                locale,
-                stringIndexType,
-                this.getApiVersion(),
-                analyzeRequest,
-                accept,
-                context);
+        return service.analyzeDocument(this.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.getApiVersion(), analyzeRequest, accept, context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -600,35 +485,22 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest,
-            Context context) {
+    public ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(String modelId, String pages,
+        String locale, StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest, Context context) {
         final String accept = "application/json";
-        return service.analyzeDocumentSync(
-                this.getEndpoint(),
-                modelId,
-                pages,
-                locale,
-                stringIndexType,
-                this.getApiVersion(),
-                analyzeRequest,
-                accept,
-                context);
+        return service.analyzeDocumentSync(this.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.getApiVersion(), analyzeRequest, accept, context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -637,32 +509,25 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.analyzeDocumentWithResponseAsync(modelId, pages, locale, stringIndexType, analyzeRequest),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, String pages, String locale,
+        StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, pages, locale, stringIndexType, analyzeRequest),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -672,35 +537,26 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest,
-            Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponseAsync(
-                                modelId, pages, locale, stringIndexType, analyzeRequest, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, String pages, String locale,
+        StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, pages, locale, stringIndexType, analyzeRequest,
+                context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -709,34 +565,26 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponse(
-                                modelId, pages, locale, stringIndexType, analyzeRequest, Context.NONE),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String pages, String locale,
+        StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponse(modelId, pages, locale, stringIndexType, analyzeRequest,
+                Context.NONE),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -746,36 +594,26 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(
-            String modelId,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            AnalyzeDocumentRequest analyzeRequest,
-            Context context) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponse(
-                                modelId, pages, locale, stringIndexType, analyzeRequest, context),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String pages, String locale,
+        StringIndexType stringIndexType, AnalyzeDocumentRequest analyzeRequest, Context context) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponse(modelId, pages, locale, stringIndexType, analyzeRequest, context),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -785,41 +623,24 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            Flux<ByteBuffer> analyzeRequest,
-            Long contentLength) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.analyzeDocument(
-                                this.getEndpoint(),
-                                modelId,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                this.getApiVersion(),
-                                contentType,
-                                analyzeRequest,
-                                contentLength,
-                                accept,
-                                context));
+        return FluxUtil.withContext(context -> service.analyzeDocument(this.getEndpoint(), modelId, pages, locale,
+            stringIndexType, this.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -830,40 +651,24 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            Flux<ByteBuffer> analyzeRequest,
-            Long contentLength,
-            Context context) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength, Context context) {
         final String accept = "application/json";
-        return service.analyzeDocument(
-                this.getEndpoint(),
-                modelId,
-                pages,
-                locale,
-                stringIndexType,
-                this.getApiVersion(),
-                contentType,
-                analyzeRequest,
-                contentLength,
-                accept,
-                context);
+        return service.analyzeDocument(this.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -873,37 +678,28 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            Flux<ByteBuffer> analyzeRequest,
-            Long contentLength) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponseAsync(
-                                modelId, contentType, pages, locale, stringIndexType, analyzeRequest, contentLength),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -914,45 +710,28 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            Flux<ByteBuffer> analyzeRequest,
-            Long contentLength,
-            Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponseAsync(
-                                modelId,
-                                contentType,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                analyzeRequest,
-                                contentLength,
-                                context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -962,41 +741,24 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        BinaryData analyzeRequest, Long contentLength) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.analyzeDocument(
-                                this.getEndpoint(),
-                                modelId,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                this.getApiVersion(),
-                                contentType,
-                                analyzeRequest,
-                                contentLength,
-                                accept,
-                                context));
+        return FluxUtil.withContext(context -> service.analyzeDocument(this.getEndpoint(), modelId, pages, locale,
+            stringIndexType, this.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1007,40 +769,24 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength,
-            Context context) {
+    public Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        BinaryData analyzeRequest, Long contentLength, Context context) {
         final String accept = "application/json";
-        return service.analyzeDocument(
-                this.getEndpoint(),
-                modelId,
-                pages,
-                locale,
-                stringIndexType,
-                this.getApiVersion(),
-                contentType,
-                analyzeRequest,
-                contentLength,
-                accept,
-                context);
+        return service.analyzeDocument(this.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1051,40 +797,24 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength,
-            Context context) {
+    public ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        BinaryData analyzeRequest, Long contentLength, Context context) {
         final String accept = "application/json";
-        return service.analyzeDocumentSync(
-                this.getEndpoint(),
-                modelId,
-                pages,
-                locale,
-                stringIndexType,
-                this.getApiVersion(),
-                contentType,
-                analyzeRequest,
-                contentLength,
-                accept,
-                context);
+        return service.analyzeDocumentSync(this.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context);
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1094,37 +824,27 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponseAsync(
-                                modelId, contentType, pages, locale, stringIndexType, analyzeRequest, contentLength),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, BinaryData analyzeRequest, Long contentLength) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1135,45 +855,28 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength,
-            Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponseAsync(
-                                modelId,
-                                contentType,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                analyzeRequest,
-                                contentLength,
-                                context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, BinaryData analyzeRequest, Long contentLength,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1183,44 +886,27 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponse(
-                                modelId,
-                                contentType,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                analyzeRequest,
-                                contentLength,
-                                Context.NONE),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, BinaryData analyzeRequest, Long contentLength) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponse(modelId, contentType, pages, locale, stringIndexType, analyzeRequest,
+                contentLength, Context.NONE),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Analyze document
-     *
-     * <p>Analyzes document with document model.
-     *
+     * 
+     * Analyzes document with document model.
+     * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
      * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
      * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
-     *     (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1231,40 +917,23 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(
-            String modelId,
-            ContentType contentType,
-            String pages,
-            String locale,
-            StringIndexType stringIndexType,
-            BinaryData analyzeRequest,
-            Long contentLength,
-            Context context) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () ->
-                        this.analyzeDocumentWithResponse(
-                                modelId,
-                                contentType,
-                                pages,
-                                locale,
-                                stringIndexType,
-                                analyzeRequest,
-                                contentLength,
-                                context),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, BinaryData analyzeRequest, Long contentLength,
+        Context context) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponse(modelId, contentType, pages, locale, stringIndexType, analyzeRequest,
+                contentLength, context),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1273,20 +942,18 @@ public final class FormRecognizerClientImpl {
      * @return the result of document analysis along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResultWithResponseAsync(
-            String modelId, String resultId) {
+    public Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResultWithResponseAsync(String modelId,
+        String resultId) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getAnalyzeDocumentResult(
-                                this.getEndpoint(), modelId, resultId, this.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> service.getAnalyzeDocumentResult(this.getEndpoint(), modelId, resultId,
+            this.getApiVersion(), accept, context));
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @param context The context to associate with this operation.
@@ -1296,18 +963,18 @@ public final class FormRecognizerClientImpl {
      * @return the result of document analysis along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResultWithResponseAsync(
-            String modelId, String resultId, Context context) {
+    public Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResultWithResponseAsync(String modelId,
+        String resultId, Context context) {
         final String accept = "application/json";
-        return service.getAnalyzeDocumentResult(
-                this.getEndpoint(), modelId, resultId, this.getApiVersion(), accept, context);
+        return service.getAnalyzeDocumentResult(this.getEndpoint(), modelId, resultId, this.getApiVersion(), accept,
+            context);
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1318,14 +985,14 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AnalyzeResultOperation> getAnalyzeDocumentResultAsync(String modelId, String resultId) {
         return getAnalyzeDocumentResultWithResponseAsync(modelId, resultId)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @param context The context to associate with this operation.
@@ -1335,17 +1002,17 @@ public final class FormRecognizerClientImpl {
      * @return the result of document analysis on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<AnalyzeResultOperation> getAnalyzeDocumentResultAsync(
-            String modelId, String resultId, Context context) {
+    public Mono<AnalyzeResultOperation> getAnalyzeDocumentResultAsync(String modelId, String resultId,
+        Context context) {
         return getAnalyzeDocumentResultWithResponseAsync(modelId, resultId, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @param context The context to associate with this operation.
@@ -1355,18 +1022,18 @@ public final class FormRecognizerClientImpl {
      * @return the result of document analysis along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<AnalyzeResultOperation> getAnalyzeDocumentResultWithResponse(
-            String modelId, String resultId, Context context) {
+    public Response<AnalyzeResultOperation> getAnalyzeDocumentResultWithResponse(String modelId, String resultId,
+        Context context) {
         final String accept = "application/json";
-        return service.getAnalyzeDocumentResultSync(
-                this.getEndpoint(), modelId, resultId, this.getApiVersion(), accept, context);
+        return service.getAnalyzeDocumentResultSync(this.getEndpoint(), modelId, resultId, this.getApiVersion(), accept,
+            context);
     }
 
     /**
      * Get analyze result
-     *
-     * <p>Gets the result of document analysis.
-     *
+     * 
+     * Gets the result of document analysis.
+     * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1381,9 +1048,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1391,20 +1058,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<BuildDocumentModelHeaders, Void>> buildDocumentModelWithResponseAsync(
-            BuildDocumentModelRequest buildRequest) {
+    public Mono<ResponseBase<BuildDocumentModelHeaders, Void>>
+        buildDocumentModelWithResponseAsync(BuildDocumentModelRequest buildRequest) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.buildDocumentModel(
-                                this.getEndpoint(), this.getApiVersion(), buildRequest, accept, context));
+        return FluxUtil.withContext(context -> service.buildDocumentModel(this.getEndpoint(), this.getApiVersion(),
+            buildRequest, accept, context));
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1413,17 +1078,17 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<BuildDocumentModelHeaders, Void>> buildDocumentModelWithResponseAsync(
-            BuildDocumentModelRequest buildRequest, Context context) {
+    public Mono<ResponseBase<BuildDocumentModelHeaders, Void>>
+        buildDocumentModelWithResponseAsync(BuildDocumentModelRequest buildRequest, Context context) {
         final String accept = "application/json";
         return service.buildDocumentModel(this.getEndpoint(), this.getApiVersion(), buildRequest, accept, context);
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1432,17 +1097,17 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<BuildDocumentModelHeaders, Void> buildDocumentModelWithResponse(
-            BuildDocumentModelRequest buildRequest, Context context) {
+    public ResponseBase<BuildDocumentModelHeaders, Void>
+        buildDocumentModelWithResponse(BuildDocumentModelRequest buildRequest, Context context) {
         final String accept = "application/json";
         return service.buildDocumentModelSync(this.getEndpoint(), this.getApiVersion(), buildRequest, accept, context);
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1451,22 +1116,18 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginBuildDocumentModelAsync(BuildDocumentModelRequest buildRequest) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.buildDocumentModelWithResponseAsync(buildRequest),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.buildDocumentModelWithResponseAsync(buildRequest),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1475,24 +1136,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginBuildDocumentModelAsync(
-            BuildDocumentModelRequest buildRequest, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.buildDocumentModelWithResponseAsync(buildRequest, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginBuildDocumentModelAsync(BuildDocumentModelRequest buildRequest,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.buildDocumentModelWithResponseAsync(buildRequest, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1501,22 +1159,19 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginBuildDocumentModel(BuildDocumentModelRequest buildRequest) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.buildDocumentModelWithResponse(buildRequest, Context.NONE),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.buildDocumentModelWithResponse(buildRequest, Context.NONE),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Build document model
-     *
-     * <p>Builds a custom document analysis model.
-     *
+     * 
+     * Builds a custom document analysis model.
+     * 
      * @param buildRequest Building request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1525,24 +1180,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginBuildDocumentModel(
-            BuildDocumentModelRequest buildRequest, Context context) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.buildDocumentModelWithResponse(buildRequest, context),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginBuildDocumentModel(BuildDocumentModelRequest buildRequest,
+        Context context) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.buildDocumentModelWithResponse(buildRequest, context),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1550,20 +1202,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<ComposeDocumentModelHeaders, Void>> composeDocumentModelWithResponseAsync(
-            ComposeDocumentModelRequest composeRequest) {
+    public Mono<ResponseBase<ComposeDocumentModelHeaders, Void>>
+        composeDocumentModelWithResponseAsync(ComposeDocumentModelRequest composeRequest) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.composeDocumentModel(
-                                this.getEndpoint(), this.getApiVersion(), composeRequest, accept, context));
+        return FluxUtil.withContext(context -> service.composeDocumentModel(this.getEndpoint(), this.getApiVersion(),
+            composeRequest, accept, context));
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1572,17 +1222,17 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<ComposeDocumentModelHeaders, Void>> composeDocumentModelWithResponseAsync(
-            ComposeDocumentModelRequest composeRequest, Context context) {
+    public Mono<ResponseBase<ComposeDocumentModelHeaders, Void>>
+        composeDocumentModelWithResponseAsync(ComposeDocumentModelRequest composeRequest, Context context) {
         final String accept = "application/json";
         return service.composeDocumentModel(this.getEndpoint(), this.getApiVersion(), composeRequest, accept, context);
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1591,18 +1241,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<ComposeDocumentModelHeaders, Void> composeDocumentModelWithResponse(
-            ComposeDocumentModelRequest composeRequest, Context context) {
+    public ResponseBase<ComposeDocumentModelHeaders, Void>
+        composeDocumentModelWithResponse(ComposeDocumentModelRequest composeRequest, Context context) {
         final String accept = "application/json";
-        return service.composeDocumentModelSync(
-                this.getEndpoint(), this.getApiVersion(), composeRequest, accept, context);
+        return service.composeDocumentModelSync(this.getEndpoint(), this.getApiVersion(), composeRequest, accept,
+            context);
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1610,24 +1260,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginComposeDocumentModelAsync(
-            ComposeDocumentModelRequest composeRequest) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.composeDocumentModelWithResponseAsync(composeRequest),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData>
+        beginComposeDocumentModelAsync(ComposeDocumentModelRequest composeRequest) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.composeDocumentModelWithResponseAsync(composeRequest),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1636,24 +1283,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginComposeDocumentModelAsync(
-            ComposeDocumentModelRequest composeRequest, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.composeDocumentModelWithResponseAsync(composeRequest, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginComposeDocumentModelAsync(ComposeDocumentModelRequest composeRequest,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.composeDocumentModelWithResponseAsync(composeRequest, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1662,22 +1306,19 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginComposeDocumentModel(ComposeDocumentModelRequest composeRequest) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.composeDocumentModelWithResponse(composeRequest, Context.NONE),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.composeDocumentModelWithResponse(composeRequest, Context.NONE),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Compose document model
-     *
-     * <p>Creates a new document model from document types of existing document models.
-     *
+     * 
+     * Creates a new document model from document types of existing document models.
+     * 
      * @param composeRequest Compose request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1686,132 +1327,127 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginComposeDocumentModel(
-            ComposeDocumentModelRequest composeRequest, Context context) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.composeDocumentModelWithResponse(composeRequest, context),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginComposeDocumentModel(ComposeDocumentModelRequest composeRequest,
+        Context context) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.composeDocumentModelWithResponse(composeRequest, context),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<CopyAuthorization>> authorizeCopyDocumentModelWithResponseAsync(
-            AuthorizeCopyRequest authorizeCopyRequest) {
+    public Mono<Response<CopyAuthorization>>
+        authorizeCopyDocumentModelWithResponseAsync(AuthorizeCopyRequest authorizeCopyRequest) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.authorizeCopyDocumentModel(
-                                this.getEndpoint(), this.getApiVersion(), authorizeCopyRequest, accept, context));
+        return FluxUtil.withContext(context -> service.authorizeCopyDocumentModel(this.getEndpoint(),
+            this.getApiVersion(), authorizeCopyRequest, accept, context));
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<CopyAuthorization>> authorizeCopyDocumentModelWithResponseAsync(
-            AuthorizeCopyRequest authorizeCopyRequest, Context context) {
+    public Mono<Response<CopyAuthorization>>
+        authorizeCopyDocumentModelWithResponseAsync(AuthorizeCopyRequest authorizeCopyRequest, Context context) {
         final String accept = "application/json";
-        return service.authorizeCopyDocumentModel(
-                this.getEndpoint(), this.getApiVersion(), authorizeCopyRequest, accept, context);
+        return service.authorizeCopyDocumentModel(this.getEndpoint(), this.getApiVersion(), authorizeCopyRequest,
+            accept, context);
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return authorization to copy a document model to the specified target resource and modelId on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CopyAuthorization> authorizeCopyDocumentModelAsync(AuthorizeCopyRequest authorizeCopyRequest) {
         return authorizeCopyDocumentModelWithResponseAsync(authorizeCopyRequest)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return authorization to copy a document model to the specified target resource and modelId on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<CopyAuthorization> authorizeCopyDocumentModelAsync(
-            AuthorizeCopyRequest authorizeCopyRequest, Context context) {
+    public Mono<CopyAuthorization> authorizeCopyDocumentModelAsync(AuthorizeCopyRequest authorizeCopyRequest,
+        Context context) {
         return authorizeCopyDocumentModelWithResponseAsync(authorizeCopyRequest, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
-     *     Response}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<CopyAuthorization> authorizeCopyDocumentModelWithResponse(
-            AuthorizeCopyRequest authorizeCopyRequest, Context context) {
+    public Response<CopyAuthorization> authorizeCopyDocumentModelWithResponse(AuthorizeCopyRequest authorizeCopyRequest,
+        Context context) {
         final String accept = "application/json";
-        return service.authorizeCopyDocumentModelSync(
-                this.getEndpoint(), this.getApiVersion(), authorizeCopyRequest, accept, context);
+        return service.authorizeCopyDocumentModelSync(this.getEndpoint(), this.getApiVersion(), authorizeCopyRequest,
+            accept, context);
     }
 
     /**
      * Generate copy authorization
-     *
-     * <p>Generates authorization to copy a document model to this location with specified modelId and optional
+     * 
+     * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
-     *
+     * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -1825,9 +1461,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1836,20 +1472,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelToWithResponseAsync(
-            String modelId, CopyAuthorization copyToRequest) {
+    public Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelToWithResponseAsync(String modelId,
+        CopyAuthorization copyToRequest) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.copyDocumentModelTo(
-                                this.getEndpoint(), modelId, this.getApiVersion(), copyToRequest, accept, context));
+        return FluxUtil.withContext(context -> service.copyDocumentModelTo(this.getEndpoint(), modelId,
+            this.getApiVersion(), copyToRequest, accept, context));
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @param context The context to associate with this operation.
@@ -1859,18 +1493,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelToWithResponseAsync(
-            String modelId, CopyAuthorization copyToRequest, Context context) {
+    public Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelToWithResponseAsync(String modelId,
+        CopyAuthorization copyToRequest, Context context) {
         final String accept = "application/json";
-        return service.copyDocumentModelTo(
-                this.getEndpoint(), modelId, this.getApiVersion(), copyToRequest, accept, context);
+        return service.copyDocumentModelTo(this.getEndpoint(), modelId, this.getApiVersion(), copyToRequest, accept,
+            context);
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @param context The context to associate with this operation.
@@ -1880,18 +1514,18 @@ public final class FormRecognizerClientImpl {
      * @return the {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<CopyDocumentModelToHeaders, Void> copyDocumentModelToWithResponse(
-            String modelId, CopyAuthorization copyToRequest, Context context) {
+    public ResponseBase<CopyDocumentModelToHeaders, Void> copyDocumentModelToWithResponse(String modelId,
+        CopyAuthorization copyToRequest, Context context) {
         final String accept = "application/json";
-        return service.copyDocumentModelToSync(
-                this.getEndpoint(), modelId, this.getApiVersion(), copyToRequest, accept, context);
+        return service.copyDocumentModelToSync(this.getEndpoint(), modelId, this.getApiVersion(), copyToRequest, accept,
+            context);
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1900,24 +1534,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCopyDocumentModelToAsync(
-            String modelId, CopyAuthorization copyToRequest) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.copyDocumentModelToWithResponseAsync(modelId, copyToRequest),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginCopyDocumentModelToAsync(String modelId,
+        CopyAuthorization copyToRequest) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.copyDocumentModelToWithResponseAsync(modelId, copyToRequest),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @param context The context to associate with this operation.
@@ -1927,24 +1558,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCopyDocumentModelToAsync(
-            String modelId, CopyAuthorization copyToRequest, Context context) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.copyDocumentModelToWithResponseAsync(modelId, copyToRequest, context),
-                new DefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public PollerFlux<BinaryData, BinaryData> beginCopyDocumentModelToAsync(String modelId,
+        CopyAuthorization copyToRequest, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.copyDocumentModelToWithResponseAsync(modelId, copyToRequest, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1953,24 +1581,21 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCopyDocumentModelTo(
-            String modelId, CopyAuthorization copyToRequest) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.copyDocumentModelToWithResponse(modelId, copyToRequest, Context.NONE),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(Context.NONE)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginCopyDocumentModelTo(String modelId,
+        CopyAuthorization copyToRequest) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.copyDocumentModelToWithResponse(modelId, copyToRequest, Context.NONE),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Copy document model
-     *
-     * <p>Copies document model to the target resource, region, and modelId.
-     *
+     * 
+     * Copies document model to the target resource, region, and modelId.
+     * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
      * @param context The context to associate with this operation.
@@ -1980,92 +1605,75 @@ public final class FormRecognizerClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCopyDocumentModelTo(
-            String modelId, CopyAuthorization copyToRequest, Context context) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.copyDocumentModelToWithResponse(modelId, copyToRequest, context),
-                new SyncDefaultPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(context)),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+    public SyncPoller<BinaryData, BinaryData> beginCopyDocumentModelTo(String modelId, CopyAuthorization copyToRequest,
+        Context context) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.copyDocumentModelToWithResponse(modelId, copyToRequest, context),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsSinglePageAsync() {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getOperations(this.getEndpoint(), this.getApiVersion(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.getOperations(this.getEndpoint(), this.getApiVersion(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsSinglePageAsync(Context context) {
         final String accept = "application/json";
         return service.getOperations(this.getEndpoint(), this.getApiVersion(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list Operations response object as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<OperationSummary> getOperationsAsync() {
-        return new PagedFlux<>(
-                () -> getOperationsSinglePageAsync(), nextLink -> getOperationsNextSinglePageAsync(nextLink));
+        return new PagedFlux<>(() -> getOperationsSinglePageAsync(),
+            nextLink -> getOperationsNextSinglePageAsync(nextLink));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2074,16 +1682,15 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<OperationSummary> getOperationsAsync(Context context) {
-        return new PagedFlux<>(
-                () -> getOperationsSinglePageAsync(context),
-                nextLink -> getOperationsNextSinglePageAsync(nextLink, context));
+        return new PagedFlux<>(() -> getOperationsSinglePageAsync(context),
+            nextLink -> getOperationsNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list Operations response object along with {@link PagedResponse}.
@@ -2091,22 +1698,17 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> getOperationsSinglePage() {
         final String accept = "application/json";
-        Response<GetOperationsResponse> res =
-                service.getOperationsSync(this.getEndpoint(), this.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetOperationsResponse> res
+            = service.getOperationsSync(this.getEndpoint(), this.getApiVersion(), accept, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2116,37 +1718,32 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> getOperationsSinglePage(Context context) {
         final String accept = "application/json";
-        Response<GetOperationsResponse> res =
-                service.getOperationsSync(this.getEndpoint(), this.getApiVersion(), accept, context);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetOperationsResponse> res
+            = service.getOperationsSync(this.getEndpoint(), this.getApiVersion(), accept, context);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list Operations response object as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<OperationSummary> getOperations() {
-        return new PagedIterable<>(
-                () -> getOperationsSinglePage(Context.NONE), nextLink -> getOperationsNextSinglePage(nextLink));
+        return new PagedIterable<>(() -> getOperationsSinglePage(Context.NONE),
+            nextLink -> getOperationsNextSinglePage(nextLink));
     }
 
     /**
      * List operations
-     *
-     * <p>Lists all operations.
-     *
+     * 
+     * Lists all operations.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2155,15 +1752,15 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<OperationSummary> getOperations(Context context) {
-        return new PagedIterable<>(
-                () -> getOperationsSinglePage(context), nextLink -> getOperationsNextSinglePage(nextLink, context));
+        return new PagedIterable<>(() -> getOperationsSinglePage(context),
+            nextLink -> getOperationsNextSinglePage(nextLink, context));
     }
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2174,15 +1771,14 @@ public final class FormRecognizerClientImpl {
     public Mono<Response<OperationDetails>> getOperationWithResponseAsync(String operationId) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.getOperation(this.getEndpoint(), operationId, this.getApiVersion(), accept, context));
+            context -> service.getOperation(this.getEndpoint(), operationId, this.getApiVersion(), accept, context));
     }
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2198,9 +1794,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2214,9 +1810,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2231,9 +1827,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2249,9 +1845,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get operation
-     *
-     * <p>Gets operation info.
-     *
+     * 
+     * Gets operation info.
+     * 
      * @param operationId Unique operation ID.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2265,77 +1861,64 @@ public final class FormRecognizerClientImpl {
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsSinglePageAsync() {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getDocumentModels(this.getEndpoint(), this.getApiVersion(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(
+                context -> service.getDocumentModels(this.getEndpoint(), this.getApiVersion(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsSinglePageAsync(Context context) {
         final String accept = "application/json";
         return service.getDocumentModels(this.getEndpoint(), this.getApiVersion(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list document models response object as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<DocumentModelSummary> getDocumentModelsAsync() {
-        return new PagedFlux<>(
-                () -> getDocumentModelsSinglePageAsync(), nextLink -> getDocumentModelsNextSinglePageAsync(nextLink));
+        return new PagedFlux<>(() -> getDocumentModelsSinglePageAsync(),
+            nextLink -> getDocumentModelsNextSinglePageAsync(nextLink));
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2344,16 +1927,15 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<DocumentModelSummary> getDocumentModelsAsync(Context context) {
-        return new PagedFlux<>(
-                () -> getDocumentModelsSinglePageAsync(context),
-                nextLink -> getDocumentModelsNextSinglePageAsync(nextLink, context));
+        return new PagedFlux<>(() -> getDocumentModelsSinglePageAsync(context),
+            nextLink -> getDocumentModelsNextSinglePageAsync(nextLink, context));
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list document models response object along with {@link PagedResponse}.
@@ -2361,22 +1943,17 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> getDocumentModelsSinglePage() {
         final String accept = "application/json";
-        Response<GetDocumentModelsResponse> res =
-                service.getDocumentModelsSync(this.getEndpoint(), this.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetDocumentModelsResponse> res
+            = service.getDocumentModelsSync(this.getEndpoint(), this.getApiVersion(), accept, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2386,37 +1963,32 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> getDocumentModelsSinglePage(Context context) {
         final String accept = "application/json";
-        Response<GetDocumentModelsResponse> res =
-                service.getDocumentModelsSync(this.getEndpoint(), this.getApiVersion(), accept, context);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetDocumentModelsResponse> res
+            = service.getDocumentModelsSync(this.getEndpoint(), this.getApiVersion(), accept, context);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return list document models response object as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<DocumentModelSummary> getDocumentModels() {
-        return new PagedIterable<>(
-                () -> getDocumentModelsSinglePage(Context.NONE), nextLink -> getDocumentModelsNextSinglePage(nextLink));
+        return new PagedIterable<>(() -> getDocumentModelsSinglePage(Context.NONE),
+            nextLink -> getDocumentModelsNextSinglePage(nextLink));
     }
 
     /**
      * List document models
-     *
-     * <p>List all document models.
-     *
+     * 
+     * List all document models.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2425,16 +1997,15 @@ public final class FormRecognizerClientImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<DocumentModelSummary> getDocumentModels(Context context) {
-        return new PagedIterable<>(
-                () -> getDocumentModelsSinglePage(context),
-                nextLink -> getDocumentModelsNextSinglePage(nextLink, context));
+        return new PagedIterable<>(() -> getDocumentModelsSinglePage(context),
+            nextLink -> getDocumentModelsNextSinglePage(nextLink, context));
     }
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2445,15 +2016,14 @@ public final class FormRecognizerClientImpl {
     public Mono<Response<DocumentModelDetails>> getDocumentModelWithResponseAsync(String modelId) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.getDocumentModel(this.getEndpoint(), modelId, this.getApiVersion(), accept, context));
+            context -> service.getDocumentModel(this.getEndpoint(), modelId, this.getApiVersion(), accept, context));
     }
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2469,9 +2039,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2485,9 +2055,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2502,9 +2072,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2520,9 +2090,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get document model
-     *
-     * <p>Gets detailed document model information.
-     *
+     * 
+     * Gets detailed document model information.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2536,9 +2106,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2549,16 +2119,14 @@ public final class FormRecognizerClientImpl {
     public Mono<Response<Void>> deleteDocumentModelWithResponseAsync(String modelId) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.deleteDocumentModel(
-                                this.getEndpoint(), modelId, this.getApiVersion(), accept, context));
+            context -> service.deleteDocumentModel(this.getEndpoint(), modelId, this.getApiVersion(), accept, context));
     }
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2574,9 +2142,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2590,9 +2158,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2607,9 +2175,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2625,9 +2193,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Delete document model
-     *
-     * <p>Deletes document model.
-     *
+     * 
+     * Deletes document model.
+     * 
      * @param modelId Unique document model name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2640,32 +2208,32 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return general information regarding the current resource along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceDetailsWithResponseAsync() {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.getResourceDetails(this.getEndpoint(), this.getApiVersion(), accept, context));
+            context -> service.getResourceDetails(this.getEndpoint(), this.getApiVersion(), accept, context));
     }
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return general information regarding the current resource along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceDetailsWithResponseAsync(Context context) {
@@ -2675,9 +2243,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return general information regarding the current resource on successful completion of {@link Mono}.
@@ -2689,9 +2257,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2705,9 +2273,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2722,9 +2290,9 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get resource info
-     *
-     * <p>Return information about the current resource.
-     *
+     * 
+     * Return information about the current resource.
+     * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return general information regarding the current resource.
@@ -2736,62 +2304,51 @@ public final class FormRecognizerClientImpl {
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsNextSinglePageAsync(String nextLink) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOperationsNext(nextLink, this.getEndpoint(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsNextSinglePageAsync(String nextLink, Context context) {
         final String accept = "application/json";
         return service.getOperationsNext(nextLink, this.getEndpoint(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2800,22 +2357,18 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> getOperationsNextSinglePage(String nextLink) {
         final String accept = "application/json";
-        Response<GetOperationsResponse> res =
-                service.getOperationsNextSync(nextLink, this.getEndpoint(), accept, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetOperationsResponse> res
+            = service.getOperationsNextSync(nextLink, this.getEndpoint(), accept, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2825,77 +2378,61 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> getOperationsNextSinglePage(String nextLink, Context context) {
         final String accept = "application/json";
-        Response<GetOperationsResponse> res =
-                service.getOperationsNextSync(nextLink, this.getEndpoint(), accept, context);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetOperationsResponse> res
+            = service.getOperationsNextSync(nextLink, this.getEndpoint(), accept, context);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsNextSinglePageAsync(String nextLink) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getDocumentModelsNext(nextLink, this.getEndpoint(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.getDocumentModelsNext(nextLink, this.getEndpoint(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsNextSinglePageAsync(
-            String nextLink, Context context) {
+    public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsNextSinglePageAsync(String nextLink,
+        Context context) {
         final String accept = "application/json";
         return service.getDocumentModelsNext(nextLink, this.getEndpoint(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValue(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValue(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2904,22 +2441,18 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> getDocumentModelsNextSinglePage(String nextLink) {
         final String accept = "application/json";
-        Response<GetDocumentModelsResponse> res =
-                service.getDocumentModelsNextSync(nextLink, this.getEndpoint(), accept, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetDocumentModelsResponse> res
+            = service.getDocumentModelsNextSync(nextLink, this.getEndpoint(), accept, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
@@ -2929,14 +2462,9 @@ public final class FormRecognizerClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> getDocumentModelsNextSinglePage(String nextLink, Context context) {
         final String accept = "application/json";
-        Response<GetDocumentModelsResponse> res =
-                service.getDocumentModelsNextSync(nextLink, this.getEndpoint(), accept, context);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                res.getValue().getValue(),
-                res.getValue().getNextLink(),
-                null);
+        Response<GetDocumentModelsResponse> res
+            = service.getDocumentModelsNextSync(nextLink, this.getEndpoint(), accept, context);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            res.getValue().getValue(), res.getValue().getNextLink(), null);
     }
 }

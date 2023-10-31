@@ -7,7 +7,9 @@ package fixtures.validation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Error model. */
+/**
+ * The Error model.
+ */
 @Fluent
 public final class Error {
     /*
@@ -28,12 +30,15 @@ public final class Error {
     @JsonProperty(value = "fields")
     private String fields;
 
-    /** Creates an instance of Error class. */
-    public Error() {}
+    /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+    }
 
     /**
      * Get the code property: The code property.
-     *
+     * 
      * @return the code value.
      */
     public Integer getCode() {
@@ -42,7 +47,7 @@ public final class Error {
 
     /**
      * Set the code property: The code property.
-     *
+     * 
      * @param code the code value to set.
      * @return the Error object itself.
      */
@@ -53,7 +58,7 @@ public final class Error {
 
     /**
      * Get the message property: The message property.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -62,7 +67,7 @@ public final class Error {
 
     /**
      * Set the message property: The message property.
-     *
+     * 
      * @param message the message value to set.
      * @return the Error object itself.
      */
@@ -73,7 +78,7 @@ public final class Error {
 
     /**
      * Get the fields property: The fields property.
-     *
+     * 
      * @return the fields value.
      */
     public String getFields() {
@@ -82,7 +87,7 @@ public final class Error {
 
     /**
      * Set the fields property: The fields property.
-     *
+     * 
      * @param fields the fields value to set.
      * @return the Error object itself.
      */
@@ -93,8 +98,9 @@ public final class Error {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

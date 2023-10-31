@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Constructor model. */
+/**
+ * The Constructor model.
+ */
 @Immutable
 public final class Constructor {
     /*
@@ -21,7 +23,7 @@ public final class Constructor {
 
     /**
      * Creates an instance of Constructor class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Constructor {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

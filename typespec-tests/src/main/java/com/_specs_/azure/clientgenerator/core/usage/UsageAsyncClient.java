@@ -21,14 +21,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous UsageClient type. */
+/**
+ * Initializes a new instance of the asynchronous UsageClient type.
+ */
 @ServiceClient(builder = UsageClientBuilder.class, isAsync = true)
 public final class UsageAsyncClient {
-    @Generated private final UsageClientImpl serviceClient;
+    @Generated
+    private final UsageClientImpl serviceClient;
 
     /**
      * Initializes an instance of UsageAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,16 +40,21 @@ public final class UsageAsyncClient {
     }
 
     /**
-     * Expected body parameter: ```json { "name": &lt;any string&gt; } ```.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * Expected body parameter:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Usage override to roundtrip.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,16 +70,21 @@ public final class UsageAsyncClient {
     }
 
     /**
-     * Expected response body: ```json { "name": &lt;any string&gt; } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -86,8 +99,13 @@ public final class UsageAsyncClient {
     }
 
     /**
-     * Expected body parameter: ```json { "name": &lt;any string&gt; } ```.
-     *
+     * Expected body parameter:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * 
      * @param body Usage override to roundtrip.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -106,8 +124,13 @@ public final class UsageAsyncClient {
     }
 
     /**
-     * Expected response body: ```json { "name": &lt;any string&gt; } ```.
-     *
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -120,8 +143,7 @@ public final class UsageAsyncClient {
     public Mono<OutputModel> outputToInputOutput() {
         // Generated convenience method for outputToInputOutputWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return outputToInputOutputWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
+        return outputToInputOutputWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(OutputModel.class));
     }
 }

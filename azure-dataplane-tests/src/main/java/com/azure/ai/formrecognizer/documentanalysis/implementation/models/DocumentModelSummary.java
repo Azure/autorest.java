@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-/** Document model summary. */
+/**
+ * Document model summary.
+ */
 @Fluent
 public final class DocumentModelSummary {
     /*
@@ -42,12 +44,15 @@ public final class DocumentModelSummary {
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
-    /** Creates an instance of DocumentModelSummary class. */
-    public DocumentModelSummary() {}
+    /**
+     * Creates an instance of DocumentModelSummary class.
+     */
+    public DocumentModelSummary() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -56,7 +61,7 @@ public final class DocumentModelSummary {
 
     /**
      * Set the modelId property: Unique document model name.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the DocumentModelSummary object itself.
      */
@@ -67,7 +72,7 @@ public final class DocumentModelSummary {
 
     /**
      * Get the description property: Document model description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -76,7 +81,7 @@ public final class DocumentModelSummary {
 
     /**
      * Set the description property: Document model description.
-     *
+     * 
      * @param description the description value to set.
      * @return the DocumentModelSummary object itself.
      */
@@ -87,7 +92,7 @@ public final class DocumentModelSummary {
 
     /**
      * Get the createdDateTime property: Date and time (UTC) when the document model was created.
-     *
+     * 
      * @return the createdDateTime value.
      */
     public OffsetDateTime getCreatedDateTime() {
@@ -96,7 +101,7 @@ public final class DocumentModelSummary {
 
     /**
      * Set the createdDateTime property: Date and time (UTC) when the document model was created.
-     *
+     * 
      * @param createdDateTime the createdDateTime value to set.
      * @return the DocumentModelSummary object itself.
      */
@@ -107,7 +112,7 @@ public final class DocumentModelSummary {
 
     /**
      * Get the apiVersion property: API version used to create this document model.
-     *
+     * 
      * @return the apiVersion value.
      */
     public String getApiVersion() {
@@ -116,7 +121,7 @@ public final class DocumentModelSummary {
 
     /**
      * Set the apiVersion property: API version used to create this document model.
-     *
+     * 
      * @param apiVersion the apiVersion value to set.
      * @return the DocumentModelSummary object itself.
      */
@@ -127,7 +132,7 @@ public final class DocumentModelSummary {
 
     /**
      * Get the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -136,7 +141,7 @@ public final class DocumentModelSummary {
 
     /**
      * Set the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the DocumentModelSummary object itself.
      */

@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Model with a property unknown, and the data is a dictionnary. */
+/**
+ * Model with a property unknown, and the data is a dictionnary.
+ */
 @Immutable
 public final class UnknownDictProperty {
     /*
@@ -21,7 +23,7 @@ public final class UnknownDictProperty {
 
     /**
      * Creates an instance of UnknownDictProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class UnknownDictProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

@@ -7,15 +7,23 @@ package fixtures.mediatypes.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Content type for upload. */
+/**
+ * Content type for upload.
+ */
 public enum ContentType3 {
-    /** Content Type 'application/json'. */
+    /**
+     * Content Type 'application/json'.
+     */
     APPLICATION_JSON("application/json"),
 
-    /** Content Type 'text/plain'. */
+    /**
+     * Content Type 'text/plain'.
+     */
     TEXT_PLAIN("text/plain");
 
-    /** The actual serialized value for a ContentType3 instance. */
+    /**
+     * The actual serialized value for a ContentType3 instance.
+     */
     private final String value;
 
     ContentType3(String value) {
@@ -24,7 +32,7 @@ public enum ContentType3 {
 
     /**
      * Parses a serialized value to a ContentType3 instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed ContentType3 object, or null if unable to parse.
      */
@@ -42,7 +50,9 @@ public enum ContentType3 {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

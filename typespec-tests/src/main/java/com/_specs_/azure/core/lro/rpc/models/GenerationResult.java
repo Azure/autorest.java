@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Result of the generation. */
+/**
+ * Result of the generation.
+ */
 @Immutable
 public final class GenerationResult {
     /*
@@ -21,7 +23,7 @@ public final class GenerationResult {
 
     /**
      * Creates an instance of GenerationResult class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class GenerationResult {
 
     /**
      * Get the data property: The data.
-     *
+     * 
      * @return the data value.
      */
     @Generated

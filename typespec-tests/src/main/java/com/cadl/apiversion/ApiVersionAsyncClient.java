@@ -19,14 +19,17 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.apiversion.implementation.ApiVersionClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ApiVersionClient type. */
+/**
+ * Initializes a new instance of the asynchronous ApiVersionClient type.
+ */
 @ServiceClient(builder = ApiVersionClientBuilder.class, isAsync = true)
 public final class ApiVersionAsyncClient {
-    @Generated private final ApiVersionClientImpl serviceClient;
+    @Generated
+    private final ApiVersionClientImpl serviceClient;
 
     /**
      * Initializes an instance of ApiVersionAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,13 +39,13 @@ public final class ApiVersionAsyncClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,7 +61,7 @@ public final class ApiVersionAsyncClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -71,8 +74,7 @@ public final class ApiVersionAsyncClient {
     public Mono<String> read() {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+        return readWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

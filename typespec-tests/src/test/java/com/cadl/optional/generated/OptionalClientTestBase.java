@@ -22,16 +22,16 @@ class OptionalClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        OptionalClientBuilder optionalClientbuilder =
-                new OptionalClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder optionalClientbuilder
+            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             optionalClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             optionalClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         optionalClient = optionalClientbuilder.buildClient();
+
     }
 }

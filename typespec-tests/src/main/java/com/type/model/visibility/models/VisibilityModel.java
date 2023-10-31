@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Output model with visibility properties. */
+/**
+ * Output model with visibility properties.
+ */
 @Immutable
 public final class VisibilityModel {
     /*
@@ -50,7 +52,7 @@ public final class VisibilityModel {
 
     /**
      * Creates an instance of VisibilityModel class.
-     *
+     * 
      * @param queryProp the queryProp value to set.
      * @param createProp the createProp value to set.
      * @param updateProp the updateProp value to set.
@@ -58,11 +60,10 @@ public final class VisibilityModel {
      */
     @Generated
     @JsonCreator
-    public VisibilityModel(
-            @JsonProperty(value = "queryProp") Integer queryProp,
-            @JsonProperty(value = "createProp") List<String> createProp,
-            @JsonProperty(value = "updateProp") List<Integer> updateProp,
-            @JsonProperty(value = "deleteProp") Boolean deleteProp) {
+    public VisibilityModel(@JsonProperty(value = "queryProp") Integer queryProp,
+        @JsonProperty(value = "createProp") List<String> createProp,
+        @JsonProperty(value = "updateProp") List<Integer> updateProp,
+        @JsonProperty(value = "deleteProp") Boolean deleteProp) {
         this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;
@@ -71,7 +72,7 @@ public final class VisibilityModel {
 
     /**
      * Get the readProp property: Required string, illustrating a readonly property.
-     *
+     * 
      * @return the readProp value.
      */
     @Generated
@@ -81,7 +82,7 @@ public final class VisibilityModel {
 
     /**
      * Get the queryProp property: Required int32, illustrating a query property.
-     *
+     * 
      * @return the queryProp value.
      */
     @Generated
@@ -91,7 +92,7 @@ public final class VisibilityModel {
 
     /**
      * Get the createProp property: Required string[], illustrating a create property.
-     *
+     * 
      * @return the createProp value.
      */
     @Generated
@@ -101,7 +102,7 @@ public final class VisibilityModel {
 
     /**
      * Get the updateProp property: Required int32[], illustrating a update property.
-     *
+     * 
      * @return the updateProp value.
      */
     @Generated
@@ -111,7 +112,7 @@ public final class VisibilityModel {
 
     /**
      * Get the deleteProp property: Required bool, illustrating a delete property.
-     *
+     * 
      * @return the deleteProp value.
      */
     @Generated

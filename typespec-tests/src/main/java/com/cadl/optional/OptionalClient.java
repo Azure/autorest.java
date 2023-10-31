@@ -20,14 +20,17 @@ import com.cadl.optional.implementation.OptionalClientImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
 
-/** Initializes a new instance of the synchronous OptionalClient type. */
+/**
+ * Initializes a new instance of the synchronous OptionalClient type.
+ */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class OptionalClient {
-    @Generated private final OptionalClientImpl serviceClient;
+    @Generated
+    private final OptionalClientImpl serviceClient;
 
     /**
      * Initializes an instance of OptionalClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,31 +40,59 @@ public final class OptionalClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>booleanNullable</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * <tr>
+     * <td>string</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>stringNullable</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>request-header-optional</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -87,9 +118,9 @@ public final class OptionalClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -119,7 +150,7 @@ public final class OptionalClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.
      * @param booleanRequiredNullable Boolean with `true` and `false` values.
@@ -134,25 +165,16 @@ public final class OptionalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(
-            String requestHeaderRequired,
-            boolean booleanRequired,
-            Boolean booleanRequiredNullable,
-            String stringRequired,
-            String stringRequiredNullable,
-            RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponse(
-                requestHeaderRequired,
-                booleanRequired,
-                booleanRequiredNullable,
-                stringRequired,
-                stringRequiredNullable,
-                requestOptions);
+    public Response<BinaryData> putWithResponse(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable,
+            stringRequired, stringRequiredNullable, requestOptions);
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.
      * @param booleanRequiredNullable Boolean with `true` and `false` values.
@@ -173,17 +195,10 @@ public final class OptionalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public AllPropertiesOptional put(
-            String requestHeaderRequired,
-            boolean booleanRequired,
-            Boolean booleanRequiredNullable,
-            String stringRequired,
-            String stringRequiredNullable,
-            String requestHeaderOptional,
-            Boolean booleanNullable,
-            String string,
-            String stringNullable,
-            Optional optional) {
+    public AllPropertiesOptional put(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        String requestHeaderOptional, Boolean booleanNullable, String string, String stringNullable,
+        Optional optional) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (requestHeaderOptional != null) {
@@ -201,20 +216,13 @@ public final class OptionalClient {
         if (optional != null) {
             requestOptions.setBody(BinaryData.fromObject(optional));
         }
-        return putWithResponse(
-                        requestHeaderRequired,
-                        booleanRequired,
-                        booleanRequiredNullable,
-                        stringRequired,
-                        stringRequiredNullable,
-                        requestOptions)
-                .getValue()
-                .toObject(AllPropertiesOptional.class);
+        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired,
+            stringRequiredNullable, requestOptions).getValue().toObject(AllPropertiesOptional.class);
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.
      * @param booleanRequiredNullable Boolean with `true` and `false` values.
@@ -230,22 +238,11 @@ public final class OptionalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public AllPropertiesOptional put(
-            String requestHeaderRequired,
-            boolean booleanRequired,
-            Boolean booleanRequiredNullable,
-            String stringRequired,
-            String stringRequiredNullable) {
+    public AllPropertiesOptional put(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(
-                        requestHeaderRequired,
-                        booleanRequired,
-                        booleanRequiredNullable,
-                        stringRequired,
-                        stringRequiredNullable,
-                        requestOptions)
-                .getValue()
-                .toObject(AllPropertiesOptional.class);
+        return putWithResponse(requestHeaderRequired, booleanRequired, booleanRequiredNullable, stringRequired,
+            stringRequiredNullable, requestOptions).getValue().toObject(AllPropertiesOptional.class);
     }
 }

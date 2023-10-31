@@ -75,10 +75,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ValueTypesClientBuilder booleanOperationClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder booleanOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -86,10 +85,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         booleanOperationClient = booleanOperationClientbuilder.buildBooleanOperationClient();
 
-        ValueTypesClientBuilder stringOperationClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder stringOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -97,10 +95,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        ValueTypesClientBuilder bytesClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder bytesClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bytesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -108,10 +105,8 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         bytesClient = bytesClientbuilder.buildBytesClient();
 
-        ValueTypesClientBuilder intClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder intClientbuilder = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             intClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -119,10 +114,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         intClient = intClientbuilder.buildIntClient();
 
-        ValueTypesClientBuilder floatOperationClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder floatOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             floatOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -130,10 +124,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         floatOperationClient = floatOperationClientbuilder.buildFloatOperationClient();
 
-        ValueTypesClientBuilder datetimeOperationClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder datetimeOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -141,10 +134,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         datetimeOperationClient = datetimeOperationClientbuilder.buildDatetimeOperationClient();
 
-        ValueTypesClientBuilder durationOperationClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder durationOperationClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -152,10 +144,8 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        ValueTypesClientBuilder enumClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder enumClientbuilder = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -163,10 +153,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         enumClient = enumClientbuilder.buildEnumClient();
 
-        ValueTypesClientBuilder extensibleEnumClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder extensibleEnumClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extensibleEnumClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -174,10 +163,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         extensibleEnumClient = extensibleEnumClientbuilder.buildExtensibleEnumClient();
 
-        ValueTypesClientBuilder modelClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder modelClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -185,10 +173,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         modelClient = modelClientbuilder.buildModelClient();
 
-        ValueTypesClientBuilder collectionsStringClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -196,10 +183,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         collectionsStringClient = collectionsStringClientbuilder.buildCollectionsStringClient();
 
-        ValueTypesClientBuilder collectionsIntClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsIntClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsIntClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -207,10 +193,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         collectionsIntClient = collectionsIntClientbuilder.buildCollectionsIntClient();
 
-        ValueTypesClientBuilder collectionsModelClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder collectionsModelClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -218,10 +203,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
 
-        ValueTypesClientBuilder dictionaryStringClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder dictionaryStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             dictionaryStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -229,10 +213,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         dictionaryStringClient = dictionaryStringClientbuilder.buildDictionaryStringClient();
 
-        ValueTypesClientBuilder neverClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder neverClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             neverClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -240,10 +223,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         neverClient = neverClientbuilder.buildNeverClient();
 
-        ValueTypesClientBuilder unknownStringClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownStringClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -251,10 +233,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         unknownStringClient = unknownStringClientbuilder.buildUnknownStringClient();
 
-        ValueTypesClientBuilder unknownIntClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownIntClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownIntClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -262,10 +243,9 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         unknownIntClient = unknownIntClientbuilder.buildUnknownIntClient();
 
-        ValueTypesClientBuilder unknownDictClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownDictClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownDictClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -273,15 +253,15 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
         }
         unknownDictClient = unknownDictClientbuilder.buildUnknownDictClient();
 
-        ValueTypesClientBuilder unknownArrayClientbuilder =
-                new ValueTypesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ValueTypesClientBuilder unknownArrayClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             unknownArrayClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         unknownArrayClient = unknownArrayClientbuilder.buildUnknownArrayClient();
+
     }
 }

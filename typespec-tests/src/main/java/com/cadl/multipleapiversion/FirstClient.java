@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.cadl.multipleapiversion.implementation.FirstClientImpl;
 import com.cadl.multipleapiversion.models.Resource;
 
-/** Initializes a new instance of the synchronous FirstClient type. */
+/**
+ * Initializes a new instance of the synchronous FirstClient type.
+ */
 @ServiceClient(builder = FirstClientBuilder.class)
 public final class FirstClient {
-    @Generated private final FirstClientImpl serviceClient;
+    @Generated
+    private final FirstClientImpl serviceClient;
 
     /**
      * Initializes an instance of FirstClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class FirstClient {
 
     /**
      * Resource read operation template.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -45,7 +48,7 @@ public final class FirstClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,7 +65,7 @@ public final class FirstClient {
 
     /**
      * Resource read operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

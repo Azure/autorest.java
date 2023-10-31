@@ -11,14 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** Cobra model. */
+/**
+ * Cobra model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("cobra")
 @Immutable
 public final class Cobra extends Snake {
     /**
      * Creates an instance of Cobra class.
-     *
+     * 
      * @param length the length value to set.
      */
     @Generated

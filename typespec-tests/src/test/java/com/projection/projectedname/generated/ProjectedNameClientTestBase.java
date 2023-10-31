@@ -24,10 +24,9 @@ class ProjectedNameClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ProjectedNameClientBuilder projectedNameClientbuilder =
-                new ProjectedNameClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ProjectedNameClientBuilder projectedNameClientbuilder
+            = new ProjectedNameClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             projectedNameClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -35,15 +34,15 @@ class ProjectedNameClientTestBase extends TestProxyTestBase {
         }
         projectedNameClient = projectedNameClientbuilder.buildClient();
 
-        ProjectedNameClientBuilder propertyClientbuilder =
-                new ProjectedNameClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ProjectedNameClientBuilder propertyClientbuilder
+            = new ProjectedNameClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             propertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             propertyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
+
     }
 }

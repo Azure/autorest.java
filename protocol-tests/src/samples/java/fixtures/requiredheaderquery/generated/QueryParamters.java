@@ -14,25 +14,16 @@ import java.util.Arrays;
 
 public class QueryParamters {
     public static void main(String[] args) {
-        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient =
-                new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
+        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient
+            = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
-        RequestOptions requestOptions =
-                new RequestOptions()
-                        .addQueryParam("parameter_optional_csv_int_array", "6,7,8")
-                        .addQueryParam("parameter_optional_multi_int_array", "9")
-                        .addQueryParam("parameter_optional_multi_int_array", "10");
-        Response<BinaryData> response =
-                dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(
-                        17,
-                        true,
-                        Arrays.asList("one", "two", "three"),
-                        Arrays.asList(1, 2, 3),
-                        Arrays.asList("four", "five"),
-                        Arrays.asList(4, 5),
-                        Arrays.asList("gamma", "beta"),
-                        OffsetDateTime.parse("1985-04-12T23:20:50Z"),
-                        requestOptions);
+        RequestOptions requestOptions = new RequestOptions().addQueryParam("parameter_optional_csv_int_array", "6,7,8")
+            .addQueryParam("parameter_optional_multi_int_array", "9")
+            .addQueryParam("parameter_optional_multi_int_array", "10");
+        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(17, true,
+            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), Arrays.asList("four", "five"),
+            Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z"),
+            requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
     }
 }

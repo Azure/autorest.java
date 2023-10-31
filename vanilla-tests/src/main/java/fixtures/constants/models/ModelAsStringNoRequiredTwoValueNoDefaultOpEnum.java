@@ -8,26 +8,33 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum. */
+/**
+ * Defines values for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
+ */
 public final class ModelAsStringNoRequiredTwoValueNoDefaultOpEnum
-        extends ExpandableStringEnum<ModelAsStringNoRequiredTwoValueNoDefaultOpEnum> {
-    /** Static value value1 for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum. */
+    extends ExpandableStringEnum<ModelAsStringNoRequiredTwoValueNoDefaultOpEnum> {
+    /**
+     * Static value value1 for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
+     */
     public static final ModelAsStringNoRequiredTwoValueNoDefaultOpEnum VALUE1 = fromString("value1");
 
-    /** Static value value2 for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum. */
+    /**
+     * Static value value2 for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
+     */
     public static final ModelAsStringNoRequiredTwoValueNoDefaultOpEnum VALUE2 = fromString("value2");
 
     /**
      * Creates a new instance of ModelAsStringNoRequiredTwoValueNoDefaultOpEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringNoRequiredTwoValueNoDefaultOpEnum() {}
+    public ModelAsStringNoRequiredTwoValueNoDefaultOpEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringNoRequiredTwoValueNoDefaultOpEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
      */
@@ -38,7 +45,7 @@ public final class ModelAsStringNoRequiredTwoValueNoDefaultOpEnum
 
     /**
      * Gets known ModelAsStringNoRequiredTwoValueNoDefaultOpEnum values.
-     *
+     * 
      * @return known ModelAsStringNoRequiredTwoValueNoDefaultOpEnum values.
      */
     public static Collection<ModelAsStringNoRequiredTwoValueNoDefaultOpEnum> values() {

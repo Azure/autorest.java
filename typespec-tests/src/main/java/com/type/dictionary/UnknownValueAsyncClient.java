@@ -21,14 +21,17 @@ import com.type.dictionary.implementation.UnknownValuesImpl;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the asynchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class UnknownValueAsyncClient {
-    @Generated private final UnknownValuesImpl serviceClient;
+    @Generated
+    private final UnknownValuesImpl serviceClient;
 
     /**
      * Initializes an instance of UnknownValueAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class UnknownValueAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: Object (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -62,15 +65,15 @@ public final class UnknownValueAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: Object (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of any.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class UnknownValueAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -100,14 +103,13 @@ public final class UnknownValueAsyncClient {
     public Mono<Map<String, Object>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_OBJECT));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_OBJECT));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of any.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -126,6 +128,7 @@ public final class UnknownValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, Object>> TYPE_REFERENCE_MAP_STRING_OBJECT =
-            new TypeReference<Map<String, Object>>() {};
+    private static final TypeReference<Map<String, Object>> TYPE_REFERENCE_MAP_STRING_OBJECT
+        = new TypeReference<Map<String, Object>>() {
+        };
 }

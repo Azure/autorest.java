@@ -22,16 +22,16 @@ class SpecialCharsClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SpecialCharsClientBuilder specialCharsClientbuilder =
-                new SpecialCharsClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialCharsClientBuilder specialCharsClientbuilder = new SpecialCharsClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             specialCharsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             specialCharsClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         specialCharsClient = specialCharsClientbuilder.buildClient();
+
     }
 }

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.nullable.implementation.StringOperationsImpl;
 import com.type.property.nullable.models.StringProperty;
 
-/** Initializes a new instance of the synchronous NullableClient type. */
+/**
+ * Initializes a new instance of the synchronous NullableClient type.
+ */
 @ServiceClient(builder = NullableClientBuilder.class)
 public final class StringOperationClient {
-    @Generated private final StringOperationsImpl serviceClient;
+    @Generated
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,16 +38,16 @@ public final class StringOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,16 +63,16 @@ public final class StringOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -85,18 +88,18 @@ public final class StringOperationClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     *     looking for.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,18 +116,18 @@ public final class StringOperationClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     *     looking for.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -141,7 +144,7 @@ public final class StringOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -159,7 +162,7 @@ public final class StringOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

@@ -24,17 +24,23 @@ import fixtures.bodycomplex.implementation.models.Basic;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Basics. */
+/**
+ * An instance of this class provides access to all the operations defined in Basics.
+ */
 public final class BasicsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final BasicsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of BasicsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     BasicsImpl(AutoRestComplexTestServiceImpl client) {
@@ -50,53 +56,49 @@ public final class BasicsImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface BasicsService {
         @Get("/complex/basic/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Basic>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/basic/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @BodyParam("application/json") Basic complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion,
+            @BodyParam("application/json") Basic complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getInvalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Basic>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/basic/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getEmpty(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Basic>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/basic/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getNull(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Basic>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/basic/notprovided")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Basic>> getNotProvided(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Basic>> getNotProvided(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync() {
@@ -106,13 +108,13 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync(Context context) {
@@ -122,7 +124,7 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} on successful completion of {@link Mono}.
@@ -134,7 +136,7 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -148,7 +150,7 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -162,7 +164,7 @@ public final class BasicsImpl {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -174,7 +176,7 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -184,15 +186,13 @@ public final class BasicsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.putValid(
-                                this.client.getHost(), this.client.getApiVersion(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), this.client.getApiVersion(),
+            complexBody, accept, context));
     }
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -208,7 +208,7 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -222,7 +222,7 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -237,7 +237,7 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -252,7 +252,7 @@ public final class BasicsImpl {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -265,11 +265,11 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync() {
@@ -279,13 +279,13 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync(Context context) {
@@ -295,7 +295,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type on successful completion of {@link Mono}.
@@ -307,7 +307,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -321,7 +321,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -335,7 +335,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type.
@@ -347,7 +347,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty along with {@link Response} on successful completion of {@link Mono}.
@@ -360,7 +360,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -375,7 +375,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty on successful completion of {@link Mono}.
@@ -387,7 +387,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -401,7 +401,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -415,7 +415,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty.
@@ -427,11 +427,11 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync() {
@@ -441,13 +441,13 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync(Context context) {
@@ -457,7 +457,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null on successful completion of {@link Mono}.
@@ -469,7 +469,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -483,7 +483,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -497,7 +497,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null.
@@ -509,11 +509,11 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync() {
@@ -523,13 +523,13 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync(Context context) {
@@ -539,11 +539,11 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync() {
@@ -552,13 +552,13 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Basic> getNotProvidedAsync(Context context) {
@@ -567,7 +567,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -581,7 +581,7 @@ public final class BasicsImpl {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload.

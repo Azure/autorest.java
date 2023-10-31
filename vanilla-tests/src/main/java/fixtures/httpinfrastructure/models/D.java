@@ -7,7 +7,9 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The D model. */
+/**
+ * The D model.
+ */
 @Fluent
 public final class D {
     /*
@@ -16,12 +18,15 @@ public final class D {
     @JsonProperty(value = "httpStatusCode")
     private String httpStatusCode;
 
-    /** Creates an instance of D class. */
-    public D() {}
+    /**
+     * Creates an instance of D class.
+     */
+    public D() {
+    }
 
     /**
      * Get the httpStatusCode property: The httpStatusCode property.
-     *
+     * 
      * @return the httpStatusCode value.
      */
     public String getHttpStatusCode() {
@@ -30,7 +35,7 @@ public final class D {
 
     /**
      * Set the httpStatusCode property: The httpStatusCode property.
-     *
+     * 
      * @param httpStatusCode the httpStatusCode value to set.
      * @return the D object itself.
      */
@@ -41,8 +46,9 @@ public final class D {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -20,14 +20,17 @@ import com.cadl.internal.implementation.models.ResponseInternal;
 import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
 
-/** Initializes a new instance of the synchronous InternalClient type. */
+/**
+ * Initializes a new instance of the synchronous InternalClient type.
+ */
 @ServiceClient(builder = InternalClientBuilder.class)
 public final class InternalClient {
-    @Generated private final InternalClientImpl serviceClient;
+    @Generated
+    private final InternalClientImpl serviceClient;
 
     /**
      * Initializes an instance of InternalClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class InternalClient {
 
     /**
      * The postInternal operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -47,9 +50,9 @@ public final class InternalClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -57,7 +60,7 @@ public final class InternalClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param apiRequest The apiRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -74,15 +77,15 @@ public final class InternalClient {
 
     /**
      * The getInternal operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -98,7 +101,7 @@ public final class InternalClient {
 
     /**
      * The postInternal operation.
-     *
+     * 
      * @param apiRequest The apiRequest parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -113,14 +116,13 @@ public final class InternalClient {
     ResponseInternal postInternal(ApiRequest apiRequest) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions)
-                .getValue()
-                .toObject(ResponseInternal.class);
+        return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions).getValue()
+            .toObject(ResponseInternal.class);
     }
 
     /**
      * The getInternal operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

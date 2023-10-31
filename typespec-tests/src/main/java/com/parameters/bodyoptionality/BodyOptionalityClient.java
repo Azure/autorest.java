@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.parameters.bodyoptionality.implementation.BodyOptionalityClientImpl;
 import com.parameters.bodyoptionality.models.BodyModel;
 
-/** Initializes a new instance of the synchronous BodyOptionalityClient type. */
+/**
+ * Initializes a new instance of the synchronous BodyOptionalityClient type.
+ */
 @ServiceClient(builder = BodyOptionalityClientBuilder.class)
 public final class BodyOptionalityClient {
-    @Generated private final BodyOptionalityClientImpl serviceClient;
+    @Generated
+    private final BodyOptionalityClientImpl serviceClient;
 
     /**
      * Initializes an instance of BodyOptionalityClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class BodyOptionalityClient {
 
     /**
      * The requiredExplicit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,15 +63,15 @@ public final class BodyOptionalityClient {
 
     /**
      * The requiredImplicit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyModel The bodyModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +88,7 @@ public final class BodyOptionalityClient {
 
     /**
      * The requiredExplicit operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -104,7 +107,7 @@ public final class BodyOptionalityClient {
 
     /**
      * The requiredImplicit operation.
-     *
+     * 
      * @param bodyModel The bodyModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

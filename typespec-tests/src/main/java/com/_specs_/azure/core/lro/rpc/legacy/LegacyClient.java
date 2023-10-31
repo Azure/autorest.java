@@ -19,14 +19,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 
-/** Initializes a new instance of the synchronous LegacyClient type. */
+/**
+ * Initializes a new instance of the synchronous LegacyClient type.
+ */
 @ServiceClient(builder = LegacyClientBuilder.class)
 public final class LegacyClient {
-    @Generated private final LegacyClientImpl serviceClient;
+    @Generated
+    private final LegacyClientImpl serviceClient;
 
     /**
      * Initializes an instance of LegacyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,17 +39,17 @@ public final class LegacyClient {
 
     /**
      * Creates a Job.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     comment: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -73,7 +76,7 @@ public final class LegacyClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -90,7 +93,7 @@ public final class LegacyClient {
 
     /**
      * Creates a Job.
-     *
+     * 
      * @param jobData Data of the job.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

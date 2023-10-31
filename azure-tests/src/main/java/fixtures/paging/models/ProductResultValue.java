@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The ProductResultValue model. */
+/**
+ * The ProductResultValue model.
+ */
 @Fluent
 public final class ProductResultValue {
     /*
@@ -23,12 +25,15 @@ public final class ProductResultValue {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of ProductResultValue class. */
-    public ProductResultValue() {}
+    /**
+     * Creates an instance of ProductResultValue class.
+     */
+    public ProductResultValue() {
+    }
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public List<Product> getValue() {
@@ -37,7 +42,7 @@ public final class ProductResultValue {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the ProductResultValue object itself.
      */
@@ -48,7 +53,7 @@ public final class ProductResultValue {
 
     /**
      * Get the nextLink property: The nextLink property.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +62,7 @@ public final class ProductResultValue {
 
     /**
      * Set the nextLink property: The nextLink property.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the ProductResultValue object itself.
      */
@@ -68,7 +73,7 @@ public final class ProductResultValue {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
-/** Contans property. */
+/**
+ * Contans property.
+ */
 @JacksonXmlRootElement(localName = "Data")
 @Fluent
 public final class ObjectWithXMsTextProperty {
@@ -22,14 +24,18 @@ public final class ObjectWithXMsTextProperty {
     /*
      * Returned value should be 'I am text'
      */
-    @JacksonXmlText private String content;
+    @JacksonXmlText
+    private String content;
 
-    /** Creates an instance of ObjectWithXMsTextProperty class. */
-    public ObjectWithXMsTextProperty() {}
+    /**
+     * Creates an instance of ObjectWithXMsTextProperty class.
+     */
+    public ObjectWithXMsTextProperty() {
+    }
 
     /**
      * Get the language property: Returned value should be 'english'.
-     *
+     * 
      * @return the language value.
      */
     public String getLanguage() {
@@ -38,7 +44,7 @@ public final class ObjectWithXMsTextProperty {
 
     /**
      * Set the language property: Returned value should be 'english'.
-     *
+     * 
      * @param language the language value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
@@ -49,7 +55,7 @@ public final class ObjectWithXMsTextProperty {
 
     /**
      * Get the content property: Returned value should be 'I am text'.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -58,7 +64,7 @@ public final class ObjectWithXMsTextProperty {
 
     /**
      * Set the content property: Returned value should be 'I am text'.
-     *
+     * 
      * @param content the content value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
@@ -69,8 +75,9 @@ public final class ObjectWithXMsTextProperty {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

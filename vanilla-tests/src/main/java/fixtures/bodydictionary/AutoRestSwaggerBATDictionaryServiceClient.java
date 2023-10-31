@@ -19,14 +19,17 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-/** Initializes a new instance of the synchronous AutoRestSwaggerBATDictionaryService type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestSwaggerBATDictionaryService type.
+ */
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class)
 public final class AutoRestSwaggerBATDictionaryServiceClient {
-    @Generated private final DictionariesImpl serviceClient;
+    @Generated
+    private final DictionariesImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestSwaggerBATDictionaryServiceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,7 +39,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get null dictionary value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -51,7 +54,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get null dictionary value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null dictionary value.
@@ -64,7 +67,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get empty dictionary value {}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -79,7 +82,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get empty dictionary value {}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary value {}.
@@ -92,7 +95,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {}.
-     *
+     * 
      * @param arrayBody The empty dictionary value {}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -108,7 +111,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {}.
-     *
+     * 
      * @param arrayBody The empty dictionary value {}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -122,7 +125,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with null value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -137,7 +140,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with null value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null value.
@@ -150,7 +153,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with null key.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -165,7 +168,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with null key.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with null key.
@@ -178,7 +181,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with key as empty string.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -193,7 +196,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get Dictionary with key as empty string.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary with key as empty string.
@@ -206,7 +209,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get invalid Dictionary value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -221,7 +224,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get invalid Dictionary value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Dictionary value.
@@ -234,7 +237,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -249,7 +252,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -262,7 +265,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -278,7 +281,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -292,7 +295,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -307,7 +310,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -320,7 +323,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -335,7 +338,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -348,7 +351,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -363,7 +366,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -376,7 +379,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -392,7 +395,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -406,7 +409,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -421,7 +424,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -434,7 +437,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -449,7 +452,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -462,7 +465,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -477,7 +480,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -490,7 +493,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -506,7 +509,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -520,7 +523,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -535,7 +538,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -548,7 +551,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -563,7 +566,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -576,7 +579,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -591,7 +594,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -604,7 +607,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -620,7 +623,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -634,7 +637,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -649,7 +652,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -662,7 +665,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -677,7 +680,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -690,7 +693,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -705,7 +708,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -718,7 +721,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -734,7 +737,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -748,7 +751,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -763,7 +766,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -776,7 +779,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -791,7 +794,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -804,7 +807,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -819,7 +822,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -832,7 +835,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -848,7 +851,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -862,7 +865,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -877,7 +880,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -890,7 +893,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -905,7 +908,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -918,13 +921,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
-     *     Response}.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -934,7 +937,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -947,7 +950,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -963,7 +966,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -977,7 +980,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -992,7 +995,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -1005,7 +1008,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1020,7 +1023,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -1034,13 +1037,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     *     "1492-10-12T10:15:01-08:00"} along with {@link Response}.
+     * "1492-10-12T10:15:01-08:00"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1051,11 +1054,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     *     "1492-10-12T10:15:01-08:00"}.
+     * "1492-10-12T10:15:01-08:00"}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1066,9 +1069,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     *     "1492-10-12T10:15:01-08:00"}.
+     * "1492-10-12T10:15:01-08:00"}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1084,9 +1087,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     *     "1492-10-12T10:15:01-08:00"}.
+     * "1492-10-12T10:15:01-08:00"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1099,7 +1102,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1114,7 +1117,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1127,7 +1130,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1142,7 +1145,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1156,13 +1159,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response}.
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1173,11 +1176,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
      * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1188,9 +1191,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
      * "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1206,9 +1209,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
      * "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     *     GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1221,7 +1224,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1236,7 +1239,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1249,7 +1252,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1265,7 +1268,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1280,13 +1283,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      * encoded in base64.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
-     *     encoded in base64 along with {@link Response}.
+     * encoded in base64 along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1297,11 +1300,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
      * encoded in base64.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item
-     *     encoded in base64.
+     * encoded in base64.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1312,9 +1315,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
      * elementencoded in base 64.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
-     *     each elementencoded in base 64.
+     * each elementencoded in base 64.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1330,9 +1333,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
      * elementencoded in base 64.
-     *
+     * 
      * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
-     *     each elementencoded in base 64.
+     * each elementencoded in base 64.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1345,13 +1348,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1361,7 +1364,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1375,13 +1378,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
      * ipsum"}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
-     *     "Lorem ipsum"} along with {@link Response}.
+     * "Lorem ipsum"} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1392,11 +1395,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
      * ipsum"}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
-     *     "Lorem ipsum"}.
+     * "Lorem ipsum"}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1406,7 +1409,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get dictionary of complex type null value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1421,7 +1424,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get dictionary of complex type null value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type null value.
@@ -1434,7 +1437,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get empty dictionary of complex type {}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1449,7 +1452,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get empty dictionary of complex type {}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty dictionary of complex type {}.
@@ -1463,13 +1466,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
      * "string": "6"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
-     *     {"integer": 5, "string": "6"}} along with {@link Response}.
+     * {"integer": 5, "string": "6"}} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1480,11 +1483,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
      * "string": "6"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2":
-     *     {"integer": 5, "string": "6"}}.
+     * {"integer": 5, "string": "6"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1495,13 +1498,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
      * "string": "6"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
-     *     5, "string": "6"}} along with {@link Response}.
+     * 5, "string": "6"}} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1512,11 +1515,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5,
      * "string": "6"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
-     *     5, "string": "6"}}.
+     * 5, "string": "6"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1527,13 +1530,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
      * {"integer": 5, "string": "6"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
-     *     "2": {"integer": 5, "string": "6"}} along with {@link Response}.
+     * "2": {"integer": 5, "string": "6"}} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1544,11 +1547,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
      * {"integer": 5, "string": "6"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
-     *     "2": {"integer": 5, "string": "6"}}.
+     * "2": {"integer": 5, "string": "6"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1559,9 +1562,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
      * "4"}, "2": {"integer": 5, "string": "6"}}.
-     *
+     * 
      * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
-     *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1577,9 +1580,9 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
      * "4"}, "2": {"integer": 5, "string": "6"}}.
-     *
+     * 
      * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
-     *     "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1592,7 +1595,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get a null array.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1607,7 +1610,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get a null array.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a null array.
@@ -1620,7 +1623,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an empty dictionary {}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1635,7 +1638,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an empty dictionary {}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an empty dictionary {}.
@@ -1648,13 +1651,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]} along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1664,7 +1667,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1677,13 +1680,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
-     *     Response}.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1693,7 +1696,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1706,13 +1709,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]} along
-     *     with {@link Response}.
+     * with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1722,7 +1725,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1735,7 +1738,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1751,7 +1754,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
+     * 
      * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1765,7 +1768,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionaries of dictionaries with value null.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1780,7 +1783,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionaries of dictionaries with value null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries with value null.
@@ -1793,7 +1796,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1808,7 +1811,7 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1822,13 +1825,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
+     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1839,11 +1842,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1854,13 +1857,13 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
+     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1871,11 +1874,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1886,14 +1889,14 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
-     *     along with {@link Response}.
+     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along
+     * with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1904,11 +1907,11 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1919,17 +1922,17 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
-     *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-     *     "9": "nine"}}.
+     * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     *     "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
-     *     along with {@link Response}.
+     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along
+     * with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1940,10 +1943,10 @@ public final class AutoRestSwaggerBATDictionaryServiceClient {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
+     * 
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
-     *     "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-     *     "9": "nine"}}.
+     * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
+     * "nine"}}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

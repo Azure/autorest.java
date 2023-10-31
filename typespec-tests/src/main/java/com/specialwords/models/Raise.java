@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Raise model. */
+/**
+ * The Raise model.
+ */
 @Immutable
 public final class Raise {
     /*
@@ -21,7 +23,7 @@ public final class Raise {
 
     /**
      * Creates an instance of Raise class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Raise {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

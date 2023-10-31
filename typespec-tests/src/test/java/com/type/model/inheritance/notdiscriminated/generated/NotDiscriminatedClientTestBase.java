@@ -21,15 +21,15 @@ class NotDiscriminatedClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        NotDiscriminatedClientBuilder notDiscriminatedClientbuilder =
-                new NotDiscriminatedClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NotDiscriminatedClientBuilder notDiscriminatedClientbuilder
+            = new NotDiscriminatedClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             notDiscriminatedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             notDiscriminatedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         notDiscriminatedClient = notDiscriminatedClientbuilder.buildClient();
+
     }
 }

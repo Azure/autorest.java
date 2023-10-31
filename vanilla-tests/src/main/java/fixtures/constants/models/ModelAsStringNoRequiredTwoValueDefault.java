@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ModelAsStringNoRequiredTwoValueDefault model. */
+/**
+ * The ModelAsStringNoRequiredTwoValueDefault model.
+ */
 @Fluent
 public final class ModelAsStringNoRequiredTwoValueDefault {
     /*
@@ -16,12 +18,15 @@ public final class ModelAsStringNoRequiredTwoValueDefault {
     @JsonProperty(value = "parameter")
     private ModelAsStringNoRequiredTwoValueDefaultEnum parameter = ModelAsStringNoRequiredTwoValueDefaultEnum.VALUE1;
 
-    /** Creates an instance of ModelAsStringNoRequiredTwoValueDefault class. */
-    public ModelAsStringNoRequiredTwoValueDefault() {}
+    /**
+     * Creates an instance of ModelAsStringNoRequiredTwoValueDefault class.
+     */
+    public ModelAsStringNoRequiredTwoValueDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public ModelAsStringNoRequiredTwoValueDefaultEnum getParameter() {
@@ -30,7 +35,7 @@ public final class ModelAsStringNoRequiredTwoValueDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the ModelAsStringNoRequiredTwoValueDefault object itself.
      */
@@ -41,8 +46,9 @@ public final class ModelAsStringNoRequiredTwoValueDefault {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

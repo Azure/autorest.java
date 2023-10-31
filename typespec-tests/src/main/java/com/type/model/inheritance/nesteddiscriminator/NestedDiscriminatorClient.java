@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.model.inheritance.nesteddiscriminator.implementation.NestedDiscriminatorClientImpl;
 import com.type.model.inheritance.nesteddiscriminator.models.Fish;
 
-/** Initializes a new instance of the synchronous NestedDiscriminatorClient type. */
+/**
+ * Initializes a new instance of the synchronous NestedDiscriminatorClient type.
+ */
 @ServiceClient(builder = NestedDiscriminatorClientBuilder.class)
 public final class NestedDiscriminatorClient {
-    @Generated private final NestedDiscriminatorClientImpl serviceClient;
+    @Generated
+    private final NestedDiscriminatorClientImpl serviceClient;
 
     /**
      * Initializes an instance of NestedDiscriminatorClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,22 +38,22 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -60,15 +63,15 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,22 +88,22 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getRecursiveModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -110,15 +113,15 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The putRecursiveModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -135,22 +138,22 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getMissingDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -160,22 +163,22 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getWrongDiscriminator operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     age: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     *     Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -185,7 +188,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -203,7 +206,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The putModel operation.
-     *
+     * 
      * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -222,7 +225,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getRecursiveModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -240,7 +243,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The putRecursiveModel operation.
-     *
+     * 
      * @param input This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -259,7 +262,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getMissingDiscriminator operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -277,7 +280,7 @@ public final class NestedDiscriminatorClient {
 
     /**
      * The getWrongDiscriminator operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Assertions;
 public final class MyBaseTypeTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        MyBaseType model =
-                BinaryData.fromString(
-                                "{\"kind\":\"MyBaseType\",\"propB1\":\"kwt\",\"helper\":{\"propBH1\":\"xbnjbiksq\"}}")
-                        .toObject(MyBaseType.class);
+        MyBaseType model = BinaryData
+            .fromString("{\"kind\":\"MyBaseType\",\"propB1\":\"kwt\",\"helper\":{\"propBH1\":\"xbnjbiksq\"}}")
+            .toObject(MyBaseType.class);
         Assertions.assertEquals("kwt", model.getPropB1());
     }
 }

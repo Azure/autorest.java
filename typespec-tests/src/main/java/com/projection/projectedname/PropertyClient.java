@@ -21,14 +21,17 @@ import com.projection.projectedname.models.JsonAndClientProjectedNameModel;
 import com.projection.projectedname.models.JsonProjectedNameModel;
 import com.projection.projectedname.models.LanguageProjectedNameModel;
 
-/** Initializes a new instance of the synchronous ProjectedNameClient type. */
+/**
+ * Initializes a new instance of the synchronous ProjectedNameClient type.
+ */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class PropertyClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class PropertyClient {
 
     /**
      * The json operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -63,15 +66,15 @@ public final class PropertyClient {
 
     /**
      * The client operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,15 +91,15 @@ public final class PropertyClient {
 
     /**
      * The language operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -113,15 +116,15 @@ public final class PropertyClient {
 
     /**
      * The jsonAndClient operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -132,14 +135,14 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> jsonAndClientWithResponse(
-            BinaryData jsonAndClientProjectedNameModel, RequestOptions requestOptions) {
+    public Response<Void> jsonAndClientWithResponse(BinaryData jsonAndClientProjectedNameModel,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndClientWithResponse(jsonAndClientProjectedNameModel, requestOptions);
     }
 
     /**
      * The json operation.
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -158,7 +161,7 @@ public final class PropertyClient {
 
     /**
      * The client operation.
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -177,7 +180,7 @@ public final class PropertyClient {
 
     /**
      * The language operation.
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,7 +199,7 @@ public final class PropertyClient {
 
     /**
      * The jsonAndClient operation.
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

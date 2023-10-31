@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Model with collection bytes properties. */
+/**
+ * Model with collection bytes properties.
+ */
 @Fluent
 public final class CollectionsByteProperty {
     /*
@@ -19,13 +21,16 @@ public final class CollectionsByteProperty {
     @JsonProperty(value = "property")
     private List<byte[]> property;
 
-    /** Creates an instance of CollectionsByteProperty class. */
+    /**
+     * Creates an instance of CollectionsByteProperty class.
+     */
     @Generated
-    public CollectionsByteProperty() {}
+    public CollectionsByteProperty() {
+    }
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated
@@ -35,7 +40,7 @@ public final class CollectionsByteProperty {
 
     /**
      * Set the property property: Property.
-     *
+     * 
      * @param property the property value to set.
      * @return the CollectionsByteProperty object itself.
      */

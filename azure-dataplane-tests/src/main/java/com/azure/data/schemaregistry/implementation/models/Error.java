@@ -7,7 +7,9 @@ package com.azure.data.schemaregistry.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** An error response returned from Azure Schema Registry service. */
+/**
+ * An error response returned from Azure Schema Registry service.
+ */
 @Fluent
 public final class Error {
     /*
@@ -16,12 +18,15 @@ public final class Error {
     @JsonProperty(value = "error", required = true)
     private ErrorDetail error;
 
-    /** Creates an instance of Error class. */
-    public Error() {}
+    /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+    }
 
     /**
      * Get the error property: Error response returned from Azure Schema Registry service.
-     *
+     * 
      * @return the error value.
      */
     public ErrorDetail getError() {
@@ -30,7 +35,7 @@ public final class Error {
 
     /**
      * Set the error property: Error response returned from Azure Schema Registry service.
-     *
+     * 
      * @param error the error value to set.
      * @return the Error object itself.
      */

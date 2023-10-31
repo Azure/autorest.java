@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Model with collection model properties. */
+/**
+ * Model with collection model properties.
+ */
 @Immutable
 public final class CollectionsModelProperty {
     /*
@@ -22,7 +24,7 @@ public final class CollectionsModelProperty {
 
     /**
      * Creates an instance of CollectionsModelProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class CollectionsModelProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

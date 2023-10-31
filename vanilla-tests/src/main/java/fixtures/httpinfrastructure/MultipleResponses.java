@@ -23,23 +23,28 @@ import fixtures.httpinfrastructure.models.MyException;
 import fixtures.httpinfrastructure.models.MyExceptionException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in MultipleResponses. */
+/**
+ * An instance of this class provides access to all the operations defined in MultipleResponses.
+ */
 public final class MultipleResponses {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final MultipleResponsesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of MultipleResponses.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     MultipleResponses(AutoRestHttpInfrastructureTestService client) {
-        this.service =
-                RestProxy.create(
-                        MultipleResponsesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(MultipleResponsesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -51,205 +56,205 @@ public final class MultipleResponses {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface MultipleResponsesService {
         @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({ 200, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model204NoModelDefaultError200Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model204NoModelDefaultError200Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/204/none")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({ 200, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model204NoModelDefaultError204Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model204NoModelDefaultError204Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/201/valid")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({ 200, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model204NoModelDefaultError201Invalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model204NoModelDefaultError201Invalid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/202/none")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({ 200, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model204NoModelDefaultError202None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model204NoModelDefaultError202None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/204/none/default/Error/response/400/valid")
-        @ExpectedResponses({200, 204})
+        @ExpectedResponses({ 200, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model204NoModelDefaultError400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model204NoModelDefaultError400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/200/valid")
-        @ExpectedResponses({200, 201})
+        @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model201ModelDefaultError200Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model201ModelDefaultError200Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/201/valid")
-        @ExpectedResponses({200, 201})
+        @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model201ModelDefaultError201Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model201ModelDefaultError201Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/B/default/Error/response/400/valid")
-        @ExpectedResponses({200, 201})
+        @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<MyException>> get200Model201ModelDefaultError400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200Model201ModelDefaultError400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        @ExpectedResponses({200, 201, 404})
+        @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        @ExpectedResponses({200, 201, 404})
+        @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        @ExpectedResponses({200, 201, 404})
+        @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        @ExpectedResponses({200, 201, 404})
+        @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/Error/response/202/none")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get202None204NoneDefaultError202None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> get202None204NoneDefaultError202None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/Error/response/204/none")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get202None204NoneDefaultError204None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> get202None204NoneDefaultError204None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/Error/response/400/valid")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get202None204NoneDefaultError400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> get202None204NoneDefaultError400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/202/invalid")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone202Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/204/none")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone204None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/400/none")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone400None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/none/response/400/invalid")
-        @ExpectedResponses({202, 204})
+        @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get202None204NoneDefaultNone400Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/A/response/200/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> getDefaultModelA200Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> getDefaultModelA200Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/default/A/response/200/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> getDefaultModelA200None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> getDefaultModelA200None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/default/A/response/400/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(MyExceptionException.class)
-        Mono<Response<Void>> getDefaultModelA400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> getDefaultModelA400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/default/A/response/400/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(MyExceptionException.class)
-        Mono<Response<Void>> getDefaultModelA400None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> getDefaultModelA400None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/default/none/response/200/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone200Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/none/response/200/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone200None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/none/response/400/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone400Invalid(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/default/none/response/400/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone400None(@HostParam("$host") String host, Context context);
 
         @Get("/http/payloads/200/A/response/200/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA200None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA200None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/200/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA200Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA200Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/200/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA200Invalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA200Invalid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/400/none")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA400None(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA400None(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/400/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA400Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA400Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/400/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA400Invalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA400Invalid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/response/202/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyException>> get200ModelA202Valid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyException>> get200ModelA202Valid(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -257,17 +262,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model204NoModelDefaultError200Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model204NoModelDefaultError200Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -277,8 +282,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model204NoModelDefaultError200Valid(this.client.getHost(), accept, context);
@@ -286,7 +291,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -294,12 +299,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -309,12 +314,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync(Context context) {
         return get200Model204NoModelDefaultError200ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -328,7 +333,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -340,7 +345,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -348,17 +353,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model204NoModelDefaultError204Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model204NoModelDefaultError204Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -368,8 +373,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model204NoModelDefaultError204Valid(this.client.getHost(), accept, context);
@@ -377,7 +382,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -385,12 +390,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -400,12 +405,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync(Context context) {
         return get200Model204NoModelDefaultError204ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -419,7 +424,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -431,7 +436,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -439,17 +444,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model204NoModelDefaultError201Invalid(this.client.getHost(), accept, context));
+            context -> service.get200Model204NoModelDefaultError201Invalid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -459,8 +464,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model204NoModelDefaultError201Invalid(this.client.getHost(), accept, context);
@@ -468,7 +473,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -476,12 +481,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -491,12 +496,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync(Context context) {
         return get200Model204NoModelDefaultError201InvalidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -510,7 +515,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -522,7 +527,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -530,17 +535,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model204NoModelDefaultError202None(this.client.getHost(), accept, context));
+            context -> service.get200Model204NoModelDefaultError202None(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -550,8 +555,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model204NoModelDefaultError202None(this.client.getHost(), accept, context);
@@ -559,7 +564,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -567,12 +572,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -582,12 +587,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync(Context context) {
         return get200Model204NoModelDefaultError202NoneWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -601,7 +606,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload:.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -613,7 +618,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -621,17 +626,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model204NoModelDefaultError400Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model204NoModelDefaultError400Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -641,8 +646,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model204NoModelDefaultError400Valid(this.client.getHost(), accept, context);
@@ -650,7 +655,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -658,12 +663,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -673,12 +678,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync(Context context) {
         return get200Model204NoModelDefaultError400ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -692,7 +697,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -704,7 +709,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -712,17 +717,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model201ModelDefaultError200Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model201ModelDefaultError200Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -732,8 +737,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model201ModelDefaultError200Valid(this.client.getHost(), accept, context);
@@ -741,7 +746,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -749,12 +754,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -764,12 +769,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync(Context context) {
         return get200Model201ModelDefaultError200ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -783,7 +788,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -795,7 +800,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -803,17 +808,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model201ModelDefaultError201Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model201ModelDefaultError201Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -823,8 +828,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model201ModelDefaultError201Valid(this.client.getHost(), accept, context);
@@ -832,7 +837,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -840,12 +845,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -855,12 +860,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync(Context context) {
         return get200Model201ModelDefaultError201ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -874,7 +879,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -886,7 +891,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -894,17 +899,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get200Model201ModelDefaultError400Valid(this.client.getHost(), accept, context));
+            context -> service.get200Model201ModelDefaultError400Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -914,8 +919,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200Model201ModelDefaultError400Valid(this.client.getHost(), accept, context);
@@ -923,7 +928,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -931,12 +936,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -946,12 +951,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync(Context context) {
         return get200Model201ModelDefaultError400ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -965,7 +970,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -977,7 +982,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -985,19 +990,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.get200ModelA201ModelC404ModelDDefaultError200Valid(
-                                this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> service
+            .get200ModelA201ModelC404ModelDDefaultError200Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1007,8 +1010,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA201ModelC404ModelDDefaultError200Valid(this.client.getHost(), accept, context);
@@ -1016,7 +1019,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -1024,12 +1027,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1039,12 +1042,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1058,7 +1061,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -1070,7 +1073,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -1078,19 +1081,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.get200ModelA201ModelC404ModelDDefaultError201Valid(
-                                this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> service
+            .get200ModelA201ModelC404ModelDDefaultError201Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1100,8 +1101,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid(this.client.getHost(), accept, context);
@@ -1109,7 +1110,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -1117,12 +1118,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1132,12 +1133,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1151,7 +1152,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -1163,7 +1164,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -1171,19 +1172,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.get200ModelA201ModelC404ModelDDefaultError404Valid(
-                                this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> service
+            .get200ModelA201ModelC404ModelDDefaultError404Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1193,8 +1192,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA201ModelC404ModelDDefaultError404Valid(this.client.getHost(), accept, context);
@@ -1202,7 +1201,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -1210,12 +1209,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1225,12 +1224,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1244,7 +1243,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -1256,7 +1255,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -1264,19 +1263,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.get200ModelA201ModelC404ModelDDefaultError400Valid(
-                                this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> service
+            .get200ModelA201ModelC404ModelDDefaultError400Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1286,8 +1283,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA201ModelC404ModelDDefaultError400Valid(this.client.getHost(), accept, context);
@@ -1295,7 +1292,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -1303,12 +1300,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync()
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1318,12 +1315,12 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1337,7 +1334,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -1349,7 +1346,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1357,17 +1354,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultError202None(this.client.getHost(), accept, context));
+            context -> service.get202None204NoneDefaultError202None(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1377,8 +1374,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get202None204NoneDefaultError202None(this.client.getHost(), accept, context);
@@ -1386,7 +1383,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1398,7 +1395,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1412,7 +1409,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1426,7 +1423,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1437,7 +1434,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1445,17 +1442,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultError204None(this.client.getHost(), accept, context));
+            context -> service.get202None204NoneDefaultError204None(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1465,8 +1462,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get202None204NoneDefaultError204None(this.client.getHost(), accept, context);
@@ -1474,7 +1471,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1486,7 +1483,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1500,7 +1497,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1514,7 +1511,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1525,7 +1522,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1533,17 +1530,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultError400Valid(this.client.getHost(), accept, context));
+            context -> service.get202None204NoneDefaultError400Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1553,8 +1550,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get202None204NoneDefaultError400Valid(this.client.getHost(), accept, context);
@@ -1562,7 +1559,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1574,7 +1571,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1588,7 +1585,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1602,7 +1599,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1613,7 +1610,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1621,16 +1618,16 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultNone202Invalid(this.client.getHost(), context));
+        return FluxUtil
+            .withContext(context -> service.get202None204NoneDefaultNone202Invalid(this.client.getHost(), context));
     }
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1640,15 +1637,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.get202None204NoneDefaultNone202Invalid(this.client.getHost(), context);
     }
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1660,7 +1657,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1674,7 +1671,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1688,7 +1685,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1699,7 +1696,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1707,16 +1704,16 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultNone204None(this.client.getHost(), context));
+        return FluxUtil
+            .withContext(context -> service.get202None204NoneDefaultNone204None(this.client.getHost(), context));
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1726,15 +1723,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.get202None204NoneDefaultNone204None(this.client.getHost(), context);
     }
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1746,7 +1743,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1760,7 +1757,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1774,7 +1771,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 204 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1785,7 +1782,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1793,16 +1790,16 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultNone400None(this.client.getHost(), context));
+        return FluxUtil
+            .withContext(context -> service.get202None204NoneDefaultNone400None(this.client.getHost(), context));
     }
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1812,15 +1809,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.get202None204NoneDefaultNone400None(this.client.getHost(), context);
     }
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1832,7 +1829,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1846,7 +1843,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1860,7 +1857,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1871,7 +1868,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1879,16 +1876,16 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        return FluxUtil.withContext(
-                context -> service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), context));
+        return FluxUtil
+            .withContext(context -> service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), context));
     }
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1898,15 +1895,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.get202None204NoneDefaultNone400Invalid(this.client.getHost(), context);
     }
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1918,7 +1915,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1932,7 +1929,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1946,7 +1943,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1957,7 +1954,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -1965,17 +1962,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getDefaultModelA200Valid(this.client.getHost(), accept, context));
+        return FluxUtil
+            .withContext(context -> service.getDefaultModelA200Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1985,8 +1982,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDefaultModelA200Valid(this.client.getHost(), accept, context);
@@ -1994,7 +1991,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2006,7 +2003,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2020,7 +2017,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2034,7 +2031,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -2046,7 +2043,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -2054,8 +2051,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDefaultModelA200None(this.client.getHost(), accept, context));
@@ -2063,7 +2060,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2073,8 +2070,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDefaultModelA200None(this.client.getHost(), accept, context);
@@ -2082,7 +2079,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2094,7 +2091,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2108,7 +2105,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2122,7 +2119,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -2134,7 +2131,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2142,17 +2139,17 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getDefaultModelA400Valid(this.client.getHost(), accept, context));
+        return FluxUtil
+            .withContext(context -> service.getDefaultModelA400Valid(this.client.getHost(), accept, context));
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2162,8 +2159,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDefaultModelA400Valid(this.client.getHost(), accept, context);
@@ -2171,7 +2168,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2183,7 +2180,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2197,7 +2194,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2211,7 +2208,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2222,7 +2219,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2230,8 +2227,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDefaultModelA400None(this.client.getHost(), accept, context));
@@ -2239,7 +2236,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2249,8 +2246,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDefaultModelA400None(this.client.getHost(), accept, context);
@@ -2258,7 +2255,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2270,7 +2267,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2284,7 +2281,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
@@ -2298,7 +2295,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2309,7 +2306,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2317,15 +2314,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone200Invalid(this.client.getHost(), context));
     }
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2335,15 +2332,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.getDefaultNone200Invalid(this.client.getHost(), context);
     }
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2355,7 +2352,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2369,7 +2366,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2383,7 +2380,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2394,7 +2391,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2402,15 +2399,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone200None(this.client.getHost(), context));
     }
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2420,15 +2417,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.getDefaultNone200None(this.client.getHost(), context);
     }
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2440,7 +2437,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2454,7 +2451,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2468,7 +2465,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2479,7 +2476,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2487,15 +2484,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone400Invalid(this.client.getHost(), context));
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2505,15 +2502,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.getDefaultNone400Invalid(this.client.getHost(), context);
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2525,7 +2522,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2539,7 +2536,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2553,7 +2550,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2564,7 +2561,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -2572,15 +2569,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return FluxUtil.withContext(context -> service.getDefaultNone400None(this.client.getHost(), context));
     }
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2590,15 +2587,15 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         return service.getDefaultNone400None(this.client.getHost(), context);
     }
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -2610,7 +2607,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2624,7 +2621,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2638,7 +2635,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -2650,7 +2647,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -2658,8 +2655,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA200None(this.client.getHost(), accept, context));
@@ -2668,7 +2665,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2678,8 +2675,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA200None(this.client.getHost(), accept, context);
@@ -2688,7 +2685,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2701,7 +2698,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2716,7 +2713,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2731,7 +2728,7 @@ public final class MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
      * for model A.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -2743,7 +2740,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -2751,8 +2748,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA200Valid(this.client.getHost(), accept, context));
@@ -2760,7 +2757,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2770,8 +2767,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA200Valid(this.client.getHost(), accept, context);
@@ -2779,7 +2776,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2791,7 +2788,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2805,7 +2802,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2819,7 +2816,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -2831,7 +2828,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -2839,8 +2836,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA200Invalid(this.client.getHost(), accept, context));
@@ -2848,7 +2845,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2858,8 +2855,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA200Invalid(this.client.getHost(), accept, context);
@@ -2867,7 +2864,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2879,7 +2876,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2893,7 +2890,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2907,7 +2904,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -2919,7 +2916,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -2927,8 +2924,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400NoneWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA400None(this.client.getHost(), accept, context));
@@ -2936,7 +2933,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2946,8 +2943,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400NoneWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA400None(this.client.getHost(), accept, context);
@@ -2955,7 +2952,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -2967,7 +2964,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2981,7 +2978,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2995,7 +2992,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -3007,7 +3004,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -3015,8 +3012,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA400Valid(this.client.getHost(), accept, context));
@@ -3024,7 +3021,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3034,8 +3031,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA400Valid(this.client.getHost(), accept, context);
@@ -3043,7 +3040,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -3055,7 +3052,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3069,7 +3066,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3083,7 +3080,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -3095,7 +3092,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -3103,8 +3100,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400InvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA400Invalid(this.client.getHost(), accept, context));
@@ -3112,7 +3109,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3122,8 +3119,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400InvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA400Invalid(this.client.getHost(), accept, context);
@@ -3131,7 +3128,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -3143,7 +3140,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3157,7 +3154,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3171,7 +3168,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -3183,7 +3180,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -3191,8 +3188,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA202ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200ModelA202Valid(this.client.getHost(), accept, context));
@@ -3200,7 +3197,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3210,8 +3207,8 @@ public final class MultipleResponses {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA202ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200ModelA202Valid(this.client.getHost(), accept, context);
@@ -3219,7 +3216,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -3231,7 +3228,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3245,7 +3242,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3259,7 +3256,7 @@ public final class MultipleResponses {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

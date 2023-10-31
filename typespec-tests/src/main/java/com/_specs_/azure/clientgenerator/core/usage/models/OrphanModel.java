@@ -23,7 +23,7 @@ public final class OrphanModel {
 
     /**
      * Creates an instance of OrphanModel class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -34,7 +34,7 @@ public final class OrphanModel {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
