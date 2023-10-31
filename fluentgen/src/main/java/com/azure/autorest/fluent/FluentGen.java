@@ -64,6 +64,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -142,7 +143,7 @@ public class FluentGen extends Javagen {
     private void formatAndWriteJavaFiles(List<JavaFile> javaFiles, JavaSettings settings) {
         if (!settings.isSkipFormatting()) {
             try {
-                Path tmpDir = Files.createTempDirectory("spotless");
+                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
                 tmpDir.toFile().deleteOnExit();
 
                 for (JavaFile javaFile : javaFiles) {

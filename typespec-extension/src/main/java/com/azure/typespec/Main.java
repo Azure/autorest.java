@@ -32,11 +32,11 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -131,7 +131,7 @@ public class Main {
                                                 JavaSettings settings) {
         if (!settings.isSkipFormatting()) {
             try {
-                Path tmpDir = Files.createTempDirectory("spotless");
+                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
                 tmpDir.toFile().deleteOnExit();
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
@@ -141,11 +141,9 @@ public class Main {
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath,
-                    StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
                 Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
-                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
-                    StandardCopyOption.REPLACE_EXISTING);
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
 
                 attemptMavenSpotless(pomPath);
 

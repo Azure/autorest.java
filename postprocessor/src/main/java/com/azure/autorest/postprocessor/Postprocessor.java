@@ -28,10 +28,10 @@ import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -147,22 +147,18 @@ public class Postprocessor extends NewPlugin {
         if (!settings.isSkipFormatting()) {
             Path tmpDir = null;
             try {
-                tmpDir = Files.createTempDirectory("spotless");
-                tmpDir.toFile().deleteOnExit();
+                tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
                     Path file = tmpDir.resolve(javaFile.getKey());
                     Files.createDirectories(file.getParent());
-                    Files.writeString(file, javaFile.getValue()).toFile().deleteOnExit();
+                    Files.writeString(file, javaFile.getValue());
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath,
-                    StandardCopyOption.REPLACE_EXISTING);
-                pomPath.toFile().deleteOnExit();
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
                 Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
-                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"), StandardCopyOption.REPLACE_EXISTING);
-                pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml").toFile().deleteOnExit();
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
 
                 attemptMavenSpotless(pomPath);
 
