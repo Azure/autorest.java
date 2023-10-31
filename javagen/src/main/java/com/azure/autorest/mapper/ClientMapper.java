@@ -435,6 +435,10 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {
+        if (!JavaSettings.getInstance().isBranded()) {
+            return;
+        }
+
         clientBuilder.addBuilderTrait(ClientBuilderTrait.HTTP_TRAIT);
         clientBuilder.addBuilderTrait(ClientBuilderTrait.CONFIGURATION_TRAIT);
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
