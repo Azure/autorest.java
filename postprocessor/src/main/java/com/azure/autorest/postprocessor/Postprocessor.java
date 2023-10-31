@@ -201,9 +201,10 @@ public class Postprocessor extends NewPlugin {
                 customizationFile = Paths.get(baseDirectory, filePath);
             }
         }
+
         try {
             String code = Files.readString(customizationFile);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), code);
         } catch (IOException e) {
             logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
@@ -211,7 +212,7 @@ public class Postprocessor extends NewPlugin {
     }
 
     @SuppressWarnings("unchecked")
-    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
+    public static Class<? extends Customization> loadCustomizationClass(String className, String code) {
         Path customizationCompile = null;
         try {
             customizationCompile = Files.createTempDirectory("customizationCompile" + UUID.randomUUID());
@@ -219,7 +220,7 @@ public class Postprocessor extends NewPlugin {
             Path pomPath = customizationCompile.resolve("compile-pom.xml");
             Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
 
-            Path sourcePath = customizationCompile.resolve(fileName);
+            Path sourcePath = customizationCompile.resolve("src/main/java/" + className + ".java");
             Files.createDirectories(sourcePath.getParent());
 
             Files.writeString(sourcePath, code);
