@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** This is base model for not-discriminated normal multiple levels inheritance. */
+/**
+ * This is base model for not-discriminated normal multiple levels inheritance.
+ */
 @Immutable
 public class Pet {
     /*
@@ -21,7 +23,7 @@ public class Pet {
 
     /**
      * Creates an instance of Pet class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public class Pet {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

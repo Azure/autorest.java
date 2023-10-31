@@ -22,16 +22,16 @@ class ResponseClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ResponseClientBuilder responseClientbuilder =
-                new ResponseClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ResponseClientBuilder responseClientbuilder
+            = new ResponseClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             responseClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             responseClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         responseClient = responseClientbuilder.buildClient();
+
     }
 }

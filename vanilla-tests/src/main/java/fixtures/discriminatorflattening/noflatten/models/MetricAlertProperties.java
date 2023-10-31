@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.noflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** An alert rule. */
+/**
+ * An alert rule.
+ */
 @Fluent
 public final class MetricAlertProperties {
     /*
@@ -16,12 +18,15 @@ public final class MetricAlertProperties {
     @JsonProperty(value = "criteria", required = true)
     private MetricAlertCriteria criteria;
 
-    /** Creates an instance of MetricAlertProperties class. */
-    public MetricAlertProperties() {}
+    /**
+     * Creates an instance of MetricAlertProperties class.
+     */
+    public MetricAlertProperties() {
+    }
 
     /**
      * Get the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @return the criteria value.
      */
     public MetricAlertCriteria getCriteria() {
@@ -30,7 +35,7 @@ public final class MetricAlertProperties {
 
     /**
      * Set the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @param criteria the criteria value to set.
      * @return the MetricAlertProperties object itself.
      */
@@ -41,7 +46,7 @@ public final class MetricAlertProperties {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

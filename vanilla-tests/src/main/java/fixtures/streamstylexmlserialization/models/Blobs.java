@@ -15,7 +15,9 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** The Blobs model. */
+/**
+ * The Blobs model.
+ */
 @Fluent
 public final class Blobs implements XmlSerializable<Blobs> {
     /*
@@ -28,12 +30,15 @@ public final class Blobs implements XmlSerializable<Blobs> {
      */
     private List<Blob> blob = new ArrayList<>();
 
-    /** Creates an instance of Blobs class. */
-    public Blobs() {}
+    /**
+     * Creates an instance of Blobs class.
+     */
+    public Blobs() {
+    }
 
     /**
      * Get the blobPrefix property: The BlobPrefix property.
-     *
+     * 
      * @return the blobPrefix value.
      */
     public List<BlobPrefix> getBlobPrefix() {
@@ -42,7 +47,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Set the blobPrefix property: The BlobPrefix property.
-     *
+     * 
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
      */
@@ -53,7 +58,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Get the blob property: The Blob property.
-     *
+     * 
      * @return the blob value.
      */
     public List<Blob> getBlob() {
@@ -62,7 +67,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Set the blob property: The Blob property.
-     *
+     * 
      * @param blob the blob value to set.
      * @return the Blobs object itself.
      */
@@ -73,7 +78,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -109,10 +114,10 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Reads an instance of Blobs from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Blobs.
      */
     public static Blobs fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -121,39 +126,37 @@ public final class Blobs implements XmlSerializable<Blobs> {
 
     /**
      * Reads an instance of Blobs from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Blobs if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Blobs.
      */
     public static Blobs fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blobs" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Blobs deserializedBlobs = new Blobs();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Blobs deserializedBlobs = new Blobs();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("BlobPrefix".equals(elementName.getLocalPart())) {
-                            if (deserializedBlobs.blobPrefix == null) {
-                                deserializedBlobs.blobPrefix = new ArrayList<>();
-                            }
-                            deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
-                        } else if ("Blob".equals(elementName.getLocalPart())) {
-                            if (deserializedBlobs.blob == null) {
-                                deserializedBlobs.blob = new ArrayList<>();
-                            }
-                            deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
-                        } else {
-                            reader.skipElement();
-                        }
+                if ("BlobPrefix".equals(elementName.getLocalPart())) {
+                    if (deserializedBlobs.blobPrefix == null) {
+                        deserializedBlobs.blobPrefix = new ArrayList<>();
                     }
+                    deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
+                } else if ("Blob".equals(elementName.getLocalPart())) {
+                    if (deserializedBlobs.blob == null) {
+                        deserializedBlobs.blob = new ArrayList<>();
+                    }
+                    deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedBlobs;
-                });
+            return deserializedBlobs;
+        });
     }
 }

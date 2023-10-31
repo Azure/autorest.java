@@ -7,15 +7,23 @@ package fixtures.constants.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum. */
+/**
+ * Defines values for NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
+ */
 public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum {
-    /** Enum value value1. */
+    /**
+     * Enum value value1.
+     */
     VALUE1("value1"),
 
-    /** Enum value value2. */
+    /**
+     * Enum value value2.
+     */
     VALUE2("value2");
 
-    /** The actual serialized value for a NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum instance. */
+    /**
+     * The actual serialized value for a NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum instance.
+     */
     private final String value;
 
     NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum(String value) {
@@ -24,7 +32,7 @@ public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum {
 
     /**
      * Parses a serialized value to a NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum object, or null if unable to parse.
      */
@@ -33,8 +41,8 @@ public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum {
         if (value == null) {
             return null;
         }
-        NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum[] items =
-                NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum.values();
+        NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum[] items
+            = NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum.values();
         for (NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
@@ -43,7 +51,9 @@ public enum NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

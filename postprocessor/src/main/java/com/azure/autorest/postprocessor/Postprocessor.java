@@ -14,12 +14,11 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -32,9 +31,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 public class Postprocessor extends NewPlugin {
     private final Logger logger = new PluginLogger(this, Postprocessor.class);
@@ -49,7 +48,8 @@ public class Postprocessor extends NewPlugin {
         this.clear();
 
         List<String> files = listInputs();
-        Map<String, String> fileContents = files.stream().collect(Collectors.toMap(f -> f, this::readFile));
+        final Map<String, String> fileContents = new ConcurrentHashMap<>();
+        files.parallelStream().forEach(f -> fileContents.put(f, readFile(f)));
 
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
@@ -58,7 +58,7 @@ public class Postprocessor extends NewPlugin {
             String readmePath = getReadme();
             if (readmePath != null) {
                 logger.info("README found at: {}", readmePath);
-                readme = new String(Files.readAllBytes(Paths.get(new URI(readmePath))));
+                readme = Files.readString(Paths.get(new URI(readmePath)));
             }
         } catch (IOException | URISyntaxException | IllegalArgumentException e) {
             logger.warn("Location of README is not valid", e);
@@ -73,6 +73,7 @@ public class Postprocessor extends NewPlugin {
             try {
                 writeToFiles(fileContents);
             } catch (Exception e) {
+                logger.error("Failed to complete postprocessing.", e);
                 return false;
             }
             return true;
@@ -123,14 +124,11 @@ public class Postprocessor extends NewPlugin {
             try {
                 Customization customization = customizationClass.getConstructor().newInstance();
                 logger.info("Running customization, this may take a while...");
-                fileContents = customization.run(fileContents, logger);
+                writeToFiles(customization.run(fileContents, logger));
             } catch (Exception e) {
                 logger.error("Unable to complete customization", e);
                 return false;
             }
-
-            //Step 2: Print to files
-            writeToFiles(fileContents);
         } catch (Exception e) {
             logger.error("Failed to complete postprocessing.", e);
             return false;
@@ -138,38 +136,73 @@ public class Postprocessor extends NewPlugin {
         return true;
     }
 
-    private void writeToFiles(Map<String, String> fileContents) {
+    private void writeToFiles(Map<String, String> javaFiles) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isHandlePartialUpdate()) {
-            handlePartialUpdate(fileContents);
+            handlePartialUpdate(javaFiles);
         }
 
-        //Step 4: Print to files
-        Formatter formatter = new Formatter();
+        if (!settings.isSkipFormatting()) {
+            Path tmpDir = null;
+            try {
+                tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
+                Path finalTmpDir = tmpDir;
 
+                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                    Path file = tmpDir.resolve(javaFile.getKey());
+                    Files.createDirectories(file.getParent());
+                    Files.writeString(file, javaFile.getValue());
+                }
 
-        // Formatting Java source files can be expensive but can be run in parallel.
-        // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-        // complete.
-        AtomicBoolean failedFormatting = new AtomicBoolean();
-        fileContents.entrySet().parallelStream().forEach(javaFile -> {
-            String formattedSource = javaFile.getValue();
-            if (javaFile.getKey().endsWith(".java")) {
-                if (!settings.isSkipFormatting()) {
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
+
+                attemptMavenSpotless(pomPath);
+
+                javaFiles.entrySet().parallelStream().forEach(javaFile -> {
+                    Path file = finalTmpDir.resolve(javaFile.getKey());
                     try {
-                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-                    } catch (Exception e) {
-                        logger.error("Unable to format output file " + javaFile.getKey(), e);
-                        failedFormatting.set(true);
+                        writeFile(javaFile.getKey(), Files.readString(file), null);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
                     }
+                });
+            } catch (IOException ex) {
+                throw new UncheckedIOException(ex);
+            } finally {
+                if (tmpDir != null) {
+                    Utils.deleteDirectory(tmpDir.toFile());
                 }
             }
+        } else {
+            javaFiles.entrySet().parallelStream()
+                .forEach(javaFile -> writeFile(javaFile.getKey(), javaFile.getValue(), null));
+        }
+    }
 
-            writeFile(javaFile.getKey(), formattedSource, null);
-        });
+    private static void attemptMavenSpotless(Path pomPath) {
+        String[] command = Utils.isWindows()
+            ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() };
 
-        if (failedFormatting.get()) {
-            throw new RuntimeException("Failed to format Java files.");
+        try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
+                    + Files.readString(outputFile.toPath()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
     }
 
@@ -202,7 +235,7 @@ public class Postprocessor extends NewPlugin {
             return null;
         }
 
-        return loadCustomizationClass(className, customizationFile, code, this.logger);
+        return loadCustomizationClass(className, customizationFile, code);
     }
 
     public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
@@ -213,8 +246,8 @@ public class Postprocessor extends NewPlugin {
             }
         }
         try {
-            String code = new String(Files.readAllBytes(customizationFile), StandardCharsets.UTF_8);
-            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code, logger);
+            String code = Files.readString(customizationFile);
+            return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), filePath, code);
         } catch (IOException e) {
             logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
             return null;
@@ -222,7 +255,7 @@ public class Postprocessor extends NewPlugin {
     }
 
     @SuppressWarnings("unchecked")
-    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code, Logger logger) {
+    public static Class<? extends Customization> loadCustomizationClass(String className, String fileName, String code) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -230,17 +263,15 @@ public class Postprocessor extends NewPlugin {
         try {
             tempDirWithPrefix = Files.createTempDirectory("temp");
             editor = new Editor(new HashMap<>(), tempDirWithPrefix);
-            InputStream pomStream = Postprocessor.class.getResourceAsStream("/readme/pom.xml");
-            byte[] buffer = new byte[pomStream.available()];
-            pomStream.read(buffer);
+            byte[] buffer = Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml").readAllBytes();
             editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"), logger);
+            attemptMavenInstall(Paths.get(tempDirWithPrefix.toString(), "pom.xml"));
             editor.addFile(fileName.substring(fileName.indexOf("src/")), code);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        int javaVersion = getJavaVersion(logger);
+        int javaVersion = Runtime.version().feature();
         if (javaVersion != -1 && javaVersion < 11) {
             throw new IllegalStateException("Java version was '" + javaVersion + "', code customizations require "
                 + "Java 11+ to be used. Please update your environment to Java 11+, preferably Java 17, and run "
@@ -290,7 +321,7 @@ public class Postprocessor extends NewPlugin {
                 // check if existingFile exists, if not, no need to handle partial update
                 if (Files.exists(existingFilePath)) {
                     try {
-                        String existingFileContent = new String(Files.readAllBytes(existingFilePath), StandardCharsets.UTF_8);
+                        String existingFileContent = Files.readString(existingFilePath);
                         return PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
                     } catch (Exception e) {
                         logger.error("Unable to get content from file path", e);
@@ -303,72 +334,33 @@ public class Postprocessor extends NewPlugin {
         logger.info("Finish handle partial update.");
     }
 
-    private static void attemptMavenInstall(Path pomPath, Logger logger) {
-        String[] command;
-        if (Utils.isWindows()) {
-            command = new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() };
-        } else {
-            command = new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
-        }
+    private static void attemptMavenInstall(Path pomPath) {
+        String[] command = Utils.isWindows()
+            ? new String[] { "cmd", "/c", "mvn", "compiler:compile", "-f", pomPath.toString() }
+            : new String[] { "mvn", "compiler:compile", "-f", pomPath.toString() };
 
         // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
         // necessary dependencies to run.
         try {
-            Runtime.getRuntime().exec(command).waitFor(30, TimeUnit.SECONDS);
+            File outputFile = Files.createTempFile(pomPath.getParent(), "install", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Customization install failed to complete within 60 seconds or failed with "
+                    + "an error code." + Files.readString(outputFile.toPath()));
+            }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing dependencies."
-                + "If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
+            throw new RuntimeException("Failed to install customization POM file.", ex);
         }
     }
 
     private void clear() {
         JavaSettings.clear();
-    }
-
-    private static int getJavaVersion(Logger logger) {
-        // java.version format:
-        // 8 and lower: 1.7, 1.8.0
-        // 9 and above: 12, 14.1.1
-        String version = System.getProperty("java.version");
-        if (version == null || version.isEmpty()) {
-            logger.info("Unable to determine Java version to verify if Java 11+ is being used, which is the "
-                + "requirement to run Autorest code customizations.");
-            return -1;
-        }
-
-        if (version.startsWith("1.")) {
-            if (version.length() < 3) {
-                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
-                    + "requirement to run Autorest code customizations. Version was: " + version);
-                return -1;
-            }
-
-            try {
-                return Integer.parseInt(version.substring(2, 3));
-            } catch (NumberFormatException t) {
-                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
-                    + "requirement to run Autorest code customizations. Version was: " + version);
-                return -1;
-            }
-        } else {
-            int idx = version.indexOf(".");
-
-            if (idx == -1) {
-                try {
-                    return Integer.parseInt(version);
-                } catch (NumberFormatException ex) {
-                    logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
-                        + "requirement to run Autorest code customizations. Version was: " + version);
-                    return -1;
-                }
-            }
-            try {
-                return Integer.parseInt(version.substring(0, idx));
-            } catch (NumberFormatException t) {
-                logger.info("Unable to parse Java version to verify if Java 11+ is being used, which is the "
-                    + "requirement to run Autorest code customizations. Version was: " + version);
-                return -1;
-            }
-        }
     }
 }

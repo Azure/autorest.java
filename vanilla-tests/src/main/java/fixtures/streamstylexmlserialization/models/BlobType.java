@@ -4,18 +4,28 @@
 
 package fixtures.streamstylexmlserialization.models;
 
-/** Defines values for BlobType. */
+/**
+ * Defines values for BlobType.
+ */
 public enum BlobType {
-    /** Enum value BlockBlob. */
+    /**
+     * Enum value BlockBlob.
+     */
     BLOCK_BLOB("BlockBlob"),
 
-    /** Enum value PageBlob. */
+    /**
+     * Enum value PageBlob.
+     */
     PAGE_BLOB("PageBlob"),
 
-    /** Enum value AppendBlob. */
+    /**
+     * Enum value AppendBlob.
+     */
     APPEND_BLOB("AppendBlob");
 
-    /** The actual serialized value for a BlobType instance. */
+    /**
+     * The actual serialized value for a BlobType instance.
+     */
     private final String value;
 
     BlobType(String value) {
@@ -24,7 +34,7 @@ public enum BlobType {
 
     /**
      * Parses a serialized value to a BlobType instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed BlobType object, or null if unable to parse.
      */
@@ -41,7 +51,9 @@ public enum BlobType {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return this.value;

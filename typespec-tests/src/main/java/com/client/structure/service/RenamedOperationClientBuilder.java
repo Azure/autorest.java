@@ -38,29 +38,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the RenamedOperationClient type. */
+/**
+ * A builder for creating a new instance of the RenamedOperationClient type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            RenamedOperationClient.class,
-            GroupClient.class,
-            RenamedOperationAsyncClient.class,
-            GroupAsyncClient.class
-        })
-public final class RenamedOperationClientBuilder
-        implements HttpTrait<RenamedOperationClientBuilder>,
-                ConfigurationTrait<RenamedOperationClientBuilder>,
-                EndpointTrait<RenamedOperationClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+    serviceClients = { RenamedOperationClient.class, GroupClient.class, RenamedOperationAsyncClient.class,
+        GroupAsyncClient.class })
+public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOperationClientBuilder>,
+    ConfigurationTrait<RenamedOperationClientBuilder>, EndpointTrait<RenamedOperationClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("client-structure-service.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES
+        = CoreUtils.getProperties("client-structure-service.properties");
 
-    /** Create an instance of the RenamedOperationClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the RenamedOperationClientBuilder.
+     */
     @Generated
     public RenamedOperationClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -69,9 +70,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder pipeline(HttpPipeline pipeline) {
@@ -85,9 +89,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder httpClient(HttpClient httpClient) {
@@ -98,9 +105,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -111,9 +121,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -124,9 +137,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -134,7 +150,9 @@ public final class RenamedOperationClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -146,9 +164,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder configuration(Configuration configuration) {
@@ -159,9 +180,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The service endpoint
      */
-    @Generated private String endpoint;
+    @Generated
+    private String endpoint;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public RenamedOperationClientBuilder endpoint(String endpoint) {
@@ -172,11 +196,12 @@ public final class RenamedOperationClientBuilder
     /*
      * Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      */
-    @Generated private String client;
+    @Generated
+    private String client;
 
     /**
      * Sets Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     *
+     * 
      * @param client the client value.
      * @return the RenamedOperationClientBuilder.
      */
@@ -189,11 +214,12 @@ public final class RenamedOperationClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the RenamedOperationClientBuilder.
      */
@@ -205,22 +231,21 @@ public final class RenamedOperationClientBuilder
 
     /**
      * Builds an instance of RenamedOperationClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of RenamedOperationClientImpl.
      */
     @Generated
     private RenamedOperationClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        RenamedOperationClientImpl client =
-                new RenamedOperationClientImpl(
-                        localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
+        RenamedOperationClientImpl client = new RenamedOperationClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -231,35 +256,28 @@ public final class RenamedOperationClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of RenamedOperationAsyncClient class.
-     *
+     * 
      * @return an instance of RenamedOperationAsyncClient.
      */
     @Generated
@@ -269,7 +287,7 @@ public final class RenamedOperationClientBuilder
 
     /**
      * Builds an instance of GroupAsyncClient class.
-     *
+     * 
      * @return an instance of GroupAsyncClient.
      */
     @Generated
@@ -279,7 +297,7 @@ public final class RenamedOperationClientBuilder
 
     /**
      * Builds an instance of RenamedOperationClient class.
-     *
+     * 
      * @return an instance of RenamedOperationClient.
      */
     @Generated
@@ -289,7 +307,7 @@ public final class RenamedOperationClientBuilder
 
     /**
      * Builds an instance of GroupClient class.
-     *
+     * 
      * @return an instance of GroupClient.
      */
     @Generated

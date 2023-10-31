@@ -11,10 +11,8 @@ import com.cadl.specialchars.models.Resource;
 
 public class BuiltinOpRead {
     public static void main(String[] args) {
-        SpecialCharsClient specialCharsClient =
-                new SpecialCharsClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
-                        .buildClient();
+        SpecialCharsClient specialCharsClient = new SpecialCharsClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.specialchars.generated.read.builtinopread
         Resource response = specialCharsClient.read(null);
         // END:com.cadl.specialchars.generated.read.builtinopread

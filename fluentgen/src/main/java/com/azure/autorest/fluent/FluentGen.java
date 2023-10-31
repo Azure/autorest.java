@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -22,26 +21,26 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClientBuilder;
-import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.UnionModels;
-import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
@@ -58,12 +57,15 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class FluentGen extends Javagen {
@@ -104,7 +106,7 @@ public class FluentGen extends Javagen {
 
             logger.info("Read YAML");
             String fileContent = readFile(files.get(0));
-            createInputCodeModelFile(fileContent);
+            Files.writeString(Paths.get("code-model.yaml"), fileContent);
 
             // Parse yaml to code model
             CodeModel codeModel = this.handleYaml(fileContent);
@@ -120,27 +122,7 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            // Formatting Java source files can be expensive but can be run in parallel.
-            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-            // complete.
-            AtomicBoolean failedFormatting = new AtomicBoolean();
-            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-                String formattedSource = javaFile.getContents().toString();
-                if (!settings.isSkipFormatting()) {
-                    try {
-                        formattedSource = new JavaFormatter(formattedSource, javaFile.getFilePath()).format();
-                    } catch (Exception e) {
-                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        failedFormatting.set(true);
-                    }
-                }
-
-                writeFile(javaFile.getFilePath(), formattedSource, null);
-            });
-
-            if (failedFormatting.get()) {
-                throw new RuntimeException("Failed to format Java files.");
-            }
+            formatAndWriteJavaFiles(javaPackage.getJavaFiles(), settings);
 
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
@@ -158,12 +140,71 @@ public class FluentGen extends Javagen {
         }
     }
 
-    private void createInputCodeModelFile(String file) throws IOException {
-        File tempFile = new File("code-model.yaml");
-        if (!tempFile.exists()) {
-            tempFile.createNewFile();
+    private void formatAndWriteJavaFiles(List<JavaFile> javaFiles, JavaSettings settings) {
+        if (!settings.isSkipFormatting()) {
+            try {
+                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
+                tmpDir.toFile().deleteOnExit();
+
+                for (JavaFile javaFile : javaFiles) {
+                    Path file = tmpDir.resolve(javaFile.getFilePath());
+                    Files.createDirectories(file.getParent());
+                    Files.writeString(file, javaFile.getContents().toString()).toFile().deleteOnExit();
+                }
+
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
+                Files.writeString(pomPath, FluentUtils.loadTextFromResource("spotless-pom.xml"))
+                        .toFile().deleteOnExit();
+                Files.writeString(pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
+                        FluentUtils.loadTextFromResource("eclipse-format-azure-sdk-for-java.xml"))
+                        .toFile().deleteOnExit();
+
+                attemptMavenSpotless(pomPath);
+
+                javaFiles.parallelStream().forEach(javaFile -> {
+                    Path file = tmpDir.resolve(javaFile.getFilePath());
+                    try {
+                        writeFile(javaFile.getFilePath(), Files.readString(file), null);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                });
+            } catch (IOException ex) {
+                throw new UncheckedIOException(ex);
+            }
+        } else {
+            javaFiles.parallelStream()
+                .forEach(javaFile -> writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null));
         }
-        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static void attemptMavenSpotless(Path pomPath) {
+        String[] command = isWindows()
+            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
+
+        try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
+                    + Files.readString(outputFile.toPath()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
+        }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     CodeModel handleYaml(String yamlContent) {
@@ -185,8 +226,7 @@ public class FluentGen extends Javagen {
         loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
-        return codeModel;
+        return newYaml.loadAs(yamlContent, CodeModel.class);
     }
 
     Client handleMap(CodeModel codeModel) {

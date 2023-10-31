@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** The FloatSecondsDurationProperty model. */
+/**
+ * The FloatSecondsDurationProperty model.
+ */
 @Immutable
 public final class FloatSecondsDurationProperty {
     /*
@@ -22,7 +24,7 @@ public final class FloatSecondsDurationProperty {
 
     /**
      * Creates an instance of FloatSecondsDurationProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -38,7 +40,7 @@ public final class FloatSecondsDurationProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

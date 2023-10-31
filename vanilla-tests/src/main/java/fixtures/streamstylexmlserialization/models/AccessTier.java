@@ -7,49 +7,72 @@ package fixtures.streamstylexmlserialization.models;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for AccessTier. */
+/**
+ * Defines values for AccessTier.
+ */
 public final class AccessTier extends ExpandableStringEnum<AccessTier> {
-    /** Static value P4 for AccessTier. */
+    /**
+     * Static value P4 for AccessTier.
+     */
     public static final AccessTier P4 = fromString("P4");
 
-    /** Static value P6 for AccessTier. */
+    /**
+     * Static value P6 for AccessTier.
+     */
     public static final AccessTier P6 = fromString("P6");
 
-    /** Static value P10 for AccessTier. */
+    /**
+     * Static value P10 for AccessTier.
+     */
     public static final AccessTier P10 = fromString("P10");
 
-    /** Static value P20 for AccessTier. */
+    /**
+     * Static value P20 for AccessTier.
+     */
     public static final AccessTier P20 = fromString("P20");
 
-    /** Static value P30 for AccessTier. */
+    /**
+     * Static value P30 for AccessTier.
+     */
     public static final AccessTier P30 = fromString("P30");
 
-    /** Static value P40 for AccessTier. */
+    /**
+     * Static value P40 for AccessTier.
+     */
     public static final AccessTier P40 = fromString("P40");
 
-    /** Static value P50 for AccessTier. */
+    /**
+     * Static value P50 for AccessTier.
+     */
     public static final AccessTier P50 = fromString("P50");
 
-    /** Static value Hot for AccessTier. */
+    /**
+     * Static value Hot for AccessTier.
+     */
     public static final AccessTier HOT = fromString("Hot");
 
-    /** Static value Cool for AccessTier. */
+    /**
+     * Static value Cool for AccessTier.
+     */
     public static final AccessTier COOL = fromString("Cool");
 
-    /** Static value Archive for AccessTier. */
+    /**
+     * Static value Archive for AccessTier.
+     */
     public static final AccessTier ARCHIVE = fromString("Archive");
 
     /**
      * Creates a new instance of AccessTier value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public AccessTier() {}
+    public AccessTier() {
+    }
 
     /**
      * Creates or finds a AccessTier from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding AccessTier.
      */
@@ -59,7 +82,7 @@ public final class AccessTier extends ExpandableStringEnum<AccessTier> {
 
     /**
      * Gets known AccessTier values.
-     *
+     * 
      * @return known AccessTier values.
      */
     public static Collection<AccessTier> values() {

@@ -12,158 +12,186 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
 
-/** Initializes a new instance of the AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the AutoRestComplexTestServiceClient type.
+ */
 public final class AutoRestComplexTestServiceClientImpl {
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** Service version. */
+    /**
+     * Service version.
+     */
     private final AutoRestComplexTestServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
-     *
+     * 
      * @return the serviceVersion value.
      */
     public AutoRestComplexTestServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The BasicsImpl object to access its operations. */
+    /**
+     * The BasicsImpl object to access its operations.
+     */
     private final BasicsImpl basics;
 
     /**
      * Gets the BasicsImpl object to access its operations.
-     *
+     * 
      * @return the BasicsImpl object.
      */
     public BasicsImpl getBasics() {
         return this.basics;
     }
 
-    /** The PrimitivesImpl object to access its operations. */
+    /**
+     * The PrimitivesImpl object to access its operations.
+     */
     private final PrimitivesImpl primitives;
 
     /**
      * Gets the PrimitivesImpl object to access its operations.
-     *
+     * 
      * @return the PrimitivesImpl object.
      */
     public PrimitivesImpl getPrimitives() {
         return this.primitives;
     }
 
-    /** The ArraysImpl object to access its operations. */
+    /**
+     * The ArraysImpl object to access its operations.
+     */
     private final ArraysImpl arrays;
 
     /**
      * Gets the ArraysImpl object to access its operations.
-     *
+     * 
      * @return the ArraysImpl object.
      */
     public ArraysImpl getArrays() {
         return this.arrays;
     }
 
-    /** The DictionariesImpl object to access its operations. */
+    /**
+     * The DictionariesImpl object to access its operations.
+     */
     private final DictionariesImpl dictionaries;
 
     /**
      * Gets the DictionariesImpl object to access its operations.
-     *
+     * 
      * @return the DictionariesImpl object.
      */
     public DictionariesImpl getDictionaries() {
         return this.dictionaries;
     }
 
-    /** The InheritancesImpl object to access its operations. */
+    /**
+     * The InheritancesImpl object to access its operations.
+     */
     private final InheritancesImpl inheritances;
 
     /**
      * Gets the InheritancesImpl object to access its operations.
-     *
+     * 
      * @return the InheritancesImpl object.
      */
     public InheritancesImpl getInheritances() {
         return this.inheritances;
     }
 
-    /** The PolymorphismsImpl object to access its operations. */
+    /**
+     * The PolymorphismsImpl object to access its operations.
+     */
     private final PolymorphismsImpl polymorphisms;
 
     /**
      * Gets the PolymorphismsImpl object to access its operations.
-     *
+     * 
      * @return the PolymorphismsImpl object.
      */
     public PolymorphismsImpl getPolymorphisms() {
         return this.polymorphisms;
     }
 
-    /** The PolymorphicrecursivesImpl object to access its operations. */
+    /**
+     * The PolymorphicrecursivesImpl object to access its operations.
+     */
     private final PolymorphicrecursivesImpl polymorphicrecursives;
 
     /**
      * Gets the PolymorphicrecursivesImpl object to access its operations.
-     *
+     * 
      * @return the PolymorphicrecursivesImpl object.
      */
     public PolymorphicrecursivesImpl getPolymorphicrecursives() {
         return this.polymorphicrecursives;
     }
 
-    /** The ReadonlypropertiesImpl object to access its operations. */
+    /**
+     * The ReadonlypropertiesImpl object to access its operations.
+     */
     private final ReadonlypropertiesImpl readonlyproperties;
 
     /**
      * Gets the ReadonlypropertiesImpl object to access its operations.
-     *
+     * 
      * @return the ReadonlypropertiesImpl object.
      */
     public ReadonlypropertiesImpl getReadonlyproperties() {
         return this.readonlyproperties;
     }
 
-    /** The FlattencomplexesImpl object to access its operations. */
+    /**
+     * The FlattencomplexesImpl object to access its operations.
+     */
     private final FlattencomplexesImpl flattencomplexes;
 
     /**
      * Gets the FlattencomplexesImpl object to access its operations.
-     *
+     * 
      * @return the FlattencomplexesImpl object.
      */
     public FlattencomplexesImpl getFlattencomplexes() {
@@ -172,43 +200,37 @@ public final class AutoRestComplexTestServiceClientImpl {
 
     /**
      * Initializes an instance of AutoRestComplexTestServiceClient client.
-     *
+     * 
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
     public AutoRestComplexTestServiceClientImpl(String host, AutoRestComplexTestServiceVersion serviceVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host,
-                serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
      * Initializes an instance of AutoRestComplexTestServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceClientImpl(
-            HttpPipeline httpPipeline, String host, AutoRestComplexTestServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestComplexTestServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
      * Initializes an instance of AutoRestComplexTestServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestComplexTestServiceClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String host,
-            AutoRestComplexTestServiceVersion serviceVersion) {
+    public AutoRestComplexTestServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String host, AutoRestComplexTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;

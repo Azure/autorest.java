@@ -23,17 +23,23 @@ import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Groups. */
+/**
+ * An instance of this class provides access to all the operations defined in Groups.
+ */
 public final class Groups {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final GroupsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final MicrosoftAzureTestUrl client;
 
     /**
      * Initializes an instance of Groups.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Groups(MicrosoftAzureTestUrl client) {
@@ -49,20 +55,17 @@ public final class Groups {
     @ServiceInterface(name = "MicrosoftAzureTestUr")
     public interface GroupsService {
         @Get("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<SampleResourceGroup>> getSampleResourceGroup(
-                @HostParam("$host") String host,
-                @PathParam("subscriptionId") String subscriptionId,
-                @PathParam("resourceGroupName") String resourceGroupName,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<SampleResourceGroup>> getSampleResourceGroup(@HostParam("$host") String host,
+            @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -72,33 +75,25 @@ public final class Groups {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SampleResourceGroup>> getSampleResourceGroupWithResponseAsync(String resourceGroupName) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getSampleResourceGroup(
-                                this.client.getHost(),
-                                this.client.getSubscriptionId(),
-                                resourceGroupName,
-                                this.client.getApiVersion(),
-                                accept,
-                                context));
+        return FluxUtil.withContext(context -> service.getSampleResourceGroup(this.client.getHost(),
+            this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), accept, context));
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -107,34 +102,28 @@ public final class Groups {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<SampleResourceGroup>> getSampleResourceGroupWithResponseAsync(
-            String resourceGroupName, Context context) {
+    public Mono<Response<SampleResourceGroup>> getSampleResourceGroupWithResponseAsync(String resourceGroupName,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         if (resourceGroupName == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getSampleResourceGroup(
-                this.client.getHost(),
-                this.client.getSubscriptionId(),
-                resourceGroupName,
-                this.client.getApiVersion(),
-                accept,
-                context);
+        return service.getSampleResourceGroup(this.client.getHost(), this.client.getSubscriptionId(), resourceGroupName,
+            this.client.getApiVersion(), accept, context);
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -144,12 +133,12 @@ public final class Groups {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithResponseAsync(resourceGroupName)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -160,12 +149,12 @@ public final class Groups {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, Context context) {
         return getSampleResourceGroupWithResponseAsync(resourceGroupName, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -180,7 +169,7 @@ public final class Groups {
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
+     * 
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

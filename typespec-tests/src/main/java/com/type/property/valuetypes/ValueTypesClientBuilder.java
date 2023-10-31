@@ -37,61 +37,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the ValueTypesClient type. */
+/**
+ * A builder for creating a new instance of the ValueTypesClient type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            BooleanOperationClient.class,
-            StringOperationClient.class,
-            BytesClient.class,
-            IntClient.class,
-            FloatOperationClient.class,
-            DatetimeOperationClient.class,
-            DurationOperationClient.class,
-            EnumClient.class,
-            ExtensibleEnumClient.class,
-            ModelClient.class,
-            CollectionsStringClient.class,
-            CollectionsIntClient.class,
-            CollectionsModelClient.class,
-            DictionaryStringClient.class,
-            NeverClient.class,
-            UnknownStringClient.class,
-            UnknownIntClient.class,
-            UnknownDictClient.class,
-            UnknownArrayClient.class,
-            BooleanOperationAsyncClient.class,
-            StringOperationAsyncClient.class,
-            BytesAsyncClient.class,
-            IntAsyncClient.class,
-            FloatOperationAsyncClient.class,
-            DatetimeOperationAsyncClient.class,
-            DurationOperationAsyncClient.class,
-            EnumAsyncClient.class,
-            ExtensibleEnumAsyncClient.class,
-            ModelAsyncClient.class,
-            CollectionsStringAsyncClient.class,
-            CollectionsIntAsyncClient.class,
-            CollectionsModelAsyncClient.class,
-            DictionaryStringAsyncClient.class,
-            NeverAsyncClient.class,
-            UnknownStringAsyncClient.class,
-            UnknownIntAsyncClient.class,
-            UnknownDictAsyncClient.class,
-            UnknownArrayAsyncClient.class
-        })
+    serviceClients = { BooleanOperationClient.class, StringOperationClient.class, BytesClient.class, IntClient.class,
+        FloatOperationClient.class, DatetimeOperationClient.class, DurationOperationClient.class, EnumClient.class,
+        ExtensibleEnumClient.class, ModelClient.class, CollectionsStringClient.class, CollectionsIntClient.class,
+        CollectionsModelClient.class, DictionaryStringClient.class, NeverClient.class, UnknownStringClient.class,
+        UnknownIntClient.class, UnknownDictClient.class, UnknownArrayClient.class, BooleanOperationAsyncClient.class,
+        StringOperationAsyncClient.class, BytesAsyncClient.class, IntAsyncClient.class, FloatOperationAsyncClient.class,
+        DatetimeOperationAsyncClient.class, DurationOperationAsyncClient.class, EnumAsyncClient.class,
+        ExtensibleEnumAsyncClient.class, ModelAsyncClient.class, CollectionsStringAsyncClient.class,
+        CollectionsIntAsyncClient.class, CollectionsModelAsyncClient.class, DictionaryStringAsyncClient.class,
+        NeverAsyncClient.class, UnknownStringAsyncClient.class, UnknownIntAsyncClient.class,
+        UnknownDictAsyncClient.class, UnknownArrayAsyncClient.class })
 public final class ValueTypesClientBuilder
-        implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+    implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("type-property-valuetypes.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES
+        = CoreUtils.getProperties("type-property-valuetypes.properties");
 
-    /** Create an instance of the ValueTypesClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the ValueTypesClientBuilder.
+     */
     @Generated
     public ValueTypesClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -100,9 +78,12 @@ public final class ValueTypesClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder pipeline(HttpPipeline pipeline) {
@@ -116,9 +97,12 @@ public final class ValueTypesClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder httpClient(HttpClient httpClient) {
@@ -129,9 +113,12 @@ public final class ValueTypesClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -142,9 +129,12 @@ public final class ValueTypesClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -155,9 +145,12 @@ public final class ValueTypesClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -165,7 +158,9 @@ public final class ValueTypesClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -177,9 +172,12 @@ public final class ValueTypesClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ValueTypesClientBuilder configuration(Configuration configuration) {
@@ -190,11 +188,12 @@ public final class ValueTypesClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the ValueTypesClientBuilder.
      */
@@ -206,21 +205,21 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of ValueTypesClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of ValueTypesClientImpl.
      */
     @Generated
     private ValueTypesClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ValueTypesClientImpl client =
-                new ValueTypesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        ValueTypesClientImpl client
+            = new ValueTypesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -231,35 +230,28 @@ public final class ValueTypesClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of BooleanOperationAsyncClient class.
-     *
+     * 
      * @return an instance of BooleanOperationAsyncClient.
      */
     @Generated
@@ -269,7 +261,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of StringOperationAsyncClient class.
-     *
+     * 
      * @return an instance of StringOperationAsyncClient.
      */
     @Generated
@@ -279,7 +271,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of BytesAsyncClient class.
-     *
+     * 
      * @return an instance of BytesAsyncClient.
      */
     @Generated
@@ -289,7 +281,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of IntAsyncClient class.
-     *
+     * 
      * @return an instance of IntAsyncClient.
      */
     @Generated
@@ -299,7 +291,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of FloatOperationAsyncClient class.
-     *
+     * 
      * @return an instance of FloatOperationAsyncClient.
      */
     @Generated
@@ -309,7 +301,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DatetimeOperationAsyncClient class.
-     *
+     * 
      * @return an instance of DatetimeOperationAsyncClient.
      */
     @Generated
@@ -319,7 +311,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DurationOperationAsyncClient class.
-     *
+     * 
      * @return an instance of DurationOperationAsyncClient.
      */
     @Generated
@@ -329,7 +321,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of EnumAsyncClient class.
-     *
+     * 
      * @return an instance of EnumAsyncClient.
      */
     @Generated
@@ -339,7 +331,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of ExtensibleEnumAsyncClient class.
-     *
+     * 
      * @return an instance of ExtensibleEnumAsyncClient.
      */
     @Generated
@@ -349,7 +341,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of ModelAsyncClient class.
-     *
+     * 
      * @return an instance of ModelAsyncClient.
      */
     @Generated
@@ -359,7 +351,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsStringAsyncClient class.
-     *
+     * 
      * @return an instance of CollectionsStringAsyncClient.
      */
     @Generated
@@ -369,7 +361,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsIntAsyncClient class.
-     *
+     * 
      * @return an instance of CollectionsIntAsyncClient.
      */
     @Generated
@@ -379,7 +371,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsModelAsyncClient class.
-     *
+     * 
      * @return an instance of CollectionsModelAsyncClient.
      */
     @Generated
@@ -389,7 +381,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DictionaryStringAsyncClient class.
-     *
+     * 
      * @return an instance of DictionaryStringAsyncClient.
      */
     @Generated
@@ -399,7 +391,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of NeverAsyncClient class.
-     *
+     * 
      * @return an instance of NeverAsyncClient.
      */
     @Generated
@@ -409,7 +401,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownStringAsyncClient class.
-     *
+     * 
      * @return an instance of UnknownStringAsyncClient.
      */
     @Generated
@@ -419,7 +411,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownIntAsyncClient class.
-     *
+     * 
      * @return an instance of UnknownIntAsyncClient.
      */
     @Generated
@@ -429,7 +421,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownDictAsyncClient class.
-     *
+     * 
      * @return an instance of UnknownDictAsyncClient.
      */
     @Generated
@@ -439,7 +431,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownArrayAsyncClient class.
-     *
+     * 
      * @return an instance of UnknownArrayAsyncClient.
      */
     @Generated
@@ -449,7 +441,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of BooleanOperationClient class.
-     *
+     * 
      * @return an instance of BooleanOperationClient.
      */
     @Generated
@@ -459,7 +451,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of StringOperationClient class.
-     *
+     * 
      * @return an instance of StringOperationClient.
      */
     @Generated
@@ -469,7 +461,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of BytesClient class.
-     *
+     * 
      * @return an instance of BytesClient.
      */
     @Generated
@@ -479,7 +471,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of IntClient class.
-     *
+     * 
      * @return an instance of IntClient.
      */
     @Generated
@@ -489,7 +481,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of FloatOperationClient class.
-     *
+     * 
      * @return an instance of FloatOperationClient.
      */
     @Generated
@@ -499,7 +491,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DatetimeOperationClient class.
-     *
+     * 
      * @return an instance of DatetimeOperationClient.
      */
     @Generated
@@ -509,7 +501,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DurationOperationClient class.
-     *
+     * 
      * @return an instance of DurationOperationClient.
      */
     @Generated
@@ -519,7 +511,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of EnumClient class.
-     *
+     * 
      * @return an instance of EnumClient.
      */
     @Generated
@@ -529,7 +521,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of ExtensibleEnumClient class.
-     *
+     * 
      * @return an instance of ExtensibleEnumClient.
      */
     @Generated
@@ -539,7 +531,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of ModelClient class.
-     *
+     * 
      * @return an instance of ModelClient.
      */
     @Generated
@@ -549,7 +541,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsStringClient class.
-     *
+     * 
      * @return an instance of CollectionsStringClient.
      */
     @Generated
@@ -559,7 +551,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsIntClient class.
-     *
+     * 
      * @return an instance of CollectionsIntClient.
      */
     @Generated
@@ -569,7 +561,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of CollectionsModelClient class.
-     *
+     * 
      * @return an instance of CollectionsModelClient.
      */
     @Generated
@@ -579,7 +571,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of DictionaryStringClient class.
-     *
+     * 
      * @return an instance of DictionaryStringClient.
      */
     @Generated
@@ -589,7 +581,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of NeverClient class.
-     *
+     * 
      * @return an instance of NeverClient.
      */
     @Generated
@@ -599,7 +591,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownStringClient class.
-     *
+     * 
      * @return an instance of UnknownStringClient.
      */
     @Generated
@@ -609,7 +601,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownIntClient class.
-     *
+     * 
      * @return an instance of UnknownIntClient.
      */
     @Generated
@@ -619,7 +611,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownDictClient class.
-     *
+     * 
      * @return an instance of UnknownDictClient.
      */
     @Generated
@@ -629,7 +621,7 @@ public final class ValueTypesClientBuilder
 
     /**
      * Builds an instance of UnknownArrayClient class.
-     *
+     * 
      * @return an instance of UnknownArrayClient.
      */
     @Generated

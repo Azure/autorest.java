@@ -12,8 +12,8 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringGetEmpty {
     public static void main(String[] args) {
-        StringOperationClient stringOperationClient =
-                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient
+            = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringgetempty.stringgetempty
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getEmptyWithResponse(requestOptions);

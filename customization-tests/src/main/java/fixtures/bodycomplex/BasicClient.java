@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.BasicsImpl;
 import fixtures.bodycomplex.implementation.models.Basic;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class BasicClient {
-    @Generated private final BasicsImpl serviceClient;
+    @Generated
+    private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of BasicClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class BasicClient {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -46,7 +49,7 @@ public final class BasicClient {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -59,7 +62,7 @@ public final class BasicClient {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -75,7 +78,7 @@ public final class BasicClient {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -89,7 +92,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -104,7 +107,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type.
@@ -117,7 +120,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -132,7 +135,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty.
@@ -145,7 +148,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -160,7 +163,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null.
@@ -173,7 +176,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -188,7 +191,7 @@ public final class BasicClient {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload.

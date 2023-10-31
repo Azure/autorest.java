@@ -12,62 +12,74 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.paging.AutoRestPagingTestServiceVersion;
 
-/** Initializes a new instance of the AutoRestPagingTestServiceClient type. */
+/**
+ * Initializes a new instance of the AutoRestPagingTestServiceClient type.
+ */
 public final class AutoRestPagingTestServiceClientImpl {
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** Service version. */
+    /**
+     * Service version.
+     */
     private final AutoRestPagingTestServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
-     *
+     * 
      * @return the serviceVersion value.
      */
     public AutoRestPagingTestServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The PagingsImpl object to access its operations. */
+    /**
+     * The PagingsImpl object to access its operations.
+     */
     private final PagingsImpl pagings;
 
     /**
      * Gets the PagingsImpl object to access its operations.
-     *
+     * 
      * @return the PagingsImpl object.
      */
     public PagingsImpl getPagings() {
@@ -76,43 +88,37 @@ public final class AutoRestPagingTestServiceClientImpl {
 
     /**
      * Initializes an instance of AutoRestPagingTestServiceClient client.
-     *
+     * 
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
     public AutoRestPagingTestServiceClientImpl(String host, AutoRestPagingTestServiceVersion serviceVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host,
-                serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestPagingTestServiceClientImpl(
-            HttpPipeline httpPipeline, String host, AutoRestPagingTestServiceVersion serviceVersion) {
+    public AutoRestPagingTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestPagingTestServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
-    public AutoRestPagingTestServiceClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String host,
-            AutoRestPagingTestServiceVersion serviceVersion) {
+    public AutoRestPagingTestServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String host, AutoRestPagingTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;

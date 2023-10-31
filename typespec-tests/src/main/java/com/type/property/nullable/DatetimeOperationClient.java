@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.nullable.implementation.DatetimeOperationsImpl;
 import com.type.property.nullable.models.DatetimeProperty;
 
-/** Initializes a new instance of the synchronous NullableClient type. */
+/**
+ * Initializes a new instance of the synchronous NullableClient type.
+ */
 @ServiceClient(builder = NullableClientBuilder.class)
 public final class DatetimeOperationClient {
-    @Generated private final DatetimeOperationsImpl serviceClient;
+    @Generated
+    private final DatetimeOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of DatetimeOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,16 +38,16 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,16 +63,16 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -85,16 +88,16 @@ public final class DatetimeOperationClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,16 +115,16 @@ public final class DatetimeOperationClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
      *     nullableProperty: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -139,7 +142,7 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -157,7 +160,7 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

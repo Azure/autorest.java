@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** The DefaultDurationProperty model. */
+/**
+ * The DefaultDurationProperty model.
+ */
 @Immutable
 public final class DefaultDurationProperty {
     /*
@@ -22,7 +24,7 @@ public final class DefaultDurationProperty {
 
     /**
      * Creates an instance of DefaultDurationProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class DefaultDurationProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

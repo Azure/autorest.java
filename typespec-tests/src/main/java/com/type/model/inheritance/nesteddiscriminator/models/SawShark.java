@@ -11,14 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The third level model SawShark in polymorphic multiple levels inheritance. */
+/**
+ * The third level model SawShark in polymorphic multiple levels inheritance.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "sharktype")
 @JsonTypeName("saw")
 @Immutable
 public final class SawShark extends Shark {
     /**
      * Creates an instance of SawShark class.
-     *
+     * 
      * @param age the age value to set.
      * @param sharktype the sharktype value to set.
      */

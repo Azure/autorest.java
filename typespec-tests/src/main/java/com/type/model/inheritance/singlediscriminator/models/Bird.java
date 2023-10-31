@@ -12,19 +12,18 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** This is base model for polymorphic single level inheritance with a discriminator. */
+/**
+ * This is base model for polymorphic single level inheritance with a discriminator.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Bird.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Bird.class)
 @JsonTypeName("Bird")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
+@JsonSubTypes({ @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
     @JsonSubTypes.Type(name = "sparrow", value = Sparrow.class),
-    @JsonSubTypes.Type(name = "goose", value = Goose.class),
-    @JsonSubTypes.Type(name = "eagle", value = Eagle.class)
-})
+    @JsonSubTypes.Type(name = "goose", value = Goose.class), @JsonSubTypes.Type(name = "eagle", value = Eagle.class) })
 @Immutable
 public class Bird {
     /*
@@ -36,7 +35,7 @@ public class Bird {
 
     /**
      * Creates an instance of Bird class.
-     *
+     * 
      * @param wingspan the wingspan value to set.
      */
     @Generated
@@ -47,7 +46,7 @@ public class Bird {
 
     /**
      * Get the wingspan property: The wingspan property.
-     *
+     * 
      * @return the wingspan value.
      */
     @Generated

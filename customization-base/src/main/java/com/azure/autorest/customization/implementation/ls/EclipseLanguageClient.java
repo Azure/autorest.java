@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
-import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.models.ClientCapabilities;
 import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.CodeActionClientCapabilities;
@@ -42,9 +41,6 @@ import com.azure.autorest.customization.models.Position;
 import com.azure.autorest.customization.models.Range;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.platform.win32.Kernel32;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,7 +101,7 @@ public class EclipseLanguageClient implements AutoCloseable {
     }
 
     public void initialize() {
-        int pid = Utils.isWindows() ? Kernel32.INSTANCE.GetCurrentProcessId() : CLibrary.INSTANCE.getpid();
+        int pid = (int) ProcessHandle.current().pid();
 
         InitializeParams initializeParams = new InitializeParams();
         initializeParams.setProcessId(pid);
@@ -276,11 +272,5 @@ public class EclipseLanguageClient implements AutoCloseable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private interface CLibrary extends Library {
-        CLibrary INSTANCE = Native.load("c", CLibrary.class);
-
-        int getpid();
     }
 }

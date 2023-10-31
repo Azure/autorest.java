@@ -33,41 +33,51 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the DpgMultiMediaTypesClient type. */
+/**
+ * Initializes a new instance of the DpgMultiMediaTypesClient type.
+ */
 public final class DpgMultiMediaTypesClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final DpgMultiMediaTypesClientService service;
 
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -76,19 +86,17 @@ public final class DpgMultiMediaTypesClientImpl {
 
     /**
      * Initializes an instance of DpgMultiMediaTypesClient client.
-     *
+     * 
      * @param host server parameter.
      */
     public DpgMultiMediaTypesClientImpl(String host) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
     /**
      * Initializes an instance of DpgMultiMediaTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
@@ -98,7 +106,7 @@ public final class DpgMultiMediaTypesClientImpl {
 
     /**
      * Initializes an instance of DpgMultiMediaTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
@@ -107,8 +115,8 @@ public final class DpgMultiMediaTypesClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.service =
-                RestProxy.create(DpgMultiMediaTypesClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service
+            = RestProxy.create(DpgMultiMediaTypesClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
@@ -119,531 +127,277 @@ public final class DpgMultiMediaTypesClientImpl {
     @ServiceInterface(name = "DpgMultiMediaTypesCl")
     public interface DpgMultiMediaTypesClientService {
         @Post("/mediatypes/jsonandbinary/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndBinaryTypesJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndBinaryTypesJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandbinary/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndBinaryTypesJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndBinaryTypesJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandbinary/binaryfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandbinary/binaryfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndBinaryTypesBinaryFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndBinaryTypesBinaryFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandoctet/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndOctectWithJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndOctectWithJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandoctet/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndOctectWithJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndOctectWithJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandoctet/octetfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndOctectWithOctetFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndOctectWithOctetFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandoctet/octetfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndOctectWithOctetFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndOctectWithOctetFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandencoding/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndEncodingWithJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndEncodingWithJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandencoding/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndEncodingWithJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndEncodingWithJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandencoding/encodingfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandencoding/encodingfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndEncodingWithEncodingFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndEncodingWithEncodingFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandtext/textfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndTextWithTextFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndTextWithTextFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandtext/textfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndTextWithTextFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndTextWithTextFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandtext/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndTextWithJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndTextWithJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandtext/jsonfirst")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndTextWithJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("text/plain") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndTextWithJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("text/plain") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/binary")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndImageWithJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndImageWithJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/binary")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndImageWithJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndImageWithJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/octet-stream") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/object")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirst(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("image/jpeg") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirst(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("image/jpeg") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/object")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @BodyParam("image/jpeg") BinaryData input,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstSync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("image/jpeg") BinaryData input,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/image/binary/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> imageTypeWithNonRequiredBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> imageTypeWithNonRequiredBody(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/image/binary/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> imageTypeWithNonRequiredBodySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> imageTypeWithNonRequiredBodySync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/binary/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/binary/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/object/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/mediatypes/jsonandimage/jsonfirst/object/nonrequired")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * json and binary types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -654,30 +408,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndBinaryTypesJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndBinaryTypesJsonFirstWithResponseAsync(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndBinaryTypesJsonFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndBinaryTypesJsonFirst(this.getHost(), contentType, input,
+            accept, requestOptions, context));
     }
 
     /**
      * json and binary types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -688,28 +440,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndBinaryTypesJsonFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndBinaryTypesJsonFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and binary types with binary type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -720,30 +472,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndBinaryTypesBinaryFirstWithResponseAsync(String contentType,
+        BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndBinaryTypesBinaryFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndBinaryTypesBinaryFirst(this.getHost(), contentType, input,
+            accept, requestOptions, context));
     }
 
     /**
      * json and binary types with binary type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -754,28 +504,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndBinaryTypesBinaryFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndBinaryTypesBinaryFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and octet media types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -786,30 +536,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndOctectWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndOctectWithJsonFirstWithResponseAsync(String contentType,
+        BinaryData message, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndOctectWithJsonFirst(
-                                this.getHost(), contentType, message, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndOctectWithJsonFirst(this.getHost(), contentType, message,
+            accept, requestOptions, context));
     }
 
     /**
      * json and octet media types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -820,28 +568,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndOctectWithJsonFirstSync(
-                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
+        return service.jsonAndOctectWithJsonFirstSync(this.getHost(), contentType, message, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and octet media types with octet type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -852,30 +600,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndOctectWithOctetFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndOctectWithOctetFirstWithResponseAsync(String contentType,
+        BinaryData message, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndOctectWithOctetFirst(
-                                this.getHost(), contentType, message, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndOctectWithOctetFirst(this.getHost(), contentType, message,
+            accept, requestOptions, context));
     }
 
     /**
      * json and octet media types with octet type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -886,28 +632,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndOctectWithOctetFirstSync(
-                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
+        return service.jsonAndOctectWithOctetFirstSync(this.getHost(), contentType, message, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and encoding types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -918,30 +664,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndEncodingWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndEncodingWithJsonFirstWithResponseAsync(String contentType,
+        BinaryData message, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndEncodingWithJsonFirst(
-                                this.getHost(), contentType, message, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndEncodingWithJsonFirst(this.getHost(), contentType,
+            message, accept, requestOptions, context));
     }
 
     /**
      * json and encoding types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -952,28 +696,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndEncodingWithJsonFirstSync(
-                this.getHost(), contentType, message, accept, requestOptions, Context.NONE);
+        return service.jsonAndEncodingWithJsonFirstSync(this.getHost(), contentType, message, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and encoding types with encoding type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -984,30 +728,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndEncodingWithEncodingFirstWithResponseAsync(String contentType,
+        BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndEncodingWithEncodingFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndEncodingWithEncodingFirst(this.getHost(), contentType,
+            input, accept, requestOptions, context));
     }
 
     /**
      * json and encoding types with encoding type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1018,28 +760,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndEncodingWithEncodingFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndEncodingWithEncodingFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and text types with text type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1050,30 +792,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndTextWithTextFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndTextWithTextFirstWithResponseAsync(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndTextWithTextFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndTextWithTextFirst(this.getHost(), contentType, input,
+            accept, requestOptions, context));
     }
 
     /**
      * json and text types with text type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1084,28 +824,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndTextWithTextFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndTextWithTextFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and text types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1116,30 +856,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndTextWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndTextWithJsonFirstWithResponseAsync(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndTextWithJsonFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndTextWithJsonFirst(this.getHost(), contentType, input,
+            accept, requestOptions, context));
     }
 
     /**
      * json and text types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1150,28 +888,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndTextWithJsonFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndTextWithJsonFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1182,30 +920,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndImageWithJsonFirstWithResponseAsync(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndImageWithJsonFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndImageWithJsonFirst(this.getHost(), contentType, input,
+            accept, requestOptions, context));
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1216,28 +952,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndImageWithJsonFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndImageWithJsonFirstSync(this.getHost(), contentType, input, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1248,30 +984,28 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> jsonAndImageObjectTypeWithJsonFirstWithResponseAsync(String contentType,
+        BinaryData input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndImageObjectTypeWithJsonFirst(
-                                this.getHost(), contentType, input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonAndImageObjectTypeWithJsonFirst(this.getHost(), contentType,
+            input, accept, requestOptions, context));
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1282,38 +1016,47 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndImageObjectTypeWithJsonFirstSync(
-                this.getHost(), contentType, input, accept, requestOptions, Context.NONE);
+        return service.jsonAndImageObjectTypeWithJsonFirstSync(this.getHost(), contentType, input, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
      * image type with non-required body.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1325,42 +1068,49 @@ public final class DpgMultiMediaTypesClientImpl {
     public Mono<Response<BinaryData>> imageTypeWithNonRequiredBodyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
+            }
+        });
         return FluxUtil.withContext(
-                context -> service.imageTypeWithNonRequiredBody(this.getHost(), accept, requestOptionsLocal, context));
+            context -> service.imageTypeWithNonRequiredBody(this.getHost(), accept, requestOptionsLocal, context));
     }
 
     /**
      * image type with non-required body.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1372,31 +1122,29 @@ public final class DpgMultiMediaTypesClientImpl {
     public Response<BinaryData> imageTypeWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "image/jpeg");
+            }
+        });
         return service.imageTypeWithNonRequiredBodySync(this.getHost(), accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1407,29 +1155,28 @@ public final class DpgMultiMediaTypesClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponseAsync(
-            String contentType, RequestOptions requestOptions) {
+        String contentType, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(
-                                this.getHost(), contentType, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBody(this.getHost(),
+                contentType, accept, requestOptions, context));
     }
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1439,38 +1186,47 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
-            String contentType, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(String contentType,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(
-                this.getHost(), contentType, accept, requestOptions, Context.NONE);
+        return service.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodySync(this.getHost(), contentType, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json", "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json", "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1479,40 +1235,47 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(
-            RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>>
+        jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(
-                                this.getHost(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service
+            .jsonAndImageObjectTypeJsonFirstWithNonRequiredBody(this.getHost(), accept, requestOptions, context));
     }
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json", "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json", "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1521,10 +1284,10 @@ public final class DpgMultiMediaTypesClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
-            RequestOptions requestOptions) {
+    public Response<BinaryData>
+        jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(
-                this.getHost(), accept, requestOptions, Context.NONE);
+        return service.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodySync(this.getHost(), accept, requestOptions,
+            Context.NONE);
     }
 }

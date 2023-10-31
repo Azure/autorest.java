@@ -21,15 +21,15 @@ class SingleDiscriminatorClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SingleDiscriminatorClientBuilder singleDiscriminatorClientbuilder =
-                new SingleDiscriminatorClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SingleDiscriminatorClientBuilder singleDiscriminatorClientbuilder
+            = new SingleDiscriminatorClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             singleDiscriminatorClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             singleDiscriminatorClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         singleDiscriminatorClient = singleDiscriminatorClientbuilder.buildClient();
+
     }
 }

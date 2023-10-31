@@ -10,7 +10,7 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      JavaVersion: 1.8
+      JavaVersion: 1.11
       NodeVersion: '18.x'
 
     steps:
@@ -24,7 +24,7 @@ jobs:
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'clean verify package install'
+          goals: 'clean install'
           options: '-P local -T 1C --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)

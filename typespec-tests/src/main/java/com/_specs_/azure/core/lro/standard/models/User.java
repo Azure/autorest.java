@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Details about a user. */
+/**
+ * Details about a user.
+ */
 @Immutable
 public final class User {
     /*
@@ -28,7 +30,7 @@ public final class User {
 
     /**
      * Creates an instance of User class.
-     *
+     * 
      * @param role the role value to set.
      */
     @Generated
@@ -39,7 +41,7 @@ public final class User {
 
     /**
      * Get the name property: The name of user.
-     *
+     * 
      * @return the name value.
      */
     @Generated
@@ -49,7 +51,7 @@ public final class User {
 
     /**
      * Get the role property: The role of user.
-     *
+     * 
      * @return the role value.
      */
     @Generated

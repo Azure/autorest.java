@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPutNoHeaderInRetryHeaders model. */
+/**
+ * The LROsPutNoHeaderInRetryHeaders model.
+ */
 @Fluent
 public final class LROsPutNoHeaderInRetryHeaders {
     /*
@@ -21,7 +23,7 @@ public final class LROsPutNoHeaderInRetryHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPutNoHeaderInRetryHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPutNoHeaderInRetryHeaders(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class LROsPutNoHeaderInRetryHeaders {
 
     /**
      * Get the location property: The location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -39,7 +41,7 @@ public final class LROsPutNoHeaderInRetryHeaders {
 
     /**
      * Set the location property: The location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LROsPutNoHeaderInRetryHeaders object itself.
      */
@@ -50,8 +52,9 @@ public final class LROsPutNoHeaderInRetryHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

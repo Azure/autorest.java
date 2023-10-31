@@ -15,7 +15,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-/** The Encoded model. */
+/**
+ * The Encoded model.
+ */
 @Fluent
 public final class Encoded {
     /*
@@ -67,13 +69,16 @@ public final class Encoded {
     @JsonProperty(value = "base64url")
     private Base64Url base64Url;
 
-    /** Creates an instance of Encoded class. */
+    /**
+     * Creates an instance of Encoded class.
+     */
     @Generated
-    public Encoded() {}
+    public Encoded() {
+    }
 
     /**
      * Get the timeInSeconds property: The timeInSeconds property.
-     *
+     * 
      * @return the timeInSeconds value.
      */
     @Generated
@@ -86,7 +91,7 @@ public final class Encoded {
 
     /**
      * Set the timeInSeconds property: The timeInSeconds property.
-     *
+     * 
      * @param timeInSeconds the timeInSeconds value to set.
      * @return the Encoded object itself.
      */
@@ -102,7 +107,7 @@ public final class Encoded {
 
     /**
      * Get the timeInSecondsFraction property: The timeInSecondsFraction property.
-     *
+     * 
      * @return the timeInSecondsFraction value.
      */
     @Generated
@@ -115,7 +120,7 @@ public final class Encoded {
 
     /**
      * Set the timeInSecondsFraction property: The timeInSecondsFraction property.
-     *
+     * 
      * @param timeInSecondsFraction the timeInSecondsFraction value to set.
      * @return the Encoded object itself.
      */
@@ -131,7 +136,7 @@ public final class Encoded {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated
@@ -141,7 +146,7 @@ public final class Encoded {
 
     /**
      * Set the dateTime property: The dateTime property.
-     *
+     * 
      * @param dateTime the dateTime value to set.
      * @return the Encoded object itself.
      */
@@ -153,7 +158,7 @@ public final class Encoded {
 
     /**
      * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
-     *
+     * 
      * @return the dateTimeRfc7231 value.
      */
     @Generated
@@ -166,7 +171,7 @@ public final class Encoded {
 
     /**
      * Set the dateTimeRfc7231 property: The dateTimeRfc7231 property.
-     *
+     * 
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      * @return the Encoded object itself.
      */
@@ -182,7 +187,7 @@ public final class Encoded {
 
     /**
      * Get the unixTimestamp property: The unixTimestamp property.
-     *
+     * 
      * @return the unixTimestamp value.
      */
     @Generated
@@ -195,7 +200,7 @@ public final class Encoded {
 
     /**
      * Set the unixTimestamp property: The unixTimestamp property.
-     *
+     * 
      * @param unixTimestamp the unixTimestamp value to set.
      * @return the Encoded object itself.
      */
@@ -211,7 +216,7 @@ public final class Encoded {
 
     /**
      * Get the base64 property: The base64 property.
-     *
+     * 
      * @return the base64 value.
      */
     @Generated
@@ -221,7 +226,7 @@ public final class Encoded {
 
     /**
      * Set the base64 property: The base64 property.
-     *
+     * 
      * @param base64 the base64 value to set.
      * @return the Encoded object itself.
      */
@@ -233,7 +238,7 @@ public final class Encoded {
 
     /**
      * Get the base64Url property: The base64url property.
-     *
+     * 
      * @return the base64Url value.
      */
     @Generated
@@ -246,7 +251,7 @@ public final class Encoded {
 
     /**
      * Set the base64Url property: The base64url property.
-     *
+     * 
      * @param base64Url the base64Url value to set.
      * @return the Encoded object itself.
      */

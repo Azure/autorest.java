@@ -7,10 +7,15 @@ package com.type.model.empty.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
-/** Empty model used in operation parameters. */
+/**
+ * Empty model used in operation parameters.
+ */
 @Immutable
 public final class EmptyInput {
-    /** Creates an instance of EmptyInput class. */
+    /**
+     * Creates an instance of EmptyInput class.
+     */
     @Generated
-    public EmptyInput() {}
+    public EmptyInput() {
+    }
 }

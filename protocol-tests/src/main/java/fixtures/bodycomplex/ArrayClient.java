@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ArraysImpl;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = ArrayClientBuilder.class)
 public final class ArrayClient {
-    @Generated private final ArraysImpl serviceClient;
+    @Generated
+    private final ArraysImpl serviceClient;
 
     /**
      * Initializes an instance of ArrayClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,9 +37,9 @@ public final class ArrayClient {
 
     /**
      * Get complex types with array property.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -44,7 +47,7 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,9 +63,9 @@ public final class ArrayClient {
 
     /**
      * Put complex types with array property.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -70,9 +73,9 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
+     * jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,9 +91,9 @@ public final class ArrayClient {
 
     /**
      * Get complex types with array property which is empty.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -98,7 +101,7 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -114,9 +117,9 @@ public final class ArrayClient {
 
     /**
      * Put complex types with array property which is empty.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -124,7 +127,7 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -141,9 +144,9 @@ public final class ArrayClient {
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -151,14 +154,14 @@ public final class ArrayClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     *     Response}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

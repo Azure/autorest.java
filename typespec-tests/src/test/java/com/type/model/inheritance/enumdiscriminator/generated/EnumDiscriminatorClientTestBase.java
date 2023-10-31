@@ -21,15 +21,15 @@ class EnumDiscriminatorClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        EnumDiscriminatorClientBuilder enumDiscriminatorClientbuilder =
-                new EnumDiscriminatorClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        EnumDiscriminatorClientBuilder enumDiscriminatorClientbuilder
+            = new EnumDiscriminatorClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumDiscriminatorClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             enumDiscriminatorClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         enumDiscriminatorClient = enumDiscriminatorClientbuilder.buildClient();
+
     }
 }

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.model.visibility.implementation.VisibilityClientImpl;
 import com.type.model.visibility.models.VisibilityModel;
 
-/** Initializes a new instance of the synchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the synchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityClient {
-    @Generated private final VisibilityClientImpl serviceClient;
+    @Generated
+    private final VisibilityClientImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class VisibilityClient {
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -51,9 +54,9 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -67,7 +70,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -84,9 +87,9 @@ public final class VisibilityClient {
 
     /**
      * The headModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -100,7 +103,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -117,9 +120,9 @@ public final class VisibilityClient {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -133,7 +136,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -150,9 +153,9 @@ public final class VisibilityClient {
 
     /**
      * The patchModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -166,7 +169,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,9 +186,9 @@ public final class VisibilityClient {
 
     /**
      * The postModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -199,7 +202,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -216,9 +219,9 @@ public final class VisibilityClient {
 
     /**
      * The deleteModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -232,7 +235,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -249,7 +252,7 @@ public final class VisibilityClient {
 
     /**
      * The getModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -264,14 +267,13 @@ public final class VisibilityClient {
     public VisibilityModel getModel(VisibilityModel input) {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
-                .getValue()
-                .toObject(VisibilityModel.class);
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue()
+            .toObject(VisibilityModel.class);
     }
 
     /**
      * The headModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -290,7 +292,7 @@ public final class VisibilityClient {
 
     /**
      * The putModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -309,7 +311,7 @@ public final class VisibilityClient {
 
     /**
      * The patchModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -328,7 +330,7 @@ public final class VisibilityClient {
 
     /**
      * The postModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -347,7 +349,7 @@ public final class VisibilityClient {
 
     /**
      * The deleteModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

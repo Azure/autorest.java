@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.payload.contentnegotiation.implementation.DifferentBodiesImpl;
 import com.payload.contentnegotiation.models.PngImageAsJson;
 
-/** Initializes a new instance of the synchronous ContentNegotiationClient type. */
+/**
+ * Initializes a new instance of the synchronous ContentNegotiationClient type.
+ */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class)
 public final class DifferentBodyClient {
-    @Generated private final DifferentBodiesImpl serviceClient;
+    @Generated
+    private final DifferentBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of DifferentBodyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class DifferentBodyClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,15 +60,15 @@ public final class DifferentBodyClient {
 
     /**
      * The getAvatarAsJson operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     content: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,7 +84,7 @@ public final class DifferentBodyClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -99,7 +102,7 @@ public final class DifferentBodyClient {
 
     /**
      * The getAvatarAsJson operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

@@ -21,14 +21,17 @@ import com.type.dictionary.implementation.Int32ValuesImpl;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the asynchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class Int32ValueAsyncClient {
-    @Generated private final Int32ValuesImpl serviceClient;
+    @Generated
+    private final Int32ValuesImpl serviceClient;
 
     /**
      * Initializes an instance of Int32ValueAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class Int32ValueAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -62,15 +65,15 @@ public final class Int32ValueAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class Int32ValueAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -100,14 +103,13 @@ public final class Int32ValueAsyncClient {
     public Mono<Map<String, Integer>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INTEGER));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_INTEGER));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -126,6 +128,7 @@ public final class Int32ValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER =
-            new TypeReference<Map<String, Integer>>() {};
+    private static final TypeReference<Map<String, Integer>> TYPE_REFERENCE_MAP_STRING_INTEGER
+        = new TypeReference<Map<String, Integer>>() {
+        };
 }

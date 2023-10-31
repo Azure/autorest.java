@@ -20,14 +20,17 @@ import com.type.property.nullable.implementation.CollectionsModelsImpl;
 import com.type.property.nullable.models.CollectionsModelProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous NullableClient type. */
+/**
+ * Initializes a new instance of the asynchronous NullableClient type.
+ */
 @ServiceClient(builder = NullableClientBuilder.class, isAsync = true)
 public final class CollectionsModelAsyncClient {
-    @Generated private final CollectionsModelsImpl serviceClient;
+    @Generated
+    private final CollectionsModelsImpl serviceClient;
 
     /**
      * Initializes an instance of CollectionsModelAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -50,14 +53,14 @@ public final class CollectionsModelAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,9 +70,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -80,14 +83,14 @@ public final class CollectionsModelAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -97,9 +100,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -110,7 +113,7 @@ public final class CollectionsModelAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -128,9 +131,9 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -141,7 +144,7 @@ public final class CollectionsModelAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,7 +162,7 @@ public final class CollectionsModelAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -172,14 +175,13 @@ public final class CollectionsModelAsyncClient {
     public Mono<CollectionsModelProperty> getNonNull() {
         // Generated convenience method for getNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getNonNullWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
+        return getNonNullWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
     }
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -192,8 +194,7 @@ public final class CollectionsModelAsyncClient {
     public Mono<CollectionsModelProperty> getNull() {
         // Generated convenience method for getNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getNullWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
+        return getNullWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(CollectionsModelProperty.class));
     }
 }

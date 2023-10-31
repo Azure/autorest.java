@@ -6,9 +6,13 @@ package fixtures.bodyfile;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of AutoRestSwaggerBatFileServiceClient. */
+/**
+ * Service version of AutoRestSwaggerBatFileServiceClient.
+ */
 public enum AutoRestSwaggerBatFileServiceVersion implements ServiceVersion {
-    /** Enum value 1.0.0. */
+    /**
+     * Enum value 1.0.0.
+     */
     V1_0_0("1.0.0");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum AutoRestSwaggerBatFileServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum AutoRestSwaggerBatFileServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link AutoRestSwaggerBatFileServiceVersion}.
      */
     public static AutoRestSwaggerBatFileServiceVersion getLatest() {

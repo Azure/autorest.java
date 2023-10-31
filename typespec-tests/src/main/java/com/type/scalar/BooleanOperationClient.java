@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.scalar.implementation.BooleanOperationsImpl;
 
-/** Initializes a new instance of the synchronous ScalarClient type. */
+/**
+ * Initializes a new instance of the synchronous ScalarClient type.
+ */
 @ServiceClient(builder = ScalarClientBuilder.class)
 public final class BooleanOperationClient {
-    @Generated private final BooleanOperationsImpl serviceClient;
+    @Generated
+    private final BooleanOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of BooleanOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,13 +37,13 @@ public final class BooleanOperationClient {
 
     /**
      * get boolean value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,13 +59,13 @@ public final class BooleanOperationClient {
 
     /**
      * put boolean value.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -79,7 +82,7 @@ public final class BooleanOperationClient {
 
     /**
      * get boolean value.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -97,7 +100,7 @@ public final class BooleanOperationClient {
 
     /**
      * put boolean value.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

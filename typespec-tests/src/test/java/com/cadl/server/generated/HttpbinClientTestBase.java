@@ -26,12 +26,10 @@ class HttpbinClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        HttpbinClientBuilder httpbinClientbuilder =
-                new HttpbinClientBuilder()
-                        .domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
-                        .tld(Configuration.getGlobalConfiguration().get("TLD", "org"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        HttpbinClientBuilder httpbinClientbuilder
+            = new HttpbinClientBuilder().domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
+                .tld(Configuration.getGlobalConfiguration().get("TLD", "org")).httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             httpbinClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -39,16 +37,16 @@ class HttpbinClientTestBase extends TestProxyTestBase {
         }
         httpbinClient = httpbinClientbuilder.buildClient();
 
-        ContosoClientBuilder contosoClientbuilder =
-                new ContosoClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ContosoClientBuilder contosoClientbuilder
+            = new ContosoClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             contosoClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             contosoClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         contosoClient = contosoClientbuilder.buildClient();
+
     }
 }

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** List Operations response object. */
+/**
+ * List Operations response object.
+ */
 @Fluent
 public final class GetOperationsResponse {
     /*
@@ -23,12 +25,15 @@ public final class GetOperationsResponse {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of GetOperationsResponse class. */
-    public GetOperationsResponse() {}
+    /**
+     * Creates an instance of GetOperationsResponse class.
+     */
+    public GetOperationsResponse() {
+    }
 
     /**
      * Get the value property: List of operations.
-     *
+     * 
      * @return the value value.
      */
     public List<OperationSummary> getValue() {
@@ -37,7 +42,7 @@ public final class GetOperationsResponse {
 
     /**
      * Set the value property: List of operations.
-     *
+     * 
      * @param value the value value to set.
      * @return the GetOperationsResponse object itself.
      */
@@ -48,7 +53,7 @@ public final class GetOperationsResponse {
 
     /**
      * Get the nextLink property: Link to the next page of operations.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +62,7 @@ public final class GetOperationsResponse {
 
     /**
      * Set the nextLink property: Link to the next page of operations.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the GetOperationsResponse object itself.
      */

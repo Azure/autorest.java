@@ -19,14 +19,17 @@ import com.azure.core.util.serializer.TypeReference;
 import com.type.dictionary.implementation.StringValuesImpl;
 import java.util.Map;
 
-/** Initializes a new instance of the synchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the synchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class)
 public final class StringValueClient {
-    @Generated private final StringValuesImpl serviceClient;
+    @Generated
+    private final StringValuesImpl serviceClient;
 
     /**
      * Initializes an instance of StringValueClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,15 +39,15 @@ public final class StringValueClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,15 +63,15 @@ public final class StringValueClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +88,7 @@ public final class StringValueClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -103,7 +106,7 @@ public final class StringValueClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -121,6 +124,7 @@ public final class StringValueClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING =
-            new TypeReference<Map<String, String>>() {};
+    private static final TypeReference<Map<String, String>> TYPE_REFERENCE_MAP_STRING_STRING
+        = new TypeReference<Map<String, String>>() {
+        };
 }

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.nullable.implementation.CollectionsModelsImpl;
 import com.type.property.nullable.models.CollectionsModelProperty;
 
-/** Initializes a new instance of the synchronous NullableClient type. */
+/**
+ * Initializes a new instance of the synchronous NullableClient type.
+ */
 @ServiceClient(builder = NullableClientBuilder.class)
 public final class CollectionsModelClient {
-    @Generated private final CollectionsModelsImpl serviceClient;
+    @Generated
+    private final CollectionsModelsImpl serviceClient;
 
     /**
      * Initializes an instance of CollectionsModelClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -48,7 +51,7 @@ public final class CollectionsModelClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -64,9 +67,9 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -77,7 +80,7 @@ public final class CollectionsModelClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -93,9 +96,9 @@ public final class CollectionsModelClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -106,7 +109,7 @@ public final class CollectionsModelClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -124,9 +127,9 @@ public final class CollectionsModelClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProperty: String (Required)
@@ -137,7 +140,7 @@ public final class CollectionsModelClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -155,7 +158,7 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -173,7 +176,7 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

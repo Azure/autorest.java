@@ -43,22 +43,28 @@ import fixtures.httpinfrastructure.models.HttpRedirectsPut307Response;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in HttpRedirects. */
+/**
+ * An instance of this class provides access to all the operations defined in HttpRedirects.
+ */
 public final class HttpRedirects {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HttpRedirectsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpRedirects.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HttpRedirects(AutoRestHttpInfrastructureTestService client) {
-        this.service =
-                RestProxy.create(HttpRedirectsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(HttpRedirectsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -70,126 +76,105 @@ public final class HttpRedirects {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpRedirectsService {
         @Head("/http/redirect/300")
-        @ExpectedResponses({200, 300})
+        @ExpectedResponses({ 200, 300 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead300Response> head300(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsHead300Response> head300(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/300")
-        @ExpectedResponses({200, 300})
+        @ExpectedResponses({ 200, 300 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet300Response> get300(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsGet300Response> get300(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Head("/http/redirect/301")
-        @ExpectedResponses({200, 301})
+        @ExpectedResponses({ 200, 301 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead301Response> head301(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsHead301Response> head301(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/301")
-        @ExpectedResponses({200, 301})
+        @ExpectedResponses({ 200, 301 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet301Response> get301(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsGet301Response> get301(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/http/redirect/301")
-        @ExpectedResponses({301})
+        @ExpectedResponses({ 301 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut301Response> put301(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPut301Response> put301(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/redirect/302")
-        @ExpectedResponses({200, 302})
+        @ExpectedResponses({ 200, 302 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead302Response> head302(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsHead302Response> head302(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/302")
-        @ExpectedResponses({200, 302})
+        @ExpectedResponses({ 200, 302 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet302Response> get302(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsGet302Response> get302(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Patch("/http/redirect/302")
-        @ExpectedResponses({302})
+        @ExpectedResponses({ 302 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch302Response> patch302(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPatch302Response> patch302(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/redirect/303")
-        @ExpectedResponses({200, 303})
+        @ExpectedResponses({ 200, 303 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost303Response> post303(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPost303Response> post303(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsHead307Response> head307(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsHead307Response> head307(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsGet307Response> get307(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsGet307Response> get307(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Options("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsOptions307Response> options307(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<HttpRedirectsOptions307Response> options307(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut307Response> put307(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPut307Response> put307(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch307Response> patch307(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPatch307Response> patch307(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost307Response> post307(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsPost307Response> post307(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/redirect/307")
-        @ExpectedResponses({200, 307})
+        @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsDelete307Response> delete307(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<HttpRedirectsDelete307Response> delete307(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -197,8 +182,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head300(this.client.getHost(), accept, context));
@@ -206,7 +191,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -216,8 +201,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head300(this.client.getHost(), accept, context);
@@ -225,7 +210,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -237,7 +222,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -251,7 +236,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -265,7 +250,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -276,7 +261,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -284,8 +269,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get300(this.client.getHost(), accept, context));
@@ -293,7 +278,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -303,8 +288,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get300(this.client.getHost(), accept, context);
@@ -312,7 +297,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -324,7 +309,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -338,7 +323,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -352,7 +337,7 @@ public final class HttpRedirects {
 
     /**
      * Return 300 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -364,7 +349,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -372,8 +357,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head301(this.client.getHost(), accept, context));
@@ -381,7 +366,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -391,8 +376,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head301(this.client.getHost(), accept, context);
@@ -400,7 +385,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -412,7 +397,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -426,7 +411,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -440,7 +425,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -451,7 +436,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -459,8 +444,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get301(this.client.getHost(), accept, context));
@@ -468,7 +453,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -478,8 +463,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get301(this.client.getHost(), accept, context);
@@ -487,7 +472,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -499,7 +484,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -513,7 +498,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -527,7 +512,7 @@ public final class HttpRedirects {
 
     /**
      * Return 301 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -539,7 +524,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -547,8 +532,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -558,7 +543,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -568,8 +553,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -579,7 +564,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -592,7 +577,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -607,7 +592,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -622,7 +607,7 @@ public final class HttpRedirects {
     /**
      * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -633,7 +618,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -641,8 +626,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head302(this.client.getHost(), accept, context));
@@ -650,7 +635,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -660,8 +645,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head302(this.client.getHost(), accept, context);
@@ -669,7 +654,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -681,7 +666,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -695,7 +680,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -709,7 +694,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -720,7 +705,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -728,8 +713,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get302(this.client.getHost(), accept, context));
@@ -737,7 +722,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -747,8 +732,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get302(this.client.getHost(), accept, context);
@@ -756,7 +741,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -768,7 +753,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -782,7 +767,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -796,7 +781,7 @@ public final class HttpRedirects {
 
     /**
      * Return 302 status code and redirect to /http/success/200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -808,7 +793,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -816,8 +801,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -827,7 +812,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -837,8 +822,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -848,7 +833,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -861,7 +846,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -876,7 +861,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -891,7 +876,7 @@ public final class HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
      * return the received 302 to the caller for evaluation.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -903,7 +888,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -911,8 +896,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -922,7 +907,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -932,8 +917,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -943,7 +928,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -956,7 +941,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -971,7 +956,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -986,7 +971,7 @@ public final class HttpRedirects {
     /**
      * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -997,7 +982,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1005,8 +990,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head307(this.client.getHost(), accept, context));
@@ -1014,7 +999,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1024,8 +1009,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head307(this.client.getHost(), accept, context);
@@ -1033,7 +1018,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1045,7 +1030,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1059,7 +1044,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1073,7 +1058,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1084,7 +1069,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1092,8 +1077,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get307(this.client.getHost(), accept, context));
@@ -1101,7 +1086,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1111,8 +1096,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get307(this.client.getHost(), accept, context);
@@ -1120,7 +1105,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1132,7 +1117,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1146,7 +1131,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1160,7 +1145,7 @@ public final class HttpRedirects {
 
     /**
      * Redirect get with 307, resulting in a 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1171,7 +1156,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1179,8 +1164,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.options307(this.client.getHost(), accept, context));
@@ -1188,7 +1173,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1198,8 +1183,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.options307(this.client.getHost(), accept, context);
@@ -1207,7 +1192,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1219,7 +1204,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1233,7 +1218,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1247,7 +1232,7 @@ public final class HttpRedirects {
 
     /**
      * options redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1258,7 +1243,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1266,8 +1251,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1276,7 +1261,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1286,8 +1271,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1296,7 +1281,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1308,7 +1293,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1322,7 +1307,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1336,7 +1321,7 @@ public final class HttpRedirects {
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1347,7 +1332,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1355,8 +1340,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1365,7 +1350,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1375,8 +1360,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1385,7 +1370,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1397,7 +1382,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1411,7 +1396,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1425,7 +1410,7 @@ public final class HttpRedirects {
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1436,7 +1421,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1444,8 +1429,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1454,7 +1439,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1464,8 +1449,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1474,7 +1459,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1486,7 +1471,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1500,7 +1485,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1514,7 +1499,7 @@ public final class HttpRedirects {
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1525,7 +1510,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1533,8 +1518,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1543,7 +1528,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1553,8 +1538,8 @@ public final class HttpRedirects {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1563,7 +1548,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1575,7 +1560,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1589,7 +1574,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1603,7 +1588,7 @@ public final class HttpRedirects {
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

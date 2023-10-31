@@ -37,19 +37,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the BodyFormsDataURLEncoded type. */
-@ServiceClientBuilder(serviceClients = {BodyFormsDataURLEncoded.class})
+/**
+ * A builder for creating a new instance of the BodyFormsDataURLEncoded type.
+ */
+@ServiceClientBuilder(serviceClients = { BodyFormsDataURLEncoded.class })
 public final class BodyFormsDataURLEncodedBuilder
-        implements HttpTrait<BodyFormsDataURLEncodedBuilder>, ConfigurationTrait<BodyFormsDataURLEncodedBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    implements HttpTrait<BodyFormsDataURLEncodedBuilder>, ConfigurationTrait<BodyFormsDataURLEncodedBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> PROPERTIES = new HashMap<>();
+    @Generated
+    private static final Map<String, String> PROPERTIES = new HashMap<>();
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the BodyFormsDataURLEncodedBuilder. */
+    /**
+     * Create an instance of the BodyFormsDataURLEncodedBuilder.
+     */
     @Generated
     public BodyFormsDataURLEncodedBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -58,9 +66,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder pipeline(HttpPipeline pipeline) {
@@ -71,9 +82,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder httpClient(HttpClient httpClient) {
@@ -84,9 +98,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -97,9 +114,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder clientOptions(ClientOptions clientOptions) {
@@ -110,9 +130,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder retryOptions(RetryOptions retryOptions) {
@@ -120,7 +143,9 @@ public final class BodyFormsDataURLEncodedBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -132,9 +157,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyFormsDataURLEncodedBuilder configuration(Configuration configuration) {
@@ -145,11 +173,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * server parameter
      */
-    @Generated private String host;
+    @Generated
+    private String host;
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the BodyFormsDataURLEncodedBuilder.
      */
@@ -162,11 +191,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The serializer to serialize an object into a string
      */
-    @Generated private SerializerAdapter serializerAdapter;
+    @Generated
+    private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
-     *
+     * 
      * @param serializerAdapter the serializerAdapter value.
      * @return the BodyFormsDataURLEncodedBuilder.
      */
@@ -179,11 +209,12 @@ public final class BodyFormsDataURLEncodedBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the BodyFormsDataURLEncodedBuilder.
      */
@@ -195,23 +226,23 @@ public final class BodyFormsDataURLEncodedBuilder
 
     /**
      * Builds an instance of BodyFormsDataURLEncoded with the provided parameters.
-     *
+     * 
      * @return an instance of BodyFormsDataURLEncoded.
      */
     @Generated
     public BodyFormsDataURLEncoded buildClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        SerializerAdapter localSerializerAdapter =
-                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        SerializerAdapter localSerializerAdapter
+            = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
         BodyFormsDataURLEncoded client = new BodyFormsDataURLEncoded(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -222,29 +253,22 @@ public final class BodyFormsDataURLEncodedBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 }

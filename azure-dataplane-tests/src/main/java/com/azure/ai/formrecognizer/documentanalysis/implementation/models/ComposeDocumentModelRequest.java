@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
-/** Request body to create a composed document model from component document models. */
+/**
+ * Request body to create a composed document model from component document models.
+ */
 @Fluent
 public final class ComposeDocumentModelRequest {
     /*
@@ -36,12 +38,15 @@ public final class ComposeDocumentModelRequest {
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
-    /** Creates an instance of ComposeDocumentModelRequest class. */
-    public ComposeDocumentModelRequest() {}
+    /**
+     * Creates an instance of ComposeDocumentModelRequest class.
+     */
+    public ComposeDocumentModelRequest() {
+    }
 
     /**
      * Get the modelId property: Unique document model name.
-     *
+     * 
      * @return the modelId value.
      */
     public String getModelId() {
@@ -50,7 +55,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Set the modelId property: Unique document model name.
-     *
+     * 
      * @param modelId the modelId value to set.
      * @return the ComposeDocumentModelRequest object itself.
      */
@@ -61,7 +66,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Get the description property: Document model description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -70,7 +75,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Set the description property: Document model description.
-     *
+     * 
      * @param description the description value to set.
      * @return the ComposeDocumentModelRequest object itself.
      */
@@ -81,7 +86,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Get the componentModels property: List of component document models to compose.
-     *
+     * 
      * @return the componentModels value.
      */
     public List<ComponentDocumentModelDetails> getComponentModels() {
@@ -90,7 +95,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Set the componentModels property: List of component document models to compose.
-     *
+     * 
      * @param componentModels the componentModels value to set.
      * @return the ComposeDocumentModelRequest object itself.
      */
@@ -101,7 +106,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Get the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @return the tags value.
      */
     public Map<String, String> getTags() {
@@ -110,7 +115,7 @@ public final class ComposeDocumentModelRequest {
 
     /**
      * Set the tags property: List of key-value tag attributes associated with the document model.
-     *
+     * 
      * @param tags the tags value to set.
      * @return the ComposeDocumentModelRequest object itself.
      */

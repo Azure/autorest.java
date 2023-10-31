@@ -12,7 +12,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-/** The UnixTimestampDatetimeProperty model. */
+/**
+ * The UnixTimestampDatetimeProperty model.
+ */
 @Immutable
 public final class UnixTimestampDatetimeProperty {
     /*
@@ -24,7 +26,7 @@ public final class UnixTimestampDatetimeProperty {
 
     /**
      * Creates an instance of UnixTimestampDatetimeProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -40,7 +42,7 @@ public final class UnixTimestampDatetimeProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

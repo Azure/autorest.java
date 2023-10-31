@@ -11,7 +11,9 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
 import javax.xml.stream.XMLStreamException;
 
-/** Contans property. */
+/**
+ * Contans property.
+ */
 @Fluent
 public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWithXMsTextProperty> {
     /*
@@ -24,12 +26,15 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      */
     private String content;
 
-    /** Creates an instance of ObjectWithXMsTextProperty class. */
-    public ObjectWithXMsTextProperty() {}
+    /**
+     * Creates an instance of ObjectWithXMsTextProperty class.
+     */
+    public ObjectWithXMsTextProperty() {
+    }
 
     /**
      * Get the language property: Returned value should be 'english'.
-     *
+     * 
      * @return the language value.
      */
     public String getLanguage() {
@@ -38,7 +43,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Set the language property: Returned value should be 'english'.
-     *
+     * 
      * @param language the language value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
@@ -49,7 +54,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Get the content property: Returned value should be 'I am text'.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -58,7 +63,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Set the content property: Returned value should be 'I am text'.
-     *
+     * 
      * @param content the content value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
@@ -69,10 +74,11 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
@@ -90,10 +96,10 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
-     *     it was pointing to XML null.
+     * it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
      */
     public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -102,25 +108,23 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
 
     /**
      * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
-     *     it was pointing to XML null.
+     * it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
      */
     public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader, String rootElementName)
-            throws XMLStreamException {
+        throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ObjectWithXMsTextProperty deserializedObjectWithXMsTextProperty = new ObjectWithXMsTextProperty();
-                    deserializedObjectWithXMsTextProperty.language = reader.getStringAttribute(null, "language");
-                    deserializedObjectWithXMsTextProperty.content = reader.getStringElement();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ObjectWithXMsTextProperty deserializedObjectWithXMsTextProperty = new ObjectWithXMsTextProperty();
+            deserializedObjectWithXMsTextProperty.language = reader.getStringAttribute(null, "language");
+            deserializedObjectWithXMsTextProperty.content = reader.getStringElement();
 
-                    return deserializedObjectWithXMsTextProperty;
-                });
+            return deserializedObjectWithXMsTextProperty;
+        });
     }
 }

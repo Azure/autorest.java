@@ -22,16 +22,16 @@ class BuiltinClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BuiltinClientBuilder builtinClientbuilder =
-                new BuiltinClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BuiltinClientBuilder builtinClientbuilder
+            = new BuiltinClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             builtinClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             builtinClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         builtinClient = builtinClientbuilder.buildClient();
+
     }
 }

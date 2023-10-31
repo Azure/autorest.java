@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 
-/** Initializes a new instance of the synchronous MediaTypesClient type. */
+/**
+ * Initializes a new instance of the synchronous MediaTypesClient type.
+ */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {
-    @Generated private final MediaTypesClientImpl serviceClient;
+    @Generated
+    private final MediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of MediaTypesClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,19 +37,19 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -63,13 +66,13 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,29 +89,38 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "text/plain; charset=UTF-8".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "text/plain; charset=UTF-8".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -125,19 +137,19 @@ public final class MediaTypesClient {
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,29 +161,29 @@ public final class MediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> binaryBodyWithTwoContentTypesWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.binaryBodyWithTwoContentTypesWithResponse(contentType, message, requestOptions);
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream",
-     *     "text/plain".
+     * "text/plain".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -182,8 +194,8 @@ public final class MediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> binaryBodyWithThreeContentTypesWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.binaryBodyWithThreeContentTypesWithResponse(contentType, message, requestOptions);
     }
 
@@ -191,21 +203,21 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain",
-     *     "application/json".
+     * "application/json".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -216,26 +228,26 @@ public final class MediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> bodyThreeTypesWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> bodyThreeTypesWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.bodyThreeTypesWithResponse(contentType, message, requestOptions);
     }
 
     /**
      * Body that's either text/plain or application/json.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -247,8 +259,8 @@ public final class MediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putTextAndJsonBodyWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> putTextAndJsonBodyWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.putTextAndJsonBodyWithResponse(contentType, message, requestOptions);
     }
 }

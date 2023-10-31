@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 import fixtures.bodycomplex.implementation.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class FlattencomplexAsyncClient {
-    @Generated private final FlattencomplexesImpl serviceClient;
+    @Generated
+    private final FlattencomplexesImpl serviceClient;
 
     /**
      * Initializes an instance of FlattencomplexAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class FlattencomplexAsyncClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -44,7 +47,7 @@ public final class FlattencomplexAsyncClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.

@@ -13,13 +13,16 @@ import com.azure.core.util.Context;
 import fixtures.nonstringenum.implementation.FloatOperationsImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 
-/** Initializes a new instance of the synchronous NonStringEnumsClient type. */
+/**
+ * Initializes a new instance of the synchronous NonStringEnumsClient type.
+ */
 public final class FloatOperationClient {
-    @Generated private final FloatOperationsImpl serviceClient;
+    @Generated
+    private final FloatOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of FloatOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -29,7 +32,7 @@ public final class FloatOperationClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @param input Input float enum.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -45,7 +48,7 @@ public final class FloatOperationClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,7 +63,7 @@ public final class FloatOperationClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -73,7 +76,7 @@ public final class FloatOperationClient {
 
     /**
      * Get a float enum.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class FloatOperationClient {
 
     /**
      * Get a float enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum.

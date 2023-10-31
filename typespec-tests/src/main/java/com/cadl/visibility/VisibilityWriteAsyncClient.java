@@ -21,14 +21,17 @@ import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.WriteDog;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the asynchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
 public final class VisibilityWriteAsyncClient {
-    @Generated private final VisibilityWritesImpl serviceClient;
+    @Generated
+    private final VisibilityWritesImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityWriteAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,17 +41,17 @@ public final class VisibilityWriteAsyncClient {
 
     /**
      * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -56,7 +59,7 @@ public final class VisibilityWriteAsyncClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -73,7 +76,7 @@ public final class VisibilityWriteAsyncClient {
 
     /**
      * The create operation.
-     *
+     * 
      * @param dog The dog parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,8 +91,7 @@ public final class VisibilityWriteAsyncClient {
     public Mono<Dog> create(WriteDog dog) {
         // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(BinaryData.fromObject(dog), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+        return createWithResponse(BinaryData.fromObject(dog), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 }

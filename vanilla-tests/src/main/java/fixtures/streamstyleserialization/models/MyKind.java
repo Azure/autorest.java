@@ -7,22 +7,27 @@ package fixtures.streamstyleserialization.models;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for MyKind. */
+/**
+ * Defines values for MyKind.
+ */
 public final class MyKind extends ExpandableStringEnum<MyKind> {
-    /** Static value Kind1 for MyKind. */
+    /**
+     * Static value Kind1 for MyKind.
+     */
     public static final MyKind KIND1 = fromString("Kind1");
 
     /**
      * Creates a new instance of MyKind value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public MyKind() {}
+    public MyKind() {
+    }
 
     /**
      * Creates or finds a MyKind from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding MyKind.
      */
@@ -32,7 +37,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
 
     /**
      * Gets known MyKind values.
-     *
+     * 
      * @return known MyKind values.
      */
     public static Collection<MyKind> values() {

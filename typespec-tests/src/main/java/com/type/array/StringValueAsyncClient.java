@@ -21,14 +21,17 @@ import com.type.array.implementation.StringValuesImpl;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ArrayClient type. */
+/**
+ * Initializes a new instance of the asynchronous ArrayClient type.
+ */
 @ServiceClient(builder = ArrayClientBuilder.class, isAsync = true)
 public final class StringValueAsyncClient {
-    @Generated private final StringValuesImpl serviceClient;
+    @Generated
+    private final StringValuesImpl serviceClient;
 
     /**
      * Initializes an instance of StringValueAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class StringValueAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *     String (Required)
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -62,15 +65,15 @@ public final class StringValueAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *     String (Required)
      * ]
      * }</pre>
-     *
+     * 
      * @param body Array of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class StringValueAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -100,14 +103,13 @@ public final class StringValueAsyncClient {
     public Mono<List<String>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_STRING));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_STRING));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Array of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -126,5 +128,6 @@ public final class StringValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {};
+    private static final TypeReference<List<String>> TYPE_REFERENCE_LIST_STRING = new TypeReference<List<String>>() {
+    };
 }
