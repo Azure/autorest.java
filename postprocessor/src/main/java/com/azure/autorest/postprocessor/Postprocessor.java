@@ -198,7 +198,7 @@ public class Postprocessor extends NewPlugin {
                     + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to run Spotless on generated code.");
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
     }
 
@@ -351,13 +351,11 @@ public class Postprocessor extends NewPlugin {
 
             if (process.isAlive() || process.exitValue() != 0) {
                 process.destroyForcibly();
-                logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing "
-                    + "dependencies. If this happens 'mvn install -f" + pomPath + "' to install dependencies manually."
-                    + Files.readString(outputFile.toPath()));
+                throw new RuntimeException("Customization install failed to complete within 60 seconds or failed with "
+                    + "an error code." + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to install customization POM file. Eclipse language server may fail with missing "
-                + "dependencies. If this happens 'mvn install -f" + pomPath + "' to install dependencies manually.");
+            throw new RuntimeException("Failed to install customization POM file.", ex);
         }
     }
 
