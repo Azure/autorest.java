@@ -28,6 +28,8 @@ import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,10 +158,11 @@ public class Postprocessor extends NewPlugin {
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
+                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath,
+                    StandardCopyOption.REPLACE_EXISTING);
                 pomPath.toFile().deleteOnExit();
                 Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
-                        pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"), StandardCopyOption.REPLACE_EXISTING);
                 pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml").toFile().deleteOnExit();
 
                 attemptMavenSpotless(pomPath);

@@ -32,6 +32,7 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
@@ -140,9 +141,11 @@ public class Main {
                 }
 
                 Path pomPath = tmpDir.resolve("pom.xml");
-                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath,
+                    StandardCopyOption.REPLACE_EXISTING);
                 Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
-                        pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
+                    StandardCopyOption.REPLACE_EXISTING);
 
                 attemptMavenSpotless(pomPath);
 
