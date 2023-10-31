@@ -135,16 +135,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent()) {
+        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
                     .map(trait -> trait.getTraitInterfaceName() + serviceClientBuilderGeneric)
                     .collect(Collectors.joining(", "));
 
-            if (!interfaces.isEmpty()) {
-                classDefinition = serviceClientBuilderName + " implements " + interfaces;
-            }
+            classDefinition = serviceClientBuilderName + " implements " + interfaces;
         }
 
         javaFile.publicFinalClass(classDefinition, classBlock ->
