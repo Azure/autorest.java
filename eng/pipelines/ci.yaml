@@ -61,6 +61,10 @@ jobs:
           npm install
         displayName: 'Prepare Environment for Generation'
 
+      - script: |
+          mvn -version
+        displayName: 'Maven Version'
+
       - task: PowerShell@2
         displayName: 'Generate Code'
         inputs:
