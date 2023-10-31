@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The NoModelAsStringNoRequiredOneValueNoDefault model. */
+/**
+ * The NoModelAsStringNoRequiredOneValueNoDefault model.
+ */
 @Fluent
 public final class NoModelAsStringNoRequiredOneValueNoDefault {
     /*
@@ -16,12 +18,15 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault {
     @JsonProperty(value = "parameter")
     private String parameter = "value1";
 
-    /** Creates an instance of NoModelAsStringNoRequiredOneValueNoDefault class. */
-    public NoModelAsStringNoRequiredOneValueNoDefault() {}
+    /**
+     * Creates an instance of NoModelAsStringNoRequiredOneValueNoDefault class.
+     */
+    public NoModelAsStringNoRequiredOneValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public String getParameter() {
@@ -30,7 +35,7 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the NoModelAsStringNoRequiredOneValueNoDefault object itself.
      */
@@ -41,8 +46,9 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

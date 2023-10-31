@@ -24,17 +24,23 @@ import com.azure.core.util.FluxUtil;
 import fixtures.extensibleenums.models.Pet;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Pets. */
+/**
+ * An instance of this class provides access to all the operations defined in Pets.
+ */
 public final class Pets {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PetsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final PetStoreInc client;
 
     /**
      * Initializes an instance of Pets.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Pets(PetStoreInc client) {
@@ -50,27 +56,21 @@ public final class Pets {
     @ServiceInterface(name = "PetStoreIncPets")
     public interface PetsService {
         @Get("/extensibleenums/pet/{petId}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Pet>> getByPetId(
-                @HostParam("$host") String host,
-                @PathParam("petId") String petId,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Pet>> getByPetId(@HostParam("$host") String host, @PathParam("petId") String petId,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/extensibleenums/pet/addPet")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Pet>> addPet(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Pet petParam,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -80,8 +80,8 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petId == null) {
             return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
@@ -92,7 +92,7 @@ public final class Pets {
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -103,8 +103,8 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petId == null) {
             return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
@@ -115,7 +115,7 @@ public final class Pets {
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -129,7 +129,7 @@ public final class Pets {
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -144,7 +144,7 @@ public final class Pets {
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -159,7 +159,7 @@ public final class Pets {
 
     /**
      * get pet by id.
-     *
+     * 
      * @param petId Pet id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -173,7 +173,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,8 +183,8 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> addPetWithResponseAsync(Pet petParam) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petParam != null) {
             petParam.validate();
@@ -195,7 +195,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -206,8 +206,8 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> addPetWithResponseAsync(Pet petParam, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (petParam != null) {
             petParam.validate();
@@ -218,7 +218,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,7 +232,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -245,7 +245,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -260,7 +260,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -275,7 +275,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @param petParam pet param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -289,7 +289,7 @@ public final class Pets {
 
     /**
      * add pet.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

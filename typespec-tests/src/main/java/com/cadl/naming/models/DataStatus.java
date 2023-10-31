@@ -11,31 +11,41 @@ import java.util.Collection;
 
 /**
  * summary of Statuses
- *
- * <p>description of Statuses.
+ * 
+ * description of Statuses.
  */
 public final class DataStatus extends ExpandableStringEnum<DataStatus> {
-    /** Static value Running for DataStatus. */
-    @Generated public static final DataStatus RUNNING = fromString("Running");
+    /**
+     * Static value Running for DataStatus.
+     */
+    @Generated
+    public static final DataStatus RUNNING = fromString("Running");
 
-    /** Static value Completed for DataStatus. */
-    @Generated public static final DataStatus COMPLETED = fromString("Completed");
+    /**
+     * Static value Completed for DataStatus.
+     */
+    @Generated
+    public static final DataStatus COMPLETED = fromString("Completed");
 
-    /** Static value Failed for DataStatus. */
-    @Generated public static final DataStatus FAILED = fromString("Failed");
+    /**
+     * Static value Failed for DataStatus.
+     */
+    @Generated
+    public static final DataStatus FAILED = fromString("Failed");
 
     /**
      * Creates a new instance of DataStatus value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public DataStatus() {}
+    public DataStatus() {
+    }
 
     /**
      * Creates or finds a DataStatus from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding DataStatus.
      */
@@ -47,7 +57,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> {
 
     /**
      * Gets known DataStatus values.
-     *
+     * 
      * @return known DataStatus values.
      */
     @Generated

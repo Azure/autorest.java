@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** General information regarding the current resource. */
+/**
+ * General information regarding the current resource.
+ */
 @Fluent
 public final class ResourceDetails {
     /*
@@ -16,12 +18,15 @@ public final class ResourceDetails {
     @JsonProperty(value = "customDocumentModels", required = true)
     private CustomDocumentModelsDetails customDocumentModels;
 
-    /** Creates an instance of ResourceDetails class. */
-    public ResourceDetails() {}
+    /**
+     * Creates an instance of ResourceDetails class.
+     */
+    public ResourceDetails() {
+    }
 
     /**
      * Get the customDocumentModels property: Details regarding custom document models.
-     *
+     * 
      * @return the customDocumentModels value.
      */
     public CustomDocumentModelsDetails getCustomDocumentModels() {
@@ -30,7 +35,7 @@ public final class ResourceDetails {
 
     /**
      * Set the customDocumentModels property: Details regarding custom document models.
-     *
+     * 
      * @param customDocumentModels the customDocumentModels value to set.
      * @return the ResourceDetails object itself.
      */

@@ -23,14 +23,17 @@ import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous FlattenClient type. */
+/**
+ * Initializes a new instance of the asynchronous FlattenClient type.
+ */
 @ServiceClient(builder = FlattenClientBuilder.class, isAsync = true)
 public final class FlattenAsyncClient {
-    @Generated private final FlattenClientImpl serviceClient;
+    @Generated
+    private final FlattenClientImpl serviceClient;
 
     /**
      * Initializes an instance of FlattenAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -40,9 +43,9 @@ public final class FlattenAsyncClient {
 
     /**
      * The send operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -51,7 +54,7 @@ public final class FlattenAsyncClient {
      *     input: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,19 +72,28 @@ public final class FlattenAsyncClient {
 
     /**
      * The sendLong operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -94,7 +106,7 @@ public final class FlattenAsyncClient {
      *     data_float: Double (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -112,7 +124,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The send operation.
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param input A sequence of textual characters.
      * @param user The user parameter.
@@ -138,7 +150,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The send operation.
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param input A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -162,7 +174,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The sendLong operation.
-     *
+     * 
      * @param options Options for sendLong API.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

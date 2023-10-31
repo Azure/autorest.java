@@ -29,41 +29,51 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the ParmaterizedEndpointClient type. */
+/**
+ * Initializes a new instance of the ParmaterizedEndpointClient type.
+ */
 public final class ParmaterizedEndpointClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ParmaterizedEndpointClientService service;
 
-    /** The parameterized host. Pass in 'http://localhost:3000' to pass. */
+    /**
+     * The parameterized host. Pass in 'http://localhost:3000' to pass.
+     */
     private final String endpoint;
 
     /**
      * Gets The parameterized host. Pass in 'http://localhost:3000' to pass.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -72,19 +82,17 @@ public final class ParmaterizedEndpointClientImpl {
 
     /**
      * Initializes an instance of ParmaterizedEndpointClient client.
-     *
+     * 
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
      */
     public ParmaterizedEndpointClientImpl(String endpoint) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of ParmaterizedEndpointClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
      */
@@ -94,61 +102,48 @@ public final class ParmaterizedEndpointClientImpl {
 
     /**
      * Initializes an instance of ParmaterizedEndpointClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
      */
-    public ParmaterizedEndpointClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public ParmaterizedEndpointClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.service =
-                RestProxy.create(
-                        ParmaterizedEndpointClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service
+            = RestProxy.create(ParmaterizedEndpointClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ParmaterizedEndpoint")
     public interface ParmaterizedEndpointClientService {
         @Get("/parameterizedEndpoint/get")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get(
-                @HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/parameterizedEndpoint/get")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> getSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Basic get to make sure base url formatting of 'endpoint' works.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -163,7 +158,7 @@ public final class ParmaterizedEndpointClientImpl {
 
     /**
      * Basic get to make sure base url formatting of 'endpoint' works.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

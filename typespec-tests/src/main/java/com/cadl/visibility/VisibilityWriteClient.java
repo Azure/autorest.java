@@ -19,14 +19,17 @@ import com.cadl.visibility.implementation.VisibilityWritesImpl;
 import com.cadl.visibility.models.Dog;
 import com.cadl.visibility.models.WriteDog;
 
-/** Initializes a new instance of the synchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the synchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityWriteClient {
-    @Generated private final VisibilityWritesImpl serviceClient;
+    @Generated
+    private final VisibilityWritesImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityWriteClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,17 +39,17 @@ public final class VisibilityWriteClient {
 
     /**
      * The create operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -54,7 +57,7 @@ public final class VisibilityWriteClient {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,7 +74,7 @@ public final class VisibilityWriteClient {
 
     /**
      * The create operation.
-     *
+     * 
      * @param dog The dog parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

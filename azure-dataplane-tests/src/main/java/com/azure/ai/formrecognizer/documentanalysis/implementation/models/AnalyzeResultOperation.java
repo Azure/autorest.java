@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** Status and result of the analyze operation. */
+/**
+ * Status and result of the analyze operation.
+ */
 @Fluent
 public final class AnalyzeResultOperation {
     /*
@@ -41,12 +43,15 @@ public final class AnalyzeResultOperation {
     @JsonProperty(value = "analyzeResult")
     private AnalyzeResult analyzeResult;
 
-    /** Creates an instance of AnalyzeResultOperation class. */
-    public AnalyzeResultOperation() {}
+    /**
+     * Creates an instance of AnalyzeResultOperation class.
+     */
+    public AnalyzeResultOperation() {
+    }
 
     /**
      * Get the status property: Operation status.
-     *
+     * 
      * @return the status value.
      */
     public AnalyzeResultOperationStatus getStatus() {
@@ -55,7 +60,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Set the status property: Operation status.
-     *
+     * 
      * @param status the status value to set.
      * @return the AnalyzeResultOperation object itself.
      */
@@ -66,7 +71,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Get the createdDateTime property: Date and time (UTC) when the analyze operation was submitted.
-     *
+     * 
      * @return the createdDateTime value.
      */
     public OffsetDateTime getCreatedDateTime() {
@@ -75,7 +80,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Set the createdDateTime property: Date and time (UTC) when the analyze operation was submitted.
-     *
+     * 
      * @param createdDateTime the createdDateTime value to set.
      * @return the AnalyzeResultOperation object itself.
      */
@@ -86,7 +91,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Get the lastUpdatedDateTime property: Date and time (UTC) when the status was last updated.
-     *
+     * 
      * @return the lastUpdatedDateTime value.
      */
     public OffsetDateTime getLastUpdatedDateTime() {
@@ -95,7 +100,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Set the lastUpdatedDateTime property: Date and time (UTC) when the status was last updated.
-     *
+     * 
      * @param lastUpdatedDateTime the lastUpdatedDateTime value to set.
      * @return the AnalyzeResultOperation object itself.
      */
@@ -106,7 +111,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Get the error property: Encountered error during document analysis.
-     *
+     * 
      * @return the error value.
      */
     public Error getError() {
@@ -115,7 +120,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Set the error property: Encountered error during document analysis.
-     *
+     * 
      * @param error the error value to set.
      * @return the AnalyzeResultOperation object itself.
      */
@@ -126,7 +131,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Get the analyzeResult property: Document analysis result.
-     *
+     * 
      * @return the analyzeResult value.
      */
     public AnalyzeResult getAnalyzeResult() {
@@ -135,7 +140,7 @@ public final class AnalyzeResultOperation {
 
     /**
      * Set the analyzeResult property: Document analysis result.
-     *
+     * 
      * @param analyzeResult the analyzeResult value to set.
      * @return the AnalyzeResultOperation object itself.
      */

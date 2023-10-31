@@ -17,11 +17,14 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestSwaggerBatServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestSwaggerBatServiceClient type.
+ */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class, isAsync = true)
 public final class EnumAsyncClient {
 
-    @Generated private final EnumsImpl serviceClient;
+    @Generated
+    private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of EnumAsyncClient class.
@@ -35,9 +38,9 @@ public final class EnumAsyncClient {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -47,8 +50,8 @@ public final class EnumAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -58,9 +61,9 @@ public final class EnumAsyncClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -75,16 +78,16 @@ public final class EnumAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNotExpandableWithResponse(
-            BinaryData stringBodyUpdated, RequestOptions requestOptions) {
+    public Mono<Response<Void>> putNotExpandableWithResponse(BinaryData stringBodyUpdated,
+        RequestOptions requestOptions) {
         return this.serviceClient.putNotExpandableWithResponseAsync(stringBodyUpdated, requestOptions);
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -94,8 +97,8 @@ public final class EnumAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -105,9 +108,9 @@ public final class EnumAsyncClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>

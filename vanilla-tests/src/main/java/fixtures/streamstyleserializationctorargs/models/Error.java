@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The Error model. */
+/**
+ * The Error model.
+ */
 @Fluent
 public final class Error implements JsonSerializable<Error> {
     /*
@@ -24,12 +26,15 @@ public final class Error implements JsonSerializable<Error> {
      */
     private String message;
 
-    /** Creates an instance of Error class. */
-    public Error() {}
+    /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+    }
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Integer getStatus() {
@@ -38,7 +43,7 @@ public final class Error implements JsonSerializable<Error> {
 
     /**
      * Set the status property: The status property.
-     *
+     * 
      * @param status the status value to set.
      * @return the Error object itself.
      */
@@ -49,7 +54,7 @@ public final class Error implements JsonSerializable<Error> {
 
     /**
      * Get the message property: The message property.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -58,7 +63,7 @@ public final class Error implements JsonSerializable<Error> {
 
     /**
      * Set the message property: The message property.
-     *
+     * 
      * @param message the message value to set.
      * @return the Error object itself.
      */
@@ -69,10 +74,11 @@ public final class Error implements JsonSerializable<Error> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -84,30 +90,29 @@ public final class Error implements JsonSerializable<Error> {
 
     /**
      * Reads an instance of Error from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Error if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IOException If an error occurs while reading the Error.
      */
     public static Error fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    Error deserializedError = new Error();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            Error deserializedError = new Error();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("status".equals(fieldName)) {
-                            deserializedError.status = reader.getNullable(JsonReader::getInt);
-                        } else if ("message".equals(fieldName)) {
-                            deserializedError.message = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("status".equals(fieldName)) {
+                    deserializedError.status = reader.getNullable(JsonReader::getInt);
+                } else if ("message".equals(fieldName)) {
+                    deserializedError.message = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedError;
-                });
+            return deserializedError;
+        });
     }
 }

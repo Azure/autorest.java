@@ -6,9 +6,13 @@ package fixtures.mediatypes;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of MediaTypesClient. */
+/**
+ * Service version of MediaTypesClient.
+ */
 public enum MediaTypesServiceVersion implements ServiceVersion {
-    /** Enum value 2.0-preview. */
+    /**
+     * Enum value 2.0-preview.
+     */
     V2_0_PREVIEW("2.0-preview");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum MediaTypesServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum MediaTypesServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link MediaTypesServiceVersion}.
      */
     public static MediaTypesServiceVersion getLatest() {

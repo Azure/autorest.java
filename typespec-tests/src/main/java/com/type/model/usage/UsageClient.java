@@ -20,14 +20,17 @@ import com.type.model.usage.models.InputOutputRecord;
 import com.type.model.usage.models.InputRecord;
 import com.type.model.usage.models.OutputRecord;
 
-/** Initializes a new instance of the synchronous UsageClient type. */
+/**
+ * Initializes a new instance of the synchronous UsageClient type.
+ */
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {
-    @Generated private final UsageClientImpl serviceClient;
+    @Generated
+    private final UsageClientImpl serviceClient;
 
     /**
      * Initializes an instance of UsageClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class UsageClient {
 
     /**
      * The input operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Record used in operation parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,15 +65,15 @@ public final class UsageClient {
 
     /**
      * The output operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -86,23 +89,23 @@ public final class UsageClient {
 
     /**
      * The inputAndOutput operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Record used both as operation parameter and return type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +122,7 @@ public final class UsageClient {
 
     /**
      * The input operation.
-     *
+     * 
      * @param input Record used in operation parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,7 +141,7 @@ public final class UsageClient {
 
     /**
      * The output operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -156,7 +159,7 @@ public final class UsageClient {
 
     /**
      * The inputAndOutput operation.
-     *
+     * 
      * @param body Record used both as operation parameter and return type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -171,8 +174,7 @@ public final class UsageClient {
     public InputOutputRecord inputAndOutput(InputOutputRecord body) {
         // Generated convenience method for inputAndOutputWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return inputAndOutputWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(InputOutputRecord.class);
+        return inputAndOutputWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(InputOutputRecord.class);
     }
 }

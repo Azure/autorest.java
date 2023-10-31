@@ -22,17 +22,23 @@ import com.azure.core.util.FluxUtil;
 import fixtures.custombaseuri.moreoptions.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Paths. */
+/**
+ * An instance of this class provides access to all the operations defined in Paths.
+ */
 public final class Paths {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PathsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestParameterizedCustomHostTestClient client;
 
     /**
      * Initializes an instance of Paths.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Paths(AutoRestParameterizedCustomHostTestClient client) {
@@ -48,22 +54,17 @@ public final class Paths {
     @ServiceInterface(name = "AutoRestParameterize")
     public interface PathsService {
         @Get("/customuri/{subscriptionId}/{keyName}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getEmpty(
-                @HostParam("vault") String vault,
-                @HostParam("secret") String secret,
-                @HostParam("dnsSuffix") String dnsSuffix,
-                @PathParam("keyName") String keyName,
-                @PathParam("subscriptionId") String subscriptionId,
-                @QueryParam("keyVersion") String keyVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret,
+            @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName,
+            @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -74,8 +75,8 @@ public final class Paths {
      * @return a 200 to test a valid base uri along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(
-            String vault, String secret, String keyName, String keyVersion) {
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String keyName,
+        String keyVersion) {
         if (vault == null) {
             return Mono.error(new IllegalArgumentException("Parameter vault is required and cannot be null."));
         }
@@ -84,34 +85,23 @@ public final class Paths {
         }
         if (this.client.getDnsSuffix() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getDnsSuffix() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
         }
         if (keyName == null) {
             return Mono.error(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getEmpty(
-                                vault,
-                                secret,
-                                this.client.getDnsSuffix(),
-                                keyName,
-                                this.client.getSubscriptionId(),
-                                keyVersion,
-                                accept,
-                                context));
+        return FluxUtil.withContext(context -> service.getEmpty(vault, secret, this.client.getDnsSuffix(), keyName,
+            this.client.getSubscriptionId(), keyVersion, accept, context));
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -123,8 +113,8 @@ public final class Paths {
      * @return a 200 to test a valid base uri along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(
-            String vault, String secret, String keyName, String keyVersion, Context context) {
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String keyName,
+        String keyVersion, Context context) {
         if (vault == null) {
             return Mono.error(new IllegalArgumentException("Parameter vault is required and cannot be null."));
         }
@@ -133,32 +123,23 @@ public final class Paths {
         }
         if (this.client.getDnsSuffix() == null) {
             return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getDnsSuffix() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
         }
         if (keyName == null) {
             return Mono.error(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
         }
         if (this.client.getSubscriptionId() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getEmpty(
-                vault,
-                secret,
-                this.client.getDnsSuffix(),
-                keyName,
-                this.client.getSubscriptionId(),
-                keyVersion,
-                accept,
-                context);
+        return service.getEmpty(vault, secret, this.client.getDnsSuffix(), keyName, this.client.getSubscriptionId(),
+            keyVersion, accept, context);
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -175,7 +156,7 @@ public final class Paths {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -192,7 +173,7 @@ public final class Paths {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -210,7 +191,7 @@ public final class Paths {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -222,14 +203,14 @@ public final class Paths {
      * @return a 200 to test a valid base uri along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getEmptyWithResponse(
-            String vault, String secret, String keyName, String keyVersion, Context context) {
+    public Response<Void> getEmptyWithResponse(String vault, String secret, String keyName, String keyVersion,
+        Context context) {
         return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion, context).block();
     }
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
@@ -245,7 +226,7 @@ public final class Paths {
 
     /**
      * Get a 200 to test a valid base uri.
-     *
+     * 
      * @param vault The vault name, e.g. https://myvault.
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.

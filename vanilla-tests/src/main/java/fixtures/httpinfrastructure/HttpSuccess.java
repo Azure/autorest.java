@@ -27,22 +27,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in HttpSuccess. */
+/**
+ * An instance of this class provides access to all the operations defined in HttpSuccess.
+ */
 public final class HttpSuccess {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HttpSuccessService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpSuccess.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HttpSuccess(AutoRestHttpInfrastructureTestService client) {
-        this.service =
-                RestProxy.create(HttpSuccessService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(HttpSuccessService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -54,165 +60,123 @@ public final class HttpSuccess {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpSuccessService {
         @Head("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head200(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> head200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> get200(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Boolean>> get200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Options("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> options200(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Boolean>> options200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put200(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> patch200(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> post200(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/200")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete200(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> delete200(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/success/201")
-        @ExpectedResponses({201})
+        @ExpectedResponses({ 201 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put201(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put201(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/201")
-        @ExpectedResponses({201})
+        @ExpectedResponses({ 201 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post201(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> post201(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/success/202")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put202(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/202")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> patch202(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/202")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> post202(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/202")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete202(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> delete202(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/success/204")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head204(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> head204(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/http/success/204")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put204(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/204")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> patch204(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/204")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> post204(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/204")
-        @ExpectedResponses({204})
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete204(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> delete204(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/success/404")
-        @ExpectedResponses({204, 404})
+        @ExpectedResponses({ 204, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> head404(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Boolean>> head404(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -220,8 +184,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head200(this.client.getHost(), accept, context));
@@ -229,7 +193,7 @@ public final class HttpSuccess {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -239,8 +203,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head200(this.client.getHost(), accept, context);
@@ -248,7 +212,7 @@ public final class HttpSuccess {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -260,7 +224,7 @@ public final class HttpSuccess {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -274,7 +238,7 @@ public final class HttpSuccess {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -288,7 +252,7 @@ public final class HttpSuccess {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -299,7 +263,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 200 success along with {@link Response} on successful completion of {@link Mono}.
@@ -307,8 +271,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get200(this.client.getHost(), accept, context));
@@ -316,7 +280,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -326,8 +290,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> get200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get200(this.client.getHost(), accept, context);
@@ -335,7 +299,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 200 success on successful completion of {@link Mono}.
@@ -347,7 +311,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -361,7 +325,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -375,7 +339,7 @@ public final class HttpSuccess {
 
     /**
      * Get 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return 200 success.
@@ -387,7 +351,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean along with {@link Response} on successful completion of {@link Mono}.
@@ -395,8 +359,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.options200(this.client.getHost(), accept, context));
@@ -404,7 +368,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -414,8 +378,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.options200(this.client.getHost(), accept, context);
@@ -423,7 +387,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean on successful completion of {@link Mono}.
@@ -435,7 +399,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -449,7 +413,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -463,7 +427,7 @@ public final class HttpSuccess {
 
     /**
      * Options 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean.
@@ -475,7 +439,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -483,8 +447,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -493,7 +457,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -503,8 +467,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -513,7 +477,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -525,7 +489,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -539,7 +503,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -553,7 +517,7 @@ public final class HttpSuccess {
 
     /**
      * Put boolean value true returning 200 success.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -564,7 +528,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -572,8 +536,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -582,7 +546,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -592,8 +556,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -602,7 +566,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -614,7 +578,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -628,7 +592,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -642,7 +606,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returning 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -653,7 +617,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -661,8 +625,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -671,7 +635,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -681,8 +645,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -691,7 +655,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -703,7 +667,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -717,7 +681,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -731,7 +695,7 @@ public final class HttpSuccess {
 
     /**
      * Post bollean value true in request that returns a 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -742,7 +706,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -750,8 +714,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -760,7 +724,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -770,8 +734,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -780,7 +744,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -792,7 +756,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -806,7 +770,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -820,7 +784,7 @@ public final class HttpSuccess {
 
     /**
      * Delete simple boolean value true returns 200.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -831,7 +795,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -839,8 +803,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -849,7 +813,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -859,8 +823,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -869,7 +833,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -881,7 +845,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -895,7 +859,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -909,7 +873,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 201.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -920,7 +884,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -928,8 +892,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -938,7 +902,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -948,8 +912,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -958,7 +922,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -970,7 +934,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -984,7 +948,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -998,7 +962,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 201 (Created).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1009,7 +973,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1017,8 +981,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1027,7 +991,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1037,8 +1001,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1047,7 +1011,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1059,7 +1023,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1073,7 +1037,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1087,7 +1051,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1098,7 +1062,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1106,8 +1070,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1116,7 +1080,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1126,8 +1090,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1136,7 +1100,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1148,7 +1112,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1162,7 +1126,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1176,7 +1140,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 202.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1187,7 +1151,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1195,8 +1159,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1205,7 +1169,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1215,8 +1179,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1225,7 +1189,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1237,7 +1201,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1251,7 +1215,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1265,7 +1229,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1276,7 +1240,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1284,8 +1248,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1294,7 +1258,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1304,8 +1268,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1314,7 +1278,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1326,7 +1290,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1340,7 +1304,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1354,7 +1318,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1365,7 +1329,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1373,8 +1337,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head204(this.client.getHost(), accept, context));
@@ -1382,7 +1346,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1392,8 +1356,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head204(this.client.getHost(), accept, context);
@@ -1401,7 +1365,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1413,7 +1377,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1427,7 +1391,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1441,7 +1405,7 @@ public final class HttpSuccess {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1452,7 +1416,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1460,8 +1424,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1470,7 +1434,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1480,8 +1444,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1490,7 +1454,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1502,7 +1466,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1516,7 +1480,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1530,7 +1494,7 @@ public final class HttpSuccess {
 
     /**
      * Put true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1541,7 +1505,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1549,8 +1513,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1559,7 +1523,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1569,8 +1533,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1579,7 +1543,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1591,7 +1555,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1605,7 +1569,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1619,7 +1583,7 @@ public final class HttpSuccess {
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1630,7 +1594,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1638,8 +1602,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1648,7 +1612,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1658,8 +1622,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1668,7 +1632,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1680,7 +1644,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1694,7 +1658,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1708,7 +1672,7 @@ public final class HttpSuccess {
 
     /**
      * Post true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1719,7 +1683,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1727,8 +1691,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1737,7 +1701,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1747,8 +1711,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -1757,7 +1721,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1769,7 +1733,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1783,7 +1747,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1797,7 +1761,7 @@ public final class HttpSuccess {
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1808,7 +1772,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
@@ -1816,8 +1780,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head404(this.client.getHost(), accept, context));
@@ -1825,7 +1789,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1835,8 +1799,8 @@ public final class HttpSuccess {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head404(this.client.getHost(), accept, context);
@@ -1844,7 +1808,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists on successful completion of {@link Mono}.
@@ -1856,7 +1820,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1870,7 +1834,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1884,7 +1848,7 @@ public final class HttpSuccess {
 
     /**
      * Return 404 status code.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return whether resource exists.

@@ -35,41 +35,51 @@ import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the MediaTypesClient type. */
+/**
+ * Initializes a new instance of the MediaTypesClient type.
+ */
 public final class MediaTypesClient {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final MediaTypesClientService service;
 
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -78,19 +88,17 @@ public final class MediaTypesClient {
 
     /**
      * Initializes an instance of MediaTypesClient client.
-     *
+     * 
      * @param host server parameter.
      */
     MediaTypesClient(String host) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
     /**
      * Initializes an instance of MediaTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
@@ -100,7 +108,7 @@ public final class MediaTypesClient {
 
     /**
      * Initializes an instance of MediaTypesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
@@ -120,167 +128,125 @@ public final class MediaTypesClient {
     @ServiceInterface(name = "MediaTypesClient")
     public interface MediaTypesClientService {
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> analyzeBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> analyzeBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") BinaryData input, @HeaderParam("Content-Length") Long contentLength,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> analyzeBody(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") SourcePath input,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
+            @BodyParam("application/json") SourcePath input, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
-                @HeaderParam("Content-Length") Long contentLength,
-                Context context);
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
+            @HeaderParam("Content-Length") Long contentLength, Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType contentType,
-                @BodyParam("application/octet-stream") BinaryData input,
-                @HeaderParam("Content-Length") Long contentLength,
-                Context context);
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") BinaryData input, @HeaderParam("Content-Length") Long contentLength,
+            Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({202})
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> analyzeBodyNoAcceptHeader(
-                @HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+        Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
+            @BodyParam("application/json") SourcePath input, Context context);
 
         @Post("/mediatypes/contentTypeWithEncoding")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> contentTypeWithEncoding(
-                @HostParam("$host") String host,
-                @BodyParam("text/plain; charset=UTF-8") String input,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> contentTypeWithEncoding(@HostParam("$host") String host,
+            @BodyParam("text/plain; charset=UTF-8") String input, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/mediatypes/binaryBodyTwoContentTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithTwoContentTypes(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType1 contentType,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType1 contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyTwoContentTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithTwoContentTypes(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType1 contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType1 contentType,
+            @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyThreeContentTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithThreeContentTypes(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType2 contentType,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType2 contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyThreeContentTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithThreeContentTypes(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType2 contentType,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType2 contentType,
+            @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> bodyThreeTypes(
-                @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> bodyThreeTypes(
-                @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") BinaryData message,
-                @HeaderParam("Content-Length") long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
+            @BodyParam("application/octet-stream") BinaryData message,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> bodyThreeTypes(
-                @HostParam("$host") String host,
-                @BodyParam("text/plain") String message,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host, @BodyParam("text/plain") String message,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> bodyThreeTypes(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Object message,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
+            @BodyParam("application/json") Object message, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/textAndJson")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putTextAndJsonBody(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") ContentType3 contentType,
-                @BodyParam("text/plain") String message,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putTextAndJsonBody(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") ContentType3 contentType, @BodyParam("text/plain") String message,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -290,8 +256,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
+        Long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -300,12 +266,12 @@ public final class MediaTypesClient {
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
+            context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -316,8 +282,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
+        Long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -330,7 +296,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -342,12 +308,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -359,12 +325,12 @@ public final class MediaTypesClient {
         final Flux<ByteBuffer> input = null;
         final Long contentLength = null;
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -375,15 +341,15 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
+        Context context) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -394,14 +360,14 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> analyzeBodyWithResponse(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Response<String> analyzeBodyWithResponse(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
+        Context context) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength, context).block();
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -417,7 +383,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -433,7 +399,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -443,8 +409,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(
-            ContentType contentType, BinaryData input, Long contentLength) {
+    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, BinaryData input,
+        Long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -453,12 +419,12 @@ public final class MediaTypesClient {
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
+            context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -469,8 +435,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, BinaryData input,
+        Long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -483,7 +449,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -495,12 +461,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, BinaryData input, Long contentLength) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -511,15 +477,15 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Mono<String> analyzeBodyAsync(ContentType contentType, BinaryData input, Long contentLength,
+        Context context) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -530,14 +496,14 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> analyzeBodyWithResponse(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Response<String> analyzeBodyWithResponse(ContentType contentType, BinaryData input, Long contentLength,
+        Context context) {
         return analyzeBodyWithResponseAsync(contentType, input, contentLength, context).block();
     }
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -553,7 +519,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -577,7 +543,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -602,7 +568,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -616,7 +582,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -629,7 +595,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -644,7 +610,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -659,7 +625,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -673,7 +639,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -686,7 +652,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -696,8 +662,8 @@ public final class MediaTypesClient {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
+        Flux<ByteBuffer> input, Long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -705,13 +671,12 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
         }
         return FluxUtil.withContext(
-                context ->
-                        service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
+            context -> service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -722,8 +687,8 @@ public final class MediaTypesClient {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
+        Flux<ByteBuffer> input, Long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -735,7 +700,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -745,15 +710,15 @@ public final class MediaTypesClient {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
+        Long contentLength) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -765,12 +730,12 @@ public final class MediaTypesClient {
         final Flux<ByteBuffer> input = null;
         final Long contentLength = null;
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -781,15 +746,15 @@ public final class MediaTypesClient {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
+        Long contentLength, Context context) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -800,14 +765,14 @@ public final class MediaTypesClient {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(
-            ContentType contentType, Flux<ByteBuffer> input, Long contentLength, Context context) {
+    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(ContentType contentType, Flux<ByteBuffer> input,
+        Long contentLength, Context context) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context).block();
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -822,7 +787,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -837,7 +802,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -847,8 +812,8 @@ public final class MediaTypesClient {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
-            ContentType contentType, BinaryData input, Long contentLength) {
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
+        Long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -856,13 +821,12 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
         }
         return FluxUtil.withContext(
-                context ->
-                        service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
+            context -> service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -873,8 +837,8 @@ public final class MediaTypesClient {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
+        Long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -886,7 +850,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -898,12 +862,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, BinaryData input, Long contentLength) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -914,15 +878,15 @@ public final class MediaTypesClient {
      * @return A {@link Mono} that completes when a successful response is received.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, BinaryData input, Long contentLength,
+        Context context) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -933,14 +897,14 @@ public final class MediaTypesClient {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(
-            ContentType contentType, BinaryData input, Long contentLength, Context context) {
+    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(ContentType contentType, BinaryData input,
+        Long contentLength, Context context) {
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context).block();
     }
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
@@ -955,7 +919,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -978,7 +942,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1002,7 +966,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1016,7 +980,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1029,7 +993,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1044,7 +1008,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1059,7 +1023,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @param source File source path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1072,7 +1036,7 @@ public final class MediaTypesClient {
 
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1084,7 +1048,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1102,7 +1066,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1121,7 +1085,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1135,7 +1099,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -1148,7 +1112,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1159,12 +1123,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync(String input, Context context) {
         return contentTypeWithEncodingWithResponseAsync(input, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1179,7 +1143,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @param input Input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1193,7 +1157,7 @@ public final class MediaTypesClient {
 
     /**
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -1207,7 +1171,7 @@ public final class MediaTypesClient {
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1217,8 +1181,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
+        Flux<ByteBuffer> message, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1229,16 +1193,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context ->
-                        service.binaryBodyWithTwoContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.binaryBodyWithTwoContentTypes(this.getHost(), contentType,
+            message, contentLength, accept, context));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1249,8 +1211,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
+        Flux<ByteBuffer> message, long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1261,14 +1223,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return service.binaryBodyWithTwoContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, context);
+        return service.binaryBodyWithTwoContentTypes(this.getHost(), contentType, message, contentLength, accept,
+            context);
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1278,16 +1240,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
+        long contentLength) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1298,16 +1260,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
+        long contentLength, Context context) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1318,15 +1280,15 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithTwoContentTypesWithResponse(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Response<String> binaryBodyWithTwoContentTypesWithResponse(ContentType1 contentType,
+        Flux<ByteBuffer> message, long contentLength, Context context) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1336,15 +1298,15 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String binaryBodyWithTwoContentTypes(
-            ContentType1 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public String binaryBodyWithTwoContentTypes(ContentType1 contentType, Flux<ByteBuffer> message,
+        long contentLength) {
         return binaryBodyWithTwoContentTypesWithResponse(contentType, message, contentLength, Context.NONE).getValue();
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1354,8 +1316,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            ContentType1 contentType, BinaryData message, long contentLength) {
+    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
+        BinaryData message, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1366,16 +1328,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context ->
-                        service.binaryBodyWithTwoContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.binaryBodyWithTwoContentTypes(this.getHost(), contentType,
+            message, contentLength, accept, context));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1386,8 +1346,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(
-            ContentType1 contentType, BinaryData message, long contentLength, Context context) {
+    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
+        BinaryData message, long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1398,14 +1358,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return service.binaryBodyWithTwoContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, context);
+        return service.binaryBodyWithTwoContentTypes(this.getHost(), contentType, message, contentLength, accept,
+            context);
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1415,16 +1375,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(
-            ContentType1 contentType, BinaryData message, long contentLength) {
+    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, BinaryData message,
+        long contentLength) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1435,16 +1395,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(
-            ContentType1 contentType, BinaryData message, long contentLength, Context context) {
+    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, BinaryData message,
+        long contentLength, Context context) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1455,15 +1415,15 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithTwoContentTypesWithResponse(
-            ContentType1 contentType, BinaryData message, long contentLength, Context context) {
+    public Response<String> binaryBodyWithTwoContentTypesWithResponse(ContentType1 contentType, BinaryData message,
+        long contentLength, Context context) {
         return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
     }
 
     /**
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1480,7 +1440,7 @@ public final class MediaTypesClient {
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1490,8 +1450,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
+        Flux<ByteBuffer> message, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1502,16 +1462,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context ->
-                        service.binaryBodyWithThreeContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.binaryBodyWithThreeContentTypes(this.getHost(), contentType,
+            message, contentLength, accept, context));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1522,8 +1480,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
+        Flux<ByteBuffer> message, long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1534,14 +1492,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return service.binaryBodyWithThreeContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, context);
+        return service.binaryBodyWithThreeContentTypes(this.getHost(), contentType, message, contentLength, accept,
+            context);
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1551,16 +1509,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
+        long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1571,16 +1529,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
+        long contentLength, Context context) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1591,15 +1549,15 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithThreeContentTypesWithResponse(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Response<String> binaryBodyWithThreeContentTypesWithResponse(ContentType2 contentType,
+        Flux<ByteBuffer> message, long contentLength, Context context) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1609,16 +1567,16 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String binaryBodyWithThreeContentTypes(
-            ContentType2 contentType, Flux<ByteBuffer> message, long contentLength) {
+    public String binaryBodyWithThreeContentTypes(ContentType2 contentType, Flux<ByteBuffer> message,
+        long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, Context.NONE)
-                .getValue();
+            .getValue();
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1628,8 +1586,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            ContentType2 contentType, BinaryData message, long contentLength) {
+    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
+        BinaryData message, long contentLength) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1640,16 +1598,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context ->
-                        service.binaryBodyWithThreeContentTypes(
-                                this.getHost(), contentType, message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.binaryBodyWithThreeContentTypes(this.getHost(), contentType,
+            message, contentLength, accept, context));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1660,8 +1616,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(
-            ContentType2 contentType, BinaryData message, long contentLength, Context context) {
+    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
+        BinaryData message, long contentLength, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1672,14 +1628,14 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return service.binaryBodyWithThreeContentTypes(
-                this.getHost(), contentType, message, contentLength, accept, context);
+        return service.binaryBodyWithThreeContentTypes(this.getHost(), contentType, message, contentLength, accept,
+            context);
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1689,16 +1645,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(
-            ContentType2 contentType, BinaryData message, long contentLength) {
+    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, BinaryData message,
+        long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1709,16 +1665,16 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(
-            ContentType2 contentType, BinaryData message, long contentLength, Context context) {
+    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, BinaryData message,
+        long contentLength, Context context) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1729,15 +1685,15 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithThreeContentTypesWithResponse(
-            ContentType2 contentType, BinaryData message, long contentLength, Context context) {
+    public Response<String> binaryBodyWithThreeContentTypesWithResponse(ContentType2 contentType, BinaryData message,
+        long contentLength, Context context) {
         return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
     }
 
     /**
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1749,14 +1705,14 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithThreeContentTypes(ContentType2 contentType, BinaryData message, long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, Context.NONE)
-                .getValue();
+            .getValue();
     }
 
     /**
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1773,15 +1729,15 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
     }
 
     /**
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1791,8 +1747,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(
-            Flux<ByteBuffer> message, long contentLength, Context context) {
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength,
+        Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1807,7 +1763,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1824,7 +1780,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1836,14 +1792,14 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength, Context context) {
         return bodyThreeTypesWithResponseAsync(message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1861,7 +1817,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1878,7 +1834,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1895,15 +1851,15 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
     }
 
     /**
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1913,8 +1869,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(
-            BinaryData message, long contentLength, Context context) {
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, long contentLength,
+        Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -1929,7 +1885,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1946,7 +1902,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1958,14 +1914,14 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(BinaryData message, long contentLength, Context context) {
         return bodyThreeTypesWithResponseAsync(message, contentLength, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1983,7 +1939,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2000,7 +1956,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2023,7 +1979,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2047,7 +2003,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2063,7 +2019,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2080,7 +2036,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2097,7 +2053,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2113,7 +2069,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2136,7 +2092,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2160,7 +2116,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2176,7 +2132,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2193,7 +2149,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2210,7 +2166,7 @@ public final class MediaTypesClient {
      * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
-     *
+     * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2224,7 +2180,7 @@ public final class MediaTypesClient {
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2244,13 +2200,13 @@ public final class MediaTypesClient {
             return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
         }
         final String accept = "text/plain";
-        return FluxUtil.withContext(
-                context -> service.putTextAndJsonBody(this.getHost(), contentType, message, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putTextAndJsonBody(this.getHost(), contentType, message, accept, context));
     }
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2260,8 +2216,8 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(
-            ContentType3 contentType, String message, Context context) {
+    public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(ContentType3 contentType, String message,
+        Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -2277,7 +2233,7 @@ public final class MediaTypesClient {
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2288,12 +2244,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putTextAndJsonBodyAsync(ContentType3 contentType, String message) {
         return putTextAndJsonBodyWithResponseAsync(contentType, message)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2305,12 +2261,12 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putTextAndJsonBodyAsync(ContentType3 contentType, String message, Context context) {
         return putTextAndJsonBodyWithResponseAsync(contentType, message, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2326,7 +2282,7 @@ public final class MediaTypesClient {
 
     /**
      * Body that's either text/plain or application/json.
-     *
+     * 
      * @param contentType Upload file type.
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

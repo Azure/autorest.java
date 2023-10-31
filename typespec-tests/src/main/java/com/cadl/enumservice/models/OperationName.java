@@ -9,26 +9,35 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for OperationName. */
+/**
+ * Defines values for OperationName.
+ */
 public final class OperationName extends ExpandableStringEnum<OperationName> {
-    /** Static value Read for OperationName. */
-    @Generated public static final OperationName READ = fromString("Read");
+    /**
+     * Static value Read for OperationName.
+     */
+    @Generated
+    public static final OperationName READ = fromString("Read");
 
-    /** Static value Write for OperationName. */
-    @Generated public static final OperationName WRITE = fromString("Write");
+    /**
+     * Static value Write for OperationName.
+     */
+    @Generated
+    public static final OperationName WRITE = fromString("Write");
 
     /**
      * Creates a new instance of OperationName value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public OperationName() {}
+    public OperationName() {
+    }
 
     /**
      * Creates or finds a OperationName from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding OperationName.
      */
@@ -40,7 +49,7 @@ public final class OperationName extends ExpandableStringEnum<OperationName> {
 
     /**
      * Gets known OperationName values.
-     *
+     * 
      * @return known OperationName values.
      */
     @Generated

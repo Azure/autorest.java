@@ -275,9 +275,7 @@ public class ServiceClient {
     }
 
     protected void addPipelineBuilderImport(Set<String> imports) {
-        if (JavaSettings.getInstance().isBranded()) {
-            imports.add("com.azure.core.http.HttpPipelineBuilder");
-        }
+        ClassType.HttpPipelineBuilder.addImportsTo(imports, false);
     }
 
     public static class Builder {

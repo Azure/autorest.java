@@ -46,41 +46,51 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the BasicClient type. */
+/**
+ * Initializes a new instance of the BasicClient type.
+ */
 public final class BasicClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final BasicClientService service;
 
-    /** Service version. */
+    /**
+     * Service version.
+     */
     private final BasicServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
-     *
+     * 
      * @return the serviceVersion value.
      */
     public BasicServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -89,19 +99,17 @@ public final class BasicClientImpl {
 
     /**
      * Initializes an instance of BasicClient client.
-     *
+     * 
      * @param serviceVersion Service version.
      */
     public BasicClientImpl(BasicServiceVersion serviceVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
     }
 
     /**
      * Initializes an instance of BasicClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serviceVersion Service version.
      */
@@ -111,13 +119,13 @@ public final class BasicClientImpl {
 
     /**
      * Initializes an instance of BasicClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param serviceVersion Service version.
      */
-    public BasicClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, BasicServiceVersion serviceVersion) {
+    public BasicClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        BasicServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.serviceVersion = serviceVersion;
@@ -131,427 +139,221 @@ public final class BasicClientImpl {
     @ServiceInterface(name = "BasicClient")
     public interface BasicClientService {
         @Patch("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrUpdate(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> createOrUpdate(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
+            Context context);
 
         @Patch("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrUpdateSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/merge-patch+json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createOrUpdateSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
+            Context context);
 
         @Put("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrReplace(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
+            @PathParam("id") int id, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200, 201})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrReplaceSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData resource,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> get(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> getSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> list(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listSync(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/page")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listWithPage(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listWithPage(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/page")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listWithPageSync(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listWithPageSync(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/custom-page")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listWithCustomPageModel(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listWithCustomPageModel(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/custom-page")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listWithCustomPageModelSync(
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listWithCustomPageModelSync(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> delete(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> deleteSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> export(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @QueryParam("format") String format,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> exportSync(
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("id") int id,
-                @QueryParam("format") String format,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listWithPageNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listWithPageNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listWithPageNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listWithPageNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithCustomPageModelNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithCustomPageModelNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Adds a user or updates a user's fields.
-     *
-     * <p>Creates or updates a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or updates a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -566,9 +368,9 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -583,7 +385,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -594,29 +396,21 @@ public final class BasicClientImpl {
      * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(
-            int id, BinaryData resource, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(int id, BinaryData resource,
+        RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.createOrUpdate(
-                                this.getServiceVersion().getVersion(),
-                                id,
-                                contentType,
-                                accept,
-                                resource,
-                                requestOptions,
-                                context));
+        return FluxUtil.withContext(context -> service.createOrUpdate(this.getServiceVersion().getVersion(), id,
+            contentType, accept, resource, requestOptions, context));
     }
 
     /**
      * Adds a user or updates a user's fields.
-     *
-     * <p>Creates or updates a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or updates a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -631,9 +425,9 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -648,7 +442,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -662,17 +456,17 @@ public final class BasicClientImpl {
     public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.createOrUpdateSync(
-                this.getServiceVersion().getVersion(), id, contentType, accept, resource, requestOptions, Context.NONE);
+        return service.createOrUpdateSync(this.getServiceVersion().getVersion(), id, contentType, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -687,9 +481,9 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -704,7 +498,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -715,22 +509,20 @@ public final class BasicClientImpl {
      * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(
-            int id, BinaryData resource, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(int id, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.createOrReplace(
-                                this.getServiceVersion().getVersion(), id, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), id,
+            accept, resource, requestOptions, context));
     }
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -745,9 +537,9 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -762,7 +554,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -773,20 +565,20 @@ public final class BasicClientImpl {
      * @return details about a user along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrReplaceWithResponse(
-            int id, BinaryData resource, RequestOptions requestOptions) {
+    public Response<BinaryData> createOrReplaceWithResponse(int id, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.createOrReplaceSync(
-                this.getServiceVersion().getVersion(), id, accept, resource, requestOptions, Context.NONE);
+        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, accept, resource, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Gets a user.
-     *
-     * <p>Gets a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Gets a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -801,7 +593,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -814,16 +606,16 @@ public final class BasicClientImpl {
     public Mono<Response<BinaryData>> getWithResponseAsync(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.get(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
+            context -> service.get(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
     }
 
     /**
      * Gets a user.
-     *
-     * <p>Gets a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Gets a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -838,7 +630,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -855,27 +647,69 @@ public final class BasicClientImpl {
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Lists all Users.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
-     *     <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>top</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to return.</td>
+     * </tr>
+     * <tr>
+     * <td>skip</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to skip.</td>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
+     * <tr>
+     * <td>orderby</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>expand</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to
+     * array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -890,7 +724,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -901,42 +735,78 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.list(this.getServiceVersion().getVersion(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(
+                context -> service.list(this.getServiceVersion().getVersion(), accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Lists all Users.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
-     *     <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>top</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to return.</td>
+     * </tr>
+     * <tr>
+     * <td>skip</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to skip.</td>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
+     * <tr>
+     * <td>orderby</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>expand</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to
+     * array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -951,7 +821,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -963,60 +833,96 @@ public final class BasicClientImpl {
     public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePageAsync(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePageAsync(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Lists all Users.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
-     *     <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>top</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to return.</td>
+     * </tr>
+     * <tr>
+     * <td>skip</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to skip.</td>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
+     * <tr>
+     * <td>orderby</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>expand</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to
+     * array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1031,7 +937,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1042,40 +948,77 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listSync(this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res
+            = service.listSync(this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * Lists all users.
-     *
-     * <p>Lists all Users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Lists all Users.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
-     *     <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
-     *     <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>top</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to return.</td>
+     * </tr>
+     * <tr>
+     * <td>skip</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The number of result items to skip.</td>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
+     * <tr>
+     * <td>orderby</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expressions that specify the order of returned results. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>expand</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Expand the indicated resources into the response. Call {@link RequestOptions#addQueryParam} to add string to
+     * array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1090,7 +1033,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1102,42 +1045,36 @@ public final class BasicClientImpl {
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePage(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePage(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePage(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePage(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1152,7 +1089,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1163,26 +1100,18 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithPageSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.listWithPage(
-                                        this.getServiceVersion().getVersion(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(
+                context -> service.listWithPage(this.getServiceVersion().getVersion(), accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1197,7 +1126,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1209,19 +1138,16 @@ public final class BasicClientImpl {
     public PagedFlux<BinaryData> listWithPageAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                () -> listWithPageSinglePageAsync(requestOptions),
-                nextLink -> listWithPageNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(() -> listWithPageSinglePageAsync(requestOptions),
+            nextLink -> listWithPageNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1236,7 +1162,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1247,22 +1173,17 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listWithPageSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listWithPageSync(this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res
+            = service.listWithPageSync(this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * List with Azure.Core.Page&lt;&gt;.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1277,7 +1198,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1289,19 +1210,16 @@ public final class BasicClientImpl {
     public PagedIterable<BinaryData> listWithPage(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                () -> listWithPageSinglePage(requestOptions),
-                nextLink -> listWithPageNextSinglePage(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(() -> listWithPageSinglePage(requestOptions),
+            nextLink -> listWithPageNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * List with custom page model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1316,7 +1234,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1327,26 +1245,18 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithCustomPageModelSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.listWithCustomPageModel(
-                                        this.getServiceVersion().getVersion(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "items"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.listWithCustomPageModel(this.getServiceVersion().getVersion(), accept,
+                requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "items"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * List with custom page model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1361,7 +1271,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1373,19 +1283,16 @@ public final class BasicClientImpl {
     public PagedFlux<BinaryData> listWithCustomPageModelAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                () -> listWithCustomPageModelSinglePageAsync(requestOptions),
-                nextLink -> listWithCustomPageModelNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(() -> listWithCustomPageModelSinglePageAsync(requestOptions),
+            nextLink -> listWithCustomPageModelNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * List with custom page model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1400,7 +1307,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1411,23 +1318,17 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listWithCustomPageModelSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listWithCustomPageModelSync(
-                        this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "items"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res = service.listWithCustomPageModelSync(this.getServiceVersion().getVersion(), accept,
+            requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "items"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * List with custom page model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1442,7 +1343,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1454,19 +1355,16 @@ public final class BasicClientImpl {
     public PagedIterable<BinaryData> listWithCustomPageModel(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                () -> listWithCustomPageModelSinglePage(requestOptions),
-                nextLink -> listWithCustomPageModelNextSinglePage(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(() -> listWithCustomPageModelSinglePage(requestOptions),
+            nextLink -> listWithCustomPageModelNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1479,14 +1377,14 @@ public final class BasicClientImpl {
     public Mono<Response<Void>> deleteWithResponseAsync(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.delete(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
+            context -> service.delete(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1503,11 +1401,11 @@ public final class BasicClientImpl {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1522,7 +1420,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1535,19 +1433,17 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> exportWithResponseAsync(int id, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.export(
-                                this.getServiceVersion().getVersion(), id, format, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.export(this.getServiceVersion().getVersion(), id, format, accept,
+            requestOptions, context));
     }
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1562,7 +1458,7 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1575,17 +1471,17 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> exportWithResponse(int id, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.exportSync(
-                this.getServiceVersion().getVersion(), id, format, accept, requestOptions, Context.NONE);
+        return service.exportSync(this.getServiceVersion().getVersion(), id, format, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Lists all users.
-     *
-     * <p>Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1600,9 +1496,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1614,24 +1511,17 @@ public final class BasicClientImpl {
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.listNext(nextLink, accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Lists all users.
-     *
-     * <p>Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1646,9 +1536,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1660,20 +1551,15 @@ public final class BasicClientImpl {
     private PagedResponse<BinaryData> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         Response<BinaryData> res = service.listNextSync(nextLink, accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1688,9 +1574,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1699,26 +1586,19 @@ public final class BasicClientImpl {
      * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> listWithPageNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> listWithPageNextSinglePageAsync(String nextLink,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.listWithPageNext(nextLink, accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1733,9 +1613,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1747,20 +1628,15 @@ public final class BasicClientImpl {
     private PagedResponse<BinaryData> listWithPageNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         Response<BinaryData> res = service.listWithPageNextSync(nextLink, accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1775,9 +1651,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1786,27 +1663,20 @@ public final class BasicClientImpl {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> listWithCustomPageModelNextSinglePageAsync(
-            String nextLink, RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> listWithCustomPageModelNextSinglePageAsync(String nextLink,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.listWithCustomPageModelNext(nextLink, accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "items"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.listWithCustomPageModelNext(nextLink, accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "items"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -1821,9 +1691,10 @@ public final class BasicClientImpl {
      *     etag: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1832,18 +1703,13 @@ public final class BasicClientImpl {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private PagedResponse<BinaryData> listWithCustomPageModelNextSinglePage(
-            String nextLink, RequestOptions requestOptions) {
+    private PagedResponse<BinaryData> listWithCustomPageModelNextSinglePage(String nextLink,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listWithCustomPageModelNextSync(nextLink, accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "items"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res
+            = service.listWithCustomPageModelNextSync(nextLink, accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "items"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

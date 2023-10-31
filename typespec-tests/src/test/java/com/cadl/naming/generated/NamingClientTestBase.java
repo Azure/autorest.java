@@ -22,16 +22,16 @@ class NamingClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        NamingClientBuilder namingClientbuilder =
-                new NamingClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NamingClientBuilder namingClientbuilder
+            = new NamingClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             namingClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             namingClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         namingClient = namingClientbuilder.buildClient();
+
     }
 }

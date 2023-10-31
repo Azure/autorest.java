@@ -6,12 +6,18 @@ package com.cadl.versioning;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of VersioningClient. */
+/**
+ * Service version of VersioningClient.
+ */
 public enum VersioningServiceVersion implements ServiceVersion {
-    /** Enum value 2022-06-01-preview. */
+    /**
+     * Enum value 2022-06-01-preview.
+     */
     V2022_06_01_PREVIEW("2022-06-01-preview"),
 
-    /** Enum value 2022-12-01-preview. */
+    /**
+     * Enum value 2022-12-01-preview.
+     */
     V2022_12_01_PREVIEW("2022-12-01-preview");
 
     private final String version;
@@ -20,7 +26,9 @@ public enum VersioningServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -28,7 +36,7 @@ public enum VersioningServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link VersioningServiceVersion}.
      */
     public static VersioningServiceVersion getLatest() {

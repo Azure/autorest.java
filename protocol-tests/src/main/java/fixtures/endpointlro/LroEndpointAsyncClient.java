@@ -17,14 +17,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 import fixtures.endpointlro.implementation.LROsImpl;
 
-/** Initializes a new instance of the asynchronous LroEndpointClient type. */
+/**
+ * Initializes a new instance of the asynchronous LroEndpointClient type.
+ */
 @ServiceClient(builder = LroEndpointClientBuilder.class, isAsync = true)
 public final class LroEndpointAsyncClient {
-    @Generated private final LROsImpl serviceClient;
+    @Generated
+    private final LROsImpl serviceClient;
 
     /**
      * Initializes an instance of LroEndpointAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,19 +38,28 @@ public final class LroEndpointAsyncClient {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Succeeded’.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -56,9 +68,9 @@ public final class LroEndpointAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -67,7 +79,7 @@ public final class LroEndpointAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

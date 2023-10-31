@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.InheritancesImpl;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Siamese;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class InheritanceClient {
-    @Generated private final InheritancesImpl serviceClient;
+    @Generated
+    private final InheritancesImpl serviceClient;
 
     /**
      * Initializes an instance of InheritanceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class InheritanceClient {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -46,7 +49,7 @@ public final class InheritanceClient {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
@@ -59,10 +62,10 @@ public final class InheritanceClient {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -77,10 +80,10 @@ public final class InheritanceClient {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

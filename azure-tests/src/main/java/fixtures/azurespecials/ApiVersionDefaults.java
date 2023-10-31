@@ -21,106 +21,97 @@ import com.azure.core.util.FluxUtil;
 import fixtures.azurespecials.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in ApiVersionDefaults. */
+/**
+ * An instance of this class provides access to all the operations defined in ApiVersionDefaults.
+ */
 public final class ApiVersionDefaults {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ApiVersionDefaultsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestAzureSpecialParametersTestClient client;
 
     /**
      * Initializes an instance of ApiVersionDefaults.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     ApiVersionDefaults(AutoRestAzureSpecialParametersTestClient client) {
-        this.service =
-                RestProxy.create(
-                        ApiVersionDefaultsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(ApiVersionDefaultsService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientApiVersionDefaults to be used
-     * by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientApiVersionDefaults to be
+     * used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface ApiVersionDefaultsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getMethodGlobalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getMethodGlobalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getMethodGlobalNotProvidedValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getMethodGlobalNotProvidedValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getPathGlobalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getPathGlobalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getSwaggerGlobalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getSwaggerGlobalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getMethodGlobalValid(
-                                this.client.getHost(), this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> service.getMethodGlobalValid(this.client.getHost(),
+            this.client.getApiVersion(), accept, context));
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMethodGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);
@@ -128,7 +119,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings on successful completion of {@link Mono}.
@@ -140,7 +131,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -154,7 +145,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -168,7 +159,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -179,49 +170,47 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodGlobalNotProvidedValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getMethodGlobalNotProvidedValid(
-                                this.client.getHost(), this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> service.getMethodGlobalNotProvidedValid(this.client.getHost(),
+            this.client.getApiVersion(), accept, context));
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodGlobalNotProvidedValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getMethodGlobalNotProvidedValid(
-                this.client.getHost(), this.client.getApiVersion(), accept, context);
+        return service.getMethodGlobalNotProvidedValid(this.client.getHost(), this.client.getApiVersion(), accept,
+            context);
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings on successful completion of {@link Mono}.
@@ -233,7 +222,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -247,7 +236,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -261,7 +250,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -272,40 +261,38 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.getPathGlobalValid(
-                                this.client.getHost(), this.client.getApiVersion(), accept, context));
+            context -> service.getPathGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context));
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPathGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);
@@ -313,7 +300,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings on successful completion of {@link Mono}.
@@ -325,7 +312,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -339,7 +326,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -353,7 +340,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -364,40 +351,38 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerGlobalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getSwaggerGlobalValid(
-                                this.client.getHost(), this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> service.getSwaggerGlobalValid(this.client.getHost(),
+            this.client.getApiVersion(), accept, context));
     }
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerGlobalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getSwaggerGlobalValid(this.client.getHost(), this.client.getApiVersion(), accept, context);
@@ -405,7 +390,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in global settings on successful completion of {@link Mono}.
@@ -417,7 +402,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -431,7 +416,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -445,7 +430,7 @@ public final class ApiVersionDefaults {
 
     /**
      * GET method with api-version modeled in global settings.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

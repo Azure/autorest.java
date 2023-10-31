@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** I am a complex type with XML node. */
+/**
+ * I am a complex type with XML node.
+ */
 @Fluent
 public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWithMeta> {
     /*
@@ -21,12 +23,15 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      */
     private String id;
 
-    /** Creates an instance of ComplexTypeWithMeta class. */
-    public ComplexTypeWithMeta() {}
+    /**
+     * Creates an instance of ComplexTypeWithMeta class.
+     */
+    public ComplexTypeWithMeta() {
+    }
 
     /**
      * Get the id property: The id of the res.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -35,7 +40,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
 
     /**
      * Set the id property: The id of the res.
-     *
+     * 
      * @param id the id value to set.
      * @return the ComplexTypeWithMeta object itself.
      */
@@ -46,10 +51,11 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
@@ -66,10 +72,10 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
 
     /**
      * Reads an instance of ComplexTypeWithMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of ComplexTypeWithMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeWithMeta.
      */
     public static ComplexTypeWithMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -78,32 +84,30 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
 
     /**
      * Reads an instance of ComplexTypeWithMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of ComplexTypeWithMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeWithMeta.
      */
     public static ComplexTypeWithMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName =
-                CoreUtils.isNullOrEmpty(rootElementName) ? "XMLComplexTypeWithMeta" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        String finalRootElementName
+            = CoreUtils.isNullOrEmpty(rootElementName) ? "XMLComplexTypeWithMeta" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("ID".equals(elementName.getLocalPart())) {
-                            deserializedComplexTypeWithMeta.id = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("ID".equals(elementName.getLocalPart())) {
+                    deserializedComplexTypeWithMeta.id = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedComplexTypeWithMeta;
-                });
+            return deserializedComplexTypeWithMeta;
+        });
     }
 }

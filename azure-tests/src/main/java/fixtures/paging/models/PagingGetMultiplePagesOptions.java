@@ -7,7 +7,9 @@ package fixtures.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class PagingGetMultiplePagesOptions {
     /*
@@ -22,12 +24,15 @@ public final class PagingGetMultiplePagesOptions {
     @JsonProperty(value = "timeout")
     private Integer timeout;
 
-    /** Creates an instance of PagingGetMultiplePagesOptions class. */
-    public PagingGetMultiplePagesOptions() {}
+    /**
+     * Creates an instance of PagingGetMultiplePagesOptions class.
+     */
+    public PagingGetMultiplePagesOptions() {
+    }
 
     /**
      * Get the maxresults property: Sets the maximum number of items to return in the response.
-     *
+     * 
      * @return the maxresults value.
      */
     public Integer getMaxresults() {
@@ -36,7 +41,7 @@ public final class PagingGetMultiplePagesOptions {
 
     /**
      * Set the maxresults property: Sets the maximum number of items to return in the response.
-     *
+     * 
      * @param maxresults the maxresults value to set.
      * @return the PagingGetMultiplePagesOptions object itself.
      */
@@ -46,9 +51,9 @@ public final class PagingGetMultiplePagesOptions {
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
-     *
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
      * @return the timeout value.
      */
     public Integer getTimeout() {
@@ -56,9 +61,9 @@ public final class PagingGetMultiplePagesOptions {
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
-     *
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesOptions object itself.
      */
@@ -69,8 +74,9 @@ public final class PagingGetMultiplePagesOptions {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

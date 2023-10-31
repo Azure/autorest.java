@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** The PetAPInProperties model. */
+/**
+ * The PetAPInProperties model.
+ */
 @Fluent
 public final class PetAPInProperties {
     /*
@@ -35,12 +37,15 @@ public final class PetAPInProperties {
     @JsonProperty(value = "additionalProperties")
     private Map<String, Float> additionalProperties;
 
-    /** Creates an instance of PetAPInProperties class. */
-    public PetAPInProperties() {}
+    /**
+     * Creates an instance of PetAPInProperties class.
+     */
+    public PetAPInProperties() {
+    }
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public int getId() {
@@ -49,7 +54,7 @@ public final class PetAPInProperties {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the PetAPInProperties object itself.
      */
@@ -60,7 +65,7 @@ public final class PetAPInProperties {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -69,7 +74,7 @@ public final class PetAPInProperties {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the PetAPInProperties object itself.
      */
@@ -80,7 +85,7 @@ public final class PetAPInProperties {
 
     /**
      * Get the status property: The status property.
-     *
+     * 
      * @return the status value.
      */
     public Boolean isStatus() {
@@ -89,7 +94,7 @@ public final class PetAPInProperties {
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;number&gt;.
-     *
+     * 
      * @return the additionalProperties value.
      */
     public Map<String, Float> getAdditionalProperties() {
@@ -98,7 +103,7 @@ public final class PetAPInProperties {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;number&gt;.
-     *
+     * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPInProperties object itself.
      */
@@ -109,8 +114,9 @@ public final class PetAPInProperties {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

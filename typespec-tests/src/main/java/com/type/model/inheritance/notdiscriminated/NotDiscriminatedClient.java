@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.model.inheritance.notdiscriminated.implementation.NotDiscriminatedClientImpl;
 import com.type.model.inheritance.notdiscriminated.models.Siamese;
 
-/** Initializes a new instance of the synchronous NotDiscriminatedClient type. */
+/**
+ * Initializes a new instance of the synchronous NotDiscriminatedClient type.
+ */
 @ServiceClient(builder = NotDiscriminatedClientBuilder.class)
 public final class NotDiscriminatedClient {
-    @Generated private final NotDiscriminatedClientImpl serviceClient;
+    @Generated
+    private final NotDiscriminatedClientImpl serviceClient;
 
     /**
      * Initializes an instance of NotDiscriminatedClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class NotDiscriminatedClient {
 
     /**
      * The postValid operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -45,7 +48,7 @@ public final class NotDiscriminatedClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,9 +65,9 @@ public final class NotDiscriminatedClient {
 
     /**
      * The getValid operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -72,7 +75,7 @@ public final class NotDiscriminatedClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,9 +91,9 @@ public final class NotDiscriminatedClient {
 
     /**
      * The putValid operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -98,9 +101,9 @@ public final class NotDiscriminatedClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -108,7 +111,7 @@ public final class NotDiscriminatedClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -125,7 +128,7 @@ public final class NotDiscriminatedClient {
 
     /**
      * The postValid operation.
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -144,7 +147,7 @@ public final class NotDiscriminatedClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -162,7 +165,7 @@ public final class NotDiscriminatedClient {
 
     /**
      * The putValid operation.
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

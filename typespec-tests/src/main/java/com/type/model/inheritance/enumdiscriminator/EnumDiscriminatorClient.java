@@ -19,14 +19,17 @@ import com.type.model.inheritance.enumdiscriminator.implementation.EnumDiscrimin
 import com.type.model.inheritance.enumdiscriminator.models.Dog;
 import com.type.model.inheritance.enumdiscriminator.models.Snake;
 
-/** Initializes a new instance of the synchronous EnumDiscriminatorClient type. */
+/**
+ * Initializes a new instance of the synchronous EnumDiscriminatorClient type.
+ */
 @ServiceClient(builder = EnumDiscriminatorClientBuilder.class)
 public final class EnumDiscriminatorClient {
-    @Generated private final EnumDiscriminatorClientImpl serviceClient;
+    @Generated
+    private final EnumDiscriminatorClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumDiscriminatorClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,15 +39,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Receive model with extensible enum discriminator type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,15 +63,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Send model with extensible enum discriminator type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Dog to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,15 +88,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -109,15 +112,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -133,15 +136,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Receive model with fixed enum discriminator type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -157,15 +160,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Send model with fixed enum discriminator type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Snake to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -182,15 +185,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -206,15 +209,15 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -230,7 +233,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Receive model with extensible enum discriminator type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -248,7 +251,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Send model with extensible enum discriminator type.
-     *
+     * 
      * @param input Dog to create.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -267,7 +270,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -285,7 +288,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -303,7 +306,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Receive model with fixed enum discriminator type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -321,7 +324,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Send model with fixed enum discriminator type.
-     *
+     * 
      * @param input Snake to create.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -340,7 +343,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -358,7 +361,7 @@ public final class EnumDiscriminatorClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

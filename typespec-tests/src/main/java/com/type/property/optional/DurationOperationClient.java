@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.optional.implementation.DurationOperationsImpl;
 import com.type.property.optional.models.DurationProperty;
 
-/** Initializes a new instance of the synchronous OptionalClient type. */
+/**
+ * Initializes a new instance of the synchronous OptionalClient type.
+ */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class DurationOperationClient {
-    @Generated private final DurationOperationsImpl serviceClient;
+    @Generated
+    private final DurationOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of DurationOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class DurationOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,15 +62,15 @@ public final class DurationOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,15 +86,15 @@ public final class DurationOperationClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a duration property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -108,15 +111,15 @@ public final class DurationOperationClient {
 
     /**
      * Put a body with default properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with a duration property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -133,7 +136,7 @@ public final class DurationOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -151,7 +154,7 @@ public final class DurationOperationClient {
 
     /**
      * Get models that will return the default object.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -169,7 +172,7 @@ public final class DurationOperationClient {
 
     /**
      * Put a body with all properties present.
-     *
+     * 
      * @param body Model with a duration property.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -188,7 +191,7 @@ public final class DurationOperationClient {
 
     /**
      * Put a body with default properties.
-     *
+     * 
      * @param body Model with a duration property.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

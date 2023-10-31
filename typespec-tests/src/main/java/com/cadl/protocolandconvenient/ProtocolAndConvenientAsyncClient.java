@@ -32,14 +32,17 @@ import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ProtocolAndConvenientClient type. */
+/**
+ * Initializes a new instance of the asynchronous ProtocolAndConvenientClient type.
+ */
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class, isAsync = true)
 public final class ProtocolAndConvenientAsyncClient {
-    @Generated private final ProtocolAndConvenientClientImpl serviceClient;
+    @Generated
+    private final ProtocolAndConvenientClientImpl serviceClient;
 
     /**
      * Initializes an instance of ProtocolAndConvenientAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -49,25 +52,25 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,25 +88,25 @@ public final class ProtocolAndConvenientAsyncClient {
     /**
      * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
      * ResourceD should not be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -120,25 +123,25 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,32 +152,32 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponse(
-            BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> bothConvenientAndProtocolWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
         return this.serviceClient.bothConvenientAndProtocolWithResponseAsync(body, requestOptions);
     }
 
     /**
      * When set protocol false and convenient false.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -191,9 +194,9 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Long running operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -201,9 +204,9 @@ public final class ProtocolAndConvenientAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -211,7 +214,7 @@ public final class ProtocolAndConvenientAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -223,26 +226,36 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginCreateOrReplaceAsync(name, resource, requestOptions);
     }
 
     /**
      * Paging operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxresults</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
+     * )</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -250,7 +263,7 @@ public final class ProtocolAndConvenientAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -266,7 +279,7 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -281,14 +294,13 @@ public final class ProtocolAndConvenientAsyncClient {
     public Mono<ResourceB> onlyConvenient(ResourceA body) {
         // Generated convenience method for onlyConvenientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return onlyConvenientWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(ResourceB.class));
+        return onlyConvenientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ResourceB.class));
     }
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -304,13 +316,12 @@ public final class ProtocolAndConvenientAsyncClient {
         // Generated convenience method for bothConvenientAndProtocolWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return bothConvenientAndProtocolWithResponse(BinaryData.fromObject(body), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
     }
 
     /**
      * Long running operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -331,7 +342,7 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Paging operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -345,27 +356,15 @@ public final class ProtocolAndConvenientAsyncClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
-        return PagedFlux.create(
-                () ->
-                        (continuationToken, pageSize) -> {
-                            Flux<PagedResponse<BinaryData>> flux =
-                                    (continuationToken == null)
-                                            ? pagedFluxResponse.byPage().take(1)
-                                            : pagedFluxResponse.byPage(continuationToken).take(1);
-                            return flux.map(
-                                    pagedResponse ->
-                                            new PagedResponseBase<Void, ResourceJ>(
-                                                    pagedResponse.getRequest(),
-                                                    pagedResponse.getStatusCode(),
-                                                    pagedResponse.getHeaders(),
-                                                    pagedResponse.getValue().stream()
-                                                            .map(
-                                                                    protocolMethodData ->
-                                                                            protocolMethodData.toObject(
-                                                                                    ResourceJ.class))
-                                                            .collect(Collectors.toList()),
-                                                    pagedResponse.getContinuationToken(),
-                                                    null));
-                        });
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, ResourceJ>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(ResourceJ.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
     }
 }

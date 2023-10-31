@@ -13,7 +13,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** I am root, and I ref a model with no meta. */
+/**
+ * I am root, and I ref a model with no meta.
+ */
 @Fluent
 public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAndNoMeta> {
     /*
@@ -26,12 +28,15 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      */
     private String something;
 
-    /** Creates an instance of RootWithRefAndNoMeta class. */
-    public RootWithRefAndNoMeta() {}
+    /**
+     * Creates an instance of RootWithRefAndNoMeta class.
+     */
+    public RootWithRefAndNoMeta() {
+    }
 
     /**
      * Get the refToModel property: XML will use RefToModel.
-     *
+     * 
      * @return the refToModel value.
      */
     public ComplexTypeNoMeta getRefToModel() {
@@ -40,7 +45,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Set the refToModel property: XML will use RefToModel.
-     *
+     * 
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
@@ -51,7 +56,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Get the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @return the something value.
      */
     public String getSomething() {
@@ -60,7 +65,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Set the something property: Something else (just to avoid flattening).
-     *
+     * 
      * @param something the something value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
@@ -71,7 +76,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -96,10 +101,10 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Reads an instance of RootWithRefAndNoMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of RootWithRefAndNoMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
      */
     public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -108,35 +113,32 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
 
     /**
      * Reads an instance of RootWithRefAndNoMeta from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of RootWithRefAndNoMeta if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
      */
     public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName =
-                CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    RootWithRefAndNoMeta deserializedRootWithRefAndNoMeta = new RootWithRefAndNoMeta();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        String finalRootElementName
+            = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            RootWithRefAndNoMeta deserializedRootWithRefAndNoMeta = new RootWithRefAndNoMeta();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("RefToModel".equals(elementName.getLocalPart())) {
-                            deserializedRootWithRefAndNoMeta.refToModel =
-                                    ComplexTypeNoMeta.fromXml(reader, "RefToModel");
-                        } else if ("Something".equals(elementName.getLocalPart())) {
-                            deserializedRootWithRefAndNoMeta.something = reader.getStringElement();
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("RefToModel".equals(elementName.getLocalPart())) {
+                    deserializedRootWithRefAndNoMeta.refToModel = ComplexTypeNoMeta.fromXml(reader, "RefToModel");
+                } else if ("Something".equals(elementName.getLocalPart())) {
+                    deserializedRootWithRefAndNoMeta.something = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedRootWithRefAndNoMeta;
-                });
+            return deserializedRootWithRefAndNoMeta;
+        });
     }
 }

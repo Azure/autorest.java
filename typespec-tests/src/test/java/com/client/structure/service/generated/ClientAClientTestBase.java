@@ -26,12 +26,11 @@ class ClientAClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ClientAClientBuilder clientAClientbuilder =
-                new ClientAClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ClientAClientBuilder clientAClientbuilder
+            = new ClientAClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientAClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -39,17 +38,17 @@ class ClientAClientTestBase extends TestProxyTestBase {
         }
         clientAClient = clientAClientbuilder.buildClient();
 
-        ClientBClientBuilder clientBClientbuilder =
-                new ClientBClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ClientBClientBuilder clientBClientbuilder
+            = new ClientBClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientBClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             clientBClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         clientBClient = clientBClientbuilder.buildClient();
+
     }
 }

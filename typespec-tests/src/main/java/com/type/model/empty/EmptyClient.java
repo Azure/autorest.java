@@ -20,14 +20,17 @@ import com.type.model.empty.models.EmptyInput;
 import com.type.model.empty.models.EmptyInputOutput;
 import com.type.model.empty.models.EmptyOutput;
 
-/** Initializes a new instance of the synchronous EmptyClient type. */
+/**
+ * Initializes a new instance of the synchronous EmptyClient type.
+ */
 @ServiceClient(builder = EmptyClientBuilder.class)
 public final class EmptyClient {
-    @Generated private final EmptyClientImpl serviceClient;
+    @Generated
+    private final EmptyClientImpl serviceClient;
 
     /**
      * Initializes an instance of EmptyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,14 +40,14 @@ public final class EmptyClient {
 
     /**
      * The putEmpty operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     *
+     * 
      * @param input Empty model used in operation parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -61,14 +64,14 @@ public final class EmptyClient {
 
     /**
      * The getEmpty operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -84,21 +87,21 @@ public final class EmptyClient {
 
     /**
      * The postRoundTripEmpty operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     *
+     * 
      * @param body Empty model used in both parameter and return type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -115,7 +118,7 @@ public final class EmptyClient {
 
     /**
      * The putEmpty operation.
-     *
+     * 
      * @param input Empty model used in operation parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -134,7 +137,7 @@ public final class EmptyClient {
 
     /**
      * The getEmpty operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -152,7 +155,7 @@ public final class EmptyClient {
 
     /**
      * The postRoundTripEmpty operation.
-     *
+     * 
      * @param body Empty model used in both parameter and return type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -167,8 +170,7 @@ public final class EmptyClient {
     public EmptyInputOutput postRoundTripEmpty(EmptyInputOutput body) {
         // Generated convenience method for postRoundTripEmptyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postRoundTripEmptyWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(EmptyInputOutput.class);
+        return postRoundTripEmptyWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(EmptyInputOutput.class);
     }
 }

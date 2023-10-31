@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ResponseInternal model. */
+/**
+ * The ResponseInternal model.
+ */
 @Immutable
 public final class ResponseInternal {
     /*
@@ -21,7 +23,7 @@ public final class ResponseInternal {
 
     /**
      * Creates an instance of ResponseInternal class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class ResponseInternal {
 
     /**
      * Get the property property: The property property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

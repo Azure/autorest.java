@@ -21,15 +21,14 @@ class FixedClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        FixedClientBuilder fixedClientbuilder =
-                new FixedClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FixedClientBuilder fixedClientbuilder = new FixedClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             fixedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             fixedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         fixedClient = fixedClientbuilder.buildClient();
+
     }
 }

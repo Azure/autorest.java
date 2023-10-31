@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 
-/** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type.
+ */
 @ServiceClient(builder = HttpFailureClientBuilder.class)
 public final class HttpFailureClient {
-    @Generated private final HttpFailuresImpl serviceClient;
+    @Generated
+    private final HttpFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpFailureClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,13 +37,13 @@ public final class HttpFailureClient {
 
     /**
      * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,13 +59,13 @@ public final class HttpFailureClient {
 
     /**
      * Get empty error form server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -78,13 +81,13 @@ public final class HttpFailureClient {
 
     /**
      * Get empty response from server.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

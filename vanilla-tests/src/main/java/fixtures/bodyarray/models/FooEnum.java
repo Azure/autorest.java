@@ -7,18 +7,28 @@ package fixtures.bodyarray.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for FooEnum. */
+/**
+ * Defines values for FooEnum.
+ */
 public enum FooEnum {
-    /** Enum value foo1. */
+    /**
+     * Enum value foo1.
+     */
     FOO1("foo1"),
 
-    /** Enum value foo2. */
+    /**
+     * Enum value foo2.
+     */
     FOO2("foo2"),
 
-    /** Enum value foo3. */
+    /**
+     * Enum value foo3.
+     */
     FOO3("foo3");
 
-    /** The actual serialized value for a FooEnum instance. */
+    /**
+     * The actual serialized value for a FooEnum instance.
+     */
     private final String value;
 
     FooEnum(String value) {
@@ -27,7 +37,7 @@ public enum FooEnum {
 
     /**
      * Parses a serialized value to a FooEnum instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed FooEnum object, or null if unable to parse.
      */
@@ -45,7 +55,9 @@ public enum FooEnum {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

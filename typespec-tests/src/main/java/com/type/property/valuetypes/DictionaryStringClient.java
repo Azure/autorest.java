@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.valuetypes.implementation.DictionaryStringsImpl;
 import com.type.property.valuetypes.models.DictionaryStringProperty;
 
-/** Initializes a new instance of the synchronous ValueTypesClient type. */
+/**
+ * Initializes a new instance of the synchronous ValueTypesClient type.
+ */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class DictionaryStringClient {
-    @Generated private final DictionaryStringsImpl serviceClient;
+    @Generated
+    private final DictionaryStringsImpl serviceClient;
 
     /**
      * Initializes an instance of DictionaryStringClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class DictionaryStringClient {
 
     /**
      * Get call.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -45,7 +48,7 @@ public final class DictionaryStringClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,9 +64,9 @@ public final class DictionaryStringClient {
 
     /**
      * Put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -71,7 +74,7 @@ public final class DictionaryStringClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class DictionaryStringClient {
 
     /**
      * Get call.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -106,7 +109,7 @@ public final class DictionaryStringClient {
 
     /**
      * Put operation.
-     *
+     * 
      * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

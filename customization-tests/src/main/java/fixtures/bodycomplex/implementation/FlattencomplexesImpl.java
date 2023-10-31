@@ -21,23 +21,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.implementation.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Flattencomplexes. */
+/**
+ * An instance of this class provides access to all the operations defined in Flattencomplexes.
+ */
 public final class FlattencomplexesImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final FlattencomplexesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of FlattencomplexesImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     FlattencomplexesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service =
-                RestProxy.create(
-                        FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -49,15 +54,15 @@ public final class FlattencomplexesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyBaseType>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -70,7 +75,7 @@ public final class FlattencomplexesImpl {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +90,7 @@ public final class FlattencomplexesImpl {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -97,7 +102,7 @@ public final class FlattencomplexesImpl {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -111,7 +116,7 @@ public final class FlattencomplexesImpl {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -125,7 +130,7 @@ public final class FlattencomplexesImpl {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

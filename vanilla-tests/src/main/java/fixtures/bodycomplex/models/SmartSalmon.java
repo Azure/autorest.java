@@ -16,7 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** The SmartSalmon model. */
+/**
+ * The SmartSalmon model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("smart_salmon")
 @Fluent
@@ -30,11 +32,12 @@ public final class SmartSalmon extends Salmon {
     /*
      * Dictionary of <any>
      */
-    @JsonIgnore private Map<String, Object> additionalProperties;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of SmartSalmon class.
-     *
+     * 
      * @param length the length value to set.
      */
     @JsonCreator
@@ -44,7 +47,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Get the collegeDegree property: The college_degree property.
-     *
+     * 
      * @return the collegeDegree value.
      */
     public String getCollegeDegree() {
@@ -53,7 +56,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Set the collegeDegree property: The college_degree property.
-     *
+     * 
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.
      */
@@ -64,7 +67,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
@@ -74,7 +77,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
@@ -91,28 +94,36 @@ public final class SmartSalmon extends Salmon {
         additionalProperties.put(key, value);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setLocation(String location) {
         super.setLocation(location);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setIswild(Boolean iswild) {
         super.setIswild(iswild);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -121,7 +132,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

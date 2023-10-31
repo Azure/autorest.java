@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Await model. */
+/**
+ * The Await model.
+ */
 @Immutable
 public final class Await {
     /*
@@ -21,7 +23,7 @@ public final class Await {
 
     /**
      * Creates an instance of Await class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Await {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

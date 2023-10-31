@@ -13,13 +13,16 @@ import fixtures.nonstringenum.implementation.FloatOperationsImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous NonStringEnumsClient type. */
+/**
+ * Initializes a new instance of the asynchronous NonStringEnumsClient type.
+ */
 public final class FloatOperationAsyncClient {
-    @Generated private final FloatOperationsImpl serviceClient;
+    @Generated
+    private final FloatOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of FloatOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -29,7 +32,7 @@ public final class FloatOperationAsyncClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -44,7 +47,7 @@ public final class FloatOperationAsyncClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @param input Input float enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -59,7 +62,7 @@ public final class FloatOperationAsyncClient {
 
     /**
      * Put a float enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -72,7 +75,7 @@ public final class FloatOperationAsyncClient {
 
     /**
      * Get a float enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum along with {@link Response} on successful completion of {@link Mono}.
@@ -85,7 +88,7 @@ public final class FloatOperationAsyncClient {
 
     /**
      * Get a float enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a float enum on successful completion of {@link Mono}.

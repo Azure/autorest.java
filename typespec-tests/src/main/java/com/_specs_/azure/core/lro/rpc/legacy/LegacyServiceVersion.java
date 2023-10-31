@@ -6,9 +6,13 @@ package com._specs_.azure.core.lro.rpc.legacy;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of LegacyClient. */
+/**
+ * Service version of LegacyClient.
+ */
 public enum LegacyServiceVersion implements ServiceVersion {
-    /** Enum value 2022-12-01-preview. */
+    /**
+     * Enum value 2022-12-01-preview.
+     */
     V2022_12_01_PREVIEW("2022-12-01-preview");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum LegacyServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum LegacyServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link LegacyServiceVersion}.
      */
     public static LegacyServiceVersion getLatest() {

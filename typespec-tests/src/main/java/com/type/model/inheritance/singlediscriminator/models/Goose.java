@@ -11,14 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The second level model in polymorphic single level inheritance. */
+/**
+ * The second level model in polymorphic single level inheritance.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("goose")
 @Immutable
 public final class Goose extends Bird {
     /**
      * Creates an instance of Goose class.
-     *
+     * 
      * @param wingspan the wingspan value to set.
      */
     @Generated

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** The OdataProductResult model. */
+/**
+ * The OdataProductResult model.
+ */
 @Fluent
 public final class OdataProductResult {
     /*
@@ -23,12 +25,15 @@ public final class OdataProductResult {
     @JsonProperty(value = "odata.nextLink")
     private String odataNextLink;
 
-    /** Creates an instance of OdataProductResult class. */
-    public OdataProductResult() {}
+    /**
+     * Creates an instance of OdataProductResult class.
+     */
+    public OdataProductResult() {
+    }
 
     /**
      * Get the values property: The values property.
-     *
+     * 
      * @return the values value.
      */
     public List<Product> getValues() {
@@ -37,7 +42,7 @@ public final class OdataProductResult {
 
     /**
      * Set the values property: The values property.
-     *
+     * 
      * @param values the values value to set.
      * @return the OdataProductResult object itself.
      */
@@ -48,7 +53,7 @@ public final class OdataProductResult {
 
     /**
      * Get the odataNextLink property: The odata.nextLink property.
-     *
+     * 
      * @return the odataNextLink value.
      */
     public String getOdataNextLink() {
@@ -57,7 +62,7 @@ public final class OdataProductResult {
 
     /**
      * Set the odataNextLink property: The odata.nextLink property.
-     *
+     * 
      * @param odataNextLink the odataNextLink value to set.
      * @return the OdataProductResult object itself.
      */
@@ -68,7 +73,7 @@ public final class OdataProductResult {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

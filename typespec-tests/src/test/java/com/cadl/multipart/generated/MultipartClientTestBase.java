@@ -22,16 +22,16 @@ class MultipartClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        MultipartClientBuilder multipartClientbuilder =
-                new MultipartClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        MultipartClientBuilder multipartClientbuilder
+            = new MultipartClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             multipartClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             multipartClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         multipartClient = multipartClientbuilder.buildClient();
+
     }
 }
