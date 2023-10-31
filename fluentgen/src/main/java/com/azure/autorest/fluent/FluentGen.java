@@ -212,10 +212,7 @@ public class FluentGen extends Javagen {
             ServiceClient serviceClient = client.getServiceClient();
             addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
         } else {
-            // multi-client from TypeSpec
-            for (ServiceClient serviceClient : client.getServiceClients()) {
-                addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
-            }
+            addServiceClient(javaSettings, javaPackage, interfacePackage, client.getServiceClients().iterator().next());
         }
 
         // Async/sync service clients

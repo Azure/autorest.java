@@ -76,9 +76,9 @@ public class Main {
         if (Files.exists(outputDirPath)) {
             try (Stream<Path> filestream = Files.list(outputDirPath)) {
                 Set<String> filenames = filestream
-                        .map(p -> p.getFileName().toString())
-                        .map(name -> name.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+                    .map(p -> p.getFileName().toString())
+                    .map(name -> name.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toSet());
 
                 // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                 sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));

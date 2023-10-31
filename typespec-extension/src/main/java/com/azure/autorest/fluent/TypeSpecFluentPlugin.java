@@ -40,24 +40,16 @@ public class TypeSpecFluentPlugin extends FluentGen {
         if (!CoreUtils.isNullOrEmpty(emitterOptions.getServiceName())) {
             SETTINGS_MAP.put("service-name", emitterOptions.getServiceName());
         }
-        if (!CoreUtils.isNullOrEmpty(emitterOptions.getServiceVersions())) {
-            SETTINGS_MAP.put("service-versions", emitterOptions.getServiceVersions());
-        }
         if (emitterOptions.getGenerateSamples() != null) {
             SETTINGS_MAP.put("generate-samples", emitterOptions.getGenerateSamples());
         }
         if (emitterOptions.getGenerateTests() != null) {
             SETTINGS_MAP.put("generate-tests", emitterOptions.getGenerateTests());
         }
-        if (emitterOptions.getEnableSyncStack() != null) {
-            SETTINGS_MAP.put("enable-sync-stack", emitterOptions.getEnableSyncStack());
-        }
         if (emitterOptions.getFluent() != null) {
             SETTINGS_MAP.put("fluent", emitterOptions.getFluent());
         }
-
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
-        SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
@@ -96,6 +88,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
 
+    // from fluentnamer/readme.md
     static {
         SETTINGS_MAP.put("data-plane", false);
 
@@ -103,19 +96,15 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("regenerate-pom", true);
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
-        SETTINGS_MAP.put("enable-sync-stack", false);
-        SETTINGS_MAP.put("enable-page-size", true);
-
-        SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
 
         SETTINGS_MAP.put("generic-response-type", true);
+        SETTINGS_MAP.put("generate-client-interfaces", true);
         SETTINGS_MAP.put("client-logger", true);
-        SETTINGS_MAP.put("required-fields-as-ctor-args", true);
+
         SETTINGS_MAP.put("required-parameter-client-methods", true);
-        SETTINGS_MAP.put("output-model-immutable", true);
-        SETTINGS_MAP.put("disable-required-property-annotation", true);
-        // Defaulting to KeyCredential and not providing TypeSpec services to generate with AzureKeyCredential.
-        SETTINGS_MAP.put("use-key-credential", true);
+        SETTINGS_MAP.put("client-flattened-annotation-target", "none");
+        SETTINGS_MAP.put("null-byte-array-maps-to-empty-array", true);
+        SETTINGS_MAP.put("graal-vm-config", true);
     }
 
     @SuppressWarnings("unchecked")
