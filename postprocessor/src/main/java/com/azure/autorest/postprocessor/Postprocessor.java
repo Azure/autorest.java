@@ -155,7 +155,7 @@ public class Postprocessor extends NewPlugin {
                     Files.writeString(file, javaFile.getValue());
                 }
 
-                Path pomPath = tmpDir.resolve("pom.xml");
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
                 Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
                 Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
                     pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));

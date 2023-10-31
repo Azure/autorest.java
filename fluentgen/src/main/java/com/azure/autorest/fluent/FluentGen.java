@@ -152,7 +152,7 @@ public class FluentGen extends Javagen {
                     Files.writeString(file, javaFile.getContents().toString()).toFile().deleteOnExit();
                 }
 
-                Path pomPath = tmpDir.resolve("pom.xml");
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
                 Files.writeString(pomPath, FluentUtils.loadTextFromResource("spotless-pom.xml"))
                         .toFile().deleteOnExit();
                 Files.writeString(pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),

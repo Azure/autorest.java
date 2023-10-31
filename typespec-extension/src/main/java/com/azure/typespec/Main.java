@@ -140,7 +140,7 @@ public class Main {
                     Files.writeString(file, javaFile.getValue()).toFile().deleteOnExit();
                 }
 
-                Path pomPath = tmpDir.resolve("pom.xml");
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
                 Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
                 Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
                     pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
