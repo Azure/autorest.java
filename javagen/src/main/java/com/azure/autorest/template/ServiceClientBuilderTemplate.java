@@ -480,7 +480,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
-        imports.add(KeyCredentialPolicy.class.getName());
+        ClassType.KeyCredentialPolicy.addImportsTo(imports, false);
 
         imports.add(HttpPolicyProviders.class.getName());
         imports.add(HttpPipelinePolicy.class.getName());
