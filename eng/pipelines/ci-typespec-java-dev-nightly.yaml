@@ -48,12 +48,6 @@ jobs:
           cat typespec-tests/package.json
         displayName: 'Bump TypeSpec Dependencies to dev'
 
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '11'
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-
       - task: PowerShell@2
         displayName: 'Generate Code'
         inputs:

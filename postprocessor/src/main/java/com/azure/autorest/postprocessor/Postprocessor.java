@@ -176,7 +176,7 @@ public class Postprocessor extends NewPlugin {
     }
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
-        String[] command = new String[] { "mvn", "validate", "-P", "spotless" };
+        String[] command = new String[] { "mvn", "spotless:apply", "-P", "spotless" };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -329,7 +329,7 @@ public class Postprocessor extends NewPlugin {
     }
 
     private static void attemptMavenInstall(Path pomPath, Logger logger) {
-        String[] command = new String[] { "mvn", "clean", "install", "-f", pomPath.toString() };
+        String[] command = new String[] { "mvn", "compiler:compile" };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -341,6 +341,7 @@ public class Postprocessor extends NewPlugin {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .directory(pomPath.toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 

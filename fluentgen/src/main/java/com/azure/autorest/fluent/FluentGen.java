@@ -173,9 +173,7 @@ public class FluentGen extends Javagen {
     }
 
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
-        String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn", "validate" }
-            : new String[] { "sh", "-c", "mvn", "validate" };
+        String[] command = new String[] { "mvn", "spotless:apply" };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -197,11 +195,6 @@ public class FluentGen extends Javagen {
         } catch (IOException | InterruptedException ex) {
             logger.warn("Failed to run Spotless on generated code.");
         }
-    }
-
-    private static boolean isWindows() {
-        String osName = System.getProperty("os.name");
-        return osName != null && osName.startsWith("Windows");
     }
 
     CodeModel handleYaml(String yamlContent) {
