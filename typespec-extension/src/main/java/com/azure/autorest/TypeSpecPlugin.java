@@ -24,8 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -162,7 +161,12 @@ public class TypeSpecPlugin extends Javagen {
 
     public static class MockConnection extends Connection {
         public MockConnection() {
-            super(null, null);
+            super(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    // NO-OP
+                }
+            }, null);
         }
     }
 

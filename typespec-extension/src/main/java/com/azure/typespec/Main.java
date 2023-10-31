@@ -30,7 +30,6 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -42,7 +41,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,7 +85,7 @@ public class Main {
             }
         }
 
-        if (emitterOptions.getFluent() != null) {
+        if (emitterOptions.getFluent() == null) {
             handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
         } else {
             handleFluent(codeModel, emitterOptions, sdkIntegration, outputDir);
@@ -105,13 +103,7 @@ public class Main {
         FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
 
         // write
-        formatAndWriteFiles(outputDir, new BiConsumer<String, String>() {
-            @Override
-            public void accept(String filePath, String content) {
-                // TODO (xiaofeicao, 2023-10-23 5:24 PM)
-                throw new UnsupportedOperationException("method [accept] not implemented in class []");
-            }
-        }, javaPackage, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
+        formatAndWriteFiles(outputDir, (filePath, content) -> fluentPlugin.writeFile(filePath, content, null), javaPackage, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
     }
 
     private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {

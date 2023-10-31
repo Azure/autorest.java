@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.JavaSettingsAccessor;
@@ -6,70 +9,64 @@ import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
-import com.azure.autorest.fluent.namer.FluentNamerFactory;
-import com.azure.autorest.fluent.transformer.FluentTransformer;
-import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.preprocessor.Preprocessor;
-import com.azure.autorest.preprocessor.tranformer.Transformer;
-import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TypeSpecFluentPlugin extends FluentGen {
     private static final Logger LOGGER = LoggerFactory.getLogger(TypeSpecFluentPlugin.class);
-    private final EmitterOptions options;
+    private final EmitterOptions emitterOptions;
 
-    public TypeSpecFluentPlugin(EmitterOptions options, boolean sdkIntegration) {
+    public TypeSpecFluentPlugin(EmitterOptions emitterOptions, boolean sdkIntegration) {
         super(new TypeSpecPlugin.MockConnection(), "dummy", "dummy");
-        this.options = options;
-        SETTINGS_MAP.put("namespace", options.getNamespace());
-        if (!CoreUtils.isNullOrEmpty(options.getOutputDir())) {
-            SETTINGS_MAP.put("output-folder", options.getOutputDir());
+
+        this.emitterOptions = emitterOptions;
+        SETTINGS_MAP.put("namespace", emitterOptions.getNamespace());
+        if (!CoreUtils.isNullOrEmpty(emitterOptions.getOutputDir())) {
+            SETTINGS_MAP.put("output-folder", emitterOptions.getOutputDir());
         }
-        if (!CoreUtils.isNullOrEmpty(options.getServiceName())) {
-            SETTINGS_MAP.put("service-name", options.getServiceName());
+        if (!CoreUtils.isNullOrEmpty(emitterOptions.getServiceName())) {
+            SETTINGS_MAP.put("service-name", emitterOptions.getServiceName());
         }
-        if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
-            SETTINGS_MAP.put("service-versions", options.getServiceVersions());
+        if (!CoreUtils.isNullOrEmpty(emitterOptions.getServiceVersions())) {
+            SETTINGS_MAP.put("service-versions", emitterOptions.getServiceVersions());
         }
-        if (options.getGenerateSamples() != null) {
-            SETTINGS_MAP.put("generate-samples", options.getGenerateSamples());
+        if (emitterOptions.getGenerateSamples() != null) {
+            SETTINGS_MAP.put("generate-samples", emitterOptions.getGenerateSamples());
         }
-        if (options.getGenerateTests() != null) {
-            SETTINGS_MAP.put("generate-tests", options.getGenerateTests());
+        if (emitterOptions.getGenerateTests() != null) {
+            SETTINGS_MAP.put("generate-tests", emitterOptions.getGenerateTests());
         }
-        if (options.getEnableSyncStack() != null) {
-            SETTINGS_MAP.put("enable-sync-stack", options.getEnableSyncStack());
+        if (emitterOptions.getEnableSyncStack() != null) {
+            SETTINGS_MAP.put("enable-sync-stack", emitterOptions.getEnableSyncStack());
         }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
 
         JavaSettingsAccessor.setHost(this);
-        LOGGER.info("Output folder: {}", options.getOutputDir());
+        LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
+
+        Mappers.setFactory(new TypeSpecMapperFactory());
     }
 
     public Client processClient(CodeModel codeModel) {
         // transform code model
-        LOGGER.info("Load fluent settings");
-        CodeNamer.setFactory(new FluentNamerFactory(getFluentJavaSettings()));
-
-        LOGGER.info("Transform code model");
-        FluentTransformer transformer = new FluentTransformer(getFluentJavaSettings());
-        codeModel = transformer.preTransform(codeModel);
-
-        codeModel = new Transformer().transform(codeModel);
-
-        codeModel = transformer.postTransform(codeModel);
+        FluentNamer fluentNamer = new TypeSpecFluentNamer();
+        codeModel = fluentNamer.transform(codeModel);
 
         // call FluentGen.handleMap
         Client client = handleMap(codeModel);
@@ -81,6 +78,12 @@ public class TypeSpecFluentPlugin extends FluentGen {
         FluentJavaPackage javaPackage = handleTemplate(client);
         handleFluentLite(codeModel, client, javaPackage);
         return javaPackage;
+    }
+
+    @Override
+    public void writeFile(String fileName, String content, List<Object> sourceMap) {
+        File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
+        LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
