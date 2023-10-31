@@ -31,7 +31,6 @@ import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
@@ -482,7 +481,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         ClassType.KeyCredentialPolicy.addImportsTo(imports, false);
 
         imports.add(HttpPolicyProviders.class.getName());
-        imports.add(HttpPipelinePolicy.class.getName());
+        ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
         imports.add(HttpLoggingPolicy.class.getName());
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
