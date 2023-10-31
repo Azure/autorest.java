@@ -488,6 +488,9 @@ public class ClassType implements IType {
     public static final ClassType KeyCredentialPolicy = getClassTypeBuilder(com.azure.core.http.policy.KeyCredentialPolicy.class)
         .build();
 
+    public static final ClassType KeyCredentialTrait = getClassTypeBuilder(com.azure.core.client.traits.KeyCredentialTrait.class)
+        .build();
+
     public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)
         .build();
 
