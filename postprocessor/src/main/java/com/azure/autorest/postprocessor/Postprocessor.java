@@ -332,8 +332,8 @@ public class Postprocessor extends NewPlugin {
 
     private static void attemptMavenInstall(Path pomPath, Logger logger) {
         String[] command = Utils.isWindows()
-                ? new String[] { "cmd", "/c", "mvn", "clean", "install" }
-                : new String[] { "sh", "-c", "mvn", "clean", "install" };
+                ? new String[] { "cmd", "/c", "mvn", "clean", "install", "-f", pomPath.toString() }
+                : new String[] { "sh", "-c", "mvn", "clean", "install", "-f", pomPath.toString() };
 
         logger.info("Running command: " + String.join(" ", command));
 
@@ -345,7 +345,6 @@ public class Postprocessor extends NewPlugin {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 
