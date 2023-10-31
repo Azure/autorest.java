@@ -178,8 +178,6 @@ public class Postprocessor extends NewPlugin {
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = new String[] { "mvn", "spotless:apply", "-P", "spotless" };
 
-        logger.info("Running command: " + String.join(" ", command));
-
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
@@ -331,8 +329,6 @@ public class Postprocessor extends NewPlugin {
     private static void attemptMavenInstall(Path pomPath, Logger logger) {
         String[] command = new String[] { "mvn", "compiler:compile" };
 
-        logger.info("Running command: " + String.join(" ", command));
-
         // Attempt to install the POM file. This will ensure that the Eclipse language server will have all
         // necessary dependencies to run.
         try {
@@ -341,7 +337,7 @@ public class Postprocessor extends NewPlugin {
             Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .directory(pomPath.toFile())
+                .directory(pomPath.getParent().toFile())
                 .start();
             process.waitFor(60, TimeUnit.SECONDS);
 

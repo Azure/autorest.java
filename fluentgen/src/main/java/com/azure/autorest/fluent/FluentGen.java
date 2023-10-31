@@ -175,8 +175,6 @@ public class FluentGen extends Javagen {
     private static void attemptMavenSpotless(Path pomPath, Logger logger) {
         String[] command = new String[] { "mvn", "spotless:apply" };
 
-        logger.info("Running command: " + String.join(" ", command));
-
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
@@ -193,7 +191,7 @@ public class FluentGen extends Javagen {
                     + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {
-            logger.warn("Failed to run Spotless on generated code.");
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
     }
 

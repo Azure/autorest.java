@@ -77,10 +77,6 @@ if (Test-Path ./vanilla-tests/src/main) {
     Remove-Item ./vanilla-tests/src/main -Recurse -Force | Out-Null
 }
 
-# customization
-Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
-
 singleThreadGenerate "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/additionalProperties.json --namespace=fixtures.additionalproperties"
 singleThreadGenerate "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-array.json --namespace=fixtures.bodyarray"
 singleThreadGenerate "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-boolean.json --namespace=fixtures.bodyboolean --client-logger"
@@ -216,9 +212,9 @@ singleThreadGenerate("$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java -Force | Out-Null
 
-# # customization
-# Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
-# singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
+# customization
+Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
+singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
 
 # partial update tests
 singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md")

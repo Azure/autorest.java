@@ -163,8 +163,6 @@ public class Main {
     private static void attemptMavenSpotless(Path pomPath) {
         String[] command = new String[] { "mvn", "spotless:apply" };
 
-        LOGGER.info("Running command: " + String.join(" ", command));
-
         try {
             File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
             outputFile.deleteOnExit();
@@ -181,7 +179,7 @@ public class Main {
                     + Files.readString(outputFile.toPath()));
             }
         } catch (IOException | InterruptedException ex) {
-            Main.LOGGER.warn("Failed to run Spotless on generated code.");
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
         }
     }
 
