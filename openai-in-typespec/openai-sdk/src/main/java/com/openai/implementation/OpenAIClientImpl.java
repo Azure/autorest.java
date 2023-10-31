@@ -2,7 +2,6 @@
 
 package com.openai.implementation;
 
-import com.azure.core.util.serializer.SerializerAdapter;
 import com.generic.core.annotation.BodyParam;
 import com.generic.core.annotation.Delete;
 import com.generic.core.annotation.ExpectedResponses;
@@ -25,7 +24,6 @@ import com.generic.core.http.models.RequestOptions;
 import com.generic.core.http.pipeline.HttpPipeline;
 import com.generic.core.models.BinaryData;
 import com.generic.core.models.Context;
-import com.generic.core.util.serializer.JsonSerializer;
 
 /** Initializes a new instance of the OpenAIClient type. */
 public final class OpenAIClientImpl {
@@ -44,45 +42,14 @@ public final class OpenAIClientImpl {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     *
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
-    /** Initializes an instance of OpenAIClient client. */
-    public OpenAIClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JsonSerializerProvider.createInstance());
-    }
-
     /**
      * Initializes an instance of OpenAIClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public OpenAIClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JsonSerializerProvider.createInstance());
-    }
-
-    /**
-     * Initializes an instance of OpenAIClient client.
-     *
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     */
-    public OpenAIClientImpl(HttpPipeline httpPipeline, JsonSerializer serializerAdapter) {
         this.httpPipeline = httpPipeline;
-        this.jsonSerializer = jsonSerializer;
-        this.service =
-                RestProxy.create(OpenAIClientService.class, this.httpPipeline, JsonSerializerProvider.createInstance());
+        this.service = RestProxy.create(OpenAIClientService.class, this.httpPipeline, null);
     }
 
     /**
