@@ -7,7 +7,9 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Sku model. */
+/**
+ * The Sku model.
+ */
 @Fluent
 public final class Sku {
     /*
@@ -22,12 +24,15 @@ public final class Sku {
     @JsonProperty(value = "id")
     private String id;
 
-    /** Creates an instance of Sku class. */
-    public Sku() {}
+    /**
+     * Creates an instance of Sku class.
+     */
+    public Sku() {
+    }
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -36,7 +41,7 @@ public final class Sku {
 
     /**
      * Set the name property: The name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Sku object itself.
      */
@@ -47,7 +52,7 @@ public final class Sku {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -56,7 +61,7 @@ public final class Sku {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the Sku object itself.
      */
@@ -67,8 +72,9 @@ public final class Sku {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

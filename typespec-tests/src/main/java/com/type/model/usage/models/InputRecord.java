@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Record used in operation parameters. */
+/**
+ * Record used in operation parameters.
+ */
 @Immutable
 public final class InputRecord {
     /*
@@ -21,7 +23,7 @@ public final class InputRecord {
 
     /**
      * Creates an instance of InputRecord class.
-     *
+     * 
      * @param requiredProp the requiredProp value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class InputRecord {
 
     /**
      * Get the requiredProp property: The requiredProp property.
-     *
+     * 
      * @return the requiredProp value.
      */
     @Generated

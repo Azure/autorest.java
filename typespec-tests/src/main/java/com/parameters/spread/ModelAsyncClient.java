@@ -20,14 +20,17 @@ import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SpreadClient type. */
+/**
+ * Initializes a new instance of the asynchronous SpreadClient type.
+ */
 @ServiceClient(builder = SpreadClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {
-    @Generated private final ModelsImpl serviceClient;
+    @Generated
+    private final ModelsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class ModelAsyncClient {
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -56,14 +59,14 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(
-            BinaryData bodyParameter, RequestOptions requestOptions) {
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(BinaryData bodyParameter,
+        RequestOptions requestOptions) {
         return this.serviceClient.spreadAsRequestBodyWithResponseAsync(bodyParameter, requestOptions);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -79,6 +82,6 @@ public final class ModelAsyncClient {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 }

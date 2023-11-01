@@ -7,7 +7,9 @@ package fixtures.mediatypes.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Uri or local path to source data. */
+/**
+ * Uri or local path to source data.
+ */
 @Fluent
 public final class SourcePath {
     /*
@@ -16,12 +18,15 @@ public final class SourcePath {
     @JsonProperty(value = "source")
     private String source;
 
-    /** Creates an instance of SourcePath class. */
-    public SourcePath() {}
+    /**
+     * Creates an instance of SourcePath class.
+     */
+    public SourcePath() {
+    }
 
     /**
      * Get the source property: File source path.
-     *
+     * 
      * @return the source value.
      */
     public String getSource() {
@@ -30,7 +35,7 @@ public final class SourcePath {
 
     /**
      * Set the source property: File source path.
-     *
+     * 
      * @param source the source value to set.
      * @return the SourcePath object itself.
      */
@@ -41,8 +46,9 @@ public final class SourcePath {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

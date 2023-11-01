@@ -15,13 +15,15 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization. */
+/**
+ * A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization.
+ */
 public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
     private final List<Banana> bananas;
 
     /**
      * Creates an instance of BananaWrapper.
-     *
+     * 
      * @param bananas the list.
      */
     public BananaWrapper(List<Banana> bananas) {
@@ -30,7 +32,7 @@ public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
 
     /**
      * Get the List&lt;Banana&gt; contained in this wrapper.
-     *
+     * 
      * @return the List&lt;Banana&gt;.
      */
     public List<Banana> items() {
@@ -60,25 +62,23 @@ public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
 
     public static BananaWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
-        return xmlReader.readObject(
-                rootElementName,
-                reader -> {
-                    List<Banana> items = null;
+        return xmlReader.readObject(rootElementName, reader -> {
+            List<Banana> items = null;
 
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("banana".equals(elementName.getLocalPart())) {
-                            if (items == null) {
-                                items = new ArrayList<>();
-                            }
-
-                            items.add(Banana.fromXml(reader));
-                        } else {
-                            reader.nextElement();
-                        }
+                if ("banana".equals(elementName.getLocalPart())) {
+                    if (items == null) {
+                        items = new ArrayList<>();
                     }
-                    return new BananaWrapper(items);
-                });
+
+                    items.add(Banana.fromXml(reader));
+                } else {
+                    reader.nextElement();
+                }
+            }
+            return new BananaWrapper(items);
+        });
     }
 }

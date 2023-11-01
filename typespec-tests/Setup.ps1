@@ -14,7 +14,7 @@ if ($RebuildJar) {
 Set-Location ../typespec-extension/
 # Remove-Item node_modules -Recurse -Force
 # Remove-Item package-lock.json
-npm install --force
+npm install
 npm run build
 npm run lint
 npm pack
@@ -29,7 +29,7 @@ if (Test-Path package-lock.json) {
     Remove-Item package-lock.json
 }
 
-npm install --force
+npm install
 
 # delete output
 if (Test-Path tsp-output) {

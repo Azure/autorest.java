@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Yield model. */
+/**
+ * The Yield model.
+ */
 @Immutable
 public final class Yield {
     /*
@@ -21,7 +23,7 @@ public final class Yield {
 
     /**
      * Creates an instance of Yield class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Yield {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

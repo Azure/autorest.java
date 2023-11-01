@@ -19,14 +19,17 @@ import com.parameters.collectionformat.implementation.HeadersImpl;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous CollectionFormatClient type. */
+/**
+ * Initializes a new instance of the asynchronous CollectionFormatClient type.
+ */
 @ServiceClient(builder = CollectionFormatClientBuilder.class, isAsync = true)
 public final class HeaderAsyncClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,7 +39,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -53,7 +56,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

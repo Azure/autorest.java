@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The BodyModel model. */
+/**
+ * The BodyModel model.
+ */
 @Immutable
 public final class BodyModel {
     /*
@@ -21,7 +23,7 @@ public final class BodyModel {
 
     /**
      * Creates an instance of BodyModel class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class BodyModel {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

@@ -20,14 +20,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollerFlux;
 
-/** Initializes a new instance of the asynchronous RpcClient type. */
+/**
+ * Initializes a new instance of the asynchronous RpcClient type.
+ */
 @ServiceClient(builder = RpcClientBuilder.class, isAsync = true)
 public final class RpcAsyncClient {
-    @Generated private final RpcClientImpl serviceClient;
+    @Generated
+    private final RpcClientImpl serviceClient;
 
     /**
      * Initializes an instance of RpcAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,17 +40,17 @@ public final class RpcAsyncClient {
 
     /**
      * Generate data.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -62,7 +65,7 @@ public final class RpcAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -73,14 +76,14 @@ public final class RpcAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLongRunningRpc(
-            BinaryData generationOptions, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginLongRunningRpc(BinaryData generationOptions,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginLongRunningRpcAsync(generationOptions, requestOptions);
     }
 
     /**
      * Generate data.
-     *
+     * 
      * @param generationOptions Options for the generation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -95,7 +98,7 @@ public final class RpcAsyncClient {
     public PollerFlux<PollResult, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLongRunningRpcWithModelAsync(
-                BinaryData.fromObject(generationOptions), requestOptions);
+        return serviceClient.beginLongRunningRpcWithModelAsync(BinaryData.fromObject(generationOptions),
+            requestOptions);
     }
 }

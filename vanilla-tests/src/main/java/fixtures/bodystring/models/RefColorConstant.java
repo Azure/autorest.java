@@ -7,7 +7,9 @@ package fixtures.bodystring.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The RefColorConstant model. */
+/**
+ * The RefColorConstant model.
+ */
 @Fluent
 public final class RefColorConstant {
     /*
@@ -22,12 +24,15 @@ public final class RefColorConstant {
     @JsonProperty(value = "field1")
     private String field1;
 
-    /** Creates an instance of RefColorConstant class. */
-    public RefColorConstant() {}
+    /**
+     * Creates an instance of RefColorConstant class.
+     */
+    public RefColorConstant() {
+    }
 
     /**
      * Get the colorConstant property: Referenced Color Constant Description.
-     *
+     * 
      * @return the colorConstant value.
      */
     public String getColorConstant() {
@@ -36,7 +41,7 @@ public final class RefColorConstant {
 
     /**
      * Set the colorConstant property: Referenced Color Constant Description.
-     *
+     * 
      * @param colorConstant the colorConstant value to set.
      * @return the RefColorConstant object itself.
      */
@@ -47,7 +52,7 @@ public final class RefColorConstant {
 
     /**
      * Get the field1 property: Sample string.
-     *
+     * 
      * @return the field1 value.
      */
     public String getField1() {
@@ -56,7 +61,7 @@ public final class RefColorConstant {
 
     /**
      * Set the field1 property: Sample string.
-     *
+     * 
      * @param field1 the field1 value to set.
      * @return the RefColorConstant object itself.
      */
@@ -67,8 +72,9 @@ public final class RefColorConstant {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -8,25 +8,32 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Presence of signature. */
+/**
+ * Presence of signature.
+ */
 public final class DocumentSignatureType extends ExpandableStringEnum<DocumentSignatureType> {
-    /** Static value signed for DocumentSignatureType. */
+    /**
+     * Static value signed for DocumentSignatureType.
+     */
     public static final DocumentSignatureType SIGNED = fromString("signed");
 
-    /** Static value unsigned for DocumentSignatureType. */
+    /**
+     * Static value unsigned for DocumentSignatureType.
+     */
     public static final DocumentSignatureType UNSIGNED = fromString("unsigned");
 
     /**
      * Creates a new instance of DocumentSignatureType value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public DocumentSignatureType() {}
+    public DocumentSignatureType() {
+    }
 
     /**
      * Creates or finds a DocumentSignatureType from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding DocumentSignatureType.
      */
@@ -37,7 +44,7 @@ public final class DocumentSignatureType extends ExpandableStringEnum<DocumentSi
 
     /**
      * Gets known DocumentSignatureType values.
-     *
+     * 
      * @return known DocumentSignatureType values.
      */
     public static Collection<DocumentSignatureType> values() {

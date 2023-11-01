@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.projection.projectedname.implementation.ProjectedNameClientImpl;
 
-/** Initializes a new instance of the synchronous ProjectedNameClient type. */
+/**
+ * Initializes a new instance of the synchronous ProjectedNameClient type.
+ */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class ProjectedNameClient {
-    @Generated private final ProjectedNameClientImpl serviceClient;
+    @Generated
+    private final ProjectedNameClientImpl serviceClient;
 
     /**
      * Initializes an instance of ProjectedNameClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ProjectedNameClient {
 
     /**
      * The clientName operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class ProjectedNameClient {
 
     /**
      * The parameter operation.
-     *
+     * 
      * @param clientName A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -66,7 +69,7 @@ public final class ProjectedNameClient {
 
     /**
      * The clientName operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -83,7 +86,7 @@ public final class ProjectedNameClient {
 
     /**
      * The parameter operation.
-     *
+     * 
      * @param clientName A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

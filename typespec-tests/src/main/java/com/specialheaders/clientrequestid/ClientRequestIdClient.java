@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.specialheaders.clientrequestid.implementation.ClientRequestIdClientImpl;
 
-/** Initializes a new instance of the synchronous ClientRequestIdClient type. */
+/**
+ * Initializes a new instance of the synchronous ClientRequestIdClient type.
+ */
 @ServiceClient(builder = ClientRequestIdClientBuilder.class)
 public final class ClientRequestIdClient {
-    @Generated private final ClientRequestIdClientImpl serviceClient;
+    @Generated
+    private final ClientRequestIdClientImpl serviceClient;
 
     /**
      * Initializes an instance of ClientRequestIdClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ClientRequestIdClient {
 
     /**
      * Get operation with azure client request id header.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class ClientRequestIdClient {
 
     /**
      * Get operation with azure client request id header.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

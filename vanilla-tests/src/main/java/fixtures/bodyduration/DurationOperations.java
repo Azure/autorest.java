@@ -23,64 +23,67 @@ import fixtures.bodyduration.models.ErrorException;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in DurationOperations. */
+/**
+ * An instance of this class provides access to all the operations defined in DurationOperations.
+ */
 public final class DurationOperations {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final DurationOperationsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestDurationTestService client;
 
     /**
      * Initializes an instance of DurationOperations.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     DurationOperations(AutoRestDurationTestService client) {
-        this.service =
-                RestProxy.create(
-                        DurationOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(DurationOperationsService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AutoRestDurationTestServiceDurationOperations to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestDurationTestServiceDurationOperations to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDurationTest")
     public interface DurationOperationsService {
         @Get("/duration/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getNull(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Duration>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/duration/positiveduration")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putPositiveDuration(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Duration durationBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host,
+            @BodyParam("application/json") Duration durationBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/duration/positiveduration")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getPositiveDuration(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Duration>> getPositiveDuration(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/duration/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Duration>> getInvalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Duration>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get null duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value along with {@link Response} on successful completion of {@link Mono}.
@@ -88,8 +91,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -97,7 +100,7 @@ public final class DurationOperations {
 
     /**
      * Get null duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -107,8 +110,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -116,7 +119,7 @@ public final class DurationOperations {
 
     /**
      * Get null duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value on successful completion of {@link Mono}.
@@ -128,7 +131,7 @@ public final class DurationOperations {
 
     /**
      * Get null duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -142,7 +145,7 @@ public final class DurationOperations {
 
     /**
      * Get null duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -156,7 +159,7 @@ public final class DurationOperations {
 
     /**
      * Get null duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null duration value.
@@ -168,7 +171,7 @@ public final class DurationOperations {
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -178,20 +181,20 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (durationBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putPositiveDuration(this.client.getHost(), durationBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putPositiveDuration(this.client.getHost(), durationBody, accept, context));
     }
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -202,8 +205,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (durationBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
@@ -214,7 +217,7 @@ public final class DurationOperations {
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -228,7 +231,7 @@ public final class DurationOperations {
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -243,7 +246,7 @@ public final class DurationOperations {
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -258,7 +261,7 @@ public final class DurationOperations {
 
     /**
      * Put a positive duration value.
-     *
+     * 
      * @param durationBody duration body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -271,7 +274,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value along with {@link Response} on successful completion of {@link Mono}.
@@ -279,8 +282,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getPositiveDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), accept, context));
@@ -288,7 +291,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -298,8 +301,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getPositiveDurationWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPositiveDuration(this.client.getHost(), accept, context);
@@ -307,7 +310,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value on successful completion of {@link Mono}.
@@ -319,7 +322,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -333,7 +336,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -347,7 +350,7 @@ public final class DurationOperations {
 
     /**
      * Get a positive duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a positive duration value.
@@ -359,7 +362,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value along with {@link Response} on successful completion of {@link Mono}.
@@ -367,8 +370,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -376,7 +379,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -386,8 +389,8 @@ public final class DurationOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalid(this.client.getHost(), accept, context);
@@ -395,7 +398,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value on successful completion of {@link Mono}.
@@ -407,7 +410,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -421,7 +424,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -435,7 +438,7 @@ public final class DurationOperations {
 
     /**
      * Get an invalid duration value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an invalid duration value.

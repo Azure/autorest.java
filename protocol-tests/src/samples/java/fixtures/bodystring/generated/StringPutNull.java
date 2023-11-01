@@ -11,8 +11,8 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringPutNull {
     public static void main(String[] args) {
-        StringOperationClient stringOperationClient =
-                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient
+            = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringputnull.stringputnull
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = stringOperationClient.putNullWithResponse(requestOptions);

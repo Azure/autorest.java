@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.constantandclientparam.implementation.ConstantAndClientParameterServiceClientImpl;
 
-/** Initializes a new instance of the synchronous ConstantAndClientParameterServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous ConstantAndClientParameterServiceClient type.
+ */
 @ServiceClient(builder = ConstantAndClientParameterServiceClientBuilder.class)
 public final class ConstantAndClientParameterServiceClient {
-    @Generated private final ConstantAndClientParameterServiceClientImpl serviceClient;
+    @Generated
+    private final ConstantAndClientParameterServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of ConstantAndClientParameterServiceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ConstantAndClientParameterServiceClient {
 
     /**
      * Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

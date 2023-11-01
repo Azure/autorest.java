@@ -16,13 +16,6 @@
   <artifactId>azure-autorest-androidgen</artifactId>
   <version>1.0.0-beta.1</version>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
@@ -49,12 +42,6 @@
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.googlejavaformat</groupId>
-      <artifactId>google-java-format</artifactId>
-      <version>1.0.0-beta.1</version>
     </dependency>
 
   </dependencies>

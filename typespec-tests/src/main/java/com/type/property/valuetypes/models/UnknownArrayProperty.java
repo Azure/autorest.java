@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Model with a property unknown, and the data is an array. */
+/**
+ * Model with a property unknown, and the data is an array.
+ */
 @Immutable
 public final class UnknownArrayProperty {
     /*
@@ -21,7 +23,7 @@ public final class UnknownArrayProperty {
 
     /**
      * Creates an instance of UnknownArrayProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class UnknownArrayProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

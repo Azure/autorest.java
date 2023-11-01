@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-/** signed identifier. */
+/**
+ * signed identifier.
+ */
 @JacksonXmlRootElement(localName = "SignedIdentifier")
 @Fluent
 public final class SignedIdentifier {
@@ -24,12 +26,15 @@ public final class SignedIdentifier {
     @JsonProperty(value = "AccessPolicy", required = true)
     private AccessPolicy accessPolicy;
 
-    /** Creates an instance of SignedIdentifier class. */
-    public SignedIdentifier() {}
+    /**
+     * Creates an instance of SignedIdentifier class.
+     */
+    public SignedIdentifier() {
+    }
 
     /**
      * Get the id property: a unique id.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -38,7 +43,7 @@ public final class SignedIdentifier {
 
     /**
      * Set the id property: a unique id.
-     *
+     * 
      * @param id the id value to set.
      * @return the SignedIdentifier object itself.
      */
@@ -49,7 +54,7 @@ public final class SignedIdentifier {
 
     /**
      * Get the accessPolicy property: The access policy.
-     *
+     * 
      * @return the accessPolicy value.
      */
     public AccessPolicy getAccessPolicy() {
@@ -58,7 +63,7 @@ public final class SignedIdentifier {
 
     /**
      * Set the accessPolicy property: The access policy.
-     *
+     * 
      * @param accessPolicy the accessPolicy value to set.
      * @return the SignedIdentifier object itself.
      */
@@ -69,7 +74,7 @@ public final class SignedIdentifier {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

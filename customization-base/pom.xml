@@ -22,13 +22,6 @@
   <description>This module contains the base classes needed for customizing a generated library.</description>
   <url>https://github.com/Azure/autorest.java</url>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
-    </repository>
-  </repositories>
-
   <properties>
     <codesnippet.skip>false</codesnippet.skip>
 
@@ -56,16 +49,6 @@
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.4</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.googlejavaformat</groupId>
-      <artifactId>google-java-format</artifactId>
-      <version>1.0.0-beta.1</version>
-    </dependency>
-    <dependency>
-      <groupId>net.java.dev.jna</groupId>
-      <artifactId>jna-platform</artifactId>
-      <version>5.13.0</version>
     </dependency>
     <dependency>
       <groupId>com.github.javaparser</groupId>

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.specialwords.implementation.ModelPropertiesImpl;
 import com.specialwords.models.SameAsModel;
 
-/** Initializes a new instance of the synchronous SpecialWordsClient type. */
+/**
+ * Initializes a new instance of the synchronous SpecialWordsClient type.
+ */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
 public final class ModelPropertiesClient {
-    @Generated private final ModelPropertiesImpl serviceClient;
+    @Generated
+    private final ModelPropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ModelPropertiesClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class ModelPropertiesClient {
 
     /**
      * The sameAsModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     SameAsModel: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,7 +63,7 @@ public final class ModelPropertiesClient {
 
     /**
      * The sameAsModel operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

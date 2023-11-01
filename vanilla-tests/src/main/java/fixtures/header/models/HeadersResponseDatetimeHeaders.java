@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** The HeadersResponseDatetimeHeaders model. */
+/**
+ * The HeadersResponseDatetimeHeaders model.
+ */
 @Fluent
 public final class HeadersResponseDatetimeHeaders {
     /*
@@ -24,7 +26,7 @@ public final class HeadersResponseDatetimeHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseDatetimeHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseDatetimeHeaders(HttpHeaders rawHeaders) {
@@ -36,7 +38,7 @@ public final class HeadersResponseDatetimeHeaders {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public OffsetDateTime getValue() {
@@ -45,7 +47,7 @@ public final class HeadersResponseDatetimeHeaders {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the HeadersResponseDatetimeHeaders object itself.
      */
@@ -56,8 +58,9 @@ public final class HeadersResponseDatetimeHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

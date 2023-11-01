@@ -12,18 +12,18 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** The Shark model. */
+/**
+ * The Shark model.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "fishtype",
-        defaultImpl = Shark.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "fishtype",
+    defaultImpl = Shark.class)
 @JsonTypeName("shark")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+@JsonSubTypes({ @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
     @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
-})
+    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent
 public class Shark extends Fish {
     /*
@@ -38,12 +38,15 @@ public class Shark extends Fish {
     @JsonProperty(value = "birthday", required = true)
     private OffsetDateTime birthday;
 
-    /** Creates an instance of Shark class. */
-    public Shark() {}
+    /**
+     * Creates an instance of Shark class.
+     */
+    public Shark() {
+    }
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     public Integer getAge() {
@@ -52,7 +55,7 @@ public class Shark extends Fish {
 
     /**
      * Set the age property: The age property.
-     *
+     * 
      * @param age the age value to set.
      * @return the Shark object itself.
      */
@@ -63,7 +66,7 @@ public class Shark extends Fish {
 
     /**
      * Get the birthday property: The birthday property.
-     *
+     * 
      * @return the birthday value.
      */
     public OffsetDateTime getBirthday() {
@@ -72,7 +75,7 @@ public class Shark extends Fish {
 
     /**
      * Set the birthday property: The birthday property.
-     *
+     * 
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
@@ -81,21 +84,27 @@ public class Shark extends Fish {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

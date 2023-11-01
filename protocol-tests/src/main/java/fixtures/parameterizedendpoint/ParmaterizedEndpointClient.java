@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.parameterizedendpoint.implementation.ParmaterizedEndpointClientImpl;
 
-/** Initializes a new instance of the synchronous ParmaterizedEndpointClient type. */
+/**
+ * Initializes a new instance of the synchronous ParmaterizedEndpointClient type.
+ */
 @ServiceClient(builder = ParmaterizedEndpointClientBuilder.class)
 public final class ParmaterizedEndpointClient {
-    @Generated private final ParmaterizedEndpointClientImpl serviceClient;
+    @Generated
+    private final ParmaterizedEndpointClientImpl serviceClient;
 
     /**
      * Initializes an instance of ParmaterizedEndpointClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ParmaterizedEndpointClient {
 
     /**
      * Basic get to make sure base url formatting of 'endpoint' works.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -345,14 +345,18 @@ export class CodeModelBuilder {
             {
               const schemeOrApiKeyPrefix = scheme.scheme;
               if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
-                this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
-              } else {
-                const keyScheme = new KeySecurityScheme({
-                  name: "authorization",
-                });
-                (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
-                securitySchemes.push(keyScheme);
+                if (!(this.options.branded === false)) {
+                  // Azure would not allow BasicAuth or BearerAuth
+                  this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
+                  continue;
+                }
               }
+
+              const keyScheme = new KeySecurityScheme({
+                name: "authorization",
+              });
+              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+              securitySchemes.push(keyScheme);
             }
             break;
         }

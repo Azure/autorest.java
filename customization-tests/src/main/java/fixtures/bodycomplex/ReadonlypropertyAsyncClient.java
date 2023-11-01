@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class ReadonlypropertyAsyncClient {
-    @Generated private final ReadonlypropertiesImpl serviceClient;
+    @Generated
+    private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlypropertyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,11 +34,11 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -45,7 +48,7 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties on successful completion of {@link Mono}.
@@ -58,7 +61,7 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -73,7 +76,7 @@ public final class ReadonlypropertyAsyncClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

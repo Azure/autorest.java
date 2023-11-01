@@ -11,102 +11,119 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the BytesClient type. */
+/**
+ * Initializes a new instance of the BytesClient type.
+ */
 public final class BytesClientImpl {
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The QueriesImpl object to access its operations. */
+    /**
+     * The QueriesImpl object to access its operations.
+     */
     private final QueriesImpl queries;
 
     /**
      * Gets the QueriesImpl object to access its operations.
-     *
+     * 
      * @return the QueriesImpl object.
      */
     public QueriesImpl getQueries() {
         return this.queries;
     }
 
-    /** The PropertiesImpl object to access its operations. */
+    /**
+     * The PropertiesImpl object to access its operations.
+     */
     private final PropertiesImpl properties;
 
     /**
      * Gets the PropertiesImpl object to access its operations.
-     *
+     * 
      * @return the PropertiesImpl object.
      */
     public PropertiesImpl getProperties() {
         return this.properties;
     }
 
-    /** The HeadersImpl object to access its operations. */
+    /**
+     * The HeadersImpl object to access its operations.
+     */
     private final HeadersImpl headers;
 
     /**
      * Gets the HeadersImpl object to access its operations.
-     *
+     * 
      * @return the HeadersImpl object.
      */
     public HeadersImpl getHeaders() {
         return this.headers;
     }
 
-    /** The RequestBodiesImpl object to access its operations. */
+    /**
+     * The RequestBodiesImpl object to access its operations.
+     */
     private final RequestBodiesImpl requestBodies;
 
     /**
      * Gets the RequestBodiesImpl object to access its operations.
-     *
+     * 
      * @return the RequestBodiesImpl object.
      */
     public RequestBodiesImpl getRequestBodies() {
         return this.requestBodies;
     }
 
-    /** The ResponseBodiesImpl object to access its operations. */
+    /**
+     * The ResponseBodiesImpl object to access its operations.
+     */
     private final ResponseBodiesImpl responseBodies;
 
     /**
      * Gets the ResponseBodiesImpl object to access its operations.
-     *
+     * 
      * @return the ResponseBodiesImpl object.
      */
     public ResponseBodiesImpl getResponseBodies() {
         return this.responseBodies;
     }
 
-    /** Initializes an instance of BytesClient client. */
+    /**
+     * Initializes an instance of BytesClient client.
+     */
     public BytesClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of BytesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public BytesClientImpl(HttpPipeline httpPipeline) {
@@ -115,7 +132,7 @@ public final class BytesClientImpl {
 
     /**
      * Initializes an instance of BytesClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */

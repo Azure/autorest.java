@@ -7,7 +7,9 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The product URL. */
+/**
+ * The product URL.
+ */
 @Fluent
 public final class ProductUrl extends GenericUrl {
     /*
@@ -16,12 +18,15 @@ public final class ProductUrl extends GenericUrl {
     @JsonProperty(value = "@odata.value")
     private String odataValue;
 
-    /** Creates an instance of ProductUrl class. */
-    public ProductUrl() {}
+    /**
+     * Creates an instance of ProductUrl class.
+     */
+    public ProductUrl() {
+    }
 
     /**
      * Get the odataValue property: URL value.
-     *
+     * 
      * @return the odataValue value.
      */
     public String getOdataValue() {
@@ -30,7 +35,7 @@ public final class ProductUrl extends GenericUrl {
 
     /**
      * Set the odataValue property: URL value.
-     *
+     * 
      * @param odataValue the odataValue value to set.
      * @return the ProductUrl object itself.
      */
@@ -39,7 +44,9 @@ public final class ProductUrl extends GenericUrl {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductUrl setGenericValue(String genericValue) {
         super.setGenericValue(genericValue);
@@ -48,7 +55,7 @@ public final class ProductUrl extends GenericUrl {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

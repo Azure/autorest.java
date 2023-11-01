@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Used in an internal operation, should be generated but not exported. */
+/**
+ * Used in an internal operation, should be generated but not exported.
+ */
 @Immutable
 public final class NoDecoratorModelInInternal {
     /*
@@ -21,7 +23,7 @@ public final class NoDecoratorModelInInternal {
 
     /**
      * Creates an instance of NoDecoratorModelInInternal class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class NoDecoratorModelInInternal {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

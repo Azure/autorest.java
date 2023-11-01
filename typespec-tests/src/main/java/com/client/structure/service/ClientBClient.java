@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.ClientBClientImpl;
 
-/** Initializes a new instance of the synchronous ClientBClient type. */
+/**
+ * Initializes a new instance of the synchronous ClientBClient type.
+ */
 @ServiceClient(builder = ClientBClientBuilder.class)
 public final class ClientBClient {
-    @Generated private final ClientBClientImpl serviceClient;
+    @Generated
+    private final ClientBClientImpl serviceClient;
 
     /**
      * Initializes an instance of ClientBClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ClientBClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class ClientBClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +68,7 @@ public final class ClientBClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,7 +84,7 @@ public final class ClientBClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -98,7 +101,7 @@ public final class ClientBClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -115,7 +118,7 @@ public final class ClientBClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

@@ -6,9 +6,13 @@ package com.cadl.flatten;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of FlattenClient. */
+/**
+ * Service version of FlattenClient.
+ */
 public enum FlattenServiceVersion implements ServiceVersion {
-    /** Enum value 2022-06-01-preview. */
+    /**
+     * Enum value 2022-06-01-preview.
+     */
     V2022_06_01_PREVIEW("2022-06-01-preview");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum FlattenServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum FlattenServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link FlattenServiceVersion}.
      */
     public static FlattenServiceVersion getLatest() {

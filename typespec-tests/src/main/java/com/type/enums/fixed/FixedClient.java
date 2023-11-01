@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.enums.fixed.implementation.FixedClientImpl;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 
-/** Initializes a new instance of the synchronous FixedClient type. */
+/**
+ * Initializes a new instance of the synchronous FixedClient type.
+ */
 @ServiceClient(builder = FixedClientBuilder.class)
 public final class FixedClient {
-    @Generated private final FixedClientImpl serviceClient;
+    @Generated
+    private final FixedClientImpl serviceClient;
 
     /**
      * Initializes an instance of FixedClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class FixedClient {
 
     /**
      * getKnownValue.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,13 +60,13 @@ public final class FixedClient {
 
     /**
      * putKnownValue.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -80,13 +83,13 @@ public final class FixedClient {
 
     /**
      * putUnknownValue.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -103,7 +106,7 @@ public final class FixedClient {
 
     /**
      * getKnownValue.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -121,7 +124,7 @@ public final class FixedClient {
 
     /**
      * putKnownValue.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -140,7 +143,7 @@ public final class FixedClient {
 
     /**
      * putUnknownValue.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -20,14 +20,17 @@ import com.specialwords.implementation.ModelPropertiesImpl;
 import com.specialwords.models.SameAsModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SpecialWordsClient type. */
+/**
+ * Initializes a new instance of the asynchronous SpecialWordsClient type.
+ */
 @ServiceClient(builder = SpecialWordsClientBuilder.class, isAsync = true)
 public final class ModelPropertiesAsyncClient {
-    @Generated private final ModelPropertiesImpl serviceClient;
+    @Generated
+    private final ModelPropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ModelPropertiesAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class ModelPropertiesAsyncClient {
 
     /**
      * The sameAsModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     SameAsModel: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,7 +65,7 @@ public final class ModelPropertiesAsyncClient {
 
     /**
      * The sameAsModel operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -7,15 +7,23 @@ package fixtures.constants.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for NoModelAsStringNoRequiredTwoValueDefaultOpEnum. */
+/**
+ * Defines values for NoModelAsStringNoRequiredTwoValueDefaultOpEnum.
+ */
 public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
-    /** Enum value value1. */
+    /**
+     * Enum value value1.
+     */
     VALUE1("value1"),
 
-    /** Enum value value2. */
+    /**
+     * Enum value value2.
+     */
     VALUE2("value2");
 
-    /** The actual serialized value for a NoModelAsStringNoRequiredTwoValueDefaultOpEnum instance. */
+    /**
+     * The actual serialized value for a NoModelAsStringNoRequiredTwoValueDefaultOpEnum instance.
+     */
     private final String value;
 
     NoModelAsStringNoRequiredTwoValueDefaultOpEnum(String value) {
@@ -24,7 +32,7 @@ public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
 
     /**
      * Parses a serialized value to a NoModelAsStringNoRequiredTwoValueDefaultOpEnum instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed NoModelAsStringNoRequiredTwoValueDefaultOpEnum object, or null if unable to parse.
      */
@@ -33,8 +41,8 @@ public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
         if (value == null) {
             return null;
         }
-        NoModelAsStringNoRequiredTwoValueDefaultOpEnum[] items =
-                NoModelAsStringNoRequiredTwoValueDefaultOpEnum.values();
+        NoModelAsStringNoRequiredTwoValueDefaultOpEnum[] items
+            = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.values();
         for (NoModelAsStringNoRequiredTwoValueDefaultOpEnum item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
@@ -43,7 +51,9 @@ public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

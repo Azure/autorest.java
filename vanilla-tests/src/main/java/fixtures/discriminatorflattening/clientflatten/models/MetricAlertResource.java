@@ -7,7 +7,9 @@ package fixtures.discriminatorflattening.clientflatten.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The metric alert resource. */
+/**
+ * The metric alert resource.
+ */
 @Fluent
 public final class MetricAlertResource {
     /*
@@ -16,12 +18,15 @@ public final class MetricAlertResource {
     @JsonProperty(value = "properties", required = true)
     private MetricAlertProperties innerProperties = new MetricAlertProperties();
 
-    /** Creates an instance of MetricAlertResource class. */
-    public MetricAlertResource() {}
+    /**
+     * Creates an instance of MetricAlertResource class.
+     */
+    public MetricAlertResource() {
+    }
 
     /**
      * Get the innerProperties property: The alert rule properties of the resource.
-     *
+     * 
      * @return the innerProperties value.
      */
     private MetricAlertProperties getInnerProperties() {
@@ -30,7 +35,7 @@ public final class MetricAlertResource {
 
     /**
      * Get the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @return the criteria value.
      */
     public MetricAlertCriteria getCriteria() {
@@ -39,7 +44,7 @@ public final class MetricAlertResource {
 
     /**
      * Set the criteria property: defines the specific alert criteria information.
-     *
+     * 
      * @param criteria the criteria value to set.
      * @return the MetricAlertResource object itself.
      */
@@ -53,13 +58,13 @@ public final class MetricAlertResource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getInnerProperties() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property innerProperties in model MetricAlertResource");
+                "Missing required property innerProperties in model MetricAlertResource");
         } else {
             getInnerProperties().validate();
         }

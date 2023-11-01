@@ -9,7 +9,9 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** LoadBalancer resource. */
+/**
+ * LoadBalancer resource.
+ */
 @Fluent
 public final class LoadBalancer {
     /*
@@ -19,12 +21,15 @@ public final class LoadBalancer {
     @JsonProperty(value = "properties.backendAddressPools")
     private List<BackendAddressPool> backendAddressPools;
 
-    /** Creates an instance of LoadBalancer class. */
-    public LoadBalancer() {}
+    /**
+     * Creates an instance of LoadBalancer class.
+     */
+    public LoadBalancer() {
+    }
 
     /**
      * Get the backendAddressPools property: Collection of backend address pools used by a load balancer.
-     *
+     * 
      * @return the backendAddressPools value.
      */
     public List<BackendAddressPool> getBackendAddressPools() {
@@ -33,7 +38,7 @@ public final class LoadBalancer {
 
     /**
      * Set the backendAddressPools property: Collection of backend address pools used by a load balancer.
-     *
+     * 
      * @param backendAddressPools the backendAddressPools value to set.
      * @return the LoadBalancer object itself.
      */
@@ -44,7 +49,7 @@ public final class LoadBalancer {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

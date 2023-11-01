@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-/** The DatetimeWrapper model. */
+/**
+ * The DatetimeWrapper model.
+ */
 @Fluent
 public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> {
     /*
@@ -26,12 +28,15 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      */
     private OffsetDateTime now;
 
-    /** Creates an instance of DatetimeWrapper class. */
-    public DatetimeWrapper() {}
+    /**
+     * Creates an instance of DatetimeWrapper class.
+     */
+    public DatetimeWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public OffsetDateTime getField() {
@@ -40,7 +45,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
      */
@@ -51,7 +56,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
 
     /**
      * Get the now property: The now property.
-     *
+     * 
      * @return the now value.
      */
     public OffsetDateTime getNow() {
@@ -60,7 +65,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
 
     /**
      * Set the now property: The now property.
-     *
+     * 
      * @param now the now value to set.
      * @return the DatetimeWrapper object itself.
      */
@@ -71,10 +76,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -86,34 +92,31 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
 
     /**
      * Reads an instance of DatetimeWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DatetimeWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DatetimeWrapper.
      */
     public static DatetimeWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    DatetimeWrapper deserializedDatetimeWrapper = new DatetimeWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            DatetimeWrapper deserializedDatetimeWrapper = new DatetimeWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field".equals(fieldName)) {
-                            deserializedDatetimeWrapper.field =
-                                    reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                        } else if ("now".equals(fieldName)) {
-                            deserializedDatetimeWrapper.now =
-                                    reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field".equals(fieldName)) {
+                    deserializedDatetimeWrapper.field
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("now".equals(fieldName)) {
+                    deserializedDatetimeWrapper.now
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedDatetimeWrapper;
-                });
+            return deserializedDatetimeWrapper;
+        });
     }
 }

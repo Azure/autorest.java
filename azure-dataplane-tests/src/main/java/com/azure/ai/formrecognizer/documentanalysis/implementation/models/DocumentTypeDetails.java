@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Document type info. */
+/**
+ * Document type info.
+ */
 @Fluent
 public final class DocumentTypeDetails {
     /*
@@ -35,12 +37,15 @@ public final class DocumentTypeDetails {
     @JsonProperty(value = "fieldConfidence")
     private Map<String, Float> fieldConfidence;
 
-    /** Creates an instance of DocumentTypeDetails class. */
-    public DocumentTypeDetails() {}
+    /**
+     * Creates an instance of DocumentTypeDetails class.
+     */
+    public DocumentTypeDetails() {
+    }
 
     /**
      * Get the description property: Document model description.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -49,7 +54,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Set the description property: Document model description.
-     *
+     * 
      * @param description the description value to set.
      * @return the DocumentTypeDetails object itself.
      */
@@ -60,7 +65,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Get the buildMode property: Custom document model build mode.
-     *
+     * 
      * @return the buildMode value.
      */
     public DocumentBuildMode getBuildMode() {
@@ -69,7 +74,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Set the buildMode property: Custom document model build mode.
-     *
+     * 
      * @param buildMode the buildMode value to set.
      * @return the DocumentTypeDetails object itself.
      */
@@ -80,7 +85,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Get the fieldSchema property: Description of the document semantic schema using a JSON Schema style syntax.
-     *
+     * 
      * @return the fieldSchema value.
      */
     public Map<String, DocumentFieldSchema> getFieldSchema() {
@@ -89,7 +94,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Set the fieldSchema property: Description of the document semantic schema using a JSON Schema style syntax.
-     *
+     * 
      * @param fieldSchema the fieldSchema value to set.
      * @return the DocumentTypeDetails object itself.
      */
@@ -100,7 +105,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Get the fieldConfidence property: Estimated confidence for each field.
-     *
+     * 
      * @return the fieldConfidence value.
      */
     public Map<String, Float> getFieldConfidence() {
@@ -109,7 +114,7 @@ public final class DocumentTypeDetails {
 
     /**
      * Set the fieldConfidence property: Estimated confidence for each field.
-     *
+     * 
      * @param fieldConfidence the fieldConfidence value to set.
      * @return the DocumentTypeDetails object itself.
      */

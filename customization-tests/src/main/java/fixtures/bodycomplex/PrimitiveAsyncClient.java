@@ -24,14 +24,17 @@ import fixtures.bodycomplex.implementation.models.LongWrapper;
 import fixtures.bodycomplex.implementation.models.StringWrapper;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class PrimitiveAsyncClient {
-    @Generated private final PrimitivesImpl serviceClient;
+    @Generated
+    private final PrimitivesImpl serviceClient;
 
     /**
      * Initializes an instance of PrimitiveAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -41,11 +44,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -55,7 +58,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with integer properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with integer properties on successful completion of {@link Mono}.
@@ -68,7 +71,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -83,7 +86,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with integer properties.
-     *
+     * 
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -98,7 +101,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties along with {@link Response} on successful completion of {@link Mono}.
@@ -111,7 +114,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with long properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with long properties on successful completion of {@link Mono}.
@@ -124,7 +127,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -139,7 +142,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with long properties.
-     *
+     * 
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -154,7 +157,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
@@ -167,7 +170,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with float properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with float properties on successful completion of {@link Mono}.
@@ -180,7 +183,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -195,7 +198,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with float properties.
-     *
+     * 
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -210,11 +213,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -224,7 +227,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with double properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with double properties on successful completion of {@link Mono}.
@@ -237,7 +240,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -252,7 +255,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with double properties.
-     *
+     * 
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -267,7 +270,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties along with {@link Response} on successful completion of {@link Mono}.
@@ -280,7 +283,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with bool properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with bool properties on successful completion of {@link Mono}.
@@ -293,7 +296,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -308,7 +311,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with bool properties.
-     *
+     * 
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -323,11 +326,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -337,7 +340,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with string properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with string properties on successful completion of {@link Mono}.
@@ -350,7 +353,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -365,7 +368,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with string properties.
-     *
+     * 
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -380,7 +383,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties along with {@link Response} on successful completion of {@link Mono}.
@@ -393,7 +396,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with date properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with date properties on successful completion of {@link Mono}.
@@ -406,7 +409,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -421,7 +424,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with date properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -436,11 +439,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -450,7 +453,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with datetime properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetime properties on successful completion of {@link Mono}.
@@ -463,7 +466,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -478,7 +481,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with datetime properties.
-     *
+     * 
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -493,11 +496,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -507,7 +510,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with datetimeRfc1123 properties on successful completion of {@link Mono}.
@@ -520,7 +523,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -535,7 +538,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     *
+     * 
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -550,11 +553,11 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -564,7 +567,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with duration properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with duration properties on successful completion of {@link Mono}.
@@ -577,7 +580,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -592,7 +595,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with duration properties.
-     *
+     * 
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -607,7 +610,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties along with {@link Response} on successful completion of {@link Mono}.
@@ -620,7 +623,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Get complex types with byte properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with byte properties on successful completion of {@link Mono}.
@@ -633,7 +636,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -648,7 +651,7 @@ public final class PrimitiveAsyncClient {
 
     /**
      * Put complex types with byte properties.
-     *
+     * 
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

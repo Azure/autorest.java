@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Product model. */
+/**
+ * The Product model.
+ */
 @Immutable
 public class Product {
     /*
@@ -21,7 +23,7 @@ public class Product {
 
     /**
      * Creates an instance of Product class.
-     *
+     * 
      * @param received the received value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public class Product {
 
     /**
      * Get the received property: The received property.
-     *
+     * 
      * @return the received value.
      */
     @Generated

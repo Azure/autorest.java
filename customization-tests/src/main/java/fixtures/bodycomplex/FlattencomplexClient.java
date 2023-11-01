@@ -14,14 +14,17 @@ import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 import fixtures.bodycomplex.implementation.models.MyBaseType;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class FlattencomplexClient {
-    @Generated private final FlattencomplexesImpl serviceClient;
+    @Generated
+    private final FlattencomplexesImpl serviceClient;
 
     /**
      * Initializes an instance of FlattencomplexClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class FlattencomplexClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -46,7 +49,7 @@ public final class FlattencomplexClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

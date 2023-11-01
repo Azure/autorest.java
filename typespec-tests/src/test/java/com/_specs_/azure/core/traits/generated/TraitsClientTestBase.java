@@ -21,15 +21,14 @@ class TraitsClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        TraitsClientBuilder traitsClientbuilder =
-                new TraitsClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        TraitsClientBuilder traitsClientbuilder = new TraitsClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             traitsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             traitsClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         traitsClient = traitsClientbuilder.buildClient();
+
     }
 }

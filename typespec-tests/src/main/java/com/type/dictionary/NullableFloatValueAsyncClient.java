@@ -21,14 +21,17 @@ import com.type.dictionary.implementation.NullableFloatValuesImpl;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the asynchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class NullableFloatValueAsyncClient {
-    @Generated private final NullableFloatValuesImpl serviceClient;
+    @Generated
+    private final NullableFloatValuesImpl serviceClient;
 
     /**
      * Initializes an instance of NullableFloatValueAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class NullableFloatValueAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: double (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -62,15 +65,15 @@ public final class NullableFloatValueAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: double (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class NullableFloatValueAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -100,14 +103,13 @@ public final class NullableFloatValueAsyncClient {
     public Mono<Map<String, Double>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_DOUBLE));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_DOUBLE));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -126,6 +128,7 @@ public final class NullableFloatValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE =
-            new TypeReference<Map<String, Double>>() {};
+    private static final TypeReference<Map<String, Double>> TYPE_REFERENCE_MAP_STRING_DOUBLE
+        = new TypeReference<Map<String, Double>>() {
+        };
 }

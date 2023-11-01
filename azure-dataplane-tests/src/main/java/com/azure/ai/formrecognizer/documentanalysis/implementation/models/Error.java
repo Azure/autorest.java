@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Error info. */
+/**
+ * Error info.
+ */
 @Fluent
 public final class Error {
     /*
@@ -41,12 +43,15 @@ public final class Error {
     @JsonProperty(value = "innererror")
     private InnerError innererror;
 
-    /** Creates an instance of Error class. */
-    public Error() {}
+    /**
+     * Creates an instance of Error class.
+     */
+    public Error() {
+    }
 
     /**
      * Get the code property: Error code.
-     *
+     * 
      * @return the code value.
      */
     public String getCode() {
@@ -55,7 +60,7 @@ public final class Error {
 
     /**
      * Set the code property: Error code.
-     *
+     * 
      * @param code the code value to set.
      * @return the Error object itself.
      */
@@ -66,7 +71,7 @@ public final class Error {
 
     /**
      * Get the message property: Error message.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -75,7 +80,7 @@ public final class Error {
 
     /**
      * Set the message property: Error message.
-     *
+     * 
      * @param message the message value to set.
      * @return the Error object itself.
      */
@@ -86,7 +91,7 @@ public final class Error {
 
     /**
      * Get the target property: Target of the error.
-     *
+     * 
      * @return the target value.
      */
     public String getTarget() {
@@ -95,7 +100,7 @@ public final class Error {
 
     /**
      * Set the target property: Target of the error.
-     *
+     * 
      * @param target the target value to set.
      * @return the Error object itself.
      */
@@ -106,7 +111,7 @@ public final class Error {
 
     /**
      * Get the details property: List of detailed errors.
-     *
+     * 
      * @return the details value.
      */
     public List<Error> getDetails() {
@@ -115,7 +120,7 @@ public final class Error {
 
     /**
      * Set the details property: List of detailed errors.
-     *
+     * 
      * @param details the details value to set.
      * @return the Error object itself.
      */
@@ -126,7 +131,7 @@ public final class Error {
 
     /**
      * Get the innererror property: Detailed error.
-     *
+     * 
      * @return the innererror value.
      */
     public InnerError getInnererror() {
@@ -135,7 +140,7 @@ public final class Error {
 
     /**
      * Set the innererror property: Detailed error.
-     *
+     * 
      * @param innererror the innererror value to set.
      * @return the Error object itself.
      */

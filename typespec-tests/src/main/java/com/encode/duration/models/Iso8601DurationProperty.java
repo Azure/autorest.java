@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** The Iso8601DurationProperty model. */
+/**
+ * The Iso8601DurationProperty model.
+ */
 @Immutable
 public final class Iso8601DurationProperty {
     /*
@@ -22,7 +24,7 @@ public final class Iso8601DurationProperty {
 
     /**
      * Creates an instance of Iso8601DurationProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class Iso8601DurationProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

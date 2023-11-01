@@ -22,16 +22,16 @@ class PatchClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        PatchClientBuilder patchClientbuilder =
-                new PatchClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        PatchClientBuilder patchClientbuilder
+            = new PatchClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             patchClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             patchClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         patchClient = patchClientbuilder.buildClient();
+
     }
 }

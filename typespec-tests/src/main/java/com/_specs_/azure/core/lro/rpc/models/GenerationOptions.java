@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Options for the generation. */
+/**
+ * Options for the generation.
+ */
 @Immutable
 public final class GenerationOptions {
     /*
@@ -21,7 +23,7 @@ public final class GenerationOptions {
 
     /**
      * Creates an instance of GenerationOptions class.
-     *
+     * 
      * @param prompt the prompt value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class GenerationOptions {
 
     /**
      * Get the prompt property: Prompt.
-     *
+     * 
      * @return the prompt value.
      */
     @Generated

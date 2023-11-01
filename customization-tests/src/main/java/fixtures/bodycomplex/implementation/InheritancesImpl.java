@@ -23,22 +23,28 @@ import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Siamese;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Inheritances. */
+/**
+ * An instance of this class provides access to all the operations defined in Inheritances.
+ */
 public final class InheritancesImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final InheritancesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of InheritancesImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     InheritancesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service =
-                RestProxy.create(InheritancesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(InheritancesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -50,24 +56,21 @@ public final class InheritancesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface InheritancesService {
         @Get("/complex/inheritance/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Siamese>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Siamese>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/inheritance/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Siamese complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host,
+            @BodyParam("application/json") Siamese complexBody, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others along with {@link Response} on successful completion of {@link Mono}.
@@ -80,7 +83,7 @@ public final class InheritancesImpl {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -95,7 +98,7 @@ public final class InheritancesImpl {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others on successful completion of {@link Mono}.
@@ -107,7 +110,7 @@ public final class InheritancesImpl {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -121,7 +124,7 @@ public final class InheritancesImpl {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -135,7 +138,7 @@ public final class InheritancesImpl {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
@@ -147,10 +150,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -164,10 +167,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -182,10 +185,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -198,10 +201,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -215,10 +218,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -232,10 +235,10 @@ public final class InheritancesImpl {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

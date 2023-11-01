@@ -20,14 +20,17 @@ import com.type.dictionary.implementation.RecursiveModelValuesImpl;
 import com.type.dictionary.models.InnerModel;
 import java.util.Map;
 
-/** Initializes a new instance of the synchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the synchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class)
 public final class RecursiveModelValueClient {
-    @Generated private final RecursiveModelValuesImpl serviceClient;
+    @Generated
+    private final RecursiveModelValuesImpl serviceClient;
 
     /**
      * Initializes an instance of RecursiveModelValueClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class RecursiveModelValueClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String (Required): {
@@ -50,7 +53,7 @@ public final class RecursiveModelValueClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -66,9 +69,9 @@ public final class RecursiveModelValueClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String (Required): {
@@ -79,7 +82,7 @@ public final class RecursiveModelValueClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of InnerModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -96,7 +99,7 @@ public final class RecursiveModelValueClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -114,7 +117,7 @@ public final class RecursiveModelValueClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of InnerModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -132,6 +135,7 @@ public final class RecursiveModelValueClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL =
-            new TypeReference<Map<String, InnerModel>>() {};
+    private static final TypeReference<Map<String, InnerModel>> TYPE_REFERENCE_MAP_STRING_INNER_MODEL
+        = new TypeReference<Map<String, InnerModel>>() {
+        };
 }

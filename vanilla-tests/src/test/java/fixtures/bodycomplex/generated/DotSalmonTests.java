@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Assertions;
 public final class DotSalmonTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        DotSalmon model =
-                BinaryData.fromString(
-                                "{\"fish.type\":\"DotSalmon\",\"location\":\"kpode\",\"iswild\":true,\"species\":\"inuvamiheogn\"}")
-                        .toObject(DotSalmon.class);
+        DotSalmon model = BinaryData
+            .fromString(
+                "{\"fish.type\":\"DotSalmon\",\"location\":\"kpode\",\"iswild\":true,\"species\":\"inuvamiheogn\"}")
+            .toObject(DotSalmon.class);
         Assertions.assertEquals("inuvamiheogn", model.getSpecies());
         Assertions.assertEquals("kpode", model.getLocation());
         Assertions.assertEquals(true, model.iswild());

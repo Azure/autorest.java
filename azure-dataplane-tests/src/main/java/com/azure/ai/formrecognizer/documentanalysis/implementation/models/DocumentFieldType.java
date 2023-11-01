@@ -8,58 +8,87 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Semantic data type of the field value. */
+/**
+ * Semantic data type of the field value.
+ */
 public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldType> {
-    /** Static value string for DocumentFieldType. */
+    /**
+     * Static value string for DocumentFieldType.
+     */
     public static final DocumentFieldType STRING = fromString("string");
 
-    /** Static value date for DocumentFieldType. */
+    /**
+     * Static value date for DocumentFieldType.
+     */
     public static final DocumentFieldType DATE = fromString("date");
 
-    /** Static value time for DocumentFieldType. */
+    /**
+     * Static value time for DocumentFieldType.
+     */
     public static final DocumentFieldType TIME = fromString("time");
 
-    /** Static value phoneNumber for DocumentFieldType. */
+    /**
+     * Static value phoneNumber for DocumentFieldType.
+     */
     public static final DocumentFieldType PHONE_NUMBER = fromString("phoneNumber");
 
-    /** Static value number for DocumentFieldType. */
+    /**
+     * Static value number for DocumentFieldType.
+     */
     public static final DocumentFieldType NUMBER = fromString("number");
 
-    /** Static value integer for DocumentFieldType. */
+    /**
+     * Static value integer for DocumentFieldType.
+     */
     public static final DocumentFieldType INTEGER = fromString("integer");
 
-    /** Static value selectionMark for DocumentFieldType. */
+    /**
+     * Static value selectionMark for DocumentFieldType.
+     */
     public static final DocumentFieldType SELECTION_MARK = fromString("selectionMark");
 
-    /** Static value countryRegion for DocumentFieldType. */
+    /**
+     * Static value countryRegion for DocumentFieldType.
+     */
     public static final DocumentFieldType COUNTRY_REGION = fromString("countryRegion");
 
-    /** Static value signature for DocumentFieldType. */
+    /**
+     * Static value signature for DocumentFieldType.
+     */
     public static final DocumentFieldType SIGNATURE = fromString("signature");
 
-    /** Static value array for DocumentFieldType. */
+    /**
+     * Static value array for DocumentFieldType.
+     */
     public static final DocumentFieldType ARRAY = fromString("array");
 
-    /** Static value object for DocumentFieldType. */
+    /**
+     * Static value object for DocumentFieldType.
+     */
     public static final DocumentFieldType OBJECT = fromString("object");
 
-    /** Static value currency for DocumentFieldType. */
+    /**
+     * Static value currency for DocumentFieldType.
+     */
     public static final DocumentFieldType CURRENCY = fromString("currency");
 
-    /** Static value address for DocumentFieldType. */
+    /**
+     * Static value address for DocumentFieldType.
+     */
     public static final DocumentFieldType ADDRESS = fromString("address");
 
     /**
      * Creates a new instance of DocumentFieldType value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public DocumentFieldType() {}
+    public DocumentFieldType() {
+    }
 
     /**
      * Creates or finds a DocumentFieldType from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding DocumentFieldType.
      */
@@ -70,7 +99,7 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
 
     /**
      * Gets known DocumentFieldType values.
-     *
+     * 
      * @return known DocumentFieldType values.
      */
     public static Collection<DocumentFieldType> values() {
