@@ -20,14 +20,17 @@ import com.type.model.visibility.implementation.VisibilityClientImpl;
 import com.type.model.visibility.models.VisibilityModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous VisibilityClient type. */
+/**
+ * Initializes a new instance of the asynchronous VisibilityClient type.
+ */
 @ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
 public final class VisibilityAsyncClient {
-    @Generated private final VisibilityClientImpl serviceClient;
+    @Generated
+    private final VisibilityClientImpl serviceClient;
 
     /**
      * Initializes an instance of VisibilityAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The getModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -53,9 +56,9 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -69,15 +72,15 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with visibility properties along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return output model with visibility properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -87,9 +90,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The headModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -103,7 +106,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -120,9 +123,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The putModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -136,7 +139,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -153,9 +156,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The patchModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -169,7 +172,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -186,9 +189,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The postModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -202,7 +205,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -219,9 +222,9 @@ public final class VisibilityAsyncClient {
 
     /**
      * The deleteModel operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -235,7 +238,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Output model with visibility properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -252,7 +255,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The getModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -267,14 +270,13 @@ public final class VisibilityAsyncClient {
     public Mono<VisibilityModel> getModel(VisibilityModel input) {
         // Generated convenience method for getModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getModelWithResponse(BinaryData.fromObject(input), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(VisibilityModel.class));
+        return getModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(VisibilityModel.class));
     }
 
     /**
      * The headModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -294,7 +296,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The putModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -314,7 +316,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The patchModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -334,7 +336,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The postModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -354,7 +356,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The deleteModel operation.
-     *
+     * 
      * @param input Output model with visibility properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

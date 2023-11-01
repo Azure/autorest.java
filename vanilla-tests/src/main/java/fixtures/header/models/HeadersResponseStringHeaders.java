@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HeadersResponseStringHeaders model. */
+/**
+ * The HeadersResponseStringHeaders model.
+ */
 @Fluent
 public final class HeadersResponseStringHeaders {
     /*
@@ -23,7 +25,7 @@ public final class HeadersResponseStringHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersResponseStringHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersResponseStringHeaders(HttpHeaders rawHeaders) {
@@ -32,7 +34,7 @@ public final class HeadersResponseStringHeaders {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public String getValue() {
@@ -41,7 +43,7 @@ public final class HeadersResponseStringHeaders {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the HeadersResponseStringHeaders object itself.
      */
@@ -52,8 +54,9 @@ public final class HeadersResponseStringHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

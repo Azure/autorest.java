@@ -47,9 +47,12 @@ public class ClassType implements IType {
 //    private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
 //        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, com.generic.core.http.RestProxy.class));
 //        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, com.generic.core.http.pipeline.HttpPipeline.class));
+//        put(com.azure.core.http.HttpPipelineBuilder.class, new ClassDetails(com.azure.core.http.HttpPipelineBuilder.class, com.generic.core.http.pipeline.HttpPipelineBuilder.class));
 //        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, com.generic.core.models.Context.class));
 //        put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, com.generic.core.http.client.HttpClient.class));
 //        put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, com.generic.core.http.policy.logging.HttpLogOptions.class));
+//        put(com.azure.core.http.policy.HttpPipelinePolicy.class, new ClassDetails(com.azure.core.http.policy.HttpPipelinePolicy.class, com.generic.core.http.pipeline.HttpPipelinePolicy.class));
+//        put(com.azure.core.http.policy.KeyCredentialPolicy.class, new ClassDetails(com.azure.core.http.policy.KeyCredentialPolicy.class, com.generic.core.http.policy.credential.KeyCredentialPolicy.class));
 //        put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, com.generic.core.util.configuration.Configuration.class));
 //        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
 //        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
@@ -87,9 +90,12 @@ public class ClassType implements IType {
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
         put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, "com.generic.core.http.RestProxy"));
         put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
+        put(com.azure.core.http.HttpPipelineBuilder.class, new ClassDetails(com.azure.core.http.HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
         put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, "com.generic.core.models.Context"));
         put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, "com.generic.core.http.client.HttpClient"));
         put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, "com.generic.core.http.policy.logging.HttpLogOptions"));
+        put(com.azure.core.http.policy.HttpPipelinePolicy.class, new ClassDetails(com.azure.core.http.policy.HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
+        put(com.azure.core.http.policy.KeyCredentialPolicy.class, new ClassDetails(com.azure.core.http.policy.KeyCredentialPolicy.class, "com.generic.core.http.policy.credential.KeyCredentialPolicy"));
         put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, "com.generic.core.util.configuration.Configuration"));
         put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, "com.generic.core.models.Headers"));
         put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
@@ -477,6 +483,15 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType ExpandableStringEnum = getClassTypeBuilder(com.azure.core.util.ExpandableStringEnum.class)
+        .build();
+
+    public static final ClassType HttpPipelineBuilder = getClassTypeBuilder(com.azure.core.http.HttpPipelineBuilder.class)
+        .build();
+
+    public static final ClassType KeyCredentialPolicy = getClassTypeBuilder(com.azure.core.http.policy.KeyCredentialPolicy.class)
+        .build();
+
+    public static final ClassType KeyCredentialTrait = getClassTypeBuilder(com.azure.core.client.traits.KeyCredentialTrait.class)
         .build();
 
     public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)

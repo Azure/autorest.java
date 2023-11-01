@@ -6,9 +6,13 @@ package com.azure.ai.formrecognizer.documentanalysis.dpg;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of FormRecognizerClient. */
+/**
+ * Service version of FormRecognizerClient.
+ */
 public enum FormRecognizerServiceVersion implements ServiceVersion {
-    /** Enum value 2022-08-31. */
+    /**
+     * Enum value 2022-08-31.
+     */
     V2022_08_31("2022-08-31");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum FormRecognizerServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum FormRecognizerServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link FormRecognizerServiceVersion}.
      */
     public static FormRecognizerServiceVersion getLatest() {

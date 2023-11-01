@@ -18,14 +18,17 @@ import com.encode.datetime.implementation.HeadersImpl;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous DatetimeClient type. */
+/**
+ * Initializes a new instance of the synchronous DatetimeClient type.
+ */
 @ServiceClient(builder = DatetimeClientBuilder.class)
 public final class HeaderClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class HeaderClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -52,7 +55,7 @@ public final class HeaderClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -69,7 +72,7 @@ public final class HeaderClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,7 +89,7 @@ public final class HeaderClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -103,7 +106,7 @@ public final class HeaderClient {
 
     /**
      * The unixTimestampArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -120,7 +123,7 @@ public final class HeaderClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -139,7 +142,7 @@ public final class HeaderClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -158,7 +161,7 @@ public final class HeaderClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -177,7 +180,7 @@ public final class HeaderClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,7 +199,7 @@ public final class HeaderClient {
 
     /**
      * The unixTimestampArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

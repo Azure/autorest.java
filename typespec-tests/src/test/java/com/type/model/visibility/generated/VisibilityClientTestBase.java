@@ -21,15 +21,15 @@ class VisibilityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        VisibilityClientBuilder visibilityClientbuilder =
-                new VisibilityClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        VisibilityClientBuilder visibilityClientbuilder
+            = new VisibilityClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             visibilityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             visibilityClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         visibilityClient = visibilityClientbuilder.buildClient();
+
     }
 }

@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The NestedModel model. */
+/**
+ * The NestedModel model.
+ */
 @Immutable
 public final class NestedModel {
     /*
@@ -21,7 +23,7 @@ public final class NestedModel {
 
     /**
      * Creates an instance of NestedModel class.
-     *
+     * 
      * @param nested1 the nested1 value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class NestedModel {
 
     /**
      * Get the nested1 property: The nested1 property.
-     *
+     * 
      * @return the nested1 value.
      */
     @Generated

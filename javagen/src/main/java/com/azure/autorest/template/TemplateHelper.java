@@ -49,9 +49,30 @@ public final class TemplateHelper {
     }
 
     private static void createGenericHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
-        function.line("HttpPipeline httpPipeline = HttpPipelineBuilder.createDefaultPipeline();");
-        function.methodReturn("httpPipeline");
-        // TODO: default pipeline is immutable and we need to add KeyCredential policy to the pipeline depending on securityInfo.
+        // TODO: generic
+//        function.line("HttpPipeline httpPipeline = HttpPipelineBuilder.createDefaultPipeline();");
+//        function.methodReturn("httpPipeline");
+//        // TODO: default pipeline is immutable and we need to add KeyCredential policy to the pipeline depending on securityInfo.
+
+        function.line("HttpPipelineBuilder httpPipelineBuilder = new HttpPipelineBuilder();");
+        if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
+            function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
+            function.ifBlock("keyCredential != null", action -> {
+                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                    function.line("policies.add(new KeyCredentialPolicy(\""
+                            + securityInfo.getHeaderName()
+                            + "\", keyCredential));");
+                } else {
+                    function.line("policies.add(new KeyCredentialPolicy(\""
+                            + securityInfo.getHeaderName()
+                            + "\", keyCredential, \""
+                            + securityInfo.getHeaderValuePrefix()
+                            + "\"));");
+                }
+            });
+            function.line("httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));");
+        }
+        function.methodReturn("httpPipelineBuilder.build()");
     }
 
     private static void createAzureHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
@@ -153,7 +174,7 @@ public final class TemplateHelper {
 
     public static void createRestProxyInstance(ServiceClientTemplate template, ServiceClient serviceClient, JavaBlock constructorBlock) {
         if (!JavaSettings.getInstance().isBranded()) {
-            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), "JsonSerializerProvider.createInstance()");
+            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), "null");
         } else {
             constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), template.getSerializerPhrase());
         }

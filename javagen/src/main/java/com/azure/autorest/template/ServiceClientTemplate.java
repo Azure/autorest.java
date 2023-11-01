@@ -206,7 +206,14 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
                 classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructorParams), constructorBlock ->
                 {
-                    if (settings.isFluent()) {
+                    if (!settings.isBranded()) {
+                        if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
+                            if (serviceClient.getProxy() != null) {
+                                constructorBlock.line("this.httpPipeline = httpPipeline;");
+                                TemplateHelper.createRestProxyInstance(this, serviceClient, constructorBlock);
+                            }
+                        }
+                    } else if (settings.isFluent()) {
                         if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter(), serviceClient.getDefaultPollIntervalParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             if (settings.isFluentPremium()) {
                                 constructorBlock.line(String.format("super(%1$s, %2$s, %3$s);", serviceClient.getHttpPipelineParameter().getName(),
@@ -241,22 +248,6 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
                             final String createDefaultSerializerAdapter = writeSerializerInitialization();
                             constructorBlock.line("this(httpPipeline, %1$s%2$s);", createDefaultSerializerAdapter, constructorArgsFinal);
-//                            constructorBlock.line("this.httpPipeline = httpPipeline;");
-//                            constructorParametersCodes.accept(constructorBlock);
-//
-//                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
-//                                if (serviceClientProperty.getDefaultValueExpression() != null) {
-//                                    constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
-//                                }
-//                            }
-//
-//                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
-//                                constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
-//                            }
-//
-//                            if (serviceClient.getProxy() != null) {
-//                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
-//                            }
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getSerializerAdapterParameter()))) {
                             constructorBlock.line("this.httpPipeline = httpPipeline;");
                             writeSerializerMemberInitialization(constructorBlock);
@@ -299,9 +290,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
-        if (!JavaSettings.getInstance().isBranded()) {
-            constructorBlock.line("this.jsonSerializer = jsonSerializer;");
-        } else {
+        if (JavaSettings.getInstance().isBranded()) {
             constructorBlock.line("this.serializerAdapter = serializerAdapter;");
         }
     }
@@ -311,10 +300,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected String writeSerializerInitialization() {
-        if (!JavaSettings.getInstance().isBranded()) {
-            return "JsonSerializerProvider.createInstance()";
-        } else {
+        if (JavaSettings.getInstance().isBranded()) {
             return "JacksonAdapter.createDefaultSerializerAdapter()";
+        } else {
+            return null;
         }
     }
 

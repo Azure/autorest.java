@@ -7,7 +7,9 @@ package fixtures.xmlservice.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The JsonInput model. */
+/**
+ * The JsonInput model.
+ */
 @Fluent
 public final class JsonInput {
     /*
@@ -16,12 +18,15 @@ public final class JsonInput {
     @JsonProperty(value = "id")
     private Integer id;
 
-    /** Creates an instance of JsonInput class. */
-    public JsonInput() {}
+    /**
+     * Creates an instance of JsonInput class.
+     */
+    public JsonInput() {
+    }
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public Integer getId() {
@@ -30,7 +35,7 @@ public final class JsonInput {
 
     /**
      * Set the id property: The id property.
-     *
+     * 
      * @param id the id value to set.
      * @return the JsonInput object itself.
      */
@@ -41,8 +46,9 @@ public final class JsonInput {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

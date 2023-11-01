@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Objects;
 
-/** The DurationWrapper model. */
+/**
+ * The DurationWrapper model.
+ */
 @Fluent
 public final class DurationWrapper implements JsonSerializable<DurationWrapper> {
     /*
@@ -21,12 +23,15 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      */
     private Duration field;
 
-    /** Creates an instance of DurationWrapper class. */
-    public DurationWrapper() {}
+    /**
+     * Creates an instance of DurationWrapper class.
+     */
+    public DurationWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public Duration getField() {
@@ -35,7 +40,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the DurationWrapper object itself.
      */
@@ -46,10 +51,11 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -60,29 +66,28 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
 
     /**
      * Reads an instance of DurationWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DurationWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DurationWrapper.
      */
     public static DurationWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    DurationWrapper deserializedDurationWrapper = new DurationWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            DurationWrapper deserializedDurationWrapper = new DurationWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field".equals(fieldName)) {
-                            deserializedDurationWrapper.field =
-                                    reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field".equals(fieldName)) {
+                    deserializedDurationWrapper.field
+                        = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedDurationWrapper;
-                });
+            return deserializedDurationWrapper;
+        });
     }
 }

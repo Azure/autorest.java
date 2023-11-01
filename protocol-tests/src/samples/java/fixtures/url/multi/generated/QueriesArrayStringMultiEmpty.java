@@ -11,14 +11,13 @@ import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuild
 
 public class QueriesArrayStringMultiEmpty {
     public static void main(String[] args) {
-        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient =
-                new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
-                        .host("http://localhost:3000")
-                        .buildClient();
+        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient
+            = new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder().host("http://localhost:3000")
+                .buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
         RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "");
-        Response<Void> response =
-                autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
+        Response<Void> response
+            = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
     }
 }

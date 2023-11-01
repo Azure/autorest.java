@@ -22,16 +22,16 @@ class ErrorModelClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ErrorModelClientBuilder errorModelClientbuilder =
-                new ErrorModelClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ErrorModelClientBuilder errorModelClientbuilder
+            = new ErrorModelClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             errorModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             errorModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         errorModelClient = errorModelClientbuilder.buildClient();
+
     }
 }

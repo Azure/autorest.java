@@ -7,7 +7,9 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The MyException model. */
+/**
+ * The MyException model.
+ */
 @Fluent
 public class MyException {
     /*
@@ -16,12 +18,15 @@ public class MyException {
     @JsonProperty(value = "statusCode")
     private String statusCode;
 
-    /** Creates an instance of MyException class. */
-    public MyException() {}
+    /**
+     * Creates an instance of MyException class.
+     */
+    public MyException() {
+    }
 
     /**
      * Get the statusCode property: The statusCode property.
-     *
+     * 
      * @return the statusCode value.
      */
     public String getStatusCode() {
@@ -30,7 +35,7 @@ public class MyException {
 
     /**
      * Set the statusCode property: The statusCode property.
-     *
+     * 
      * @param statusCode the statusCode value to set.
      * @return the MyException object itself.
      */
@@ -41,8 +46,9 @@ public class MyException {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

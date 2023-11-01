@@ -11,7 +11,8 @@ import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.core.util.CoreUtils;
-import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
 
 public class FluentLiveTestsTemplate {
 
@@ -24,7 +25,7 @@ public class FluentLiveTestsTemplate {
     public void write(FluentLiveTests liveTests, JavaFile javaFile) {
         // write class
         addImports(liveTests, javaFile);
-        javaFile.publicClass(Lists.newArrayList(), liveTests.getClassName() + " extends TestBase", classBlock->{
+        javaFile.publicClass(new ArrayList<>(), liveTests.getClassName() + " extends TestBase", classBlock->{
             for (FluentLiveTestCase testCase : liveTests.getTestCases()) {
                 // write manager field
                 classBlock.privateMemberVariable(liveTests.getManagerType().getName(), liveTests.getManagerName());

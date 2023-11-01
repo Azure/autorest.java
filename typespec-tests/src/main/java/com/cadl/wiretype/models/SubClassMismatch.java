@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** The SubClassMismatch model. */
+/**
+ * The SubClassMismatch model.
+ */
 @Immutable
 public final class SubClassMismatch extends SuperClass {
     /*
@@ -23,7 +25,7 @@ public final class SubClassMismatch extends SuperClass {
 
     /**
      * Creates an instance of SubClassMismatch class.
-     *
+     * 
      * @param dateTime the dateTime value to set.
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
      */
@@ -35,15 +37,14 @@ public final class SubClassMismatch extends SuperClass {
 
     @Generated
     @JsonCreator
-    private SubClassMismatch(
-            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
+    private SubClassMismatch(@JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+        @JsonProperty(value = "dateTimeRfc7231") DateTimeRfc1123 dateTimeRfc7231) {
         this(dateTime, dateTimeRfc7231.getDateTime());
     }
 
     /**
      * Get the dateTimeRfc7231 property: The dateTimeRfc7231 property.
-     *
+     * 
      * @return the dateTimeRfc7231 value.
      */
     @Generated

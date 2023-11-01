@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * summary of Data
- *
- * <p>description of Data.
+ * 
+ * description of Data.
  */
 @Immutable
 public final class BinaryData {
     /*
      * summary of data property
-     *
+     * 
      * description of data property
      */
     @Generated
@@ -28,7 +28,7 @@ public final class BinaryData {
 
     /**
      * Creates an instance of BinaryData class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
@@ -39,9 +39,9 @@ public final class BinaryData {
 
     /**
      * Get the data property: summary of data property
-     *
-     * <p>description of data property.
-     *
+     * 
+     * description of data property.
+     * 
      * @return the data value.
      */
     @Generated

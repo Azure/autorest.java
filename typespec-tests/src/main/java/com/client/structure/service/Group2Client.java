@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.Group2sImpl;
 
-/** Initializes a new instance of the synchronous TwoOperationGroupClient type. */
+/**
+ * Initializes a new instance of the synchronous TwoOperationGroupClient type.
+ */
 @ServiceClient(builder = TwoOperationGroupClientBuilder.class)
 public final class Group2Client {
-    @Generated private final Group2sImpl serviceClient;
+    @Generated
+    private final Group2sImpl serviceClient;
 
     /**
      * Initializes an instance of Group2Client class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class Group2Client {
 
     /**
      * The two operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class Group2Client {
 
     /**
      * The five operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +68,7 @@ public final class Group2Client {
 
     /**
      * The six operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,7 +84,7 @@ public final class Group2Client {
 
     /**
      * The two operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -98,7 +101,7 @@ public final class Group2Client {
 
     /**
      * The five operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -115,7 +118,7 @@ public final class Group2Client {
 
     /**
      * The six operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

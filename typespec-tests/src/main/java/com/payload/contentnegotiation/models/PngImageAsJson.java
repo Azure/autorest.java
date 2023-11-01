@@ -10,7 +10,9 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The PngImageAsJson model. */
+/**
+ * The PngImageAsJson model.
+ */
 @Immutable
 public final class PngImageAsJson {
     /*
@@ -22,7 +24,7 @@ public final class PngImageAsJson {
 
     /**
      * Creates an instance of PngImageAsJson class.
-     *
+     * 
      * @param content the content value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class PngImageAsJson {
 
     /**
      * Get the content property: The content property.
-     *
+     * 
      * @return the content value.
      */
     @Generated

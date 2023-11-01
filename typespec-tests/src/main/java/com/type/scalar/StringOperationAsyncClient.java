@@ -19,14 +19,17 @@ import com.azure.core.util.FluxUtil;
 import com.type.scalar.implementation.StringOperationsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ScalarClient type. */
+/**
+ * Initializes a new instance of the asynchronous ScalarClient type.
+ */
 @ServiceClient(builder = ScalarClientBuilder.class, isAsync = true)
 public final class StringOperationAsyncClient {
-    @Generated private final StringOperationsImpl serviceClient;
+    @Generated
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of StringOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,13 +39,13 @@ public final class StringOperationAsyncClient {
 
     /**
      * get string value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,13 +61,13 @@ public final class StringOperationAsyncClient {
 
     /**
      * put string value.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,7 +84,7 @@ public final class StringOperationAsyncClient {
 
     /**
      * get string value.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -94,14 +97,13 @@ public final class StringOperationAsyncClient {
     public Mono<String> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
      * put string value.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

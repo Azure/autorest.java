@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = PolymorphicrecursiveClientBuilder.class, isAsync = true)
 public final class PolymorphicrecursiveAsyncClient {
-    @Generated private final PolymorphicrecursivesImpl serviceClient;
+    @Generated
+    private final PolymorphicrecursivesImpl serviceClient;
 
     /**
      * Initializes an instance of PolymorphicrecursiveAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class PolymorphicrecursiveAsyncClient {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     species: String (Optional)
@@ -47,14 +50,14 @@ public final class PolymorphicrecursiveAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return complex types that are polymorphic and have recursive references along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -64,9 +67,9 @@ public final class PolymorphicrecursiveAsyncClient {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     species: String (Optional)
@@ -76,14 +79,60 @@ public final class PolymorphicrecursiveAsyncClient {
      *     ]
      * }
      * }</pre>
-     *
-     * @param complexBody Please put a salmon that looks like this: { "fishtype": "salmon", "species": "king", "length":
-     *     1, "age": 1, "location": "alaska", "iswild": true, "siblings": [ { "fishtype": "shark", "species":
-     *     "predator", "length": 20, "age": 6, "siblings": [ { "fishtype": "salmon", "species": "coho", "length": 2,
-     *     "age": 2, "location": "atlantic", "iswild": true, "siblings": [ { "fishtype": "shark", "species": "predator",
-     *     "length": 20, "age": 6 }, { "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, {
-     *     "fishtype": "sawshark", "species": "dangerous", "length": 10, "age": 105 } ] }, { "fishtype": "sawshark",
-     *     "species": "dangerous", "length": 10, "age": 105 } ] }.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

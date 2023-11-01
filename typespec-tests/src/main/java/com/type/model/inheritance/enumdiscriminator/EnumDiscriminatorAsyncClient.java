@@ -21,14 +21,17 @@ import com.type.model.inheritance.enumdiscriminator.models.Dog;
 import com.type.model.inheritance.enumdiscriminator.models.Snake;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous EnumDiscriminatorClient type. */
+/**
+ * Initializes a new instance of the asynchronous EnumDiscriminatorClient type.
+ */
 @ServiceClient(builder = EnumDiscriminatorClientBuilder.class, isAsync = true)
 public final class EnumDiscriminatorAsyncClient {
-    @Generated private final EnumDiscriminatorClientImpl serviceClient;
+    @Generated
+    private final EnumDiscriminatorClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumDiscriminatorAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,22 +41,22 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Receive model with extensible enum discriminator type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,15 +66,15 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Send model with extensible enum discriminator type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Dog to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,15 +91,15 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -106,29 +109,29 @@ public final class EnumDiscriminatorAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getExtensibleModelMissingDiscriminatorWithResponse(
-            RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>>
+        getExtensibleModelMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getExtensibleModelMissingDiscriminatorWithResponseAsync(requestOptions);
     }
 
     /**
      * Get a model containing discriminator value never defined.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     weight: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -138,22 +141,22 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Receive model with fixed enum discriminator type.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -163,15 +166,15 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Send model with fixed enum discriminator type.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input Snake to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -188,15 +191,15 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -212,22 +215,22 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     length: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -237,7 +240,7 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Receive model with extensible enum discriminator type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -250,14 +253,13 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Dog> getExtensibleModel() {
         // Generated convenience method for getExtensibleModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getExtensibleModelWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+        return getExtensibleModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /**
      * Send model with extensible enum discriminator type.
-     *
+     * 
      * @param input Dog to create.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -277,7 +279,7 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -290,14 +292,13 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Dog> getExtensibleModelMissingDiscriminator() {
         // Generated convenience method for getExtensibleModelMissingDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getExtensibleModelMissingDiscriminatorWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+        return getExtensibleModelMissingDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /**
      * Get a model containing discriminator value never defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -310,14 +311,13 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Dog> getExtensibleModelWrongDiscriminator() {
         // Generated convenience method for getExtensibleModelWrongDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getExtensibleModelWrongDiscriminatorWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
+        return getExtensibleModelWrongDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Dog.class));
     }
 
     /**
      * Receive model with fixed enum discriminator type.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -330,14 +330,13 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Snake> getFixedModel() {
         // Generated convenience method for getFixedModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getFixedModelWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
+        return getFixedModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
     }
 
     /**
      * Send model with fixed enum discriminator type.
-     *
+     * 
      * @param input Snake to create.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -357,7 +356,7 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -370,14 +369,13 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Snake> getFixedModelMissingDiscriminator() {
         // Generated convenience method for getFixedModelMissingDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getFixedModelMissingDiscriminatorWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
+        return getFixedModelMissingDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
     }
 
     /**
      * Get a model containing discriminator value never defined.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -390,8 +388,7 @@ public final class EnumDiscriminatorAsyncClient {
     public Mono<Snake> getFixedModelWrongDiscriminator() {
         // Generated convenience method for getFixedModelWrongDiscriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getFixedModelWrongDiscriminatorWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
+        return getFixedModelWrongDiscriminatorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Snake.class));
     }
 }

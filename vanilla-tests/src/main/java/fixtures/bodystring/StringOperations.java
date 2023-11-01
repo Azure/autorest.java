@@ -10,11 +10,13 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in StringOperations. */
+/**
+ * An instance of this class provides access to all the operations defined in StringOperations.
+ */
 public interface StringOperations {
     /**
      * Get null string value value.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value along with {@link Response} on successful completion of {@link Mono}.
@@ -24,7 +26,7 @@ public interface StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -36,7 +38,7 @@ public interface StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value on successful completion of {@link Mono}.
@@ -46,7 +48,7 @@ public interface StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -58,7 +60,7 @@ public interface StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -70,7 +72,7 @@ public interface StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value.
@@ -80,7 +82,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -92,7 +94,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -105,7 +107,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -117,7 +119,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -127,7 +129,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -140,7 +142,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -153,7 +155,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -164,7 +166,7 @@ public interface StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -173,7 +175,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value '' along with {@link Response} on successful completion of {@link Mono}.
@@ -183,7 +185,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -195,7 +197,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value '' on successful completion of {@link Mono}.
@@ -205,7 +207,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -217,7 +219,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -229,7 +231,7 @@ public interface StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value ''.
@@ -239,7 +241,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -249,7 +251,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -261,7 +263,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -271,7 +273,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -283,7 +285,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -295,7 +297,7 @@ public interface StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -304,68 +306,68 @@ public interface StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getMbcsWithResponseAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getMbcsWithResponseAsync(Context context);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<String> getMbcsAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<String> getMbcsAsync(Context context);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<String> getMbcsWithResponse(Context context);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -375,7 +377,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -385,7 +387,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -397,7 +399,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -407,7 +409,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -419,7 +421,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -431,7 +433,7 @@ public interface StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -441,12 +443,12 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getWhitespaceWithResponseAsync();
@@ -454,14 +456,14 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getWhitespaceWithResponseAsync(Context context);
@@ -469,12 +471,12 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
-     *     completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<String> getWhitespaceAsync();
@@ -482,14 +484,14 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
-     *     completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<String> getWhitespaceAsync(Context context);
@@ -497,14 +499,14 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<String> getWhitespaceWithResponse(Context context);
@@ -512,11 +514,11 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     String getWhitespace();
@@ -524,7 +526,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -535,7 +537,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -548,7 +550,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -559,7 +561,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -572,7 +574,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -585,7 +587,7 @@ public interface StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -594,31 +596,31 @@ public interface StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getNotProvidedWithResponseAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<String>> getNotProvidedWithResponseAsync(Context context);
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload on successful completion of {@link Mono}.
@@ -628,7 +630,7 @@ public interface StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -640,7 +642,7 @@ public interface StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -652,7 +654,7 @@ public interface StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload.
@@ -662,7 +664,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded along with {@link Response} on successful completion of {@link Mono}.
@@ -672,7 +674,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -684,7 +686,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded on successful completion of {@link Mono}.
@@ -694,7 +696,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -706,7 +708,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -718,7 +720,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded.
@@ -728,7 +730,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded along with {@link Response} on successful completion of {@link Mono}.
@@ -738,7 +740,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -750,7 +752,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded on successful completion of {@link Mono}.
@@ -760,7 +762,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -772,7 +774,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -784,7 +786,7 @@ public interface StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded.
@@ -794,7 +796,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -806,7 +808,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -819,7 +821,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -831,7 +833,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -844,7 +846,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -857,7 +859,7 @@ public interface StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -868,31 +870,31 @@ public interface StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync();
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync(Context context);
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded on successful completion of {@link Mono}.
@@ -902,7 +904,7 @@ public interface StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -914,7 +916,7 @@ public interface StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
@@ -926,7 +928,7 @@ public interface StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded.

@@ -11,12 +11,12 @@ import fixtures.header.AutoRestSwaggerBatHeaderServiceClientBuilder;
 
 public class HeaderParamInteger {
     public static void main(String[] args) {
-        AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient =
-                new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
+        AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient
+            = new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.header.generated.headerparaminteger.headerparaminteger
         RequestOptions requestOptions = new RequestOptions();
-        Response<Void> response =
-                autoRestSwaggerBatHeaderServiceClient.paramIntegerWithResponse("positive", 1, requestOptions);
+        Response<Void> response
+            = autoRestSwaggerBatHeaderServiceClient.paramIntegerWithResponse("positive", 1, requestOptions);
         // END:fixtures.header.generated.headerparaminteger.headerparaminteger
     }
 }

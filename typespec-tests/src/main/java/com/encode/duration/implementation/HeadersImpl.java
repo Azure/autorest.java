@@ -27,17 +27,23 @@ import java.time.Duration;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Headers. */
+/**
+ * An instance of this class provides access to all the operations defined in Headers.
+ */
 public final class HeadersImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final DurationClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HeadersImpl(DurationClientImpl client) {
@@ -46,196 +52,106 @@ public final class HeadersImpl {
     }
 
     /**
-     * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DurationClientHeader")
     public interface HeadersService {
         @Get("/encode/duration/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(
-                @HeaderParam("duration") Duration duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> defaultMethod(@HeaderParam("duration") Duration duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(
-                @HeaderParam("duration") Duration duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> defaultMethodSync(@HeaderParam("duration") Duration duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601(
-                @HeaderParam("duration") Duration duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> iso8601(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601Sync(
-                @HeaderParam("duration") Duration duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> iso8601Sync(@HeaderParam("duration") Duration duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601Array(
-                @HeaderParam("duration") String duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> iso8601Array(@HeaderParam("duration") String duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601ArraySync(
-                @HeaderParam("duration") String duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> iso8601ArraySync(@HeaderParam("duration") String duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> int32Seconds(
-                @HeaderParam("duration") long duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> int32Seconds(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> int32SecondsSync(
-                @HeaderParam("duration") long duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> int32SecondsSync(@HeaderParam("duration") long duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatSeconds(
-                @HeaderParam("duration") double duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> floatSeconds(@HeaderParam("duration") double duration,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatSecondsSync(
-                @HeaderParam("duration") double duration,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> floatSecondsSync(@HeaderParam("duration") double duration, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -252,7 +168,7 @@ public final class HeadersImpl {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -269,7 +185,7 @@ public final class HeadersImpl {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -286,7 +202,7 @@ public final class HeadersImpl {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -303,7 +219,7 @@ public final class HeadersImpl {
 
     /**
      * The iso8601Array operation.
-     *
+     * 
      * @param duration Array of Duration.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -315,15 +231,15 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> iso8601ArrayWithResponseAsync(List<Duration> duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String durationConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
-        return FluxUtil.withContext(
-                context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
+        String durationConverted
+            = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        return FluxUtil
+            .withContext(context -> service.iso8601Array(durationConverted, accept, requestOptions, context));
     }
 
     /**
      * The iso8601Array operation.
-     *
+     * 
      * @param duration Array of Duration.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -335,14 +251,14 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String durationConverted =
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
+        String durationConverted
+            = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
         return service.iso8601ArraySync(durationConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -355,13 +271,13 @@ public final class HeadersImpl {
     public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
         long durationConverted = duration.getSeconds();
-        return FluxUtil.withContext(
-                context -> service.int32Seconds(durationConverted, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.int32Seconds(durationConverted, accept, requestOptions, context));
     }
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -379,7 +295,7 @@ public final class HeadersImpl {
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -392,13 +308,13 @@ public final class HeadersImpl {
     public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         final String accept = "application/json";
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(
-                context -> service.floatSeconds(durationConverted, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.floatSeconds(durationConverted, accept, requestOptions, context));
     }
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

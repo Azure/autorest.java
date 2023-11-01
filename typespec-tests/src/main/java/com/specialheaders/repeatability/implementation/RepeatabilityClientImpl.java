@@ -33,45 +33,54 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the RepeatabilityClient type. */
+/**
+ * Initializes a new instance of the RepeatabilityClient type.
+ */
 public final class RepeatabilityClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final RepeatabilityClientService service;
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of RepeatabilityClient client. */
+    /**
+     * Initializes an instance of RepeatabilityClient client.
+     */
     public RepeatabilityClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of RepeatabilityClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public RepeatabilityClientImpl(HttpPipeline httpPipeline) {
@@ -80,15 +89,15 @@ public final class RepeatabilityClientImpl {
 
     /**
      * Initializes an instance of RepeatabilityClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */
     public RepeatabilityClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
-        this.service =
-                RestProxy.create(RepeatabilityClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service
+            = RestProxy.create(RepeatabilityClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
@@ -99,50 +108,52 @@ public final class RepeatabilityClientImpl {
     @ServiceInterface(name = "RepeatabilityClient")
     public interface RepeatabilityClientService {
         @Post("/special-headers/repeatability/immediateSuccess")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> immediateSuccess(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> immediateSuccess(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/special-headers/repeatability/immediateSuccess")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> immediateSuccessSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> immediateSuccessSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,39 +167,49 @@ public final class RepeatabilityClientImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                        requestLocal
-                                .getHeaders()
-                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
-                    }
-                });
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                        requestLocal
-                                .getHeaders()
-                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
+            }
+        });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
+            }
+        });
         return FluxUtil.withContext(context -> service.immediateSuccess(accept, requestOptionsLocal, context));
     }
 
     /**
      * Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,22 +223,18 @@ public final class RepeatabilityClientImpl {
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                        requestLocal
-                                .getHeaders()
-                                .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
-                    }
-                });
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                        requestLocal
-                                .getHeaders()
-                                .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
-                    }
-                });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
+            }
+        });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
+            }
+        });
         return service.immediateSuccessSync(accept, requestOptionsLocal, Context.NONE);
     }
 }

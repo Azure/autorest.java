@@ -21,14 +21,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AccessClient type. */
+/**
+ * Initializes a new instance of the asynchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class, isAsync = true)
 public final class RelativeModelInOperationAsyncClient {
-    @Generated private final RelativeModelInOperationsImpl serviceClient;
+    @Generated
+    private final RelativeModelInOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of RelativeModelInOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,11 +40,20 @@ public final class RelativeModelInOperationAsyncClient {
     }
 
     /**
-     * Expected query parameter: name=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "inner": { "name": &lt;any string&gt; } } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected query parameter: name=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -50,7 +62,7 @@ public final class RelativeModelInOperationAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -58,7 +70,7 @@ public final class RelativeModelInOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in internal operations, should be generated but not exported along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,17 +79,23 @@ public final class RelativeModelInOperationAsyncClient {
     }
 
     /**
-     * Expected query parameter: kind=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "kind": "real" } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected query parameter: kind=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param kind A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +103,7 @@ public final class RelativeModelInOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in internal operations, should be generated but not exported along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -94,9 +112,18 @@ public final class RelativeModelInOperationAsyncClient {
     }
 
     /**
-     * Expected query parameter: name=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "inner": { "name": &lt;any string&gt; } } ```.
-     *
+     * Expected query parameter: name=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * }
+     * ```.
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -104,23 +131,28 @@ public final class RelativeModelInOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used in internal operations, should be generated but not exported on successful completion of {@link
-     *     Mono}.
+     * @return used in internal operations, should be generated but not exported on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<OuterModel> operation(String name) {
         // Generated convenience method for operationWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return operationWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(OuterModel.class));
+        return operationWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(OuterModel.class));
     }
 
     /**
-     * Expected query parameter: kind=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "kind": "real" } ```.
-     *
+     * Expected query parameter: kind=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
+     * }
+     * ```.
+     * 
      * @param kind A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -128,16 +160,15 @@ public final class RelativeModelInOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used in internal operations, should be generated but not exported on successful completion of {@link
-     *     Mono}.
+     * @return used in internal operations, should be generated but not exported on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<AbstractModel> discriminator(String kind) {
         // Generated convenience method for discriminatorWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return discriminatorWithResponse(kind, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(AbstractModel.class));
+        return discriminatorWithResponse(kind, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(AbstractModel.class));
     }
 }

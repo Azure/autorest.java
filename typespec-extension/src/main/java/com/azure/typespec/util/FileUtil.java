@@ -27,8 +27,9 @@ public class FileUtil {
         if (!parentFile.exists()) {
             parentFile.mkdirs();
         }
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-            writer.write(content);
+
+        try {
+            Files.writeString(outputFile.toPath(), content);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }

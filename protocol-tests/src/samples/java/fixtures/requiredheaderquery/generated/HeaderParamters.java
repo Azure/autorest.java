@@ -15,19 +15,13 @@ import java.util.Arrays;
 
 public class HeaderParamters {
     public static void main(String[] args) {
-        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient =
-                new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
+        DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient
+            = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
         RequestOptions requestOptions = new RequestOptions();
-        Response<BinaryData> response =
-                dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(
-                        31,
-                        false,
-                        Arrays.asList("one", "two", "three"),
-                        Arrays.asList(1, 2, 3),
-                        OffsetDateTime.parse("2019-03-01T15:00Z"),
-                        Duration.parse("P1DT30H4S"),
-                        requestOptions);
+        Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(31, false,
+            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), OffsetDateTime.parse("2019-03-01T15:00Z"),
+            Duration.parse("P1DT30H4S"), requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
     }
 }

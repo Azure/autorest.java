@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HttpRedirectsOptions307Headers model. */
+/**
+ * The HttpRedirectsOptions307Headers model.
+ */
 @Fluent
 public final class HttpRedirectsOptions307Headers {
     /*
@@ -21,7 +23,7 @@ public final class HttpRedirectsOptions307Headers {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HttpRedirectsOptions307Headers class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsOptions307Headers(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class HttpRedirectsOptions307Headers {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -39,7 +41,7 @@ public final class HttpRedirectsOptions307Headers {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the HttpRedirectsOptions307Headers object itself.
      */
@@ -50,8 +52,9 @@ public final class HttpRedirectsOptions307Headers {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

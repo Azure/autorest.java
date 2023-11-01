@@ -20,14 +20,17 @@ import com.cadl.errormodel.implementation.ErrorModelClientImpl;
 import com.cadl.errormodel.models.Diagnostic;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ErrorModelClient type. */
+/**
+ * Initializes a new instance of the asynchronous ErrorModelClient type.
+ */
 @ServiceClient(builder = ErrorModelClientBuilder.class, isAsync = true)
 public final class ErrorModelAsyncClient {
-    @Generated private final ErrorModelClientImpl serviceClient;
+    @Generated
+    private final ErrorModelClientImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorModelAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class ErrorModelAsyncClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -57,7 +60,7 @@ public final class ErrorModelAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -73,7 +76,7 @@ public final class ErrorModelAsyncClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -86,8 +89,7 @@ public final class ErrorModelAsyncClient {
     public Mono<Diagnostic> read() {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
+        return readWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
     }
 }

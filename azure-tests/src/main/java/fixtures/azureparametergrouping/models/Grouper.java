@@ -7,7 +7,9 @@ package fixtures.azureparametergrouping.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class Grouper {
     /*
@@ -22,12 +24,15 @@ public final class Grouper {
     @JsonProperty(value = "groupedParameter")
     private String groupedParameter;
 
-    /** Creates an instance of Grouper class. */
-    public Grouper() {}
+    /**
+     * Creates an instance of Grouper class.
+     */
+    public Grouper() {
+    }
 
     /**
      * Get the groupedConstant property: A grouped parameter that is a constant.
-     *
+     * 
      * @return the groupedConstant value.
      */
     public String getGroupedConstant() {
@@ -36,7 +41,7 @@ public final class Grouper {
 
     /**
      * Set the groupedConstant property: A grouped parameter that is a constant.
-     *
+     * 
      * @param groupedConstant the groupedConstant value to set.
      * @return the Grouper object itself.
      */
@@ -47,7 +52,7 @@ public final class Grouper {
 
     /**
      * Get the groupedParameter property: Optional parameter part of a parameter grouping.
-     *
+     * 
      * @return the groupedParameter value.
      */
     public String getGroupedParameter() {
@@ -56,7 +61,7 @@ public final class Grouper {
 
     /**
      * Set the groupedParameter property: Optional parameter part of a parameter grouping.
-     *
+     * 
      * @param groupedParameter the groupedParameter value to set.
      * @return the Grouper object itself.
      */
@@ -67,8 +72,9 @@ public final class Grouper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.models.Basic;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class BasicAsyncClient {
-    @Generated private final BasicsImpl serviceClient;
+    @Generated
+    private final BasicsImpl serviceClient;
 
     /**
      * Initializes an instance of BasicAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,11 +34,11 @@ public final class BasicAsyncClient {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -45,7 +48,7 @@ public final class BasicAsyncClient {
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} on successful completion of {@link Mono}.
@@ -58,7 +61,7 @@ public final class BasicAsyncClient {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -73,7 +76,7 @@ public final class BasicAsyncClient {
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
+     * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -88,11 +91,11 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -102,7 +105,7 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is invalid for the local strong type on successful completion of {@link Mono}.
@@ -115,7 +118,7 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty along with {@link Response} on successful completion of {@link Mono}.
@@ -128,7 +131,7 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type that is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type that is empty on successful completion of {@link Mono}.
@@ -141,11 +144,11 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -155,7 +158,7 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type whose properties are null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type whose properties are null on successful completion of {@link Mono}.
@@ -168,11 +171,11 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -182,11 +185,11 @@ public final class BasicAsyncClient {
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a basic complex type while the server doesn't provide a response payload on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

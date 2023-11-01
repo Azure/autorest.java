@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import fixtures.httpinfrastructure.implementation.HttpClientFailuresImpl;
 
-/** Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type.
+ */
 @ServiceClient(builder = HttpClientFailureClientBuilder.class)
 public final class HttpClientFailureClient {
-    @Generated private final HttpClientFailuresImpl serviceClient;
+    @Generated
+    private final HttpClientFailuresImpl serviceClient;
 
     /**
      * Initializes an instance of HttpClientFailureClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +68,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,23 +84,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,23 +125,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -145,23 +166,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,23 +207,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 400 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -209,7 +248,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 401 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -225,7 +264,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 402 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -241,7 +280,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 403 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -257,7 +296,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 403 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -273,23 +312,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 404 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -305,23 +353,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 405 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -337,23 +394,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 406 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -369,23 +435,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 407 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -401,23 +476,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 409 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -433,7 +517,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 410 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -449,7 +533,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 411 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -465,7 +549,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 412 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -481,7 +565,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 412 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -497,23 +581,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 413 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -529,23 +622,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 414 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -561,23 +663,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 415 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -593,7 +704,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 416 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -609,23 +720,32 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 417 status code - should be represented in the client as an error.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -641,7 +761,7 @@ public final class HttpClientFailureClient {
 
     /**
      * Return 429 status code - should be represented in the client as an error.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

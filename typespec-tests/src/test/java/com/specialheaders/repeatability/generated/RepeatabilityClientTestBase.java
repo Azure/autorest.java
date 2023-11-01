@@ -21,15 +21,15 @@ class RepeatabilityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        RepeatabilityClientBuilder repeatabilityClientbuilder =
-                new RepeatabilityClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        RepeatabilityClientBuilder repeatabilityClientbuilder
+            = new RepeatabilityClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             repeatabilityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             repeatabilityClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         repeatabilityClient = repeatabilityClientbuilder.buildClient();
+
     }
 }

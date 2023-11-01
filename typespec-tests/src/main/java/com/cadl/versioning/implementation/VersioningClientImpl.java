@@ -49,53 +49,65 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the VersioningClient type. */
+/**
+ * Initializes a new instance of the VersioningClient type.
+ */
 public final class VersioningClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final VersioningClientService service;
 
-    /** Server parameter. */
+    /**
+     * Server parameter.
+     */
     private final String endpoint;
 
     /**
      * Gets Server parameter.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** Service version. */
+    /**
+     * Service version.
+     */
     private final VersioningServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
-     *
+     * 
      * @return the serviceVersion value.
      */
     public VersioningServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -104,21 +116,18 @@ public final class VersioningClientImpl {
 
     /**
      * Initializes an instance of VersioningClient client.
-     *
+     * 
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public VersioningClientImpl(String endpoint, VersioningServiceVersion serviceVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint,
-                serviceVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of VersioningClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
@@ -129,17 +138,14 @@ public final class VersioningClientImpl {
 
     /**
      * Initializes an instance of VersioningClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public VersioningClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String endpoint,
-            VersioningServiceVersion serviceVersion) {
+    public VersioningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        VersioningServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
@@ -155,138 +161,96 @@ public final class VersioningClientImpl {
     @ServiceInterface(name = "VersioningClient")
     public interface VersioningClientService {
         @Post("/versioning/resources/{name}:export")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> export(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("name") String name,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> export(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/versioning/resources/{name}:export")
-        @ExpectedResponses({202})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> exportSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @PathParam("name") String name,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> exportSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/versioning/resources")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> list(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/versioning/resources")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(
-                @HostParam("endpoint") String endpoint,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -301,46 +265,53 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.export(
-                                this.getEndpoint(),
-                                this.getServiceVersion().getVersion(),
-                                name,
-                                accept,
-                                requestOptions,
-                                context));
+        return FluxUtil.withContext(context -> service.export(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            name, accept, requestOptions, context));
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -355,7 +326,7 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -367,26 +338,40 @@ public final class VersioningClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.exportSync(
-                this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
+        return service.exportSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -401,7 +386,7 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -412,37 +397,46 @@ public final class VersioningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginExportAsync(String name, RequestOptions requestOptions) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.exportWithResponseAsync(name, requestOptions),
-                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.exportWithResponseAsync(name, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -457,7 +451,7 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -468,37 +462,46 @@ public final class VersioningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.exportWithResponse(name, requestOptions),
-                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(BinaryData.class),
-                TypeReference.createInstance(BinaryData.class));
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.exportWithResponse(name, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -513,7 +516,7 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -523,39 +526,48 @@ public final class VersioningClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedResource> beginExportWithModelAsync(
-            String name, RequestOptions requestOptions) {
-        return PollerFlux.create(
-                Duration.ofSeconds(1),
-                () -> this.exportWithResponseAsync(name, requestOptions),
-                new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(ExportedResource.class));
+    public PollerFlux<PollResult, ExportedResource> beginExportWithModelAsync(String name,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.exportWithResponseAsync(name, requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedResource.class));
     }
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -570,7 +582,7 @@ public final class VersioningClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -581,37 +593,47 @@ public final class VersioningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult, ExportedResource> beginExportWithModel(String name, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-                Duration.ofSeconds(1),
-                () -> this.exportWithResponse(name, requestOptions),
-                new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
-                        new PollingStrategyOptions(this.getHttpPipeline())
-                                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                                .setContext(
-                                        requestOptions != null && requestOptions.getContext() != null
-                                                ? requestOptions.getContext()
-                                                : Context.NONE)
-                                .setServiceVersion(this.getServiceVersion().getVersion())),
-                TypeReference.createInstance(PollResult.class),
-                TypeReference.createInstance(ExportedResource.class));
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.exportWithResponse(name, requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedResource.class));
     }
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -619,53 +641,56 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.list(
-                                        this.getEndpoint(),
-                                        this.getServiceVersion().getVersion(),
-                                        accept,
-                                        requestOptions,
-                                        context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.list(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+                requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -673,7 +698,7 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -685,30 +710,42 @@ public final class VersioningClientImpl {
     public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                () -> listSinglePageAsync(requestOptions),
-                nextLink -> listNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(() -> listSinglePageAsync(requestOptions),
+            nextLink -> listNextSinglePageAsync(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -716,7 +753,7 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -727,38 +764,43 @@ public final class VersioningClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listSync(
-                        this.getEndpoint(),
-                        this.getServiceVersion().getVersion(),
-                        accept,
-                        requestOptions,
-                        Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res = service.listSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+            requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -766,7 +808,7 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -778,19 +820,16 @@ public final class VersioningClientImpl {
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                () -> listSinglePage(requestOptions),
-                nextLink -> listNextSinglePage(nextLink, requestOptionsForNextPage));
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(() -> listSinglePage(requestOptions),
+            nextLink -> listNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -798,38 +837,32 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
-     *     Mono}.
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.listNext(nextLink, this.getEndpoint(), accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.listNext(nextLink, this.getEndpoint(), accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -837,9 +870,10 @@ public final class VersioningClientImpl {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -850,15 +884,10 @@ public final class VersioningClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res =
-                service.listNextSync(nextLink, this.getEndpoint(), accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        Response<BinaryData> res
+            = service.listNextSync(nextLink, this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

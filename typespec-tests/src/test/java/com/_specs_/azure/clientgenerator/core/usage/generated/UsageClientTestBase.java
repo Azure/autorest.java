@@ -21,15 +21,14 @@ class UsageClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        UsageClientBuilder usageClientbuilder =
-                new UsageClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UsageClientBuilder usageClientbuilder = new UsageClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             usageClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             usageClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         usageClient = usageClientbuilder.buildClient();
+
     }
 }

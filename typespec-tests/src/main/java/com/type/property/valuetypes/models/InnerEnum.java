@@ -9,26 +9,35 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Enum that will be used as a property for model EnumProperty. Non-extensible. */
+/**
+ * Enum that will be used as a property for model EnumProperty. Non-extensible.
+ */
 public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
-    /** First value. */
-    @Generated public static final InnerEnum VALUE_ONE = fromString("ValueOne");
+    /**
+     * First value.
+     */
+    @Generated
+    public static final InnerEnum VALUE_ONE = fromString("ValueOne");
 
-    /** Second value. */
-    @Generated public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
+    /**
+     * Second value.
+     */
+    @Generated
+    public static final InnerEnum VALUE_TWO = fromString("ValueTwo");
 
     /**
      * Creates a new instance of InnerEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public InnerEnum() {}
+    public InnerEnum() {
+    }
 
     /**
      * Creates or finds a InnerEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding InnerEnum.
      */
@@ -40,7 +49,7 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
 
     /**
      * Gets known InnerEnum values.
-     *
+     * 
      * @return known InnerEnum values.
      */
     @Generated

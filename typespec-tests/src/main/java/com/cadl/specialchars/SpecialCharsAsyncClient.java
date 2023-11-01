@@ -22,14 +22,17 @@ import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SpecialCharsClient type. */
+/**
+ * Initializes a new instance of the asynchronous SpecialCharsClient type.
+ */
 @ServiceClient(builder = SpecialCharsClientBuilder.class, isAsync = true)
 public final class SpecialCharsAsyncClient {
-    @Generated private final SpecialCharsClientImpl serviceClient;
+    @Generated
+    private final SpecialCharsClientImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialCharsAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -39,17 +42,17 @@ public final class SpecialCharsAsyncClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -59,7 +62,7 @@ public final class SpecialCharsAsyncClient {
      *     value: Double (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -76,7 +79,7 @@ public final class SpecialCharsAsyncClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @param id A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -94,8 +97,7 @@ public final class SpecialCharsAsyncClient {
         Map<String, Object> requestObj = new HashMap<>();
         requestObj.put("id", id);
         BinaryData request = BinaryData.fromObject(requestObj);
-        return readWithResponse(request, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        return readWithResponse(request, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

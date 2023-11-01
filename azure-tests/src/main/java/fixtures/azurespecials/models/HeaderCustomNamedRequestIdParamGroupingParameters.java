@@ -7,7 +7,9 @@ package fixtures.azurespecials.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Parameter group. */
+/**
+ * Parameter group.
+ */
 @Fluent
 public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     /*
@@ -16,12 +18,15 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     @JsonProperty(value = "foo-client-request-id", required = true)
     private String fooClientRequestId;
 
-    /** Creates an instance of HeaderCustomNamedRequestIdParamGroupingParameters class. */
-    public HeaderCustomNamedRequestIdParamGroupingParameters() {}
+    /**
+     * Creates an instance of HeaderCustomNamedRequestIdParamGroupingParameters class.
+     */
+    public HeaderCustomNamedRequestIdParamGroupingParameters() {
+    }
 
     /**
      * Get the fooClientRequestId property: The fooRequestId.
-     *
+     * 
      * @return the fooClientRequestId value.
      */
     public String getFooClientRequestId() {
@@ -30,7 +35,7 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
 
     /**
      * Set the fooClientRequestId property: The fooRequestId.
-     *
+     * 
      * @param fooClientRequestId the fooClientRequestId value to set.
      * @return the HeaderCustomNamedRequestIdParamGroupingParameters object itself.
      */
@@ -41,13 +46,13 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getFooClientRequestId() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property fooClientRequestId in model HeaderCustomNamedRequestIdParamGroupingParameters");
+                "Missing required property fooClientRequestId in model HeaderCustomNamedRequestIdParamGroupingParameters");
         }
     }
 }

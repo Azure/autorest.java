@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.union.implementation.UnionClientImpl;
 
-/** Initializes a new instance of the synchronous UnionClient type. */
+/**
+ * Initializes a new instance of the synchronous UnionClient type.
+ */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {
-    @Generated private final UnionClientImpl serviceClient;
+    @Generated
+    private final UnionClientImpl serviceClient;
 
     /**
      * Initializes an instance of UnionClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class UnionClient {
 
     /**
      * The send operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -46,7 +49,7 @@ public final class UnionClient {
      *     input: InputModelBase (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -66,19 +69,28 @@ public final class UnionClient {
 
     /**
      * The sendLong operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -91,7 +103,7 @@ public final class UnionClient {
      *     data_float: Double (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -111,17 +123,26 @@ public final class UnionClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>DataModelBase</td><td>No</td><td>The data parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>data</td>
+     * <td>DataModelBase</td>
+     * <td>No</td>
+     * <td>The data parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -138,9 +159,9 @@ public final class UnionClient {
 
     /**
      * A long-running remote procedure call (RPC) operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -155,7 +176,7 @@ public final class UnionClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

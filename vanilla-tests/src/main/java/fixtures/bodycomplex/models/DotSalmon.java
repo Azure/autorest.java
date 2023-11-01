@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The DotSalmon model. */
+/**
+ * The DotSalmon model.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type")
 @JsonTypeName("DotSalmon")
 @JsonFlatten
@@ -28,12 +30,15 @@ public class DotSalmon extends DotFish {
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
-    /** Creates an instance of DotSalmon class. */
-    private DotSalmon() {}
+    /**
+     * Creates an instance of DotSalmon class.
+     */
+    private DotSalmon() {
+    }
 
     /**
      * Get the location property: The location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -42,7 +47,7 @@ public class DotSalmon extends DotFish {
 
     /**
      * Get the iswild property: The iswild property.
-     *
+     * 
      * @return the iswild value.
      */
     public Boolean iswild() {
@@ -51,7 +56,7 @@ public class DotSalmon extends DotFish {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

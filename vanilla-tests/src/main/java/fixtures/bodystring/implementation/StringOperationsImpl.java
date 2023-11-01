@@ -25,23 +25,28 @@ import fixtures.bodystring.StringOperations;
 import fixtures.bodystring.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in StringOperations. */
+/**
+ * An instance of this class provides access to all the operations defined in StringOperations.
+ */
 public final class StringOperationsImpl implements StringOperations {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final StringOperationsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerBATServiceImpl client;
 
     /**
      * Initializes an instance of StringOperationsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     StringOperationsImpl(AutoRestSwaggerBATServiceImpl client) {
-        this.service =
-                RestProxy.create(
-                        StringOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(StringOperationsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -53,104 +58,89 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceInterface(name = "AutoRestSwaggerBATSe")
     public interface StringOperationsService {
         @Get("/string/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getNull(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<String>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/string/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNull(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") String stringBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putNull(@HostParam("$host") String host, @BodyParam("application/json") String stringBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getEmpty(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<String>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/string/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") String stringBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") String stringBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/mbcs")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getMbcs(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<String>> getMbcs(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/string/mbcs")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMbcs(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") String stringBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putMbcs(@HostParam("$host") String host, @BodyParam("application/json") String stringBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/whitespace")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getWhitespace(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<String>> getWhitespace(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/string/whitespace")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putWhitespace(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") String stringBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putWhitespace(@HostParam("$host") String host,
+            @BodyParam("application/json") String stringBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/notProvided")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<String>> getNotProvided(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<String>> getNotProvided(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/string/base64Encoding")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getBase64Encoded(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getBase64Encoded(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/string/base64UrlEncoding")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getBase64UrlEncoded(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/base64UrlEncoding")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBase64UrlEncoded(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Base64Url stringBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String host,
+            @BodyParam("application/json") Base64Url stringBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/nullBase64UrlEncoding")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<byte[]>> getNullBase64UrlEncoded(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get null string value value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value along with {@link Response} on successful completion of {@link Mono}.
@@ -158,8 +148,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -167,7 +157,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -177,8 +167,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -186,7 +176,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value on successful completion of {@link Mono}.
@@ -198,7 +188,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -212,7 +202,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -226,7 +216,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null string value value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null string value value.
@@ -238,7 +228,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -248,8 +238,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(String stringBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, accept, context));
@@ -257,7 +247,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -268,8 +258,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync(String stringBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putNull(this.client.getHost(), stringBody, accept, context);
@@ -277,7 +267,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -291,7 +281,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -304,7 +294,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -319,7 +309,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -334,7 +324,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -347,7 +337,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value null.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -359,7 +349,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value '' along with {@link Response} on successful completion of {@link Mono}.
@@ -367,8 +357,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -376,7 +366,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -386,8 +376,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmpty(this.client.getHost(), accept, context);
@@ -395,7 +385,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value '' on successful completion of {@link Mono}.
@@ -407,7 +397,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -421,7 +411,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -435,7 +425,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get empty string value value ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty string value value ''.
@@ -447,7 +437,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -455,8 +445,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "";
         final String accept = "application/json";
@@ -465,7 +455,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -475,8 +465,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "";
         final String accept = "application/json";
@@ -485,7 +475,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -497,7 +487,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -511,7 +501,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -525,7 +515,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value empty ''.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -536,17 +526,17 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getMbcsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), accept, context));
@@ -554,19 +544,19 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getMbcsWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMbcs(this.client.getHost(), accept, context);
@@ -574,11 +564,11 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getMbcsAsync() {
@@ -587,13 +577,13 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getMbcsAsync(Context context) {
@@ -602,13 +592,13 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€' along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getMbcsWithResponse(Context context) {
@@ -617,7 +607,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -629,7 +619,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -637,8 +627,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         final String accept = "application/json";
@@ -647,7 +637,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -657,8 +647,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         final String accept = "application/json";
@@ -667,7 +657,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -679,7 +669,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -693,7 +683,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -707,7 +697,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -719,18 +709,18 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getWhitespaceWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), accept, context));
@@ -739,20 +729,20 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getWhitespaceWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getWhitespace(this.client.getHost(), accept, context);
@@ -761,12 +751,12 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
-     *     completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getWhitespaceAsync() {
@@ -776,14 +766,14 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
-     *     completion of {@link Mono}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> getWhitespaceAsync(Context context) {
@@ -793,14 +783,14 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with {@link
-     *     Response}.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> getWhitespaceWithResponse(Context context) {
@@ -810,11 +800,11 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time
-     *     for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     * for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String getWhitespace() {
@@ -824,7 +814,7 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -832,19 +822,19 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putWhitespace(this.client.getHost(), stringBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putWhitespace(this.client.getHost(), stringBody, accept, context));
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -854,8 +844,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         final String accept = "application/json";
@@ -865,7 +855,7 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -878,7 +868,7 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -893,7 +883,7 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -908,7 +898,7 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for
      * all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -919,17 +909,17 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
@@ -937,19 +927,19 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> getNotProvidedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvided(this.client.getHost(), accept, context);
@@ -957,7 +947,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload on successful completion of {@link Mono}.
@@ -969,7 +959,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -983,7 +973,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -997,7 +987,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get String value when no string value is sent in response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return string value when no string value is sent in response payload.
@@ -1009,7 +999,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded along with {@link Response} on successful completion of {@link Mono}.
@@ -1017,8 +1007,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBase64Encoded(this.client.getHost(), accept, context));
@@ -1026,7 +1016,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1036,8 +1026,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64EncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getBase64Encoded(this.client.getHost(), accept, context);
@@ -1045,7 +1035,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded on successful completion of {@link Mono}.
@@ -1057,7 +1047,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1071,7 +1061,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1085,7 +1075,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64 encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64 encoded.
@@ -1097,7 +1087,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded along with {@link Response} on successful completion of {@link Mono}.
@@ -1105,8 +1095,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getBase64UrlEncoded(this.client.getHost(), accept, context));
@@ -1114,7 +1104,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1124,8 +1114,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getBase64UrlEncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getBase64UrlEncoded(this.client.getHost(), accept, context);
@@ -1133,7 +1123,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded on successful completion of {@link Mono}.
@@ -1145,7 +1135,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1159,7 +1149,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1173,7 +1163,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get value that is base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return value that is base64url encoded.
@@ -1185,7 +1175,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1195,8 +1185,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
@@ -1204,12 +1194,12 @@ public final class StringOperationsImpl implements StringOperations {
         final String accept = "application/json";
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         return FluxUtil.withContext(
-                context -> service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, accept, context));
+            context -> service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, accept, context));
     }
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1220,8 +1210,8 @@ public final class StringOperationsImpl implements StringOperations {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (stringBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
@@ -1233,7 +1223,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1247,7 +1237,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1262,7 +1252,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1277,7 +1267,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Put value that is base64url encoded.
-     *
+     * 
      * @param stringBody string body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1290,17 +1280,17 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNullBase64UrlEncoded(this.client.getHost(), accept, context));
@@ -1308,19 +1298,19 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNullBase64UrlEncodedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNullBase64UrlEncoded(this.client.getHost(), accept, context);
@@ -1328,7 +1318,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded on successful completion of {@link Mono}.
@@ -1340,7 +1330,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1354,7 +1344,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1368,7 +1358,7 @@ public final class StringOperationsImpl implements StringOperations {
 
     /**
      * Get null value that is expected to be base64url encoded.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null value that is expected to be base64url encoded.

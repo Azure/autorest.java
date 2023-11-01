@@ -27,17 +27,23 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Headers. */
+/**
+ * An instance of this class provides access to all the operations defined in Headers.
+ */
 public final class HeadersImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerBatHeaderServiceClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HeadersImpl(AutoRestSwaggerBatHeaderServiceClientImpl client) {
@@ -53,1123 +59,557 @@ public final class HeadersImpl {
     @ServiceInterface(name = "AutoRestSwaggerBatHe")
     public interface HeadersService {
         @Post("/header/param/existingkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramExistingKey(
-                @HostParam("$host") String host,
-                @HeaderParam("User-Agent") String userAgent,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramExistingKey(@HostParam("$host") String host,
+            @HeaderParam("User-Agent") String userAgent, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/existingkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramExistingKeySync(
-                @HostParam("$host") String host,
-                @HeaderParam("User-Agent") String userAgent,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramExistingKeySync(@HostParam("$host") String host,
+            @HeaderParam("User-Agent") String userAgent, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/existingkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseExistingKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseExistingKey(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/existingkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseExistingKeySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseExistingKeySync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/protectedkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramProtectedKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/protectedkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramProtectedKeySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Content-Type") String contentType,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramProtectedKeySync(@HostParam("$host") String host,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/protectedkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseProtectedKey(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseProtectedKey(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/protectedkey")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseProtectedKeySync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseProtectedKeySync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/integer")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramInteger(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") int value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") int value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/integer")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramIntegerSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") int value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramIntegerSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") int value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/integer")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseInteger(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/integer")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseIntegerSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseIntegerSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/long")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramLong(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") long value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") long value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/long")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramLongSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") long value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramLongSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") long value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/long")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseLong(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/long")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseLongSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseLongSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/float")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramFloat(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") float value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") float value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/float")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramFloatSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") float value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramFloatSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") float value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/float")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseFloat(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/float")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseFloatSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseFloatSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/double")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDouble(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") double value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") double value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/double")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramDoubleSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") double value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramDoubleSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") double value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/double")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseDouble(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/double")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseDoubleSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseDoubleSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/bool")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramBool(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") boolean value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") boolean value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/bool")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramBoolSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") boolean value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramBoolSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") boolean value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/bool")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseBool(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/bool")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseBoolSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseBoolSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/string")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramString(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/string")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramStringSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramStringSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/string")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseString(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/string")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseStringSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseStringSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/date")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDate(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") String value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/date")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramDateSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramDateSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") String value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/date")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseDate(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/date")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseDateSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseDateSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetime")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDatetime(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") OffsetDateTime value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") OffsetDateTime value, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetime")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramDatetimeSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") OffsetDateTime value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramDatetimeSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") OffsetDateTime value, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetime")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseDatetime(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetime")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseDatetimeSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseDatetimeSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDatetimeRfc1123(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String host,
+            @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramDatetimeRfc1123Sync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramDatetimeRfc1123Sync(@HostParam("$host") String host,
+            @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseDatetimeRfc1123(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseDatetimeRfc1123(@HostParam("$host") String host,
+            @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseDatetimeRfc1123Sync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseDatetimeRfc1123Sync(@HostParam("$host") String host,
+            @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/duration")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramDuration(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") Duration value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") Duration value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/duration")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramDurationSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") Duration value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramDurationSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") Duration value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/duration")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseDuration(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/duration")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseDurationSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseDurationSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/byte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramByte(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") String value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/param/prim/byte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramByteSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("value") String value,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramByteSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("value") String value, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/header/response/prim/byte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseByte(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/byte")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseByteSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseByteSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/enum")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> paramEnum(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/param/prim/enum")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> paramEnumSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> paramEnumSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/enum")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> responseEnum(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> responseEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/response/prim/enum")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseEnumSync(
-                @HostParam("$host") String host,
-                @HeaderParam("scenario") String scenario,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> responseEnumSync(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> customRequestId(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> customRequestId(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> customRequestIdSync(
-                @HostParam("$host") String host,
-                @HeaderParam("Accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> customRequestIdSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
-     *
+     * 
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1182,12 +622,12 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramExistingKeyWithResponseAsync(String userAgent, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramExistingKey(this.client.getHost(), userAgent, accept, requestOptions, context));
+            context -> service.paramExistingKey(this.client.getHost(), userAgent, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header value "User-Agent": "overwrite".
-     *
+     * 
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1204,25 +644,25 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "User-Agent": "overwrite" along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseExistingKeyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseExistingKey(this.client.getHost(), accept, requestOptions, context));
+            context -> service.responseExistingKey(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1238,7 +678,7 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
-     *
+     * 
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1251,13 +691,12 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(String contentType, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramProtectedKey(this.client.getHost(), contentType, accept, requestOptions, context));
+            context -> service.paramProtectedKey(this.client.getHost(), contentType, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
-     *
+     * 
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1274,25 +713,25 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "Content-Type": "text/html".
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "Content-Type": "text/html" along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseProtectedKeyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context));
+            context -> service.responseProtectedKey(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "Content-Type": "text/html".
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1308,7 +747,7 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1319,17 +758,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramIntegerWithResponseAsync(
-            String scenario, int value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramIntegerWithResponseAsync(String scenario, int value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramInteger(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramInteger(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1347,7 +785,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 1 or -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1355,18 +793,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 1 or -2 along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseIntegerWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseInteger(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 1 or -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1384,7 +822,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1398,13 +836,13 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramLongWithResponseAsync(String scenario, long value, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramLong(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramLong(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
      * -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1422,7 +860,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 105 or -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1430,18 +868,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 105 or -2 along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseLongWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseLong(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 105 or -2.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1459,7 +897,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1470,17 +908,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramFloatWithResponseAsync(
-            String scenario, float value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramFloatWithResponseAsync(String scenario, float value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramFloat(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramFloat(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
      * -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1498,7 +936,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1506,18 +944,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 0.07 or -3.0 along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseFloatWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseFloat(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1535,7 +973,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1546,18 +984,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDoubleWithResponseAsync(
-            String scenario, double value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramDoubleWithResponseAsync(String scenario, double value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramDouble(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramDouble(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
      * -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1575,7 +1012,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1583,18 +1020,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": 7e120 or -3.0 along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDoubleWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseDouble(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1611,7 +1048,7 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1622,16 +1059,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramBoolWithResponseAsync(
-            String scenario, boolean value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramBoolWithResponseAsync(String scenario, boolean value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramBool(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramBool(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1649,7 +1086,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header value "value": true or false.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1657,18 +1094,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header value "value": true or false along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseBoolWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseBool(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header value "value": true or false.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1686,17 +1123,26 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1709,23 +1155,32 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramStringWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramString(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.paramString(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
      * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1742,7 +1197,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1750,18 +1205,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
-     *     {@link Response} on successful completion of {@link Mono}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseStringWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseString(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseString(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1769,7 +1224,7 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" along with
-     *     {@link Response}.
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseStringWithResponse(String scenario, RequestOptions requestOptions) {
@@ -1780,7 +1235,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1791,17 +1246,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDateWithResponseAsync(
-            String scenario, String value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramDateWithResponseAsync(String scenario, String value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramDate(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramDate(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
      * "0001-01-01".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1819,7 +1274,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1827,18 +1282,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "2010-01-01" or "0001-01-01" along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDateWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseDate(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1856,7 +1311,7 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1867,18 +1322,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeWithResponseAsync(
-            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramDatetimeWithResponseAsync(String scenario, OffsetDateTime value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramDatetime(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
      * "value": "0001-01-01T00:00:00Z".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1889,42 +1343,42 @@ public final class HeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> paramDatetimeWithResponse(
-            String scenario, OffsetDateTime value, RequestOptions requestOptions) {
+    public Response<Void> paramDatetimeWithResponse(String scenario, OffsetDateTime value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.paramDatetimeSync(this.client.getHost(), scenario, value, accept, requestOptions, Context.NONE);
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDatetimeWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseDatetime(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
-     *     Response}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeWithResponse(String scenario, RequestOptions requestOptions) {
@@ -1935,17 +1389,27 @@ public final class HeadersImpl {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT"</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1958,24 +1422,33 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.paramDatetimeRfc1123(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
      * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>OffsetDateTime</td><td>No</td><td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT"</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1992,7 +1465,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2000,21 +1473,19 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
-     *     with {@link Response} on successful completion of {@link Mono}.
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(
-            String scenario, RequestOptions requestOptions) {
+    public Mono<Response<Void>> responseDatetimeRfc1123WithResponseAsync(String scenario,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.responseDatetimeRfc1123(
-                                this.client.getHost(), scenario, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.responseDatetimeRfc1123(this.client.getHost(), scenario, accept,
+            requestOptions, context));
     }
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2022,18 +1493,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" along
-     *     with {@link Response}.
+     * with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseDatetimeRfc1123WithResponse(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.responseDatetimeRfc1123Sync(
-                this.client.getHost(), scenario, accept, requestOptions, Context.NONE);
+        return service.responseDatetimeRfc1123Sync(this.client.getHost(), scenario, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2044,17 +1515,16 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDurationWithResponseAsync(
-            String scenario, Duration value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramDurationWithResponseAsync(String scenario, Duration value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context ->
-                        service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context));
+            context -> service.paramDuration(this.client.getHost(), scenario, value, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2072,7 +1542,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2080,18 +1550,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "P123DT22H14M12.011S" along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseDurationWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseDuration(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2108,7 +1578,7 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2119,19 +1589,17 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponseAsync(
-            String scenario, byte[] value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> paramByteWithResponseAsync(String scenario, byte[] value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return FluxUtil.withContext(
-                context ->
-                        service.paramByte(
-                                this.client.getHost(), scenario, valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.paramByte(this.client.getHost(), scenario, valueConverted,
+            accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -2145,32 +1613,32 @@ public final class HeadersImpl {
     public Response<Void> paramByteWithResponse(String scenario, byte[] value, RequestOptions requestOptions) {
         final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return service.paramByteSync(
-                this.client.getHost(), scenario, valueConverted, accept, requestOptions, Context.NONE);
+        return service.paramByteSync(this.client.getHost(), scenario, valueConverted, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return a response with header values "啊齄丂狛狜隣郎隣兀﨩" along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseByteWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseByte(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2187,17 +1655,26 @@ public final class HeadersImpl {
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2210,22 +1687,31 @@ public final class HeadersImpl {
     public Mono<Response<Void>> paramEnumWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.paramEnum(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.paramEnum(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>value</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Send a post request with header values 'GREY' . Allowed values: "White", "black", "GREY".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2242,7 +1728,7 @@ public final class HeadersImpl {
 
     /**
      * Get a response with header values "GREY" or null.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2250,18 +1736,18 @@ public final class HeadersImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return a response with header values "GREY" or null along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseEnumWithResponseAsync(String scenario, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.responseEnum(this.client.getHost(), scenario, accept, requestOptions, context));
+            context -> service.responseEnum(this.client.getHost(), scenario, accept, requestOptions, context));
     }
 
     /**
      * Get a response with header values "GREY" or null.
-     *
+     * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2278,7 +1764,7 @@ public final class HeadersImpl {
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -2289,13 +1775,13 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customRequestIdWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.customRequestId(this.client.getHost(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.customRequestId(this.client.getHost(), accept, requestOptions, context));
     }
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

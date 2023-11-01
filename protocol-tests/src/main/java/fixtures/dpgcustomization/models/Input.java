@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Input model. */
+/**
+ * The Input model.
+ */
 @Immutable
 public final class Input {
     /*
@@ -21,7 +23,7 @@ public final class Input {
 
     /**
      * Creates an instance of Input class.
-     *
+     * 
      * @param hello the hello value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Input {
 
     /**
      * Get the hello property: The hello property.
-     *
+     * 
      * @return the hello value.
      */
     @Generated

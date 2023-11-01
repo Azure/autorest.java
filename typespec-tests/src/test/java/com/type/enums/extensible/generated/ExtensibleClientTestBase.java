@@ -21,15 +21,15 @@ class ExtensibleClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ExtensibleClientBuilder extensibleClientbuilder =
-                new ExtensibleClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ExtensibleClientBuilder extensibleClientbuilder
+            = new ExtensibleClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extensibleClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             extensibleClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         extensibleClient = extensibleClientbuilder.buildClient();
+
     }
 }

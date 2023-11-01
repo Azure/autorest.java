@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-/** The Builtin model. */
+/**
+ * The Builtin model.
+ */
 @Immutable
 public final class Builtin {
     /*
@@ -134,7 +136,7 @@ public final class Builtin {
 
     /**
      * Creates an instance of Builtin class.
-     *
+     * 
      * @param booleanProperty the booleanProperty value to set.
      * @param string the string value to set.
      * @param bytes the bytes value to set.
@@ -154,23 +156,16 @@ public final class Builtin {
      */
     @Generated
     @JsonCreator
-    public Builtin(
-            @JsonProperty(value = "boolean") boolean booleanProperty,
-            @JsonProperty(value = "string") String string,
-            @JsonProperty(value = "bytes") byte[] bytes,
-            @JsonProperty(value = "int") int intProperty,
-            @JsonProperty(value = "safeint") long safeint,
-            @JsonProperty(value = "long") long longProperty,
-            @JsonProperty(value = "float") double floatProperty,
-            @JsonProperty(value = "double") double doubleProperty,
-            @JsonProperty(value = "duration") Duration duration,
-            @JsonProperty(value = "date") LocalDate date,
-            @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-            @JsonProperty(value = "stringList") List<String> stringList,
-            @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict,
-            @JsonProperty(value = "url") String url,
-            @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
-            @JsonProperty(value = "encoded") Encoded encoded) {
+    public Builtin(@JsonProperty(value = "boolean") boolean booleanProperty,
+        @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes,
+        @JsonProperty(value = "int") int intProperty, @JsonProperty(value = "safeint") long safeint,
+        @JsonProperty(value = "long") long longProperty, @JsonProperty(value = "float") double floatProperty,
+        @JsonProperty(value = "double") double doubleProperty, @JsonProperty(value = "duration") Duration duration,
+        @JsonProperty(value = "date") LocalDate date, @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+        @JsonProperty(value = "stringList") List<String> stringList,
+        @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict, @JsonProperty(value = "url") String url,
+        @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
+        @JsonProperty(value = "encoded") Encoded encoded) {
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;
@@ -191,7 +186,7 @@ public final class Builtin {
 
     /**
      * Get the booleanProperty property: The boolean property.
-     *
+     * 
      * @return the booleanProperty value.
      */
     @Generated
@@ -201,7 +196,7 @@ public final class Builtin {
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     @Generated
@@ -211,7 +206,7 @@ public final class Builtin {
 
     /**
      * Get the bytes property: The bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     @Generated
@@ -221,7 +216,7 @@ public final class Builtin {
 
     /**
      * Get the intProperty property: The int property.
-     *
+     * 
      * @return the intProperty value.
      */
     @Generated
@@ -231,7 +226,7 @@ public final class Builtin {
 
     /**
      * Get the safeint property: The safeint property.
-     *
+     * 
      * @return the safeint value.
      */
     @Generated
@@ -241,7 +236,7 @@ public final class Builtin {
 
     /**
      * Get the longProperty property: The long property.
-     *
+     * 
      * @return the longProperty value.
      */
     @Generated
@@ -251,7 +246,7 @@ public final class Builtin {
 
     /**
      * Get the floatProperty property: The float property.
-     *
+     * 
      * @return the floatProperty value.
      */
     @Generated
@@ -261,7 +256,7 @@ public final class Builtin {
 
     /**
      * Get the doubleProperty property: The double property.
-     *
+     * 
      * @return the doubleProperty value.
      */
     @Generated
@@ -271,7 +266,7 @@ public final class Builtin {
 
     /**
      * Get the duration property: The duration property.
-     *
+     * 
      * @return the duration value.
      */
     @Generated
@@ -281,7 +276,7 @@ public final class Builtin {
 
     /**
      * Get the date property: The date property.
-     *
+     * 
      * @return the date value.
      */
     @Generated
@@ -291,7 +286,7 @@ public final class Builtin {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated
@@ -301,7 +296,7 @@ public final class Builtin {
 
     /**
      * Get the stringList property: The stringList property.
-     *
+     * 
      * @return the stringList value.
      */
     @Generated
@@ -311,7 +306,7 @@ public final class Builtin {
 
     /**
      * Get the bytesDict property: The bytesDict property.
-     *
+     * 
      * @return the bytesDict value.
      */
     @Generated
@@ -321,7 +316,7 @@ public final class Builtin {
 
     /**
      * Get the url property: The url property.
-     *
+     * 
      * @return the url value.
      */
     @Generated
@@ -331,7 +326,7 @@ public final class Builtin {
 
     /**
      * Get the nullableFloatDict property: The nullableFloatDict property.
-     *
+     * 
      * @return the nullableFloatDict value.
      */
     @Generated
@@ -341,7 +336,7 @@ public final class Builtin {
 
     /**
      * Get the encoded property: The encoded property.
-     *
+     * 
      * @return the encoded value.
      */
     @Generated

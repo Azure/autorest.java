@@ -39,45 +39,54 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the PageableClient type. */
+/**
+ * Initializes a new instance of the PageableClient type.
+ */
 public final class PageableClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PageableClientService service;
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** Initializes an instance of PageableClient client. */
+    /**
+     * Initializes an instance of PageableClient client.
+     */
     public PageableClientImpl() {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter());
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter());
     }
 
     /**
      * Initializes an instance of PageableClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public PageableClientImpl(HttpPipeline httpPipeline) {
@@ -86,7 +95,7 @@ public final class PageableClientImpl {
 
     /**
      * Initializes an instance of PageableClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      */
@@ -97,99 +106,79 @@ public final class PageableClientImpl {
     }
 
     /**
-     * The interface defining all the services for PageableClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for PageableClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "PageableClient")
     public interface PageableClientService {
         @Get("/payload/pageable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> list(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/payload/pageable")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> listNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listNextSync(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
      * List users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -201,38 +190,40 @@ public final class PageableClientImpl {
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.list(accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * List users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -244,58 +235,61 @@ public final class PageableClientImpl {
     public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedFlux<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePageAsync(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePageAsync(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePageAsync(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * List users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -307,36 +301,40 @@ public final class PageableClientImpl {
     private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
         Response<BinaryData> res = service.listSync(accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
      * List users.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>maxpagesize</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>The maximum number of result items per page.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -348,50 +346,45 @@ public final class PageableClientImpl {
     public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
-                requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext()
-                        : Context.NONE);
-        return new PagedIterable<>(
-                (pageSize) -> {
-                    RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listSinglePage(requestOptionsLocal);
-                },
-                (nextLink, pageSize) -> {
-                    RequestOptions requestOptionsLocal = new RequestOptions();
-                    requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
-                    if (pageSize != null) {
-                        requestOptionsLocal.addRequestCallback(
-                                requestLocal -> {
-                                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
-                                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
-                                    requestLocal.setUrl(urlBuilder.toString());
-                                });
-                    }
-                    return listNextSinglePage(nextLink, requestOptionsLocal);
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>((pageSize) -> {
+            RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
                 });
+            }
+            return listSinglePage(requestOptionsLocal);
+        }, (nextLink, pageSize) -> {
+            RequestOptions requestOptionsLocal = new RequestOptions();
+            requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
+            if (pageSize != null) {
+                requestOptionsLocal.addRequestCallback(requestLocal -> {
+                    UrlBuilder urlBuilder = UrlBuilder.parse(requestLocal.getUrl());
+                    urlBuilder.setQueryParameter("maxpagesize", String.valueOf(pageSize));
+                    requestLocal.setUrl(urlBuilder.toString());
+                });
+            }
+            return listNextSinglePage(nextLink, requestOptionsLocal);
+        });
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -403,30 +396,24 @@ public final class PageableClientImpl {
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.listNext(nextLink, accept, requestOptions, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        getValues(res.getValue(), "value"),
-                                        getNextLink(res.getValue(), "nextLink"),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
      * Get the next page of items.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -438,13 +425,8 @@ public final class PageableClientImpl {
     private PagedResponse<BinaryData> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         Response<BinaryData> res = service.listNextSync(nextLink, accept, requestOptions, Context.NONE);
-        return new PagedResponseBase<>(
-                res.getRequest(),
-                res.getStatusCode(),
-                res.getHeaders(),
-                getValues(res.getValue(), "value"),
-                getNextLink(res.getValue(), "nextLink"),
-                null);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     private List<BinaryData> getValues(BinaryData binaryData, String path) {

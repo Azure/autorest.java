@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The Blobs model. */
+/**
+ * The Blobs model.
+ */
 @JacksonXmlRootElement(localName = "Blobs")
 @Fluent
 public final class Blobs {
@@ -26,12 +28,15 @@ public final class Blobs {
     @JsonProperty("Blob")
     private List<Blob> blob = new ArrayList<>();
 
-    /** Creates an instance of Blobs class. */
-    public Blobs() {}
+    /**
+     * Creates an instance of Blobs class.
+     */
+    public Blobs() {
+    }
 
     /**
      * Get the blobPrefix property: The BlobPrefix property.
-     *
+     * 
      * @return the blobPrefix value.
      */
     public List<BlobPrefix> getBlobPrefix() {
@@ -40,7 +45,7 @@ public final class Blobs {
 
     /**
      * Set the blobPrefix property: The BlobPrefix property.
-     *
+     * 
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
      */
@@ -51,7 +56,7 @@ public final class Blobs {
 
     /**
      * Get the blob property: The Blob property.
-     *
+     * 
      * @return the blob value.
      */
     public List<Blob> getBlob() {
@@ -60,7 +65,7 @@ public final class Blobs {
 
     /**
      * Set the blob property: The Blob property.
-     *
+     * 
      * @param blob the blob value to set.
      * @return the Blobs object itself.
      */
@@ -71,7 +76,7 @@ public final class Blobs {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

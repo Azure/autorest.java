@@ -18,14 +18,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous CustomClient type. */
+/**
+ * Initializes a new instance of the asynchronous CustomClient type.
+ */
 @ServiceClient(builder = CustomClientBuilder.class, isAsync = true)
 public final class CustomAsyncClient {
-    @Generated private final CustomClientImpl serviceClient;
+    @Generated
+    private final CustomClientImpl serviceClient;
 
     /**
      * Initializes an instance of CustomAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class CustomAsyncClient {
 
     /**
      * Check whether client is authenticated.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class CustomAsyncClient {
 
     /**
      * Check whether client is authenticated.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +70,7 @@ public final class CustomAsyncClient {
 
     /**
      * Check whether client is authenticated.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -85,7 +88,7 @@ public final class CustomAsyncClient {
 
     /**
      * Check whether client is authenticated.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

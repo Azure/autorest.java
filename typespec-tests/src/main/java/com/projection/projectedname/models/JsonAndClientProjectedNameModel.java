@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The JsonAndClientProjectedNameModel model. */
+/**
+ * The JsonAndClientProjectedNameModel model.
+ */
 @Immutable
 public final class JsonAndClientProjectedNameModel {
     /*
@@ -21,7 +23,7 @@ public final class JsonAndClientProjectedNameModel {
 
     /**
      * Creates an instance of JsonAndClientProjectedNameModel class.
-     *
+     * 
      * @param clientName the clientName value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class JsonAndClientProjectedNameModel {
 
     /**
      * Get the clientName property: Pass in true.
-     *
+     * 
      * @return the clientName value.
      */
     @Generated

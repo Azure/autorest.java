@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Model with collection bytes properties. */
+/**
+ * Model with collection bytes properties.
+ */
 @Immutable
 public final class CollectionsByteProperty {
     /*
@@ -29,22 +31,21 @@ public final class CollectionsByteProperty {
 
     /**
      * Creates an instance of CollectionsByteProperty class.
-     *
+     * 
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
     @JsonCreator
-    public CollectionsByteProperty(
-            @JsonProperty(value = "requiredProperty") String requiredProperty,
-            @JsonProperty(value = "nullableProperty") List<byte[]> nullableProperty) {
+    public CollectionsByteProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") List<byte[]> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
 
     /**
      * Get the requiredProperty property: Required property.
-     *
+     * 
      * @return the requiredProperty value.
      */
     @Generated
@@ -54,7 +55,7 @@ public final class CollectionsByteProperty {
 
     /**
      * Get the nullableProperty property: Property.
-     *
+     * 
      * @return the nullableProperty value.
      */
     @Generated

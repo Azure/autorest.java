@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LrosaDsDelete202RetryInvalidHeaderHeaders model. */
+/**
+ * The LrosaDsDelete202RetryInvalidHeaderHeaders model.
+ */
 @Fluent
 public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
     /*
@@ -27,7 +29,7 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LrosaDsDelete202RetryInvalidHeaderHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsDelete202RetryInvalidHeaderHeaders(HttpHeaders rawHeaders) {
@@ -40,7 +42,7 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
 
     /**
      * Get the retryAfter property: The Retry-After property.
-     *
+     * 
      * @return the retryAfter value.
      */
     public Integer getRetryAfter() {
@@ -49,7 +51,7 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
 
     /**
      * Set the retryAfter property: The Retry-After property.
-     *
+     * 
      * @param retryAfter the retryAfter value to set.
      * @return the LrosaDsDelete202RetryInvalidHeaderHeaders object itself.
      */
@@ -60,7 +62,7 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -69,7 +71,7 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the LrosaDsDelete202RetryInvalidHeaderHeaders object itself.
      */
@@ -80,8 +82,9 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

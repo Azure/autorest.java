@@ -22,16 +22,16 @@ class EnumServiceClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        EnumServiceClientBuilder enumServiceClientbuilder =
-                new EnumServiceClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        EnumServiceClientBuilder enumServiceClientbuilder = new EnumServiceClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumServiceClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             enumServiceClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         enumServiceClient = enumServiceClientbuilder.buildClient();
+
     }
 }

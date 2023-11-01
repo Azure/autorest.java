@@ -27,22 +27,28 @@ import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Implicits. */
+/**
+ * An instance of this class provides access to all the operations defined in Implicits.
+ */
 public final class Implicits {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ImplicitsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestRequiredOptionalTestService client;
 
     /**
      * Initializes an instance of Implicits.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Implicits(AutoRestRequiredOptionalTestService client) {
-        this.service =
-                RestProxy.create(ImplicitsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(ImplicitsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -54,92 +60,69 @@ public final class Implicits {
     @ServiceInterface(name = "AutoRestRequiredOpti")
     public interface ImplicitsService {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredPath(
-                @HostParam("$host") String host,
-                @PathParam("pathParameter") String pathParameter,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getRequiredPath(@HostParam("$host") String host,
+            @PathParam("pathParameter") String pathParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/query")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalQuery(
-                @HostParam("$host") String host,
-                @QueryParam("queryParameter") String queryParameter,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putOptionalQuery(@HostParam("$host") String host,
+            @QueryParam("queryParameter") String queryParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/header")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalHeader(
-                @HostParam("$host") String host,
-                @HeaderParam("queryParameter") String queryParameter,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putOptionalHeader(@HostParam("$host") String host,
+            @HeaderParam("queryParameter") String queryParameter, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/reqopt/implicit/optional/body")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalBody(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") String bodyParameter,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putOptionalBody(@HostParam("$host") String host,
+            @BodyParam("application/json") String bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/binary-body")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalBinaryBody(
-                @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/binary-body")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalBinaryBody(
-                @HostParam("$host") String host,
-                @BodyParam("application/octet-stream") BinaryData bodyParameter,
-                @HeaderParam("Content-Length") Long contentLength,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
+            @BodyParam("application/octet-stream") BinaryData bodyParameter,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/reqopt/global/required/path/{required-global-path}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalPath(
-                @HostParam("$host") String host,
-                @PathParam("required-global-path") String requiredGlobalPath,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host,
+            @PathParam("required-global-path") String requiredGlobalPath, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/reqopt/global/required/query")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalQuery(
-                @HostParam("$host") String host,
-                @QueryParam("required-global-query") String requiredGlobalQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host,
+            @QueryParam("required-global-query") String requiredGlobalQuery, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/reqopt/global/optional/query")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getOptionalGlobalQuery(
-                @HostParam("$host") String host,
-                @QueryParam("optional-global-query") Integer optionalGlobalQuery,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host,
+            @QueryParam("optional-global-query") Integer optionalGlobalQuery, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -149,20 +132,20 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredPathWithResponseAsync(String pathParameter) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathParameter == null) {
             return Mono.error(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getRequiredPath(this.client.getHost(), pathParameter, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getRequiredPath(this.client.getHost(), pathParameter, accept, context));
     }
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -173,8 +156,8 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredPathWithResponseAsync(String pathParameter, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (pathParameter == null) {
             return Mono.error(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
@@ -185,7 +168,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -199,7 +182,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -214,7 +197,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -229,7 +212,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param pathParameter The pathParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -242,7 +225,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -252,17 +235,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalQueryWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putOptionalQuery(this.client.getHost(), queryParameter, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putOptionalQuery(this.client.getHost(), queryParameter, accept, context));
     }
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -273,8 +256,8 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalQueryWithResponseAsync(String queryParameter, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putOptionalQuery(this.client.getHost(), queryParameter, accept, context);
@@ -282,7 +265,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -296,7 +279,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -309,7 +292,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -324,7 +307,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -339,7 +322,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -352,7 +335,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -364,7 +347,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -374,17 +357,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalHeaderWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putOptionalHeader(this.client.getHost(), queryParameter, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putOptionalHeader(this.client.getHost(), queryParameter, accept, context));
     }
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -395,8 +378,8 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalHeaderWithResponseAsync(String queryParameter, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putOptionalHeader(this.client.getHost(), queryParameter, accept, context);
@@ -404,7 +387,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -418,7 +401,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -431,7 +414,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -446,7 +429,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -461,7 +444,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @param queryParameter The queryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -474,7 +457,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional header parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -486,7 +469,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -496,17 +479,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBodyWithResponseAsync(String bodyParameter) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putOptionalBody(this.client.getHost(), bodyParameter, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putOptionalBody(this.client.getHost(), bodyParameter, accept, context));
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -517,8 +500,8 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBodyWithResponseAsync(String bodyParameter, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putOptionalBody(this.client.getHost(), bodyParameter, accept, context);
@@ -526,7 +509,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -540,7 +523,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -553,7 +536,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -568,7 +551,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -583,7 +566,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -596,7 +579,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -608,7 +591,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -617,22 +600,20 @@ public final class Implicits {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
-            Flux<ByteBuffer> bodyParameter, Long contentLength) {
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(Flux<ByteBuffer> bodyParameter,
+        Long contentLength) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.putOptionalBinaryBody(
-                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.putOptionalBinaryBody(this.client.getHost(), bodyParameter,
+            contentLength, accept, context));
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -642,11 +623,11 @@ public final class Implicits {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
-            Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(Flux<ByteBuffer> bodyParameter,
+        Long contentLength, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putOptionalBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
@@ -654,7 +635,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -669,7 +650,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -683,7 +664,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -695,12 +676,12 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBinaryBodyAsync(Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
         return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -710,14 +691,14 @@ public final class Implicits {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putOptionalBinaryBodyWithResponse(
-            Flux<ByteBuffer> bodyParameter, Long contentLength, Context context) {
+    public Response<Void> putOptionalBinaryBodyWithResponse(Flux<ByteBuffer> bodyParameter, Long contentLength,
+        Context context) {
         return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -731,7 +712,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -744,7 +725,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -755,19 +736,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(BinaryData bodyParameter, Long contentLength) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.putOptionalBinaryBody(
-                                this.client.getHost(), bodyParameter, contentLength, accept, context));
+        return FluxUtil.withContext(context -> service.putOptionalBinaryBody(this.client.getHost(), bodyParameter,
+            contentLength, accept, context));
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -777,11 +756,11 @@ public final class Implicits {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(
-            BinaryData bodyParameter, Long contentLength, Context context) {
+    public Mono<Response<Void>> putOptionalBinaryBodyWithResponseAsync(BinaryData bodyParameter, Long contentLength,
+        Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putOptionalBinaryBody(this.client.getHost(), bodyParameter, contentLength, accept, context);
@@ -789,7 +768,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -804,7 +783,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -816,12 +795,12 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBinaryBodyAsync(BinaryData bodyParameter, Long contentLength, Context context) {
         return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context)
-                .flatMap(ignored -> Mono.empty());
+            .flatMap(ignored -> Mono.empty());
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -831,14 +810,14 @@ public final class Implicits {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> putOptionalBinaryBodyWithResponse(
-            BinaryData bodyParameter, Long contentLength, Context context) {
+    public Response<Void> putOptionalBinaryBodyWithResponse(BinaryData bodyParameter, Long contentLength,
+        Context context) {
         return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength, context).block();
     }
 
     /**
      * Test implicitly optional body parameter.
-     *
+     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -852,7 +831,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -860,24 +839,21 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalPathWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalPath() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getRequiredGlobalPath(
-                                this.client.getHost(), this.client.getRequiredGlobalPath(), accept, context));
+        return FluxUtil.withContext(context -> service.getRequiredGlobalPath(this.client.getHost(),
+            this.client.getRequiredGlobalPath(), accept, context));
     }
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -887,22 +863,21 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalPathWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalPath() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getRequiredGlobalPath(
-                this.client.getHost(), this.client.getRequiredGlobalPath(), accept, context);
+        return service.getRequiredGlobalPath(this.client.getHost(), this.client.getRequiredGlobalPath(), accept,
+            context);
     }
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -914,7 +889,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -928,7 +903,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -942,7 +917,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required path parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -953,7 +928,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -961,24 +936,21 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalQuery() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getRequiredGlobalQuery(
-                                this.client.getHost(), this.client.getRequiredGlobalQuery(), accept, context));
+        return FluxUtil.withContext(context -> service.getRequiredGlobalQuery(this.client.getHost(),
+            this.client.getRequiredGlobalQuery(), accept, context));
     }
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -988,22 +960,21 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalQueryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (this.client.getRequiredGlobalQuery() == null) {
-            return Mono.error(
-                    new IllegalArgumentException(
-                            "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getRequiredGlobalQuery(
-                this.client.getHost(), this.client.getRequiredGlobalQuery(), accept, context);
+        return service.getRequiredGlobalQuery(this.client.getHost(), this.client.getRequiredGlobalQuery(), accept,
+            context);
     }
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1015,7 +986,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1029,7 +1000,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1043,7 +1014,7 @@ public final class Implicits {
 
     /**
      * Test implicitly required query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -1054,7 +1025,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -1062,19 +1033,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getOptionalGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context ->
-                        service.getOptionalGlobalQuery(
-                                this.client.getHost(), this.client.getOptionalGlobalQuery(), accept, context));
+        return FluxUtil.withContext(context -> service.getOptionalGlobalQuery(this.client.getHost(),
+            this.client.getOptionalGlobalQuery(), accept, context));
     }
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1084,17 +1053,17 @@ public final class Implicits {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getOptionalGlobalQueryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return service.getOptionalGlobalQuery(
-                this.client.getHost(), this.client.getOptionalGlobalQuery(), accept, context);
+        return service.getOptionalGlobalQuery(this.client.getHost(), this.client.getOptionalGlobalQuery(), accept,
+            context);
     }
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -1106,7 +1075,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1120,7 +1089,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1134,7 +1103,7 @@ public final class Implicits {
 
     /**
      * Test implicitly optional query parameter.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

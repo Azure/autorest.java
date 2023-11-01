@@ -11,14 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The second level legacy model in polymorphic single level inheritance. */
+/**
+ * The second level legacy model in polymorphic single level inheritance.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("t-rex")
 @Immutable
 public final class TRex extends Dinosaur {
     /**
      * Creates an instance of TRex class.
-     *
+     * 
      * @param size the size value to set.
      */
     @Generated

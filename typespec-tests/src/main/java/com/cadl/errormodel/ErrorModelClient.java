@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.cadl.errormodel.implementation.ErrorModelClientImpl;
 import com.cadl.errormodel.models.Diagnostic;
 
-/** Initializes a new instance of the synchronous ErrorModelClient type. */
+/**
+ * Initializes a new instance of the synchronous ErrorModelClient type.
+ */
 @ServiceClient(builder = ErrorModelClientBuilder.class)
 public final class ErrorModelClient {
-    @Generated private final ErrorModelClientImpl serviceClient;
+    @Generated
+    private final ErrorModelClientImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorModelClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class ErrorModelClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -55,7 +58,7 @@ public final class ErrorModelClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -71,7 +74,7 @@ public final class ErrorModelClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

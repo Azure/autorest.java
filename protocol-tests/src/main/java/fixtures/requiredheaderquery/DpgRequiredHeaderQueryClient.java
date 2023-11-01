@@ -20,14 +20,17 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous DpgRequiredHeaderQueryClient type. */
+/**
+ * Initializes a new instance of the synchronous DpgRequiredHeaderQueryClient type.
+ */
 @ServiceClient(builder = DpgRequiredHeaderQueryClientBuilder.class)
 public final class DpgRequiredHeaderQueryClient {
-    @Generated private final ParamsImpl serviceClient;
+    @Generated
+    private final ParamsImpl serviceClient;
 
     /**
      * Initializes an instance of DpgRequiredHeaderQueryClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,26 +40,40 @@ public final class DpgRequiredHeaderQueryClient {
 
     /**
      * Test Case for Required Query Parameters
-     *
-     * <p>Get Required Query Parameters.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * 
+     * Get Required Query Parameters.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
-     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>parameter_optional_csv_int_array</td>
+     * <td>List&lt;Integer&gt;</td>
+     * <td>No</td>
+     * <td>I am a required csv int array parameter. In the form of "," separated string.</td>
+     * </tr>
+     * <tr>
+     * <td>parameter_optional_multi_int_array</td>
+     * <td>List&lt;Integer&gt;</td>
+     * <td>No</td>
+     * <td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray I am a required csv string array parameter.
@@ -74,37 +91,24 @@ public final class DpgRequiredHeaderQueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredQueryParamWithResponse(
-            int parameterInt,
-            boolean parameterBoolean,
-            List<String> parameterCsvStringArray,
-            List<Integer> parameterCsvIntArray,
-            List<String> parameterMultiStringArray,
-            List<Integer> parameterMultiIntArray,
-            List<String> parameterMultiEnumArray,
-            OffsetDateTime parameterDatetime,
-            RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredQueryParamWithResponse(
-                parameterInt,
-                parameterBoolean,
-                parameterCsvStringArray,
-                parameterCsvIntArray,
-                parameterMultiStringArray,
-                parameterMultiIntArray,
-                parameterMultiEnumArray,
-                parameterDatetime,
-                requestOptions);
+    public Response<BinaryData> getRequiredQueryParamWithResponse(int parameterInt, boolean parameterBoolean,
+        List<String> parameterCsvStringArray, List<Integer> parameterCsvIntArray,
+        List<String> parameterMultiStringArray, List<Integer> parameterMultiIntArray,
+        List<String> parameterMultiEnumArray, OffsetDateTime parameterDatetime, RequestOptions requestOptions) {
+        return this.serviceClient.getRequiredQueryParamWithResponse(parameterInt, parameterBoolean,
+            parameterCsvStringArray, parameterCsvIntArray, parameterMultiStringArray, parameterMultiIntArray,
+            parameterMultiEnumArray, parameterDatetime, requestOptions);
     }
 
     /**
      * Get Required Header Parameters.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Object
      * }</pre>
-     *
+     * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
      * @param parameterCsvStringArray The array of string collect by csv.
@@ -120,21 +124,10 @@ public final class DpgRequiredHeaderQueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getRequiredHeaderWithResponse(
-            int parameterInt,
-            boolean parameterBoolean,
-            List<String> parameterCsvStringArray,
-            List<Integer> parameterCsvIntArray,
-            OffsetDateTime parameterDatetime,
-            Duration parameterDuration,
-            RequestOptions requestOptions) {
-        return this.serviceClient.getRequiredHeaderWithResponse(
-                parameterInt,
-                parameterBoolean,
-                parameterCsvStringArray,
-                parameterCsvIntArray,
-                parameterDatetime,
-                parameterDuration,
-                requestOptions);
+    public Response<BinaryData> getRequiredHeaderWithResponse(int parameterInt, boolean parameterBoolean,
+        List<String> parameterCsvStringArray, List<Integer> parameterCsvIntArray, OffsetDateTime parameterDatetime,
+        Duration parameterDuration, RequestOptions requestOptions) {
+        return this.serviceClient.getRequiredHeaderWithResponse(parameterInt, parameterBoolean, parameterCsvStringArray,
+            parameterCsvIntArray, parameterDatetime, parameterDuration, requestOptions);
     }
 }

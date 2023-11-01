@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Except model. */
+/**
+ * The Except model.
+ */
 @Immutable
 public final class Except {
     /*
@@ -21,7 +23,7 @@ public final class Except {
 
     /**
      * Creates an instance of Except class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class Except {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

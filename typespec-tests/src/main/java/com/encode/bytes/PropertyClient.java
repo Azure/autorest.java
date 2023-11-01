@@ -21,14 +21,17 @@ import com.encode.bytes.models.Base64UrlArrayBytesProperty;
 import com.encode.bytes.models.Base64UrlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 
-/** Initializes a new instance of the synchronous BytesClient type. */
+/**
+ * Initializes a new instance of the synchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class PropertyClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,23 +41,23 @@ public final class PropertyClient {
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,23 +74,23 @@ public final class PropertyClient {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -104,23 +107,23 @@ public final class PropertyClient {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -137,9 +140,9 @@ public final class PropertyClient {
 
     /**
      * The base64UrlArray operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -147,9 +150,9 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -157,7 +160,7 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -174,7 +177,7 @@ public final class PropertyClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -189,14 +192,13 @@ public final class PropertyClient {
     public DefaultBytesProperty defaultMethod(DefaultBytesProperty body) {
         // Generated convenience method for defaultMethodWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(DefaultBytesProperty.class);
+        return defaultMethodWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(DefaultBytesProperty.class);
     }
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -211,14 +213,13 @@ public final class PropertyClient {
     public Base64BytesProperty base64(Base64BytesProperty body) {
         // Generated convenience method for base64WithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64WithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(Base64BytesProperty.class);
+        return base64WithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Base64BytesProperty.class);
     }
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -233,14 +234,13 @@ public final class PropertyClient {
     public Base64UrlBytesProperty base64Url(Base64UrlBytesProperty body) {
         // Generated convenience method for base64UrlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(Base64UrlBytesProperty.class);
+        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Base64UrlBytesProperty.class);
     }
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -255,8 +255,7 @@ public final class PropertyClient {
     public Base64UrlArrayBytesProperty base64UrlArray(Base64UrlArrayBytesProperty body) {
         // Generated convenience method for base64UrlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions)
-                .getValue()
-                .toObject(Base64UrlArrayBytesProperty.class);
+        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Base64UrlArrayBytesProperty.class);
     }
 }

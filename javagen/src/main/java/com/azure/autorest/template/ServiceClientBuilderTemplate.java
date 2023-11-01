@@ -31,9 +31,7 @@ import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
-import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -137,7 +135,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent()) {
+        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
@@ -166,24 +164,31 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             String.join(", ", scopes)));
                 }
 
-                // properties for sdk name and version
-                String propertiesValue = "new HashMap<>()";
-                String artifactId = ClientModelUtil.getArtifactId();
-                if (!CoreUtils.isNullOrEmpty(artifactId)) {
-                    propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
+                if (settings.isBranded()) {
+                    // properties for sdk name and version
+                    String propertiesValue = "new HashMap<>()";
+                    String artifactId = ClientModelUtil.getArtifactId();
+                    if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                        propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
+                    }
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.privateStaticFinalVariable(String.format("Map<String, String> PROPERTIES = %s", propertiesValue));
+
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
+
+                    // constructor
+                    classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                        javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
+                    });
+                } else {
+                    classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                    });
                 }
-                addGeneratedAnnotation(classBlock);
-                classBlock.privateStaticFinalVariable(String.format("Map<String, String> PROPERTIES = %s", propertiesValue));
-
-                addGeneratedAnnotation(classBlock);
-                classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
-
-                // constructor
-                classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
-                addGeneratedAnnotation(classBlock);
-                classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
-                    javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
-                });
             }
 
             Stream<ServiceClientProperty> serviceClientPropertyStream = serviceClient.getProperties().stream()
@@ -289,7 +294,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     serializerExpression = getLocalBuildVariableName(getSerializerMemberName());
                 }
 
-                if (settings.isFluent()) {
+                if (!settings.isBranded()) {
+                    function.line(String.format("%1$s client = new %1$s(%2$s);", serviceClient.getClassName(), "this.createHttpPipeline()"));
+                } else if (settings.isFluent()) {
                     function.line(String.format("%1$s client = new %2$s(%3$s, %4$s, %5$s, %6$s%7$s);",
                             serviceClient.getClassName(),
                             serviceClient.getClassName(),
@@ -469,10 +476,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
-        imports.add(KeyCredentialPolicy.class.getName());
+        ClassType.KeyCredentialPolicy.addImportsTo(imports, false);
 
         imports.add(HttpPolicyProviders.class.getName());
-        imports.add(HttpPipelinePolicy.class.getName());
+        ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
         imports.add(HttpLoggingPolicy.class.getName());
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
@@ -499,8 +506,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         });
     }
 
-
-
     protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings, SecurityInfo securityInfo) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
@@ -519,7 +524,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));
         }
 
-        if (!settings.isAzureOrFluent()) {
+        if (!settings.isAzureOrFluent() && settings.isBranded()) {
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
                     + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
         }

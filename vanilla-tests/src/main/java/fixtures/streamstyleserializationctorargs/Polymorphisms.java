@@ -27,22 +27,28 @@ import fixtures.streamstyleserializationctorargs.models.Fish;
 import fixtures.streamstyleserializationctorargs.models.Salmon;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Polymorphisms. */
+/**
+ * An instance of this class provides access to all the operations defined in Polymorphisms.
+ */
 public final class Polymorphisms {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PolymorphismsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Polymorphisms.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Polymorphisms(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(PolymorphismsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(PolymorphismsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -54,141 +60,117 @@ public final class Polymorphisms {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PolymorphismsService {
         @Get("/complex/polymorphism/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Fish>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Fish>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/polymorphism/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Fish> getValidSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<Fish> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/polymorphism/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Void> putValidSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> putValidSync(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/dotsyntax")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFish>> getDotSyntax(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DotFish>> getDotSyntax(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/polymorphism/dotsyntax")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<DotFish> getDotSyntaxSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<DotFish> getDotSyntaxSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFishMarket>> getComposedWithDiscriminator(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<DotFishMarket> getComposedWithDiscriminatorSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<DotFishMarket> getComposedWithDiscriminatorSync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<DotFishMarket> getComposedWithoutDiscriminatorSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<DotFishMarket> getComposedWithoutDiscriminatorSync(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/complicated")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Salmon>> getComplicated(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Salmon>> getComplicated(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/polymorphism/complicated")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Salmon> getComplicatedSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<Salmon> getComplicatedSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/polymorphism/complicated")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putComplicated(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Salmon complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putComplicated(@HostParam("$host") String host,
+            @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/complicated")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Void> putComplicatedSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Salmon complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> putComplicatedSync(@HostParam("$host") String host,
+            @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingdiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Salmon>> putMissingDiscriminator(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Salmon complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Salmon>> putMissingDiscriminator(@HostParam("$host") String host,
+            @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingdiscriminator")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Salmon> putMissingDiscriminatorSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Salmon complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Salmon> putMissingDiscriminatorSync(@HostParam("$host") String host,
+            @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValidMissingRequired(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host,
+            @BodyParam("application/json") Fish complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Void> putValidMissingRequiredSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Fish complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> putValidMissingRequiredSync(@HostParam("$host") String host,
+            @BodyParam("application/json") Fish complexBody, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic along with {@link Response} on successful completion of {@link Mono}.
@@ -197,7 +179,7 @@ public final class Polymorphisms {
     public Mono<Response<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -205,7 +187,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -216,7 +198,7 @@ public final class Polymorphisms {
     public Mono<Response<Fish>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -224,7 +206,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic on successful completion of {@link Mono}.
@@ -236,7 +218,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -250,7 +232,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -261,7 +243,7 @@ public final class Polymorphisms {
     public Response<Fish> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -269,7 +251,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic.
@@ -281,13 +263,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -297,11 +306,11 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -311,13 +320,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -328,11 +364,11 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -342,13 +378,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -361,13 +424,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -381,13 +471,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -398,11 +515,11 @@ public final class Polymorphisms {
     public Response<Void> putValidWithResponse(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -412,13 +529,40 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic.
-     *
-     * @param complexBody Please put a salmon that looks like this: { 'fishtype':'Salmon', 'location':'alaska',
-     *     'iswild':true, 'species':'king', 'length':1.0, 'siblings':[ { 'fishtype':'Shark', 'age':6, 'birthday':
-     *     '2012-01-05T01:00:00Z', 'length':20.0, 'species':'predator', }, { 'fishtype':'Sawshark', 'age':105,
-     *     'birthday': '1900-01-05T01:00:00Z', 'length':10.0, 'picture': new Buffer([255, 255, 255, 255,
-     *     254]).toString('base64'), 'species':'dangerous', }, { 'fishtype': 'goblin', 'age': 1, 'birthday':
-     *     '2015-08-08T00:00:00Z', 'length': 30.0, 'species': 'scary', 'jawsize': 5 } ] };.
+     * 
+     * @param complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -430,17 +574,17 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getDotSyntax(this.client.getHost(), accept, context));
@@ -448,19 +592,19 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDotSyntax(this.client.getHost(), accept, context);
@@ -468,7 +612,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot on successful completion of {@link Mono}.
@@ -480,7 +624,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -494,7 +638,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -505,7 +649,7 @@ public final class Polymorphisms {
     public Response<DotFish> getDotSyntaxWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDotSyntaxSync(this.client.getHost(), accept, context);
@@ -513,7 +657,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, JSON key contains a dot.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, JSON key contains a dot.
@@ -526,39 +670,39 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
+     * with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getComposedWithDiscriminator(this.client.getHost(), accept, context));
+        return FluxUtil
+            .withContext(context -> service.getComposedWithDiscriminator(this.client.getHost(), accept, context));
     }
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
+     * with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComposedWithDiscriminator(this.client.getHost(), accept, context);
@@ -567,11 +711,11 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified on successful completion of {@link Mono}.
+     * with discriminator specified on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync() {
@@ -581,13 +725,13 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified on successful completion of {@link Mono}.
+     * with discriminator specified on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync(Context context) {
@@ -597,19 +741,19 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified along with {@link Response}.
+     * with discriminator specified along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithDiscriminatorWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComposedWithDiscriminatorSync(this.client.getHost(), accept, context);
@@ -618,11 +762,11 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     with discriminator specified.
+     * with discriminator specified.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithDiscriminator() {
@@ -632,39 +776,39 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
+     * without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getComposedWithoutDiscriminator(this.client.getHost(), accept, context));
+        return FluxUtil
+            .withContext(context -> service.getComposedWithoutDiscriminator(this.client.getHost(), accept, context));
     }
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
+     * without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComposedWithoutDiscriminator(this.client.getHost(), accept, context);
@@ -673,11 +817,11 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire on successful completion of {@link Mono}.
+     * without discriminator specified on wire on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync() {
@@ -687,36 +831,36 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire on successful completion of {@link Mono}.
+     * without discriminator specified on wire on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync(Context context) {
         return getComposedWithoutDiscriminatorWithResponseAsync(context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire along with {@link Response}.
+     * without discriminator specified on wire along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithoutDiscriminatorWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComposedWithoutDiscriminatorSync(this.client.getHost(), accept, context);
@@ -725,11 +869,11 @@ public final class Polymorphisms {
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     *     without discriminator specified on wire.
+     * without discriminator specified on wire.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithoutDiscriminator() {
@@ -738,17 +882,17 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     *     along with {@link Response} on successful completion of {@link Mono}.
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getComplicated(this.client.getHost(), accept, context));
@@ -756,19 +900,19 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     *     along with {@link Response} on successful completion of {@link Mono}.
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComplicated(this.client.getHost(), accept, context);
@@ -776,11 +920,11 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     *     on successful completion of {@link Mono}.
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync() {
@@ -789,13 +933,13 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     *     on successful completion of {@link Mono}.
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync(Context context) {
@@ -804,19 +948,19 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     *     along with {@link Response}.
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Salmon> getComplicatedWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getComplicatedSync(this.client.getHost(), accept, context);
@@ -824,11 +968,11 @@ public final class Polymorphisms {
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     *     properties.
+     * properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon getComplicated() {
@@ -837,7 +981,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -848,22 +992,22 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.putComplicated(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putComplicated(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -875,11 +1019,11 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -889,7 +1033,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -903,7 +1047,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -918,7 +1062,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -930,11 +1074,11 @@ public final class Polymorphisms {
     public Response<Void> putComplicatedWithResponse(Salmon complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -944,7 +1088,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -957,7 +1101,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -968,22 +1112,22 @@ public final class Polymorphisms {
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putMissingDiscriminator(this.client.getHost(), complexBody, accept, context));
+            context -> service.putMissingDiscriminator(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -995,11 +1139,11 @@ public final class Polymorphisms {
     public Mono<Response<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1009,7 +1153,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1023,7 +1167,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1034,12 +1178,12 @@ public final class Polymorphisms {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> putMissingDiscriminatorAsync(Salmon complexBody, Context context) {
         return putMissingDiscriminatorWithResponseAsync(complexBody, context)
-                .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1051,11 +1195,11 @@ public final class Polymorphisms {
     public Response<Salmon> putMissingDiscriminatorWithResponse(Salmon complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1065,7 +1209,7 @@ public final class Polymorphisms {
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1080,12 +1224,34 @@ public final class Polymorphisms {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1095,28 +1261,50 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.putValidMissingRequired(this.client.getHost(), complexBody, accept, context));
+            context -> service.putValidMissingRequired(this.client.getHost(), complexBody, accept, context));
     }
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1127,11 +1315,11 @@ public final class Polymorphisms {
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1142,12 +1330,34 @@ public final class Polymorphisms {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1161,12 +1371,34 @@ public final class Polymorphisms {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1181,12 +1413,34 @@ public final class Polymorphisms {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1197,11 +1451,11 @@ public final class Polymorphisms {
     public Response<Void> putValidMissingRequiredWithResponse(Fish complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1212,12 +1466,34 @@ public final class Polymorphisms {
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
      * allowed from the client.
-     *
+     * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     *     be sent: { "fishtype": "sawshark", "species": "snaggle toothed", "length": 18.5, "age": 2, "birthday":
-     *     "2013-06-01T01:00:00Z", "location": "alaska", "picture": base64(FF FF FF FF FE), "siblings": [ { "fishtype":
-     *     "shark", "species": "predator", "birthday": "2012-01-05T01:00:00Z", "length": 20, "age": 6 }, { "fishtype":
-     *     "sawshark", "species": "dangerous", "picture": base64(FF FF FF FF FE), "length": 10, "age": 105 } ] }.
+     * be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

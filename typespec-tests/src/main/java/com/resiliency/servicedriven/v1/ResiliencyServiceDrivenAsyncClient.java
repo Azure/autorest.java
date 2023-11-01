@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.resiliency.servicedriven.v1.implementation.ResiliencyServiceDrivenClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ResiliencyServiceDrivenClient type. */
+/**
+ * Initializes a new instance of the asynchronous ResiliencyServiceDrivenClient type.
+ */
 @ServiceClient(builder = ResiliencyServiceDrivenClientBuilder.class, isAsync = true)
 public final class ResiliencyServiceDrivenAsyncClient {
-    @Generated private final ResiliencyServiceDrivenClientImpl serviceClient;
+    @Generated
+    private final ResiliencyServiceDrivenClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResiliencyServiceDrivenAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,7 +39,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
      * well.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -53,7 +56,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
      * parameter as well.
-     *
+     * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,17 +74,26 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
      * parameter as well.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>parameter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>I am an optional parameter</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -98,7 +110,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
      * well.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -117,7 +129,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
      * parameter as well.
-     *
+     * 
      * @param parameter I am a required parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,7 +150,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
      * parameter as well.
-     *
+     * 
      * @param parameter I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -162,7 +174,7 @@ public final class ResiliencyServiceDrivenAsyncClient {
     /**
      * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
      * parameter as well.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

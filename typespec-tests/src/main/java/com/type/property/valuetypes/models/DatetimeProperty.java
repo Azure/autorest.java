@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** Model with a datetime property. */
+/**
+ * Model with a datetime property.
+ */
 @Immutable
 public final class DatetimeProperty {
     /*
@@ -22,7 +24,7 @@ public final class DatetimeProperty {
 
     /**
      * Creates an instance of DatetimeProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class DatetimeProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

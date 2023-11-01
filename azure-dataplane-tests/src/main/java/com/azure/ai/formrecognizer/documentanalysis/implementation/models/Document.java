@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
-/** An object describing the location and semantic content of a document. */
+/**
+ * An object describing the location and semantic content of a document.
+ */
 @Fluent
 public final class Document {
     /*
@@ -42,12 +44,15 @@ public final class Document {
     @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
-    /** Creates an instance of Document class. */
-    public Document() {}
+    /**
+     * Creates an instance of Document class.
+     */
+    public Document() {
+    }
 
     /**
      * Get the docType property: Document type.
-     *
+     * 
      * @return the docType value.
      */
     public String getDocType() {
@@ -56,7 +61,7 @@ public final class Document {
 
     /**
      * Set the docType property: Document type.
-     *
+     * 
      * @param docType the docType value to set.
      * @return the Document object itself.
      */
@@ -67,7 +72,7 @@ public final class Document {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the document.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -76,7 +81,7 @@ public final class Document {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the document.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the Document object itself.
      */
@@ -87,7 +92,7 @@ public final class Document {
 
     /**
      * Get the spans property: Location of the document in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -96,7 +101,7 @@ public final class Document {
 
     /**
      * Set the spans property: Location of the document in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the Document object itself.
      */
@@ -107,7 +112,7 @@ public final class Document {
 
     /**
      * Get the fields property: Dictionary of named field values.
-     *
+     * 
      * @return the fields value.
      */
     public Map<String, DocumentField> getFields() {
@@ -116,7 +121,7 @@ public final class Document {
 
     /**
      * Set the fields property: Dictionary of named field values.
-     *
+     * 
      * @param fields the fields value to set.
      * @return the Document object itself.
      */
@@ -127,7 +132,7 @@ public final class Document {
 
     /**
      * Get the confidence property: Confidence of correctly extracting the document.
-     *
+     * 
      * @return the confidence value.
      */
     public float getConfidence() {
@@ -136,7 +141,7 @@ public final class Document {
 
     /**
      * Set the confidence property: Confidence of correctly extracting the document.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the Document object itself.
      */

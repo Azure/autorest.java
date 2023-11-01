@@ -16,14 +16,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.cadl.server.implementation.ContosoClientImpl;
 
-/** Initializes a new instance of the synchronous ContosoClient type. */
+/**
+ * Initializes a new instance of the synchronous ContosoClient type.
+ */
 @ServiceClient(builder = ContosoClientBuilder.class)
 public final class ContosoClient {
-    @Generated private final ContosoClientImpl serviceClient;
+    @Generated
+    private final ContosoClientImpl serviceClient;
 
     /**
      * Initializes an instance of ContosoClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class ContosoClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -50,7 +53,7 @@ public final class ContosoClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

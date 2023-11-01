@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 
-/** Initializes a new instance of the synchronous MultipartClient type. */
+/**
+ * Initializes a new instance of the synchronous MultipartClient type.
+ */
 @ServiceClient(builder = MultipartClientBuilder.class)
 public final class MultipartClient {
-    @Generated private final MultipartClientImpl serviceClient;
+    @Generated
+    private final MultipartClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultipartClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,9 +37,9 @@ public final class MultipartClient {
 
     /**
      * request is binary.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     data (Required): {
@@ -45,7 +48,7 @@ public final class MultipartClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

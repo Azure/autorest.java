@@ -7,7 +7,9 @@ package fixtures.constants.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ModelAsStringRequiredTwoValueNoDefault model. */
+/**
+ * The ModelAsStringRequiredTwoValueNoDefault model.
+ */
 @Fluent
 public final class ModelAsStringRequiredTwoValueNoDefault {
     /*
@@ -16,12 +18,15 @@ public final class ModelAsStringRequiredTwoValueNoDefault {
     @JsonProperty(value = "parameter", required = true)
     private ModelAsStringRequiredTwoValueNoDefaultEnum parameter;
 
-    /** Creates an instance of ModelAsStringRequiredTwoValueNoDefault class. */
-    public ModelAsStringRequiredTwoValueNoDefault() {}
+    /**
+     * Creates an instance of ModelAsStringRequiredTwoValueNoDefault class.
+     */
+    public ModelAsStringRequiredTwoValueNoDefault() {
+    }
 
     /**
      * Get the parameter property: The parameter property.
-     *
+     * 
      * @return the parameter value.
      */
     public ModelAsStringRequiredTwoValueNoDefaultEnum getParameter() {
@@ -30,7 +35,7 @@ public final class ModelAsStringRequiredTwoValueNoDefault {
 
     /**
      * Set the parameter property: The parameter property.
-     *
+     * 
      * @param parameter the parameter value to set.
      * @return the ModelAsStringRequiredTwoValueNoDefault object itself.
      */
@@ -41,13 +46,13 @@ public final class ModelAsStringRequiredTwoValueNoDefault {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getParameter() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property parameter in model ModelAsStringRequiredTwoValueNoDefault");
+                "Missing required property parameter in model ModelAsStringRequiredTwoValueNoDefault");
         }
     }
 }

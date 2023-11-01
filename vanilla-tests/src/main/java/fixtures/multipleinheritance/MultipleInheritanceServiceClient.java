@@ -34,41 +34,51 @@ import fixtures.multipleinheritance.models.Kitten;
 import fixtures.multipleinheritance.models.Pet;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the MultipleInheritanceServiceClient type. */
+/**
+ * Initializes a new instance of the MultipleInheritanceServiceClient type.
+ */
 public final class MultipleInheritanceServiceClient {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final MultipleInheritanceServiceClientService service;
 
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -77,19 +87,17 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Initializes an instance of MultipleInheritanceServiceClient client.
-     *
+     * 
      * @param host server parameter.
      */
     MultipleInheritanceServiceClient(String host) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                host);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), host);
     }
 
     /**
      * Initializes an instance of MultipleInheritanceServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
      */
@@ -99,7 +107,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Initializes an instance of MultipleInheritanceServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
@@ -108,9 +116,8 @@ public final class MultipleInheritanceServiceClient {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
-        this.service =
-                RestProxy.create(
-                        MultipleInheritanceServiceClientService.class, this.httpPipeline, this.getSerializerAdapter());
+        this.service = RestProxy.create(MultipleInheritanceServiceClientService.class, this.httpPipeline,
+            this.getSerializerAdapter());
     }
 
     /**
@@ -121,88 +128,73 @@ public final class MultipleInheritanceServiceClient {
     @ServiceInterface(name = "MultipleInheritanceS")
     public interface MultipleInheritanceServiceClientService {
         @Get("/multipleInheritance/horse")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Horse>> getHorse(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Horse>> getHorse(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/multipleInheritance/horse")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putHorse(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Horse horse,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putHorse(@HostParam("$host") String host, @BodyParam("application/json") Horse horse,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/pet")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Pet>> getPet(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Pet>> getPet(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/multipleInheritance/pet")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putPet(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Pet pet,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putPet(@HostParam("$host") String host, @BodyParam("application/json") Pet pet,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/feline")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Feline>> getFeline(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Feline>> getFeline(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/multipleInheritance/feline")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putFeline(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Feline feline,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putFeline(@HostParam("$host") String host, @BodyParam("application/json") Feline feline,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/cat")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Cat>> getCat(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Cat>> getCat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/multipleInheritance/cat")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putCat(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Cat cat,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putCat(@HostParam("$host") String host, @BodyParam("application/json") Cat cat,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/kitten")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Kitten>> getKitten(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Kitten>> getKitten(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/multipleInheritance/kitten")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> putKitten(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Kitten kitten,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> putKitten(@HostParam("$host") String host, @BodyParam("application/json") Kitten kitten,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Horse>> getHorseWithResponseAsync() {
@@ -215,13 +207,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Horse>> getHorseWithResponseAsync(Context context) {
@@ -234,7 +226,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true on successful completion of {@link Mono}.
@@ -246,7 +238,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -260,7 +252,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -274,7 +266,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a horse with name 'Fred' and isAShowHorse true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a horse with name 'Fred' and isAShowHorse true.
@@ -286,7 +278,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -309,7 +301,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -333,7 +325,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -347,7 +339,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -362,7 +354,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -377,7 +369,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a horse with name 'General' and isAShowHorse false.
-     *
+     * 
      * @param horse Put a horse with name 'General' and isAShowHorse false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -391,7 +383,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut' along with {@link Response} on successful completion of {@link Mono}.
@@ -407,7 +399,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -425,7 +417,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut' on successful completion of {@link Mono}.
@@ -437,7 +429,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -451,7 +443,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -465,7 +457,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a pet with name 'Peanut'.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a pet with name 'Peanut'.
@@ -477,7 +469,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -500,7 +492,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -524,7 +516,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -538,7 +530,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -553,7 +545,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -568,7 +560,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a pet with name 'Butter'.
-     *
+     * 
      * @param pet Put a pet with name 'Butter'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -582,11 +574,11 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Feline>> getFelineWithResponseAsync() {
@@ -599,13 +591,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of {@link
-     *     Mono}.
+     * @return a feline where meows and hisses are true along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Feline>> getFelineWithResponseAsync(Context context) {
@@ -618,7 +610,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a feline where meows and hisses are true on successful completion of {@link Mono}.
@@ -630,7 +622,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -644,7 +636,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -658,7 +650,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a feline where meows and hisses are true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a feline where meows and hisses are true.
@@ -670,7 +662,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -693,7 +685,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -717,7 +709,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -731,7 +723,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -746,7 +738,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -761,7 +753,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a feline who hisses and doesn't meow.
-     *
+     * 
      * @param feline Put a feline who hisses and doesn't meow.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -775,11 +767,11 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Cat>> getCatWithResponseAsync() {
@@ -792,13 +784,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true along with {@link Response} on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Cat>> getCatWithResponseAsync(Context context) {
@@ -811,11 +803,11 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of {@link
-     *     Mono}.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Cat> getCatAsync() {
@@ -824,13 +816,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of {@link
-     *     Mono}.
+     * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Cat> getCatAsync(Context context) {
@@ -839,7 +831,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -853,7 +845,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a cat with name 'Whiskers' where likesMilk, meows, and hisses is true.
@@ -865,7 +857,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -888,7 +880,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -912,7 +904,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -926,7 +918,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -941,7 +933,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -956,7 +948,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
-     *
+     * 
      * @param cat Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -970,11 +962,11 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
-     *     with {@link Response} on successful completion of {@link Mono}.
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Kitten>> getKittenWithResponseAsync() {
@@ -987,13 +979,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
-     *     with {@link Response} on successful completion of {@link Mono}.
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Kitten>> getKittenWithResponseAsync(Context context) {
@@ -1006,11 +998,11 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Kitten> getKittenAsync() {
@@ -1019,13 +1011,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false on
-     *     successful completion of {@link Mono}.
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Kitten> getKittenAsync(Context context) {
@@ -1034,13 +1026,13 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false along
-     *     with {@link Response}.
+     * with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Kitten> getKittenWithResponse(Context context) {
@@ -1049,7 +1041,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false.
@@ -1061,7 +1053,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1084,7 +1076,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1108,7 +1100,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1122,7 +1114,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1137,7 +1129,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1152,7 +1144,7 @@ public final class MultipleInheritanceServiceClient {
 
     /**
      * Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
-     *
+     * 
      * @param kitten Put a kitten with name 'Kitty' where likesMilk and hisses is false, meows and eatsMiceYet is true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

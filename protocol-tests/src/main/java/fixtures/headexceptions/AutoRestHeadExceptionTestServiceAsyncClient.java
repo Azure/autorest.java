@@ -17,14 +17,17 @@ import fixtures.headexceptions.implementation.HeadExceptionsImpl;
 import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestHeadExceptionTestServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestHeadExceptionTestServiceClient type.
+ */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class, isAsync = true)
 public final class AutoRestHeadExceptionTestServiceAsyncClient {
-    @Generated private final HeadExceptionsImpl serviceClient;
+    @Generated
+    private final HeadExceptionsImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestServiceAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,7 +37,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -50,7 +53,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -66,7 +69,7 @@ public final class AutoRestHeadExceptionTestServiceAsyncClient {
 
     /**
      * Return 404 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

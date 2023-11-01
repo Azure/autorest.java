@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.encode.bytes.implementation.HeadersImpl;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous BytesClient type. */
+/**
+ * Initializes a new instance of the synchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class HeaderClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,7 +37,7 @@ public final class HeaderClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -51,7 +54,7 @@ public final class HeaderClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -68,7 +71,7 @@ public final class HeaderClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +88,7 @@ public final class HeaderClient {
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,7 +105,7 @@ public final class HeaderClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -121,7 +124,7 @@ public final class HeaderClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -140,7 +143,7 @@ public final class HeaderClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,7 +162,7 @@ public final class HeaderClient {
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

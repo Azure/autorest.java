@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** User action response. */
+/**
+ * User action response.
+ */
 @Immutable
 public final class UserActionResponse {
     /*
@@ -21,7 +23,7 @@ public final class UserActionResponse {
 
     /**
      * Creates an instance of UserActionResponse class.
-     *
+     * 
      * @param userActionResult the userActionResult value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class UserActionResponse {
 
     /**
      * Get the userActionResult property: User action result.
-     *
+     * 
      * @return the userActionResult value.
      */
     @Generated

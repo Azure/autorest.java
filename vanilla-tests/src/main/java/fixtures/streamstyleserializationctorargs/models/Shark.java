@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The Shark model. */
+/**
+ * The Shark model.
+ */
 @Fluent
 public class Shark extends Fish {
     /*
@@ -30,7 +32,7 @@ public class Shark extends Fish {
 
     /**
      * Creates an instance of Shark class.
-     *
+     * 
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
@@ -41,7 +43,7 @@ public class Shark extends Fish {
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     public Integer getAge() {
@@ -50,7 +52,7 @@ public class Shark extends Fish {
 
     /**
      * Set the age property: The age property.
-     *
+     * 
      * @param age the age value to set.
      * @return the Shark object itself.
      */
@@ -61,21 +63,25 @@ public class Shark extends Fish {
 
     /**
      * Get the birthday property: The birthday property.
-     *
+     * 
      * @return the birthday value.
      */
     public OffsetDateTime getBirthday() {
         return this.birthday;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -84,15 +90,15 @@ public class Shark extends Fish {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
     public void validate() {
         super.validate();
         if (getBirthday() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Missing required property birthday in model Shark"));
+            throw LOGGER
+                .logExceptionAsError(new IllegalArgumentException("Missing required property birthday in model Shark"));
         }
     }
 
@@ -112,111 +118,105 @@ public class Shark extends Fish {
 
     /**
      * Reads an instance of Shark from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Shark.
      */
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    String discriminatorValue = null;
-                    JsonReader readerToUse = reader.bufferObject();
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
 
-                    readerToUse.nextToken(); // Prepare for reading
-                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = readerToUse.getFieldName();
-                        readerToUse.nextToken();
-                        if ("fishtype".equals(fieldName)) {
-                            discriminatorValue = readerToUse.getString();
-                            break;
-                        } else {
-                            readerToUse.skipChildren();
-                        }
-                    }
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("fishtype".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
 
-                    if (discriminatorValue != null) {
-                        readerToUse = readerToUse.reset();
-                    }
-                    // Use the discriminator value to determine which subtype should be deserialized.
-                    if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
-                        return fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("sawshark".equals(discriminatorValue)) {
-                        return Sawshark.fromJson(readerToUse);
-                    } else if ("goblin".equals(discriminatorValue)) {
-                        return Goblinshark.fromJson(readerToUse);
-                    } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                        return Cookiecuttershark.fromJson(readerToUse);
-                    } else {
-                        throw new IllegalStateException(
-                                "Discriminator field 'fishtype' didn't match one of the expected values 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
-                                        + discriminatorValue
-                                        + "'.");
-                    }
-                });
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
+                return fromJsonKnownDiscriminator(readerToUse);
+            } else if ("sawshark".equals(discriminatorValue)) {
+                return Sawshark.fromJson(readerToUse);
+            } else if ("goblin".equals(discriminatorValue)) {
+                return Goblinshark.fromJson(readerToUse);
+            } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                return Cookiecuttershark.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'fishtype' didn't match one of the expected values 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
+                        + discriminatorValue + "'.");
+            }
+        });
     }
 
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    boolean birthdayFound = false;
-                    OffsetDateTime birthday = null;
-                    Integer age = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean lengthFound = false;
+            float length = 0.0f;
+            String species = null;
+            List<Fish> siblings = null;
+            boolean birthdayFound = false;
+            OffsetDateTime birthday = null;
+            Integer age = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("fishtype".equals(fieldName)) {
-                            String fishtype = reader.getString();
-                            if (!"shark".equals(fishtype)) {
-                                throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to 'shark'. The found 'fishtype' was '"
-                                                + fishtype
-                                                + "'.");
-                            }
-                        } else if ("length".equals(fieldName)) {
-                            length = reader.getFloat();
-                            lengthFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                        } else if ("birthday".equals(fieldName)) {
-                            birthday =
-                                    reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                            birthdayFound = true;
-                        } else if ("age".equals(fieldName)) {
-                            age = reader.getNullable(JsonReader::getInt);
-                        } else {
-                            reader.skipChildren();
-                        }
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"shark".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'shark'. The found 'fishtype' was '"
+                                + fishtype + "'.");
                     }
-                    if (lengthFound && birthdayFound) {
-                        Shark deserializedShark = new Shark(length, birthday);
-                        deserializedShark.setSpecies(species);
-                        deserializedShark.setSiblings(siblings);
-                        deserializedShark.age = age;
+                } else if ("length".equals(fieldName)) {
+                    length = reader.getFloat();
+                    lengthFound = true;
+                } else if ("species".equals(fieldName)) {
+                    species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                } else if ("birthday".equals(fieldName)) {
+                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthdayFound = true;
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getNullable(JsonReader::getInt);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (lengthFound && birthdayFound) {
+                Shark deserializedShark = new Shark(length, birthday);
+                deserializedShark.setSpecies(species);
+                deserializedShark.setSiblings(siblings);
+                deserializedShark.age = age;
 
-                        return deserializedShark;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
-                    }
-                    if (!birthdayFound) {
-                        missingProperties.add("birthday");
-                    }
+                return deserializedShark;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!lengthFound) {
+                missingProperties.add("length");
+            }
+            if (!birthdayFound) {
+                missingProperties.add("birthday");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

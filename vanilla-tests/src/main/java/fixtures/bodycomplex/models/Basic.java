@@ -7,7 +7,9 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Basic model. */
+/**
+ * The Basic model.
+ */
 @Fluent
 public final class Basic {
     /*
@@ -28,12 +30,15 @@ public final class Basic {
     @JsonProperty(value = "color")
     private CMYKColors color;
 
-    /** Creates an instance of Basic class. */
-    public Basic() {}
+    /**
+     * Creates an instance of Basic class.
+     */
+    public Basic() {
+    }
 
     /**
      * Get the id property: Basic Id.
-     *
+     * 
      * @return the id value.
      */
     public Integer getId() {
@@ -42,7 +47,7 @@ public final class Basic {
 
     /**
      * Set the id property: Basic Id.
-     *
+     * 
      * @param id the id value to set.
      * @return the Basic object itself.
      */
@@ -54,7 +59,7 @@ public final class Basic {
     /**
      * Get the name property: Name property with a very long description that does not fit on a single line and a line
      * break.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -64,7 +69,7 @@ public final class Basic {
     /**
      * Set the name property: Name property with a very long description that does not fit on a single line and a line
      * break.
-     *
+     * 
      * @param name the name value to set.
      * @return the Basic object itself.
      */
@@ -75,7 +80,7 @@ public final class Basic {
 
     /**
      * Get the color property: The color property.
-     *
+     * 
      * @return the color value.
      */
     public CMYKColors getColor() {
@@ -84,7 +89,7 @@ public final class Basic {
 
     /**
      * Set the color property: The color property.
-     *
+     * 
      * @param color the color value to set.
      * @return the Basic object itself.
      */
@@ -95,8 +100,9 @@ public final class Basic {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

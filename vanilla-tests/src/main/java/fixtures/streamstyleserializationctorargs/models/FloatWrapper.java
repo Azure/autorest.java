@@ -11,7 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The FloatWrapper model. */
+/**
+ * The FloatWrapper model.
+ */
 @Fluent
 public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
     /*
@@ -24,12 +26,15 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      */
     private Float field2;
 
-    /** Creates an instance of FloatWrapper class. */
-    public FloatWrapper() {}
+    /**
+     * Creates an instance of FloatWrapper class.
+     */
+    public FloatWrapper() {
+    }
 
     /**
      * Get the field1 property: The field1 property.
-     *
+     * 
      * @return the field1 value.
      */
     public Float getField1() {
@@ -38,7 +43,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     /**
      * Set the field1 property: The field1 property.
-     *
+     * 
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
      */
@@ -49,7 +54,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     /**
      * Get the field2 property: The field2 property.
-     *
+     * 
      * @return the field2 value.
      */
     public Float getField2() {
@@ -58,7 +63,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     /**
      * Set the field2 property: The field2 property.
-     *
+     * 
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.
      */
@@ -69,10 +74,11 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -84,30 +90,29 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
 
     /**
      * Reads an instance of FloatWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of FloatWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the FloatWrapper.
      */
     public static FloatWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    FloatWrapper deserializedFloatWrapper = new FloatWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            FloatWrapper deserializedFloatWrapper = new FloatWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field1".equals(fieldName)) {
-                            deserializedFloatWrapper.field1 = reader.getNullable(JsonReader::getFloat);
-                        } else if ("field2".equals(fieldName)) {
-                            deserializedFloatWrapper.field2 = reader.getNullable(JsonReader::getFloat);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field1".equals(fieldName)) {
+                    deserializedFloatWrapper.field1 = reader.getNullable(JsonReader::getFloat);
+                } else if ("field2".equals(fieldName)) {
+                    deserializedFloatWrapper.field2 = reader.getNullable(JsonReader::getFloat);
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedFloatWrapper;
-                });
+            return deserializedFloatWrapper;
+        });
     }
 }

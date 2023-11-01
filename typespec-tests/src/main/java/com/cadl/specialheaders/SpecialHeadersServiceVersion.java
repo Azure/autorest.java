@@ -6,9 +6,13 @@ package com.cadl.specialheaders;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of SpecialHeadersClient. */
+/**
+ * Service version of SpecialHeadersClient.
+ */
 public enum SpecialHeadersServiceVersion implements ServiceVersion {
-    /** Enum value 1.0.0. */
+    /**
+     * Enum value 1.0.0.
+     */
     V1_0_0("1.0.0");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum SpecialHeadersServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum SpecialHeadersServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link SpecialHeadersServiceVersion}.
      */
     public static SpecialHeadersServiceVersion getLatest() {

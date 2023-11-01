@@ -24,14 +24,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import java.time.OffsetDateTime;
 
-/** Initializes a new instance of the synchronous TraitsClient type. */
+/**
+ * Initializes a new instance of the synchronous TraitsClient type.
+ */
 @ServiceClient(builder = TraitsClientBuilder.class)
 public final class TraitsClient {
-    @Generated private final TraitsClientImpl serviceClient;
+    @Generated
+    private final TraitsClientImpl serviceClient;
 
     /**
      * Initializes an instance of TraitsClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -41,29 +44,53 @@ public final class TraitsClient {
 
     /**
      * Get a resource, sending and receiving headers.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this string.</td></tr>
-     *     <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this string.</td></tr>
-     *     <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was not modified after this time.</td></tr>
-     *     <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity was modified after this time.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>If-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if an entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-None-Match</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The request should only proceed if no entity matches this string.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Unmodified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was not modified after this time.</td>
+     * </tr>
+     * <tr>
+     * <td>If-Modified-Since</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>The request should only proceed if the entity was modified after this time.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param foo header in request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -81,34 +108,48 @@ public final class TraitsClient {
 
     /**
      * Test for repeatable requests.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionValue: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     userActionResult: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id The user's id.
      * @param userActionParam User action param.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -120,14 +161,14 @@ public final class TraitsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> repeatableActionWithResponse(
-            int id, BinaryData userActionParam, RequestOptions requestOptions) {
+    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
+        RequestOptions requestOptions) {
         return this.serviceClient.repeatableActionWithResponse(id, userActionParam, requestOptions);
     }
 
     /**
      * Get a resource, sending and receiving headers.
-     *
+     * 
      * @param id The user's id.
      * @param foo header in request.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
@@ -155,19 +196,19 @@ public final class TraitsClient {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         if (ifUnmodifiedSince != null) {
-            requestOptions.setHeader(
-                    HttpHeaderName.IF_UNMODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
+            requestOptions.setHeader(HttpHeaderName.IF_UNMODIFIED_SINCE,
+                String.valueOf(new DateTimeRfc1123(ifUnmodifiedSince)));
         }
         if (ifModifiedSince != null) {
-            requestOptions.setHeader(
-                    HttpHeaderName.IF_MODIFIED_SINCE, String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
+            requestOptions.setHeader(HttpHeaderName.IF_MODIFIED_SINCE,
+                String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
         return smokeTestWithResponse(id, foo, requestOptions).getValue().toObject(User.class);
     }
 
     /**
      * Get a resource, sending and receiving headers.
-     *
+     * 
      * @param id The user's id.
      * @param foo header in request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -188,7 +229,7 @@ public final class TraitsClient {
 
     /**
      * Test for repeatable requests.
-     *
+     * 
      * @param id The user's id.
      * @param userActionParam User action param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -204,8 +245,7 @@ public final class TraitsClient {
     public UserActionResponse repeatableAction(int id, UserActionParam userActionParam) {
         // Generated convenience method for repeatableActionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return repeatableActionWithResponse(id, BinaryData.fromObject(userActionParam), requestOptions)
-                .getValue()
-                .toObject(UserActionResponse.class);
+        return repeatableActionWithResponse(id, BinaryData.fromObject(userActionParam), requestOptions).getValue()
+            .toObject(UserActionResponse.class);
     }
 }

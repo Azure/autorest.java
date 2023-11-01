@@ -21,23 +21,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Flattencomplexes. */
+/**
+ * An instance of this class provides access to all the operations defined in Flattencomplexes.
+ */
 public final class Flattencomplexes {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final FlattencomplexesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Flattencomplexes.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Flattencomplexes(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(
-                        FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(FlattencomplexesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -49,15 +54,15 @@ public final class Flattencomplexes {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MyBaseType>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
@@ -65,8 +70,8 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -74,7 +79,7 @@ public final class Flattencomplexes {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -84,8 +89,8 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -93,7 +98,7 @@ public final class Flattencomplexes {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -105,7 +110,7 @@ public final class Flattencomplexes {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +124,7 @@ public final class Flattencomplexes {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -133,7 +138,7 @@ public final class Flattencomplexes {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.

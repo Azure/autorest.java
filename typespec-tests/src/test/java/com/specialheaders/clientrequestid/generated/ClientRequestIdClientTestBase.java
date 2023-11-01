@@ -21,15 +21,15 @@ class ClientRequestIdClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ClientRequestIdClientBuilder clientRequestIdClientbuilder =
-                new ClientRequestIdClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ClientRequestIdClientBuilder clientRequestIdClientbuilder
+            = new ClientRequestIdClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientRequestIdClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             clientRequestIdClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         clientRequestIdClient = clientRequestIdClientbuilder.buildClient();
+
     }
 }

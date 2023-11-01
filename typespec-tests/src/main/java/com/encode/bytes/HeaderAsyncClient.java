@@ -19,14 +19,17 @@ import com.encode.bytes.implementation.HeadersImpl;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous BytesClient type. */
+/**
+ * Initializes a new instance of the asynchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class, isAsync = true)
 public final class HeaderAsyncClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,7 +39,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -53,7 +56,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -70,7 +73,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -104,7 +107,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -124,7 +127,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -144,7 +147,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -164,7 +167,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The base64UrlArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

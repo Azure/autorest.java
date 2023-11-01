@@ -4,8 +4,13 @@
 
 package com.cadl.internal.implementation.models;
 
-/** The StandAloneUnionDataModelBase model. */
+/**
+ * The StandAloneUnionDataModelBase model.
+ */
 public abstract class StandAloneUnionDataModelBase {
-    /** Creates an instance of StandAloneUnionDataModelBase class. */
-    protected StandAloneUnionDataModelBase() {}
+    /**
+     * Creates an instance of StandAloneUnionDataModelBase class.
+     */
+    protected StandAloneUnionDataModelBase() {
+    }
 }

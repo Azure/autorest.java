@@ -30,10 +30,9 @@ class AccessClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        AccessClientBuilder publicOperationClientbuilder =
-                new AccessClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder publicOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             publicOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -41,10 +40,9 @@ class AccessClientTestBase extends TestProxyTestBase {
         }
         publicOperationClient = publicOperationClientbuilder.buildPublicOperationClient();
 
-        AccessClientBuilder internalOperationClientbuilder =
-                new AccessClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder internalOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             internalOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -52,10 +50,9 @@ class AccessClientTestBase extends TestProxyTestBase {
         }
         internalOperationClient = internalOperationClientbuilder.buildInternalOperationClient();
 
-        AccessClientBuilder sharedModelInOperationClientbuilder =
-                new AccessClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder sharedModelInOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             sharedModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -63,15 +60,15 @@ class AccessClientTestBase extends TestProxyTestBase {
         }
         sharedModelInOperationClient = sharedModelInOperationClientbuilder.buildSharedModelInOperationClient();
 
-        AccessClientBuilder relativeModelInOperationClientbuilder =
-                new AccessClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AccessClientBuilder relativeModelInOperationClientbuilder
+            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             relativeModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             relativeModelInOperationClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         relativeModelInOperationClient = relativeModelInOperationClientbuilder.buildRelativeModelInOperationClient();
+
     }
 }
