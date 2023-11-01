@@ -31,9 +31,7 @@ import com.azure.core.http.policy.AddHeadersPolicy;
 import com.azure.core.http.policy.AzureKeyCredentialPolicy;
 import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
 import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
-import com.azure.core.http.policy.KeyCredentialPolicy;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -137,16 +135,14 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent()) {
+        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
                     .map(trait -> trait.getTraitInterfaceName() + serviceClientBuilderGeneric)
                     .collect(Collectors.joining(", "));
 
-            if (!interfaces.isEmpty()) {
-                classDefinition = serviceClientBuilderName + " implements " + interfaces;
-            }
+            classDefinition = serviceClientBuilderName + " implements " + interfaces;
         }
 
         javaFile.publicFinalClass(classDefinition, classBlock ->
@@ -480,10 +476,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
-        imports.add(KeyCredentialPolicy.class.getName());
+        ClassType.KeyCredentialPolicy.addImportsTo(imports, false);
 
         imports.add(HttpPolicyProviders.class.getName());
-        imports.add(HttpPipelinePolicy.class.getName());
+        ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
         imports.add(HttpLoggingPolicy.class.getName());
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
