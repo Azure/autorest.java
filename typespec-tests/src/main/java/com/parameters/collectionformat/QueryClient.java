@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.parameters.collectionformat.implementation.QueriesImpl;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous CollectionFormatClient type. */
+/**
+ * Initializes a new instance of the synchronous CollectionFormatClient type.
+ */
 @ServiceClient(builder = CollectionFormatClientBuilder.class)
 public final class QueryClient {
-    @Generated private final QueriesImpl serviceClient;
+    @Generated
+    private final QueriesImpl serviceClient;
 
     /**
      * Initializes an instance of QueryClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,7 +37,7 @@ public final class QueryClient {
 
     /**
      * The multi operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -51,7 +54,7 @@ public final class QueryClient {
 
     /**
      * The ssv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -68,7 +71,7 @@ public final class QueryClient {
 
     /**
      * The tsv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +88,7 @@ public final class QueryClient {
 
     /**
      * The pipes operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,7 +105,7 @@ public final class QueryClient {
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +122,7 @@ public final class QueryClient {
 
     /**
      * The multi operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -138,7 +141,7 @@ public final class QueryClient {
 
     /**
      * The ssv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -157,7 +160,7 @@ public final class QueryClient {
 
     /**
      * The tsv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -176,7 +179,7 @@ public final class QueryClient {
 
     /**
      * The pipes operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -195,7 +198,7 @@ public final class QueryClient {
 
     /**
      * The csv operation.
-     *
+     * 
      * @param colors Possible values for colors are [blue,red,green].
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

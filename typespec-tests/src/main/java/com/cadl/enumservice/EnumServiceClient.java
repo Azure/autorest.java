@@ -28,14 +28,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** Initializes a new instance of the synchronous EnumServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous EnumServiceClient type.
+ */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {
-    @Generated private final EnumServiceClientImpl serviceClient;
+    @Generated
+    private final EnumServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumServiceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -45,13 +48,13 @@ public final class EnumServiceClient {
 
     /**
      * The getColor operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,13 +70,13 @@ public final class EnumServiceClient {
 
     /**
      * The getColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,9 +92,9 @@ public final class EnumServiceClient {
 
     /**
      * The setColorModel operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -104,7 +107,7 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -121,9 +124,9 @@ public final class EnumServiceClient {
 
     /**
      * The setPriority operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -136,7 +139,7 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -153,9 +156,9 @@ public final class EnumServiceClient {
 
     /**
      * The getRunningOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -168,7 +171,7 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -184,9 +187,9 @@ public final class EnumServiceClient {
 
     /**
      * The getOperation operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -199,7 +202,7 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -216,23 +219,32 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>colorArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of ColorModel. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -249,23 +261,32 @@ public final class EnumServiceClient {
 
     /**
      * The setIntEnumArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>priorityArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of Priority. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -282,23 +303,32 @@ public final class EnumServiceClient {
 
     /**
      * The setStringArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stringArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of SetStringEnumArrayResponse. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -315,23 +345,32 @@ public final class EnumServiceClient {
 
     /**
      * The setIntArray operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. In the form of "," separated string.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>intArrayOpt</td>
+     * <td>List&lt;Integer&gt;</td>
+     * <td>No</td>
+     * <td>Array of IntArray. In the form of "," separated string.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -348,23 +387,32 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>colorArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of ColorModel. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -381,23 +429,32 @@ public final class EnumServiceClient {
 
     /**
      * The setIntEnumMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of Priority. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>priorityArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of Priority. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -414,23 +471,32 @@ public final class EnumServiceClient {
 
     /**
      * The setStringMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stringArrayOpt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of SetStringEnumArrayResponse. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -447,23 +513,32 @@ public final class EnumServiceClient {
 
     /**
      * The setIntMulti operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>intArrayOpt</td>
+     * <td>List&lt;Integer&gt;</td>
+     * <td>No</td>
+     * <td>Array of IntArray. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param intArray Array of IntArray.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -480,23 +555,32 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumArrayHeader operation.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>Array of ColorModel</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>color-array-opt</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Array of ColorModel</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -507,14 +591,14 @@ public final class EnumServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> setStringEnumArrayHeaderWithResponse(
-            List<String> colorArray, RequestOptions requestOptions) {
+    public Response<BinaryData> setStringEnumArrayHeaderWithResponse(List<String> colorArray,
+        RequestOptions requestOptions) {
         return this.serviceClient.setStringEnumArrayHeaderWithResponse(colorArray, requestOptions);
     }
 
     /**
      * The getColor operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -532,7 +616,7 @@ public final class EnumServiceClient {
 
     /**
      * The getColorModel operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -550,7 +634,7 @@ public final class EnumServiceClient {
 
     /**
      * The setColorModel operation.
-     *
+     * 
      * @param color The color parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -570,7 +654,7 @@ public final class EnumServiceClient {
 
     /**
      * The setPriority operation.
-     *
+     * 
      * @param priority The priority parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -585,14 +669,13 @@ public final class EnumServiceClient {
     public Operation setPriority(Priority priority) {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions)
-                .getValue()
-                .toObject(Operation.class);
+        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions).getValue()
+            .toObject(Operation.class);
     }
 
     /**
      * The getRunningOperation operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -610,7 +693,7 @@ public final class EnumServiceClient {
 
     /**
      * The getOperation operation.
-     *
+     * 
      * @param state The state parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -630,7 +713,7 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumArray operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param colorArrayOpt Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -647,24 +730,18 @@ public final class EnumServiceClient {
         // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
-            requestOptions.addQueryParam(
-                    "colorArrayOpt",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV),
-                    false);
+            requestOptions.addQueryParam("colorArrayOpt",
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(colorArrayOpt, CollectionFormat.CSV),
+                false);
         }
-        return setStringEnumArrayWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumArrayWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 
     /**
      * The setStringEnumArray operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -679,18 +756,14 @@ public final class EnumServiceClient {
     public String setStringEnumArray(List<ColorModel> colorArray) {
         // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setStringEnumArrayWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumArrayWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 
     /**
      * The setIntEnumArray operation.
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param priorityArrayOpt Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -707,26 +780,17 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
-            requestOptions.addQueryParam(
-                    "priorityArrayOpt",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(priorityArrayOpt, CollectionFormat.CSV),
-                    false);
+            requestOptions.addQueryParam("priorityArrayOpt", JacksonAdapter.createDefaultSerializerAdapter()
+                .serializeIterable(priorityArrayOpt, CollectionFormat.CSV), false);
         }
-        return setIntEnumArrayWithResponse(
-                        priorityArray.stream()
-                                .map(
-                                        paramItemValue ->
-                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setIntEnumArrayWithResponse(priorityArray.stream()
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setIntEnumArray operation.
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -741,20 +805,14 @@ public final class EnumServiceClient {
     public String setIntEnumArray(List<Priority> priorityArray) {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setIntEnumArrayWithResponse(
-                        priorityArray.stream()
-                                .map(
-                                        paramItemValue ->
-                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setIntEnumArrayWithResponse(priorityArray.stream()
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setStringArray operation.
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param stringArrayOpt Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -771,19 +829,15 @@ public final class EnumServiceClient {
         // Generated convenience method for setStringArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (stringArrayOpt != null) {
-            requestOptions.addQueryParam(
-                    "stringArrayOpt",
-                    stringArrayOpt.stream()
-                            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                            .collect(Collectors.joining(",")),
-                    false);
+            requestOptions.addQueryParam("stringArrayOpt", stringArrayOpt.stream()
+                .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(",")), false);
         }
         return setStringArrayWithResponse(stringArray, requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setStringArray operation.
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -803,7 +857,7 @@ public final class EnumServiceClient {
 
     /**
      * The setIntArray operation.
-     *
+     * 
      * @param intArray Array of IntArray.
      * @param intArrayOpt Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -820,18 +874,16 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (intArrayOpt != null) {
-            requestOptions.addQueryParam(
-                    "intArrayOpt",
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(intArrayOpt, CollectionFormat.CSV),
-                    false);
+            requestOptions.addQueryParam("intArrayOpt",
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(intArrayOpt, CollectionFormat.CSV),
+                false);
         }
         return setIntArrayWithResponse(intArray, requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setIntArray operation.
-     *
+     * 
      * @param intArray Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -851,7 +903,7 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumMulti operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param colorArrayOpt Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -874,18 +926,14 @@ public final class EnumServiceClient {
                 }
             }
         }
-        return setStringEnumMultiWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumMultiWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 
     /**
      * The setStringEnumMulti operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -900,18 +948,14 @@ public final class EnumServiceClient {
     public String setStringEnumMulti(List<ColorModel> colorArray) {
         // Generated convenience method for setStringEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setStringEnumMultiWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumMultiWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 
     /**
      * The setIntEnumMulti operation.
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @param priorityArrayOpt Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -934,20 +978,14 @@ public final class EnumServiceClient {
                 }
             }
         }
-        return setIntEnumMultiWithResponse(
-                        priorityArray.stream()
-                                .map(
-                                        paramItemValue ->
-                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setIntEnumMultiWithResponse(priorityArray.stream()
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setIntEnumMulti operation.
-     *
+     * 
      * @param priorityArray Array of Priority.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -962,20 +1000,14 @@ public final class EnumServiceClient {
     public String setIntEnumMulti(List<Priority> priorityArray) {
         // Generated convenience method for setIntEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setIntEnumMultiWithResponse(
-                        priorityArray.stream()
-                                .map(
-                                        paramItemValue ->
-                                                paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setIntEnumMultiWithResponse(priorityArray.stream()
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
     /**
      * The setStringMulti operation.
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @param stringArrayOpt Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1003,7 +1035,7 @@ public final class EnumServiceClient {
 
     /**
      * The setStringMulti operation.
-     *
+     * 
      * @param stringArray Array of SetStringEnumArrayResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1023,7 +1055,7 @@ public final class EnumServiceClient {
 
     /**
      * The setIntMulti operation.
-     *
+     * 
      * @param intArray Array of IntArray.
      * @param intArrayOpt Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1049,7 +1081,7 @@ public final class EnumServiceClient {
 
     /**
      * The setIntMulti operation.
-     *
+     * 
      * @param intArray Array of IntArray.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1069,7 +1101,7 @@ public final class EnumServiceClient {
 
     /**
      * The setStringEnumArrayHeader operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @param colorArrayOpt Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1086,23 +1118,17 @@ public final class EnumServiceClient {
         // Generated convenience method for setStringEnumArrayHeaderWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
-            requestOptions.setHeader(
-                    HttpHeaderName.fromString("color-array-opt"),
-                    JacksonAdapter.createDefaultSerializerAdapter()
-                            .serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+            requestOptions.setHeader(HttpHeaderName.fromString("color-array-opt"),
+                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(colorArrayOpt, CollectionFormat.CSV));
         }
-        return setStringEnumArrayHeaderWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumArrayHeaderWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 
     /**
      * The setStringEnumArrayHeader operation.
-     *
+     * 
      * @param colorArray Array of ColorModel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1117,12 +1143,8 @@ public final class EnumServiceClient {
     public String setStringEnumArrayHeader(List<ColorModel> colorArray) {
         // Generated convenience method for setStringEnumArrayHeaderWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setStringEnumArrayHeaderWithResponse(
-                        colorArray.stream()
-                                .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                                .collect(Collectors.toList()),
-                        requestOptions)
-                .getValue()
-                .toObject(String.class);
+        return setStringEnumArrayHeaderWithResponse(colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
+                .getValue().toObject(String.class);
     }
 }

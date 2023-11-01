@@ -22,19 +22,19 @@ class ResiliencyServiceDrivenClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ResiliencyServiceDrivenClientBuilder resiliencyServiceDrivenClientbuilder =
-                new ResiliencyServiceDrivenClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .serviceDeploymentVersion(
-                                Configuration.getGlobalConfiguration()
-                                        .get("SERVICEDEPLOYMENTVERSION", "servicedeploymentversion"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ResiliencyServiceDrivenClientBuilder resiliencyServiceDrivenClientbuilder
+            = new ResiliencyServiceDrivenClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .serviceDeploymentVersion(
+                    Configuration.getGlobalConfiguration().get("SERVICEDEPLOYMENTVERSION", "servicedeploymentversion"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             resiliencyServiceDrivenClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             resiliencyServiceDrivenClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         resiliencyServiceDrivenClient = resiliencyServiceDrivenClientbuilder.buildClient();
+
     }
 }

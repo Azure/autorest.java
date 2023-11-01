@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Error response returned from Azure Schema Registry service. */
+/**
+ * Error response returned from Azure Schema Registry service.
+ */
 @Fluent
 public final class ErrorDetail {
     /*
@@ -29,12 +31,15 @@ public final class ErrorDetail {
     @JsonProperty(value = "details")
     private List<ErrorDetail> details;
 
-    /** Creates an instance of ErrorDetail class. */
-    public ErrorDetail() {}
+    /**
+     * Creates an instance of ErrorDetail class.
+     */
+    public ErrorDetail() {
+    }
 
     /**
      * Get the code property: Server-defined error code.
-     *
+     * 
      * @return the code value.
      */
     public String getCode() {
@@ -43,7 +48,7 @@ public final class ErrorDetail {
 
     /**
      * Set the code property: Server-defined error code.
-     *
+     * 
      * @param code the code value to set.
      * @return the ErrorDetail object itself.
      */
@@ -54,7 +59,7 @@ public final class ErrorDetail {
 
     /**
      * Get the message property: Brief description of error.
-     *
+     * 
      * @return the message value.
      */
     public String getMessage() {
@@ -63,7 +68,7 @@ public final class ErrorDetail {
 
     /**
      * Set the message property: Brief description of error.
-     *
+     * 
      * @param message the message value to set.
      * @return the ErrorDetail object itself.
      */
@@ -74,7 +79,7 @@ public final class ErrorDetail {
 
     /**
      * Get the details property: Error message details to help user understand/debug failure.
-     *
+     * 
      * @return the details value.
      */
     public List<ErrorDetail> getDetails() {
@@ -83,7 +88,7 @@ public final class ErrorDetail {
 
     /**
      * Set the details property: Error message details to help user understand/debug failure.
-     *
+     * 
      * @param details the details value to set.
      * @return the ErrorDetail object itself.
      */

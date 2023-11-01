@@ -40,22 +40,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the ApiKeyClient type. */
-@ServiceClientBuilder(serviceClients = {ApiKeyClient.class, ApiKeyAsyncClient.class})
-public final class ApiKeyClientBuilder
-        implements HttpTrait<ApiKeyClientBuilder>,
-                ConfigurationTrait<ApiKeyClientBuilder>,
-                KeyCredentialTrait<ApiKeyClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+/**
+ * A builder for creating a new instance of the ApiKeyClient type.
+ */
+@ServiceClientBuilder(serviceClients = { ApiKeyClient.class, ApiKeyAsyncClient.class })
+public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>,
+    ConfigurationTrait<ApiKeyClientBuilder>, KeyCredentialTrait<ApiKeyClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-apikey.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the ApiKeyClientBuilder. */
+    /**
+     * Create an instance of the ApiKeyClientBuilder.
+     */
     @Generated
     public ApiKeyClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -64,9 +69,12 @@ public final class ApiKeyClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder pipeline(HttpPipeline pipeline) {
@@ -80,9 +88,12 @@ public final class ApiKeyClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder httpClient(HttpClient httpClient) {
@@ -93,9 +104,12 @@ public final class ApiKeyClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -106,9 +120,12 @@ public final class ApiKeyClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -119,9 +136,12 @@ public final class ApiKeyClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -129,7 +149,9 @@ public final class ApiKeyClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -141,9 +163,12 @@ public final class ApiKeyClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder configuration(Configuration configuration) {
@@ -154,9 +179,12 @@ public final class ApiKeyClientBuilder
     /*
      * The KeyCredential used for authentication.
      */
-    @Generated private KeyCredential keyCredential;
+    @Generated
+    private KeyCredential keyCredential;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public ApiKeyClientBuilder credential(KeyCredential keyCredential) {
@@ -167,11 +195,12 @@ public final class ApiKeyClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the ApiKeyClientBuilder.
      */
@@ -183,7 +212,7 @@ public final class ApiKeyClientBuilder
 
     /**
      * Builds an instance of ApiKeyClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of ApiKeyClientImpl.
      */
     @Generated
@@ -195,8 +224,8 @@ public final class ApiKeyClientBuilder
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -207,38 +236,31 @@ public final class ApiKeyClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
         if (keyCredential != null) {
             policies.add(new KeyCredentialPolicy("x-ms-api-key", keyCredential));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of ApiKeyAsyncClient class.
-     *
+     * 
      * @return an instance of ApiKeyAsyncClient.
      */
     @Generated
@@ -248,7 +270,7 @@ public final class ApiKeyClientBuilder
 
     /**
      * Builds an instance of ApiKeyClient class.
-     *
+     * 
      * @return an instance of ApiKeyClient.
      */
     @Generated

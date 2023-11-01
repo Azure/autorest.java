@@ -19,14 +19,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous AccessClient type. */
+/**
+ * Initializes a new instance of the synchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class)
 public final class RelativeModelInOperationClient {
-    @Generated private final RelativeModelInOperationsImpl serviceClient;
+    @Generated
+    private final RelativeModelInOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of RelativeModelInOperationClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,11 +38,20 @@ public final class RelativeModelInOperationClient {
     }
 
     /**
-     * Expected query parameter: name=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "inner": { "name": &lt;any string&gt; } } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected query parameter: name=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -48,7 +60,7 @@ public final class RelativeModelInOperationClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,17 +76,23 @@ public final class RelativeModelInOperationClient {
     }
 
     /**
-     * Expected query parameter: kind=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "kind": "real" } ```.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Expected query parameter: kind=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
+     * }
+     * ```.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param kind A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -90,9 +108,18 @@ public final class RelativeModelInOperationClient {
     }
 
     /**
-     * Expected query parameter: name=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "inner": { "name": &lt;any string&gt; } } ```.
-     *
+     * Expected query parameter: name=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * }
+     * ```.
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -111,9 +138,15 @@ public final class RelativeModelInOperationClient {
     }
 
     /**
-     * Expected query parameter: kind=&lt;any string&gt; Expected response body: ```json { "name": &lt;any string&gt;,
-     * "kind": "real" } ```.
-     *
+     * Expected query parameter: kind=&lt;any string&gt;
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
+     * }
+     * ```.
+     * 
      * @param kind A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

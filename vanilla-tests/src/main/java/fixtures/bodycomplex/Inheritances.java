@@ -23,22 +23,28 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Inheritances. */
+/**
+ * An instance of this class provides access to all the operations defined in Inheritances.
+ */
 public final class Inheritances {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final InheritancesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Inheritances.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Inheritances(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(InheritancesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(InheritancesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -50,24 +56,21 @@ public final class Inheritances {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface InheritancesService {
         @Get("/complex/inheritance/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Siamese>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Siamese>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/inheritance/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Siamese complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host,
+            @BodyParam("application/json") Siamese complexBody, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others along with {@link Response} on successful completion of {@link Mono}.
@@ -75,8 +78,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -84,7 +87,7 @@ public final class Inheritances {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -94,8 +97,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -103,7 +106,7 @@ public final class Inheritances {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others on successful completion of {@link Mono}.
@@ -115,7 +118,7 @@ public final class Inheritances {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -129,7 +132,7 @@ public final class Inheritances {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -143,7 +146,7 @@ public final class Inheritances {
 
     /**
      * Get complex types that extend others.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that extend others.
@@ -155,10 +158,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -167,8 +170,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -181,10 +184,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -194,8 +197,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -208,10 +211,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -224,10 +227,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -241,10 +244,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -258,10 +261,10 @@ public final class Inheritances {
 
     /**
      * Put complex types that extend others.
-     *
+     * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     *     dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     *     food="french fries".
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

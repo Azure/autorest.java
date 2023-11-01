@@ -24,23 +24,28 @@ import fixtures.streamstyleserialization.models.ErrorException;
 import fixtures.streamstyleserialization.models.ReadonlyObj;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Readonlyproperties. */
+/**
+ * An instance of this class provides access to all the operations defined in Readonlyproperties.
+ */
 public final class Readonlyproperties {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ReadonlypropertiesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestComplexTestService client;
 
     /**
      * Initializes an instance of Readonlyproperties.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Readonlyproperties(AutoRestComplexTestService client) {
-        this.service =
-                RestProxy.create(
-                        ReadonlypropertiesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service = RestProxy.create(ReadonlypropertiesService.class, client.getHttpPipeline(),
+            client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -52,49 +57,45 @@ public final class Readonlyproperties {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<ReadonlyObj>> getValid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<ReadonlyObj>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/complex/readonlyproperty/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<ReadonlyObj> getValidSync(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Response<ReadonlyObj> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/readonlyproperty/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") ReadonlyObj complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host,
+            @BodyParam("application/json") ReadonlyObj complexBody, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/complex/readonlyproperty/valid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Response<Void> putValidSync(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") ReadonlyObj complexBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Response<Void> putValidSync(@HostParam("$host") String host,
+            @BodyParam("application/json") ReadonlyObj complexBody, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -102,19 +103,19 @@ public final class Readonlyproperties {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -122,7 +123,7 @@ public final class Readonlyproperties {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties on successful completion of {@link Mono}.
@@ -134,7 +135,7 @@ public final class Readonlyproperties {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -148,7 +149,7 @@ public final class Readonlyproperties {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -159,7 +160,7 @@ public final class Readonlyproperties {
     public Response<ReadonlyObj> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -167,7 +168,7 @@ public final class Readonlyproperties {
 
     /**
      * Get complex types that have readonly properties.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types that have readonly properties.
@@ -179,7 +180,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -190,11 +191,11 @@ public final class Readonlyproperties {
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -204,7 +205,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -216,11 +217,11 @@ public final class Readonlyproperties {
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -230,7 +231,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -244,7 +245,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -259,7 +260,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -271,11 +272,11 @@ public final class Readonlyproperties {
     public Response<Void> putValidWithResponse(ReadonlyObj complexBody, Context context) {
         if (this.client.getHost() == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -285,7 +286,7 @@ public final class Readonlyproperties {
 
     /**
      * Put complex types that have readonly properties.
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

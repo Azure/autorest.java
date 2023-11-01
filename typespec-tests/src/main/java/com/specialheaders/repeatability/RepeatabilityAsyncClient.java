@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.specialheaders.repeatability.implementation.RepeatabilityClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous RepeatabilityClient type. */
+/**
+ * Initializes a new instance of the asynchronous RepeatabilityClient type.
+ */
 @ServiceClient(builder = RepeatabilityClientBuilder.class, isAsync = true)
 public final class RepeatabilityAsyncClient {
-    @Generated private final RepeatabilityClientImpl serviceClient;
+    @Generated
+    private final RepeatabilityClientImpl serviceClient;
 
     /**
      * Initializes an instance of RepeatabilityAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,18 +38,32 @@ public final class RepeatabilityAsyncClient {
 
     /**
      * Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -62,7 +79,7 @@ public final class RepeatabilityAsyncClient {
 
     /**
      * Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

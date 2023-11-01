@@ -9,26 +9,35 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ProductReceived. */
+/**
+ * Defines values for ProductReceived.
+ */
 public final class ProductReceived extends ExpandableStringEnum<ProductReceived> {
-    /** Static value raw for ProductReceived. */
-    @Generated public static final ProductReceived RAW = fromString("raw");
+    /**
+     * Static value raw for ProductReceived.
+     */
+    @Generated
+    public static final ProductReceived RAW = fromString("raw");
 
-    /** Static value model for ProductReceived. */
-    @Generated public static final ProductReceived MODEL = fromString("model");
+    /**
+     * Static value model for ProductReceived.
+     */
+    @Generated
+    public static final ProductReceived MODEL = fromString("model");
 
     /**
      * Creates a new instance of ProductReceived value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public ProductReceived() {}
+    public ProductReceived() {
+    }
 
     /**
      * Creates or finds a ProductReceived from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ProductReceived.
      */
@@ -40,7 +49,7 @@ public final class ProductReceived extends ExpandableStringEnum<ProductReceived>
 
     /**
      * Gets known ProductReceived values.
-     *
+     * 
      * @return known ProductReceived values.
      */
     @Generated

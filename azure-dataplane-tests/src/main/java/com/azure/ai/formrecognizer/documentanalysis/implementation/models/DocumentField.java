@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-/** An object representing the content and location of a field value. */
+/**
+ * An object representing the content and location of a field value.
+ */
 @Fluent
 public final class DocumentField {
     /*
@@ -121,12 +123,15 @@ public final class DocumentField {
     @JsonProperty(value = "confidence")
     private Float confidence;
 
-    /** Creates an instance of DocumentField class. */
-    public DocumentField() {}
+    /**
+     * Creates an instance of DocumentField class.
+     */
+    public DocumentField() {
+    }
 
     /**
      * Get the type property: Data type of the field value.
-     *
+     * 
      * @return the type value.
      */
     public DocumentFieldType getType() {
@@ -135,7 +140,7 @@ public final class DocumentField {
 
     /**
      * Set the type property: Data type of the field value.
-     *
+     * 
      * @param type the type value to set.
      * @return the DocumentField object itself.
      */
@@ -146,7 +151,7 @@ public final class DocumentField {
 
     /**
      * Get the valueString property: String value.
-     *
+     * 
      * @return the valueString value.
      */
     public String getValueString() {
@@ -155,7 +160,7 @@ public final class DocumentField {
 
     /**
      * Set the valueString property: String value.
-     *
+     * 
      * @param valueString the valueString value to set.
      * @return the DocumentField object itself.
      */
@@ -166,7 +171,7 @@ public final class DocumentField {
 
     /**
      * Get the valueDate property: Date value in YYYY-MM-DD format (ISO 8601).
-     *
+     * 
      * @return the valueDate value.
      */
     public LocalDate getValueDate() {
@@ -175,7 +180,7 @@ public final class DocumentField {
 
     /**
      * Set the valueDate property: Date value in YYYY-MM-DD format (ISO 8601).
-     *
+     * 
      * @param valueDate the valueDate value to set.
      * @return the DocumentField object itself.
      */
@@ -186,7 +191,7 @@ public final class DocumentField {
 
     /**
      * Get the valueTime property: Time value in hh:mm:ss format (ISO 8601).
-     *
+     * 
      * @return the valueTime value.
      */
     public String getValueTime() {
@@ -195,7 +200,7 @@ public final class DocumentField {
 
     /**
      * Set the valueTime property: Time value in hh:mm:ss format (ISO 8601).
-     *
+     * 
      * @param valueTime the valueTime value to set.
      * @return the DocumentField object itself.
      */
@@ -206,7 +211,7 @@ public final class DocumentField {
 
     /**
      * Get the valuePhoneNumber property: Phone number value in E.164 format (ex. +19876543210).
-     *
+     * 
      * @return the valuePhoneNumber value.
      */
     public String getValuePhoneNumber() {
@@ -215,7 +220,7 @@ public final class DocumentField {
 
     /**
      * Set the valuePhoneNumber property: Phone number value in E.164 format (ex. +19876543210).
-     *
+     * 
      * @param valuePhoneNumber the valuePhoneNumber value to set.
      * @return the DocumentField object itself.
      */
@@ -226,7 +231,7 @@ public final class DocumentField {
 
     /**
      * Get the valueNumber property: Floating point value.
-     *
+     * 
      * @return the valueNumber value.
      */
     public Float getValueNumber() {
@@ -235,7 +240,7 @@ public final class DocumentField {
 
     /**
      * Set the valueNumber property: Floating point value.
-     *
+     * 
      * @param valueNumber the valueNumber value to set.
      * @return the DocumentField object itself.
      */
@@ -246,7 +251,7 @@ public final class DocumentField {
 
     /**
      * Get the valueInteger property: Integer value.
-     *
+     * 
      * @return the valueInteger value.
      */
     public Long getValueInteger() {
@@ -255,7 +260,7 @@ public final class DocumentField {
 
     /**
      * Set the valueInteger property: Integer value.
-     *
+     * 
      * @param valueInteger the valueInteger value to set.
      * @return the DocumentField object itself.
      */
@@ -266,7 +271,7 @@ public final class DocumentField {
 
     /**
      * Get the valueSelectionMark property: Selection mark value.
-     *
+     * 
      * @return the valueSelectionMark value.
      */
     public SelectionMarkState getValueSelectionMark() {
@@ -275,7 +280,7 @@ public final class DocumentField {
 
     /**
      * Set the valueSelectionMark property: Selection mark value.
-     *
+     * 
      * @param valueSelectionMark the valueSelectionMark value to set.
      * @return the DocumentField object itself.
      */
@@ -286,7 +291,7 @@ public final class DocumentField {
 
     /**
      * Get the valueSignature property: Presence of signature.
-     *
+     * 
      * @return the valueSignature value.
      */
     public DocumentSignatureType getValueSignature() {
@@ -295,7 +300,7 @@ public final class DocumentField {
 
     /**
      * Set the valueSignature property: Presence of signature.
-     *
+     * 
      * @param valueSignature the valueSignature value to set.
      * @return the DocumentField object itself.
      */
@@ -306,7 +311,7 @@ public final class DocumentField {
 
     /**
      * Get the valueCountryRegion property: 3-letter country code value (ISO 3166-1 alpha-3).
-     *
+     * 
      * @return the valueCountryRegion value.
      */
     public String getValueCountryRegion() {
@@ -315,7 +320,7 @@ public final class DocumentField {
 
     /**
      * Set the valueCountryRegion property: 3-letter country code value (ISO 3166-1 alpha-3).
-     *
+     * 
      * @param valueCountryRegion the valueCountryRegion value to set.
      * @return the DocumentField object itself.
      */
@@ -326,7 +331,7 @@ public final class DocumentField {
 
     /**
      * Get the valueArray property: Array of field values.
-     *
+     * 
      * @return the valueArray value.
      */
     public List<DocumentField> getValueArray() {
@@ -335,7 +340,7 @@ public final class DocumentField {
 
     /**
      * Set the valueArray property: Array of field values.
-     *
+     * 
      * @param valueArray the valueArray value to set.
      * @return the DocumentField object itself.
      */
@@ -346,7 +351,7 @@ public final class DocumentField {
 
     /**
      * Get the valueObject property: Dictionary of named field values.
-     *
+     * 
      * @return the valueObject value.
      */
     public Map<String, DocumentField> getValueObject() {
@@ -355,7 +360,7 @@ public final class DocumentField {
 
     /**
      * Set the valueObject property: Dictionary of named field values.
-     *
+     * 
      * @param valueObject the valueObject value to set.
      * @return the DocumentField object itself.
      */
@@ -366,7 +371,7 @@ public final class DocumentField {
 
     /**
      * Get the valueCurrency property: Currency value.
-     *
+     * 
      * @return the valueCurrency value.
      */
     public CurrencyValue getValueCurrency() {
@@ -375,7 +380,7 @@ public final class DocumentField {
 
     /**
      * Set the valueCurrency property: Currency value.
-     *
+     * 
      * @param valueCurrency the valueCurrency value to set.
      * @return the DocumentField object itself.
      */
@@ -386,7 +391,7 @@ public final class DocumentField {
 
     /**
      * Get the valueAddress property: Address value.
-     *
+     * 
      * @return the valueAddress value.
      */
     public AddressValue getValueAddress() {
@@ -395,7 +400,7 @@ public final class DocumentField {
 
     /**
      * Set the valueAddress property: Address value.
-     *
+     * 
      * @param valueAddress the valueAddress value to set.
      * @return the DocumentField object itself.
      */
@@ -406,7 +411,7 @@ public final class DocumentField {
 
     /**
      * Get the content property: Field content.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -415,7 +420,7 @@ public final class DocumentField {
 
     /**
      * Set the content property: Field content.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentField object itself.
      */
@@ -426,7 +431,7 @@ public final class DocumentField {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the field.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -435,7 +440,7 @@ public final class DocumentField {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the field.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentField object itself.
      */
@@ -446,7 +451,7 @@ public final class DocumentField {
 
     /**
      * Get the spans property: Location of the field in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -455,7 +460,7 @@ public final class DocumentField {
 
     /**
      * Set the spans property: Location of the field in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentField object itself.
      */
@@ -466,7 +471,7 @@ public final class DocumentField {
 
     /**
      * Get the confidence property: Confidence of correctly extracting the field.
-     *
+     * 
      * @return the confidence value.
      */
     public Float getConfidence() {
@@ -475,7 +480,7 @@ public final class DocumentField {
 
     /**
      * Set the confidence property: Confidence of correctly extracting the field.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the DocumentField object itself.
      */

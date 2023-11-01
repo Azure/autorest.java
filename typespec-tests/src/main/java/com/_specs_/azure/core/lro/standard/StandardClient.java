@@ -20,14 +20,17 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 
-/** Initializes a new instance of the synchronous StandardClient type. */
+/**
+ * Initializes a new instance of the synchronous StandardClient type.
+ */
 @ServiceClient(builder = StandardClientBuilder.class)
 public final class StandardClient {
-    @Generated private final StandardClientImpl serviceClient;
+    @Generated
+    private final StandardClientImpl serviceClient;
 
     /**
      * Initializes an instance of StandardClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,27 +40,27 @@ public final class StandardClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,18 +72,18 @@ public final class StandardClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Deletes a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -95,7 +98,7 @@ public final class StandardClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,11 +115,11 @@ public final class StandardClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -131,7 +134,7 @@ public final class StandardClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,9 +152,9 @@ public final class StandardClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
+     * 
+     * Creates or replaces a User.
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -172,9 +175,9 @@ public final class StandardClient {
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param name The name of user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -194,9 +197,9 @@ public final class StandardClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
+     * 
+     * Exports a User.
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

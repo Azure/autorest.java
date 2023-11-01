@@ -22,16 +22,16 @@ class ApiVersionClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ApiVersionClientBuilder apiVersionClientbuilder =
-                new ApiVersionClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ApiVersionClientBuilder apiVersionClientbuilder
+            = new ApiVersionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             apiVersionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             apiVersionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         apiVersionClient = apiVersionClientbuilder.buildClient();
+
     }
 }

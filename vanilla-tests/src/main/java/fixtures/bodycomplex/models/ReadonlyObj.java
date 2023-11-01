@@ -7,7 +7,9 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ReadonlyObj model. */
+/**
+ * The ReadonlyObj model.
+ */
 @Fluent
 public final class ReadonlyObj {
     /*
@@ -22,12 +24,15 @@ public final class ReadonlyObj {
     @JsonProperty(value = "size")
     private Integer size;
 
-    /** Creates an instance of ReadonlyObj class. */
-    public ReadonlyObj() {}
+    /**
+     * Creates an instance of ReadonlyObj class.
+     */
+    public ReadonlyObj() {
+    }
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -36,7 +41,7 @@ public final class ReadonlyObj {
 
     /**
      * Get the size property: The size property.
-     *
+     * 
      * @return the size value.
      */
     public Integer getSize() {
@@ -45,7 +50,7 @@ public final class ReadonlyObj {
 
     /**
      * Set the size property: The size property.
-     *
+     * 
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.
      */
@@ -56,8 +61,9 @@ public final class ReadonlyObj {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

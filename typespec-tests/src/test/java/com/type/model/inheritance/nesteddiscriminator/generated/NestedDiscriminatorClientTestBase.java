@@ -21,15 +21,15 @@ class NestedDiscriminatorClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        NestedDiscriminatorClientBuilder nestedDiscriminatorClientbuilder =
-                new NestedDiscriminatorClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NestedDiscriminatorClientBuilder nestedDiscriminatorClientbuilder
+            = new NestedDiscriminatorClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nestedDiscriminatorClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             nestedDiscriminatorClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         nestedDiscriminatorClient = nestedDiscriminatorClientbuilder.buildClient();
+
     }
 }

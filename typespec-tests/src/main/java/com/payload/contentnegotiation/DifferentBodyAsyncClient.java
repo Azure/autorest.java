@@ -20,14 +20,17 @@ import com.payload.contentnegotiation.implementation.DifferentBodiesImpl;
 import com.payload.contentnegotiation.models.PngImageAsJson;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ContentNegotiationClient type. */
+/**
+ * Initializes a new instance of the asynchronous ContentNegotiationClient type.
+ */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class, isAsync = true)
 public final class DifferentBodyAsyncClient {
-    @Generated private final DifferentBodiesImpl serviceClient;
+    @Generated
+    private final DifferentBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of DifferentBodyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,13 +40,13 @@ public final class DifferentBodyAsyncClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,15 +62,15 @@ public final class DifferentBodyAsyncClient {
 
     /**
      * The getAvatarAsJson operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     content: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,7 +86,7 @@ public final class DifferentBodyAsyncClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -101,7 +104,7 @@ public final class DifferentBodyAsyncClient {
 
     /**
      * The getAvatarAsJson operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -114,8 +117,7 @@ public final class DifferentBodyAsyncClient {
     public Mono<PngImageAsJson> getAvatarAsJson() {
         // Generated convenience method for getAvatarAsJsonWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAvatarAsJsonWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(PngImageAsJson.class));
+        return getAvatarAsJsonWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(PngImageAsJson.class));
     }
 }

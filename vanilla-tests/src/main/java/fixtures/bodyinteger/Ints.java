@@ -24,17 +24,23 @@ import fixtures.bodyinteger.models.ErrorException;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Ints. */
+/**
+ * An instance of this class provides access to all the operations defined in Ints.
+ */
 public final class Ints {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final IntsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestIntegerTestService client;
 
     /**
      * Initializes an instance of Ints.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Ints(AutoRestIntegerTestService client) {
@@ -50,111 +56,96 @@ public final class Ints {
     @ServiceInterface(name = "AutoRestIntegerTestS")
     public interface IntsService {
         @Get("/int/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getNull(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Integer>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/int/invalid")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getInvalid(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Integer>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/int/overflowint32")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getOverflowInt32(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Integer>> getOverflowInt32(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/int/underflowint32")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Integer>> getUnderflowInt32(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Integer>> getUnderflowInt32(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/int/overflowint64")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Long>> getOverflowInt64(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Long>> getOverflowInt64(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/int/underflowint64")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Long>> getUnderflowInt64(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Long>> getUnderflowInt64(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/int/max/32")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMax32(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") int intBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putMax32(@HostParam("$host") String host, @BodyParam("application/json") int intBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/max/64")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMax64(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") long intBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putMax64(@HostParam("$host") String host, @BodyParam("application/json") long intBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/min/32")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMin32(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") int intBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putMin32(@HostParam("$host") String host, @BodyParam("application/json") int intBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/min/64")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMin64(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") long intBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putMin64(@HostParam("$host") String host, @BodyParam("application/json") long intBody,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/unixtime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getUnixTime(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<OffsetDateTime>> getUnixTime(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/unixtime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putUnixTimeDate(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") long intBody,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> putUnixTimeDate(@HostParam("$host") String host,
+            @BodyParam("application/json") long intBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/invalidunixtime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getInvalidUnixTime(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<OffsetDateTime>> getInvalidUnixTime(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/nullunixtime")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<OffsetDateTime>> getNullUnixTime(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<OffsetDateTime>> getNullUnixTime(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get null Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value along with {@link Response} on successful completion of {@link Mono}.
@@ -162,8 +153,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -171,7 +162,7 @@ public final class Ints {
 
     /**
      * Get null Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -181,8 +172,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -190,7 +181,7 @@ public final class Ints {
 
     /**
      * Get null Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value on successful completion of {@link Mono}.
@@ -202,7 +193,7 @@ public final class Ints {
 
     /**
      * Get null Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -216,7 +207,7 @@ public final class Ints {
 
     /**
      * Get null Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -230,7 +221,7 @@ public final class Ints {
 
     /**
      * Get null Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Int value.
@@ -242,7 +233,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value along with {@link Response} on successful completion of {@link Mono}.
@@ -250,8 +241,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -259,7 +250,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -269,8 +260,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalid(this.client.getHost(), accept, context);
@@ -278,7 +269,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value on successful completion of {@link Mono}.
@@ -290,7 +281,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -304,7 +295,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -318,7 +309,7 @@ public final class Ints {
 
     /**
      * Get invalid Int value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Int value.
@@ -330,7 +321,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value along with {@link Response} on successful completion of {@link Mono}.
@@ -338,8 +329,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getOverflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOverflowInt32(this.client.getHost(), accept, context));
@@ -347,7 +338,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -357,8 +348,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getOverflowInt32WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getOverflowInt32(this.client.getHost(), accept, context);
@@ -366,7 +357,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value on successful completion of {@link Mono}.
@@ -378,7 +369,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -392,7 +383,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -406,7 +397,7 @@ public final class Ints {
 
     /**
      * Get overflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int32 value.
@@ -418,7 +409,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value along with {@link Response} on successful completion of {@link Mono}.
@@ -426,8 +417,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getUnderflowInt32WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnderflowInt32(this.client.getHost(), accept, context));
@@ -435,7 +426,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -445,8 +436,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Integer>> getUnderflowInt32WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getUnderflowInt32(this.client.getHost(), accept, context);
@@ -454,7 +445,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value on successful completion of {@link Mono}.
@@ -466,7 +457,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -480,7 +471,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -494,7 +485,7 @@ public final class Ints {
 
     /**
      * Get underflow Int32 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int32 value.
@@ -506,7 +497,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value along with {@link Response} on successful completion of {@link Mono}.
@@ -514,8 +505,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Long>> getOverflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getOverflowInt64(this.client.getHost(), accept, context));
@@ -523,7 +514,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -533,8 +524,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Long>> getOverflowInt64WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getOverflowInt64(this.client.getHost(), accept, context);
@@ -542,7 +533,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value on successful completion of {@link Mono}.
@@ -554,7 +545,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -568,7 +559,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -582,7 +573,7 @@ public final class Ints {
 
     /**
      * Get overflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return overflow Int64 value.
@@ -594,7 +585,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value along with {@link Response} on successful completion of {@link Mono}.
@@ -602,8 +593,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Long>> getUnderflowInt64WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnderflowInt64(this.client.getHost(), accept, context));
@@ -611,7 +602,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -621,8 +612,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Long>> getUnderflowInt64WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getUnderflowInt64(this.client.getHost(), accept, context);
@@ -630,7 +621,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value on successful completion of {@link Mono}.
@@ -642,7 +633,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -656,7 +647,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -670,7 +661,7 @@ public final class Ints {
 
     /**
      * Get underflow Int64 value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return underflow Int64 value.
@@ -682,7 +673,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -692,8 +683,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMax32(this.client.getHost(), intBody, accept, context));
@@ -701,7 +692,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -712,8 +703,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putMax32(this.client.getHost(), intBody, accept, context);
@@ -721,7 +712,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -735,7 +726,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -750,7 +741,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -765,7 +756,7 @@ public final class Ints {
 
     /**
      * Put max int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -778,7 +769,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -788,8 +779,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMax64(this.client.getHost(), intBody, accept, context));
@@ -797,7 +788,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -808,8 +799,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putMax64(this.client.getHost(), intBody, accept, context);
@@ -817,7 +808,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -831,7 +822,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -846,7 +837,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -861,7 +852,7 @@ public final class Ints {
 
     /**
      * Put max int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -874,7 +865,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -884,8 +875,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMin32(this.client.getHost(), intBody, accept, context));
@@ -893,7 +884,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -904,8 +895,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putMin32(this.client.getHost(), intBody, accept, context);
@@ -913,7 +904,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -927,7 +918,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -942,7 +933,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -957,7 +948,7 @@ public final class Ints {
 
     /**
      * Put min int32 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -970,7 +961,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -980,8 +971,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putMin64(this.client.getHost(), intBody, accept, context));
@@ -989,7 +980,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1000,8 +991,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.putMin64(this.client.getHost(), intBody, accept, context);
@@ -1009,7 +1000,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1023,7 +1014,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1038,7 +1029,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1053,7 +1044,7 @@ public final class Ints {
 
     /**
      * Put min int64 value.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1066,7 +1057,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value along with {@link Response} on successful completion of {@link Mono}.
@@ -1074,8 +1065,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getUnixTime(this.client.getHost(), accept, context));
@@ -1083,7 +1074,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1093,8 +1084,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUnixTimeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getUnixTime(this.client.getHost(), accept, context);
@@ -1102,7 +1093,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value on successful completion of {@link Mono}.
@@ -1114,7 +1105,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1128,7 +1119,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1142,7 +1133,7 @@ public final class Ints {
 
     /**
      * Get datetime encoded as Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return datetime encoded as Unix time value.
@@ -1154,7 +1145,7 @@ public final class Ints {
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1164,21 +1155,21 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (intBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
         }
         final String accept = "application/json";
         long intBodyConverted = intBody.toEpochSecond();
-        return FluxUtil.withContext(
-                context -> service.putUnixTimeDate(this.client.getHost(), intBodyConverted, accept, context));
+        return FluxUtil
+            .withContext(context -> service.putUnixTimeDate(this.client.getHost(), intBodyConverted, accept, context));
     }
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1189,8 +1180,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (intBody == null) {
             return Mono.error(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
@@ -1202,7 +1193,7 @@ public final class Ints {
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1216,7 +1207,7 @@ public final class Ints {
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1231,7 +1222,7 @@ public final class Ints {
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1246,7 +1237,7 @@ public final class Ints {
 
     /**
      * Put datetime encoded as Unix time.
-     *
+     * 
      * @param intBody int body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1259,7 +1250,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value along with {@link Response} on successful completion of {@link Mono}.
@@ -1267,8 +1258,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalidUnixTime(this.client.getHost(), accept, context));
@@ -1276,7 +1267,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1286,8 +1277,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalidUnixTime(this.client.getHost(), accept, context);
@@ -1295,7 +1286,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value on successful completion of {@link Mono}.
@@ -1307,7 +1298,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1321,7 +1312,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1335,7 +1326,7 @@ public final class Ints {
 
     /**
      * Get invalid Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return invalid Unix time value.
@@ -1347,7 +1338,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value along with {@link Response} on successful completion of {@link Mono}.
@@ -1355,8 +1346,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNullUnixTime(this.client.getHost(), accept, context));
@@ -1364,7 +1355,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1374,8 +1365,8 @@ public final class Ints {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getNullUnixTimeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNullUnixTime(this.client.getHost(), accept, context);
@@ -1383,7 +1374,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value on successful completion of {@link Mono}.
@@ -1395,7 +1386,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1409,7 +1400,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1423,7 +1414,7 @@ public final class Ints {
 
     /**
      * Get null Unix time value.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return null Unix time value.

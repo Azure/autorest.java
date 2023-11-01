@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
 
-/** An Azure Storage blob. */
+/**
+ * An Azure Storage blob.
+ */
 @JacksonXmlRootElement(localName = "Blob")
 @Fluent
 public final class Blob {
@@ -43,12 +45,15 @@ public final class Blob {
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
-    /** Creates an instance of Blob class. */
-    public Blob() {}
+    /**
+     * Creates an instance of Blob class.
+     */
+    public Blob() {
+    }
 
     /**
      * Get the name property: The Name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -57,7 +62,7 @@ public final class Blob {
 
     /**
      * Set the name property: The Name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Blob object itself.
      */
@@ -68,7 +73,7 @@ public final class Blob {
 
     /**
      * Get the deleted property: The Deleted property.
-     *
+     * 
      * @return the deleted value.
      */
     public boolean isDeleted() {
@@ -77,7 +82,7 @@ public final class Blob {
 
     /**
      * Set the deleted property: The Deleted property.
-     *
+     * 
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
      */
@@ -88,7 +93,7 @@ public final class Blob {
 
     /**
      * Get the snapshot property: The Snapshot property.
-     *
+     * 
      * @return the snapshot value.
      */
     public String getSnapshot() {
@@ -97,7 +102,7 @@ public final class Blob {
 
     /**
      * Set the snapshot property: The Snapshot property.
-     *
+     * 
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.
      */
@@ -108,7 +113,7 @@ public final class Blob {
 
     /**
      * Get the properties property: Properties of a blob.
-     *
+     * 
      * @return the properties value.
      */
     public BlobProperties getProperties() {
@@ -117,7 +122,7 @@ public final class Blob {
 
     /**
      * Set the properties property: Properties of a blob.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the Blob object itself.
      */
@@ -128,7 +133,7 @@ public final class Blob {
 
     /**
      * Get the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the metadata value.
      */
     public Map<String, String> getMetadata() {
@@ -137,7 +142,7 @@ public final class Blob {
 
     /**
      * Set the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param metadata the metadata value to set.
      * @return the Blob object itself.
      */
@@ -148,7 +153,7 @@ public final class Blob {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

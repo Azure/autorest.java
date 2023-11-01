@@ -22,17 +22,17 @@ class ServiceClientClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ServiceClientClientBuilder serviceClientClientbuilder =
-                new ServiceClientClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ServiceClientClientBuilder serviceClientClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             serviceClientClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             serviceClientClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         serviceClientClient = serviceClientClientbuilder.buildClient();
+
     }
 }

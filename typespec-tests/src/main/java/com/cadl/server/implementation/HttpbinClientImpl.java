@@ -31,53 +31,65 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the HttpbinClient type. */
+/**
+ * Initializes a new instance of the HttpbinClient type.
+ */
 public final class HttpbinClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HttpbinClientService service;
 
-    /** second-level domain, use httpbin. */
+    /**
+     * second-level domain, use httpbin.
+     */
     private final String domain;
 
     /**
      * Gets second-level domain, use httpbin.
-     *
+     * 
      * @return the domain value.
      */
     public String getDomain() {
         return this.domain;
     }
 
-    /** top-level domain, use org. */
+    /**
+     * top-level domain, use org.
+     */
     private final String tld;
 
     /**
      * Gets top-level domain, use org.
-     *
+     * 
      * @return the tld value.
      */
     public String getTld() {
         return this.tld;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -86,21 +98,18 @@ public final class HttpbinClientImpl {
 
     /**
      * Initializes an instance of HttpbinClient client.
-     *
+     * 
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
      */
     public HttpbinClientImpl(String domain, String tld) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                domain,
-                tld);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), domain, tld);
     }
 
     /**
      * Initializes an instance of HttpbinClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
@@ -111,14 +120,14 @@ public final class HttpbinClientImpl {
 
     /**
      * Initializes an instance of HttpbinClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
      */
-    public HttpbinClientImpl(
-            HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain, String tld) {
+    public HttpbinClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain,
+        String tld) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.domain = domain;
@@ -133,49 +142,29 @@ public final class HttpbinClientImpl {
     @ServiceInterface(name = "HttpbinClient")
     public interface HttpbinClientService {
         @Get("/status/{code}")
-        @ExpectedResponses({200, 204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> status(
-                @HostParam("domain") String domain,
-                @HostParam("tld") String tld,
-                @PathParam("code") int code,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> status(@HostParam("domain") String domain, @HostParam("tld") String tld,
+            @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/status/{code}")
-        @ExpectedResponses({200, 204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> statusSync(
-                @HostParam("domain") String domain,
-                @HostParam("tld") String tld,
-                @PathParam("code") int code,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> statusSync(@HostParam("domain") String domain, @HostParam("tld") String tld,
+            @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -188,12 +177,12 @@ public final class HttpbinClientImpl {
     public Mono<Response<Void>> statusWithResponseAsync(int code, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
-                context -> service.status(this.getDomain(), this.getTld(), code, accept, requestOptions, context));
+            context -> service.status(this.getDomain(), this.getTld(), code, accept, requestOptions, context));
     }
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

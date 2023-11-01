@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.valuetypes.implementation.BytesImpl;
 import com.type.property.valuetypes.models.BytesProperty;
 
-/** Initializes a new instance of the synchronous ValueTypesClient type. */
+/**
+ * Initializes a new instance of the synchronous ValueTypesClient type.
+ */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class BytesClient {
-    @Generated private final BytesImpl serviceClient;
+    @Generated
+    private final BytesImpl serviceClient;
 
     /**
      * Initializes an instance of BytesClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class BytesClient {
 
     /**
      * Get call.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,15 +62,15 @@ public final class BytesClient {
 
     /**
      * Put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: byte[] (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -84,7 +87,7 @@ public final class BytesClient {
 
     /**
      * Get call.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -102,7 +105,7 @@ public final class BytesClient {
 
     /**
      * Put operation.
-     *
+     * 
      * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

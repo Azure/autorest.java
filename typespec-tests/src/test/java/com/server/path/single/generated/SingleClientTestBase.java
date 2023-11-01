@@ -22,16 +22,16 @@ class SingleClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SingleClientBuilder singleClientbuilder =
-                new SingleClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SingleClientBuilder singleClientbuilder
+            = new SingleClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             singleClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             singleClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         singleClient = singleClientbuilder.buildClient();
+
     }
 }

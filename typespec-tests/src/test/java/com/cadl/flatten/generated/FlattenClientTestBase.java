@@ -22,16 +22,16 @@ class FlattenClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        FlattenClientBuilder flattenClientbuilder =
-                new FlattenClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FlattenClientBuilder flattenClientbuilder
+            = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             flattenClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             flattenClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         flattenClient = flattenClientbuilder.buildClient();
+
     }
 }

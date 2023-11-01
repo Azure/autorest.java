@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Object received from the registry containing the list of schema groups and link to next batch page. */
+/**
+ * Object received from the registry containing the list of schema groups and link to next batch page.
+ */
 @Fluent
 public final class SchemaGroups {
     /*
@@ -23,12 +25,15 @@ public final class SchemaGroups {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of SchemaGroups class. */
-    public SchemaGroups() {}
+    /**
+     * Creates an instance of SchemaGroups class.
+     */
+    public SchemaGroups() {
+    }
 
     /**
      * Get the groups property: Array of schema groups.
-     *
+     * 
      * @return the groups value.
      */
     public List<String> getGroups() {
@@ -37,7 +42,7 @@ public final class SchemaGroups {
 
     /**
      * Set the groups property: Array of schema groups.
-     *
+     * 
      * @param groups the groups value to set.
      * @return the SchemaGroups object itself.
      */
@@ -48,7 +53,7 @@ public final class SchemaGroups {
 
     /**
      * Get the nextLink property: URl to next batch of schema groups.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +62,7 @@ public final class SchemaGroups {
 
     /**
      * Set the nextLink property: URl to next batch of schema groups.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the SchemaGroups object itself.
      */

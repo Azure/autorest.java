@@ -37,34 +37,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the NullableClient type. */
+/**
+ * A builder for creating a new instance of the NullableClient type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            StringOperationClient.class,
-            BytesClient.class,
-            DatetimeOperationClient.class,
-            DurationOperationClient.class,
-            CollectionsByteClient.class,
-            CollectionsModelClient.class,
-            StringOperationAsyncClient.class,
-            BytesAsyncClient.class,
-            DatetimeOperationAsyncClient.class,
-            DurationOperationAsyncClient.class,
-            CollectionsByteAsyncClient.class,
-            CollectionsModelAsyncClient.class
-        })
+    serviceClients = { StringOperationClient.class, BytesClient.class, DatetimeOperationClient.class,
+        DurationOperationClient.class, CollectionsByteClient.class, CollectionsModelClient.class,
+        StringOperationAsyncClient.class, BytesAsyncClient.class, DatetimeOperationAsyncClient.class,
+        DurationOperationAsyncClient.class, CollectionsByteAsyncClient.class, CollectionsModelAsyncClient.class })
 public final class NullableClientBuilder
-        implements HttpTrait<NullableClientBuilder>, ConfigurationTrait<NullableClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    implements HttpTrait<NullableClientBuilder>, ConfigurationTrait<NullableClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("type-property-nullable.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the NullableClientBuilder. */
+    /**
+     * Create an instance of the NullableClientBuilder.
+     */
     @Generated
     public NullableClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -73,9 +70,12 @@ public final class NullableClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder pipeline(HttpPipeline pipeline) {
@@ -89,9 +89,12 @@ public final class NullableClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder httpClient(HttpClient httpClient) {
@@ -102,9 +105,12 @@ public final class NullableClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -115,9 +121,12 @@ public final class NullableClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -128,9 +137,12 @@ public final class NullableClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -138,7 +150,9 @@ public final class NullableClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -150,9 +164,12 @@ public final class NullableClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public NullableClientBuilder configuration(Configuration configuration) {
@@ -163,11 +180,12 @@ public final class NullableClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the NullableClientBuilder.
      */
@@ -179,21 +197,21 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of NullableClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of NullableClientImpl.
      */
     @Generated
     private NullableClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        NullableClientImpl client =
-                new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        NullableClientImpl client
+            = new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -204,35 +222,28 @@ public final class NullableClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of StringOperationAsyncClient class.
-     *
+     * 
      * @return an instance of StringOperationAsyncClient.
      */
     @Generated
@@ -242,7 +253,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of BytesAsyncClient class.
-     *
+     * 
      * @return an instance of BytesAsyncClient.
      */
     @Generated
@@ -252,7 +263,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of DatetimeOperationAsyncClient class.
-     *
+     * 
      * @return an instance of DatetimeOperationAsyncClient.
      */
     @Generated
@@ -262,7 +273,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of DurationOperationAsyncClient class.
-     *
+     * 
      * @return an instance of DurationOperationAsyncClient.
      */
     @Generated
@@ -272,7 +283,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of CollectionsByteAsyncClient class.
-     *
+     * 
      * @return an instance of CollectionsByteAsyncClient.
      */
     @Generated
@@ -282,7 +293,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of CollectionsModelAsyncClient class.
-     *
+     * 
      * @return an instance of CollectionsModelAsyncClient.
      */
     @Generated
@@ -292,7 +303,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of StringOperationClient class.
-     *
+     * 
      * @return an instance of StringOperationClient.
      */
     @Generated
@@ -302,7 +313,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of BytesClient class.
-     *
+     * 
      * @return an instance of BytesClient.
      */
     @Generated
@@ -312,7 +323,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of DatetimeOperationClient class.
-     *
+     * 
      * @return an instance of DatetimeOperationClient.
      */
     @Generated
@@ -322,7 +333,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of DurationOperationClient class.
-     *
+     * 
      * @return an instance of DurationOperationClient.
      */
     @Generated
@@ -332,7 +343,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of CollectionsByteClient class.
-     *
+     * 
      * @return an instance of CollectionsByteClient.
      */
     @Generated
@@ -342,7 +353,7 @@ public final class NullableClientBuilder
 
     /**
      * Builds an instance of CollectionsModelClient class.
-     *
+     * 
      * @return an instance of CollectionsModelClient.
      */
     @Generated

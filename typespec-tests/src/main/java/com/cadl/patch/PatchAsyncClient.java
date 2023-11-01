@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.cadl.patch.implementation.PatchClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous PatchClient type. */
+/**
+ * Initializes a new instance of the asynchronous PatchClient type.
+ */
 @ServiceClient(builder = PatchClientBuilder.class, isAsync = true)
 public final class PatchAsyncClient {
-    @Generated private final PatchClientImpl serviceClient;
+    @Generated
+    private final PatchClientImpl serviceClient;
 
     /**
      * Initializes an instance of PatchAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class PatchAsyncClient {
 
     /**
      * The createOrUpdate operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -46,9 +49,9 @@ public final class PatchAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -57,7 +60,7 @@ public final class PatchAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,8 +72,8 @@ public final class PatchAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateWithResponse(
-            String name, BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrUpdateWithResponse(String name, BinaryData body,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponseAsync(name, body, requestOptions);
     }

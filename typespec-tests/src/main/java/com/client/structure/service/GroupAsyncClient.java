@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.client.structure.service.implementation.GroupsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous RenamedOperationClient type. */
+/**
+ * Initializes a new instance of the asynchronous RenamedOperationClient type.
+ */
 @ServiceClient(builder = RenamedOperationClientBuilder.class, isAsync = true)
 public final class GroupAsyncClient {
-    @Generated private final GroupsImpl serviceClient;
+    @Generated
+    private final GroupsImpl serviceClient;
 
     /**
      * Initializes an instance of GroupAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +70,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,7 +86,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -101,7 +104,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -119,7 +122,7 @@ public final class GroupAsyncClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

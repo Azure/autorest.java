@@ -12,16 +12,12 @@ import com.cadl.specialheaders.models.Resource;
 
 public class EtagHeadersPutWithRequestHeaders {
     public static void main(String[] args) {
-        SpecialHeadersClient specialHeadersClient =
-                new SpecialHeadersClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
-                        .buildClient();
+        SpecialHeadersClient specialHeadersClient = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
-        Resource response =
-                specialHeadersClient.putWithRequestHeaders(
-                        "name",
-                        new Resource("myType").setDescription("This is sample for Etag headers"),
-                        new RequestConditions().setIfMatch("64e005"));
+        Resource response = specialHeadersClient.putWithRequestHeaders("name",
+            new Resource("myType").setDescription("This is sample for Etag headers"),
+            new RequestConditions().setIfMatch("64e005"));
         // END:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
     }
 }

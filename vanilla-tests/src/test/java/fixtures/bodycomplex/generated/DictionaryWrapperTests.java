@@ -13,27 +13,16 @@ import org.junit.jupiter.api.Assertions;
 public final class DictionaryWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        DictionaryWrapper model =
-                BinaryData.fromString(
-                                "{\"defaultProgram\":{\"nq\":\"dznrbtcqq\",\"ifsqesaagdfmg\":\"lhqgnufooojy\",\"izntocipao\":\"zlhjxrifkwmrvkt\",\"poyfdkfogkn\":\"ajpsquc\"}}")
-                        .toObject(DictionaryWrapper.class);
+        DictionaryWrapper model = BinaryData.fromString(
+            "{\"defaultProgram\":{\"nq\":\"dznrbtcqq\",\"ifsqesaagdfmg\":\"lhqgnufooojy\",\"izntocipao\":\"zlhjxrifkwmrvkt\",\"poyfdkfogkn\":\"ajpsquc\"}}")
+            .toObject(DictionaryWrapper.class);
         Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        DictionaryWrapper model =
-                new DictionaryWrapper()
-                        .setDefaultProgram(
-                                mapOf(
-                                        "nq",
-                                        "dznrbtcqq",
-                                        "ifsqesaagdfmg",
-                                        "lhqgnufooojy",
-                                        "izntocipao",
-                                        "zlhjxrifkwmrvkt",
-                                        "poyfdkfogkn",
-                                        "ajpsquc"));
+        DictionaryWrapper model = new DictionaryWrapper().setDefaultProgram(mapOf("nq", "dznrbtcqq", "ifsqesaagdfmg",
+            "lhqgnufooojy", "izntocipao", "zlhjxrifkwmrvkt", "poyfdkfogkn", "ajpsquc"));
         model = BinaryData.fromObject(model).toObject(DictionaryWrapper.class);
         Assertions.assertEquals("dznrbtcqq", model.getDefaultProgram().get("nq"));
     }

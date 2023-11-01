@@ -22,16 +22,16 @@ class InternalClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        InternalClientBuilder internalClientbuilder =
-                new InternalClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        InternalClientBuilder internalClientbuilder
+            = new InternalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             internalClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             internalClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         internalClient = internalClientbuilder.buildClient();
+
     }
 }

@@ -27,14 +27,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 
-/** Initializes a new instance of the asynchronous VersioningClient type. */
+/**
+ * Initializes a new instance of the asynchronous VersioningClient type.
+ */
 @ServiceClient(builder = VersioningClientBuilder.class, isAsync = true)
 public final class VersioningAsyncClient {
-    @Generated private final VersioningClientImpl serviceClient;
+    @Generated
+    private final VersioningClientImpl serviceClient;
 
     /**
      * Initializes an instance of VersioningAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -44,20 +47,34 @@ public final class VersioningAsyncClient {
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -72,7 +89,7 @@ public final class VersioningAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,20 +106,35 @@ public final class VersioningAsyncClient {
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -110,7 +142,7 @@ public final class VersioningAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -126,7 +158,7 @@ public final class VersioningAsyncClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
      * @param projectedFileFormat A sequence of textual characters.
@@ -140,14 +172,13 @@ public final class VersioningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedResource> beginExport(
-            String name, String projectFileVersion, String projectedFileFormat) {
+    public PollerFlux<PollResult, ExportedResource> beginExport(String name, String projectFileVersion,
+        String projectedFileFormat) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            return PollerFlux.error(
-                    new IllegalArgumentException(
-                            "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
+            return PollerFlux.error(new IllegalArgumentException(
+                "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
         }
         if (projectFileVersion != null) {
             requestOptions.addQueryParam("projectFileVersion", projectFileVersion, false);
@@ -160,7 +191,7 @@ public final class VersioningAsyncClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -184,7 +215,7 @@ public final class VersioningAsyncClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -204,7 +235,7 @@ public final class VersioningAsyncClient {
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @param select Select the specified fields to be included in the response.
      * @param filter Filter the result list using the given expression.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -221,12 +252,8 @@ public final class VersioningAsyncClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            return PagedFlux.create(
-                    () ->
-                            (continuationToken, pageSize) ->
-                                    Flux.error(
-                                            new IllegalArgumentException(
-                                                    "Parameter filter is only available in api-version 2022-12-01-preview.")));
+            return PagedFlux.create(() -> (continuationToken, pageSize) -> Flux.error(
+                new IllegalArgumentException("Parameter filter is only available in api-version 2022-12-01-preview.")));
         }
         if (select != null) {
             for (String paramItemValue : select) {
@@ -239,32 +266,20 @@ public final class VersioningAsyncClient {
             requestOptions.addQueryParam("filter", filter, false);
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
-        return PagedFlux.create(
-                () ->
-                        (continuationToken, pageSize) -> {
-                            Flux<PagedResponse<BinaryData>> flux =
-                                    (continuationToken == null)
-                                            ? pagedFluxResponse.byPage().take(1)
-                                            : pagedFluxResponse.byPage(continuationToken).take(1);
-                            return flux.map(
-                                    pagedResponse ->
-                                            new PagedResponseBase<Void, Resource>(
-                                                    pagedResponse.getRequest(),
-                                                    pagedResponse.getStatusCode(),
-                                                    pagedResponse.getHeaders(),
-                                                    pagedResponse.getValue().stream()
-                                                            .map(
-                                                                    protocolMethodData ->
-                                                                            protocolMethodData.toObject(Resource.class))
-                                                            .collect(Collectors.toList()),
-                                                    pagedResponse.getContinuationToken(),
-                                                    null));
-                        });
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, Resource>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(Resource.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
     }
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @param select Select the specified fields to be included in the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -287,32 +302,20 @@ public final class VersioningAsyncClient {
             }
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
-        return PagedFlux.create(
-                () ->
-                        (continuationToken, pageSize) -> {
-                            Flux<PagedResponse<BinaryData>> flux =
-                                    (continuationToken == null)
-                                            ? pagedFluxResponse.byPage().take(1)
-                                            : pagedFluxResponse.byPage(continuationToken).take(1);
-                            return flux.map(
-                                    pagedResponse ->
-                                            new PagedResponseBase<Void, Resource>(
-                                                    pagedResponse.getRequest(),
-                                                    pagedResponse.getStatusCode(),
-                                                    pagedResponse.getHeaders(),
-                                                    pagedResponse.getValue().stream()
-                                                            .map(
-                                                                    protocolMethodData ->
-                                                                            protocolMethodData.toObject(Resource.class))
-                                                            .collect(Collectors.toList()),
-                                                    pagedResponse.getContinuationToken(),
-                                                    null));
-                        });
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, Resource>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(Resource.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
     }
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -326,26 +329,14 @@ public final class VersioningAsyncClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
-        return PagedFlux.create(
-                () ->
-                        (continuationToken, pageSize) -> {
-                            Flux<PagedResponse<BinaryData>> flux =
-                                    (continuationToken == null)
-                                            ? pagedFluxResponse.byPage().take(1)
-                                            : pagedFluxResponse.byPage(continuationToken).take(1);
-                            return flux.map(
-                                    pagedResponse ->
-                                            new PagedResponseBase<Void, Resource>(
-                                                    pagedResponse.getRequest(),
-                                                    pagedResponse.getStatusCode(),
-                                                    pagedResponse.getHeaders(),
-                                                    pagedResponse.getValue().stream()
-                                                            .map(
-                                                                    protocolMethodData ->
-                                                                            protocolMethodData.toObject(Resource.class))
-                                                            .collect(Collectors.toList()),
-                                                    pagedResponse.getContinuationToken(),
-                                                    null));
-                        });
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, Resource>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue().stream().map(protocolMethodData -> protocolMethodData.toObject(Resource.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
     }
 }

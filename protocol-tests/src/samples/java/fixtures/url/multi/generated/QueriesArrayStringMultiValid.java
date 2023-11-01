@@ -11,20 +11,15 @@ import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuild
 
 public class QueriesArrayStringMultiValid {
     public static void main(String[] args) {
-        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient =
-                new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder()
-                        .host("http://localhost:3000")
-                        .buildClient();
+        AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient
+            = new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder().host("http://localhost:3000")
+                .buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
-        RequestOptions requestOptions =
-                new RequestOptions()
-                        .addQueryParam("arrayQuery", "ArrayQuery1")
-                        .addQueryParam("arrayQuery", "begin!*'();:@ &= $")
-                        .addQueryParam("arrayQuery", "/?#[]end")
-                        .addQueryParam("arrayQuery", "")
-                        .addQueryParam("arrayQuery", "");
-        Response<Void> response =
-                autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiValidWithResponse(requestOptions);
+        RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "ArrayQuery1")
+            .addQueryParam("arrayQuery", "begin!*'();:@ &= $").addQueryParam("arrayQuery", "/?#[]end")
+            .addQueryParam("arrayQuery", "").addQueryParam("arrayQuery", "");
+        Response<Void> response
+            = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiValidWithResponse(requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
     }
 }

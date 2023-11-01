@@ -37,19 +37,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the PathItemsClient type. */
-@ServiceClientBuilder(serviceClients = {PathItemsClient.class, PathItemsAsyncClient.class})
+/**
+ * A builder for creating a new instance of the PathItemsClient type.
+ */
+@ServiceClientBuilder(serviceClients = { PathItemsClient.class, PathItemsAsyncClient.class })
 public final class PathItemsClientBuilder
-        implements HttpTrait<PathItemsClientBuilder>, ConfigurationTrait<PathItemsClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    implements HttpTrait<PathItemsClientBuilder>, ConfigurationTrait<PathItemsClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-url.properties");
+    @Generated
+    private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("fixtures-url.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the PathItemsClientBuilder. */
+    /**
+     * Create an instance of the PathItemsClientBuilder.
+     */
     @Generated
     public PathItemsClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -58,9 +66,12 @@ public final class PathItemsClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder pipeline(HttpPipeline pipeline) {
@@ -74,9 +85,12 @@ public final class PathItemsClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder httpClient(HttpClient httpClient) {
@@ -87,9 +101,12 @@ public final class PathItemsClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -100,9 +117,12 @@ public final class PathItemsClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -113,9 +133,12 @@ public final class PathItemsClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -123,7 +146,9 @@ public final class PathItemsClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -135,9 +160,12 @@ public final class PathItemsClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public PathItemsClientBuilder configuration(Configuration configuration) {
@@ -148,11 +176,12 @@ public final class PathItemsClientBuilder
     /*
      * A string value 'globalItemStringPath' that appears in the path
      */
-    @Generated private String globalStringPath;
+    @Generated
+    private String globalStringPath;
 
     /**
      * Sets A string value 'globalItemStringPath' that appears in the path.
-     *
+     * 
      * @param globalStringPath the globalStringPath value.
      * @return the PathItemsClientBuilder.
      */
@@ -165,11 +194,12 @@ public final class PathItemsClientBuilder
     /*
      * should contain value null
      */
-    @Generated private String globalStringQuery;
+    @Generated
+    private String globalStringQuery;
 
     /**
      * Sets should contain value null.
-     *
+     * 
      * @param globalStringQuery the globalStringQuery value.
      * @return the PathItemsClientBuilder.
      */
@@ -182,11 +212,12 @@ public final class PathItemsClientBuilder
     /*
      * server parameter
      */
-    @Generated private String host;
+    @Generated
+    private String host;
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the PathItemsClientBuilder.
      */
@@ -199,11 +230,12 @@ public final class PathItemsClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the PathItemsClientBuilder.
      */
@@ -215,27 +247,22 @@ public final class PathItemsClientBuilder
 
     /**
      * Builds an instance of AutoRestUrlTestServiceClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of AutoRestUrlTestServiceClientImpl.
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        AutoRestUrlTestServiceClientImpl client =
-                new AutoRestUrlTestServiceClientImpl(
-                        localPipeline,
-                        JacksonAdapter.createDefaultSerializerAdapter(),
-                        this.globalStringPath,
-                        this.globalStringQuery,
-                        localHost);
+        AutoRestUrlTestServiceClientImpl client = new AutoRestUrlTestServiceClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), this.globalStringPath, this.globalStringQuery, localHost);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -246,35 +273,28 @@ public final class PathItemsClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of PathItemsAsyncClient class.
-     *
+     * 
      * @return an instance of PathItemsAsyncClient.
      */
     @Generated
@@ -284,7 +304,7 @@ public final class PathItemsClientBuilder
 
     /**
      * Builds an instance of PathItemsClient class.
-     *
+     * 
      * @return an instance of PathItemsClient.
      */
     @Generated

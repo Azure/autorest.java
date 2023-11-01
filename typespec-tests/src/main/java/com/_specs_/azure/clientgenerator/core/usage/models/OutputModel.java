@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Usage override to roundtrip. */
+/**
+ * Usage override to roundtrip.
+ */
 @Immutable
 public final class OutputModel {
     /*
@@ -21,7 +23,7 @@ public final class OutputModel {
 
     /**
      * Creates an instance of OutputModel class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class OutputModel {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

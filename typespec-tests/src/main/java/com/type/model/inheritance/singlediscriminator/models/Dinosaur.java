@@ -12,14 +12,16 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** Define a base class in the legacy way. Discriminator property is not explicitly defined in the model. */
+/**
+ * Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Dinosaur.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Dinosaur.class)
 @JsonTypeName("Dinosaur")
-@JsonSubTypes({@JsonSubTypes.Type(name = "t-rex", value = TRex.class)})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "t-rex", value = TRex.class) })
 @Immutable
 public class Dinosaur {
     /*
@@ -31,7 +33,7 @@ public class Dinosaur {
 
     /**
      * Creates an instance of Dinosaur class.
-     *
+     * 
      * @param size the size value to set.
      */
     @Generated
@@ -42,7 +44,7 @@ public class Dinosaur {
 
     /**
      * Get the size property: The size property.
-     *
+     * 
      * @return the size value.
      */
     @Generated

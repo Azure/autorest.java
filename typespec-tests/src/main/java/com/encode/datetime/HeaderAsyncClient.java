@@ -20,14 +20,17 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DatetimeClient type. */
+/**
+ * Initializes a new instance of the asynchronous DatetimeClient type.
+ */
 @ServiceClient(builder = DatetimeClientBuilder.class, isAsync = true)
 public final class HeaderAsyncClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,7 +40,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -54,7 +57,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,7 +74,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,7 +108,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The unixTimestampArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -116,14 +119,14 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> unixTimestampArrayWithResponse(
-            List<OffsetDateTime> value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> unixTimestampArrayWithResponse(List<OffsetDateTime> value,
+        RequestOptions requestOptions) {
         return this.serviceClient.unixTimestampArrayWithResponseAsync(value, requestOptions);
     }
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -143,7 +146,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -163,7 +166,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,7 +186,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -203,7 +206,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The unixTimestampArray operation.
-     *
+     * 
      * @param value Array of Value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

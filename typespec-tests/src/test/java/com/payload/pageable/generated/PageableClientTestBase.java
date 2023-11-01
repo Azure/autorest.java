@@ -21,15 +21,14 @@ class PageableClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        PageableClientBuilder pageableClientbuilder =
-                new PageableClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        PageableClientBuilder pageableClientbuilder = new PageableClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             pageableClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             pageableClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         pageableClient = pageableClientbuilder.buildClient();
+
     }
 }

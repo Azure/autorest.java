@@ -22,14 +22,17 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DictionaryClient type. */
+/**
+ * Initializes a new instance of the asynchronous DictionaryClient type.
+ */
 @ServiceClient(builder = DictionaryClientBuilder.class, isAsync = true)
 public final class DatetimeValueAsyncClient {
-    @Generated private final DatetimeValuesImpl serviceClient;
+    @Generated
+    private final DatetimeValuesImpl serviceClient;
 
     /**
      * Initializes an instance of DatetimeValueAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -39,15 +42,15 @@ public final class DatetimeValueAsyncClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -63,15 +66,15 @@ public final class DatetimeValueAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     String: OffsetDateTime (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class DatetimeValueAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -101,14 +104,13 @@ public final class DatetimeValueAsyncClient {
     public Mono<Map<String, OffsetDateTime>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Dictionary of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -127,6 +129,7 @@ public final class DatetimeValueAsyncClient {
     }
 
     @Generated
-    private static final TypeReference<Map<String, OffsetDateTime>> TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME =
-            new TypeReference<Map<String, OffsetDateTime>>() {};
+    private static final TypeReference<Map<String, OffsetDateTime>> TYPE_REFERENCE_MAP_STRING_OFFSET_DATE_TIME
+        = new TypeReference<Map<String, OffsetDateTime>>() {
+        };
 }

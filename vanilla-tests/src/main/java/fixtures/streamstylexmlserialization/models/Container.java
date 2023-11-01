@@ -15,7 +15,9 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** An Azure Storage container. */
+/**
+ * An Azure Storage container.
+ */
 @Fluent
 public final class Container implements XmlSerializable<Container> {
     /*
@@ -33,12 +35,15 @@ public final class Container implements XmlSerializable<Container> {
      */
     private Map<String, String> metadata;
 
-    /** Creates an instance of Container class. */
-    public Container() {}
+    /**
+     * Creates an instance of Container class.
+     */
+    public Container() {
+    }
 
     /**
      * Get the name property: The Name property.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -47,7 +52,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Set the name property: The Name property.
-     *
+     * 
      * @param name the name value to set.
      * @return the Container object itself.
      */
@@ -58,7 +63,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Get the properties property: Properties of a container.
-     *
+     * 
      * @return the properties value.
      */
     public ContainerProperties getProperties() {
@@ -67,7 +72,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Set the properties property: Properties of a container.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the Container object itself.
      */
@@ -78,7 +83,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Get the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @return the metadata value.
      */
     public Map<String, String> getMetadata() {
@@ -87,7 +92,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Set the metadata property: Dictionary of &lt;string&gt;.
-     *
+     * 
      * @param metadata the metadata value to set.
      * @return the Container object itself.
      */
@@ -98,7 +103,7 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -135,10 +140,10 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Reads an instance of Container from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
+     * to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Container.
      */
@@ -148,42 +153,40 @@ public final class Container implements XmlSerializable<Container> {
 
     /**
      * Reads an instance of Container from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing
-     *     to XML null.
+     * to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Container.
      */
     public static Container fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Container" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Container deserializedContainer = new Container();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Container deserializedContainer = new Container();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Name".equals(elementName.getLocalPart())) {
-                            deserializedContainer.name = reader.getStringElement();
-                        } else if ("Properties".equals(elementName.getLocalPart())) {
-                            deserializedContainer.properties = ContainerProperties.fromXml(reader, "Properties");
-                        } else if ("Metadata".equals(elementName.getLocalPart())) {
-                            if (deserializedContainer.metadata == null) {
-                                deserializedContainer.metadata = new LinkedHashMap<>();
-                            }
-                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                deserializedContainer.metadata.put(
-                                        reader.getElementName().getLocalPart(), reader.getStringElement());
-                            }
-                        } else {
-                            reader.skipElement();
-                        }
+                if ("Name".equals(elementName.getLocalPart())) {
+                    deserializedContainer.name = reader.getStringElement();
+                } else if ("Properties".equals(elementName.getLocalPart())) {
+                    deserializedContainer.properties = ContainerProperties.fromXml(reader, "Properties");
+                } else if ("Metadata".equals(elementName.getLocalPart())) {
+                    if (deserializedContainer.metadata == null) {
+                        deserializedContainer.metadata = new LinkedHashMap<>();
                     }
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        deserializedContainer.metadata.put(reader.getElementName().getLocalPart(),
+                            reader.getStringElement());
+                    }
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedContainer;
-                });
+            return deserializedContainer;
+        });
     }
 }

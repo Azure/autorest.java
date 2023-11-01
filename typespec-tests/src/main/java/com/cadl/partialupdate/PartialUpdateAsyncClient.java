@@ -19,11 +19,14 @@ import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous PartialUpdateClient type. */
+/**
+ * Initializes a new instance of the asynchronous PartialUpdateClient type.
+ */
 @ServiceClient(builder = PartialUpdateClientBuilder.class, isAsync = true)
 public final class PartialUpdateAsyncClient {
 
-    @Generated private final PartialUpdateClientImpl serviceClient;
+    @Generated
+    private final PartialUpdateClientImpl serviceClient;
 
     /**
      * Initializes an instance of PartialUpdateAsyncClient class.
@@ -37,9 +40,9 @@ public final class PartialUpdateAsyncClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -77,8 +80,7 @@ public final class PartialUpdateAsyncClient {
     public Mono<PartialUpdateModel> read() {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
+        return readWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
     }
 }

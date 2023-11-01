@@ -22,16 +22,16 @@ class MultiContentTypesClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        MultiContentTypesClientBuilder multiContentTypesClientbuilder =
-                new MultiContentTypesClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        MultiContentTypesClientBuilder multiContentTypesClientbuilder = new MultiContentTypesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             multiContentTypesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             multiContentTypesClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         multiContentTypesClient = multiContentTypesClientbuilder.buildClient();
+
     }
 }

@@ -21,17 +21,23 @@ import com.azure.core.util.FluxUtil;
 import fixtures.bodyfile.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Files. */
+/**
+ * An instance of this class provides access to all the operations defined in Files.
+ */
 public final class Files {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final FilesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestSwaggerBATFileService client;
 
     /**
      * Initializes an instance of Files.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Files(AutoRestSwaggerBATFileService client) {
@@ -40,34 +46,34 @@ public final class Files {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBATFileServiceFiles to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATFi")
     public interface FilesService {
         @Get("/files/stream/nonempty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> getFile(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<BinaryData>> getFile(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/files/stream/verylarge")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> getFileLarge(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<BinaryData>> getFileLarge(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Get("/files/stream/empty")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> getEmptyFile(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<BinaryData>> getEmptyFile(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Get file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file along with {@link Response} on successful completion of {@link Mono}.
@@ -75,8 +81,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), accept, context));
@@ -84,7 +90,7 @@ public final class Files {
 
     /**
      * Get file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -94,8 +100,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getFile(this.client.getHost(), accept, context);
@@ -103,7 +109,7 @@ public final class Files {
 
     /**
      * Get file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file on successful completion of {@link Mono}.
@@ -115,7 +121,7 @@ public final class Files {
 
     /**
      * Get file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -129,7 +135,7 @@ public final class Files {
 
     /**
      * Get file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -143,7 +149,7 @@ public final class Files {
 
     /**
      * Get file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return file.
@@ -155,7 +161,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file along with {@link Response} on successful completion of {@link Mono}.
@@ -163,8 +169,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileLargeWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), accept, context));
@@ -172,7 +178,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -182,8 +188,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFileLargeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getFileLarge(this.client.getHost(), accept, context);
@@ -191,7 +197,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file on successful completion of {@link Mono}.
@@ -203,7 +209,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -217,7 +223,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -231,7 +237,7 @@ public final class Files {
 
     /**
      * Get a large file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return a large file.
@@ -243,7 +249,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file along with {@link Response} on successful completion of {@link Mono}.
@@ -251,8 +257,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyFileWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), accept, context));
@@ -260,7 +266,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -270,8 +276,8 @@ public final class Files {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyFileWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "image/png, application/json";
         return service.getEmptyFile(this.client.getHost(), accept, context);
@@ -279,7 +285,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file on successful completion of {@link Mono}.
@@ -291,7 +297,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -305,7 +311,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -319,7 +325,7 @@ public final class Files {
 
     /**
      * Get empty file.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return empty file.

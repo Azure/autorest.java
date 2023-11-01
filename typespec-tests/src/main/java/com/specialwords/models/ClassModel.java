@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ClassModel model. */
+/**
+ * The ClassModel model.
+ */
 @Immutable
 public final class ClassModel {
     /*
@@ -21,7 +23,7 @@ public final class ClassModel {
 
     /**
      * Creates an instance of ClassModel class.
-     *
+     * 
      * @param name the name value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class ClassModel {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

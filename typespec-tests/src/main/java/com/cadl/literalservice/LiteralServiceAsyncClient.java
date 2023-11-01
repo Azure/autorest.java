@@ -21,14 +21,17 @@ import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParam;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous LiteralServiceClient type. */
+/**
+ * Initializes a new instance of the asynchronous LiteralServiceClient type.
+ */
 @ServiceClient(builder = LiteralServiceClientBuilder.class, isAsync = true)
 public final class LiteralServiceAsyncClient {
-    @Generated private final LiteralServiceClientImpl serviceClient;
+    @Generated
+    private final LiteralServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of LiteralServiceAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,35 +41,44 @@ public final class LiteralServiceAsyncClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>optionalLiteralParam</td><td>String</td><td>No</td><td>The optionalLiteralParam parameter. Allowed values: "optionalLiteralParam".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>optionalLiteralParam</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The optionalLiteralParam parameter. Allowed values: "optionalLiteralParam".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param model The model parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -83,7 +95,7 @@ public final class LiteralServiceAsyncClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param model The model parameter.
      * @param optionalLiteralParam The optionalLiteralParam parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -102,14 +114,13 @@ public final class LiteralServiceAsyncClient {
         if (optionalLiteralParam != null) {
             requestOptions.addQueryParam("optionalLiteralParam", optionalLiteralParam.toString(), false);
         }
-        return putWithResponse(BinaryData.fromObject(model), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
+        return putWithResponse(BinaryData.fromObject(model), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
     }
 
     /**
      * The put operation.
-     *
+     * 
      * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -124,8 +135,7 @@ public final class LiteralServiceAsyncClient {
     public Mono<Model> put(Model model) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(model), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
+        return putWithResponse(BinaryData.fromObject(model), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
     }
 }

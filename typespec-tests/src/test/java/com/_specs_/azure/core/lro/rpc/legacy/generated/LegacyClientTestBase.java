@@ -21,15 +21,14 @@ class LegacyClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        LegacyClientBuilder legacyClientbuilder =
-                new LegacyClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        LegacyClientBuilder legacyClientbuilder = new LegacyClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             legacyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             legacyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         legacyClient = legacyClientbuilder.buildClient();
+
     }
 }

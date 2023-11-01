@@ -23,14 +23,17 @@ import com.projection.projectedname.models.JsonProjectedNameModel;
 import com.projection.projectedname.models.LanguageProjectedNameModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ProjectedNameClient type. */
+/**
+ * Initializes a new instance of the asynchronous ProjectedNameClient type.
+ */
 @ServiceClient(builder = ProjectedNameClientBuilder.class, isAsync = true)
 public final class PropertyAsyncClient {
-    @Generated private final PropertiesImpl serviceClient;
+    @Generated
+    private final PropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of PropertyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -40,15 +43,15 @@ public final class PropertyAsyncClient {
 
     /**
      * The json operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -65,15 +68,15 @@ public final class PropertyAsyncClient {
 
     /**
      * The client operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -90,15 +93,15 @@ public final class PropertyAsyncClient {
 
     /**
      * The language operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -109,22 +112,22 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> languageWithResponse(
-            BinaryData languageProjectedNameModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> languageWithResponse(BinaryData languageProjectedNameModel,
+        RequestOptions requestOptions) {
         return this.serviceClient.languageWithResponseAsync(languageProjectedNameModel, requestOptions);
     }
 
     /**
      * The jsonAndClient operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -135,14 +138,14 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> jsonAndClientWithResponse(
-            BinaryData jsonAndClientProjectedNameModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> jsonAndClientWithResponse(BinaryData jsonAndClientProjectedNameModel,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndClientWithResponseAsync(jsonAndClientProjectedNameModel, requestOptions);
     }
 
     /**
      * The json operation.
-     *
+     * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -158,12 +161,12 @@ public final class PropertyAsyncClient {
         // Generated convenience method for jsonWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return jsonWithResponse(BinaryData.fromObject(jsonProjectedNameModel), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
      * The client operation.
-     *
+     * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -179,12 +182,12 @@ public final class PropertyAsyncClient {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return clientWithResponse(BinaryData.fromObject(clientProjectedNameModel), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
      * The language operation.
-     *
+     * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -200,12 +203,12 @@ public final class PropertyAsyncClient {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return languageWithResponse(BinaryData.fromObject(languageProjectedNameModel), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
      * The jsonAndClient operation.
-     *
+     * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -221,6 +224,6 @@ public final class PropertyAsyncClient {
         // Generated convenience method for jsonAndClientWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return jsonAndClientWithResponse(BinaryData.fromObject(jsonAndClientProjectedNameModel), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 }

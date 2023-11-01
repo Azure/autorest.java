@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.net.URL;
 
-/** The ModelWithUrlProperty model. */
+/**
+ * The ModelWithUrlProperty model.
+ */
 @JacksonXmlRootElement(localName = "ModelWithUrlProperty")
 @Fluent
 public final class ModelWithUrlProperty {
@@ -19,12 +21,15 @@ public final class ModelWithUrlProperty {
     @JsonProperty(value = "Url")
     private URL url;
 
-    /** Creates an instance of ModelWithUrlProperty class. */
-    public ModelWithUrlProperty() {}
+    /**
+     * Creates an instance of ModelWithUrlProperty class.
+     */
+    public ModelWithUrlProperty() {
+    }
 
     /**
      * Get the url property: The Url property.
-     *
+     * 
      * @return the url value.
      */
     public URL getUrl() {
@@ -33,7 +38,7 @@ public final class ModelWithUrlProperty {
 
     /**
      * Set the url property: The Url property.
-     *
+     * 
      * @param url the url value to set.
      * @return the ModelWithUrlProperty object itself.
      */
@@ -44,8 +49,9 @@ public final class ModelWithUrlProperty {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

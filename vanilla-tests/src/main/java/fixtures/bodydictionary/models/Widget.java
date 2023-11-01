@@ -7,7 +7,9 @@ package fixtures.bodydictionary.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Widget model. */
+/**
+ * The Widget model.
+ */
 @Fluent
 public final class Widget {
     /*
@@ -22,12 +24,15 @@ public final class Widget {
     @JsonProperty(value = "string")
     private String string;
 
-    /** Creates an instance of Widget class. */
-    public Widget() {}
+    /**
+     * Creates an instance of Widget class.
+     */
+    public Widget() {
+    }
 
     /**
      * Get the integer property: The integer property.
-     *
+     * 
      * @return the integer value.
      */
     public Integer getInteger() {
@@ -36,7 +41,7 @@ public final class Widget {
 
     /**
      * Set the integer property: The integer property.
-     *
+     * 
      * @param integer the integer value to set.
      * @return the Widget object itself.
      */
@@ -47,7 +52,7 @@ public final class Widget {
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     public String getString() {
@@ -56,7 +61,7 @@ public final class Widget {
 
     /**
      * Set the string property: The string property.
-     *
+     * 
      * @param string the string value to set.
      * @return the Widget object itself.
      */
@@ -67,8 +72,9 @@ public final class Widget {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

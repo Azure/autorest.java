@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Document analysis parameters. */
+/**
+ * Document analysis parameters.
+ */
 @Fluent
 public final class AnalyzeDocumentRequest {
     /*
@@ -23,12 +25,15 @@ public final class AnalyzeDocumentRequest {
     @JsonProperty(value = "base64Source")
     private byte[] base64Source;
 
-    /** Creates an instance of AnalyzeDocumentRequest class. */
-    public AnalyzeDocumentRequest() {}
+    /**
+     * Creates an instance of AnalyzeDocumentRequest class.
+     */
+    public AnalyzeDocumentRequest() {
+    }
 
     /**
      * Get the urlSource property: Document URL to analyze.
-     *
+     * 
      * @return the urlSource value.
      */
     public String getUrlSource() {
@@ -37,7 +42,7 @@ public final class AnalyzeDocumentRequest {
 
     /**
      * Set the urlSource property: Document URL to analyze.
-     *
+     * 
      * @param urlSource the urlSource value to set.
      * @return the AnalyzeDocumentRequest object itself.
      */
@@ -48,7 +53,7 @@ public final class AnalyzeDocumentRequest {
 
     /**
      * Get the base64Source property: Base64 encoding of the document to analyze.
-     *
+     * 
      * @return the base64Source value.
      */
     public byte[] getBase64Source() {
@@ -57,7 +62,7 @@ public final class AnalyzeDocumentRequest {
 
     /**
      * Set the base64Source property: Base64 encoding of the document to analyze.
-     *
+     * 
      * @param base64Source the base64Source value to set.
      * @return the AnalyzeDocumentRequest object itself.
      */

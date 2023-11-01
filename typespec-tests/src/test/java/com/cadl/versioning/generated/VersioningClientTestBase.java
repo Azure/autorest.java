@@ -22,16 +22,16 @@ class VersioningClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        VersioningClientBuilder versioningClientbuilder =
-                new VersioningClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        VersioningClientBuilder versioningClientbuilder
+            = new VersioningClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             versioningClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             versioningClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         versioningClient = versioningClientbuilder.buildClient();
+
     }
 }

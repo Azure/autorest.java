@@ -41,24 +41,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the FormRecognizerClient type. */
-@ServiceClientBuilder(serviceClients = {FormRecognizerClient.class, FormRecognizerAsyncClient.class})
+/**
+ * A builder for creating a new instance of the FormRecognizerClient type.
+ */
+@ServiceClientBuilder(serviceClients = { FormRecognizerClient.class, FormRecognizerAsyncClient.class })
 public final class FormRecognizerClientBuilder
-        implements HttpTrait<FormRecognizerClientBuilder>,
-                ConfigurationTrait<FormRecognizerClientBuilder>,
-                KeyCredentialTrait<FormRecognizerClientBuilder>,
-                EndpointTrait<FormRecognizerClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+    implements HttpTrait<FormRecognizerClientBuilder>, ConfigurationTrait<FormRecognizerClientBuilder>,
+    KeyCredentialTrait<FormRecognizerClientBuilder>, EndpointTrait<FormRecognizerClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("azure-ai-formrecognizer-documentanalysis-dpg.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES
+        = CoreUtils.getProperties("azure-ai-formrecognizer-documentanalysis-dpg.properties");
 
-    /** Create an instance of the FormRecognizerClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the FormRecognizerClientBuilder.
+     */
     @Generated
     public FormRecognizerClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -67,9 +72,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder pipeline(HttpPipeline pipeline) {
@@ -83,9 +91,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder httpClient(HttpClient httpClient) {
@@ -96,9 +107,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -109,9 +123,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -122,9 +139,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -132,7 +152,9 @@ public final class FormRecognizerClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -144,9 +166,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder configuration(Configuration configuration) {
@@ -157,9 +182,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The KeyCredential used for authentication.
      */
-    @Generated private KeyCredential keyCredential;
+    @Generated
+    private KeyCredential keyCredential;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder credential(KeyCredential keyCredential) {
@@ -170,9 +198,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The service endpoint
      */
-    @Generated private String endpoint;
+    @Generated
+    private String endpoint;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public FormRecognizerClientBuilder endpoint(String endpoint) {
@@ -183,11 +214,12 @@ public final class FormRecognizerClientBuilder
     /*
      * Service version
      */
-    @Generated private FormRecognizerServiceVersion serviceVersion;
+    @Generated
+    private FormRecognizerServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
-     *
+     * 
      * @param serviceVersion the serviceVersion value.
      * @return the FormRecognizerClientBuilder.
      */
@@ -200,11 +232,12 @@ public final class FormRecognizerClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the FormRecognizerClientBuilder.
      */
@@ -216,27 +249,23 @@ public final class FormRecognizerClientBuilder
 
     /**
      * Builds an instance of FormRecognizerClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of FormRecognizerClientImpl.
      */
     @Generated
     private FormRecognizerClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        FormRecognizerServiceVersion localServiceVersion =
-                (serviceVersion != null) ? serviceVersion : FormRecognizerServiceVersion.getLatest();
-        FormRecognizerClientImpl client =
-                new FormRecognizerClientImpl(
-                        localPipeline,
-                        JacksonAdapter.createDefaultSerializerAdapter(),
-                        this.endpoint,
-                        localServiceVersion);
+        FormRecognizerServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : FormRecognizerServiceVersion.getLatest();
+        FormRecognizerClientImpl client = new FormRecognizerClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -247,38 +276,31 @@ public final class FormRecognizerClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
         if (keyCredential != null) {
             policies.add(new KeyCredentialPolicy("Ocp-Apim-Subscription-Key", keyCredential));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of FormRecognizerAsyncClient class.
-     *
+     * 
      * @return an instance of FormRecognizerAsyncClient.
      */
     @Generated
@@ -288,7 +310,7 @@ public final class FormRecognizerClientBuilder
 
     /**
      * Builds an instance of FormRecognizerClient class.
-     *
+     * 
      * @return an instance of FormRecognizerClient.
      */
     @Generated

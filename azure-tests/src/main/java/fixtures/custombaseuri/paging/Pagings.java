@@ -27,17 +27,23 @@ import fixtures.custombaseuri.paging.models.Product;
 import fixtures.custombaseuri.paging.models.ProductResult;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Pagings. */
+/**
+ * An instance of this class provides access to all the operations defined in Pagings.
+ */
 public final class Pagings {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final PagingsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestParameterizedHostTestPagingClient client;
 
     /**
      * Initializes an instance of Pagings.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     Pagings(AutoRestParameterizedHostTestPagingClient client) {
@@ -53,47 +59,36 @@ public final class Pagings {
     @ServiceInterface(name = "AutoRestParameterize")
     public interface PagingsService {
         @Get("/paging/customurl/partialnextlink")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getPagesPartialUrl(
-                @HostParam("accountName") String accountName,
-                @HostParam("host") String host,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<ProductResult>> getPagesPartialUrl(@HostParam("accountName") String accountName,
+            @HostParam("host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/customurl/partialnextlinkop")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getPagesPartialUrlOperation(
-                @HostParam("accountName") String accountName,
-                @HostParam("host") String host,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<ProductResult>> getPagesPartialUrlOperation(@HostParam("accountName") String accountName,
+            @HostParam("host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/customurl/{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<ProductResult>> getPagesPartialUrlOperationNext(
-                @HostParam("accountName") String accountName,
-                @HostParam("host") String host,
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<ProductResult>> getPagesPartialUrlOperationNext(@HostParam("accountName") String accountName,
+            @HostParam("host") String host, @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getPagesPartialUrlNext(
-                @PathParam(value = "nextLink", encoded = true) String nextLink,
-                @HostParam("accountName") String accountName,
-                @HostParam("host") String host,
-                @HeaderParam("Accept") String accept,
-                Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("accountName") String accountName, @HostParam("host") String host,
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -106,26 +101,19 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context -> service.getPagesPartialUrl(accountName, this.client.getHost(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.getPagesPartialUrl(accountName, this.client.getHost(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -139,25 +127,18 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPagesPartialUrl(accountName, this.client.getHost(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -166,14 +147,13 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlAsync(String accountName) {
-        return new PagedFlux<>(
-                () -> getPagesPartialUrlSinglePageAsync(accountName),
-                nextLink -> getPagesPartialUrlNextSinglePageAsync(nextLink, accountName));
+        return new PagedFlux<>(() -> getPagesPartialUrlSinglePageAsync(accountName),
+            nextLink -> getPagesPartialUrlNextSinglePageAsync(nextLink, accountName));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -183,14 +163,13 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlAsync(String accountName, Context context) {
-        return new PagedFlux<>(
-                () -> getPagesPartialUrlSinglePageAsync(accountName, context),
-                nextLink -> getPagesPartialUrlNextSinglePageAsync(nextLink, accountName, context));
+        return new PagedFlux<>(() -> getPagesPartialUrlSinglePageAsync(accountName, context),
+            nextLink -> getPagesPartialUrlNextSinglePageAsync(nextLink, accountName, context));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -204,7 +183,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -219,7 +198,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -233,7 +212,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL and expect to concat after host.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -248,7 +227,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -261,28 +240,20 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.getPagesPartialUrlOperation(
-                                        accountName, this.client.getHost(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(
+                context -> service.getPagesPartialUrlOperation(accountName, this.client.getHost(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -291,31 +262,24 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationSinglePageAsync(
-            String accountName, Context context) {
+    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationSinglePageAsync(String accountName,
+        Context context) {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPagesPartialUrlOperation(accountName, this.client.getHost(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -324,14 +288,13 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlOperationAsync(String accountName) {
-        return new PagedFlux<>(
-                () -> getPagesPartialUrlOperationSinglePageAsync(accountName),
-                nextLink -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink));
+        return new PagedFlux<>(() -> getPagesPartialUrlOperationSinglePageAsync(accountName),
+            nextLink -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -341,14 +304,13 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlOperationAsync(String accountName, Context context) {
-        return new PagedFlux<>(
-                () -> getPagesPartialUrlOperationSinglePageAsync(accountName, context),
-                nextLink -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink, context));
+        return new PagedFlux<>(() -> getPagesPartialUrlOperationSinglePageAsync(accountName, context),
+            nextLink -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink, context));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -362,7 +324,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -377,7 +339,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -391,7 +353,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL with next operation.
-     *
+     * 
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -406,7 +368,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL.
-     *
+     * 
      * @param accountName Account Name.
      * @param nextLink Next link for the list operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -415,37 +377,29 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(
-            String accountName, String nextLink) {
+    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(String accountName,
+        String nextLink) {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                        context ->
-                                service.getPagesPartialUrlOperationNext(
-                                        accountName, this.client.getHost(), nextLink, accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+        return FluxUtil
+            .withContext(context -> service.getPagesPartialUrlOperationNext(accountName, this.client.getHost(),
+                nextLink, accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL.
-     *
+     * 
      * @param accountName Account Name.
      * @param nextLink Next link for the list operation.
      * @param context The context to associate with this operation.
@@ -455,34 +409,27 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(
-            String accountName, String nextLink, Context context) {
+    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(String accountName,
+        String nextLink, Context context) {
         if (accountName == null) {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPagesPartialUrlOperationNext(accountName, this.client.getHost(), nextLink, accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * A paging operation that combines custom url, paging and partial URL.
-     *
+     * 
      * @param accountName Account Name.
      * @param nextLink Next link for the list operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -497,7 +444,7 @@ public final class Pagings {
 
     /**
      * A paging operation that combines custom url, paging and partial URL.
-     *
+     * 
      * @param accountName Account Name.
      * @param nextLink Next link for the list operation.
      * @param context The context to associate with this operation.
@@ -507,16 +454,17 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(
-            String accountName, String nextLink, Context context) {
+    public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(String accountName, String nextLink,
+        Context context) {
         return getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink, context).block();
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -532,30 +480,22 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(
-                        context ->
-                                service.getPagesPartialUrlNext(
-                                        nextLink, accountName, this.client.getHost(), accept, context))
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            context -> service.getPagesPartialUrlNext(nextLink, accountName, this.client.getHost(), accept, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -564,8 +504,8 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getPagesPartialUrlNextSinglePageAsync(
-            String nextLink, String accountName, Context context) {
+    public Mono<PagedResponse<Product>> getPagesPartialUrlNextSinglePageAsync(String nextLink, String accountName,
+        Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -573,27 +513,21 @@ public final class Pagings {
             return Mono.error(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
         }
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getPagesPartialUrlNext(nextLink, accountName, this.client.getHost(), accept, context)
-                .map(
-                        res ->
-                                new PagedResponseBase<>(
-                                        res.getRequest(),
-                                        res.getStatusCode(),
-                                        res.getHeaders(),
-                                        res.getValue().getValues(),
-                                        res.getValue().getNextLink(),
-                                        null));
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
     }
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -607,9 +541,10 @@ public final class Pagings {
 
     /**
      * Get the next page of items.
-     *
+     * 
      * @param nextLink The URL to get the next list of items
-     *     <p>The nextLink parameter.
+     * 
+     * The nextLink parameter.
      * @param accountName Account Name.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -618,8 +553,8 @@ public final class Pagings {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<Product> getPagesPartialUrlNextSinglePage(
-            String nextLink, String accountName, Context context) {
+    public PagedResponse<Product> getPagesPartialUrlNextSinglePage(String nextLink, String accountName,
+        Context context) {
         return getPagesPartialUrlNextSinglePageAsync(nextLink, accountName, context).block();
     }
 }

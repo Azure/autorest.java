@@ -24,10 +24,9 @@ class BodyOptionalityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BodyOptionalityClientBuilder bodyOptionalityClientbuilder =
-                new BodyOptionalityClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BodyOptionalityClientBuilder bodyOptionalityClientbuilder
+            = new BodyOptionalityClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bodyOptionalityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -35,15 +34,15 @@ class BodyOptionalityClientTestBase extends TestProxyTestBase {
         }
         bodyOptionalityClient = bodyOptionalityClientbuilder.buildClient();
 
-        BodyOptionalityClientBuilder optionalExplicitClientbuilder =
-                new BodyOptionalityClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BodyOptionalityClientBuilder optionalExplicitClientbuilder
+            = new BodyOptionalityClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             optionalExplicitClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             optionalExplicitClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         optionalExplicitClient = optionalExplicitClientbuilder.buildOptionalExplicitClient();
+
     }
 }

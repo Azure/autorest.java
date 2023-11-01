@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** The SuperClass model. */
+/**
+ * The SuperClass model.
+ */
 @Immutable
 public class SuperClass {
     /*
@@ -22,7 +24,7 @@ public class SuperClass {
 
     /**
      * Creates an instance of SuperClass class.
-     *
+     * 
      * @param dateTime the dateTime value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public class SuperClass {
 
     /**
      * Get the dateTime property: The dateTime property.
-     *
+     * 
      * @return the dateTime value.
      */
     @Generated

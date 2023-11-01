@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.server.implementation.ContosoClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ContosoClient type. */
+/**
+ * Initializes a new instance of the asynchronous ContosoClient type.
+ */
 @ServiceClient(builder = ContosoClientBuilder.class, isAsync = true)
 public final class ContosoAsyncClient {
-    @Generated private final ContosoClientImpl serviceClient;
+    @Generated
+    private final ContosoClientImpl serviceClient;
 
     /**
      * Initializes an instance of ContosoAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class ContosoAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -52,7 +55,7 @@ public final class ContosoAsyncClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @param group Represent a URL string as described by https://url.spec.whatwg.org/.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

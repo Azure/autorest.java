@@ -8,7 +8,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Sample Model. */
+/**
+ * Sample Model.
+ */
 @Immutable
 public final class User {
     /*
@@ -25,13 +27,16 @@ public final class User {
     @JsonProperty(value = "name")
     private String name;
 
-    /** Creates an instance of User class. */
+    /**
+     * Creates an instance of User class.
+     */
     @Generated
-    private User() {}
+    private User() {
+    }
 
     /**
      * Get the id property: The user's id.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -41,7 +46,7 @@ public final class User {
 
     /**
      * Get the name property: The user's name.
-     *
+     * 
      * @return the name value.
      */
     @Generated

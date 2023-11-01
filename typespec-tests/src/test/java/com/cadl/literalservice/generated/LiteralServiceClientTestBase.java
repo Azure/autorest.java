@@ -22,16 +22,16 @@ class LiteralServiceClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        LiteralServiceClientBuilder literalServiceClientbuilder =
-                new LiteralServiceClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        LiteralServiceClientBuilder literalServiceClientbuilder = new LiteralServiceClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             literalServiceClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             literalServiceClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         literalServiceClient = literalServiceClientbuilder.buildClient();
+
     }
 }

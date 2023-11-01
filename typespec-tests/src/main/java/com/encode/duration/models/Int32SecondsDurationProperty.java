@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
-/** The Int32SecondsDurationProperty model. */
+/**
+ * The Int32SecondsDurationProperty model.
+ */
 @Immutable
 public final class Int32SecondsDurationProperty {
     /*
@@ -22,7 +24,7 @@ public final class Int32SecondsDurationProperty {
 
     /**
      * Creates an instance of Int32SecondsDurationProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -38,7 +40,7 @@ public final class Int32SecondsDurationProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

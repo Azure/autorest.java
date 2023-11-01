@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class FloatWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        FloatWrapper model =
-                BinaryData.fromString("{\"field1\":32.06033,\"field2\":54.94055}").toObject(FloatWrapper.class);
+        FloatWrapper model
+            = BinaryData.fromString("{\"field1\":32.06033,\"field2\":54.94055}").toObject(FloatWrapper.class);
         Assertions.assertEquals(32.06033F, model.getField1());
         Assertions.assertEquals(54.94055F, model.getField2());
     }

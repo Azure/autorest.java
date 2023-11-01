@@ -22,9 +22,11 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.core.http.HttpMethod;
-import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * unit test entry
@@ -199,14 +201,14 @@ public class JavagenUnitTests {
         Schema schema = new Schema();
         schema.setSummary(responseSchemaDesc);
         response.setSchema(schema);
-        operation.setResponses(Lists.newArrayList(response));
+        operation.setResponses(new ArrayList<>(Collections.singletonList(response)));
         Request request = new Request();
         Protocols protocols = new Protocols();
         Protocol http = new Protocol();
         http.setMethod(HttpMethod.HEAD.name());
         protocols.setHttp(http);
         request.setProtocol(protocols);
-        operation.setRequests(Lists.newArrayList(request));
+        operation.setRequests(new ArrayList<>(Collections.singletonList(request)));
         return operation;
     }
 

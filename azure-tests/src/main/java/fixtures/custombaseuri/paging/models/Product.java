@@ -7,7 +7,9 @@ package fixtures.custombaseuri.paging.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Product model. */
+/**
+ * The Product model.
+ */
 @Fluent
 public final class Product {
     /*
@@ -16,12 +18,15 @@ public final class Product {
     @JsonProperty(value = "properties")
     private ProductProperties properties;
 
-    /** Creates an instance of Product class. */
-    public Product() {}
+    /**
+     * Creates an instance of Product class.
+     */
+    public Product() {
+    }
 
     /**
      * Get the properties property: The properties property.
-     *
+     * 
      * @return the properties value.
      */
     public ProductProperties getProperties() {
@@ -30,7 +35,7 @@ public final class Product {
 
     /**
      * Set the properties property: The properties property.
-     *
+     * 
      * @param properties the properties value to set.
      * @return the Product object itself.
      */
@@ -41,7 +46,7 @@ public final class Product {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

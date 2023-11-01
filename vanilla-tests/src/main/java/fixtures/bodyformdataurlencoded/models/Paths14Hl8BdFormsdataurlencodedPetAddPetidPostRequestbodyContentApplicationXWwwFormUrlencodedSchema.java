@@ -7,7 +7,9 @@ package fixtures.bodyformdataurlencoded.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema model. */
+/**
+ * The Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema model.
+ */
 @Fluent
 public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
     /*
@@ -44,11 +46,12 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * Creates an instance of
      * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
-    public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {}
+    public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
+    }
 
     /**
      * Get the petType property: Can take a value of dog, or cat, or fish.
-     *
+     * 
      * @return the petType value.
      */
     public PetType getPetType() {
@@ -57,20 +60,20 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
 
     /**
      * Set the petType property: Can take a value of dog, or cat, or fish.
-     *
+     * 
      * @param petType the petType value to set.
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * object itself.
      */
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setPetType(PetType petType) {
+        setPetType(PetType petType) {
         this.petType = petType;
         return this;
     }
 
     /**
      * Get the petFood property: Can take a value of meat, or fish, or plant.
-     *
+     * 
      * @return the petFood value.
      */
     public PetFood getPetFood() {
@@ -79,20 +82,20 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
 
     /**
      * Set the petFood property: Can take a value of meat, or fish, or plant.
-     *
+     * 
      * @param petFood the petFood value to set.
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * object itself.
      */
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setPetFood(PetFood petFood) {
+        setPetFood(PetFood petFood) {
         this.petFood = petFood;
         return this;
     }
 
     /**
      * Get the petAge property: How many years is it old?.
-     *
+     * 
      * @return the petAge value.
      */
     public int getPetAge() {
@@ -101,20 +104,20 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
 
     /**
      * Set the petAge property: How many years is it old?.
-     *
+     * 
      * @param petAge the petAge value to set.
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * object itself.
      */
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setPetAge(int petAge) {
+        setPetAge(int petAge) {
         this.petAge = petAge;
         return this;
     }
 
     /**
      * Get the name property: Updated name of the pet.
-     *
+     * 
      * @return the name value.
      */
     public String getName() {
@@ -123,20 +126,20 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
 
     /**
      * Set the name property: Updated name of the pet.
-     *
+     * 
      * @param name the name value to set.
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * object itself.
      */
-    public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema setName(
-            String name) {
+    public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+        setName(String name) {
         this.name = name;
         return this;
     }
 
     /**
      * Get the status property: Updated status of the pet.
-     *
+     * 
      * @return the status value.
      */
     public String getStatus() {
@@ -145,30 +148,30 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
 
     /**
      * Set the status property: Updated status of the pet.
-     *
+     * 
      * @param status the status value to set.
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     *     object itself.
+     * object itself.
      */
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-            setStatus(String status) {
+        setStatus(String status) {
         this.status = status;
         return this;
     }
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getPetType() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property petType in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+                "Missing required property petType in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
         }
         if (getPetFood() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property petFood in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+                "Missing required property petFood in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
         }
     }
 }

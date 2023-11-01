@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Describes a virtual machine scale set network profile. */
+/**
+ * Describes a virtual machine scale set network profile.
+ */
 @Fluent
 public final class VirtualMachineScaleSetNetworkProfile {
     /*
@@ -17,12 +19,15 @@ public final class VirtualMachineScaleSetNetworkProfile {
     @JsonProperty(value = "networkInterfaceConfigurations")
     private List<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations;
 
-    /** Creates an instance of VirtualMachineScaleSetNetworkProfile class. */
-    public VirtualMachineScaleSetNetworkProfile() {}
+    /**
+     * Creates an instance of VirtualMachineScaleSetNetworkProfile class.
+     */
+    public VirtualMachineScaleSetNetworkProfile() {
+    }
 
     /**
      * Get the networkInterfaceConfigurations property: The list of network configurations.
-     *
+     * 
      * @return the networkInterfaceConfigurations value.
      */
     public List<VirtualMachineScaleSetNetworkConfiguration> getNetworkInterfaceConfigurations() {
@@ -31,19 +36,19 @@ public final class VirtualMachineScaleSetNetworkProfile {
 
     /**
      * Set the networkInterfaceConfigurations property: The list of network configurations.
-     *
+     * 
      * @param networkInterfaceConfigurations the networkInterfaceConfigurations value to set.
      * @return the VirtualMachineScaleSetNetworkProfile object itself.
      */
     public VirtualMachineScaleSetNetworkProfile setNetworkInterfaceConfigurations(
-            List<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations) {
+        List<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations) {
         this.networkInterfaceConfigurations = networkInterfaceConfigurations;
         return this;
     }
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

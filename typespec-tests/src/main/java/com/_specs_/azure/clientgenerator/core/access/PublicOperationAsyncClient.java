@@ -21,14 +21,17 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AccessClient type. */
+/**
+ * Initializes a new instance of the asynchronous AccessClient type.
+ */
 @ServiceClient(builder = AccessClientBuilder.class, isAsync = true)
 public final class PublicOperationAsyncClient {
-    @Generated private final PublicOperationsImpl serviceClient;
+    @Generated
+    private final PublicOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of PublicOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,15 +41,15 @@ public final class PublicOperationAsyncClient {
 
     /**
      * The noDecoratorInPublic operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -54,7 +57,7 @@ public final class PublicOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in a public operation, should be generated and exported along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -64,15 +67,15 @@ public final class PublicOperationAsyncClient {
 
     /**
      * The publicDecoratorInPublic operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -80,7 +83,7 @@ public final class PublicOperationAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return used in a public operation, should be generated and exported along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,7 +93,7 @@ public final class PublicOperationAsyncClient {
 
     /**
      * The noDecoratorInPublic operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,14 +108,13 @@ public final class PublicOperationAsyncClient {
     public Mono<NoDecoratorModelInPublic> noDecoratorInPublic(String name) {
         // Generated convenience method for noDecoratorInPublicWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return noDecoratorInPublicWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(NoDecoratorModelInPublic.class));
+        return noDecoratorInPublicWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(NoDecoratorModelInPublic.class));
     }
 
     /**
      * The publicDecoratorInPublic operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -127,8 +129,7 @@ public final class PublicOperationAsyncClient {
     public Mono<PublicDecoratorModelInPublic> publicDecoratorInPublic(String name) {
         // Generated convenience method for publicDecoratorInPublicWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return publicDecoratorInPublicWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(PublicDecoratorModelInPublic.class));
+        return publicDecoratorInPublicWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(PublicDecoratorModelInPublic.class));
     }
 }

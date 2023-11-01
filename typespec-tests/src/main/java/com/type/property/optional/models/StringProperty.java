@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Template type for testing models with optional property. Pass in the type of the property you are looking for. */
+/**
+ * Template type for testing models with optional property. Pass in the type of the property you are looking for.
+ */
 @Fluent
 public final class StringProperty {
     /*
@@ -18,13 +20,16 @@ public final class StringProperty {
     @JsonProperty(value = "property")
     private String property;
 
-    /** Creates an instance of StringProperty class. */
+    /**
+     * Creates an instance of StringProperty class.
+     */
     @Generated
-    public StringProperty() {}
+    public StringProperty() {
+    }
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated
@@ -34,7 +39,7 @@ public final class StringProperty {
 
     /**
      * Set the property property: Property.
-     *
+     * 
      * @param property the property value to set.
      * @return the StringProperty object itself.
      */

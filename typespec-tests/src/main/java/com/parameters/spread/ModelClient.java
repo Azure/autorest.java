@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
 
-/** Initializes a new instance of the synchronous SpreadClient type. */
+/**
+ * Initializes a new instance of the synchronous SpreadClient type.
+ */
 @ServiceClient(builder = SpreadClientBuilder.class)
 public final class ModelClient {
-    @Generated private final ModelsImpl serviceClient;
+    @Generated
+    private final ModelsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class ModelClient {
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -60,7 +63,7 @@ public final class ModelClient {
 
     /**
      * The spreadAsRequestBody operation.
-     *
+     * 
      * @param bodyParameter This is a simple model.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

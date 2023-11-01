@@ -7,10 +7,15 @@ package com.type.model.empty.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
-/** Empty model used in both parameter and return type. */
+/**
+ * Empty model used in both parameter and return type.
+ */
 @Immutable
 public final class EmptyInputOutput {
-    /** Creates an instance of EmptyInputOutput class. */
+    /**
+     * Creates an instance of EmptyInputOutput class.
+     */
     @Generated
-    public EmptyInputOutput() {}
+    public EmptyInputOutput() {
+    }
 }

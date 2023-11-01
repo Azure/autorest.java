@@ -7,7 +7,9 @@ package fixtures.requiredoptional.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The StringWrapper model. */
+/**
+ * The StringWrapper model.
+ */
 @Fluent
 public final class StringWrapper {
     /*
@@ -16,12 +18,15 @@ public final class StringWrapper {
     @JsonProperty(value = "value", required = true)
     private String value;
 
-    /** Creates an instance of StringWrapper class. */
-    public StringWrapper() {}
+    /**
+     * Creates an instance of StringWrapper class.
+     */
+    public StringWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public String getValue() {
@@ -30,7 +35,7 @@ public final class StringWrapper {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the StringWrapper object itself.
      */
@@ -41,7 +46,7 @@ public final class StringWrapper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

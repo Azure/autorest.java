@@ -20,14 +20,17 @@ import com.cadl.response.implementation.ResponseClientImpl;
 import com.cadl.response.models.Resource;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous ResponseClient type. */
+/**
+ * Initializes a new instance of the synchronous ResponseClient type.
+ */
 @ServiceClient(builder = ResponseClientBuilder.class)
 public final class ResponseClient {
-    @Generated private final ResponseClientImpl serviceClient;
+    @Generated
+    private final ResponseClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResponseClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,13 +40,13 @@ public final class ResponseClient {
 
     /**
      * The getBinary operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,9 +62,9 @@ public final class ResponseClient {
 
     /**
      * The getArray operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *      (Required){
@@ -72,7 +75,7 @@ public final class ResponseClient {
      *     }
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,9 +91,9 @@ public final class ResponseClient {
 
     /**
      * The getAnotherArray operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *      (Required){
@@ -101,7 +104,7 @@ public final class ResponseClient {
      *     }
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -117,9 +120,9 @@ public final class ResponseClient {
 
     /**
      * The createWithHeaders operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -128,7 +131,7 @@ public final class ResponseClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -144,7 +147,7 @@ public final class ResponseClient {
 
     /**
      * The deleteWithHeaders operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -160,13 +163,13 @@ public final class ResponseClient {
 
     /**
      * The most basic operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -181,7 +184,7 @@ public final class ResponseClient {
 
     /**
      * The getBinary operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -199,7 +202,7 @@ public final class ResponseClient {
 
     /**
      * The getArray operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -217,7 +220,7 @@ public final class ResponseClient {
 
     /**
      * The getAnotherArray operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -235,7 +238,7 @@ public final class ResponseClient {
 
     /**
      * The createWithHeaders operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -253,7 +256,7 @@ public final class ResponseClient {
 
     /**
      * The deleteWithHeaders operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -270,7 +273,7 @@ public final class ResponseClient {
 
     /**
      * The most basic operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -286,6 +289,7 @@ public final class ResponseClient {
     }
 
     @Generated
-    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
-            new TypeReference<List<Resource>>() {};
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE
+        = new TypeReference<List<Resource>>() {
+        };
 }

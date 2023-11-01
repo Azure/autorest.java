@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HeadersCustomNamedRequestIdParamGroupingHeaders model. */
+/**
+ * The HeadersCustomNamedRequestIdParamGroupingHeaders model.
+ */
 @Fluent
 public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
     /*
@@ -23,7 +25,7 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HeadersCustomNamedRequestIdParamGroupingHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HeadersCustomNamedRequestIdParamGroupingHeaders(HttpHeaders rawHeaders) {
@@ -32,7 +34,7 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
 
     /**
      * Get the fooRequestId property: The foo-request-id property.
-     *
+     * 
      * @return the fooRequestId value.
      */
     public String getFooRequestId() {
@@ -41,7 +43,7 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
 
     /**
      * Set the fooRequestId property: The foo-request-id property.
-     *
+     * 
      * @param fooRequestId the fooRequestId value to set.
      * @return the HeadersCustomNamedRequestIdParamGroupingHeaders object itself.
      */
@@ -52,8 +54,9 @@ public final class HeadersCustomNamedRequestIdParamGroupingHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }
