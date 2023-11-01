@@ -22,13 +22,6 @@
   <description>This module contains the base classes needed for customizing a generated library.</description>
   <url>https://github.com/Azure/autorest.java</url>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
-    </repository>
-  </repositories>
-
   <properties>
     <codesnippet.skip>false</codesnippet.skip>
 
