@@ -16,13 +16,6 @@
   <artifactId>azure-autorest-androidgen</artifactId>
   <version>1.0.0-beta.1</version>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/maven2</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
