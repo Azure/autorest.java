@@ -10,6 +10,6 @@ if (Test-Path openai-sdk) {
     Remove-Item openai-sdk
 }
 
-npm install --force
+npm install
 
 tsp compile main.tsp

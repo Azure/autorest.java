@@ -13,29 +13,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateEditResponseChoices model. */
+/**
+ * The CreateEditResponseChoices model.
+ */
 @Immutable
 public final class CreateEditResponseChoices implements JsonSerializable<CreateEditResponseChoices> {
     /*
      * The edited result.
      */
-    @Generated private final String text;
+    @Generated
+    private final String text;
 
     /*
      * The index of the choice in the list of choices.
      */
-    @Generated private final long index;
+    @Generated
+    private final long index;
 
     /*
      * The reason the model stopped generating tokens. This will be `stop` if the model hit a
      * natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
      * specified in the request was reached.
      */
-    @Generated private final CreateEditResponseFinishReason finishReason;
+    @Generated
+    private final CreateEditResponseFinishReason finishReason;
 
     /**
      * Creates an instance of CreateEditResponseChoices class.
-     *
+     * 
      * @param text the text value to set.
      * @param index the index value to set.
      * @param finishReason the finishReason value to set.
@@ -49,7 +54,7 @@ public final class CreateEditResponseChoices implements JsonSerializable<CreateE
 
     /**
      * Get the text property: The edited result.
-     *
+     * 
      * @return the text value.
      */
     @Generated
@@ -59,7 +64,7 @@ public final class CreateEditResponseChoices implements JsonSerializable<CreateE
 
     /**
      * Get the index property: The index of the choice in the list of choices.
-     *
+     * 
      * @return the index value.
      */
     @Generated
@@ -69,9 +74,10 @@ public final class CreateEditResponseChoices implements JsonSerializable<CreateE
 
     /**
      * Get the finishReason property: The reason the model stopped generating tokens. This will be `stop` if the model
-     * hit a natural stop point or a provided stop sequence, or `length` if the maximum number of tokens specified in
-     * the request was reached.
-     *
+     * hit a
+     * natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+     * specified in the request was reached.
+     * 
      * @return the finishReason value.
      */
     @Generated
@@ -90,58 +96,57 @@ public final class CreateEditResponseChoices implements JsonSerializable<CreateE
 
     /**
      * Reads an instance of CreateEditResponseChoices from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateEditResponseChoices if the JsonReader was pointing to an instance of it, or null if
-     *     it was pointing to JSON null.
+     * it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateEditResponseChoices.
      */
     public static CreateEditResponseChoices fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean textFound = false;
-                    String text = null;
-                    boolean indexFound = false;
-                    long index = 0L;
-                    boolean finishReasonFound = false;
-                    CreateEditResponseFinishReason finishReason = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean textFound = false;
+            String text = null;
+            boolean indexFound = false;
+            long index = 0L;
+            boolean finishReasonFound = false;
+            CreateEditResponseFinishReason finishReason = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("text".equals(fieldName)) {
-                            text = reader.getString();
-                            textFound = true;
-                        } else if ("index".equals(fieldName)) {
-                            index = reader.getLong();
-                            indexFound = true;
-                        } else if ("finish_reason".equals(fieldName)) {
-                            finishReason = CreateEditResponseFinishReason.fromString(reader.getString());
-                            finishReasonFound = true;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (textFound && indexFound && finishReasonFound) {
-                        CreateEditResponseChoices deserializedCreateEditResponseChoices =
-                                new CreateEditResponseChoices(text, index, finishReason);
+                if ("text".equals(fieldName)) {
+                    text = reader.getString();
+                    textFound = true;
+                } else if ("index".equals(fieldName)) {
+                    index = reader.getLong();
+                    indexFound = true;
+                } else if ("finish_reason".equals(fieldName)) {
+                    finishReason = CreateEditResponseFinishReason.fromString(reader.getString());
+                    finishReasonFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (textFound && indexFound && finishReasonFound) {
+                CreateEditResponseChoices deserializedCreateEditResponseChoices
+                    = new CreateEditResponseChoices(text, index, finishReason);
 
-                        return deserializedCreateEditResponseChoices;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!textFound) {
-                        missingProperties.add("text");
-                    }
-                    if (!indexFound) {
-                        missingProperties.add("index");
-                    }
-                    if (!finishReasonFound) {
-                        missingProperties.add("finish_reason");
-                    }
+                return deserializedCreateEditResponseChoices;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!textFound) {
+                missingProperties.add("text");
+            }
+            if (!indexFound) {
+                missingProperties.add("index");
+            }
+            if (!finishReasonFound) {
+                missingProperties.add("finish_reason");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

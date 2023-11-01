@@ -13,131 +13,145 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateFineTuneRequest model. */
+/**
+ * The CreateFineTuneRequest model.
+ */
 @Fluent
 public final class CreateFineTuneRequest implements JsonSerializable<CreateFineTuneRequest> {
     /*
      * The ID of an uploaded file that contains training data.
-     *
+     * 
      * See [upload file](/docs/api-reference/files/upload) for how to upload a file.
-     *
+     * 
      * Your dataset must be formatted as a JSONL file, where each training example is a JSON object
      * with the keys "prompt" and "completion". Additionally, you must upload your file with the
      * purpose `fine-tune`.
-     *
+     * 
      * See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
      * details.
      */
-    @Generated private final String trainingFile;
+    @Generated
+    private final String trainingFile;
 
     /*
      * The ID of an uploaded file that contains validation data.
-     *
+     * 
      * If you provide this file, the data is used to generate validation metrics periodically during
      * fine-tuning. These metrics can be viewed in the
      * [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
      * Your train and validation data should be mutually exclusive.
-     *
+     * 
      * Your dataset must be formatted as a JSONL file, where each validation example is a JSON object
      * with the keys "prompt" and "completion". Additionally, you must upload your file with the
      * purpose `fine-tune`.
-     *
+     * 
      * See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
      * details.
      */
-    @Generated private String validationFile;
+    @Generated
+    private String validationFile;
 
     /*
      * The name of the base model to fine-tune. You can select one of "ada", "babbage", "curie",
      * "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more
      * about these models, see the [Models](/docs/models) documentation.
      */
-    @Generated private CreateFineTuneRequestModel model;
+    @Generated
+    private CreateFineTuneRequestModel model;
 
     /*
      * The number of epochs to train the model for. An epoch refers to one full cycle through the
      * training dataset.
      */
-    @Generated private Long nEpochs;
+    @Generated
+    private Long nEpochs;
 
     /*
      * The batch size to use for training. The batch size is the number of training examples used to
      * train a single forward and backward pass.
-     *
+     * 
      * By default, the batch size will be dynamically configured to be ~0.2% of the number of examples
      * in the training set, capped at 256 - in general, we've found that larger batch sizes tend to
      * work better for larger datasets.
      */
-    @Generated private Long batchSize;
+    @Generated
+    private Long batchSize;
 
     /*
      * The learning rate multiplier to use for training. The fine-tuning learning rate is the original
      * learning rate used for pretraining multiplied by this value.
-     *
+     * 
      * By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final
      * `batch_size` (larger learning rates tend to perform better with larger batch sizes). We
      * recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best
      * results.
      */
-    @Generated private Double learningRateMultiplier;
+    @Generated
+    private Double learningRateMultiplier;
 
     /*
      * The weight to use for loss on the prompt tokens. This controls how much the model tries to
      * learn to generate the prompt (as compared to the completion which always has a weight of 1.0),
      * and can add a stabilizing effect to training when completions are short.
-     *
+     * 
      * If prompts are extremely long (relative to completions), it may make sense to reduce this
      * weight so as to avoid over-prioritizing learning the prompt.
      */
-    @Generated private Double promptLossRate;
+    @Generated
+    private Double promptLossRate;
 
     /*
      * If set, we calculate classification-specific metrics such as accuracy and F-1 score using the
      * validation set at the end of every epoch. These metrics can be viewed in the
      * [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
-     *
+     * 
      * In order to compute classification metrics, you must provide a `validation_file`. Additionally,
      * you must specify `classification_n_classes` for multiclass classification or
      * `classification_positive_class` for binary classification.
      */
-    @Generated private Boolean computeClassificationMetrics;
+    @Generated
+    private Boolean computeClassificationMetrics;
 
     /*
      * The number of classes in a classification task.
-     *
+     * 
      * This parameter is required for multiclass classification.
      */
-    @Generated private Long classificationNClasses;
+    @Generated
+    private Long classificationNClasses;
 
     /*
      * The positive class in binary classification.
-     *
+     * 
      * This parameter is needed to generate precision, recall, and F1 metrics when doing binary
      * classification.
      */
-    @Generated private String classificationPositiveClass;
+    @Generated
+    private String classificationPositiveClass;
 
     /*
      * If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score
      * is a generalization of F-1 score. This is only used for binary classification.
-     *
+     * 
      * With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger
      * beta score puts more weight on recall and less on precision. A smaller beta score puts more
      * weight on precision and less on recall.
      */
-    @Generated private List<Double> classificationBetas;
+    @Generated
+    private List<Double> classificationBetas;
 
     /*
      * A string of up to 18 characters that will be added to your fine-tuned model name.
-     *
+     * 
      * For example, a `suffix` of "custom-model-name" would produce a model name like
      * `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
      */
-    @Generated private String suffix;
+    @Generated
+    private String suffix;
 
     /**
      * Creates an instance of CreateFineTuneRequest class.
-     *
+     * 
      * @param trainingFile the trainingFile value to set.
      */
     @Generated
@@ -147,14 +161,16 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the trainingFile property: The ID of an uploaded file that contains training data.
-     *
-     * <p>See [upload file](/docs/api-reference/files/upload) for how to upload a file.
-     *
-     * <p>Your dataset must be formatted as a JSONL file, where each training example is a JSON object with the keys
-     * "prompt" and "completion". Additionally, you must upload your file with the purpose `fine-tune`.
-     *
-     * <p>See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
-     *
+     * 
+     * See [upload file](/docs/api-reference/files/upload) for how to upload a file.
+     * 
+     * Your dataset must be formatted as a JSONL file, where each training example is a JSON object
+     * with the keys "prompt" and "completion". Additionally, you must upload your file with the
+     * purpose `fine-tune`.
+     * 
+     * See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
+     * details.
+     * 
      * @return the trainingFile value.
      */
     @Generated
@@ -164,17 +180,19 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the validationFile property: The ID of an uploaded file that contains validation data.
-     *
-     * <p>If you provide this file, the data is used to generate validation metrics periodically during fine-tuning.
-     * These metrics can be viewed in the [fine-tuning results
-     * file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model). Your train and validation data should be
-     * mutually exclusive.
-     *
-     * <p>Your dataset must be formatted as a JSONL file, where each validation example is a JSON object with the keys
-     * "prompt" and "completion". Additionally, you must upload your file with the purpose `fine-tune`.
-     *
-     * <p>See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
-     *
+     * 
+     * If you provide this file, the data is used to generate validation metrics periodically during
+     * fine-tuning. These metrics can be viewed in the
+     * [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
+     * Your train and validation data should be mutually exclusive.
+     * 
+     * Your dataset must be formatted as a JSONL file, where each validation example is a JSON object
+     * with the keys "prompt" and "completion". Additionally, you must upload your file with the
+     * purpose `fine-tune`.
+     * 
+     * See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
+     * details.
+     * 
      * @return the validationFile value.
      */
     @Generated
@@ -184,17 +202,19 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the validationFile property: The ID of an uploaded file that contains validation data.
-     *
-     * <p>If you provide this file, the data is used to generate validation metrics periodically during fine-tuning.
-     * These metrics can be viewed in the [fine-tuning results
-     * file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model). Your train and validation data should be
-     * mutually exclusive.
-     *
-     * <p>Your dataset must be formatted as a JSONL file, where each validation example is a JSON object with the keys
-     * "prompt" and "completion". Additionally, you must upload your file with the purpose `fine-tune`.
-     *
-     * <p>See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more details.
-     *
+     * 
+     * If you provide this file, the data is used to generate validation metrics periodically during
+     * fine-tuning. These metrics can be viewed in the
+     * [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
+     * Your train and validation data should be mutually exclusive.
+     * 
+     * Your dataset must be formatted as a JSONL file, where each validation example is a JSON object
+     * with the keys "prompt" and "completion". Additionally, you must upload your file with the
+     * purpose `fine-tune`.
+     * 
+     * See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
+     * details.
+     * 
      * @param validationFile the validationFile value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -205,10 +225,11 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
     }
 
     /**
-     * Get the model property: The name of the base model to fine-tune. You can select one of "ada", "babbage", "curie",
-     * "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more about these
-     * models, see the [Models](/docs/models) documentation.
-     *
+     * Get the model property: The name of the base model to fine-tune. You can select one of "ada", "babbage",
+     * "curie",
+     * "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more
+     * about these models, see the [Models](/docs/models) documentation.
+     * 
      * @return the model value.
      */
     @Generated
@@ -217,10 +238,11 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
     }
 
     /**
-     * Set the model property: The name of the base model to fine-tune. You can select one of "ada", "babbage", "curie",
-     * "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more about these
-     * models, see the [Models](/docs/models) documentation.
-     *
+     * Set the model property: The name of the base model to fine-tune. You can select one of "ada", "babbage",
+     * "curie",
+     * "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more
+     * about these models, see the [Models](/docs/models) documentation.
+     * 
      * @param model the model value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -232,8 +254,9 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the nEpochs property: The number of epochs to train the model for. An epoch refers to one full cycle through
-     * the training dataset.
-     *
+     * the
+     * training dataset.
+     * 
      * @return the nEpochs value.
      */
     @Generated
@@ -243,8 +266,9 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the nEpochs property: The number of epochs to train the model for. An epoch refers to one full cycle through
-     * the training dataset.
-     *
+     * the
+     * training dataset.
+     * 
      * @param nEpochs the nEpochs value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -255,13 +279,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
     }
 
     /**
-     * Get the batchSize property: The batch size to use for training. The batch size is the number of training examples
-     * used to train a single forward and backward pass.
-     *
-     * <p>By default, the batch size will be dynamically configured to be ~0.2% of the number of examples in the
-     * training set, capped at 256 - in general, we've found that larger batch sizes tend to work better for larger
-     * datasets.
-     *
+     * Get the batchSize property: The batch size to use for training. The batch size is the number of training
+     * examples used to
+     * train a single forward and backward pass.
+     * 
+     * By default, the batch size will be dynamically configured to be ~0.2% of the number of examples
+     * in the training set, capped at 256 - in general, we've found that larger batch sizes tend to
+     * work better for larger datasets.
+     * 
      * @return the batchSize value.
      */
     @Generated
@@ -270,13 +295,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
     }
 
     /**
-     * Set the batchSize property: The batch size to use for training. The batch size is the number of training examples
-     * used to train a single forward and backward pass.
-     *
-     * <p>By default, the batch size will be dynamically configured to be ~0.2% of the number of examples in the
-     * training set, capped at 256 - in general, we've found that larger batch sizes tend to work better for larger
-     * datasets.
-     *
+     * Set the batchSize property: The batch size to use for training. The batch size is the number of training
+     * examples used to
+     * train a single forward and backward pass.
+     * 
+     * By default, the batch size will be dynamically configured to be ~0.2% of the number of examples
+     * in the training set, capped at 256 - in general, we've found that larger batch sizes tend to
+     * work better for larger datasets.
+     * 
      * @param batchSize the batchSize value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -288,12 +314,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the learningRateMultiplier property: The learning rate multiplier to use for training. The fine-tuning
-     * learning rate is the original learning rate used for pretraining multiplied by this value.
-     *
-     * <p>By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final `batch_size` (larger
-     * learning rates tend to perform better with larger batch sizes). We recommend experimenting with values in the
-     * range 0.02 to 0.2 to see what produces the best results.
-     *
+     * learning rate is the original
+     * learning rate used for pretraining multiplied by this value.
+     * 
+     * By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final
+     * `batch_size` (larger learning rates tend to perform better with larger batch sizes). We
+     * recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best
+     * results.
+     * 
      * @return the learningRateMultiplier value.
      */
     @Generated
@@ -303,12 +331,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the learningRateMultiplier property: The learning rate multiplier to use for training. The fine-tuning
-     * learning rate is the original learning rate used for pretraining multiplied by this value.
-     *
-     * <p>By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final `batch_size` (larger
-     * learning rates tend to perform better with larger batch sizes). We recommend experimenting with values in the
-     * range 0.02 to 0.2 to see what produces the best results.
-     *
+     * learning rate is the original
+     * learning rate used for pretraining multiplied by this value.
+     * 
+     * By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final
+     * `batch_size` (larger learning rates tend to perform better with larger batch sizes). We
+     * recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best
+     * results.
+     * 
      * @param learningRateMultiplier the learningRateMultiplier value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -320,12 +350,13 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the promptLossRate property: The weight to use for loss on the prompt tokens. This controls how much the
-     * model tries to learn to generate the prompt (as compared to the completion which always has a weight of 1.0), and
-     * can add a stabilizing effect to training when completions are short.
-     *
-     * <p>If prompts are extremely long (relative to completions), it may make sense to reduce this weight so as to
-     * avoid over-prioritizing learning the prompt.
-     *
+     * model tries to
+     * learn to generate the prompt (as compared to the completion which always has a weight of 1.0),
+     * and can add a stabilizing effect to training when completions are short.
+     * 
+     * If prompts are extremely long (relative to completions), it may make sense to reduce this
+     * weight so as to avoid over-prioritizing learning the prompt.
+     * 
      * @return the promptLossRate value.
      */
     @Generated
@@ -335,12 +366,13 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the promptLossRate property: The weight to use for loss on the prompt tokens. This controls how much the
-     * model tries to learn to generate the prompt (as compared to the completion which always has a weight of 1.0), and
-     * can add a stabilizing effect to training when completions are short.
-     *
-     * <p>If prompts are extremely long (relative to completions), it may make sense to reduce this weight so as to
-     * avoid over-prioritizing learning the prompt.
-     *
+     * model tries to
+     * learn to generate the prompt (as compared to the completion which always has a weight of 1.0),
+     * and can add a stabilizing effect to training when completions are short.
+     * 
+     * If prompts are extremely long (relative to completions), it may make sense to reduce this
+     * weight so as to avoid over-prioritizing learning the prompt.
+     * 
      * @param promptLossRate the promptLossRate value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -352,13 +384,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the computeClassificationMetrics property: If set, we calculate classification-specific metrics such as
-     * accuracy and F-1 score using the validation set at the end of every epoch. These metrics can be viewed in the
+     * accuracy and F-1 score using the
+     * validation set at the end of every epoch. These metrics can be viewed in the
      * [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
-     *
-     * <p>In order to compute classification metrics, you must provide a `validation_file`. Additionally, you must
-     * specify `classification_n_classes` for multiclass classification or `classification_positive_class` for binary
-     * classification.
-     *
+     * 
+     * In order to compute classification metrics, you must provide a `validation_file`. Additionally,
+     * you must specify `classification_n_classes` for multiclass classification or
+     * `classification_positive_class` for binary classification.
+     * 
      * @return the computeClassificationMetrics value.
      */
     @Generated
@@ -368,13 +401,14 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the computeClassificationMetrics property: If set, we calculate classification-specific metrics such as
-     * accuracy and F-1 score using the validation set at the end of every epoch. These metrics can be viewed in the
+     * accuracy and F-1 score using the
+     * validation set at the end of every epoch. These metrics can be viewed in the
      * [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
-     *
-     * <p>In order to compute classification metrics, you must provide a `validation_file`. Additionally, you must
-     * specify `classification_n_classes` for multiclass classification or `classification_positive_class` for binary
-     * classification.
-     *
+     * 
+     * In order to compute classification metrics, you must provide a `validation_file`. Additionally,
+     * you must specify `classification_n_classes` for multiclass classification or
+     * `classification_positive_class` for binary classification.
+     * 
      * @param computeClassificationMetrics the computeClassificationMetrics value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -386,9 +420,9 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the classificationNClasses property: The number of classes in a classification task.
-     *
-     * <p>This parameter is required for multiclass classification.
-     *
+     * 
+     * This parameter is required for multiclass classification.
+     * 
      * @return the classificationNClasses value.
      */
     @Generated
@@ -398,9 +432,9 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the classificationNClasses property: The number of classes in a classification task.
-     *
-     * <p>This parameter is required for multiclass classification.
-     *
+     * 
+     * This parameter is required for multiclass classification.
+     * 
      * @param classificationNClasses the classificationNClasses value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -412,9 +446,10 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the classificationPositiveClass property: The positive class in binary classification.
-     *
-     * <p>This parameter is needed to generate precision, recall, and F1 metrics when doing binary classification.
-     *
+     * 
+     * This parameter is needed to generate precision, recall, and F1 metrics when doing binary
+     * classification.
+     * 
      * @return the classificationPositiveClass value.
      */
     @Generated
@@ -424,9 +459,10 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the classificationPositiveClass property: The positive class in binary classification.
-     *
-     * <p>This parameter is needed to generate precision, recall, and F1 metrics when doing binary classification.
-     *
+     * 
+     * This parameter is needed to generate precision, recall, and F1 metrics when doing binary
+     * classification.
+     * 
      * @param classificationPositiveClass the classificationPositiveClass value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -438,12 +474,13 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the classificationBetas property: If this is provided, we calculate F-beta scores at the specified beta
-     * values. The F-beta score is a generalization of F-1 score. This is only used for binary classification.
-     *
-     * <p>With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger beta score
-     * puts more weight on recall and less on precision. A smaller beta score puts more weight on precision and less on
-     * recall.
-     *
+     * values. The F-beta score
+     * is a generalization of F-1 score. This is only used for binary classification.
+     * 
+     * With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger
+     * beta score puts more weight on recall and less on precision. A smaller beta score puts more
+     * weight on precision and less on recall.
+     * 
      * @return the classificationBetas value.
      */
     @Generated
@@ -453,12 +490,13 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the classificationBetas property: If this is provided, we calculate F-beta scores at the specified beta
-     * values. The F-beta score is a generalization of F-1 score. This is only used for binary classification.
-     *
-     * <p>With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger beta score
-     * puts more weight on recall and less on precision. A smaller beta score puts more weight on precision and less on
-     * recall.
-     *
+     * values. The F-beta score
+     * is a generalization of F-1 score. This is only used for binary classification.
+     * 
+     * With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger
+     * beta score puts more weight on recall and less on precision. A smaller beta score puts more
+     * weight on precision and less on recall.
+     * 
      * @param classificationBetas the classificationBetas value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -470,10 +508,10 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Get the suffix property: A string of up to 18 characters that will be added to your fine-tuned model name.
-     *
-     * <p>For example, a `suffix` of "custom-model-name" would produce a model name like
+     * 
+     * For example, a `suffix` of "custom-model-name" would produce a model name like
      * `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
-     *
+     * 
      * @return the suffix value.
      */
     @Generated
@@ -483,10 +521,10 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
 
     /**
      * Set the suffix property: A string of up to 18 characters that will be added to your fine-tuned model name.
-     *
-     * <p>For example, a `suffix` of "custom-model-name" would produce a model name like
+     * 
+     * For example, a `suffix` of "custom-model-name" would produce a model name like
      * `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
-     *
+     * 
      * @param suffix the suffix value to set.
      * @return the CreateFineTuneRequest object itself.
      */
@@ -509,94 +547,92 @@ public final class CreateFineTuneRequest implements JsonSerializable<CreateFineT
         jsonWriter.writeBooleanField("compute_classification_metrics", this.computeClassificationMetrics);
         jsonWriter.writeNumberField("classification_n_classes", this.classificationNClasses);
         jsonWriter.writeStringField("classification_positive_class", this.classificationPositiveClass);
-        jsonWriter.writeArrayField(
-                "classification_betas", this.classificationBetas, (writer, element) -> writer.writeDouble(element));
+        jsonWriter.writeArrayField("classification_betas", this.classificationBetas,
+            (writer, element) -> writer.writeDouble(element));
         jsonWriter.writeStringField("suffix", this.suffix);
         return jsonWriter.writeEndObject();
     }
 
     /**
      * Reads an instance of CreateFineTuneRequest from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateFineTuneRequest if the JsonReader was pointing to an instance of it, or null if it
-     *     was pointing to JSON null.
+     * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateFineTuneRequest.
      */
     public static CreateFineTuneRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean trainingFileFound = false;
-                    String trainingFile = null;
-                    String validationFile = null;
-                    CreateFineTuneRequestModel model = null;
-                    Long nEpochs = null;
-                    Long batchSize = null;
-                    Double learningRateMultiplier = null;
-                    Double promptLossRate = null;
-                    Boolean computeClassificationMetrics = null;
-                    Long classificationNClasses = null;
-                    String classificationPositiveClass = null;
-                    List<Double> classificationBetas = null;
-                    String suffix = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean trainingFileFound = false;
+            String trainingFile = null;
+            String validationFile = null;
+            CreateFineTuneRequestModel model = null;
+            Long nEpochs = null;
+            Long batchSize = null;
+            Double learningRateMultiplier = null;
+            Double promptLossRate = null;
+            Boolean computeClassificationMetrics = null;
+            Long classificationNClasses = null;
+            String classificationPositiveClass = null;
+            List<Double> classificationBetas = null;
+            String suffix = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("training_file".equals(fieldName)) {
-                            trainingFile = reader.getString();
-                            trainingFileFound = true;
-                        } else if ("validation_file".equals(fieldName)) {
-                            validationFile = reader.getString();
-                        } else if ("model".equals(fieldName)) {
-                            model = CreateFineTuneRequestModel.fromString(reader.getString());
-                        } else if ("n_epochs".equals(fieldName)) {
-                            nEpochs = reader.getNullable(JsonReader::getLong);
-                        } else if ("batch_size".equals(fieldName)) {
-                            batchSize = reader.getNullable(JsonReader::getLong);
-                        } else if ("learning_rate_multiplier".equals(fieldName)) {
-                            learningRateMultiplier = reader.getNullable(JsonReader::getDouble);
-                        } else if ("prompt_loss_rate".equals(fieldName)) {
-                            promptLossRate = reader.getNullable(JsonReader::getDouble);
-                        } else if ("compute_classification_metrics".equals(fieldName)) {
-                            computeClassificationMetrics = reader.getNullable(JsonReader::getBoolean);
-                        } else if ("classification_n_classes".equals(fieldName)) {
-                            classificationNClasses = reader.getNullable(JsonReader::getLong);
-                        } else if ("classification_positive_class".equals(fieldName)) {
-                            classificationPositiveClass = reader.getString();
-                        } else if ("classification_betas".equals(fieldName)) {
-                            classificationBetas = reader.readArray(reader1 -> reader1.getDouble());
-                        } else if ("suffix".equals(fieldName)) {
-                            suffix = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (trainingFileFound) {
-                        CreateFineTuneRequest deserializedCreateFineTuneRequest =
-                                new CreateFineTuneRequest(trainingFile);
-                        deserializedCreateFineTuneRequest.validationFile = validationFile;
-                        deserializedCreateFineTuneRequest.model = model;
-                        deserializedCreateFineTuneRequest.nEpochs = nEpochs;
-                        deserializedCreateFineTuneRequest.batchSize = batchSize;
-                        deserializedCreateFineTuneRequest.learningRateMultiplier = learningRateMultiplier;
-                        deserializedCreateFineTuneRequest.promptLossRate = promptLossRate;
-                        deserializedCreateFineTuneRequest.computeClassificationMetrics = computeClassificationMetrics;
-                        deserializedCreateFineTuneRequest.classificationNClasses = classificationNClasses;
-                        deserializedCreateFineTuneRequest.classificationPositiveClass = classificationPositiveClass;
-                        deserializedCreateFineTuneRequest.classificationBetas = classificationBetas;
-                        deserializedCreateFineTuneRequest.suffix = suffix;
+                if ("training_file".equals(fieldName)) {
+                    trainingFile = reader.getString();
+                    trainingFileFound = true;
+                } else if ("validation_file".equals(fieldName)) {
+                    validationFile = reader.getString();
+                } else if ("model".equals(fieldName)) {
+                    model = CreateFineTuneRequestModel.fromString(reader.getString());
+                } else if ("n_epochs".equals(fieldName)) {
+                    nEpochs = reader.getNullable(JsonReader::getLong);
+                } else if ("batch_size".equals(fieldName)) {
+                    batchSize = reader.getNullable(JsonReader::getLong);
+                } else if ("learning_rate_multiplier".equals(fieldName)) {
+                    learningRateMultiplier = reader.getNullable(JsonReader::getDouble);
+                } else if ("prompt_loss_rate".equals(fieldName)) {
+                    promptLossRate = reader.getNullable(JsonReader::getDouble);
+                } else if ("compute_classification_metrics".equals(fieldName)) {
+                    computeClassificationMetrics = reader.getNullable(JsonReader::getBoolean);
+                } else if ("classification_n_classes".equals(fieldName)) {
+                    classificationNClasses = reader.getNullable(JsonReader::getLong);
+                } else if ("classification_positive_class".equals(fieldName)) {
+                    classificationPositiveClass = reader.getString();
+                } else if ("classification_betas".equals(fieldName)) {
+                    classificationBetas = reader.readArray(reader1 -> reader1.getDouble());
+                } else if ("suffix".equals(fieldName)) {
+                    suffix = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (trainingFileFound) {
+                CreateFineTuneRequest deserializedCreateFineTuneRequest = new CreateFineTuneRequest(trainingFile);
+                deserializedCreateFineTuneRequest.validationFile = validationFile;
+                deserializedCreateFineTuneRequest.model = model;
+                deserializedCreateFineTuneRequest.nEpochs = nEpochs;
+                deserializedCreateFineTuneRequest.batchSize = batchSize;
+                deserializedCreateFineTuneRequest.learningRateMultiplier = learningRateMultiplier;
+                deserializedCreateFineTuneRequest.promptLossRate = promptLossRate;
+                deserializedCreateFineTuneRequest.computeClassificationMetrics = computeClassificationMetrics;
+                deserializedCreateFineTuneRequest.classificationNClasses = classificationNClasses;
+                deserializedCreateFineTuneRequest.classificationPositiveClass = classificationPositiveClass;
+                deserializedCreateFineTuneRequest.classificationBetas = classificationBetas;
+                deserializedCreateFineTuneRequest.suffix = suffix;
 
-                        return deserializedCreateFineTuneRequest;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!trainingFileFound) {
-                        missingProperties.add("training_file");
-                    }
+                return deserializedCreateFineTuneRequest;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!trainingFileFound) {
+                missingProperties.add("training_file");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

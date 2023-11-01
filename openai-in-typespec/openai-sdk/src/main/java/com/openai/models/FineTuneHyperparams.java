@@ -12,49 +12,58 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The FineTuneHyperparams model. */
+/**
+ * The FineTuneHyperparams model.
+ */
 @Immutable
 public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyperparams> {
     /*
      * The number of epochs to train the model for. An epoch refers to one full cycle through the
      * training dataset.
      */
-    @Generated private final long nEpochs;
+    @Generated
+    private final long nEpochs;
 
     /*
      * The batch size to use for training. The batch size is the number of training examples used to
      * train a single forward and backward pass.
      */
-    @Generated private final long batchSize;
+    @Generated
+    private final long batchSize;
 
     /*
      * The weight to use for loss on the prompt tokens.
      */
-    @Generated private final double promptLossWeight;
+    @Generated
+    private final double promptLossWeight;
 
     /*
      * The learning rate multiplier to use for training.
      */
-    @Generated private final double learningRateMultiplier;
+    @Generated
+    private final double learningRateMultiplier;
 
     /*
      * The classification metrics to compute using the validation dataset at the end of every epoch.
      */
-    @Generated private Boolean computeClassificationMetrics;
+    @Generated
+    private Boolean computeClassificationMetrics;
 
     /*
      * The positive class to use for computing classification metrics.
      */
-    @Generated private String classificationPositiveClass;
+    @Generated
+    private String classificationPositiveClass;
 
     /*
      * The number of classes to use for computing classification metrics.
      */
-    @Generated private Long classificationNClasses;
+    @Generated
+    private Long classificationNClasses;
 
     /**
      * Creates an instance of FineTuneHyperparams class.
-     *
+     * 
      * @param nEpochs the nEpochs value to set.
      * @param batchSize the batchSize value to set.
      * @param promptLossWeight the promptLossWeight value to set.
@@ -70,8 +79,9 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Get the nEpochs property: The number of epochs to train the model for. An epoch refers to one full cycle through
-     * the training dataset.
-     *
+     * the
+     * training dataset.
+     * 
      * @return the nEpochs value.
      */
     @Generated
@@ -80,9 +90,10 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
     }
 
     /**
-     * Get the batchSize property: The batch size to use for training. The batch size is the number of training examples
-     * used to train a single forward and backward pass.
-     *
+     * Get the batchSize property: The batch size to use for training. The batch size is the number of training
+     * examples used to
+     * train a single forward and backward pass.
+     * 
      * @return the batchSize value.
      */
     @Generated
@@ -92,7 +103,7 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Get the promptLossWeight property: The weight to use for loss on the prompt tokens.
-     *
+     * 
      * @return the promptLossWeight value.
      */
     @Generated
@@ -102,7 +113,7 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Get the learningRateMultiplier property: The learning rate multiplier to use for training.
-     *
+     * 
      * @return the learningRateMultiplier value.
      */
     @Generated
@@ -111,9 +122,9 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
     }
 
     /**
-     * Get the computeClassificationMetrics property: The classification metrics to compute using the validation dataset
-     * at the end of every epoch.
-     *
+     * Get the computeClassificationMetrics property: The classification metrics to compute using the validation
+     * dataset at the end of every epoch.
+     * 
      * @return the computeClassificationMetrics value.
      */
     @Generated
@@ -123,7 +134,7 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Get the classificationPositiveClass property: The positive class to use for computing classification metrics.
-     *
+     * 
      * @return the classificationPositiveClass value.
      */
     @Generated
@@ -133,7 +144,7 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Get the classificationNClasses property: The number of classes to use for computing classification metrics.
-     *
+     * 
      * @return the classificationNClasses value.
      */
     @Generated
@@ -156,78 +167,77 @@ public final class FineTuneHyperparams implements JsonSerializable<FineTuneHyper
 
     /**
      * Reads an instance of FineTuneHyperparams from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of FineTuneHyperparams if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FineTuneHyperparams.
      */
     public static FineTuneHyperparams fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean nEpochsFound = false;
-                    long nEpochs = 0L;
-                    boolean batchSizeFound = false;
-                    long batchSize = 0L;
-                    boolean promptLossWeightFound = false;
-                    double promptLossWeight = 0.0;
-                    boolean learningRateMultiplierFound = false;
-                    double learningRateMultiplier = 0.0;
-                    Boolean computeClassificationMetrics = null;
-                    String classificationPositiveClass = null;
-                    Long classificationNClasses = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean nEpochsFound = false;
+            long nEpochs = 0L;
+            boolean batchSizeFound = false;
+            long batchSize = 0L;
+            boolean promptLossWeightFound = false;
+            double promptLossWeight = 0.0;
+            boolean learningRateMultiplierFound = false;
+            double learningRateMultiplier = 0.0;
+            Boolean computeClassificationMetrics = null;
+            String classificationPositiveClass = null;
+            Long classificationNClasses = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("n_epochs".equals(fieldName)) {
-                            nEpochs = reader.getLong();
-                            nEpochsFound = true;
-                        } else if ("batch_size".equals(fieldName)) {
-                            batchSize = reader.getLong();
-                            batchSizeFound = true;
-                        } else if ("prompt_loss_weight".equals(fieldName)) {
-                            promptLossWeight = reader.getDouble();
-                            promptLossWeightFound = true;
-                        } else if ("learning_rate_multiplier".equals(fieldName)) {
-                            learningRateMultiplier = reader.getDouble();
-                            learningRateMultiplierFound = true;
-                        } else if ("compute_classification_metrics".equals(fieldName)) {
-                            computeClassificationMetrics = reader.getNullable(JsonReader::getBoolean);
-                        } else if ("classification_positive_class".equals(fieldName)) {
-                            classificationPositiveClass = reader.getString();
-                        } else if ("classification_n_classes".equals(fieldName)) {
-                            classificationNClasses = reader.getNullable(JsonReader::getLong);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (nEpochsFound && batchSizeFound && promptLossWeightFound && learningRateMultiplierFound) {
-                        FineTuneHyperparams deserializedFineTuneHyperparams =
-                                new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier);
-                        deserializedFineTuneHyperparams.computeClassificationMetrics = computeClassificationMetrics;
-                        deserializedFineTuneHyperparams.classificationPositiveClass = classificationPositiveClass;
-                        deserializedFineTuneHyperparams.classificationNClasses = classificationNClasses;
+                if ("n_epochs".equals(fieldName)) {
+                    nEpochs = reader.getLong();
+                    nEpochsFound = true;
+                } else if ("batch_size".equals(fieldName)) {
+                    batchSize = reader.getLong();
+                    batchSizeFound = true;
+                } else if ("prompt_loss_weight".equals(fieldName)) {
+                    promptLossWeight = reader.getDouble();
+                    promptLossWeightFound = true;
+                } else if ("learning_rate_multiplier".equals(fieldName)) {
+                    learningRateMultiplier = reader.getDouble();
+                    learningRateMultiplierFound = true;
+                } else if ("compute_classification_metrics".equals(fieldName)) {
+                    computeClassificationMetrics = reader.getNullable(JsonReader::getBoolean);
+                } else if ("classification_positive_class".equals(fieldName)) {
+                    classificationPositiveClass = reader.getString();
+                } else if ("classification_n_classes".equals(fieldName)) {
+                    classificationNClasses = reader.getNullable(JsonReader::getLong);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nEpochsFound && batchSizeFound && promptLossWeightFound && learningRateMultiplierFound) {
+                FineTuneHyperparams deserializedFineTuneHyperparams
+                    = new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier);
+                deserializedFineTuneHyperparams.computeClassificationMetrics = computeClassificationMetrics;
+                deserializedFineTuneHyperparams.classificationPositiveClass = classificationPositiveClass;
+                deserializedFineTuneHyperparams.classificationNClasses = classificationNClasses;
 
-                        return deserializedFineTuneHyperparams;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!nEpochsFound) {
-                        missingProperties.add("n_epochs");
-                    }
-                    if (!batchSizeFound) {
-                        missingProperties.add("batch_size");
-                    }
-                    if (!promptLossWeightFound) {
-                        missingProperties.add("prompt_loss_weight");
-                    }
-                    if (!learningRateMultiplierFound) {
-                        missingProperties.add("learning_rate_multiplier");
-                    }
+                return deserializedFineTuneHyperparams;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nEpochsFound) {
+                missingProperties.add("n_epochs");
+            }
+            if (!batchSizeFound) {
+                missingProperties.add("batch_size");
+            }
+            if (!promptLossWeightFound) {
+                missingProperties.add("prompt_loss_weight");
+            }
+            if (!learningRateMultiplierFound) {
+                missingProperties.add("learning_rate_multiplier");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

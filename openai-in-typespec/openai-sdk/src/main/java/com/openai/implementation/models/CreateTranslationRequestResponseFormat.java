@@ -6,36 +6,54 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateTranslationRequestResponseFormat. */
+/**
+ * Defines values for CreateTranslationRequestResponseFormat.
+ */
 public final class CreateTranslationRequestResponseFormat
-        extends ExpandableStringEnum<CreateTranslationRequestResponseFormat> {
-    /** Static value json for CreateTranslationRequestResponseFormat. */
-    @Generated public static final CreateTranslationRequestResponseFormat JSON = fromString("json");
+    extends ExpandableStringEnum<CreateTranslationRequestResponseFormat> {
+    /**
+     * Static value json for CreateTranslationRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateTranslationRequestResponseFormat JSON = fromString("json");
 
-    /** Static value text for CreateTranslationRequestResponseFormat. */
-    @Generated public static final CreateTranslationRequestResponseFormat TEXT = fromString("text");
+    /**
+     * Static value text for CreateTranslationRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateTranslationRequestResponseFormat TEXT = fromString("text");
 
-    /** Static value srt for CreateTranslationRequestResponseFormat. */
-    @Generated public static final CreateTranslationRequestResponseFormat SRT = fromString("srt");
+    /**
+     * Static value srt for CreateTranslationRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateTranslationRequestResponseFormat SRT = fromString("srt");
 
-    /** Static value verbose_json for CreateTranslationRequestResponseFormat. */
-    @Generated public static final CreateTranslationRequestResponseFormat VERBOSE_JSON = fromString("verbose_json");
+    /**
+     * Static value verbose_json for CreateTranslationRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateTranslationRequestResponseFormat VERBOSE_JSON = fromString("verbose_json");
 
-    /** Static value vtt for CreateTranslationRequestResponseFormat. */
-    @Generated public static final CreateTranslationRequestResponseFormat VTT = fromString("vtt");
+    /**
+     * Static value vtt for CreateTranslationRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateTranslationRequestResponseFormat VTT = fromString("vtt");
 
     /**
      * Creates a new instance of CreateTranslationRequestResponseFormat value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateTranslationRequestResponseFormat() {}
+    public CreateTranslationRequestResponseFormat() {
+    }
 
     /**
      * Creates or finds a CreateTranslationRequestResponseFormat from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateTranslationRequestResponseFormat.
      */
@@ -46,7 +64,7 @@ public final class CreateTranslationRequestResponseFormat
 
     /**
      * Gets known CreateTranslationRequestResponseFormat values.
-     *
+     * 
      * @return known CreateTranslationRequestResponseFormat values.
      */
     @Generated

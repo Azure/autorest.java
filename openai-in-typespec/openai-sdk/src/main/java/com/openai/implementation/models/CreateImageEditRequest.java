@@ -15,50 +15,59 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateImageEditRequest model. */
+/**
+ * The CreateImageEditRequest model.
+ */
 @Fluent
 public final class CreateImageEditRequest implements JsonSerializable<CreateImageEditRequest> {
     /*
      * A text description of the desired image(s). The maximum length is 1000 characters.
      */
-    @Generated private final String prompt;
+    @Generated
+    private final String prompt;
 
     /*
      * The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
      * provided, image must have transparency, which will be used as the mask.
      */
-    @Generated private final byte[] image;
+    @Generated
+    private final byte[] image;
 
     /*
      * An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
      * `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
      * as `image`.
      */
-    @Generated private byte[] mask;
+    @Generated
+    private byte[] mask;
 
     /*
      * The number of images to generate. Must be between 1 and 10.
      */
-    @Generated private Long n;
+    @Generated
+    private Long n;
 
     /*
      * The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
      */
-    @Generated private CreateImageRequestSize size;
+    @Generated
+    private CreateImageRequestSize size;
 
     /*
      * The format in which the generated images are returned. Must be one of `url` or `b64_json`.
      */
-    @Generated private CreateImageRequestResponseFormat responseFormat;
+    @Generated
+    private CreateImageRequestResponseFormat responseFormat;
 
     /*
      * The user property.
      */
-    @Generated private String user;
+    @Generated
+    private String user;
 
     /**
      * Creates an instance of CreateImageEditRequest class.
-     *
+     * 
      * @param prompt the prompt value to set.
      * @param image the image value to set.
      */
@@ -70,7 +79,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Get the prompt property: A text description of the desired image(s). The maximum length is 1000 characters.
-     *
+     * 
      * @return the prompt value.
      */
     @Generated
@@ -81,7 +90,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
     /**
      * Get the image property: The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
      * provided, image must have transparency, which will be used as the mask.
-     *
+     * 
      * @return the image value.
      */
     @Generated
@@ -91,8 +100,10 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Get the mask property: An additional image whose fully transparent areas (e.g. where alpha is zero) indicate
-     * where `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
-     *
+     * where
+     * `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+     * as `image`.
+     * 
      * @return the mask value.
      */
     @Generated
@@ -102,8 +113,10 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Set the mask property: An additional image whose fully transparent areas (e.g. where alpha is zero) indicate
-     * where `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as `image`.
-     *
+     * where
+     * `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+     * as `image`.
+     * 
      * @param mask the mask value to set.
      * @return the CreateImageEditRequest object itself.
      */
@@ -115,7 +128,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Get the n property: The number of images to generate. Must be between 1 and 10.
-     *
+     * 
      * @return the n value.
      */
     @Generated
@@ -125,7 +138,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Set the n property: The number of images to generate. Must be between 1 and 10.
-     *
+     * 
      * @param n the n value to set.
      * @return the CreateImageEditRequest object itself.
      */
@@ -137,7 +150,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Get the size property: The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
-     *
+     * 
      * @return the size value.
      */
     @Generated
@@ -147,7 +160,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Set the size property: The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
-     *
+     * 
      * @param size the size value to set.
      * @return the CreateImageEditRequest object itself.
      */
@@ -160,7 +173,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
     /**
      * Get the responseFormat property: The format in which the generated images are returned. Must be one of `url` or
      * `b64_json`.
-     *
+     * 
      * @return the responseFormat value.
      */
     @Generated
@@ -171,7 +184,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
     /**
      * Set the responseFormat property: The format in which the generated images are returned. Must be one of `url` or
      * `b64_json`.
-     *
+     * 
      * @param responseFormat the responseFormat value to set.
      * @return the CreateImageEditRequest object itself.
      */
@@ -183,7 +196,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Get the user property: The user property.
-     *
+     * 
      * @return the user value.
      */
     @Generated
@@ -193,7 +206,7 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Set the user property: The user property.
-     *
+     * 
      * @param user the user value to set.
      * @return the CreateImageEditRequest object itself.
      */
@@ -218,70 +231,68 @@ public final class CreateImageEditRequest implements JsonSerializable<CreateImag
 
     /**
      * Reads an instance of CreateImageEditRequest from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateImageEditRequest if the JsonReader was pointing to an instance of it, or null if it
-     *     was pointing to JSON null.
+     * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateImageEditRequest.
      */
     public static CreateImageEditRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean promptFound = false;
-                    String prompt = null;
-                    boolean imageFound = false;
-                    byte[] image = null;
-                    byte[] mask = null;
-                    Long n = null;
-                    CreateImageRequestSize size = null;
-                    CreateImageRequestResponseFormat responseFormat = null;
-                    String user = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean promptFound = false;
+            String prompt = null;
+            boolean imageFound = false;
+            byte[] image = null;
+            byte[] mask = null;
+            Long n = null;
+            CreateImageRequestSize size = null;
+            CreateImageRequestResponseFormat responseFormat = null;
+            String user = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("prompt".equals(fieldName)) {
-                            prompt = reader.getString();
-                            promptFound = true;
-                        } else if ("image".equals(fieldName)) {
-                            image = reader.getBinary();
-                            imageFound = true;
-                        } else if ("mask".equals(fieldName)) {
-                            mask = reader.getBinary();
-                        } else if ("n".equals(fieldName)) {
-                            n = reader.getNullable(JsonReader::getLong);
-                        } else if ("size".equals(fieldName)) {
-                            size = CreateImageRequestSize.fromString(reader.getString());
-                        } else if ("response_format".equals(fieldName)) {
-                            responseFormat = CreateImageRequestResponseFormat.fromString(reader.getString());
-                        } else if ("user".equals(fieldName)) {
-                            user = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (promptFound && imageFound) {
-                        CreateImageEditRequest deserializedCreateImageEditRequest =
-                                new CreateImageEditRequest(prompt, image);
-                        deserializedCreateImageEditRequest.mask = mask;
-                        deserializedCreateImageEditRequest.n = n;
-                        deserializedCreateImageEditRequest.size = size;
-                        deserializedCreateImageEditRequest.responseFormat = responseFormat;
-                        deserializedCreateImageEditRequest.user = user;
+                if ("prompt".equals(fieldName)) {
+                    prompt = reader.getString();
+                    promptFound = true;
+                } else if ("image".equals(fieldName)) {
+                    image = reader.getBinary();
+                    imageFound = true;
+                } else if ("mask".equals(fieldName)) {
+                    mask = reader.getBinary();
+                } else if ("n".equals(fieldName)) {
+                    n = reader.getNullable(JsonReader::getLong);
+                } else if ("size".equals(fieldName)) {
+                    size = CreateImageRequestSize.fromString(reader.getString());
+                } else if ("response_format".equals(fieldName)) {
+                    responseFormat = CreateImageRequestResponseFormat.fromString(reader.getString());
+                } else if ("user".equals(fieldName)) {
+                    user = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (promptFound && imageFound) {
+                CreateImageEditRequest deserializedCreateImageEditRequest = new CreateImageEditRequest(prompt, image);
+                deserializedCreateImageEditRequest.mask = mask;
+                deserializedCreateImageEditRequest.n = n;
+                deserializedCreateImageEditRequest.size = size;
+                deserializedCreateImageEditRequest.responseFormat = responseFormat;
+                deserializedCreateImageEditRequest.user = user;
 
-                        return deserializedCreateImageEditRequest;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!promptFound) {
-                        missingProperties.add("prompt");
-                    }
-                    if (!imageFound) {
-                        missingProperties.add("image");
-                    }
+                return deserializedCreateImageEditRequest;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!promptFound) {
+                missingProperties.add("prompt");
+            }
+            if (!imageFound) {
+                missingProperties.add("image");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

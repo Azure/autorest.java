@@ -6,38 +6,59 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for OpenAIFileStatus. */
+/**
+ * Defines values for OpenAIFileStatus.
+ */
 public final class OpenAIFileStatus extends ExpandableStringEnum<OpenAIFileStatus> {
-    /** Static value uploaded for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus UPLOADED = fromString("uploaded");
+    /**
+     * Static value uploaded for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus UPLOADED = fromString("uploaded");
 
-    /** Static value processed for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus PROCESSED = fromString("processed");
+    /**
+     * Static value processed for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus PROCESSED = fromString("processed");
 
-    /** Static value pending for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus PENDING = fromString("pending");
+    /**
+     * Static value pending for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus PENDING = fromString("pending");
 
-    /** Static value error for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus ERROR = fromString("error");
+    /**
+     * Static value error for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus ERROR = fromString("error");
 
-    /** Static value deleting for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus DELETING = fromString("deleting");
+    /**
+     * Static value deleting for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus DELETING = fromString("deleting");
 
-    /** Static value deleted for OpenAIFileStatus. */
-    @Generated public static final OpenAIFileStatus DELETED = fromString("deleted");
+    /**
+     * Static value deleted for OpenAIFileStatus.
+     */
+    @Generated
+    public static final OpenAIFileStatus DELETED = fromString("deleted");
 
     /**
      * Creates a new instance of OpenAIFileStatus value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public OpenAIFileStatus() {}
+    public OpenAIFileStatus() {
+    }
 
     /**
      * Creates or finds a OpenAIFileStatus from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding OpenAIFileStatus.
      */
@@ -48,7 +69,7 @@ public final class OpenAIFileStatus extends ExpandableStringEnum<OpenAIFileStatu
 
     /**
      * Gets known OpenAIFileStatus values.
-     *
+     * 
      * @return known OpenAIFileStatus values.
      */
     @Generated

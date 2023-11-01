@@ -13,37 +13,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateImageRequest model. */
+/**
+ * The CreateImageRequest model.
+ */
 @Fluent
 public final class CreateImageRequest implements JsonSerializable<CreateImageRequest> {
     /*
      * A text description of the desired image(s). The maximum length is 1000 characters.
      */
-    @Generated private final String prompt;
+    @Generated
+    private final String prompt;
 
     /*
      * The number of images to generate. Must be between 1 and 10.
      */
-    @Generated private Long n;
+    @Generated
+    private Long n;
 
     /*
      * The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
      */
-    @Generated private CreateImageRequestSize size;
+    @Generated
+    private CreateImageRequestSize size;
 
     /*
      * The format in which the generated images are returned. Must be one of `url` or `b64_json`.
      */
-    @Generated private CreateImageRequestResponseFormat responseFormat;
+    @Generated
+    private CreateImageRequestResponseFormat responseFormat;
 
     /*
      * The user property.
      */
-    @Generated private String user;
+    @Generated
+    private String user;
 
     /**
      * Creates an instance of CreateImageRequest class.
-     *
+     * 
      * @param prompt the prompt value to set.
      */
     @Generated
@@ -53,7 +60,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Get the prompt property: A text description of the desired image(s). The maximum length is 1000 characters.
-     *
+     * 
      * @return the prompt value.
      */
     @Generated
@@ -63,7 +70,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Get the n property: The number of images to generate. Must be between 1 and 10.
-     *
+     * 
      * @return the n value.
      */
     @Generated
@@ -73,7 +80,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Set the n property: The number of images to generate. Must be between 1 and 10.
-     *
+     * 
      * @param n the n value to set.
      * @return the CreateImageRequest object itself.
      */
@@ -85,7 +92,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Get the size property: The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
-     *
+     * 
      * @return the size value.
      */
     @Generated
@@ -95,7 +102,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Set the size property: The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.
-     *
+     * 
      * @param size the size value to set.
      * @return the CreateImageRequest object itself.
      */
@@ -108,7 +115,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
     /**
      * Get the responseFormat property: The format in which the generated images are returned. Must be one of `url` or
      * `b64_json`.
-     *
+     * 
      * @return the responseFormat value.
      */
     @Generated
@@ -119,7 +126,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
     /**
      * Set the responseFormat property: The format in which the generated images are returned. Must be one of `url` or
      * `b64_json`.
-     *
+     * 
      * @param responseFormat the responseFormat value to set.
      * @return the CreateImageRequest object itself.
      */
@@ -131,7 +138,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Get the user property: The user property.
-     *
+     * 
      * @return the user value.
      */
     @Generated
@@ -141,7 +148,7 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Set the user property: The user property.
-     *
+     * 
      * @param user the user value to set.
      * @return the CreateImageRequest object itself.
      */
@@ -164,57 +171,56 @@ public final class CreateImageRequest implements JsonSerializable<CreateImageReq
 
     /**
      * Reads an instance of CreateImageRequest from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateImageRequest if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateImageRequest.
      */
     public static CreateImageRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean promptFound = false;
-                    String prompt = null;
-                    Long n = null;
-                    CreateImageRequestSize size = null;
-                    CreateImageRequestResponseFormat responseFormat = null;
-                    String user = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean promptFound = false;
+            String prompt = null;
+            Long n = null;
+            CreateImageRequestSize size = null;
+            CreateImageRequestResponseFormat responseFormat = null;
+            String user = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("prompt".equals(fieldName)) {
-                            prompt = reader.getString();
-                            promptFound = true;
-                        } else if ("n".equals(fieldName)) {
-                            n = reader.getNullable(JsonReader::getLong);
-                        } else if ("size".equals(fieldName)) {
-                            size = CreateImageRequestSize.fromString(reader.getString());
-                        } else if ("response_format".equals(fieldName)) {
-                            responseFormat = CreateImageRequestResponseFormat.fromString(reader.getString());
-                        } else if ("user".equals(fieldName)) {
-                            user = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (promptFound) {
-                        CreateImageRequest deserializedCreateImageRequest = new CreateImageRequest(prompt);
-                        deserializedCreateImageRequest.n = n;
-                        deserializedCreateImageRequest.size = size;
-                        deserializedCreateImageRequest.responseFormat = responseFormat;
-                        deserializedCreateImageRequest.user = user;
+                if ("prompt".equals(fieldName)) {
+                    prompt = reader.getString();
+                    promptFound = true;
+                } else if ("n".equals(fieldName)) {
+                    n = reader.getNullable(JsonReader::getLong);
+                } else if ("size".equals(fieldName)) {
+                    size = CreateImageRequestSize.fromString(reader.getString());
+                } else if ("response_format".equals(fieldName)) {
+                    responseFormat = CreateImageRequestResponseFormat.fromString(reader.getString());
+                } else if ("user".equals(fieldName)) {
+                    user = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (promptFound) {
+                CreateImageRequest deserializedCreateImageRequest = new CreateImageRequest(prompt);
+                deserializedCreateImageRequest.n = n;
+                deserializedCreateImageRequest.size = size;
+                deserializedCreateImageRequest.responseFormat = responseFormat;
+                deserializedCreateImageRequest.user = user;
 
-                        return deserializedCreateImageRequest;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!promptFound) {
-                        missingProperties.add("prompt");
-                    }
+                return deserializedCreateImageRequest;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!promptFound) {
+                missingProperties.add("prompt");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

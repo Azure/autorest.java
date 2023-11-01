@@ -12,22 +12,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The ListFineTunesResponse model. */
+/**
+ * The ListFineTunesResponse model.
+ */
 @Immutable
 public final class ListFineTunesResponse implements JsonSerializable<ListFineTunesResponse> {
     /*
      * The object property.
      */
-    @Generated private final String object;
+    @Generated
+    private final String object;
 
     /*
      * The data property.
      */
-    @Generated private final List<FineTune> data;
+    @Generated
+    private final List<FineTune> data;
 
     /**
      * Creates an instance of ListFineTunesResponse class.
-     *
+     * 
      * @param object the object value to set.
      * @param data the data value to set.
      */
@@ -39,7 +43,7 @@ public final class ListFineTunesResponse implements JsonSerializable<ListFineTun
 
     /**
      * Get the object property: The object property.
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -49,7 +53,7 @@ public final class ListFineTunesResponse implements JsonSerializable<ListFineTun
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated
@@ -67,50 +71,48 @@ public final class ListFineTunesResponse implements JsonSerializable<ListFineTun
 
     /**
      * Reads an instance of ListFineTunesResponse from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of ListFineTunesResponse if the JsonReader was pointing to an instance of it, or null if it
-     *     was pointing to JSON null.
+     * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ListFineTunesResponse.
      */
     public static ListFineTunesResponse fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean dataFound = false;
-                    List<FineTune> data = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean objectFound = false;
+            String object = null;
+            boolean dataFound = false;
+            List<FineTune> data = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("data".equals(fieldName)) {
-                            data = reader.readArray(reader1 -> FineTune.fromJson(reader1));
-                            dataFound = true;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (objectFound && dataFound) {
-                        ListFineTunesResponse deserializedListFineTunesResponse =
-                                new ListFineTunesResponse(object, data);
+                if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("data".equals(fieldName)) {
+                    data = reader.readArray(reader1 -> FineTune.fromJson(reader1));
+                    dataFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (objectFound && dataFound) {
+                ListFineTunesResponse deserializedListFineTunesResponse = new ListFineTunesResponse(object, data);
 
-                        return deserializedListFineTunesResponse;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!dataFound) {
-                        missingProperties.add("data");
-                    }
+                return deserializedListFineTunesResponse;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!dataFound) {
+                missingProperties.add("data");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

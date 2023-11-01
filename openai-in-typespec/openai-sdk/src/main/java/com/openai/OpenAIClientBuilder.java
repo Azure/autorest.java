@@ -4,24 +4,53 @@ package com.openai;
 
 import com.generic.core.annotation.Generated;
 import com.generic.core.annotation.ServiceClientBuilder;
+import com.generic.core.client.traits.KeyCredentialTrait;
+import com.generic.core.credential.KeyCredential;
 import com.generic.core.http.pipeline.HttpPipeline;
 import com.generic.core.http.pipeline.HttpPipelineBuilder;
+import com.generic.core.http.pipeline.HttpPipelinePolicy;
+import com.generic.core.http.policy.credential.KeyCredentialPolicy;
 import com.openai.implementation.OpenAIClientImpl;
+import java.util.ArrayList;
+import java.util.List;
 
-/** A builder for creating a new instance of the OpenAIClient type. */
-@ServiceClientBuilder(serviceClients = {OpenAIClient.class})
-public final class OpenAIClientBuilder {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
-
-    /** Create an instance of the OpenAIClientBuilder. */
+/**
+ * A builder for creating a new instance of the OpenAIClient type.
+ */
+@ServiceClientBuilder(serviceClients = { OpenAIClient.class })
+public final class OpenAIClientBuilder implements KeyCredentialTrait<OpenAIClientBuilder> {
     @Generated
-    public OpenAIClientBuilder() {}
+    private static final String SDK_NAME = "name";
+
+    @Generated
+    private static final String SDK_VERSION = "version";
+
+    /**
+     * Create an instance of the OpenAIClientBuilder.
+     */
+    @Generated
+    public OpenAIClientBuilder() {
+    }
+
+    /*
+     * The KeyCredential used for authentication.
+     */
+    @Generated
+    private KeyCredential keyCredential;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public OpenAIClientBuilder credential(KeyCredential keyCredential) {
+        this.keyCredential = keyCredential;
+        return this;
+    }
 
     /**
      * Builds an instance of OpenAIClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of OpenAIClientImpl.
      */
     @Generated
@@ -32,13 +61,18 @@ public final class OpenAIClientBuilder {
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        HttpPipeline httpPipeline = HttpPipelineBuilder.createDefaultPipeline();
-        return httpPipeline;
+        HttpPipelineBuilder httpPipelineBuilder = new HttpPipelineBuilder();
+        List<HttpPipelinePolicy> policies = new ArrayList<>();
+        if (keyCredential != null) {
+            policies.add(new KeyCredentialPolicy("authorization", keyCredential, "bearer"));
+        }
+        httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));
+        return httpPipelineBuilder.build();
     }
 
     /**
      * Builds an instance of OpenAIClient class.
-     *
+     * 
      * @return an instance of OpenAIClient.
      */
     @Generated

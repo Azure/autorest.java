@@ -6,26 +6,35 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateImageRequestResponseFormat. */
+/**
+ * Defines values for CreateImageRequestResponseFormat.
+ */
 public final class CreateImageRequestResponseFormat extends ExpandableStringEnum<CreateImageRequestResponseFormat> {
-    /** Static value url for CreateImageRequestResponseFormat. */
-    @Generated public static final CreateImageRequestResponseFormat URL = fromString("url");
+    /**
+     * Static value url for CreateImageRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateImageRequestResponseFormat URL = fromString("url");
 
-    /** Static value b64_json for CreateImageRequestResponseFormat. */
-    @Generated public static final CreateImageRequestResponseFormat B64_JSON = fromString("b64_json");
+    /**
+     * Static value b64_json for CreateImageRequestResponseFormat.
+     */
+    @Generated
+    public static final CreateImageRequestResponseFormat B64_JSON = fromString("b64_json");
 
     /**
      * Creates a new instance of CreateImageRequestResponseFormat value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateImageRequestResponseFormat() {}
+    public CreateImageRequestResponseFormat() {
+    }
 
     /**
      * Creates or finds a CreateImageRequestResponseFormat from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateImageRequestResponseFormat.
      */
@@ -36,7 +45,7 @@ public final class CreateImageRequestResponseFormat extends ExpandableStringEnum
 
     /**
      * Gets known CreateImageRequestResponseFormat values.
-     *
+     * 
      * @return known CreateImageRequestResponseFormat values.
      */
     @Generated

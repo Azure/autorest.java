@@ -16,79 +16,94 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The `FineTune` object represents a legacy fine-tune job that has been created through the API. */
+/**
+ * The `FineTune` object represents a legacy fine-tune job that has been created through the API.
+ */
 @Immutable
 public final class FineTune implements JsonSerializable<FineTune> {
     /*
      * The object identifier, which can be referenced in the API endpoints.
      */
-    @Generated private final String id;
+    @Generated
+    private final String id;
 
     /*
      * The object type, which is always "fine-tune".
      */
-    @Generated private final String object = "fine-tune";
+    @Generated
+    private final String object = "fine-tune";
 
     /*
      * The Unix timestamp (in seconds) for when the fine-tuning job was created.
      */
-    @Generated private final long createdAt;
+    @Generated
+    private final long createdAt;
 
     /*
      * The Unix timestamp (in seconds) for when the fine-tuning job was last updated.
      */
-    @Generated private final long updatedAt;
+    @Generated
+    private final long updatedAt;
 
     /*
      * The base model that is being fine-tuned.
      */
-    @Generated private final String model;
+    @Generated
+    private final String model;
 
     /*
      * The name of the fine-tuned model that is being created.
      */
-    @Generated private final String fineTunedModel;
+    @Generated
+    private final String fineTunedModel;
 
     /*
      * The organization that owns the fine-tuning job.
      */
-    @Generated private final String organizationId;
+    @Generated
+    private final String organizationId;
 
     /*
      * The current status of the fine-tuning job, which can be either `created`, `running`,
      * `succeeded`, `failed`, or `cancelled`.
      */
-    @Generated private final FineTuneStatus status;
+    @Generated
+    private final FineTuneStatus status;
 
     /*
      * The hyperparameters used for the fine-tuning job. See the
      * [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
      */
-    @Generated private final FineTuneHyperparams hyperparams;
+    @Generated
+    private final FineTuneHyperparams hyperparams;
 
     /*
      * The list of files used for training.
      */
-    @Generated private final List<OpenAIFile> trainingFiles;
+    @Generated
+    private final List<OpenAIFile> trainingFiles;
 
     /*
      * The list of files used for validation.
      */
-    @Generated private final List<OpenAIFile> validationFiles;
+    @Generated
+    private final List<OpenAIFile> validationFiles;
 
     /*
      * The compiled results files for the fine-tuning job.
      */
-    @Generated private final List<OpenAIFile> resultFiles;
+    @Generated
+    private final List<OpenAIFile> resultFiles;
 
     /*
      * The list of events that have been observed in the lifecycle of the FineTune job.
      */
-    @Generated private List<FineTuneEvent> events;
+    @Generated
+    private List<FineTuneEvent> events;
 
     /**
      * Creates an instance of FineTune class.
-     *
+     * 
      * @param id the id value to set.
      * @param createdAt the createdAt value to set.
      * @param updatedAt the updatedAt value to set.
@@ -102,18 +117,9 @@ public final class FineTune implements JsonSerializable<FineTune> {
      * @param resultFiles the resultFiles value to set.
      */
     @Generated
-    private FineTune(
-            String id,
-            OffsetDateTime createdAt,
-            OffsetDateTime updatedAt,
-            String model,
-            String fineTunedModel,
-            String organizationId,
-            FineTuneStatus status,
-            FineTuneHyperparams hyperparams,
-            List<OpenAIFile> trainingFiles,
-            List<OpenAIFile> validationFiles,
-            List<OpenAIFile> resultFiles) {
+    private FineTune(String id, OffsetDateTime createdAt, OffsetDateTime updatedAt, String model, String fineTunedModel,
+        String organizationId, FineTuneStatus status, FineTuneHyperparams hyperparams, List<OpenAIFile> trainingFiles,
+        List<OpenAIFile> validationFiles, List<OpenAIFile> resultFiles) {
         this.id = id;
         this.createdAt = createdAt.toEpochSecond();
         this.updatedAt = updatedAt.toEpochSecond();
@@ -129,7 +135,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the id property: The object identifier, which can be referenced in the API endpoints.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -139,7 +145,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the object property: The object type, which is always "fine-tune".
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -149,7 +155,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the createdAt property: The Unix timestamp (in seconds) for when the fine-tuning job was created.
-     *
+     * 
      * @return the createdAt value.
      */
     @Generated
@@ -159,7 +165,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the updatedAt property: The Unix timestamp (in seconds) for when the fine-tuning job was last updated.
-     *
+     * 
      * @return the updatedAt value.
      */
     @Generated
@@ -169,7 +175,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the model property: The base model that is being fine-tuned.
-     *
+     * 
      * @return the model value.
      */
     @Generated
@@ -179,7 +185,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the fineTunedModel property: The name of the fine-tuned model that is being created.
-     *
+     * 
      * @return the fineTunedModel value.
      */
     @Generated
@@ -189,7 +195,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the organizationId property: The organization that owns the fine-tuning job.
-     *
+     * 
      * @return the organizationId value.
      */
     @Generated
@@ -200,7 +206,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
     /**
      * Get the status property: The current status of the fine-tuning job, which can be either `created`, `running`,
      * `succeeded`, `failed`, or `cancelled`.
-     *
+     * 
      * @return the status value.
      */
     @Generated
@@ -209,9 +215,9 @@ public final class FineTune implements JsonSerializable<FineTune> {
     }
 
     /**
-     * Get the hyperparams property: The hyperparameters used for the fine-tuning job. See the [fine-tuning
-     * guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
-     *
+     * Get the hyperparams property: The hyperparameters used for the fine-tuning job. See the
+     * [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
+     * 
      * @return the hyperparams value.
      */
     @Generated
@@ -221,7 +227,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the trainingFiles property: The list of files used for training.
-     *
+     * 
      * @return the trainingFiles value.
      */
     @Generated
@@ -231,7 +237,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the validationFiles property: The list of files used for validation.
-     *
+     * 
      * @return the validationFiles value.
      */
     @Generated
@@ -241,7 +247,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the resultFiles property: The compiled results files for the fine-tuning job.
-     *
+     * 
      * @return the resultFiles value.
      */
     @Generated
@@ -251,7 +257,7 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Get the events property: The list of events that have been observed in the lifecycle of the FineTune job.
-     *
+     * 
      * @return the events value.
      */
     @Generated
@@ -271,10 +277,10 @@ public final class FineTune implements JsonSerializable<FineTune> {
         jsonWriter.writeStringField("organization_id", this.organizationId);
         jsonWriter.writeStringField("status", Objects.toString(this.status, null));
         jsonWriter.writeJsonField("hyperparams", this.hyperparams);
-        jsonWriter.writeArrayField(
-                "training_files", this.trainingFiles, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField(
-                "validation_files", this.validationFiles, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("training_files", this.trainingFiles,
+            (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("validation_files", this.validationFiles,
+            (writer, element) -> writer.writeJson(element));
         jsonWriter.writeArrayField("result_files", this.resultFiles, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeArrayField("events", this.events, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
@@ -282,158 +288,135 @@ public final class FineTune implements JsonSerializable<FineTune> {
 
     /**
      * Reads an instance of FineTune from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of FineTune if the JsonReader was pointing to an instance of it, or null if it was pointing
-     *     to JSON null.
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FineTune.
      */
     public static FineTune fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean idFound = false;
-                    String id = null;
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean createdAtFound = false;
-                    OffsetDateTime createdAt = null;
-                    boolean updatedAtFound = false;
-                    OffsetDateTime updatedAt = null;
-                    boolean modelFound = false;
-                    String model = null;
-                    boolean fineTunedModelFound = false;
-                    String fineTunedModel = null;
-                    boolean organizationIdFound = false;
-                    String organizationId = null;
-                    boolean statusFound = false;
-                    FineTuneStatus status = null;
-                    boolean hyperparamsFound = false;
-                    FineTuneHyperparams hyperparams = null;
-                    boolean trainingFilesFound = false;
-                    List<OpenAIFile> trainingFiles = null;
-                    boolean validationFilesFound = false;
-                    List<OpenAIFile> validationFiles = null;
-                    boolean resultFilesFound = false;
-                    List<OpenAIFile> resultFiles = null;
-                    List<FineTuneEvent> events = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean idFound = false;
+            String id = null;
+            boolean objectFound = false;
+            String object = null;
+            boolean createdAtFound = false;
+            OffsetDateTime createdAt = null;
+            boolean updatedAtFound = false;
+            OffsetDateTime updatedAt = null;
+            boolean modelFound = false;
+            String model = null;
+            boolean fineTunedModelFound = false;
+            String fineTunedModel = null;
+            boolean organizationIdFound = false;
+            String organizationId = null;
+            boolean statusFound = false;
+            FineTuneStatus status = null;
+            boolean hyperparamsFound = false;
+            FineTuneHyperparams hyperparams = null;
+            boolean trainingFilesFound = false;
+            List<OpenAIFile> trainingFiles = null;
+            boolean validationFilesFound = false;
+            List<OpenAIFile> validationFiles = null;
+            boolean resultFilesFound = false;
+            List<OpenAIFile> resultFiles = null;
+            List<FineTuneEvent> events = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("id".equals(fieldName)) {
-                            id = reader.getString();
-                            idFound = true;
-                        } else if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("created_at".equals(fieldName)) {
-                            createdAt =
-                                    OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
-                            createdAtFound = true;
-                        } else if ("updated_at".equals(fieldName)) {
-                            updatedAt =
-                                    OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
-                            updatedAtFound = true;
-                        } else if ("model".equals(fieldName)) {
-                            model = reader.getString();
-                            modelFound = true;
-                        } else if ("fine_tuned_model".equals(fieldName)) {
-                            fineTunedModel = reader.getString();
-                            fineTunedModelFound = true;
-                        } else if ("organization_id".equals(fieldName)) {
-                            organizationId = reader.getString();
-                            organizationIdFound = true;
-                        } else if ("status".equals(fieldName)) {
-                            status = FineTuneStatus.fromString(reader.getString());
-                            statusFound = true;
-                        } else if ("hyperparams".equals(fieldName)) {
-                            hyperparams = FineTuneHyperparams.fromJson(reader);
-                            hyperparamsFound = true;
-                        } else if ("training_files".equals(fieldName)) {
-                            trainingFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
-                            trainingFilesFound = true;
-                        } else if ("validation_files".equals(fieldName)) {
-                            validationFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
-                            validationFilesFound = true;
-                        } else if ("result_files".equals(fieldName)) {
-                            resultFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
-                            resultFilesFound = true;
-                        } else if ("events".equals(fieldName)) {
-                            events = reader.readArray(reader1 -> FineTuneEvent.fromJson(reader1));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (idFound
-                            && objectFound
-                            && createdAtFound
-                            && updatedAtFound
-                            && modelFound
-                            && fineTunedModelFound
-                            && organizationIdFound
-                            && statusFound
-                            && hyperparamsFound
-                            && trainingFilesFound
-                            && validationFilesFound
-                            && resultFilesFound) {
-                        FineTune deserializedFineTune =
-                                new FineTune(
-                                        id,
-                                        createdAt,
-                                        updatedAt,
-                                        model,
-                                        fineTunedModel,
-                                        organizationId,
-                                        status,
-                                        hyperparams,
-                                        trainingFiles,
-                                        validationFiles,
-                                        resultFiles);
-                        deserializedFineTune.events = events;
+                if ("id".equals(fieldName)) {
+                    id = reader.getString();
+                    idFound = true;
+                } else if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("created_at".equals(fieldName)) {
+                    createdAt = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    createdAtFound = true;
+                } else if ("updated_at".equals(fieldName)) {
+                    updatedAt = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    updatedAtFound = true;
+                } else if ("model".equals(fieldName)) {
+                    model = reader.getString();
+                    modelFound = true;
+                } else if ("fine_tuned_model".equals(fieldName)) {
+                    fineTunedModel = reader.getString();
+                    fineTunedModelFound = true;
+                } else if ("organization_id".equals(fieldName)) {
+                    organizationId = reader.getString();
+                    organizationIdFound = true;
+                } else if ("status".equals(fieldName)) {
+                    status = FineTuneStatus.fromString(reader.getString());
+                    statusFound = true;
+                } else if ("hyperparams".equals(fieldName)) {
+                    hyperparams = FineTuneHyperparams.fromJson(reader);
+                    hyperparamsFound = true;
+                } else if ("training_files".equals(fieldName)) {
+                    trainingFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
+                    trainingFilesFound = true;
+                } else if ("validation_files".equals(fieldName)) {
+                    validationFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
+                    validationFilesFound = true;
+                } else if ("result_files".equals(fieldName)) {
+                    resultFiles = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
+                    resultFilesFound = true;
+                } else if ("events".equals(fieldName)) {
+                    events = reader.readArray(reader1 -> FineTuneEvent.fromJson(reader1));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (idFound && objectFound && createdAtFound && updatedAtFound && modelFound && fineTunedModelFound
+                && organizationIdFound && statusFound && hyperparamsFound && trainingFilesFound && validationFilesFound
+                && resultFilesFound) {
+                FineTune deserializedFineTune = new FineTune(id, createdAt, updatedAt, model, fineTunedModel,
+                    organizationId, status, hyperparams, trainingFiles, validationFiles, resultFiles);
+                deserializedFineTune.events = events;
 
-                        return deserializedFineTune;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!idFound) {
-                        missingProperties.add("id");
-                    }
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!createdAtFound) {
-                        missingProperties.add("created_at");
-                    }
-                    if (!updatedAtFound) {
-                        missingProperties.add("updated_at");
-                    }
-                    if (!modelFound) {
-                        missingProperties.add("model");
-                    }
-                    if (!fineTunedModelFound) {
-                        missingProperties.add("fine_tuned_model");
-                    }
-                    if (!organizationIdFound) {
-                        missingProperties.add("organization_id");
-                    }
-                    if (!statusFound) {
-                        missingProperties.add("status");
-                    }
-                    if (!hyperparamsFound) {
-                        missingProperties.add("hyperparams");
-                    }
-                    if (!trainingFilesFound) {
-                        missingProperties.add("training_files");
-                    }
-                    if (!validationFilesFound) {
-                        missingProperties.add("validation_files");
-                    }
-                    if (!resultFilesFound) {
-                        missingProperties.add("result_files");
-                    }
+                return deserializedFineTune;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!idFound) {
+                missingProperties.add("id");
+            }
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!createdAtFound) {
+                missingProperties.add("created_at");
+            }
+            if (!updatedAtFound) {
+                missingProperties.add("updated_at");
+            }
+            if (!modelFound) {
+                missingProperties.add("model");
+            }
+            if (!fineTunedModelFound) {
+                missingProperties.add("fine_tuned_model");
+            }
+            if (!organizationIdFound) {
+                missingProperties.add("organization_id");
+            }
+            if (!statusFound) {
+                missingProperties.add("status");
+            }
+            if (!hyperparamsFound) {
+                missingProperties.add("hyperparams");
+            }
+            if (!trainingFilesFound) {
+                missingProperties.add("training_files");
+            }
+            if (!validationFilesFound) {
+                missingProperties.add("validation_files");
+            }
+            if (!resultFilesFound) {
+                missingProperties.add("result_files");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

@@ -13,31 +13,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateTranslationRequest model. */
+/**
+ * The CreateTranslationRequest model.
+ */
 @Fluent
 public final class CreateTranslationRequest implements JsonSerializable<CreateTranslationRequest> {
     /*
      * The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
      * mpeg, mpga, m4a, ogg, wav, or webm.
      */
-    @Generated private final byte[] file;
+    @Generated
+    private final byte[] file;
 
     /*
      * ID of the model to use. Only `whisper-1` is currently available.
      */
-    @Generated private final CreateTranslationRequestModel model;
+    @Generated
+    private final CreateTranslationRequestModel model;
 
     /*
      * An optional text to guide the model's style or continue a previous audio segment. The
      * [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
      */
-    @Generated private String prompt;
+    @Generated
+    private String prompt;
 
     /*
      * The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
      * vtt.
      */
-    @Generated private CreateTranslationRequestResponseFormat responseFormat;
+    @Generated
+    private CreateTranslationRequestResponseFormat responseFormat;
 
     /*
      * The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
@@ -45,11 +51,12 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
      * the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
      * automatically increase the temperature until certain thresholds are hit.
      */
-    @Generated private Double temperature;
+    @Generated
+    private Double temperature;
 
     /**
      * Creates an instance of CreateTranslationRequest class.
-     *
+     * 
      * @param file the file value to set.
      * @param model the model value to set.
      */
@@ -61,8 +68,9 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Get the file property: The audio file object (not file name) to translate, in one of these formats: flac, mp3,
-     * mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-     *
+     * mp4,
+     * mpeg, mpga, m4a, ogg, wav, or webm.
+     * 
      * @return the file value.
      */
     @Generated
@@ -72,7 +80,7 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Get the model property: ID of the model to use. Only `whisper-1` is currently available.
-     *
+     * 
      * @return the model value.
      */
     @Generated
@@ -83,7 +91,7 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
     /**
      * Get the prompt property: An optional text to guide the model's style or continue a previous audio segment. The
      * [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-     *
+     * 
      * @return the prompt value.
      */
     @Generated
@@ -94,7 +102,7 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
     /**
      * Set the prompt property: An optional text to guide the model's style or continue a previous audio segment. The
      * [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-     *
+     * 
      * @param prompt the prompt value to set.
      * @return the CreateTranslationRequest object itself.
      */
@@ -106,8 +114,9 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Get the responseFormat property: The format of the transcript output, in one of these options: json, text, srt,
-     * verbose_json, or vtt.
-     *
+     * verbose_json, or
+     * vtt.
+     * 
      * @return the responseFormat value.
      */
     @Generated
@@ -117,8 +126,9 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Set the responseFormat property: The format of the transcript output, in one of these options: json, text, srt,
-     * verbose_json, or vtt.
-     *
+     * verbose_json, or
+     * vtt.
+     * 
      * @param responseFormat the responseFormat value to set.
      * @return the CreateTranslationRequest object itself.
      */
@@ -130,10 +140,11 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Get the temperature property: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
-     * output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the
-     * model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the
-     * temperature until certain thresholds are hit.
-     *
+     * output more
+     * random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+     * the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+     * automatically increase the temperature until certain thresholds are hit.
+     * 
      * @return the temperature value.
      */
     @Generated
@@ -143,10 +154,11 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Set the temperature property: The sampling temperature, between 0 and 1. Higher values like 0.8 will make the
-     * output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the
-     * model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the
-     * temperature until certain thresholds are hit.
-     *
+     * output more
+     * random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+     * the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+     * automatically increase the temperature until certain thresholds are hit.
+     * 
      * @param temperature the temperature value to set.
      * @return the CreateTranslationRequest object itself.
      */
@@ -169,62 +181,61 @@ public final class CreateTranslationRequest implements JsonSerializable<CreateTr
 
     /**
      * Reads an instance of CreateTranslationRequest from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateTranslationRequest if the JsonReader was pointing to an instance of it, or null if
-     *     it was pointing to JSON null.
+     * it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateTranslationRequest.
      */
     public static CreateTranslationRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean fileFound = false;
-                    byte[] file = null;
-                    boolean modelFound = false;
-                    CreateTranslationRequestModel model = null;
-                    String prompt = null;
-                    CreateTranslationRequestResponseFormat responseFormat = null;
-                    Double temperature = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean fileFound = false;
+            byte[] file = null;
+            boolean modelFound = false;
+            CreateTranslationRequestModel model = null;
+            String prompt = null;
+            CreateTranslationRequestResponseFormat responseFormat = null;
+            Double temperature = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("file".equals(fieldName)) {
-                            file = reader.getBinary();
-                            fileFound = true;
-                        } else if ("model".equals(fieldName)) {
-                            model = CreateTranslationRequestModel.fromString(reader.getString());
-                            modelFound = true;
-                        } else if ("prompt".equals(fieldName)) {
-                            prompt = reader.getString();
-                        } else if ("response_format".equals(fieldName)) {
-                            responseFormat = CreateTranslationRequestResponseFormat.fromString(reader.getString());
-                        } else if ("temperature".equals(fieldName)) {
-                            temperature = reader.getNullable(JsonReader::getDouble);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (fileFound && modelFound) {
-                        CreateTranslationRequest deserializedCreateTranslationRequest =
-                                new CreateTranslationRequest(file, model);
-                        deserializedCreateTranslationRequest.prompt = prompt;
-                        deserializedCreateTranslationRequest.responseFormat = responseFormat;
-                        deserializedCreateTranslationRequest.temperature = temperature;
+                if ("file".equals(fieldName)) {
+                    file = reader.getBinary();
+                    fileFound = true;
+                } else if ("model".equals(fieldName)) {
+                    model = CreateTranslationRequestModel.fromString(reader.getString());
+                    modelFound = true;
+                } else if ("prompt".equals(fieldName)) {
+                    prompt = reader.getString();
+                } else if ("response_format".equals(fieldName)) {
+                    responseFormat = CreateTranslationRequestResponseFormat.fromString(reader.getString());
+                } else if ("temperature".equals(fieldName)) {
+                    temperature = reader.getNullable(JsonReader::getDouble);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (fileFound && modelFound) {
+                CreateTranslationRequest deserializedCreateTranslationRequest
+                    = new CreateTranslationRequest(file, model);
+                deserializedCreateTranslationRequest.prompt = prompt;
+                deserializedCreateTranslationRequest.responseFormat = responseFormat;
+                deserializedCreateTranslationRequest.temperature = temperature;
 
-                        return deserializedCreateTranslationRequest;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!fileFound) {
-                        missingProperties.add("file");
-                    }
-                    if (!modelFound) {
-                        missingProperties.add("model");
-                    }
+                return deserializedCreateTranslationRequest;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!fileFound) {
+                missingProperties.add("file");
+            }
+            if (!modelFound) {
+                missingProperties.add("model");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

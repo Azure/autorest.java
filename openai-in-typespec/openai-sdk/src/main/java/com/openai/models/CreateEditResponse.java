@@ -15,32 +15,38 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The CreateEditResponse model. */
+/**
+ * The CreateEditResponse model.
+ */
 @Immutable
 public final class CreateEditResponse implements JsonSerializable<CreateEditResponse> {
     /*
      * The object type, which is always `edit`.
      */
-    @Generated private final String object = "edit";
+    @Generated
+    private final String object = "edit";
 
     /*
      * The Unix timestamp (in seconds) of when the edit was created.
      */
-    @Generated private final long created;
+    @Generated
+    private final long created;
 
     /*
      * description: A list of edit choices. Can be more than one if `n` is greater than 1.
      */
-    @Generated private final List<CreateEditResponseChoices> choices;
+    @Generated
+    private final List<CreateEditResponseChoices> choices;
 
     /*
      * The usage property.
      */
-    @Generated private final CompletionUsage usage;
+    @Generated
+    private final CompletionUsage usage;
 
     /**
      * Creates an instance of CreateEditResponse class.
-     *
+     * 
      * @param created the created value to set.
      * @param choices the choices value to set.
      * @param usage the usage value to set.
@@ -54,7 +60,7 @@ public final class CreateEditResponse implements JsonSerializable<CreateEditResp
 
     /**
      * Get the object property: The object type, which is always `edit`.
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -64,7 +70,7 @@ public final class CreateEditResponse implements JsonSerializable<CreateEditResp
 
     /**
      * Get the created property: The Unix timestamp (in seconds) of when the edit was created.
-     *
+     * 
      * @return the created value.
      */
     @Generated
@@ -74,7 +80,7 @@ public final class CreateEditResponse implements JsonSerializable<CreateEditResp
 
     /**
      * Get the choices property: description: A list of edit choices. Can be more than one if `n` is greater than 1.
-     *
+     * 
      * @return the choices value.
      */
     @Generated
@@ -84,7 +90,7 @@ public final class CreateEditResponse implements JsonSerializable<CreateEditResp
 
     /**
      * Get the usage property: The usage property.
-     *
+     * 
      * @return the usage value.
      */
     @Generated
@@ -104,66 +110,64 @@ public final class CreateEditResponse implements JsonSerializable<CreateEditResp
 
     /**
      * Reads an instance of CreateEditResponse from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateEditResponse if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateEditResponse.
      */
     public static CreateEditResponse fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean createdFound = false;
-                    OffsetDateTime created = null;
-                    boolean choicesFound = false;
-                    List<CreateEditResponseChoices> choices = null;
-                    boolean usageFound = false;
-                    CompletionUsage usage = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean objectFound = false;
+            String object = null;
+            boolean createdFound = false;
+            OffsetDateTime created = null;
+            boolean choicesFound = false;
+            List<CreateEditResponseChoices> choices = null;
+            boolean usageFound = false;
+            CompletionUsage usage = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("created".equals(fieldName)) {
-                            created = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
-                            createdFound = true;
-                        } else if ("choices".equals(fieldName)) {
-                            choices = reader.readArray(reader1 -> CreateEditResponseChoices.fromJson(reader1));
-                            choicesFound = true;
-                        } else if ("usage".equals(fieldName)) {
-                            usage = CompletionUsage.fromJson(reader);
-                            usageFound = true;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (objectFound && createdFound && choicesFound && usageFound) {
-                        CreateEditResponse deserializedCreateEditResponse =
-                                new CreateEditResponse(created, choices, usage);
+                if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("created".equals(fieldName)) {
+                    created = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    createdFound = true;
+                } else if ("choices".equals(fieldName)) {
+                    choices = reader.readArray(reader1 -> CreateEditResponseChoices.fromJson(reader1));
+                    choicesFound = true;
+                } else if ("usage".equals(fieldName)) {
+                    usage = CompletionUsage.fromJson(reader);
+                    usageFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (objectFound && createdFound && choicesFound && usageFound) {
+                CreateEditResponse deserializedCreateEditResponse = new CreateEditResponse(created, choices, usage);
 
-                        return deserializedCreateEditResponse;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!createdFound) {
-                        missingProperties.add("created");
-                    }
-                    if (!choicesFound) {
-                        missingProperties.add("choices");
-                    }
-                    if (!usageFound) {
-                        missingProperties.add("usage");
-                    }
+                return deserializedCreateEditResponse;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!createdFound) {
+                missingProperties.add("created");
+            }
+            if (!choicesFound) {
+                missingProperties.add("choices");
+            }
+            if (!usageFound) {
+                missingProperties.add("usage");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

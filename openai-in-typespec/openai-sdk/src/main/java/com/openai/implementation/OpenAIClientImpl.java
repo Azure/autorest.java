@@ -25,17 +25,23 @@ import com.generic.core.http.pipeline.HttpPipeline;
 import com.generic.core.models.BinaryData;
 import com.generic.core.models.Context;
 
-/** Initializes a new instance of the OpenAIClient type. */
+/**
+ * Initializes a new instance of the OpenAIClient type.
+ */
 public final class OpenAIClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final OpenAIClientService service;
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
@@ -44,7 +50,7 @@ public final class OpenAIClientImpl {
 
     /**
      * Initializes an instance of OpenAIClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public OpenAIClientImpl(HttpPipeline httpPipeline) {
@@ -60,512 +66,274 @@ public final class OpenAIClientImpl {
     public interface OpenAIClientService {
         // @Multipart not supported by RestProxy
         @Post("/audio/transcriptions")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createTranscriptionSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("multipart/form-data") BinaryData audio,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createTranscriptionSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData audio,
+            RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/audio/translations")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createTranslationSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("multipart/form-data") BinaryData audio,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createTranslationSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData audio,
+            RequestOptions requestOptions, Context context);
 
         @Post("/chat/completions")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createChatCompletionSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData createChatCompletionRequest,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createChatCompletionSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData createChatCompletionRequest, RequestOptions requestOptions,
+            Context context);
 
         @Post("/fine_tuning/jobs")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createFineTuningJobSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData job,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createFineTuningJobSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData job, RequestOptions requestOptions, Context context);
 
         @Get("/fine_tuning/jobs")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listPaginatedFineTuningJobsSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listPaginatedFineTuningJobsSync(@HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/fine_tuning/jobs/{fine_tuning_job_id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> retrieveFineTuningJobSync(
-                @PathParam("fine_tuning_job_id") String fineTuningJobId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> retrieveFineTuningJobSync(@PathParam("fine_tuning_job_id") String fineTuningJobId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/fine_tuning/jobs/{fine_tuning_job_id}/events")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listFineTuningEventsSync(
-                @PathParam("fine_tuning_job_id") String fineTuningJobId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listFineTuningEventsSync(@PathParam("fine_tuning_job_id") String fineTuningJobId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/fine_tuning/jobs/{fine_tuning_job_id}/cancel")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> cancelFineTuningJobSync(
-                @PathParam("fine_tuning_job_id") String fineTuningJobId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> cancelFineTuningJobSync(@PathParam("fine_tuning_job_id") String fineTuningJobId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/completions")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createCompletionSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData createCompletionRequest,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createCompletionSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData createCompletionRequest, RequestOptions requestOptions,
+            Context context);
 
         @Post("/edits")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createEditSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData edit,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createEditSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData edit, RequestOptions requestOptions, Context context);
 
         @Post("/embeddings")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createEmbeddingSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData embedding,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createEmbeddingSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData embedding, RequestOptions requestOptions, Context context);
 
         @Get("/files")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listFilesSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listFilesSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/files")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createFileSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("multipart/form-data") BinaryData file,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createFileSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData file,
+            RequestOptions requestOptions, Context context);
 
         @Post("/files/files/{file_id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> retrieveFileSync(
-                @PathParam("file_id") String fileId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> retrieveFileSync(@PathParam("file_id") String fileId, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Delete("/files/files/{file_id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> deleteFileSync(
-                @PathParam("file_id") String fileId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> deleteFileSync(@PathParam("file_id") String fileId, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/files/files/{file_id}/content")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> downloadFileSync(
-                @PathParam("file_id") String fileId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> downloadFileSync(@PathParam("file_id") String fileId, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/fine-tunes")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createFineTuneSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData fineTune,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createFineTuneSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData fineTune, RequestOptions requestOptions, Context context);
 
         @Get("/fine-tunes")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listFineTunesSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listFineTunesSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/fine-tunes/{fine_tune_id}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> retrieveFineTuneSync(
-                @PathParam("fine_tune_id") String fineTuneId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> retrieveFineTuneSync(@PathParam("fine_tune_id") String fineTuneId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/fine-tunes/{fine_tune_id}/events")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listFineTuneEventsSync(
-                @PathParam("fine_tune_id") String fineTuneId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> listFineTuneEventsSync(@PathParam("fine_tune_id") String fineTuneId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/fine-tunes/{fine_tune_id}/cancel")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> cancelFineTuneSync(
-                @PathParam("fine_tune_id") String fineTuneId,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> cancelFineTuneSync(@PathParam("fine_tune_id") String fineTuneId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/models")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listModelsSync(
-                @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listModelsSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/models/{model}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> retrieveSync(
-                @PathParam("model") String model,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> retrieveSync(@PathParam("model") String model, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Delete("/models/{model}")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> deleteSync(
-                @PathParam("model") String model,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> deleteSync(@PathParam("model") String model, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/images/generations")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createImageSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData image,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createImageSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData image, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/images/edits")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createImageEditSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("multipart/form-data") BinaryData image,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createImageEditSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData image,
+            RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/images/variations")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createImageVariationSync(
-                @HeaderParam("content-type") String contentType,
-                @HeaderParam("accept") String accept,
-                @BodyParam("multipart/form-data") BinaryData image,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createImageVariationSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData image,
+            RequestOptions requestOptions, Context context);
 
         @Post("/moderations")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createModerationSync(
-                @HeaderParam("accept") String accept,
-                @BodyParam("application/json") BinaryData content,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> createModerationSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData content, RequestOptions requestOptions, Context context);
     }
 
     /**
      * Transcribes audio into the input language.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
@@ -576,15 +344,15 @@ public final class OpenAIClientImpl {
      *     language: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     text: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param audio The audio parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -602,9 +370,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Transcribes audio into the input language.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
@@ -614,15 +382,15 @@ public final class OpenAIClientImpl {
      *     temperature: Double (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     text: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param audio The audio parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -640,9 +408,9 @@ public final class OpenAIClientImpl {
 
     /**
      * The createChatCompletion operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(gpt4/gpt-4-0314/gpt-4-0613/gpt-4-32k/gpt-4-32k-0314/gpt-4-32k-0613/gpt-3.5-turbo/gpt-3.5-turbo-16k/gpt-3.5-turbo-0301/gpt-3.5-turbo-0613/gpt-3.5-turbo-16k-0613) (Required)
@@ -681,9 +449,9 @@ public final class OpenAIClientImpl {
      *     stream: Boolean (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -711,7 +479,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param createChatCompletionRequest The createChatCompletionRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -721,22 +489,22 @@ public final class OpenAIClientImpl {
      * @return represents a chat completion response returned by model, based on the provided input.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createChatCompletionWithResponse(
-            BinaryData createChatCompletionRequest, RequestOptions requestOptions) {
+    public Response<BinaryData> createChatCompletionWithResponse(BinaryData createChatCompletionRequest,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.createChatCompletionSync(accept, createChatCompletionRequest, requestOptions, Context.NONE);
     }
 
     /**
      * Creates a job that fine-tunes a specified model from a given dataset.
-     *
-     * <p>Response includes details of the enqueued job including job status and the name of the fine-tuned models once
-     * complete.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/fine-tuning).
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Response includes details of the enqueued job including job status and the name of the
+     * fine-tuned models once complete.
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     training_file: String (Required)
@@ -748,9 +516,9 @@ public final class OpenAIClientImpl {
      *     suffix: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -777,7 +545,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param job The job parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -794,20 +562,34 @@ public final class OpenAIClientImpl {
 
     /**
      * The listPaginatedFineTuningJobs operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>after</td><td>String</td><td>No</td><td>Identifier for the last job from the previous pagination request.</td></tr>
-     *     <tr><td>limit</td><td>Long</td><td>No</td><td>Number of fine-tuning jobs to retrieve.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>after</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Identifier for the last job from the previous pagination request.</td>
+     * </tr>
+     * <tr>
+     * <td>limit</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>Number of fine-tuning jobs to retrieve.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -840,7 +622,7 @@ public final class OpenAIClientImpl {
      *     has_more: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -856,11 +638,11 @@ public final class OpenAIClientImpl {
 
     /**
      * Get info about a fine-tuning job.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/fine-tuning).
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -887,7 +669,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -897,28 +679,42 @@ public final class OpenAIClientImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> retrieveFineTuningJobWithResponse(
-            String fineTuningJobId, RequestOptions requestOptions) {
+    public Response<BinaryData> retrieveFineTuningJobWithResponse(String fineTuningJobId,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.retrieveFineTuningJobSync(fineTuningJobId, accept, requestOptions, Context.NONE);
     }
 
     /**
      * Get status updates for a fine-tuning job.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>after</td><td>String</td><td>No</td><td>Identifier for the last event from the previous pagination request.</td></tr>
-     *     <tr><td>limit</td><td>Integer</td><td>No</td><td>Number of events to retrieve.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>after</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Identifier for the last event from the previous pagination request.</td>
+     * </tr>
+     * <tr>
+     * <td>limit</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>Number of events to retrieve.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -933,7 +729,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -943,17 +739,17 @@ public final class OpenAIClientImpl {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> listFineTuningEventsWithResponse(
-            String fineTuningJobId, RequestOptions requestOptions) {
+    public Response<BinaryData> listFineTuningEventsWithResponse(String fineTuningJobId,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.listFineTuningEventsSync(fineTuningJobId, accept, requestOptions, Context.NONE);
     }
 
     /**
      * Immediately cancel a fine-tune job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -980,7 +776,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to cancel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -997,9 +793,9 @@ public final class OpenAIClientImpl {
 
     /**
      * The createCompletion operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(babbage-002/davinci-002/text-davinci-003/text-davinci-002/text-davinci-001/code-davinci-002/text-curie-001/text-babbage-001/text-ada-001) (Required)
@@ -1022,9 +818,9 @@ public final class OpenAIClientImpl {
      *     best_of: Long (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1061,7 +857,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param createCompletionRequest The createCompletionRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1071,17 +867,17 @@ public final class OpenAIClientImpl {
      * @return represents a completion response from the API.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createCompletionWithResponse(
-            BinaryData createCompletionRequest, RequestOptions requestOptions) {
+    public Response<BinaryData> createCompletionWithResponse(BinaryData createCompletionRequest,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.createCompletionSync(accept, createCompletionRequest, requestOptions, Context.NONE);
     }
 
     /**
      * The createEdit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(text-davinci-edit-001/code-davinci-edit-001) (Required)
@@ -1092,9 +888,9 @@ public final class OpenAIClientImpl {
      *     top_p: Double (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1113,7 +909,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param edit The edit parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1130,9 +926,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Creates an embedding vector representing the input text.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(text-embedding-ada-002) (Required)
@@ -1140,9 +936,9 @@ public final class OpenAIClientImpl {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1162,7 +958,7 @@ public final class OpenAIClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param embedding The embedding parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1179,9 +975,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Returns a list of files that belong to the user's organization.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1199,7 +995,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1215,18 +1011,18 @@ public final class OpenAIClientImpl {
 
     /**
      * Returns a list of files that belong to the user's organization.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
      *     purpose: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1239,7 +1035,7 @@ public final class OpenAIClientImpl {
      *     status_details: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param file The file parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1257,9 +1053,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Returns information about a specific file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1272,7 +1068,7 @@ public final class OpenAIClientImpl {
      *     status_details: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1289,9 +1085,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Delete a file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1299,7 +1095,7 @@ public final class OpenAIClientImpl {
      *     deleted: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1316,13 +1112,13 @@ public final class OpenAIClientImpl {
 
     /**
      * Returns the contents of the specified file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1339,14 +1135,14 @@ public final class OpenAIClientImpl {
 
     /**
      * Creates a job that fine-tunes a specified model from a given dataset.
-     *
-     * <p>Response includes details of the enqueued job including job status and the name of the fine-tuned models once
+     * 
+     * Response includes details of the enqueued job including job status and the name of the fine-tuned models once
      * complete.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     training_file: String (Required)
@@ -1365,9 +1161,9 @@ public final class OpenAIClientImpl {
      *     suffix: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1415,7 +1211,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTune The fineTune parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1432,9 +1228,9 @@ public final class OpenAIClientImpl {
 
     /**
      * List your organization's fine-tuning jobs.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1487,7 +1283,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1503,11 +1299,11 @@ public final class OpenAIClientImpl {
 
     /**
      * Gets info about the fine-tune job.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1555,7 +1351,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1572,25 +1368,35 @@ public final class OpenAIClientImpl {
 
     /**
      * Get fine-grained status updates for a fine-tune job.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stream</td><td>Boolean</td><td>No</td><td>Whether to stream events for the fine-tune job. If set to true, events will be sent as
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stream</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Whether to stream events for the fine-tune job. If set to true, events will be sent as
      * data-only
-     * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+     * [server-sent
+     * events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
      * as they become available. The stream will terminate with a `data: [DONE]` message when the
      * job is finished (succeeded, cancelled, or failed).
-     *
-     * If set to false, only events generated so far will be returned.</td></tr>
+     * 
+     * If set to false, only events generated so far will be returned.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1604,7 +1410,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to get events for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1621,9 +1427,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Immediately cancel a fine-tune job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1671,7 +1477,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to cancel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1687,11 +1493,11 @@ public final class OpenAIClientImpl {
     }
 
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and
-     * availability.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Lists the currently available models, and provides basic information about each one such as the
+     * owner and availability.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1705,7 +1511,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1720,10 +1526,11 @@ public final class OpenAIClientImpl {
     }
 
     /**
-     * Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Retrieves a model instance, providing basic information about the model such as the owner and
+     * permissioning.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1732,7 +1539,7 @@ public final class OpenAIClientImpl {
      *     owned_by: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param model The ID of the model to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1749,9 +1556,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1759,7 +1566,7 @@ public final class OpenAIClientImpl {
      *     deleted: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param model The model to delete.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1776,9 +1583,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Creates an image given a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
@@ -1788,9 +1595,9 @@ public final class OpenAIClientImpl {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1802,7 +1609,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1819,9 +1626,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Creates an edited or extended image given an original image and a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
@@ -1833,9 +1640,9 @@ public final class OpenAIClientImpl {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1847,7 +1654,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1865,9 +1672,9 @@ public final class OpenAIClientImpl {
 
     /**
      * Creates an edited or extended image given an original image and a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     image: byte[] (Required)
@@ -1877,9 +1684,9 @@ public final class OpenAIClientImpl {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1891,7 +1698,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1909,18 +1716,18 @@ public final class OpenAIClientImpl {
 
     /**
      * Classifies if text violates OpenAI's Content Policy.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     input: CreateModerationRequestInputModelBase (Required)
      *     model: String(text-moderation-latest/text-moderation-stable) (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1958,7 +1765,7 @@ public final class OpenAIClientImpl {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param content The content parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

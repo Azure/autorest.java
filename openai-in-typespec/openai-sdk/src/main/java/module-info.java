@@ -7,8 +7,6 @@ module com.openai {
     exports com.openai;
     exports com.openai.models;
 
-    opens com.openai.implementation.models to
-            com.generic.core;
-    opens com.openai.models to
-            com.generic.core;
+    opens com.openai.implementation.models to com.generic.core;
+    opens com.openai.models to com.generic.core;
 }

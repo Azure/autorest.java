@@ -6,26 +6,35 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateEditResponseFinishReason. */
+/**
+ * Defines values for CreateEditResponseFinishReason.
+ */
 public final class CreateEditResponseFinishReason extends ExpandableStringEnum<CreateEditResponseFinishReason> {
-    /** Static value stop for CreateEditResponseFinishReason. */
-    @Generated public static final CreateEditResponseFinishReason STOP = fromString("stop");
+    /**
+     * Static value stop for CreateEditResponseFinishReason.
+     */
+    @Generated
+    public static final CreateEditResponseFinishReason STOP = fromString("stop");
 
-    /** Static value length for CreateEditResponseFinishReason. */
-    @Generated public static final CreateEditResponseFinishReason LENGTH = fromString("length");
+    /**
+     * Static value length for CreateEditResponseFinishReason.
+     */
+    @Generated
+    public static final CreateEditResponseFinishReason LENGTH = fromString("length");
 
     /**
      * Creates a new instance of CreateEditResponseFinishReason value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateEditResponseFinishReason() {}
+    public CreateEditResponseFinishReason() {
+    }
 
     /**
      * Creates or finds a CreateEditResponseFinishReason from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateEditResponseFinishReason.
      */
@@ -36,7 +45,7 @@ public final class CreateEditResponseFinishReason extends ExpandableStringEnum<C
 
     /**
      * Gets known CreateEditResponseFinishReason values.
-     *
+     * 
      * @return known CreateEditResponseFinishReason values.
      */
     @Generated

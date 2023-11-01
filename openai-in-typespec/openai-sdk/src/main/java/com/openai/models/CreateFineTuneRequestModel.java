@@ -6,32 +6,47 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateFineTuneRequestModel. */
+/**
+ * Defines values for CreateFineTuneRequestModel.
+ */
 public final class CreateFineTuneRequestModel extends ExpandableStringEnum<CreateFineTuneRequestModel> {
-    /** Static value ada for CreateFineTuneRequestModel. */
-    @Generated public static final CreateFineTuneRequestModel ADA = fromString("ada");
+    /**
+     * Static value ada for CreateFineTuneRequestModel.
+     */
+    @Generated
+    public static final CreateFineTuneRequestModel ADA = fromString("ada");
 
-    /** Static value babbage for CreateFineTuneRequestModel. */
-    @Generated public static final CreateFineTuneRequestModel BABBAGE = fromString("babbage");
+    /**
+     * Static value babbage for CreateFineTuneRequestModel.
+     */
+    @Generated
+    public static final CreateFineTuneRequestModel BABBAGE = fromString("babbage");
 
-    /** Static value curie for CreateFineTuneRequestModel. */
-    @Generated public static final CreateFineTuneRequestModel CURIE = fromString("curie");
+    /**
+     * Static value curie for CreateFineTuneRequestModel.
+     */
+    @Generated
+    public static final CreateFineTuneRequestModel CURIE = fromString("curie");
 
-    /** Static value davinci for CreateFineTuneRequestModel. */
-    @Generated public static final CreateFineTuneRequestModel DAVINCI = fromString("davinci");
+    /**
+     * Static value davinci for CreateFineTuneRequestModel.
+     */
+    @Generated
+    public static final CreateFineTuneRequestModel DAVINCI = fromString("davinci");
 
     /**
      * Creates a new instance of CreateFineTuneRequestModel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateFineTuneRequestModel() {}
+    public CreateFineTuneRequestModel() {
+    }
 
     /**
      * Creates or finds a CreateFineTuneRequestModel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateFineTuneRequestModel.
      */
@@ -42,7 +57,7 @@ public final class CreateFineTuneRequestModel extends ExpandableStringEnum<Creat
 
     /**
      * Gets known CreateFineTuneRequestModel values.
-     *
+     * 
      * @return known CreateFineTuneRequestModel values.
      */
     @Generated

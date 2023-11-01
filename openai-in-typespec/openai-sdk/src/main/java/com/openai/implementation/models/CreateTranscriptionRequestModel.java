@@ -6,23 +6,29 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateTranscriptionRequestModel. */
+/**
+ * Defines values for CreateTranscriptionRequestModel.
+ */
 public final class CreateTranscriptionRequestModel extends ExpandableStringEnum<CreateTranscriptionRequestModel> {
-    /** Static value whisper-1 for CreateTranscriptionRequestModel. */
-    @Generated public static final CreateTranscriptionRequestModel WHISPER_1 = fromString("whisper-1");
+    /**
+     * Static value whisper-1 for CreateTranscriptionRequestModel.
+     */
+    @Generated
+    public static final CreateTranscriptionRequestModel WHISPER_1 = fromString("whisper-1");
 
     /**
      * Creates a new instance of CreateTranscriptionRequestModel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateTranscriptionRequestModel() {}
+    public CreateTranscriptionRequestModel() {
+    }
 
     /**
      * Creates or finds a CreateTranscriptionRequestModel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateTranscriptionRequestModel.
      */
@@ -33,7 +39,7 @@ public final class CreateTranscriptionRequestModel extends ExpandableStringEnum<
 
     /**
      * Gets known CreateTranscriptionRequestModel values.
-     *
+     * 
      * @return known CreateTranscriptionRequestModel values.
      */
     @Generated

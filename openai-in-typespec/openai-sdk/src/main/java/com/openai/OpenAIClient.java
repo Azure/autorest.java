@@ -30,14 +30,17 @@ import com.openai.models.ListModelsResponse;
 import com.openai.models.Model;
 import com.openai.models.OpenAIFile;
 
-/** Initializes a new instance of the synchronous OpenAIClient type. */
+/**
+ * Initializes a new instance of the synchronous OpenAIClient type.
+ */
 @ServiceClient(builder = OpenAIClientBuilder.class)
 public final class OpenAIClient {
-    @Generated private final OpenAIClientImpl serviceClient;
+    @Generated
+    private final OpenAIClientImpl serviceClient;
 
     /**
      * Initializes an instance of OpenAIClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -47,9 +50,9 @@ public final class OpenAIClient {
 
     /**
      * Transcribes audio into the input language.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
@@ -60,15 +63,15 @@ public final class OpenAIClient {
      *     language: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     text: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param audio The audio parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,9 +90,9 @@ public final class OpenAIClient {
 
     /**
      * Transcribes audio into the input language.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
@@ -99,15 +102,15 @@ public final class OpenAIClient {
      *     temperature: Double (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     text: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param audio The audio parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -126,9 +129,9 @@ public final class OpenAIClient {
 
     /**
      * The createChatCompletion operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(gpt4/gpt-4-0314/gpt-4-0613/gpt-4-32k/gpt-4-32k-0314/gpt-4-32k-0613/gpt-3.5-turbo/gpt-3.5-turbo-16k/gpt-3.5-turbo-0301/gpt-3.5-turbo-0613/gpt-3.5-turbo-16k-0613) (Required)
@@ -167,9 +170,9 @@ public final class OpenAIClient {
      *     stream: Boolean (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -197,7 +200,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param createChatCompletionRequest The createChatCompletionRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -208,8 +211,8 @@ public final class OpenAIClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createChatCompletionWithResponse(
-            BinaryData createChatCompletionRequest, RequestOptions requestOptions) {
+    public Response<BinaryData> createChatCompletionWithResponse(BinaryData createChatCompletionRequest,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'createChatCompletion' refers Union 'none | auto |
         // ChatCompletionFunctionCallOption'
         return this.serviceClient.createChatCompletionWithResponse(createChatCompletionRequest, requestOptions);
@@ -217,14 +220,14 @@ public final class OpenAIClient {
 
     /**
      * Creates a job that fine-tunes a specified model from a given dataset.
-     *
-     * <p>Response includes details of the enqueued job including job status and the name of the fine-tuned models once
-     * complete.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/fine-tuning).
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Response includes details of the enqueued job including job status and the name of the
+     * fine-tuned models once complete.
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     training_file: String (Required)
@@ -236,9 +239,9 @@ public final class OpenAIClient {
      *     suffix: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -265,7 +268,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param job The job parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -283,20 +286,34 @@ public final class OpenAIClient {
 
     /**
      * The listPaginatedFineTuningJobs operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>after</td><td>String</td><td>No</td><td>Identifier for the last job from the previous pagination request.</td></tr>
-     *     <tr><td>limit</td><td>Long</td><td>No</td><td>Number of fine-tuning jobs to retrieve.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>after</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Identifier for the last job from the previous pagination request.</td>
+     * </tr>
+     * <tr>
+     * <td>limit</td>
+     * <td>Long</td>
+     * <td>No</td>
+     * <td>Number of fine-tuning jobs to retrieve.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -329,7 +346,7 @@ public final class OpenAIClient {
      *     has_more: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -346,11 +363,11 @@ public final class OpenAIClient {
 
     /**
      * Get info about a fine-tuning job.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/fine-tuning).
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -377,7 +394,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -388,28 +405,42 @@ public final class OpenAIClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> retrieveFineTuningJobWithResponse(
-            String fineTuningJobId, RequestOptions requestOptions) {
+    public Response<BinaryData> retrieveFineTuningJobWithResponse(String fineTuningJobId,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'retrieveFineTuningJob' refers Union 'auto | NEpochs'
         return this.serviceClient.retrieveFineTuningJobWithResponse(fineTuningJobId, requestOptions);
     }
 
     /**
      * Get status updates for a fine-tuning job.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>after</td><td>String</td><td>No</td><td>Identifier for the last event from the previous pagination request.</td></tr>
-     *     <tr><td>limit</td><td>Integer</td><td>No</td><td>Number of events to retrieve.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>after</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Identifier for the last event from the previous pagination request.</td>
+     * </tr>
+     * <tr>
+     * <td>limit</td>
+     * <td>Integer</td>
+     * <td>No</td>
+     * <td>Number of events to retrieve.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -424,7 +455,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -435,16 +466,16 @@ public final class OpenAIClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> listFineTuningEventsWithResponse(
-            String fineTuningJobId, RequestOptions requestOptions) {
+    public Response<BinaryData> listFineTuningEventsWithResponse(String fineTuningJobId,
+        RequestOptions requestOptions) {
         return this.serviceClient.listFineTuningEventsWithResponse(fineTuningJobId, requestOptions);
     }
 
     /**
      * Immediately cancel a fine-tune job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -471,7 +502,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to cancel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -489,9 +520,9 @@ public final class OpenAIClient {
 
     /**
      * The createCompletion operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(babbage-002/davinci-002/text-davinci-003/text-davinci-002/text-davinci-001/code-davinci-002/text-curie-001/text-babbage-001/text-ada-001) (Required)
@@ -514,9 +545,9 @@ public final class OpenAIClient {
      *     best_of: Long (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -553,7 +584,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param createCompletionRequest The createCompletionRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -564,17 +595,17 @@ public final class OpenAIClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createCompletionWithResponse(
-            BinaryData createCompletionRequest, RequestOptions requestOptions) {
+    public Response<BinaryData> createCompletionWithResponse(BinaryData createCompletionRequest,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'createCompletion' refers Union 'Prompt'
         return this.serviceClient.createCompletionWithResponse(createCompletionRequest, requestOptions);
     }
 
     /**
      * The createEdit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(text-davinci-edit-001/code-davinci-edit-001) (Required)
@@ -585,9 +616,9 @@ public final class OpenAIClient {
      *     top_p: Double (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -606,7 +637,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param edit The edit parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -623,9 +654,9 @@ public final class OpenAIClient {
 
     /**
      * Creates an embedding vector representing the input text.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     model: String(text-embedding-ada-002) (Required)
@@ -633,9 +664,9 @@ public final class OpenAIClient {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -655,7 +686,7 @@ public final class OpenAIClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param embedding The embedding parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -674,9 +705,9 @@ public final class OpenAIClient {
 
     /**
      * Returns a list of files that belong to the user's organization.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -694,7 +725,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -710,18 +741,18 @@ public final class OpenAIClient {
 
     /**
      * Returns a list of files that belong to the user's organization.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     file: byte[] (Required)
      *     purpose: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -734,7 +765,7 @@ public final class OpenAIClient {
      *     status_details: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param file The file parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -753,9 +784,9 @@ public final class OpenAIClient {
 
     /**
      * Returns information about a specific file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -768,7 +799,7 @@ public final class OpenAIClient {
      *     status_details: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -785,9 +816,9 @@ public final class OpenAIClient {
 
     /**
      * Delete a file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -795,7 +826,7 @@ public final class OpenAIClient {
      *     deleted: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -812,13 +843,13 @@ public final class OpenAIClient {
 
     /**
      * Returns the contents of the specified file.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -835,14 +866,14 @@ public final class OpenAIClient {
 
     /**
      * Creates a job that fine-tunes a specified model from a given dataset.
-     *
-     * <p>Response includes details of the enqueued job including job status and the name of the fine-tuned models once
+     * 
+     * Response includes details of the enqueued job including job status and the name of the fine-tuned models once
      * complete.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     training_file: String (Required)
@@ -861,9 +892,9 @@ public final class OpenAIClient {
      *     suffix: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -911,7 +942,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTune The fineTune parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -928,9 +959,9 @@ public final class OpenAIClient {
 
     /**
      * List your organization's fine-tuning jobs.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -983,7 +1014,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -999,11 +1030,11 @@ public final class OpenAIClient {
 
     /**
      * Gets info about the fine-tune job.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1051,7 +1082,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1068,25 +1099,35 @@ public final class OpenAIClient {
 
     /**
      * Get fine-grained status updates for a fine-tune job.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>stream</td><td>Boolean</td><td>No</td><td>Whether to stream events for the fine-tune job. If set to true, events will be sent as
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>stream</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Whether to stream events for the fine-tune job. If set to true, events will be sent as
      * data-only
-     * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+     * [server-sent
+     * events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
      * as they become available. The stream will terminate with a `data: [DONE]` message when the
      * job is finished (succeeded, cancelled, or failed).
-     *
-     * If set to false, only events generated so far will be returned.</td></tr>
+     * 
+     * If set to false, only events generated so far will be returned.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1100,7 +1141,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to get events for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1117,9 +1158,9 @@ public final class OpenAIClient {
 
     /**
      * Immediately cancel a fine-tune job.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1167,7 +1208,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to cancel.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1183,11 +1224,11 @@ public final class OpenAIClient {
     }
 
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and
-     * availability.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Lists the currently available models, and provides basic information about each one such as the
+     * owner and availability.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     object: String (Required)
@@ -1201,7 +1242,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1216,10 +1257,11 @@ public final class OpenAIClient {
     }
 
     /**
-     * Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * Retrieves a model instance, providing basic information about the model such as the owner and
+     * permissioning.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1228,7 +1270,7 @@ public final class OpenAIClient {
      *     owned_by: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param model The ID of the model to use for this request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1245,9 +1287,9 @@ public final class OpenAIClient {
 
     /**
      * Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1255,7 +1297,7 @@ public final class OpenAIClient {
      *     deleted: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param model The model to delete.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1272,9 +1314,9 @@ public final class OpenAIClient {
 
     /**
      * Creates an image given a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
@@ -1284,9 +1326,9 @@ public final class OpenAIClient {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1298,7 +1340,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1315,9 +1357,9 @@ public final class OpenAIClient {
 
     /**
      * Creates an edited or extended image given an original image and a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
@@ -1329,9 +1371,9 @@ public final class OpenAIClient {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1343,7 +1385,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1362,9 +1404,9 @@ public final class OpenAIClient {
 
     /**
      * Creates an edited or extended image given an original image and a prompt.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     image: byte[] (Required)
@@ -1374,9 +1416,9 @@ public final class OpenAIClient {
      *     user: String (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     created: long (Required)
@@ -1388,7 +1430,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param image The image parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1407,18 +1449,18 @@ public final class OpenAIClient {
 
     /**
      * Classifies if text violates OpenAI's Content Policy.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     input: CreateModerationRequestInputModelBase (Required)
      *     model: String(text-moderation-latest/text-moderation-stable) (Optional)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1456,7 +1498,7 @@ public final class OpenAIClient {
      *     ]
      * }
      * }</pre>
-     *
+     * 
      * @param content The content parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1474,7 +1516,7 @@ public final class OpenAIClient {
 
     /**
      * Get status updates for a fine-tuning job.
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @param after Identifier for the last event from the previous pagination request.
      * @param limit Number of events to retrieve.
@@ -1497,14 +1539,13 @@ public final class OpenAIClient {
         if (limit != null) {
             requestOptions.addQueryParam("limit", String.valueOf(limit), false);
         }
-        return listFineTuningEventsWithResponse(fineTuningJobId, requestOptions)
-                .getValue()
-                .toObject(ListFineTuningJobEventsResponse.class);
+        return listFineTuningEventsWithResponse(fineTuningJobId, requestOptions).getValue()
+            .toObject(ListFineTuningJobEventsResponse.class);
     }
 
     /**
      * Get status updates for a fine-tuning job.
-     *
+     * 
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1519,14 +1560,13 @@ public final class OpenAIClient {
     public ListFineTuningJobEventsResponse listFineTuningEvents(String fineTuningJobId) {
         // Generated convenience method for listFineTuningEventsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return listFineTuningEventsWithResponse(fineTuningJobId, requestOptions)
-                .getValue()
-                .toObject(ListFineTuningJobEventsResponse.class);
+        return listFineTuningEventsWithResponse(fineTuningJobId, requestOptions).getValue()
+            .toObject(ListFineTuningJobEventsResponse.class);
     }
 
     /**
      * The createEdit operation.
-     *
+     * 
      * @param edit The edit parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1541,14 +1581,13 @@ public final class OpenAIClient {
     public CreateEditResponse createEdit(CreateEditRequest edit) {
         // Generated convenience method for createEditWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createEditWithResponse(BinaryData.fromObject(edit), requestOptions)
-                .getValue()
-                .toObject(CreateEditResponse.class);
+        return createEditWithResponse(BinaryData.fromObject(edit), requestOptions).getValue()
+            .toObject(CreateEditResponse.class);
     }
 
     /**
      * Returns a list of files that belong to the user's organization.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1566,7 +1605,7 @@ public final class OpenAIClient {
 
     /**
      * Returns information about a specific file.
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1586,7 +1625,7 @@ public final class OpenAIClient {
 
     /**
      * Delete a file.
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1606,7 +1645,7 @@ public final class OpenAIClient {
 
     /**
      * Returns the contents of the specified file.
-     *
+     * 
      * @param fileId The ID of the file to use for this request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1626,12 +1665,12 @@ public final class OpenAIClient {
 
     /**
      * Creates a job that fine-tunes a specified model from a given dataset.
-     *
-     * <p>Response includes details of the enqueued job including job status and the name of the fine-tuned models once
+     * 
+     * Response includes details of the enqueued job including job status and the name of the fine-tuned models once
      * complete.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * 
      * @param fineTune The fineTune parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1646,14 +1685,13 @@ public final class OpenAIClient {
     public FineTune createFineTune(CreateFineTuneRequest fineTune) {
         // Generated convenience method for createFineTuneWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createFineTuneWithResponse(BinaryData.fromObject(fineTune), requestOptions)
-                .getValue()
-                .toObject(FineTune.class);
+        return createFineTuneWithResponse(BinaryData.fromObject(fineTune), requestOptions).getValue()
+            .toObject(FineTune.class);
     }
 
     /**
      * List your organization's fine-tuning jobs.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1671,9 +1709,9 @@ public final class OpenAIClient {
 
     /**
      * Gets info about the fine-tune job.
-     *
-     * <p>[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
-     *
+     * 
+     * [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning).
+     * 
      * @param fineTuneId The ID of the fine-tune job.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1693,14 +1731,16 @@ public final class OpenAIClient {
 
     /**
      * Get fine-grained status updates for a fine-tune job.
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to get events for.
-     * @param stream Whether to stream events for the fine-tune job. If set to true, events will be sent as data-only
-     *     [server-sent
-     *     events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-     *     as they become available. The stream will terminate with a `data: [DONE]` message when the job is finished
-     *     (succeeded, cancelled, or failed).
-     *     <p>If set to false, only events generated so far will be returned.
+     * @param stream Whether to stream events for the fine-tune job. If set to true, events will be sent as
+     * data-only
+     * [server-sent
+     * events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
+     * as they become available. The stream will terminate with a `data: [DONE]` message when the
+     * job is finished (succeeded, cancelled, or failed).
+     * 
+     * If set to false, only events generated so far will be returned.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -1717,14 +1757,13 @@ public final class OpenAIClient {
         if (stream != null) {
             requestOptions.addQueryParam("stream", String.valueOf(stream), false);
         }
-        return listFineTuneEventsWithResponse(fineTuneId, requestOptions)
-                .getValue()
-                .toObject(ListFineTuneEventsResponse.class);
+        return listFineTuneEventsWithResponse(fineTuneId, requestOptions).getValue()
+            .toObject(ListFineTuneEventsResponse.class);
     }
 
     /**
      * Get fine-grained status updates for a fine-tune job.
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to get events for.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1739,14 +1778,13 @@ public final class OpenAIClient {
     public ListFineTuneEventsResponse listFineTuneEvents(String fineTuneId) {
         // Generated convenience method for listFineTuneEventsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return listFineTuneEventsWithResponse(fineTuneId, requestOptions)
-                .getValue()
-                .toObject(ListFineTuneEventsResponse.class);
+        return listFineTuneEventsWithResponse(fineTuneId, requestOptions).getValue()
+            .toObject(ListFineTuneEventsResponse.class);
     }
 
     /**
      * Immediately cancel a fine-tune job.
-     *
+     * 
      * @param fineTuneId The ID of the fine-tune job to cancel.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1765,9 +1803,9 @@ public final class OpenAIClient {
     }
 
     /**
-     * Lists the currently available models, and provides basic information about each one such as the owner and
-     * availability.
-     *
+     * Lists the currently available models, and provides basic information about each one such as the
+     * owner and availability.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -1784,8 +1822,9 @@ public final class OpenAIClient {
     }
 
     /**
-     * Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
-     *
+     * Retrieves a model instance, providing basic information about the model such as the owner and
+     * permissioning.
+     * 
      * @param model The ID of the model to use for this request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1805,7 +1844,7 @@ public final class OpenAIClient {
 
     /**
      * Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
-     *
+     * 
      * @param model The model to delete.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1825,7 +1864,7 @@ public final class OpenAIClient {
 
     /**
      * Creates an image given a prompt.
-     *
+     * 
      * @param image The image parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1840,8 +1879,7 @@ public final class OpenAIClient {
     public ImagesResponse createImage(CreateImageRequest image) {
         // Generated convenience method for createImageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createImageWithResponse(BinaryData.fromObject(image), requestOptions)
-                .getValue()
-                .toObject(ImagesResponse.class);
+        return createImageWithResponse(BinaryData.fromObject(image), requestOptions).getValue()
+            .toObject(ImagesResponse.class);
     }
 }

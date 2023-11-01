@@ -6,26 +6,35 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateEditRequestModel. */
+/**
+ * Defines values for CreateEditRequestModel.
+ */
 public final class CreateEditRequestModel extends ExpandableStringEnum<CreateEditRequestModel> {
-    /** Static value text-davinci-edit-001 for CreateEditRequestModel. */
-    @Generated public static final CreateEditRequestModel TEXT_DAVINCI_EDIT_001 = fromString("text-davinci-edit-001");
+    /**
+     * Static value text-davinci-edit-001 for CreateEditRequestModel.
+     */
+    @Generated
+    public static final CreateEditRequestModel TEXT_DAVINCI_EDIT_001 = fromString("text-davinci-edit-001");
 
-    /** Static value code-davinci-edit-001 for CreateEditRequestModel. */
-    @Generated public static final CreateEditRequestModel CODE_DAVINCI_EDIT_001 = fromString("code-davinci-edit-001");
+    /**
+     * Static value code-davinci-edit-001 for CreateEditRequestModel.
+     */
+    @Generated
+    public static final CreateEditRequestModel CODE_DAVINCI_EDIT_001 = fromString("code-davinci-edit-001");
 
     /**
      * Creates a new instance of CreateEditRequestModel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateEditRequestModel() {}
+    public CreateEditRequestModel() {
+    }
 
     /**
      * Creates or finds a CreateEditRequestModel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateEditRequestModel.
      */
@@ -36,7 +45,7 @@ public final class CreateEditRequestModel extends ExpandableStringEnum<CreateEdi
 
     /**
      * Gets known CreateEditRequestModel values.
-     *
+     * 
      * @return known CreateEditRequestModel values.
      */
     @Generated

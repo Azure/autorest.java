@@ -12,22 +12,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The ListFilesResponse model. */
+/**
+ * The ListFilesResponse model.
+ */
 @Immutable
 public final class ListFilesResponse implements JsonSerializable<ListFilesResponse> {
     /*
      * The object property.
      */
-    @Generated private final String object;
+    @Generated
+    private final String object;
 
     /*
      * The data property.
      */
-    @Generated private final List<OpenAIFile> data;
+    @Generated
+    private final List<OpenAIFile> data;
 
     /**
      * Creates an instance of ListFilesResponse class.
-     *
+     * 
      * @param object the object value to set.
      * @param data the data value to set.
      */
@@ -39,7 +43,7 @@ public final class ListFilesResponse implements JsonSerializable<ListFilesRespon
 
     /**
      * Get the object property: The object property.
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -49,7 +53,7 @@ public final class ListFilesResponse implements JsonSerializable<ListFilesRespon
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated
@@ -67,49 +71,48 @@ public final class ListFilesResponse implements JsonSerializable<ListFilesRespon
 
     /**
      * Reads an instance of ListFilesResponse from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of ListFilesResponse if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ListFilesResponse.
      */
     public static ListFilesResponse fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean dataFound = false;
-                    List<OpenAIFile> data = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean objectFound = false;
+            String object = null;
+            boolean dataFound = false;
+            List<OpenAIFile> data = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("data".equals(fieldName)) {
-                            data = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
-                            dataFound = true;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (objectFound && dataFound) {
-                        ListFilesResponse deserializedListFilesResponse = new ListFilesResponse(object, data);
+                if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("data".equals(fieldName)) {
+                    data = reader.readArray(reader1 -> OpenAIFile.fromJson(reader1));
+                    dataFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (objectFound && dataFound) {
+                ListFilesResponse deserializedListFilesResponse = new ListFilesResponse(object, data);
 
-                        return deserializedListFilesResponse;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!dataFound) {
-                        missingProperties.add("data");
-                    }
+                return deserializedListFilesResponse;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!dataFound) {
+                missingProperties.add("data");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

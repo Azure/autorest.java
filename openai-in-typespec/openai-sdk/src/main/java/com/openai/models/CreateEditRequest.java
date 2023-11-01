@@ -13,50 +13,58 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The CreateEditRequest model. */
+/**
+ * The CreateEditRequest model.
+ */
 @Fluent
 public final class CreateEditRequest implements JsonSerializable<CreateEditRequest> {
     /*
      * ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
      * model with this endpoint.
      */
-    @Generated private final CreateEditRequestModel model;
+    @Generated
+    private final CreateEditRequestModel model;
 
     /*
      * The input text to use as a starting point for the edit.
      */
-    @Generated private String input;
+    @Generated
+    private String input;
 
     /*
      * The instruction that tells the model how to edit the prompt.
      */
-    @Generated private final String instruction;
+    @Generated
+    private final String instruction;
 
     /*
      * How many edits to generate for the input and instruction.
      */
-    @Generated private Long n;
+    @Generated
+    private Long n;
 
     /*
      * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
      * more random, while lower values like 0.2 will make it more focused and deterministic.
-     *
+     * 
      * We generally recommend altering this or `top_p` but not both.
      */
-    @Generated private Double temperature;
+    @Generated
+    private Double temperature;
 
     /*
      * An alternative to sampling with temperature, called nucleus sampling, where the model considers
      * the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
      * the top 10% probability mass are considered.
-     *
+     * 
      * We generally recommend altering this or `temperature` but not both.
      */
-    @Generated private Double topP;
+    @Generated
+    private Double topP;
 
     /**
      * Creates an instance of CreateEditRequest class.
-     *
+     * 
      * @param model the model value to set.
      * @param instruction the instruction value to set.
      */
@@ -68,8 +76,9 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Get the model property: ID of the model to use. You can use the `text-davinci-edit-001` or
-     * `code-davinci-edit-001` model with this endpoint.
-     *
+     * `code-davinci-edit-001`
+     * model with this endpoint.
+     * 
      * @return the model value.
      */
     @Generated
@@ -79,7 +88,7 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Get the input property: The input text to use as a starting point for the edit.
-     *
+     * 
      * @return the input value.
      */
     @Generated
@@ -89,7 +98,7 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Set the input property: The input text to use as a starting point for the edit.
-     *
+     * 
      * @param input the input value to set.
      * @return the CreateEditRequest object itself.
      */
@@ -101,7 +110,7 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Get the instruction property: The instruction that tells the model how to edit the prompt.
-     *
+     * 
      * @return the instruction value.
      */
     @Generated
@@ -111,7 +120,7 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Get the n property: How many edits to generate for the input and instruction.
-     *
+     * 
      * @return the n value.
      */
     @Generated
@@ -121,7 +130,7 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Set the n property: How many edits to generate for the input and instruction.
-     *
+     * 
      * @param n the n value to set.
      * @return the CreateEditRequest object itself.
      */
@@ -132,11 +141,12 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
     }
 
     /**
-     * Get the temperature property: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make
-     * the output more random, while lower values like 0.2 will make it more focused and deterministic.
-     *
-     * <p>We generally recommend altering this or `top_p` but not both.
-     *
+     * Get the temperature property: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
+     * make the output
+     * more random, while lower values like 0.2 will make it more focused and deterministic.
+     * 
+     * We generally recommend altering this or `top_p` but not both.
+     * 
      * @return the temperature value.
      */
     @Generated
@@ -145,11 +155,12 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
     }
 
     /**
-     * Set the temperature property: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make
-     * the output more random, while lower values like 0.2 will make it more focused and deterministic.
-     *
-     * <p>We generally recommend altering this or `top_p` but not both.
-     *
+     * Set the temperature property: What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
+     * make the output
+     * more random, while lower values like 0.2 will make it more focused and deterministic.
+     * 
+     * We generally recommend altering this or `top_p` but not both.
+     * 
      * @param temperature the temperature value to set.
      * @return the CreateEditRequest object itself.
      */
@@ -161,11 +172,12 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Get the topP property: An alternative to sampling with temperature, called nucleus sampling, where the model
-     * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top
-     * 10% probability mass are considered.
-     *
-     * <p>We generally recommend altering this or `temperature` but not both.
-     *
+     * considers
+     * the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+     * the top 10% probability mass are considered.
+     * 
+     * We generally recommend altering this or `temperature` but not both.
+     * 
      * @return the topP value.
      */
     @Generated
@@ -175,11 +187,12 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Set the topP property: An alternative to sampling with temperature, called nucleus sampling, where the model
-     * considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top
-     * 10% probability mass are considered.
-     *
-     * <p>We generally recommend altering this or `temperature` but not both.
-     *
+     * considers
+     * the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+     * the top 10% probability mass are considered.
+     * 
+     * We generally recommend altering this or `temperature` but not both.
+     * 
      * @param topP the topP value to set.
      * @return the CreateEditRequest object itself.
      */
@@ -203,65 +216,64 @@ public final class CreateEditRequest implements JsonSerializable<CreateEditReque
 
     /**
      * Reads an instance of CreateEditRequest from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of CreateEditRequest if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CreateEditRequest.
      */
     public static CreateEditRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean modelFound = false;
-                    CreateEditRequestModel model = null;
-                    boolean instructionFound = false;
-                    String instruction = null;
-                    String input = null;
-                    Long n = null;
-                    Double temperature = null;
-                    Double topP = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean modelFound = false;
+            CreateEditRequestModel model = null;
+            boolean instructionFound = false;
+            String instruction = null;
+            String input = null;
+            Long n = null;
+            Double temperature = null;
+            Double topP = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("model".equals(fieldName)) {
-                            model = CreateEditRequestModel.fromString(reader.getString());
-                            modelFound = true;
-                        } else if ("instruction".equals(fieldName)) {
-                            instruction = reader.getString();
-                            instructionFound = true;
-                        } else if ("input".equals(fieldName)) {
-                            input = reader.getString();
-                        } else if ("n".equals(fieldName)) {
-                            n = reader.getNullable(JsonReader::getLong);
-                        } else if ("temperature".equals(fieldName)) {
-                            temperature = reader.getNullable(JsonReader::getDouble);
-                        } else if ("top_p".equals(fieldName)) {
-                            topP = reader.getNullable(JsonReader::getDouble);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (modelFound && instructionFound) {
-                        CreateEditRequest deserializedCreateEditRequest = new CreateEditRequest(model, instruction);
-                        deserializedCreateEditRequest.input = input;
-                        deserializedCreateEditRequest.n = n;
-                        deserializedCreateEditRequest.temperature = temperature;
-                        deserializedCreateEditRequest.topP = topP;
+                if ("model".equals(fieldName)) {
+                    model = CreateEditRequestModel.fromString(reader.getString());
+                    modelFound = true;
+                } else if ("instruction".equals(fieldName)) {
+                    instruction = reader.getString();
+                    instructionFound = true;
+                } else if ("input".equals(fieldName)) {
+                    input = reader.getString();
+                } else if ("n".equals(fieldName)) {
+                    n = reader.getNullable(JsonReader::getLong);
+                } else if ("temperature".equals(fieldName)) {
+                    temperature = reader.getNullable(JsonReader::getDouble);
+                } else if ("top_p".equals(fieldName)) {
+                    topP = reader.getNullable(JsonReader::getDouble);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (modelFound && instructionFound) {
+                CreateEditRequest deserializedCreateEditRequest = new CreateEditRequest(model, instruction);
+                deserializedCreateEditRequest.input = input;
+                deserializedCreateEditRequest.n = n;
+                deserializedCreateEditRequest.temperature = temperature;
+                deserializedCreateEditRequest.topP = topP;
 
-                        return deserializedCreateEditRequest;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!modelFound) {
-                        missingProperties.add("model");
-                    }
-                    if (!instructionFound) {
-                        missingProperties.add("instruction");
-                    }
+                return deserializedCreateEditRequest;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!modelFound) {
+                missingProperties.add("model");
+            }
+            if (!instructionFound) {
+                missingProperties.add("instruction");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

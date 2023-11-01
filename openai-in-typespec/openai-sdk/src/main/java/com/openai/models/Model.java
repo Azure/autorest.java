@@ -15,32 +15,38 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Describes an OpenAI model offering that can be used with the API. */
+/**
+ * Describes an OpenAI model offering that can be used with the API.
+ */
 @Immutable
 public final class Model implements JsonSerializable<Model> {
     /*
      * The model identifier, which can be referenced in the API endpoints.
      */
-    @Generated private final String id;
+    @Generated
+    private final String id;
 
     /*
      * The object type, which is always "model".
      */
-    @Generated private final String object = "model";
+    @Generated
+    private final String object = "model";
 
     /*
      * The Unix timestamp (in seconds) when the model was created.
      */
-    @Generated private final long created;
+    @Generated
+    private final long created;
 
     /*
      * The organization that owns the model.
      */
-    @Generated private final String ownedBy;
+    @Generated
+    private final String ownedBy;
 
     /**
      * Creates an instance of Model class.
-     *
+     * 
      * @param id the id value to set.
      * @param created the created value to set.
      * @param ownedBy the ownedBy value to set.
@@ -54,7 +60,7 @@ public final class Model implements JsonSerializable<Model> {
 
     /**
      * Get the id property: The model identifier, which can be referenced in the API endpoints.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -64,7 +70,7 @@ public final class Model implements JsonSerializable<Model> {
 
     /**
      * Get the object property: The object type, which is always "model".
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -74,7 +80,7 @@ public final class Model implements JsonSerializable<Model> {
 
     /**
      * Get the created property: The Unix timestamp (in seconds) when the model was created.
-     *
+     * 
      * @return the created value.
      */
     @Generated
@@ -84,7 +90,7 @@ public final class Model implements JsonSerializable<Model> {
 
     /**
      * Get the ownedBy property: The organization that owns the model.
-     *
+     * 
      * @return the ownedBy value.
      */
     @Generated
@@ -104,65 +110,64 @@ public final class Model implements JsonSerializable<Model> {
 
     /**
      * Reads an instance of Model from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Model if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Model.
      */
     public static Model fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean idFound = false;
-                    String id = null;
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean createdFound = false;
-                    OffsetDateTime created = null;
-                    boolean ownedByFound = false;
-                    String ownedBy = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean idFound = false;
+            String id = null;
+            boolean objectFound = false;
+            String object = null;
+            boolean createdFound = false;
+            OffsetDateTime created = null;
+            boolean ownedByFound = false;
+            String ownedBy = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("id".equals(fieldName)) {
-                            id = reader.getString();
-                            idFound = true;
-                        } else if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("created".equals(fieldName)) {
-                            created = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
-                            createdFound = true;
-                        } else if ("owned_by".equals(fieldName)) {
-                            ownedBy = reader.getString();
-                            ownedByFound = true;
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (idFound && objectFound && createdFound && ownedByFound) {
-                        Model deserializedModel = new Model(id, created, ownedBy);
+                if ("id".equals(fieldName)) {
+                    id = reader.getString();
+                    idFound = true;
+                } else if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("created".equals(fieldName)) {
+                    created = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    createdFound = true;
+                } else if ("owned_by".equals(fieldName)) {
+                    ownedBy = reader.getString();
+                    ownedByFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (idFound && objectFound && createdFound && ownedByFound) {
+                Model deserializedModel = new Model(id, created, ownedBy);
 
-                        return deserializedModel;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!idFound) {
-                        missingProperties.add("id");
-                    }
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!createdFound) {
-                        missingProperties.add("created");
-                    }
-                    if (!ownedByFound) {
-                        missingProperties.add("owned_by");
-                    }
+                return deserializedModel;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!idFound) {
+                missingProperties.add("id");
+            }
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!createdFound) {
+                missingProperties.add("created");
+            }
+            if (!ownedByFound) {
+                missingProperties.add("owned_by");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

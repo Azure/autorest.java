@@ -16,54 +16,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** The `File` object represents a document that has been uploaded to OpenAI. */
+/**
+ * The `File` object represents a document that has been uploaded to OpenAI.
+ */
 @Immutable
 public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
     /*
      * The file identifier, which can be referenced in the API endpoints.
      */
-    @Generated private final String id;
+    @Generated
+    private final String id;
 
     /*
      * The object type, which is always "file".
      */
-    @Generated private final String object = "file";
+    @Generated
+    private final String object = "file";
 
     /*
      * The size of the file in bytes.
      */
-    @Generated private final long bytes;
+    @Generated
+    private final long bytes;
 
     /*
      * The Unix timestamp (in seconds) for when the file was created.
      */
-    @Generated private final long createdAt;
+    @Generated
+    private final long createdAt;
 
     /*
      * The name of the file.
      */
-    @Generated private final String filename;
+    @Generated
+    private final String filename;
 
     /*
      * The intended purpose of the file. Currently, only "fine-tune" is supported.
      */
-    @Generated private final String purpose;
+    @Generated
+    private final String purpose;
 
     /*
      * The current status of the file, which can be either `uploaded`, `processed`, `pending`,
      * `error`, `deleting` or `deleted`.
      */
-    @Generated private final OpenAIFileStatus status;
+    @Generated
+    private final OpenAIFileStatus status;
 
     /*
      * Additional details about the status of the file. If the file is in the `error` state, this will
      * include a message describing the error.
      */
-    @Generated private String statusDetails;
+    @Generated
+    private String statusDetails;
 
     /**
      * Creates an instance of OpenAIFile class.
-     *
+     * 
      * @param id the id value to set.
      * @param bytes the bytes value to set.
      * @param createdAt the createdAt value to set.
@@ -72,8 +82,8 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
      * @param status the status value to set.
      */
     @Generated
-    private OpenAIFile(
-            String id, long bytes, OffsetDateTime createdAt, String filename, String purpose, OpenAIFileStatus status) {
+    private OpenAIFile(String id, long bytes, OffsetDateTime createdAt, String filename, String purpose,
+        OpenAIFileStatus status) {
         this.id = id;
         this.bytes = bytes;
         this.createdAt = createdAt.toEpochSecond();
@@ -84,7 +94,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the id property: The file identifier, which can be referenced in the API endpoints.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -94,7 +104,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the object property: The object type, which is always "file".
-     *
+     * 
      * @return the object value.
      */
     @Generated
@@ -104,7 +114,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the bytes property: The size of the file in bytes.
-     *
+     * 
      * @return the bytes value.
      */
     @Generated
@@ -114,7 +124,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the createdAt property: The Unix timestamp (in seconds) for when the file was created.
-     *
+     * 
      * @return the createdAt value.
      */
     @Generated
@@ -124,7 +134,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the filename property: The name of the file.
-     *
+     * 
      * @return the filename value.
      */
     @Generated
@@ -134,7 +144,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the purpose property: The intended purpose of the file. Currently, only "fine-tune" is supported.
-     *
+     * 
      * @return the purpose value.
      */
     @Generated
@@ -145,7 +155,7 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
     /**
      * Get the status property: The current status of the file, which can be either `uploaded`, `processed`, `pending`,
      * `error`, `deleting` or `deleted`.
-     *
+     * 
      * @return the status value.
      */
     @Generated
@@ -155,8 +165,9 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Get the statusDetails property: Additional details about the status of the file. If the file is in the `error`
-     * state, this will include a message describing the error.
-     *
+     * state, this will
+     * include a message describing the error.
+     * 
      * @return the statusDetails value.
      */
     @Generated
@@ -180,101 +191,93 @@ public final class OpenAIFile implements JsonSerializable<OpenAIFile> {
 
     /**
      * Reads an instance of OpenAIFile from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of OpenAIFile if the JsonReader was pointing to an instance of it, or null if it was pointing
-     *     to JSON null.
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OpenAIFile.
      */
     public static OpenAIFile fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean idFound = false;
-                    String id = null;
-                    boolean objectFound = false;
-                    String object = null;
-                    boolean bytesFound = false;
-                    long bytes = 0L;
-                    boolean createdAtFound = false;
-                    OffsetDateTime createdAt = null;
-                    boolean filenameFound = false;
-                    String filename = null;
-                    boolean purposeFound = false;
-                    String purpose = null;
-                    boolean statusFound = false;
-                    OpenAIFileStatus status = null;
-                    String statusDetails = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean idFound = false;
+            String id = null;
+            boolean objectFound = false;
+            String object = null;
+            boolean bytesFound = false;
+            long bytes = 0L;
+            boolean createdAtFound = false;
+            OffsetDateTime createdAt = null;
+            boolean filenameFound = false;
+            String filename = null;
+            boolean purposeFound = false;
+            String purpose = null;
+            boolean statusFound = false;
+            OpenAIFileStatus status = null;
+            String statusDetails = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("id".equals(fieldName)) {
-                            id = reader.getString();
-                            idFound = true;
-                        } else if ("object".equals(fieldName)) {
-                            object = reader.getString();
-                            objectFound = true;
-                        } else if ("bytes".equals(fieldName)) {
-                            bytes = reader.getLong();
-                            bytesFound = true;
-                        } else if ("createdAt".equals(fieldName)) {
-                            createdAt =
-                                    OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
-                            createdAtFound = true;
-                        } else if ("filename".equals(fieldName)) {
-                            filename = reader.getString();
-                            filenameFound = true;
-                        } else if ("purpose".equals(fieldName)) {
-                            purpose = reader.getString();
-                            purposeFound = true;
-                        } else if ("status".equals(fieldName)) {
-                            status = OpenAIFileStatus.fromString(reader.getString());
-                            statusFound = true;
-                        } else if ("status_details".equals(fieldName)) {
-                            statusDetails = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                    if (idFound
-                            && objectFound
-                            && bytesFound
-                            && createdAtFound
-                            && filenameFound
-                            && purposeFound
-                            && statusFound) {
-                        OpenAIFile deserializedOpenAIFile =
-                                new OpenAIFile(id, bytes, createdAt, filename, purpose, status);
-                        deserializedOpenAIFile.statusDetails = statusDetails;
+                if ("id".equals(fieldName)) {
+                    id = reader.getString();
+                    idFound = true;
+                } else if ("object".equals(fieldName)) {
+                    object = reader.getString();
+                    objectFound = true;
+                } else if ("bytes".equals(fieldName)) {
+                    bytes = reader.getLong();
+                    bytesFound = true;
+                } else if ("createdAt".equals(fieldName)) {
+                    createdAt = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    createdAtFound = true;
+                } else if ("filename".equals(fieldName)) {
+                    filename = reader.getString();
+                    filenameFound = true;
+                } else if ("purpose".equals(fieldName)) {
+                    purpose = reader.getString();
+                    purposeFound = true;
+                } else if ("status".equals(fieldName)) {
+                    status = OpenAIFileStatus.fromString(reader.getString());
+                    statusFound = true;
+                } else if ("status_details".equals(fieldName)) {
+                    statusDetails = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (idFound && objectFound && bytesFound && createdAtFound && filenameFound && purposeFound
+                && statusFound) {
+                OpenAIFile deserializedOpenAIFile = new OpenAIFile(id, bytes, createdAt, filename, purpose, status);
+                deserializedOpenAIFile.statusDetails = statusDetails;
 
-                        return deserializedOpenAIFile;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!idFound) {
-                        missingProperties.add("id");
-                    }
-                    if (!objectFound) {
-                        missingProperties.add("object");
-                    }
-                    if (!bytesFound) {
-                        missingProperties.add("bytes");
-                    }
-                    if (!createdAtFound) {
-                        missingProperties.add("createdAt");
-                    }
-                    if (!filenameFound) {
-                        missingProperties.add("filename");
-                    }
-                    if (!purposeFound) {
-                        missingProperties.add("purpose");
-                    }
-                    if (!statusFound) {
-                        missingProperties.add("status");
-                    }
+                return deserializedOpenAIFile;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!idFound) {
+                missingProperties.add("id");
+            }
+            if (!objectFound) {
+                missingProperties.add("object");
+            }
+            if (!bytesFound) {
+                missingProperties.add("bytes");
+            }
+            if (!createdAtFound) {
+                missingProperties.add("createdAt");
+            }
+            if (!filenameFound) {
+                missingProperties.add("filename");
+            }
+            if (!purposeFound) {
+                missingProperties.add("purpose");
+            }
+            if (!statusFound) {
+                missingProperties.add("status");
+            }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

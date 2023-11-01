@@ -6,29 +6,41 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for FineTuningJobEventLevel. */
+/**
+ * Defines values for FineTuningJobEventLevel.
+ */
 public final class FineTuningJobEventLevel extends ExpandableStringEnum<FineTuningJobEventLevel> {
-    /** Static value info for FineTuningJobEventLevel. */
-    @Generated public static final FineTuningJobEventLevel INFO = fromString("info");
+    /**
+     * Static value info for FineTuningJobEventLevel.
+     */
+    @Generated
+    public static final FineTuningJobEventLevel INFO = fromString("info");
 
-    /** Static value warn for FineTuningJobEventLevel. */
-    @Generated public static final FineTuningJobEventLevel WARN = fromString("warn");
+    /**
+     * Static value warn for FineTuningJobEventLevel.
+     */
+    @Generated
+    public static final FineTuningJobEventLevel WARN = fromString("warn");
 
-    /** Static value error for FineTuningJobEventLevel. */
-    @Generated public static final FineTuningJobEventLevel ERROR = fromString("error");
+    /**
+     * Static value error for FineTuningJobEventLevel.
+     */
+    @Generated
+    public static final FineTuningJobEventLevel ERROR = fromString("error");
 
     /**
      * Creates a new instance of FineTuningJobEventLevel value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public FineTuningJobEventLevel() {}
+    public FineTuningJobEventLevel() {
+    }
 
     /**
      * Creates or finds a FineTuningJobEventLevel from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding FineTuningJobEventLevel.
      */
@@ -39,7 +51,7 @@ public final class FineTuningJobEventLevel extends ExpandableStringEnum<FineTuni
 
     /**
      * Gets known FineTuningJobEventLevel values.
-     *
+     * 
      * @return known FineTuningJobEventLevel values.
      */
     @Generated

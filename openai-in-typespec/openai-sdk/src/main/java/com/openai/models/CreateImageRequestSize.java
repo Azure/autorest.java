@@ -6,30 +6,41 @@ import com.generic.core.annotation.Generated;
 import com.generic.core.models.ExpandableStringEnum;
 import java.util.Collection;
 
-/** Defines values for CreateImageRequestSize. */
+/**
+ * Defines values for CreateImageRequestSize.
+ */
 public final class CreateImageRequestSize extends ExpandableStringEnum<CreateImageRequestSize> {
-    /** Static value 256x256 for CreateImageRequestSize. */
-    @Generated public static final CreateImageRequestSize TWO_FIVE_SIXX_TWO_FIVE_SIX = fromString("256x256");
+    /**
+     * Static value 256x256 for CreateImageRequestSize.
+     */
+    @Generated
+    public static final CreateImageRequestSize TWO_FIVE_SIXX_TWO_FIVE_SIX = fromString("256x256");
 
-    /** Static value 512x512 for CreateImageRequestSize. */
-    @Generated public static final CreateImageRequestSize FIVE_ONE_TWOX_FIVE_ONE_TWO = fromString("512x512");
+    /**
+     * Static value 512x512 for CreateImageRequestSize.
+     */
+    @Generated
+    public static final CreateImageRequestSize FIVE_ONE_TWOX_FIVE_ONE_TWO = fromString("512x512");
 
-    /** Static value 1024x1024 for CreateImageRequestSize. */
+    /**
+     * Static value 1024x1024 for CreateImageRequestSize.
+     */
     @Generated
     public static final CreateImageRequestSize ONE_ZERO_TWO_FOURX_ONE_ZERO_TWO_FOUR = fromString("1024x1024");
 
     /**
      * Creates a new instance of CreateImageRequestSize value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public CreateImageRequestSize() {}
+    public CreateImageRequestSize() {
+    }
 
     /**
      * Creates or finds a CreateImageRequestSize from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding CreateImageRequestSize.
      */
@@ -40,7 +51,7 @@ public final class CreateImageRequestSize extends ExpandableStringEnum<CreateIma
 
     /**
      * Gets known CreateImageRequestSize values.
-     *
+     * 
      * @return known CreateImageRequestSize values.
      */
     @Generated
