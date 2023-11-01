@@ -307,7 +307,7 @@ public class ClientBuilderTrait {
         keyCredentialTrait.setTraitInterfaceName(KeyCredentialTrait.class.getSimpleName());
         List<String> importPackages = new ArrayList<>();
         keyCredentialTrait.setImportPackages(importPackages);
-        importPackages.add(KeyCredentialTrait.class.getName());
+        importPackages.add(ClassType.KeyCredentialTrait.getFullName());
 
         List<ClientBuilderTraitMethod> clientBuilderTraitMethods = new ArrayList<>();
         keyCredentialTrait.setTraitMethods(clientBuilderTraitMethods);
