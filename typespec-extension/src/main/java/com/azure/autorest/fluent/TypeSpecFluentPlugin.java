@@ -58,7 +58,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     public Client processClient(CodeModel codeModel) {
         // transform code model
-        FluentNamer fluentNamer = new TypeSpecFluentNamer(this);
+        FluentNamer fluentNamer = new TypeSpecFluentNamer(SETTINGS_MAP);
         codeModel = fluentNamer.transform(codeModel);
 
         // call FluentGen.handleMap

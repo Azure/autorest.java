@@ -7,20 +7,21 @@ import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.fluentnamer.FluentNamer;
 
 import java.lang.reflect.Type;
+import java.util.Map;
 
 public class TypeSpecFluentNamer extends FluentNamer {
-    private final TypeSpecFluentPlugin fluentPlugin;
-    public TypeSpecFluentNamer(TypeSpecFluentPlugin fluentPlugin) {
+    private final Map<String, Object> settingsMap;
+    public TypeSpecFluentNamer(Map<String, Object> settingsMap) {
         super(new TypeSpecPlugin.MockConnection(), "dummy", "dummy");
-        this.fluentPlugin = fluentPlugin;
+        this.settingsMap = settingsMap;
     }
 
     @Override
     public <T> T getValue(Type type, String key) {
         // in case parent class constructor calls this method, e.g. new PluginLogger()
-        if (fluentPlugin == null) {
+        if (settingsMap == null) {
             return null;
         }
-        return fluentPlugin.getValue(type, key);
+        return (T) settingsMap.get(key);
     }
 }
