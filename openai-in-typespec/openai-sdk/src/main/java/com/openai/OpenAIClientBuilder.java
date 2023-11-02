@@ -4,7 +4,6 @@ package com.openai;
 
 import com.generic.core.annotation.Generated;
 import com.generic.core.annotation.ServiceClientBuilder;
-import com.generic.core.client.traits.KeyCredentialTrait;
 import com.generic.core.credential.KeyCredential;
 import com.generic.core.http.pipeline.HttpPipeline;
 import com.generic.core.http.pipeline.HttpPipelineBuilder;
@@ -18,7 +17,7 @@ import java.util.List;
  * A builder for creating a new instance of the OpenAIClient type.
  */
 @ServiceClientBuilder(serviceClients = { OpenAIClient.class })
-public final class OpenAIClientBuilder implements KeyCredentialTrait<OpenAIClientBuilder> {
+public final class OpenAIClientBuilder {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -42,7 +41,6 @@ public final class OpenAIClientBuilder implements KeyCredentialTrait<OpenAIClien
      * {@inheritDoc}.
      */
     @Generated
-    @Override
     public OpenAIClientBuilder credential(KeyCredential keyCredential) {
         this.keyCredential = keyCredential;
         return this;

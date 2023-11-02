@@ -1534,10 +1534,10 @@ public final class OpenAIClient {
         // Generated convenience method for listFineTuningEventsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (after != null) {
-            requestOptions.addQueryParam("after", after, false);
+            requestOptions.addQueryParam("after", after);
         }
         if (limit != null) {
-            requestOptions.addQueryParam("limit", String.valueOf(limit), false);
+            requestOptions.addQueryParam("limit", String.valueOf(limit));
         }
         return listFineTuningEventsWithResponse(fineTuningJobId, requestOptions).getValue()
             .toObject(ListFineTuningJobEventsResponse.class);
@@ -1755,7 +1755,7 @@ public final class OpenAIClient {
         // Generated convenience method for listFineTuneEventsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (stream != null) {
-            requestOptions.addQueryParam("stream", String.valueOf(stream), false);
+            requestOptions.addQueryParam("stream", String.valueOf(stream));
         }
         return listFineTuneEventsWithResponse(fineTuneId, requestOptions).getValue()
             .toObject(ListFineTuneEventsResponse.class);
