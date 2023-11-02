@@ -119,10 +119,12 @@ public class Main {
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
-        String artifactId = ClientModelUtil.getArtifactId();
-        if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project.version}\n", null);
+        if (settings.isBranded()) {
+            String artifactId = ClientModelUtil.getArtifactId();
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project.version}\n", null);
+            }
         }
         System.exit(0);
     }

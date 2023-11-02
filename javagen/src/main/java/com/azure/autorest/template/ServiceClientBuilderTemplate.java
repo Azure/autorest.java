@@ -135,7 +135,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
+        if (!settings.isAzureOrFluent() && /* TODO: generic not having Trait */ settings.isBranded() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
@@ -407,7 +407,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     }
                     classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()));
                     addGeneratedAnnotation(classBlock);
-                    addOverrideAnnotation(classBlock);
+                    if (settings.isBranded()) {
+                        // TODO: generic not having Trait
+                        addOverrideAnnotation(classBlock);
+                    }
                     classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
                             traitMethod.getMethodName(), traitMethod.getMethodParamType(),
                             traitMethod.getMethodParamName()), traitMethod.getMethodImpl());
