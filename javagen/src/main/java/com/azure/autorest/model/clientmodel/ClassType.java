@@ -57,7 +57,7 @@ public class ClassType implements IType {
 //        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, com.generic.core.models.Headers.class));
 //        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, com.generic.core.http.models.HttpHeaderName.class));
 //        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
-//        // TODO: generic
+//        // TODO: generic not having ClientOptions
 ////        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
 //        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
 //        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));

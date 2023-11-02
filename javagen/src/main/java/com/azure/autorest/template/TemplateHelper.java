@@ -35,7 +35,7 @@ public final class TemplateHelper {
         if (JavaSettings.getInstance().isBranded()) {
             return String.format("CoreUtils.clone(%s)", propertyName);
         } else {
-            // TODO: generic
+            // TODO: generic not having CoreUtils
             return propertyName;
         }
     }
@@ -49,7 +49,7 @@ public final class TemplateHelper {
     }
 
     private static void createGenericHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
-        // TODO: generic
+        // TODO: generic "createDefaultPipeline" not ready
 //        function.line("HttpPipeline httpPipeline = HttpPipelineBuilder.createDefaultPipeline();");
 //        function.methodReturn("httpPipeline");
 //        // TODO: default pipeline is immutable and we need to add KeyCredential policy to the pipeline depending on securityInfo.

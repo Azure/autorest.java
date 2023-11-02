@@ -308,11 +308,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected void addSerializerImport(Set<String> imports) {
-        if (!JavaSettings.getInstance().isBranded()) {
-            ClassType.JsonSerializer.addImportsTo(imports, false);
-            // TODO: generic
-//            imports.add(JsonSerializerProvider.class.getName());
-        } else {
+        if (JavaSettings.getInstance().isBranded()) {
             imports.add("com.azure.core.util.serializer.JacksonAdapter");
         }
     }
