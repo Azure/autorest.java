@@ -90,11 +90,11 @@ public class Main {
         if (emitterOptions.getFluent() == null) {
             handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
         } else {
-            handleFluent(codeModel, emitterOptions, sdkIntegration, outputDir);
+            handleFluent(codeModel, emitterOptions, sdkIntegration);
         }
     }
 
-    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
+    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration) {
         // initialize plugin
         TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
 

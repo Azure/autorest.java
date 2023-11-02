@@ -107,6 +107,10 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("graal-vm-config", true);
     }
 
+    static Map<String, Object> getSettingsMap() {
+        return SETTINGS_MAP;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getValue(Type type, String key) {
