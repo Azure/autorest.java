@@ -58,7 +58,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     public Client processClient(CodeModel codeModel) {
         // transform code model
-        FluentNamer fluentNamer = new TypeSpecFluentNamer();
+        FluentNamer fluentNamer = new TypeSpecFluentNamer(this);
         codeModel = fluentNamer.transform(codeModel);
 
         // call FluentGen.handleMap
@@ -105,10 +105,6 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("client-flattened-annotation-target", "none");
         SETTINGS_MAP.put("null-byte-array-maps-to-empty-array", true);
         SETTINGS_MAP.put("graal-vm-config", true);
-    }
-
-    static Map<String, Object> getSettingsMap() {
-        return SETTINGS_MAP;
     }
 
     @SuppressWarnings("unchecked")

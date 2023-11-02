@@ -9,13 +9,18 @@ import com.azure.autorest.fluentnamer.FluentNamer;
 import java.lang.reflect.Type;
 
 public class TypeSpecFluentNamer extends FluentNamer {
-
-    public TypeSpecFluentNamer() {
+    private final TypeSpecFluentPlugin fluentPlugin;
+    public TypeSpecFluentNamer(TypeSpecFluentPlugin fluentPlugin) {
         super(new TypeSpecPlugin.MockConnection(), "dummy", "dummy");
+        this.fluentPlugin = fluentPlugin;
     }
 
     @Override
     public <T> T getValue(Type type, String key) {
-        return (T) TypeSpecFluentPlugin.getSettingsMap().get(key);
+        // in case parent class constructor calls this method, e.g. new PluginLogger()
+        if (fluentPlugin == null) {
+            return null;
+        }
+        return fluentPlugin.getValue(type, key);
     }
 }
