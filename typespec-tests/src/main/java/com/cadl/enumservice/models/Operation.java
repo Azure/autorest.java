@@ -61,28 +61,28 @@ public final class Operation {
      */
     @Generated
     @JsonProperty(value = "priorityValue")
-    private Priority1 priorityValue = Priority1.LOW;
+    private Priority priorityValue = Priority.LOW;
 
     /*
      * The colorValue property.
      */
     @Generated
     @JsonProperty(value = "colorValue")
-    private Color1 colorValue = Color1.GREEN;
+    private Color colorValue = Color.GREEN;
 
     /*
      * The colorModelValue property.
      */
     @Generated
     @JsonProperty(value = "colorModelValue")
-    private ColorModel1 colorModelValue = ColorModel1.BLUE;
+    private ColorModel colorModelValue = ColorModel.BLUE;
 
     /*
      * The unitValue property.
      */
     @Generated
     @JsonProperty(value = "unitValue")
-    private Unit1 unitValue = Unit1.MILLIGRAM;
+    private Unit unitValue = Unit.MILLIGRAM;
 
     /**
      * Creates an instance of Operation class.
@@ -169,7 +169,7 @@ public final class Operation {
      * @return the priorityValue value.
      */
     @Generated
-    public Priority1 getPriorityValue() {
+    public Priority getPriorityValue() {
         return this.priorityValue;
     }
 
@@ -179,7 +179,7 @@ public final class Operation {
      * @return the colorValue value.
      */
     @Generated
-    public Color1 getColorValue() {
+    public Color getColorValue() {
         return this.colorValue;
     }
 
@@ -189,7 +189,7 @@ public final class Operation {
      * @return the colorModelValue value.
      */
     @Generated
-    public ColorModel1 getColorModelValue() {
+    public ColorModel getColorModelValue() {
         return this.colorModelValue;
     }
 
@@ -199,7 +199,7 @@ public final class Operation {
      * @return the unitValue value.
      */
     @Generated
-    public Unit1 getUnitValue() {
+    public Unit getUnitValue() {
         return this.unitValue;
     }
 }

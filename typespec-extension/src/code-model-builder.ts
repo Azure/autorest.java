@@ -1819,7 +1819,7 @@ export class CodeModelBuilder {
   }
 
   private processConstantSchemaForEnumMember(type: EnumMember, name: string): ConstantSchema {
-    const valueType = this.processChoiceSchema(type.enum, this.getName(type.enum), isFixed(this.program, type.enum));
+    const valueType = this.processSchema(type.enum, this.getName(type.enum));
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
