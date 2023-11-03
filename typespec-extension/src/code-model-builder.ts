@@ -1526,7 +1526,7 @@ export class CodeModelBuilder {
         return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
 
       case "Union":
-        return this.processUnionSchema(type, nameHint);
+        return this.processUnionSchema(type, this.getName(type, nameHint));
 
       case "ModelProperty": {
         let schema = undefined;
@@ -2129,14 +2129,15 @@ export class CodeModelBuilder {
 
     if (isSameLiteralTypes(nonNullVariants)) {
       // enum
-      this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
     const baseName = pascalCase(name) + "Model";
-    this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
+    this.logWarning(
+      `Convert TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to Class '${baseName}'`,
+    );
     const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
@@ -2253,7 +2254,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
@@ -2287,10 +2288,10 @@ export class CodeModelBuilder {
 
     if (!target.name && nameHint) {
       const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec Model to '${newName}'`);
+      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
-    return target.name;
+    return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {
