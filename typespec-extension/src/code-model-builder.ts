@@ -149,6 +149,7 @@ import {
   getUnionDescription,
   modelIs,
   getModelNameForProperty,
+  isAllValueInteger,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -1750,7 +1751,11 @@ export class CodeModelBuilder {
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type);
     const valueType =
-      typeof type.members.values().next().value.value === "number" ? this.integerSchema : this.stringSchema;
+      typeof type.members.values().next().value.value === "number"
+        ? isAllValueInteger(Array.from(type.members.values()).map((it) => it.value as number))
+          ? this.integerSchema
+          : this.doubleSchema
+        : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
@@ -1795,7 +1800,13 @@ export class CodeModelBuilder {
     name: string,
   ): ConstantSchema {
     const valueType =
-      type.kind === "String" ? this.stringSchema : type.kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      type.kind === "String"
+        ? this.stringSchema
+        : type.kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger([type.value])
+        ? this.integerSchema
+        : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1819,12 +1830,20 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+    // variants is Literal
+
     variants = variants.filter(
       (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
     );
     const kind = variants[0].type.kind;
     const valueType =
-      kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      kind === "String"
+        ? this.stringSchema
+        : kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger(variants.map((it) => (it.type as any).value))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
     variants.forEach((it) =>
@@ -2384,6 +2403,16 @@ export class CodeModelBuilder {
       this._integerSchema ||
       (this._integerSchema = this.codeModel.schemas.add(
         new NumberSchema("integer", "simple integer", SchemaType.Integer, 64),
+      ))
+    );
+  }
+
+  private _doubleSchema?: NumberSchema;
+  get doubleSchema(): NumberSchema {
+    return (
+      this._doubleSchema ||
+      (this._doubleSchema = this.codeModel.schemas.add(
+        new NumberSchema("double", "simple float", SchemaType.Number, 64),
       ))
     );
   }

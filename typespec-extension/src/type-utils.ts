@@ -263,6 +263,10 @@ export function getAccess(type: Model | Operation | Enum): string | undefined {
   });
 }
 
+export function isAllValueInteger(values: number[]): boolean {
+  return values.every((it) => Number.isInteger(it));
+}
+
 export function getUsage(type: Model | Operation | Enum): SchemaContext[] | undefined {
   return getDecoratorScopedValue(type, "$usage", (it) => {
     const value = it.args[0].value;
