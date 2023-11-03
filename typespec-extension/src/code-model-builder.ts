@@ -792,7 +792,19 @@ export class CodeModelBuilder {
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        const finalType = this.findResponseBody(lroMetadata.logicalResult);
+        let finalResult = lroMetadata.logicalResult;
+        if (
+          verb === "post" &&
+          lroMetadata.finalStep &&
+          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+          lroMetadata.finalStep.target.name !== "result" &&
+          lroMetadata.logicalResult !== lroMetadata.envelopeResult
+        ) {
+          // fix the case that @lroResult is not "result" property
+          finalResult = lroMetadata.envelopeResult;
+        }
+
+        const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
 
