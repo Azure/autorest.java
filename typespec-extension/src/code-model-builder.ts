@@ -443,6 +443,26 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+
+    // deduplicate model name
+    const nameCount = new Map<string, number>();
+    const dedupName = (schema: Schema) => {
+      const name = schema.language.default.name;
+      if (schema.language.default.name) {
+        if (!nameCount.has(name)) {
+          nameCount.set(name, 1);
+        } else {
+          const count = nameCount.get(name)!;
+          nameCount.set(name, count + 1);
+          schema.language.default.name = name + count;
+        }
+      }
+    };
+    this.codeModel.schemas.objects?.forEach((it) => dedupName(it));
+    this.codeModel.schemas.groups?.forEach((it) => dedupName(it));
+    this.codeModel.schemas.choices?.forEach((it) => dedupName(it));
+    this.codeModel.schemas.sealedChoices?.forEach((it) => dedupName(it));
+    this.codeModel.schemas.ors?.forEach((it) => dedupName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {
