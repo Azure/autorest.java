@@ -54,21 +54,21 @@ public final class Operation {
      */
     @Generated
     @JsonProperty(value = "priorityValue")
-    private Priority priorityValue = Priority.LOW;
+    private Priority1 priorityValue = Priority1.LOW;
 
     /*
      * The colorValue property.
      */
     @Generated
     @JsonProperty(value = "colorValue")
-    private Color colorValue = Color.GREEN;
+    private Color1 colorValue = Color1.GREEN;
 
     /*
      * The colorModelValue property.
      */
     @Generated
     @JsonProperty(value = "colorModelValue")
-    private ColorModel colorModelValue = ColorModel.BLUE;
+    private ColorModel1 colorModelValue = ColorModel1.BLUE;
 
     /**
      * Creates an instance of Operation class.
@@ -142,7 +142,7 @@ public final class Operation {
      * @return the priorityValue value.
      */
     @Generated
-    public Priority getPriorityValue() {
+    public Priority1 getPriorityValue() {
         return this.priorityValue;
     }
 
@@ -152,7 +152,7 @@ public final class Operation {
      * @return the colorValue value.
      */
     @Generated
-    public Color getColorValue() {
+    public Color1 getColorValue() {
         return this.colorValue;
     }
 
@@ -162,7 +162,7 @@ public final class Operation {
      * @return the colorModelValue value.
      */
     @Generated
-    public ColorModel getColorModelValue() {
+    public ColorModel1 getColorModelValue() {
         return this.colorModelValue;
     }
 }

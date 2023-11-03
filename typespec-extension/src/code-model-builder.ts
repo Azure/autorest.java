@@ -460,7 +460,7 @@ export class CodeModelBuilder {
       }
     };
     this.codeModel.schemas.objects?.forEach((it) => dedupName(it));
-    this.codeModel.schemas.groups?.forEach((it) => dedupName(it));
+    // this.codeModel.schemas.groups?.forEach((it) => dedupName(it)); // it has RequestConditions
     this.codeModel.schemas.choices?.forEach((it) => dedupName(it));
     this.codeModel.schemas.sealedChoices?.forEach((it) => dedupName(it));
     this.codeModel.schemas.ors?.forEach((it) => dedupName(it));

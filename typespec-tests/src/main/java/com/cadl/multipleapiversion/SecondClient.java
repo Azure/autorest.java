@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipleapiversion.implementation.SecondClientImpl;
-import com.cadl.multipleapiversion.models.Resource;
+import com.cadl.multipleapiversion.models.Resource2;
 
 /**
  * Initializes a new instance of the synchronous SecondClient type.
@@ -77,9 +77,9 @@ public final class SecondClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String name) {
+    public Resource2 get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+        return getWithResponse(name, requestOptions).getValue().toObject(Resource2.class);
     }
 }

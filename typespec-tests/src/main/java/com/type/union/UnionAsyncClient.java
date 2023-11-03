@@ -95,7 +95,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +121,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -197,7 +197,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -222,7 +222,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 

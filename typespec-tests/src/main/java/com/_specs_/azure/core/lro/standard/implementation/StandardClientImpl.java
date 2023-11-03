@@ -478,6 +478,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -516,6 +520,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -552,6 +560,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -594,6 +606,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -636,6 +652,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
@@ -678,6 +698,10 @@ public final class StandardClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
      *     }
      * }
      * }</pre>
