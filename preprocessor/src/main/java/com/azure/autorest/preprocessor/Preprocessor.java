@@ -14,6 +14,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -25,9 +26,10 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,184 +38,175 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Preprocessor extends NewPlugin {
-  private final Logger logger = new PluginLogger(this, Preprocessor.class);
-  protected static Preprocessor instance;
+public class Preprocessor {
+    protected final NewPlugin plugin;
+    private final Logger logger;
+    protected final Connection connection;
+    protected final Yaml yamlMapper;
+    protected final ObjectMapper jsonMapper;
 
-  public Preprocessor(Connection connection, String plugin, String sessionId) {
-    super(connection, plugin, sessionId);
-    instance = this;
-  }
-
-  public static Preprocessor getPluginInstance() {
-    return instance;
-  }
-
-  @Override
-  public boolean processInternal() {
-    this.clear();
-
-    List<String> allFiles = listInputs();
-    List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-    if (files.size() != 1) {
-      throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-    }
-    String file = readFile(files.get(0));
-    try {
-      File tempFile = new File("code-model.yaml");
-      if (!tempFile.exists()) {
-        tempFile.createNewFile();
-      }
-      new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
-    } catch (Exception e) {
-      //
+    public Preprocessor(NewPlugin plugin, Connection connection, Yaml yamlMapper, ObjectMapper jsonMapper) {
+        this.plugin = plugin;
+        this.logger = new PluginLogger(plugin, Preprocessor.class);
+        this.connection = connection;
+        this.yamlMapper = yamlMapper;
+        this.jsonMapper = jsonMapper;
     }
 
-    CodeModel codeModel;
-    try {
-      if (!file.startsWith("{")) {
-        // YAML
-        codeModel = yamlMapper.loadAs(file, CodeModel.class);
-      } else {
-        codeModel = jsonMapper.readValue(file, CodeModel.class);
-      }
-    } catch (Exception e) {
-      System.err.println("Got an error " + e.getMessage());
-      connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
-      return false;
-    }
-
-    performPretransformUpdates(codeModel);
-    codeModel = new Transformer().transform(codeModel);
-    performPosttransformUpdates(codeModel);
-
-    Representer representer = new Representer(new DumperOptions()) {
-      @Override
-      protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
-          Tag customTag) {
-        // if value of property is null, ignore it.
-        if (propertyValue == null) {
-          return null;
+    public CodeModel processCodeModel() {
+        List<String> allFiles = plugin.listInputs();
+        List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+        if (files.size() != 1) {
+            throw new RuntimeException(
+                String.format("Generator received incorrect number of inputs: %s : %s}", files.size(),
+                    String.join(", ", files)));
         }
-        else {
-          return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+        String file = plugin.readFile(files.get(0));
+        try {
+            Files.writeString(Paths.get("code-model.yaml"), file);
+        } catch (Exception e) {
+            //
         }
-      }
-    };
-    LoaderOptions loaderOptions = new LoaderOptions();
-    loaderOptions.setCodePointLimit(50 * 1024 * 1024);
-    loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-    loaderOptions.setTagInspector(new TrustedTagInspector());
-    Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-    String output = newYaml.dump(codeModel);
-    try {
-      File tempFile = new File("code-model-processed-no-tags.yaml");
-      if (!tempFile.exists()) {
-        tempFile.createNewFile();
-      }
-      new FileOutputStream(tempFile).write(output.getBytes(StandardCharsets.UTF_8));
-      writeFile(tempFile.getName(), output, null);
-    } catch (Exception e) {
-      logger.error("Failed to pre-process the code model.", e);
-      return false;
+
+        CodeModel codeModel;
+        try {
+            if (!file.startsWith("{")) {
+                // YAML
+                codeModel = yamlMapper.loadAs(file, CodeModel.class);
+            } else {
+                codeModel = jsonMapper.readValue(file, CodeModel.class);
+            }
+        } catch (Exception e) {
+            logger.error("Got an error " + e.getMessage());
+            connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
+            throw new RuntimeException("Cannot parse input into code model.", e);
+        }
+
+        performPreTransformUpdates(codeModel);
+        codeModel = new Transformer().transform(codeModel);
+        performPostTransformUpdates(codeModel);
+
+        try {
+            Path path = Paths.get("code-model-processed-no-tags.yaml");
+            Files.writeString(path, dumpYaml(codeModel));
+            return codeModel;
+        } catch (Exception e) {
+            logger.error("Failed to pre-process the code model.", e);
+            throw new RuntimeException("Failed to pre-process the code model.", e);
+        }
     }
-    return true;
-  }
 
-  private CodeModel performPosttransformUpdates(CodeModel codeModel) {
-    if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
-      return convertOptionalConstantsToEnum(codeModel);
+    protected CodeModel loadCodeModel(String file) throws IOException {
+        if (!file.startsWith("{")) {
+            // YAML
+            return yamlMapper.loadAs(file, CodeModel.class);
+        } else {
+            return jsonMapper.readValue(file, CodeModel.class);
+        }
     }
-    return codeModel;
-  }
 
-  private CodeModel performPretransformUpdates(CodeModel codeModel) {
-    if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
-      return convertOptionalConstantsToEnum(codeModel);
+    protected String dumpYaml(CodeModel codeModel) {
+        Representer representer = new Representer(new DumperOptions()) {
+            @Override
+            protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
+                Tag customTag) {
+                // if value of property is null, ignore it.
+                if (propertyValue == null) {
+                    return null;
+                } else {
+                    return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+                }
+            }
+        };
+        LoaderOptions loaderOptions = new LoaderOptions();
+        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
+        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
+        loaderOptions.setTagInspector(new TrustedTagInspector());
+        Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
+        return newYaml.dump(codeModel);
     }
-    return codeModel;
-  }
 
-  public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
-    Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
-    if (!constantSchemas.isEmpty()) {
-      Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();
+    private static CodeModel performPostTransformUpdates(CodeModel codeModel) {
+        if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
+            return convertOptionalConstantsToEnum(codeModel);
+        }
+        return codeModel;
+    }
 
-      codeModel.getOperationGroups().stream()
-              .flatMap(og -> og.getOperations().stream())
-              .forEach(o -> {
-                o.getParameters().stream()
-                        .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
-                        .forEach(p -> {
-                          ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                          SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                                  Preprocessor::convertToChoiceSchema);
-                          p.setSchema(sealedChoiceSchema);
+    private static CodeModel performPreTransformUpdates(CodeModel codeModel) {
+        if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
+            return convertOptionalConstantsToEnum(codeModel);
+        }
+        return codeModel;
+    }
 
-                          o.getSignatureParameters().add(p);
-                        });
+    public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
+        Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
+        if (!constantSchemas.isEmpty()) {
+            Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();
 
-                o.getRequests().forEach(r -> {
-                  r.getParameters().stream()
-                          .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
-                          .forEach(p -> {
-                            ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                            SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                                    Preprocessor::convertToChoiceSchema);
-                            p.setSchema(sealedChoiceSchema);
+            codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
+                o.getParameters().stream().filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
+                    .forEach(p -> {
+                        ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
+                        SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                            Preprocessor::convertToChoiceSchema);
+                        p.setSchema(sealedChoiceSchema);
 
-                            r.getSignatureParameters().add(p);
-                          });
-                });
-              });
+                        o.getSignatureParameters().add(p);
+                    });
 
-      codeModel.getSchemas().getObjects().stream()
-              .flatMap(s -> s.getProperties().stream())
-              .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
-              .forEach(p -> {
-                ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                o.getRequests().forEach(r -> r.getParameters().stream()
+                    .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema).forEach(p -> {
+                        ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
+                        SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                            Preprocessor::convertToChoiceSchema);
+                        p.setSchema(sealedChoiceSchema);
+
+                        r.getSignatureParameters().add(p);
+                    }));
+            });
+
+            codeModel.getSchemas().getObjects().stream().flatMap(s -> s.getProperties().stream())
+                .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema).forEach(p -> {
+                    ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
+                    SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
                         Preprocessor::convertToChoiceSchema);
-                p.setSchema(sealedChoiceSchema);
-              });
+                    p.setSchema(sealedChoiceSchema);
+                });
 
-      if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-        codeModel.getSchemas().getObjects().stream()
-                .flatMap(s -> s.getProperties().stream())
-                .filter(p -> !p.isRequired() && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten())
-                .filter(p -> p.getSchema() instanceof ObjectSchema)
-                .forEach(p -> ((ObjectSchema) p.getSchema()).getProperties().stream()
-                        .filter(p1 -> p1.getSchema() instanceof ConstantSchema)
-                        .forEach(p1 -> {
-                          ConstantSchema constantSchema = (ConstantSchema) p1.getSchema();
-                          SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                                  Preprocessor::convertToChoiceSchema);
-                          p1.setSchema(sealedChoiceSchema);
-                        }));
-      }
+            if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                codeModel.getSchemas().getObjects().stream().flatMap(s -> s.getProperties().stream())
+                    .filter(p -> !p.isRequired() && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten())
+                    .filter(p -> p.getSchema() instanceof ObjectSchema).forEach(
+                        p -> ((ObjectSchema) p.getSchema()).getProperties().stream()
+                            .filter(p1 -> p1.getSchema() instanceof ConstantSchema).forEach(p1 -> {
+                                ConstantSchema constantSchema = (ConstantSchema) p1.getSchema();
+                                SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(
+                                    constantSchema, Preprocessor::convertToChoiceSchema);
+                                p1.setSchema(sealedChoiceSchema);
+                            }));
+            }
 
-      codeModel.getSchemas().getSealedChoices().addAll(convertedChoiceSchemas.values());
+            codeModel.getSchemas().getSealedChoices().addAll(convertedChoiceSchemas.values());
+        }
+        return codeModel;
     }
-    return codeModel;
-  }
 
-  private static SealedChoiceSchema convertToChoiceSchema(ConstantSchema constantSchema) {
-    SealedChoiceSchema sealedChoiceSchema = new SealedChoiceSchema();
-    sealedChoiceSchema.setType(Schema.AllSchemaTypes.SEALED_CHOICE);
-    sealedChoiceSchema.setChoiceType(constantSchema.getValueType());
-    sealedChoiceSchema.setDefaultValue(constantSchema.getDefaultValue());
-    sealedChoiceSchema.setLanguage(constantSchema.getLanguage());
-    sealedChoiceSchema.setSummary(constantSchema.getSummary());
-    sealedChoiceSchema.setUsage(constantSchema.getUsage());
+    private static SealedChoiceSchema convertToChoiceSchema(ConstantSchema constantSchema) {
+        SealedChoiceSchema sealedChoiceSchema = new SealedChoiceSchema();
+        sealedChoiceSchema.setType(Schema.AllSchemaTypes.SEALED_CHOICE);
+        sealedChoiceSchema.setChoiceType(constantSchema.getValueType());
+        sealedChoiceSchema.setDefaultValue(constantSchema.getDefaultValue());
+        sealedChoiceSchema.setLanguage(constantSchema.getLanguage());
+        sealedChoiceSchema.setSummary(constantSchema.getSummary());
+        sealedChoiceSchema.setUsage(constantSchema.getUsage());
 
-    ChoiceValue choice = new ChoiceValue();
-    choice.setValue(constantSchema.getValue().getValue().toString());
-    choice.setLanguage(constantSchema.getValue().getLanguage());
-    sealedChoiceSchema.setChoices(Collections.singletonList(choice));
-    return sealedChoiceSchema;
-  }
-
-  private void clear() {
-    JavaSettings.clear();
-  }
+        ChoiceValue choice = new ChoiceValue();
+        choice.setValue(constantSchema.getValue().getValue().toString());
+        choice.setLanguage(constantSchema.getValue().getLanguage());
+        sealedChoiceSchema.setChoices(Collections.singletonList(choice));
+        return sealedChoiceSchema;
+    }
 }

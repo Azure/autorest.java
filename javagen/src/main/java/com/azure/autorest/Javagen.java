@@ -33,6 +33,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -70,16 +71,10 @@ public class Javagen extends NewPlugin {
 
         JavaSettings settings = JavaSettings.getInstance();
 
-        List<String> allFiles = listInputs();
-        List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-        if (files.size() != 1) {
-            throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-        }
-
         try {
             // Step 1: Parse input yaml as CodeModel
-            String fileName = files.get(0);
-            CodeModel codeModel = parseCodeModel(fileName);
+            CodeModel codeModel = new Preprocessor(this, connection, yamlMapper, jsonMapper)
+                .processCodeModel();
 
             // Step 2: Map
             Client client = Mappers.getClientMapper().map(codeModel);
@@ -103,7 +98,7 @@ public class Javagen extends NewPlugin {
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
         } catch (Exception ex) {
             logger.error("Failed to generate code.", ex);
@@ -198,7 +193,7 @@ public class Javagen extends NewPlugin {
                 if (CoreUtils.isNullOrEmpty(serviceClients)) {
                     serviceClients = Collections.singletonList(client.getServiceClient());
                 }
-                TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
+                TestContext<?> testContext = new TestContext<>(serviceClients, client.getSyncClients());
 
                 // base test class
                 javaPackage.addProtocolTestBase(testContext);

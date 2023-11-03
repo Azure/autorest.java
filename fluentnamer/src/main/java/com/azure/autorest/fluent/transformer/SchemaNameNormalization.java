@@ -387,6 +387,10 @@ public class SchemaNameNormalization {
     }
 
     private static boolean isSameCase(char c1, char c2) {
+        if (c1 == c2) {
+            return true;
+        }
+
         return (Character.isUpperCase(c1) && Character.isUpperCase(c2))
                 || (Character.isLowerCase(c1) && Character.isLowerCase(c2));
     }

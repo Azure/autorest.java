@@ -60,34 +60,24 @@ public class CodeNamer {
         put((char) 125, "RightCurlyBracket");
         put((char) 126, "Tilde");
     }};
-    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
-            "abstract", "assert", "boolean", "Boolean", "break",
-            "byte", "Byte", "case", "catch", "char",
-            "Character", "class", "Class", "const", "continue",
-            "default", "do", "double", "Double", "else",
-            "enum", "extends", "false", "final", "finally",
-            "float", "Float", "for", "goto", "if",
-            "implements", "import", "int", "Integer", "long",
-            "Long", "interface", "instanceof", "native", "new",
-            "null", "package", "private", "protected", "public",
-            "return", "short", "Short", "static", "strictfp",
-            "super", "switch", "synchronized", "this", "throw",
-            "throws", "transient", "true", "try", "void",
-            "Void", "volatile", "while", "Date", "Datetime",
-            "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header", "_"
-    ));
+    private static final Set<String> RESERVED_WORDS = new HashSet<>(
+        Arrays.asList("abstract", "assert", "boolean", "Boolean", "break", "byte", "Byte", "case", "catch", "char",
+            "Character", "class", "Class", "const", "continue", "default", "do", "double", "Double", "else", "enum",
+            "extends", "false", "final", "finally", "float", "Float", "for", "goto", "if", "implements", "import",
+            "int", "Integer", "long", "Long", "interface", "instanceof", "native", "new", "null", "package", "private",
+            "protected", "public", "return", "short", "Short", "static", "strictfp", "super", "switch", "synchronized",
+            "this", "throw", "throws", "transient", "true", "try", "void", "Void", "volatile", "while", "Date",
+            "Datetime", "OffsetDateTime", "Duration", "Period", "Stream", "String", "Object", "header", "_"));
 
     private static final Set<String> RESERVED_WORDS_CLASSES = new HashSet<>(RESERVED_WORDS);
+
     static {
         RESERVED_WORDS_CLASSES.addAll(Arrays.asList(
-                // following are commonly used classes/annotations in service client, from azure-core
-                "Host", "ServiceInterface", "ServiceMethod", "ServiceClient", "ReturnType",
-                "Get", "Put", "Post", "Patch", "Delete", "Headers",
-                "ExpectedResponses", "UnexpectedResponseExceptionType", "UnexpectedResponseExceptionTypes",
-                "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam", "BodyParam",
-                "Fluent", "Immutable", "JsonFlatten", "Override"
-        ));
+            // following are commonly used classes/annotations in service client, from azure-core
+            "Host", "ServiceInterface", "ServiceMethod", "ServiceClient", "ReturnType", "Get", "Put", "Post", "Patch",
+            "Delete", "Headers", "ExpectedResponses", "UnexpectedResponseExceptionType",
+            "UnexpectedResponseExceptionTypes", "HostParam", "PathParam", "QueryParam", "HeaderParam", "FormParam",
+            "BodyParam", "Fluent", "Immutable", "JsonFlatten", "Override"));
     }
 
     private CodeNamer() {
@@ -128,10 +118,8 @@ public class CodeNamer {
             return '_' + toCamelCase(name.substring(1));
         }
 
-        return Arrays.stream(name.split("[_\\- ]"))
-                .filter(s -> s != null && !s.isEmpty())
-                .map(s -> formatCase(s, false))
-                .collect(Collectors.joining());
+        return Arrays.stream(name.split("[_\\- ]")).filter(s -> s != null && !s.isEmpty())
+            .map(s -> formatCase(s, false)).collect(Collectors.joining());
     }
 
     public static String escapeXmlComment(String comment) {
@@ -139,19 +127,17 @@ public class CodeNamer {
             return null;
         }
 
-        return comment
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
+        return comment.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
     private static String formatCase(String name, boolean toLower) {
         if (name != null && !name.isEmpty()) {
-            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
+            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0))
+                && Character.isUpperCase(name.charAt(1)))) {
                 name = toLower ? name.toLowerCase() : name.toUpperCase();
             } else {
-                name = (toLower ? Character.toLowerCase(name.charAt(0))
-                        : Character.toUpperCase(name.charAt(0))) + name.substring(1);
+                name = (toLower ? Character.toLowerCase(name.charAt(0)) : Character.toUpperCase(name.charAt(0)))
+                    + name.substring(1);
             }
         }
         return name;
@@ -169,8 +155,7 @@ public class CodeNamer {
         String correctName = removeInvalidCharacters(name, allowedCharacters);
 
         // here we have only letters and digits or an empty String
-        if (correctName == null || correctName.isEmpty() ||
-                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
+        if (correctName == null || correctName.isEmpty() || BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
             StringBuilder sb = new StringBuilder();
             for (char symbol : name.toCharArray()) {
                 if (BASIC_LATIC_CHARACTERS.containsKey(symbol)) {
@@ -184,8 +169,8 @@ public class CodeNamer {
 
         // if it is still empty String, throw
         if (correctName == null || correctName.isEmpty()) {
-            throw new IllegalArgumentException(
-                    String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
+            throw new IllegalArgumentException(String.format(
+                "Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
         }
 
         return correctName;
@@ -261,14 +246,14 @@ public class CodeNamer {
         return name;
     }
 
-    private static String removeInvalidCharacters(String name, char... allowerCharacters) {
+    private static String removeInvalidCharacters(String name, char... allowedCharacters) {
         if (name == null || name.isEmpty()) {
             return name;
         }
 
         StringBuilder builder = new StringBuilder();
         List<Character> allowed = new ArrayList<>();
-        for (Character c : allowerCharacters) {
+        for (Character c : allowedCharacters) {
             allowed.add(c);
         }
         for (Character c : name.toCharArray()) {

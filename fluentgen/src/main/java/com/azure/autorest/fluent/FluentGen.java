@@ -25,6 +25,7 @@ import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
@@ -61,7 +62,6 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -99,17 +99,10 @@ public class FluentGen extends Javagen {
         try {
             JavaSettings settings = JavaSettings.getInstance();
 
-            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-            if (files.size() != 1) {
-                throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-            }
-
             logger.info("Read YAML");
-            String fileContent = readFile(files.get(0));
-            Files.writeString(Paths.get("code-model.yaml"), fileContent);
-
             // Parse yaml to code model
-            CodeModel codeModel = this.handleYaml(fileContent);
+            CodeModel codeModel = new FluentNamer(this, connection, yamlMapper, jsonMapper)
+                .processCodeModel();
 
             // Map code model to client model
             Client client = this.handleMap(codeModel);
