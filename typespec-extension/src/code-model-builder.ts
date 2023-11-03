@@ -2221,6 +2221,8 @@ export class CodeModelBuilder {
         return pascalCase(type.value);
       case "Number":
         return pascalCase(type.valueAsString);
+      case "Boolean":
+        return pascalCase(type.value ? "True" : "False");
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
