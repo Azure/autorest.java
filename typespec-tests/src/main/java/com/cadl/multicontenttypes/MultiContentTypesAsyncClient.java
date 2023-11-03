@@ -203,7 +203,7 @@ public final class MultiContentTypesAsyncClient {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * DataModelBase1
+     * DataModelBase
      * }</pre>
      * 
      * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
