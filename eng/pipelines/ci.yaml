@@ -155,6 +155,7 @@ jobs:
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml
           goals: 'package revapi:check'
+          options: '--no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

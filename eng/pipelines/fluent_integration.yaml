@@ -42,7 +42,7 @@ jobs:
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
+      goals: 'clean install'
       options: '-P local,testFluent --no-transfer-progress'
 
   - task: PublishCodeCoverageResults@1
