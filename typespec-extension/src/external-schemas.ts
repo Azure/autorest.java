@@ -90,6 +90,11 @@ export function createPollResultSchema(schemas: Schemas, stringSchema: StringSch
       required: false,
       nullable: true,
       readOnly: true,
+      language: {
+        java: {
+          namespace: "com.azure.core.models",
+        },
+      },
     }),
   );
   return pollResultSchema;

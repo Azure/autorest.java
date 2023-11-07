@@ -94,7 +94,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -120,7 +120,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -196,7 +196,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
@@ -221,7 +221,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: ModelWithNamedUnionPropertyNamedUnionModelBase (Required)
+     *     namedUnion: MyNamedUnionModelBase (Required)
      * }
      * }</pre>
      * 
