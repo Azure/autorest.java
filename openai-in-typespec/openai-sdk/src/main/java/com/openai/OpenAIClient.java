@@ -160,7 +160,7 @@ public final class OpenAIClient {
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: CreateChatCompletionRequestStopModelBase (Optional)
+     *     stop: StopModelBase (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
@@ -526,13 +526,13 @@ public final class OpenAIClient {
      * <pre>{@code
      * {
      *     model: String(babbage-002/davinci-002/text-davinci-003/text-davinci-002/text-davinci-001/code-davinci-002/text-curie-001/text-babbage-001/text-ada-001) (Required)
-     *     prompt: CreateCompletionRequestPromptModelBase (Required)
+     *     prompt: PromptModelBase (Required)
      *     suffix: String (Optional)
      *     temperature: Double (Optional)
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: CreateChatCompletionRequestStopModelBase (Optional)
+     *     stop: StopModelBase (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
