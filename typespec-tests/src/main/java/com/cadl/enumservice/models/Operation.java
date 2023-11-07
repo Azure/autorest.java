@@ -50,6 +50,13 @@ public final class Operation {
     private ColorModel color;
 
     /*
+     * The unit property.
+     */
+    @Generated
+    @JsonProperty(value = "unit")
+    private Unit unit;
+
+    /*
      * The priorityValue property.
      */
     @Generated
@@ -70,20 +77,30 @@ public final class Operation {
     @JsonProperty(value = "colorModelValue")
     private ColorModel colorModelValue = ColorModel.BLUE;
 
+    /*
+     * The unitValue property.
+     */
+    @Generated
+    @JsonProperty(value = "unitValue")
+    private Unit unitValue = Unit.MILLIGRAM;
+
     /**
      * Creates an instance of Operation class.
      * 
      * @param name the name value to set.
      * @param priority the priority value to set.
      * @param color the color value to set.
+     * @param unit the unit value to set.
      */
     @Generated
     @JsonCreator
     private Operation(@JsonProperty(value = "name") OperationName name,
-        @JsonProperty(value = "priority") Priority priority, @JsonProperty(value = "color") ColorModel color) {
+        @JsonProperty(value = "priority") Priority priority, @JsonProperty(value = "color") ColorModel color,
+        @JsonProperty(value = "unit") Unit unit) {
         this.name = name;
         this.priority = priority;
         this.color = color;
+        this.unit = unit;
     }
 
     /**
@@ -137,6 +154,16 @@ public final class Operation {
     }
 
     /**
+     * Get the unit property: The unit property.
+     * 
+     * @return the unit value.
+     */
+    @Generated
+    public Unit getUnit() {
+        return this.unit;
+    }
+
+    /**
      * Get the priorityValue property: The priorityValue property.
      * 
      * @return the priorityValue value.
@@ -164,5 +191,15 @@ public final class Operation {
     @Generated
     public ColorModel getColorModelValue() {
         return this.colorModelValue;
+    }
+
+    /**
+     * Get the unitValue property: The unitValue property.
+     * 
+     * @return the unitValue value.
+     */
+    @Generated
+    public Unit getUnitValue() {
+        return this.unitValue;
     }
 }

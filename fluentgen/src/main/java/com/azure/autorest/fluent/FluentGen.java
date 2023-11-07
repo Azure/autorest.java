@@ -37,6 +37,7 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
@@ -45,6 +46,7 @@ import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -73,10 +75,6 @@ public class FluentGen extends Javagen {
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
 
-    static {
-        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
-    }
-
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
 
@@ -86,6 +84,7 @@ public class FluentGen extends Javagen {
         super(connection, plugin, sessionId);
         instance = this;
         Javagen.instance = this;
+        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
     }
 
     public static FluentGen getPluginInstance() {
@@ -224,7 +223,7 @@ public class FluentGen extends Javagen {
         return newYaml.loadAs(yamlContent, CodeModel.class);
     }
 
-    Client handleMap(CodeModel codeModel) {
+    protected Client handleMap(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
         FluentStatic.setFluentJavaSettings(getFluentJavaSettings());
 
@@ -247,7 +246,7 @@ public class FluentGen extends Javagen {
         return client;
     }
 
-    FluentJavaPackage handleTemplate(Client client) {
+    protected FluentJavaPackage handleTemplate(Client client) {
         JavaSettings javaSettings = JavaSettings.getInstance();
 
         logger.info("Java template for client model");
@@ -255,12 +254,11 @@ public class FluentGen extends Javagen {
 
         // Service client
         String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-        javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                        client.getServiceClient());
-        if (javaSettings.isGenerateClientInterfaces()) {
-            javaPackage
-                    .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
+        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            ServiceClient serviceClient = client.getServiceClient();
+            addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
+        } else {
+            addServiceClient(javaSettings, javaPackage, interfacePackage, client.getServiceClients().iterator().next());
         }
 
         // Async/sync service clients
@@ -346,7 +344,17 @@ public class FluentGen extends Javagen {
         return javaPackage;
     }
 
-    FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+    private void addServiceClient(JavaSettings javaSettings, FluentJavaPackage javaPackage, String interfacePackage, ServiceClient serviceClient) {
+        javaPackage
+                .addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(),
+                        serviceClient);
+        if (javaSettings.isGenerateClientInterfaces()) {
+            javaPackage
+                    .addServiceClientInterface(interfacePackage, serviceClient.getInterfaceName(), serviceClient);
+        }
+    }
+
+    protected FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
         FluentJavaSettings fluentJavaSettings = this.getFluentJavaSettings();
         JavaSettings javaSettings = JavaSettings.getInstance();
 
@@ -441,7 +449,7 @@ public class FluentGen extends Javagen {
         fluentPremiumExamples = null;
     }
 
-    private FluentJavaSettings getFluentJavaSettings() {
+    protected FluentJavaSettings getFluentJavaSettings() {
         if (fluentJavaSettings == null) {
             fluentJavaSettings = new FluentJavaSettings(this);
         }

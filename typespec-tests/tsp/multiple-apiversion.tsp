@@ -56,7 +56,7 @@ namespace Cadl.MultipleApiVersion {
 })
 namespace Cadl.MultipleApiVersion2 {
   @resource("resources")
-  model Resource {
+  model Resource2 {
     @visibility("read")
     id: string;
 
@@ -81,6 +81,6 @@ namespace Cadl.MultipleApiVersion2 {
 
   @route("/client2")
   interface Client {
-    get is ResourceOperations.ResourceRead<Resource>;
+    get is ResourceOperations.ResourceRead<Resource2>;
   }
 }
