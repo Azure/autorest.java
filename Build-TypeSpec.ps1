@@ -1,4 +1,4 @@
-mvn package -P local,tsp -DskipTests
+mvn clean install -P local,tsp -DskipTests "-Djacoco.skip"
 
 Set-Location ./typespec-extension/
 npm install
