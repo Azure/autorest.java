@@ -66,7 +66,7 @@ public class FluentNamer extends Preprocessor {
         Files.writeString(Paths.get("code-model.yaml"), file);
     }
 
-    private CodeModel transform(CodeModel codeModel) {
+    public CodeModel transform(CodeModel codeModel) {
         logger.info("Load fluent settings");
         FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(plugin);
         CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));

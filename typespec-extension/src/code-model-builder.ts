@@ -149,6 +149,7 @@ import {
   getUnionDescription,
   modelIs,
   getModelNameForProperty,
+  isAllValueInteger,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -443,6 +444,27 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+
+    // deduplicate model name
+    const nameCount = new Map<string, number>();
+    const deduplicateName = (schema: Schema) => {
+      const name = schema.language.default.name;
+      // skip models under "com.azure.core."
+      if (schema.language.default.name && schema.language.default.namespace?.startsWith("com.azure.core.")) {
+        if (!nameCount.has(name)) {
+          nameCount.set(name, 1);
+        } else {
+          const count = nameCount.get(name)!;
+          nameCount.set(name, count + 1);
+          schema.language.default.name = name + count;
+        }
+      }
+    };
+    this.codeModel.schemas.objects?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it has RequestConditions
+    this.codeModel.schemas.choices?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.sealedChoices?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.ors?.forEach((it) => deduplicateName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {
@@ -792,7 +814,19 @@ export class CodeModelBuilder {
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        const finalType = this.findResponseBody(lroMetadata.logicalResult);
+        let finalResult = lroMetadata.logicalResult;
+        if (
+          verb === "post" &&
+          lroMetadata.finalStep &&
+          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+          lroMetadata.finalStep.target.name !== "result" &&
+          lroMetadata.logicalResult !== lroMetadata.envelopeResult
+        ) {
+          // fix the case that @lroResult is not "result" property
+          finalResult = lroMetadata.envelopeResult;
+        }
+
+        const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
 
@@ -1526,7 +1560,7 @@ export class CodeModelBuilder {
         return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
 
       case "Union":
-        return this.processUnionSchema(type, nameHint);
+        return this.processUnionSchema(type, this.getName(type, nameHint));
 
       case "ModelProperty": {
         let schema = undefined;
@@ -1730,7 +1764,11 @@ export class CodeModelBuilder {
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type);
     const valueType =
-      typeof type.members.values().next().value.value === "number" ? this.integerSchema : this.stringSchema;
+      typeof type.members.values().next().value.value === "number"
+        ? isAllValueInteger(Array.from(type.members.values()).map((it) => it.value as number))
+          ? this.integerSchema
+          : this.doubleSchema
+        : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
@@ -1775,7 +1813,13 @@ export class CodeModelBuilder {
     name: string,
   ): ConstantSchema {
     const valueType =
-      type.kind === "String" ? this.stringSchema : type.kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      type.kind === "String"
+        ? this.stringSchema
+        : type.kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger([type.value])
+        ? this.integerSchema
+        : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1787,7 +1831,7 @@ export class CodeModelBuilder {
   }
 
   private processConstantSchemaForEnumMember(type: EnumMember, name: string): ConstantSchema {
-    const valueType = this.processChoiceSchema(type.enum, this.getName(type.enum), isFixed(this.program, type.enum));
+    const valueType = this.processSchema(type.enum, this.getName(type.enum));
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1799,12 +1843,20 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+    // variants is Literal
+
     variants = variants.filter(
       (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
     );
     const kind = variants[0].type.kind;
     const valueType =
-      kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      kind === "String"
+        ? this.stringSchema
+        : kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger(variants.map((it) => (it.type as any).value))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
     variants.forEach((it) =>
@@ -2129,14 +2181,15 @@ export class CodeModelBuilder {
 
     if (isSameLiteralTypes(nonNullVariants)) {
       // enum
-      this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${name}'`);
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
     const baseName = pascalCase(name) + "Model";
-    this.logWarning(`Rename TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to '${baseName}'`);
+    this.logWarning(
+      `Convert TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to Class '${baseName}'`,
+    );
     const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
@@ -2221,6 +2274,8 @@ export class CodeModelBuilder {
         return pascalCase(type.value);
       case "Number":
         return pascalCase(type.valueAsString);
+      case "Boolean":
+        return pascalCase(type.value ? "True" : "False");
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
@@ -2251,7 +2306,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
@@ -2285,10 +2340,10 @@ export class CodeModelBuilder {
 
     if (!target.name && nameHint) {
       const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec Model to '${newName}'`);
+      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
-    return target.name;
+    return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {
@@ -2361,6 +2416,16 @@ export class CodeModelBuilder {
       this._integerSchema ||
       (this._integerSchema = this.codeModel.schemas.add(
         new NumberSchema("integer", "simple integer", SchemaType.Integer, 64),
+      ))
+    );
+  }
+
+  private _doubleSchema?: NumberSchema;
+  get doubleSchema(): NumberSchema {
+    return (
+      this._doubleSchema ||
+      (this._doubleSchema = this.codeModel.schemas.add(
+        new NumberSchema("double", "simple float", SchemaType.Number, 64),
       ))
     );
   }

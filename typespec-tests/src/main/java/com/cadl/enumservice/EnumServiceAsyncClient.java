@@ -104,9 +104,11 @@ public final class EnumServiceAsyncClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     unit: String(1/0.001/1000) (Required)
      *     priorityValue: String(100/0) (Required)
      *     colorValue: String(Red/Blue/Green) (Required)
      *     colorModelValue: String(Red/Blue/Green) (Required)
+     *     unitValue: String(1/0.001/1000) (Required)
      * }
      * }</pre>
      * 
@@ -136,9 +138,11 @@ public final class EnumServiceAsyncClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     unit: String(1/0.001/1000) (Required)
      *     priorityValue: String(100/0) (Required)
      *     colorValue: String(Red/Blue/Green) (Required)
      *     colorModelValue: String(Red/Blue/Green) (Required)
+     *     unitValue: String(1/0.001/1000) (Required)
      * }
      * }</pre>
      * 
@@ -168,9 +172,11 @@ public final class EnumServiceAsyncClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     unit: String(1/0.001/1000) (Required)
      *     priorityValue: String(100/0) (Required)
      *     colorValue: String(Red/Blue/Green) (Required)
      *     colorModelValue: String(Red/Blue/Green) (Required)
+     *     unitValue: String(1/0.001/1000) (Required)
      * }
      * }</pre>
      * 
@@ -199,9 +205,11 @@ public final class EnumServiceAsyncClient {
      *     age: long (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
+     *     unit: String(1/0.001/1000) (Required)
      *     priorityValue: String(100/0) (Required)
      *     colorValue: String(Red/Blue/Green) (Required)
      *     colorModelValue: String(Red/Blue/Green) (Required)
+     *     unitValue: String(1/0.001/1000) (Required)
      * }
      * }</pre>
      * 

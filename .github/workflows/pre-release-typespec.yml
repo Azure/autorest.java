@@ -26,10 +26,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup node 16
+      - name: Setup node 20
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
+
+      - name: Setup jdk 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
 
       - name: Build and Package
         run: |

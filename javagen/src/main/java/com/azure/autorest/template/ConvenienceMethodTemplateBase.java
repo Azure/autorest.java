@@ -402,10 +402,7 @@ abstract class ConvenienceMethodTemplateBase {
             IType elementType = ((IterableType) parameter.getClientMethodParameter().getWireType()).getElementType();
             String elementTypeExpression = expressionConvertToString("paramItemValue", elementType, parameter.getProxyMethodParameter());
             writeLine = javaBlock -> {
-                String addQueryParamLine = String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
-                        ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                        elementTypeExpression,
-                        parameter.getProxyMethodParameter().getAlreadyEncoded());
+                String addQueryParamLine = getAddQueryParamExpression(parameter, elementTypeExpression);
 
                 javaBlock.line(String.format("for (%1$s paramItemValue : %2$s) {", elementType, parameter.getName()));
                 javaBlock.indent(() -> {
@@ -419,10 +416,8 @@ abstract class ConvenienceMethodTemplateBase {
             };
         } else {
             writeLine = javaBlock -> javaBlock.line(
-                    String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
-                            ClassType.String.defaultValueExpression(parameter.getSerializedName()),
-                            expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter()),
-                            parameter.getProxyMethodParameter().getAlreadyEncoded()));
+                    getAddQueryParamExpression(parameter,
+                            expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         }
         Consumer<JavaBlock> writeLineFinal = writeLine;
         if (!parameter.getClientMethodParameter().isRequired()) {
@@ -431,6 +426,20 @@ abstract class ConvenienceMethodTemplateBase {
             });
         } else {
             writeLine.accept(methodBlock);
+        }
+    }
+
+    private static String getAddQueryParamExpression(MethodParameter parameter, String variable) {
+        // TODO: generic not having 3rd parameter "encoded"
+        if (JavaSettings.getInstance().isBranded()) {
+            return String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
+                    ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                    variable,
+                    parameter.getProxyMethodParameter().getAlreadyEncoded());
+        } else {
+            return String.format("requestOptions.addQueryParam(%1$s, %2$s);",
+                    ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                    variable);
         }
     }
 

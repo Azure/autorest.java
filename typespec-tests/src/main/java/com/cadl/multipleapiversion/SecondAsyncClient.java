@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.multipleapiversion.implementation.SecondClientImpl;
-import com.cadl.multipleapiversion.models.Resource;
+import com.cadl.multipleapiversion.models.Resource2;
 import reactor.core.publisher.Mono;
 
 /**
@@ -79,10 +79,10 @@ public final class SecondAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> get(String name) {
+    public Mono<Resource2> get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(Resource2.class));
     }
 }

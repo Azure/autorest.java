@@ -8,7 +8,11 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.TypeSpecFluentPlugin;
+import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
@@ -74,15 +78,37 @@ public class Main {
         if (Files.exists(outputDirPath)) {
             try (Stream<Path> filestream = Files.list(outputDirPath)) {
                 Set<String> filenames = filestream
-                        .map(p -> p.getFileName().toString())
-                        .map(name -> name.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+                    .map(p -> p.getFileName().toString())
+                    .map(name -> name.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toSet());
 
                 // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                 sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
             }
         }
 
+        if (emitterOptions.getFluent() == null) {
+            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
+        } else {
+            handleFluent(codeModel, emitterOptions, sdkIntegration);
+        }
+    }
+
+    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration) {
+        // initialize plugin
+        TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
+
+        // client
+        Client client = fluentPlugin.processClient(codeModel);
+
+        // template
+        FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
+
+        // write
+        formatAndWriteJavaFiles(fluentPlugin, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())), JavaSettings.getInstance());
+    }
+
+    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
         // initialize plugin
         TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 
@@ -109,7 +135,6 @@ public class Main {
 
         // handle customization
         javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
-
         // write output
         // java files
         formatAndWriteJavaFiles(typeSpecPlugin, javaFiles, settings);
@@ -119,15 +144,17 @@ public class Main {
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
-        String artifactId = ClientModelUtil.getArtifactId();
-        if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project.version}\n", null);
+        if (settings.isBranded()) {
+            String artifactId = ClientModelUtil.getArtifactId();
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project.version}\n", null);
+            }
         }
         System.exit(0);
     }
 
-    private static void formatAndWriteJavaFiles(TypeSpecPlugin typeSpecPlugin, Map<String, String> javaFiles,
+    private static void formatAndWriteJavaFiles(NewPlugin typeSpecPlugin, Map<String, String> javaFiles,
                                                 JavaSettings settings) {
         if (!settings.isSkipFormatting()) {
             try {
