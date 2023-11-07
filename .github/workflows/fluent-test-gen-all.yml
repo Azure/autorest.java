@@ -18,10 +18,10 @@ jobs:
           repository: azure/azure-rest-api-specs
           path: azure-rest-api-specs
 
-      - name: Setup node.js 16
+      - name: Setup node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'
       - name: Install autorest
         run: |
           npm install -g autorest
