@@ -1,5 +1,11 @@
 # Release History
 
+## 1.0.0-beta.8 (2023-11-03)
+
+### Other Changes
+
+- Removed usage of `google-java-format` and `jna-platform`.
+
 ## 1.0.0-beta.7 (2023-04-26)
 
 ### Other Changes
