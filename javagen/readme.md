@@ -7,8 +7,6 @@ pass-thru:
 
 use-extension:
   "@autorest/modelerfour": "4.26.2"
-  
-use: $(this-folder)/../postprocessor
 
 pipeline:
 
@@ -27,12 +25,8 @@ pipeline:
     input: modelerfour/identity
     output-artifact: java-files
   
-  postprocessor:
+  javagen/emitter:
     input: javagen
-    output-artifact: java-files
-  
-  postprocess/emitter:
-    input: postprocessor
     scope: scope-javagen/emitter
 
 scope-javagen/emitter:

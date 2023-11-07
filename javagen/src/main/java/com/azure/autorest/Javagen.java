@@ -29,10 +29,12 @@ import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
@@ -85,8 +87,8 @@ public class Javagen extends NewPlugin {
             //Step 4: Print to files
             // Then for each formatted file write the file. This is done synchronously as there is potential race
             // conditions that can lead to deadlocking.
-            javaPackage.getJavaFiles().forEach(javaFile ->
-                    writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null));
+            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
 
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
