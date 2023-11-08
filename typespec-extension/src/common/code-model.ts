@@ -20,7 +20,7 @@ export interface CodeModel extends Metadata {
 
   clients: Array<Client>;
 
-  arm: boolean;
+  arm?: boolean;
 }
 
 export class CodeModel extends Metadata implements CodeModel {
