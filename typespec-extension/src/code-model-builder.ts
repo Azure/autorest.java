@@ -168,6 +168,7 @@ import {
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
 import pkg from "lodash";
+import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -490,6 +491,9 @@ export class CodeModelBuilder {
   private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
     for (const client of clients) {
+      if (client.arm) {
+        this.codeModel.arm = true;
+      }
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -740,7 +744,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
+    this.processRouteForLongRunning(codeModelOperation, operation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -857,6 +861,7 @@ export class CodeModelBuilder {
 
   private processRouteForLongRunning(
     op: CodeModelOperation,
+    operation: Operation,
     responses: HttpOperationResponse[],
     lroMetadata: LongRunningMetadata,
   ) {
@@ -877,6 +882,11 @@ export class CodeModelBuilder {
           }
         }
       }
+    }
+
+    if (this.isArmLongRunningOperation(this.program, operation)) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
     }
   }
 
@@ -2574,6 +2584,10 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
+  }
+
+  private isArmLongRunningOperation(program: Program, op: Operation) {
+    return this.codeModel.arm && !!getExtensions(program, op)?.get("x-ms-long-running-operation");
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

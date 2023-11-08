@@ -37,7 +37,7 @@ export interface EmitterOptions {
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
 
-  "fluent"?: string;
+  "arm"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -81,7 +81,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
 
-    "fluent": { type: "string", nullable: true },
+    "arm": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
@@ -108,6 +108,8 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
+
+    options["arm"] = codeModel.arm;
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 

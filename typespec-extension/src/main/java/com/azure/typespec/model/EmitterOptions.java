@@ -55,8 +55,8 @@ public class EmitterOptions {
     @JsonProperty(value="customization-class")
     private String customizationClass;
 
-    @JsonProperty(value = "fluent")
-    private String fluent;
+    @JsonProperty(value = "arm")
+    private Boolean arm = false;
 
     public String getNamespace() {
         return namespace;
@@ -120,8 +120,8 @@ public class EmitterOptions {
         return branded;
     }
 
-    public String getFluent() {
-        return fluent;
+    public Boolean getArm() {
+        return arm;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {
