@@ -41,7 +41,10 @@ public class EmitterOptions {
     private Boolean generateSamples = true;
 
     @JsonProperty(value = "enable-sync-stack")
-    private Boolean enableSyncStack;
+    private Boolean enableSyncStack = true;
+
+    @JsonProperty(value = "stream-style-serialization")
+    private Boolean streamStyleSerialization = false;
 
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
@@ -84,6 +87,10 @@ public class EmitterOptions {
 
     public Boolean getEnableSyncStack() {
         return enableSyncStack;
+    }
+
+    public Boolean getStreamStyleSerialization() {
+        return streamStyleSerialization;
     }
 
     public EmitterOptions setNamespace(String namespace) {

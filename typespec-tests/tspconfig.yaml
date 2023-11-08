@@ -7,6 +7,7 @@ options:
     namer: true
     generate-samples: true
     generate-tests: true
+    stream-style-serialization: true
     examples-directory: "{project-root}/tsp/examples"
     dev-options:
       generate-code-model: true
