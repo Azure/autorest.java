@@ -11,7 +11,7 @@ import com.generic.core.exception.HttpResponseException;
 import com.generic.core.exception.ResourceModifiedException;
 import com.generic.core.exception.ResourceNotFoundException;
 import com.generic.core.http.Response;
-import com.generic.core.http.models.RequestOptions;
+import com.generic.core.models.RequestOptions;
 import com.generic.core.models.BinaryData;
 import com.openai.implementation.OpenAIClientImpl;
 import com.openai.models.CreateEditRequest;
