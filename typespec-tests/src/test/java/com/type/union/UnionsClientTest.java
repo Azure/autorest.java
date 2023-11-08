@@ -3,7 +3,6 @@
 
 package com.type.union;
 
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.models.Model1;
 import com.type.union.models.Model2;
