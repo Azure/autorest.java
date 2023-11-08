@@ -59,7 +59,7 @@ public class ClassType implements IType {
 //        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, com.generic.core.http.models.HttpRequest.class));
 //        // TODO: generic not having ClientOptions
 ////        put(com.azure.core.util.ClientOptions.class, new ClassDetails(com.azure.core.util.ClientOptions.class, com.generic.core.models.ClientOptions.class));
-//        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.http.models.RequestOptions.class));
+//        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, com.generic.core.models.RequestOptions.class));
 //        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, com.generic.core.models.BinaryData.class));
 //        put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, com.generic.core.http.policy.retry.RetryOptions.class));
 //        put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, com.generic.core.http.Response.class));
@@ -100,7 +100,7 @@ public class ClassType implements IType {
         put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, "com.generic.core.models.Headers"));
         put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
         put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
-        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, "com.generic.core.http.models.RequestOptions"));
+        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, "com.generic.core.models.RequestOptions"));
         put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, "com.generic.core.models.BinaryData"));
         put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, "com.generic.core.http.policy.retry.RetryOptions"));
         put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, "com.generic.core.http.Response"));
