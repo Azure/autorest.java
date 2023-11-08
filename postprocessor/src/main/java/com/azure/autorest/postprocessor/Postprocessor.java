@@ -5,7 +5,6 @@ package com.azure.autorest.postprocessor;
 
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -25,39 +24,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-public class Postprocessor extends NewPlugin {
-    private final Logger logger = new PluginLogger(this, Postprocessor.class);
+public class Postprocessor {
+    protected final NewPlugin plugin;
+    private final Logger logger;
 
-    public Postprocessor(Connection connection, String plugin, String sessionId) {
-        super(connection, plugin, sessionId);
+    public Postprocessor(NewPlugin plugin) {
+        this.plugin = plugin;
+        this.logger = new PluginLogger(plugin, Postprocessor.class);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
-    public boolean processInternal() {
+    public void postProcess(Map<String, String> fileContents) {
         this.clear();
-
-        List<String> files = listInputs();
-        Map<String, String> fileContents = files.stream().collect(Collectors.toMap(f -> f, this::readFile));
 
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
 
         if (className == null) {
             try {
-                writeToFiles(fileContents);
+                writeToFiles(fileContents, plugin, logger);
             } catch (Exception e) {
                 logger.error("Failed to complete postprocessing.", e);
-                return false;
+                throw new RuntimeException("Failed to complete postprocessing.", e);
             }
-            return true;
+            return;
         }
 
-        if (jarPath == null && (!className.startsWith("src") || !className.endsWith(".java"))) {
+        if (jarPath == null && !className.endsWith(".java")) {
             logger.warn("Must provide a JAR path or a source file path containing the customization class {}", className);
-            return false;
+            throw new RuntimeException("Must provide a JAR path or a source file path containing the customization class " + className);
         }
 
         try {
@@ -69,7 +65,7 @@ public class Postprocessor extends NewPlugin {
                     if (Paths.get(jarPath).isAbsolute()) {
                         jarUrl = new File(jarPath).toURI().toURL();
                     } else {
-                        String baseDirectory = getBaseDirectory();
+                        String baseDirectory = getBaseDirectory(plugin);
                         if (baseDirectory != null) {
                             jarUrl = Paths.get(baseDirectory, jarPath).toUri().toURL();
                         }
@@ -78,21 +74,21 @@ public class Postprocessor extends NewPlugin {
                     jarUrl = new URI(jarPath).toURL();
                 }
                 if (jarUrl == null || Files.notExists(Paths.get(jarUrl.toURI()))) {
-                    new PluginLogger(this, Postprocessor.class, "LoadCustomizationJar")
+                    new PluginLogger(plugin, Postprocessor.class, "LoadCustomizationJar")
                         .warn("Customization JAR {} not found. Customization skipped.", jarPath);
-                    return true;
+                    return;
                 }
                 URLClassLoader loader = URLClassLoader.newInstance(new URL[]{jarUrl}, ClassLoader.getSystemClassLoader());
                 try {
                     customizationClass = (Class<? extends Customization>) Class.forName(className, true, loader);
                 } catch (Exception e) {
-                    new PluginLogger(this, Postprocessor.class, "LoadCustomizationClass")
+                    new PluginLogger(plugin, Postprocessor.class, "LoadCustomizationClass")
                         .warn("Customization class " + className +
                             " not found in customization jar. Customization skipped.", e);
-                    return true;
+                    return;
                 }
-            } else if (className.startsWith("src") && className.endsWith(".java")) {
-                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(), logger);
+            } else if (className.endsWith(".java")) {
+                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(plugin), logger);
             } else {
                 throw new RuntimeException("Invalid customization class " + className);
             }
@@ -103,22 +99,21 @@ public class Postprocessor extends NewPlugin {
                 fileContents = customization.run(fileContents, logger);
             } catch (Exception e) {
                 logger.error("Unable to complete customization", e);
-                return false;
+                throw new RuntimeException("Unable to complete customization", e);
             }
 
             //Step 2: Print to files
-            writeToFiles(fileContents);
+            writeToFiles(fileContents, plugin, logger);
         } catch (Exception e) {
             logger.error("Failed to complete postprocessing.", e);
-            return false;
+            throw new RuntimeException("Failed to complete postprocessing.", e);
         }
-        return true;
     }
 
-    private void writeToFiles(Map<String, String> javaFiles) {
+    public static void writeToFiles(Map<String, String> javaFiles, NewPlugin plugin, Logger logger) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isHandlePartialUpdate()) {
-            handlePartialUpdate(javaFiles);
+            handlePartialUpdate(javaFiles, plugin, logger);
         }
 
         if (!settings.isSkipFormatting()) {
@@ -141,7 +136,7 @@ public class Postprocessor extends NewPlugin {
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
                     Path file = tmpDir.resolve(javaFile.getKey());
-                    writeFile(javaFile.getKey(), Files.readString(file), null);
+                    plugin.writeFile(javaFile.getKey(), Files.readString(file), null);
                 }
             } catch (IOException ex) {
                 throw new UncheckedIOException(ex);
@@ -151,7 +146,7 @@ public class Postprocessor extends NewPlugin {
                 }
             }
         } else {
-            javaFiles.forEach((fileName, content) -> writeFile(fileName, content, null));
+            javaFiles.forEach((fileName, content) -> plugin.writeFile(fileName, content, null));
         }
     }
 
@@ -179,13 +174,13 @@ public class Postprocessor extends NewPlugin {
         }
     }
 
-    private String getReadme() {
-        List<String> configurationFiles = getValue(List.class, "configurationFiles");
+    private static String getReadme(NewPlugin plugin) {
+        List<String> configurationFiles = plugin.getValue(List.class, "configurationFiles");
         return configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
     }
 
-    private String getBaseDirectory() {
-        String readme = getReadme();
+    private static String getBaseDirectory(NewPlugin plugin) {
+        String readme = getReadme(plugin);
         if (readme != null) {
             return new File(URI.create(readme).getPath()).getParent();
         }
@@ -240,7 +235,7 @@ public class Postprocessor extends NewPlugin {
         }
     }
 
-    private void handlePartialUpdate(Map<String, String> fileContents) {
+    private static void handlePartialUpdate(Map<String, String> fileContents, NewPlugin plugin, Logger logger) {
         logger.info("Begin handle partial update...");
         // handle partial update
         // currently only support add additional interface or overload a generated method in sync and async client
@@ -255,7 +250,7 @@ public class Postprocessor extends NewPlugin {
                 }
                 if (projectBaseDirectoryPath == null || !(new File(projectBaseDirectoryPath).isDirectory())) {
                     // use parent directory of swagger/readme.md
-                    projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
+                    projectBaseDirectoryPath = new File(getBaseDirectory(plugin)).getParent();
                 }
                 Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
                 // check if existingFile exists, if not, no need to handle partial update

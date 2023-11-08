@@ -3,7 +3,6 @@
 
 package com.azure.autorest;
 
-import com.azure.autorest.customization.Customization;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -12,7 +11,6 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
-import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.core.util.CoreUtils;
@@ -126,33 +124,6 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("disable-required-property-annotation", true);
         // Defaulting to KeyCredential and not providing TypeSpec services to generate with AzureKeyCredential.
         SETTINGS_MAP.put("use-key-credential", true);
-    }
-
-    public Map<String, String> customizeGeneratedCode(Map<String, String> fileContents, String outputDir) {
-        String className = JavaSettings.getInstance().getCustomizationClass();
-
-        if (className == null) {
-            return fileContents;
-        }
-
-        Class<? extends Customization> customizationClass = null;
-        if (className.endsWith(".java")) {
-            customizationClass = Postprocessor.loadCustomizationClassFromJavaCode(className, outputDir, LOGGER);
-        } else {
-            LOGGER.warn("Invalid customization class. No customizations are applied to the generated code."
-                    + " The customization java file should end with .java but was " + className);
-
-            return fileContents;
-        }
-        try {
-            Customization customization = customizationClass.getConstructor().newInstance();
-            LOGGER.info("Running customization, this may take a while...");
-            fileContents = customization.run(fileContents, LOGGER);
-            return fileContents;
-        } catch (Exception e) {
-            LOGGER.error("Unable to complete customization", e);
-            throw new RuntimeException(e);
-        }
     }
 
     public static class MockConnection extends Connection {

@@ -8,12 +8,12 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.TypeSpecFluentPlugin;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
@@ -30,9 +30,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,9 +38,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -105,7 +101,9 @@ public class Main {
         FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
 
         // write
-        formatAndWriteJavaFiles(fluentPlugin, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())), JavaSettings.getInstance());
+        Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
+            .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
+            fluentPlugin.getLogger());
     }
 
     private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
@@ -134,10 +132,9 @@ public class Main {
         });
 
         // handle customization
-        javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
         // write output
         // java files
-        formatAndWriteJavaFiles(typeSpecPlugin, javaFiles, settings);
+        new Postprocessor(typeSpecPlugin).postProcess(javaFiles);
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
@@ -152,69 +149,6 @@ public class Main {
             }
         }
         System.exit(0);
-    }
-
-    private static void formatAndWriteJavaFiles(NewPlugin typeSpecPlugin, Map<String, String> javaFiles,
-                                                JavaSettings settings) {
-        if (!settings.isSkipFormatting()) {
-            try {
-                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
-                tmpDir.toFile().deleteOnExit();
-
-                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
-                    Path file = tmpDir.resolve(javaFile.getKey());
-                    Files.createDirectories(file.getParent());
-                    Files.writeString(file, javaFile.getValue()).toFile().deleteOnExit();
-                }
-
-                Path pomPath = tmpDir.resolve("spotless-pom.xml");
-                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
-                Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
-                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
-
-                attemptMavenSpotless(pomPath);
-
-                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
-                    Path file = tmpDir.resolve(javaFile.getKey());
-                    typeSpecPlugin.writeFile(javaFile.getKey(), Files.readString(file), null);
-                }
-            } catch (IOException ex) {
-                throw new UncheckedIOException(ex);
-            }
-        } else {
-            for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
-                typeSpecPlugin.writeFile(javaFile.getValue(), javaFile.getKey(), null);
-            }
-        }
-    }
-
-    private static void attemptMavenSpotless(Path pomPath) {
-        String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
-            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
-
-        try {
-            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
-            outputFile.deleteOnExit();
-            Process process = new ProcessBuilder(command)
-                .redirectErrorStream(true)
-                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .start();
-            process.waitFor(60, TimeUnit.SECONDS);
-
-            if (process.isAlive() || process.exitValue() != 0) {
-                process.destroyForcibly();
-                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                    + Files.readString(outputFile.toPath()));
-            }
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
-        }
-    }
-
-    private static boolean isWindows() {
-        String osName = System.getProperty("os.name");
-        return osName != null && osName.startsWith("Windows");
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
