@@ -87,7 +87,7 @@ public final class StandardAsyncClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
