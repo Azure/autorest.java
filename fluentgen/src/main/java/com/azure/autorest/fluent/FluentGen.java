@@ -106,8 +106,9 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
-                .collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
+            Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())),
+                this, logger);
 
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {

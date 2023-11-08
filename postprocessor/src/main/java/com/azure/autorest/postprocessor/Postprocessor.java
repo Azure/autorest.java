@@ -43,7 +43,7 @@ public class Postprocessor {
 
         if (className == null) {
             try {
-                writeToFiles(fileContents);
+                writeToFiles(fileContents, plugin, logger);
             } catch (Exception e) {
                 logger.error("Failed to complete postprocessing.", e);
                 throw new RuntimeException("Failed to complete postprocessing.", e);
@@ -65,7 +65,7 @@ public class Postprocessor {
                     if (Paths.get(jarPath).isAbsolute()) {
                         jarUrl = new File(jarPath).toURI().toURL();
                     } else {
-                        String baseDirectory = getBaseDirectory();
+                        String baseDirectory = getBaseDirectory(plugin);
                         if (baseDirectory != null) {
                             jarUrl = Paths.get(baseDirectory, jarPath).toUri().toURL();
                         }
@@ -88,7 +88,7 @@ public class Postprocessor {
                     return;
                 }
             } else if (className.startsWith("src") && className.endsWith(".java")) {
-                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(), logger);
+                customizationClass = loadCustomizationClassFromJavaCode(className, getBaseDirectory(plugin), logger);
             } else {
                 throw new RuntimeException("Invalid customization class " + className);
             }
@@ -103,17 +103,17 @@ public class Postprocessor {
             }
 
             //Step 2: Print to files
-            writeToFiles(fileContents);
+            writeToFiles(fileContents, plugin, logger);
         } catch (Exception e) {
             logger.error("Failed to complete postprocessing.", e);
             throw new RuntimeException("Failed to complete postprocessing.", e);
         }
     }
 
-    private void writeToFiles(Map<String, String> javaFiles) {
+    public static void writeToFiles(Map<String, String> javaFiles, NewPlugin plugin, Logger logger) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.isHandlePartialUpdate()) {
-            handlePartialUpdate(javaFiles);
+            handlePartialUpdate(javaFiles, plugin, logger);
         }
 
         if (!settings.isSkipFormatting()) {
@@ -174,13 +174,13 @@ public class Postprocessor {
         }
     }
 
-    private String getReadme() {
+    private static String getReadme(NewPlugin plugin) {
         List<String> configurationFiles = plugin.getValue(List.class, "configurationFiles");
         return configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
     }
 
-    private String getBaseDirectory() {
-        String readme = getReadme();
+    private static String getBaseDirectory(NewPlugin plugin) {
+        String readme = getReadme(plugin);
         if (readme != null) {
             return new File(URI.create(readme).getPath()).getParent();
         }
@@ -235,7 +235,7 @@ public class Postprocessor {
         }
     }
 
-    private void handlePartialUpdate(Map<String, String> fileContents) {
+    private static void handlePartialUpdate(Map<String, String> fileContents, NewPlugin plugin, Logger logger) {
         logger.info("Begin handle partial update...");
         // handle partial update
         // currently only support add additional interface or overload a generated method in sync and async client
@@ -250,7 +250,7 @@ public class Postprocessor {
                 }
                 if (projectBaseDirectoryPath == null || !(new File(projectBaseDirectoryPath).isDirectory())) {
                     // use parent directory of swagger/readme.md
-                    projectBaseDirectoryPath = new File(getBaseDirectory()).getParent();
+                    projectBaseDirectoryPath = new File(getBaseDirectory(plugin)).getParent();
                 }
                 Path existingFilePath = Paths.get(projectBaseDirectoryPath, path);
                 // check if existingFile exists, if not, no need to handle partial update
