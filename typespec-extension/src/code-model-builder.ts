@@ -145,7 +145,6 @@ import {
   isSameLiteralTypes,
   getAccess,
   getUsage,
-  unionReferredByType,
   getUnionDescription,
   modelIs,
   getModelNameForProperty,
@@ -162,7 +161,6 @@ import {
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
-  operationRefersUnion,
   operationIsMultipart,
   isKnownContentType,
   CONTENT_TYPE_KEY,
@@ -389,15 +387,15 @@ export class CodeModelBuilder {
 
       // lambda to mark model as public
       const modelAsPublic = (model: Model | Enum) => {
-        // check it does not contain Union
-        const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
-        if (union) {
-          const errorMsg = `Model '${getTypeName(
-            model,
-            this.typeNameOptions,
-          )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-          throw new Error(errorMsg);
-        }
+        // // check it does not contain Union
+        // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+        // if (union) {
+        //   const errorMsg = `Model '${getTypeName(
+        //     model,
+        //     this.typeNameOptions,
+        //   )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+        //   throw new Error(errorMsg);
+        // }
 
         const schema = this.processSchema(model, model.name);
 
@@ -658,17 +656,18 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else {
-        const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
-        if (union) {
-          // and Union
-          generateConvenienceApi = false;
-          apiComment = `Convenience API is not generated, as operation '${
-            op.operation.name
-          }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-          this.logWarning(apiComment);
-        }
       }
+      // else {
+      //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+      //   if (union) {
+      //     // and Union
+      //     generateConvenienceApi = false;
+      //     apiComment = `Convenience API is not generated, as operation '${
+      //       op.operation.name
+      //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+      //     this.logWarning(apiComment);
+      //   }
+      // }
     }
     if (generateConvenienceApi && convenienceApiName) {
       codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
