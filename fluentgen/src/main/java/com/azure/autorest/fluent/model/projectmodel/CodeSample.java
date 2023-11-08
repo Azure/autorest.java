@@ -14,8 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CodeSample {
 
@@ -43,7 +43,9 @@ public class CodeSample {
             boolean embedmeBlockBegin = false;
             String testMethodIndent = "";
             String embedmeBlockIndent = "";
-            for (String line : reader.lines().collect(Collectors.toList())) {
+            Iterator<String> linesIterator = reader.lines().iterator();
+            while (linesIterator.hasNext()) {
+                String line = linesIterator.next();
                 if (!testMethodBegin) {
                     if (line.trim().equals(TEST_ANNOTATION)) {
                         // first get inside @Test method

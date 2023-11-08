@@ -17,8 +17,9 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FluentNamer extends Preprocessor {
@@ -42,26 +43,32 @@ public class FluentNamer extends Preprocessor {
                 throw new RuntimeException(String
                         .format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
             }
+
+            Path codeModelFolder;
+            try {
+                codeModelFolder = Files.createTempDirectory("code-model" + UUID.randomUUID());
+                logger.info("Created temp directory for code model: {}", codeModelFolder);
+            } catch (IOException ex) {
+                logger.error("Failed to create temp directory for code model.", ex);
+                throw new RuntimeException("Failed to create temp directory for code model.", ex);
+            }
+
             // Read input file
             String file = readFile(files.get(0));
             // Write the input code model file to a local code model file to help debugging
-            createInputCodeModelFile(file);
+            Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
             // Deserialize the input code model string to CodeModel object
             CodeModel codeModel = loadCodeModel(file);
             // Do necessary transformation
             codeModel = transform(codeModel);
             // Write to local file (for debugging)
-            Files.writeString(Paths.get("code-model-fluentnamer-no-tags.yaml"), dumpYaml(codeModel));
+            Files.writeString(codeModelFolder.resolve("code-model-fluentnamer-no-tags.yaml"), dumpYaml(codeModel));
 
             return codeModel;
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentnamer plugin.", e);
             throw new RuntimeException("Failed to successfully run fluentnamer plugin.", e);
         }
-    }
-
-    private void createInputCodeModelFile(String file) throws IOException {
-        Files.writeString(Paths.get("code-model.yaml"), file);
     }
 
     public CodeModel transform(CodeModel codeModel) {

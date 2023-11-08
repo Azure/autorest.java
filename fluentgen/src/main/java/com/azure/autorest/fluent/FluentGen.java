@@ -44,6 +44,7 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -59,15 +60,8 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class FluentGen extends Javagen {
@@ -96,8 +90,6 @@ public class FluentGen extends Javagen {
         this.clear();
 
         try {
-            JavaSettings settings = JavaSettings.getInstance();
-
             logger.info("Read YAML");
             // Parse yaml to code model
             CodeModel codeModel = new FluentNamer(this, connection, pluginName, sessionId)
@@ -114,7 +106,8 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            formatAndWriteJavaFiles(javaPackage.getJavaFiles(), settings);
+            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())));
 
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
@@ -130,68 +123,6 @@ public class FluentGen extends Javagen {
             //connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
             return false;
         }
-    }
-
-    private void formatAndWriteJavaFiles(List<JavaFile> javaFiles, JavaSettings settings) {
-        if (!settings.isSkipFormatting()) {
-            try {
-                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
-                tmpDir.toFile().deleteOnExit();
-
-                for (JavaFile javaFile : javaFiles) {
-                    Path file = tmpDir.resolve(javaFile.getFilePath());
-                    Files.createDirectories(file.getParent());
-                    Files.writeString(file, javaFile.getContents().toString()).toFile().deleteOnExit();
-                }
-
-                Path pomPath = tmpDir.resolve("spotless-pom.xml");
-                Files.writeString(pomPath, FluentUtils.loadTextFromResource("spotless-pom.xml"))
-                        .toFile().deleteOnExit();
-                Files.writeString(pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"),
-                        FluentUtils.loadTextFromResource("eclipse-format-azure-sdk-for-java.xml"))
-                        .toFile().deleteOnExit();
-
-                attemptMavenSpotless(pomPath);
-
-                for (JavaFile javaFile : javaFiles) {
-                    Path file = tmpDir.resolve(javaFile.getFilePath());
-                    writeFile(javaFile.getFilePath(), Files.readString(file), null);
-                }
-            } catch (IOException ex) {
-                throw new UncheckedIOException(ex);
-            }
-        } else {
-            javaFiles.forEach(javaFile -> writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null));
-        }
-    }
-
-    private static void attemptMavenSpotless(Path pomPath) {
-        String[] command = isWindows()
-            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
-            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
-
-        try {
-            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
-            outputFile.deleteOnExit();
-            Process process = new ProcessBuilder(command)
-                .redirectErrorStream(true)
-                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .start();
-            process.waitFor(60, TimeUnit.SECONDS);
-
-            if (process.isAlive() || process.exitValue() != 0) {
-                process.destroyForcibly();
-                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                    + Files.readString(outputFile.toPath()));
-            }
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
-        }
-    }
-
-    private static boolean isWindows() {
-        String osName = System.getProperty("os.name");
-        return osName != null && osName.startsWith("Windows");
     }
 
     CodeModel handleYaml(String yamlContent) {

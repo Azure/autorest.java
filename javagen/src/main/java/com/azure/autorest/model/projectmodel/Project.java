@@ -35,7 +35,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Project {
@@ -282,7 +281,7 @@ public class Project {
 
     public static Optional<String> checkArtifact(String line, String artifact) {
         if (line.startsWith(artifact + ";")) {
-            String[] segments = line.split(Pattern.quote(";"));
+            String[] segments = line.split(";");
             if (segments.length >= 2) {
                 String version = segments[1];
                 LOGGER.info("Found version '{}' for artifact '{}'", version, artifact);
@@ -295,74 +294,83 @@ public class Project {
     protected void findPomDependencies() {
         JavaSettings settings = JavaSettings.getInstance();
         String outputFolder = settings.getAutorestSettings().getOutputFolder();
-        if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
-            Path pomPath = Paths.get(outputFolder, "pom.xml");
+        if (outputFolder == null || !Paths.get(outputFolder).isAbsolute()) {
+            LOGGER.warn("'output-folder' parameter is not an absolute path, fall back to default dependencies");
+            return;
+        }
 
-            if (Files.isReadable(pomPath)) {
-                try {
-                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                    Document doc = dBuilder.parse(pomPath.toFile());
-                    NodeList nodeList = doc.getDocumentElement().getChildNodes();
-                    for (int i = 0; i < nodeList.getLength(); ++i) {
-                        Node node = nodeList.item(i);
-                        if (node.getNodeType() == Node.ELEMENT_NODE) {
-                            Element elementNode = (Element) node;
-                            if ("dependencies".equals(elementNode.getTagName())) {
-                                NodeList dependencyNodeList = elementNode.getChildNodes();
-                                for (int j = 0; j < dependencyNodeList.getLength(); ++j) {
-                                    Node dependencyNode = dependencyNodeList.item(j);
-                                    if (dependencyNode.getNodeType() == Node.ELEMENT_NODE) {
-                                        Element dependencyElementNode = (Element) dependencyNode;
-                                        if ("dependency".equals(dependencyElementNode.getTagName())) {
-                                            String groupId = null;
-                                            String artifactId = null;
-                                            String version = null;
-                                            String scope = null;
-                                            NodeList itemNodeList = dependencyElementNode.getChildNodes();
-                                            for (int k = 0; k < itemNodeList.getLength(); ++k) {
-                                                Node itemNode = itemNodeList.item(k);
-                                                if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
-                                                    Element elementItemNode = (Element) itemNode;
-                                                    switch (elementItemNode.getTagName()) {
-                                                        case "groupId":
-                                                            groupId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
-                                                            break;
-                                                        case "artifactId":
-                                                            artifactId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
-                                                            break;
-                                                        case "version":
-                                                            version = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
-                                                            break;
-                                                        case "scope":
-                                                            scope = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
-                                                            break;
-                                                    }
-                                                }
-                                            }
+        Path pomPath = Paths.get(outputFolder, "pom.xml");
+        if (!Files.isReadable(pomPath)) {
+            LOGGER.info("'pom.xml' not found or not readable");
+            return;
+        }
 
-                                            if (groupId != null && artifactId != null && version != null) {
-                                                String dependencyIdentifier = String.format("%s:%s:%s", groupId, artifactId, version);
-                                                if (scope != null) {
-                                                    dependencyIdentifier += ":" + scope;
-                                                }
-                                                this.pomDependencyIdentifiers.add(dependencyIdentifier);
-                                                LOGGER.info("Found dependency identifier '{}' from POM", dependencyIdentifier);
-                                            }
-                                        }
-                                    }
-                                }
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(pomPath.toFile());
+            NodeList nodeList = doc.getDocumentElement().getChildNodes();
+            for (int i = 0; i < nodeList.getLength(); ++i) {
+                Node node = nodeList.item(i);
+                if (node.getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+
+                Element elementNode = (Element) node;
+                if (!"dependencies".equals(elementNode.getTagName())) {
+                    continue;
+                }
+
+                NodeList dependencyNodeList = elementNode.getChildNodes();
+                for (int j = 0; j < dependencyNodeList.getLength(); ++j) {
+                    Node dependencyNode = dependencyNodeList.item(j);
+                    if (dependencyNode.getNodeType() != Node.ELEMENT_NODE) {
+                        continue;
+                    }
+
+                    Element dependencyElementNode = (Element) dependencyNode;
+                    if (!"dependency".equals(dependencyElementNode.getTagName())) {
+                        continue;
+                    }
+
+                    String groupId = null;
+                    String artifactId = null;
+                    String version = null;
+                    String scope = null;
+                    NodeList itemNodeList = dependencyElementNode.getChildNodes();
+                    for (int k = 0; k < itemNodeList.getLength(); ++k) {
+                        Node itemNode = itemNodeList.item(k);
+                        if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
+                            Element elementItemNode = (Element) itemNode;
+                            switch (elementItemNode.getTagName()) {
+                                case "groupId":
+                                    groupId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                    break;
+                                case "artifactId":
+                                    artifactId = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                    break;
+                                case "version":
+                                    version = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                    break;
+                                case "scope":
+                                    scope = ((Text) elementItemNode.getChildNodes().item(0)).getWholeText();
+                                    break;
                             }
                         }
                     }
-                } catch (IOException | ParserConfigurationException | SAXException e) {
-                    LOGGER.warn("Failed to parse 'pom.xml'", e);
+
+                    if (groupId != null && artifactId != null && version != null) {
+                        String dependencyIdentifier = String.format("%s:%s:%s", groupId, artifactId, version);
+                        if (scope != null) {
+                            dependencyIdentifier += ":" + scope;
+                        }
+                        this.pomDependencyIdentifiers.add(dependencyIdentifier);
+                        LOGGER.info("Found dependency identifier '{}' from POM", dependencyIdentifier);
+                    }
                 }
-            } else {
-                LOGGER.info("'pom.xml' not found or not readable");
             }
-        } else {
-            LOGGER.warn("'output-folder' parameter is not an absolute path, fall back to default dependencies");
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            LOGGER.warn("Failed to parse 'pom.xml'", e);
         }
     }
 

@@ -2,7 +2,8 @@ trigger: none
 pr: none
 
 pool:
-  vmImage: "ubuntu-latest"
+  name: "azsdk-pool-mms-ubuntu-2004-general"
+  vmImage: "MMSUbuntu20.04"
 
 jobs:
   - job: Build
@@ -20,7 +21,6 @@ jobs:
           versionSpec: '$(NodeVersion)'
 
       - task: Maven@3
-        retryCountOnTaskFailure: 3
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml

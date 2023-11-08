@@ -31,13 +31,13 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Preprocessor extends NewPlugin {
@@ -62,8 +62,18 @@ public class Preprocessor extends NewPlugin {
                     String.join(", ", files)));
         }
         String file = wrappedPlugin.readFile(files.get(0));
+
+        Path codeModelFolder;
         try {
-            Files.writeString(Paths.get("code-model.yaml"), file);
+            codeModelFolder = Files.createTempDirectory("code-model" + UUID.randomUUID());
+            logger.info("Created temp directory for code model: {}", codeModelFolder);
+        } catch (IOException ex) {
+            logger.error("Failed to create temp directory for code model.", ex);
+            throw new RuntimeException("Failed to create temp directory for code model.", ex);
+        }
+
+        try {
+            Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
         } catch (Exception e) {
             //
         }
@@ -87,8 +97,7 @@ public class Preprocessor extends NewPlugin {
         performPostTransformUpdates(codeModel);
 
         try {
-            Path path = Paths.get("code-model-processed-no-tags.yaml");
-            Files.writeString(path, dumpYaml(codeModel));
+            Files.writeString(codeModelFolder.resolve("code-model-processed-no-tags.yaml"), dumpYaml(codeModel));
             return codeModel;
         } catch (Exception e) {
             logger.error("Failed to pre-process the code model.", e);
