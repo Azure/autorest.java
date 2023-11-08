@@ -29,16 +29,6 @@
       <version>1.0.0-beta.5</version>
     </dependency>
     <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-preprocessor</artifactId>
-      <version>1.0.0-beta.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-postprocessor</artifactId>
-      <version>1.0.0-beta.1</version>
-    </dependency>
-    <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>
       <version>1.1.0</version>
@@ -84,25 +74,22 @@
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.5.1</version>
+            <artifactId>maven-assembly-plugin</artifactId>
             <executions>
               <execution>
                 <phase>package</phase>
                 <goals>
-                  <goal>shade</goal>
+                  <goal>single</goal>
                 </goals>
                 <configuration>
-                  <transformers>
-                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <archive>
+                    <manifest>
                       <mainClass>com.azure.autorest.Main</mainClass>
-                    </transformer>
-                  </transformers>
-                  <minimizeJar>true</minimizeJar>
-                  <entryPoints>
-                    <entryPoint>com.azure.autorest.Main</entryPoint>
-                  </entryPoints>
-                  <finalName>${project.artifactId}-jar-with-dependencies</finalName>
+                    </manifest>
+                  </archive>
+                  <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
                 </configuration>
               </execution>
             </executions>
