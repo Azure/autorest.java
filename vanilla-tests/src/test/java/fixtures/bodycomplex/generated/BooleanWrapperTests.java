@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class BooleanWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        BooleanWrapper model =
-                BinaryData.fromString("{\"field_true\":false,\"field_false\":false}").toObject(BooleanWrapper.class);
+        BooleanWrapper model
+            = BinaryData.fromString("{\"field_true\":false,\"field_false\":false}").toObject(BooleanWrapper.class);
         Assertions.assertEquals(false, model.isFieldTrue());
         Assertions.assertEquals(false, model.isFieldFalse());
     }

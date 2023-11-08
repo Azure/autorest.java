@@ -11,7 +11,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import fixtures.xmlservice.models.SignedIdentifier;
 import java.util.List;
 
-/** A wrapper around List&lt;SignedIdentifier&gt; which provides top-level metadata for serialization. */
+/**
+ * A wrapper around List&lt;SignedIdentifier&gt; which provides top-level metadata for serialization.
+ */
 @JacksonXmlRootElement(localName = "SignedIdentifiers")
 public final class SignedIdentifierWrapper {
     @JacksonXmlProperty(localName = "SignedIdentifier")
@@ -19,7 +21,7 @@ public final class SignedIdentifierWrapper {
 
     /**
      * Creates an instance of SignedIdentifierWrapper.
-     *
+     * 
      * @param signedIdentifiers the list.
      */
     @JsonCreator
@@ -29,7 +31,7 @@ public final class SignedIdentifierWrapper {
 
     /**
      * Get the List&lt;SignedIdentifier&gt; contained in this wrapper.
-     *
+     * 
      * @return the List&lt;SignedIdentifier&gt;.
      */
     public List<SignedIdentifier> items() {

@@ -30,10 +30,9 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SpecialWordsClientBuilder modelsClientbuilder =
-                new SpecialWordsClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder modelsClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -41,10 +40,9 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         }
         modelsClient = modelsClientbuilder.buildModelsClient();
 
-        SpecialWordsClientBuilder modelPropertiesClientbuilder =
-                new SpecialWordsClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder modelPropertiesClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelPropertiesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -52,10 +50,9 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         }
         modelPropertiesClient = modelPropertiesClientbuilder.buildModelPropertiesClient();
 
-        SpecialWordsClientBuilder operationsClientbuilder =
-                new SpecialWordsClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder operationsClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             operationsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -63,15 +60,15 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         }
         operationsClient = operationsClientbuilder.buildOperationsClient();
 
-        SpecialWordsClientBuilder parametersClientbuilder =
-                new SpecialWordsClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialWordsClientBuilder parametersClientbuilder
+            = new SpecialWordsClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             parametersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             parametersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         parametersClient = parametersClientbuilder.buildParametersClient();
+
     }
 }

@@ -14,9 +14,8 @@ public class ArrayPutValid {
     public static void main(String[] args) {
         ArrayClient arrayClient = new ArrayClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodycomplex.generated.arrayputvalid.arrayputvalid
-        BinaryData complexBody =
-                BinaryData.fromString(
-                        "{\"array\":[\"1, 2, 3, 4\",\"\",null,\"&S#$(*Y\",\"The quick brown fox jumps over the lazy dog\"]}");
+        BinaryData complexBody = BinaryData.fromString(
+            "{\"array\":[\"1, 2, 3, 4\",\"\",null,\"&S#$(*Y\",\"The quick brown fox jumps over the lazy dog\"]}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = arrayClient.putValidWithResponse(complexBody, requestOptions);
         // END:fixtures.bodycomplex.generated.arrayputvalid.arrayputvalid

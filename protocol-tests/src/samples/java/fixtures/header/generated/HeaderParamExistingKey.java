@@ -11,12 +11,12 @@ import fixtures.header.AutoRestSwaggerBatHeaderServiceClientBuilder;
 
 public class HeaderParamExistingKey {
     public static void main(String[] args) {
-        AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient =
-                new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
+        AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient
+            = new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.header.generated.headerparamexistingkey.headerparamexistingkey
         RequestOptions requestOptions = new RequestOptions();
-        Response<Void> response =
-                autoRestSwaggerBatHeaderServiceClient.paramExistingKeyWithResponse("overwrite", requestOptions);
+        Response<Void> response
+            = autoRestSwaggerBatHeaderServiceClient.paramExistingKeyWithResponse("overwrite", requestOptions);
         // END:fixtures.header.generated.headerparamexistingkey.headerparamexistingkey
     }
 }

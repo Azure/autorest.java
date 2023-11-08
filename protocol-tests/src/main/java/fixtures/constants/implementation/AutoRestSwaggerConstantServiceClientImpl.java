@@ -11,7 +11,9 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the AutoRestSwaggerConstantServiceClient type. */
+/**
+ * Initializes a new instance of the AutoRestSwaggerConstantServiceClient type.
+ */
 public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
@@ -21,7 +23,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Gets Constant header property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
-     *
+     * 
      * @return the headerConstant value.
      */
     public boolean isHeaderConstant() {
@@ -36,7 +38,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Gets Constant query property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
-     *
+     * 
      * @return the queryConstant value.
      */
     public int getQueryConstant() {
@@ -51,55 +53,63 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Gets Constant path property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
-     *
+     * 
      * @return the pathConstant value.
      */
     public String getPathConstant() {
         return this.pathConstant;
     }
 
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The ContantsImpl object to access its operations. */
+    /**
+     * The ContantsImpl object to access its operations.
+     */
     private final ContantsImpl contants;
 
     /**
      * Gets the ContantsImpl object to access its operations.
-     *
+     * 
      * @return the ContantsImpl object.
      */
     public ContantsImpl getContants() {
@@ -108,69 +118,54 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
-     *
+     * 
      * @param headerConstant Constant header property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param queryConstant Constant query property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param pathConstant Constant path property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
-    public AutoRestSwaggerConstantServiceClientImpl(
-            boolean headerConstant, int queryConstant, String pathConstant, String host) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                headerConstant,
-                queryConstant,
-                pathConstant,
-                host);
+    public AutoRestSwaggerConstantServiceClientImpl(boolean headerConstant, int queryConstant, String pathConstant,
+        String host) {
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant, host);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param headerConstant Constant header property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param queryConstant Constant query property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param pathConstant Constant path property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
-    public AutoRestSwaggerConstantServiceClientImpl(
-            HttpPipeline httpPipeline, boolean headerConstant, int queryConstant, String pathConstant, String host) {
-        this(
-                httpPipeline,
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                headerConstant,
-                queryConstant,
-                pathConstant,
-                host);
+    public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, boolean headerConstant,
+        int queryConstant, String pathConstant, String host) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant,
+            host);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param headerConstant Constant header property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param queryConstant Constant query property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param pathConstant Constant path property on the client that is a required parameter for operation
-     *     'constants_putClientConstants'.
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
-    public AutoRestSwaggerConstantServiceClientImpl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            boolean headerConstant,
-            int queryConstant,
-            String pathConstant,
-            String host) {
+    public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        boolean headerConstant, int queryConstant, String pathConstant, String host) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.headerConstant = headerConstant;

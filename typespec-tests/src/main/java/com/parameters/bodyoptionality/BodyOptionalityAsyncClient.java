@@ -20,14 +20,17 @@ import com.parameters.bodyoptionality.implementation.BodyOptionalityClientImpl;
 import com.parameters.bodyoptionality.models.BodyModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous BodyOptionalityClient type. */
+/**
+ * Initializes a new instance of the asynchronous BodyOptionalityClient type.
+ */
 @ServiceClient(builder = BodyOptionalityClientBuilder.class, isAsync = true)
 public final class BodyOptionalityAsyncClient {
-    @Generated private final BodyOptionalityClientImpl serviceClient;
+    @Generated
+    private final BodyOptionalityClientImpl serviceClient;
 
     /**
      * Initializes an instance of BodyOptionalityAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class BodyOptionalityAsyncClient {
 
     /**
      * The requiredExplicit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,15 +65,15 @@ public final class BodyOptionalityAsyncClient {
 
     /**
      * The requiredImplicit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param bodyModel The bodyModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -87,7 +90,7 @@ public final class BodyOptionalityAsyncClient {
 
     /**
      * The requiredExplicit operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -107,7 +110,7 @@ public final class BodyOptionalityAsyncClient {
 
     /**
      * The requiredImplicit operation.
-     *
+     * 
      * @param bodyModel The bodyModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

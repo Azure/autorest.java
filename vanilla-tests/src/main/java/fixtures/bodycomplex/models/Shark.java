@@ -14,18 +14,18 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-/** The Shark model. */
+/**
+ * The Shark model.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "fishtype",
-        defaultImpl = Shark.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "fishtype",
+    defaultImpl = Shark.class)
 @JsonTypeName("shark")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+@JsonSubTypes({ @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
     @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
-})
+    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent
 public class Shark extends Fish {
     /*
@@ -42,21 +42,20 @@ public class Shark extends Fish {
 
     /**
      * Creates an instance of Shark class.
-     *
+     * 
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
     @JsonCreator
-    public Shark(
-            @JsonProperty(value = "length", required = true) float length,
-            @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
+    public Shark(@JsonProperty(value = "length", required = true) float length,
+        @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length);
         this.birthday = birthday;
     }
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     public Integer getAge() {
@@ -65,7 +64,7 @@ public class Shark extends Fish {
 
     /**
      * Set the age property: The age property.
-     *
+     * 
      * @param age the age value to set.
      * @return the Shark object itself.
      */
@@ -76,21 +75,25 @@ public class Shark extends Fish {
 
     /**
      * Get the birthday property: The birthday property.
-     *
+     * 
      * @return the birthday value.
      */
     public OffsetDateTime getBirthday() {
         return this.birthday;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -99,15 +102,15 @@ public class Shark extends Fish {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
     public void validate() {
         super.validate();
         if (getBirthday() == null) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException("Missing required property birthday in model Shark"));
+            throw LOGGER
+                .logExceptionAsError(new IllegalArgumentException("Missing required property birthday in model Shark"));
         }
     }
 

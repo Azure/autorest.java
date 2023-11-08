@@ -20,14 +20,17 @@ import com.type.model.inheritance.notdiscriminated.implementation.NotDiscriminat
 import com.type.model.inheritance.notdiscriminated.models.Siamese;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous NotDiscriminatedClient type. */
+/**
+ * Initializes a new instance of the asynchronous NotDiscriminatedClient type.
+ */
 @ServiceClient(builder = NotDiscriminatedClientBuilder.class, isAsync = true)
 public final class NotDiscriminatedAsyncClient {
-    @Generated private final NotDiscriminatedClientImpl serviceClient;
+    @Generated
+    private final NotDiscriminatedClientImpl serviceClient;
 
     /**
      * Initializes an instance of NotDiscriminatedAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class NotDiscriminatedAsyncClient {
 
     /**
      * The postValid operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -47,7 +50,7 @@ public final class NotDiscriminatedAsyncClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,9 +67,9 @@ public final class NotDiscriminatedAsyncClient {
 
     /**
      * The getValid operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -74,14 +77,14 @@ public final class NotDiscriminatedAsyncClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the third level model in the normal multiple levels inheritance along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,9 +94,9 @@ public final class NotDiscriminatedAsyncClient {
 
     /**
      * The putValid operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -101,9 +104,9 @@ public final class NotDiscriminatedAsyncClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -111,7 +114,7 @@ public final class NotDiscriminatedAsyncClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +122,7 @@ public final class NotDiscriminatedAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the third level model in the normal multiple levels inheritance along with {@link Response} on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -129,7 +132,7 @@ public final class NotDiscriminatedAsyncClient {
 
     /**
      * The postValid operation.
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,7 +152,7 @@ public final class NotDiscriminatedAsyncClient {
 
     /**
      * The getValid operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -162,14 +165,13 @@ public final class NotDiscriminatedAsyncClient {
     public Mono<Siamese> getValid() {
         // Generated convenience method for getValidWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getValidWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
+        return getValidWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
     }
 
     /**
      * The putValid operation.
-     *
+     * 
      * @param input The third level model in the normal multiple levels inheritance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -184,8 +186,7 @@ public final class NotDiscriminatedAsyncClient {
     public Mono<Siamese> putValid(Siamese input) {
         // Generated convenience method for putValidWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putValidWithResponse(BinaryData.fromObject(input), requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
+        return putValidWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Siamese.class));
     }
 }

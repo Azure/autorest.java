@@ -18,15 +18,14 @@ import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.FileUtil;
 import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,9 +45,7 @@ public class TypeSpecPlugin extends Javagen {
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model
-        Client client = Mappers.getClientMapper().map(codeModel);
-
-        return client;
+        return Mappers.getClientMapper().map(codeModel);
     }
 
     public JavaPackage processTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
@@ -80,16 +77,7 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(emitterOptions.getOutputDir(), fileName).toAbsolutePath().toFile();
-        File parentFile = outputFile.getParentFile();
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-            writer.write(content);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
@@ -99,9 +87,8 @@ public class TypeSpecPlugin extends Javagen {
             Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath), StandardCharsets.UTF_8);
-                    String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
-                    return updatedContent;
+                    String existingFileContent = Files.readString(absoluteFilePath);
+                    return PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -170,7 +157,12 @@ public class TypeSpecPlugin extends Javagen {
 
     public static class MockConnection extends Connection {
         public MockConnection() {
-            super(null, null);
+            super(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    // NO-OP
+                }
+            }, null);
         }
     }
 
@@ -213,6 +205,18 @@ public class TypeSpecPlugin extends Javagen {
 
         if (options.getCustomizationClass() != null) {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
+        }
+
+        if (options.getBranded() == Boolean.FALSE) {
+            SETTINGS_MAP.put("branded", options.getBranded());
+
+            SETTINGS_MAP.put("sdk-integration", false);
+            SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
+
+            SETTINGS_MAP.put("sync-methods", "sync-only");
+            SETTINGS_MAP.put("stream-style-serialization", true);
+            SETTINGS_MAP.put("generate-samples", false);
+            SETTINGS_MAP.put("generate-tests", false);
         }
 
         JavaSettingsAccessor.setHost(this);

@@ -33,41 +33,51 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the OptionalClient type. */
+/**
+ * Initializes a new instance of the OptionalClient type.
+ */
 public final class OptionalClientImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final OptionalClientService service;
 
-    /** Server parameter. */
+    /**
+     * Server parameter.
+     */
     private final String endpoint;
 
     /**
      * Gets Server parameter.
-     *
+     * 
      * @return the endpoint value.
      */
     public String getEndpoint() {
         return this.endpoint;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
@@ -76,19 +86,17 @@ public final class OptionalClientImpl {
 
     /**
      * Initializes an instance of OptionalClient client.
-     *
+     * 
      * @param endpoint Server parameter.
      */
     public OptionalClientImpl(String endpoint) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                endpoint);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of OptionalClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      */
@@ -98,7 +106,7 @@ public final class OptionalClientImpl {
 
     /**
      * Initializes an instance of OptionalClient client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
@@ -111,85 +119,96 @@ public final class OptionalClientImpl {
     }
 
     /**
-     * The interface defining all the services for OptionalClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for OptionalClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "OptionalClient")
     public interface OptionalClientService {
         @Put("/optional/put")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> put(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("request-header-required") String requestHeaderRequired,
-                @QueryParam("booleanRequired") boolean booleanRequired,
-                @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
-                @QueryParam("stringRequired") String stringRequired,
-                @QueryParam("stringRequiredNullable") String stringRequiredNullable,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<BinaryData>> put(@HostParam("endpoint") String endpoint,
+            @HeaderParam("request-header-required") String requestHeaderRequired,
+            @QueryParam("booleanRequired") boolean booleanRequired,
+            @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
+            @QueryParam("stringRequired") String stringRequired,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/optional/put")
-        @ExpectedResponses({200})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putSync(
-                @HostParam("endpoint") String endpoint,
-                @HeaderParam("request-header-required") String requestHeaderRequired,
-                @QueryParam("booleanRequired") boolean booleanRequired,
-                @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
-                @QueryParam("stringRequired") String stringRequired,
-                @QueryParam("stringRequiredNullable") String stringRequiredNullable,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<BinaryData> putSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("request-header-required") String requestHeaderRequired,
+            @QueryParam("booleanRequired") boolean booleanRequired,
+            @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
+            @QueryParam("stringRequired") String stringRequired,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * The put operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>booleanNullable</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * <tr>
+     * <td>string</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>stringNullable</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>request-header-optional</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -215,9 +234,9 @@ public final class OptionalClientImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -247,7 +266,7 @@ public final class OptionalClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.
      * @param booleanRequiredNullable Boolean with `true` and `false` values.
@@ -261,63 +280,75 @@ public final class OptionalClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithResponseAsync(
-            String requestHeaderRequired,
-            boolean booleanRequired,
-            Boolean booleanRequiredNullable,
-            String stringRequired,
-            String stringRequiredNullable,
-            RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> putWithResponseAsync(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
-        return FluxUtil.withContext(
-                context ->
-                        service.put(
-                                this.getEndpoint(),
-                                requestHeaderRequired,
-                                booleanRequired,
-                                booleanRequiredNullable,
-                                stringRequired,
-                                stringRequiredNullable,
-                                accept,
-                                requestOptionsLocal,
-                                context));
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
+        return FluxUtil.withContext(context -> service.put(this.getEndpoint(), requestHeaderRequired, booleanRequired,
+            booleanRequiredNullable, stringRequired, stringRequiredNullable, accept, requestOptionsLocal, context));
     }
 
     /**
      * The put operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>booleanNullable</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * <tr>
+     * <td>string</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>stringNullable</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>request-header-optional</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -343,9 +374,9 @@ public final class OptionalClientImpl {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -375,7 +406,7 @@ public final class OptionalClientImpl {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.
      * @param booleanRequiredNullable Boolean with `true` and `false` values.
@@ -389,31 +420,17 @@ public final class OptionalClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(
-            String requestHeaderRequired,
-            boolean booleanRequired,
-            Boolean booleanRequiredNullable,
-            String stringRequired,
-            String stringRequiredNullable,
-            RequestOptions requestOptions) {
+    public Response<BinaryData> putWithResponse(String requestHeaderRequired, boolean booleanRequired,
+        Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        requestOptionsLocal.addRequestCallback(
-                requestLocal -> {
-                    if (requestLocal.getBody() != null
-                            && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
-                        requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
-                    }
-                });
-        return service.putSync(
-                this.getEndpoint(),
-                requestHeaderRequired,
-                booleanRequired,
-                booleanRequiredNullable,
-                stringRequired,
-                stringRequiredNullable,
-                accept,
-                requestOptionsLocal,
-                Context.NONE);
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
+            }
+        });
+        return service.putSync(this.getEndpoint(), requestHeaderRequired, booleanRequired, booleanRequiredNullable,
+            stringRequired, stringRequiredNullable, accept, requestOptionsLocal, Context.NONE);
     }
 }

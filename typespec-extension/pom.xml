@@ -10,7 +10,7 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.4</version>
+    <version>1.0.0-beta.5</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -18,25 +18,7 @@
   <artifactId>azure-typespec-extension</artifactId>
   <version>1.0.0-beta.1</version>
 
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
-    </repository>
-  </repositories>
-
   <dependencies>
-    <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-javagen</artifactId>
-      <version>1.0.0-beta.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-nop</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-postprocessor</artifactId>
@@ -61,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-preprocessor</artifactId>
+      <artifactId>azure-autorest-fluentgen</artifactId>
       <version>1.0.0-beta.1</version>
       <exclusions>
         <exclusion>
@@ -73,21 +55,16 @@
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
-      <version>1.0.0-beta.4</version>
+      <version>1.0.0-beta.5</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.slf4j</groupId>-->
-<!--      <artifactId>slf4j-simple</artifactId>-->
-<!--      <version>1.7.36</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.slf4j</groupId>-->
+    <!--      <artifactId>slf4j-simple</artifactId>-->
+    <!--      <version>1.7.36</version>-->
+    <!--    </dependency>-->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.googlejavaformat</groupId>
-      <artifactId>google-java-format</artifactId>
-      <version>1.0.0-beta.1</version>
     </dependency>
 
     <dependency>

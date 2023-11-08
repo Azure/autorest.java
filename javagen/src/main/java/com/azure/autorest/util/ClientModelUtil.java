@@ -57,8 +57,8 @@ public class ClientModelUtil {
     public static void getAsyncSyncClients(Client client, ServiceClient serviceClient,
                                            List<AsyncSyncClient> asyncClients, List<AsyncSyncClient> syncClients) {
         String packageName = getAsyncSyncClientPackageName(serviceClient);
-        boolean generateSyncMethods = JavaSettings.SyncMethodsGeneration.ALL
-            .equals(JavaSettings.getInstance().getSyncMethods());
+        boolean generateAsyncMethods = JavaSettings.getInstance().isGenerateAsyncMethods();
+        boolean generateSyncMethods = JavaSettings.getInstance().isGenerateSyncMethods();
 
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
@@ -72,8 +72,10 @@ public class ClientModelUtil {
                     .orElse(Collections.emptyList());
             builder.convenienceMethods(convenienceMethods);
 
-            String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
-            asyncClients.add(builder.className(asyncClassName).build());
+            if (generateAsyncMethods) {
+                String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
+                asyncClients.add(builder.className(asyncClassName).build());
+            }
 
             if (generateSyncMethods) {
                 String syncClassName =
@@ -101,8 +103,10 @@ public class ClientModelUtil {
             if (count == 1) {
                 // if it is the only method group, use service client name as base.
 
-                String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
-                asyncClients.add(builder.className(asyncClassName).build());
+                if (generateAsyncMethods) {
+                    String asyncClassName = clientNameToAsyncClientName(serviceClient.getClientBaseName());
+                    asyncClients.add(builder.className(asyncClassName).build());
+                }
 
                 if (generateSyncMethods) {
                     String syncClassName =
@@ -112,8 +116,10 @@ public class ClientModelUtil {
                     syncClients.add(builder.className(syncClassName).build());
                 }
             } else {
-                String asyncClassName = clientNameToAsyncClientName(methodGroupClient.getClassBaseName());
-                asyncClients.add(builder.className(asyncClassName).build());
+                if (generateAsyncMethods) {
+                    String asyncClassName = clientNameToAsyncClientName(methodGroupClient.getClassBaseName());
+                    asyncClients.add(builder.className(asyncClassName).build());
+                }
 
                 if (generateSyncMethods) {
                     String syncClassName =

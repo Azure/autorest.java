@@ -6,6 +6,7 @@ import {
   EnumMember,
   IntrinsicScalarName,
   Model,
+  ModelProperty,
   Operation,
   Program,
   Scalar,
@@ -109,11 +110,16 @@ export function isNullableType(type: Type): boolean {
 export function isSameLiteralTypes(variants: UnionVariant[]): boolean {
   const kindSet = new Set(variants.map((it) => it.type.kind));
   if (kindSet.size === 1) {
+    // Union of same literals
     const kind = kindSet.values().next().value;
     return kind === "String" || kind === "Number" || kind === "Boolean";
   } else {
-    return false;
+    if (kindSet.size === 2 && kindSet.has("String") && kindSet.has("Scalar")) {
+      // Union of string liberals and string scalar, treat as extensible enum
+      return variants.filter((it) => it.type.kind === "Scalar").every((it) => (it.type as Scalar).name === "string");
+    }
   }
+  return false;
 }
 
 export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
@@ -201,7 +207,7 @@ export function unionReferredByType(
   return null;
 }
 
-export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): string {
+export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptions): string {
   let name = union.name;
   if (!name) {
     const names: string[] = [];
@@ -211,6 +217,28 @@ export function getUnionName(union: Union, typeNameOptions: TypeNameOptions): st
     name = names.join(" | ");
   }
   return name;
+}
+
+export function getModelNameForProperty(property: ModelProperty): string {
+  if (property.model) {
+    if (property.model.name) {
+      return property.model.name;
+    } else if (property.model.namespace) {
+      for (const model of property.model.namespace.models.values()) {
+        for (const prop of model.properties.values()) {
+          const candidateModel = prop.type;
+          // find the property that refers to the unnamed property.model
+          if (
+            candidateModel.kind === "Model" &&
+            (candidateModel === property.model || candidateModel.indexer?.value === property.model)
+          ) {
+            return getModelNameForProperty(prop);
+          }
+        }
+      }
+    }
+  }
+  return "";
 }
 
 export function modelIs(model: Model, name: string, namespace: string): boolean {
@@ -233,6 +261,10 @@ export function getAccess(type: Model | Operation | Enum): string | undefined {
       return undefined;
     }
   });
+}
+
+export function isAllValueInteger(values: number[]): boolean {
+  return values.every((it) => Number.isInteger(it));
 }
 
 export function getUsage(type: Model | Operation | Enum): SchemaContext[] | undefined {

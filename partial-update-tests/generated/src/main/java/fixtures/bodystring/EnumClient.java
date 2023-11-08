@@ -16,11 +16,14 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
 
-/** Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type.
+ */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class EnumClient {
 
-    @Generated private final EnumsImpl serviceClient;
+    @Generated
+    private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of EnumClient class.
@@ -34,9 +37,9 @@ public final class EnumClient {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -46,8 +49,8 @@ public final class EnumClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -57,9 +60,9 @@ public final class EnumClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -80,9 +83,9 @@ public final class EnumClient {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -92,8 +95,8 @@ public final class EnumClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     *     Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -103,9 +106,9 @@ public final class EnumClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>

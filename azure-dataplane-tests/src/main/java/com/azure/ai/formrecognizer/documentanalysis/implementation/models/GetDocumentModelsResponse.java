@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** List document models response object. */
+/**
+ * List document models response object.
+ */
 @Fluent
 public final class GetDocumentModelsResponse {
     /*
@@ -23,12 +25,15 @@ public final class GetDocumentModelsResponse {
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
-    /** Creates an instance of GetDocumentModelsResponse class. */
-    public GetDocumentModelsResponse() {}
+    /**
+     * Creates an instance of GetDocumentModelsResponse class.
+     */
+    public GetDocumentModelsResponse() {
+    }
 
     /**
      * Get the value property: List of document models.
-     *
+     * 
      * @return the value value.
      */
     public List<DocumentModelSummary> getValue() {
@@ -37,7 +42,7 @@ public final class GetDocumentModelsResponse {
 
     /**
      * Set the value property: List of document models.
-     *
+     * 
      * @param value the value value to set.
      * @return the GetDocumentModelsResponse object itself.
      */
@@ -48,7 +53,7 @@ public final class GetDocumentModelsResponse {
 
     /**
      * Get the nextLink property: Link to the next page of document models.
-     *
+     * 
      * @return the nextLink value.
      */
     public String getNextLink() {
@@ -57,7 +62,7 @@ public final class GetDocumentModelsResponse {
 
     /**
      * Set the nextLink property: Link to the next page of document models.
-     *
+     * 
      * @param nextLink the nextLink value to set.
      * @return the GetDocumentModelsResponse object itself.
      */

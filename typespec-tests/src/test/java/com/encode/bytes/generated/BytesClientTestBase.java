@@ -33,10 +33,8 @@ class BytesClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BytesClientBuilder queryClientbuilder =
-                new BytesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BytesClientBuilder queryClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -44,10 +42,8 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        BytesClientBuilder propertyClientbuilder =
-                new BytesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BytesClientBuilder propertyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             propertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -55,10 +51,8 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
 
-        BytesClientBuilder headerClientbuilder =
-                new BytesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BytesClientBuilder headerClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -66,10 +60,8 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         headerClient = headerClientbuilder.buildHeaderClient();
 
-        BytesClientBuilder requestBodyClientbuilder =
-                new BytesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BytesClientBuilder requestBodyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             requestBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -77,15 +69,14 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         requestBodyClient = requestBodyClientbuilder.buildRequestBodyClient();
 
-        BytesClientBuilder responseBodyClientbuilder =
-                new BytesClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BytesClientBuilder responseBodyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             responseBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             responseBodyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         responseBodyClient = responseBodyClientbuilder.buildResponseBodyClient();
+
     }
 }

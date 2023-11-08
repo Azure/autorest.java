@@ -12,7 +12,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** An enumeration of containers. */
+/**
+ * An enumeration of containers.
+ */
 @JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent
 public final class ListContainersResponse {
@@ -62,12 +64,15 @@ public final class ListContainersResponse {
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
-    /** Creates an instance of ListContainersResponse class. */
-    public ListContainersResponse() {}
+    /**
+     * Creates an instance of ListContainersResponse class.
+     */
+    public ListContainersResponse() {
+    }
 
     /**
      * Get the serviceEndpoint property: The ServiceEndpoint property.
-     *
+     * 
      * @return the serviceEndpoint value.
      */
     public String getServiceEndpoint() {
@@ -76,7 +81,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the serviceEndpoint property: The ServiceEndpoint property.
-     *
+     * 
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -87,7 +92,7 @@ public final class ListContainersResponse {
 
     /**
      * Get the prefix property: The Prefix property.
-     *
+     * 
      * @return the prefix value.
      */
     public String getPrefix() {
@@ -96,7 +101,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the prefix property: The Prefix property.
-     *
+     * 
      * @param prefix the prefix value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -107,7 +112,7 @@ public final class ListContainersResponse {
 
     /**
      * Get the marker property: The Marker property.
-     *
+     * 
      * @return the marker value.
      */
     public String getMarker() {
@@ -116,7 +121,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the marker property: The Marker property.
-     *
+     * 
      * @param marker the marker value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -127,7 +132,7 @@ public final class ListContainersResponse {
 
     /**
      * Get the maxResults property: The MaxResults property.
-     *
+     * 
      * @return the maxResults value.
      */
     public int getMaxResults() {
@@ -136,7 +141,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the maxResults property: The MaxResults property.
-     *
+     * 
      * @param maxResults the maxResults value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -147,7 +152,7 @@ public final class ListContainersResponse {
 
     /**
      * Get the containers property: The Containers property.
-     *
+     * 
      * @return the containers value.
      */
     public List<Container> getContainers() {
@@ -159,7 +164,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the containers property: The Containers property.
-     *
+     * 
      * @param containers the containers value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -170,7 +175,7 @@ public final class ListContainersResponse {
 
     /**
      * Get the nextMarker property: The NextMarker property.
-     *
+     * 
      * @return the nextMarker value.
      */
     public String getNextMarker() {
@@ -179,7 +184,7 @@ public final class ListContainersResponse {
 
     /**
      * Set the nextMarker property: The NextMarker property.
-     *
+     * 
      * @param nextMarker the nextMarker value to set.
      * @return the ListContainersResponse object itself.
      */
@@ -190,13 +195,13 @@ public final class ListContainersResponse {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (getServiceEndpoint() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property serviceEndpoint in model ListContainersResponse");
+                "Missing required property serviceEndpoint in model ListContainersResponse");
         }
         if (getPrefix() == null) {
             throw new IllegalArgumentException("Missing required property prefix in model ListContainersResponse");

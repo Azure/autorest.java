@@ -25,12 +25,11 @@ class RenamedOperationClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        RenamedOperationClientBuilder renamedOperationClientbuilder =
-                new RenamedOperationClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        RenamedOperationClientBuilder renamedOperationClientbuilder = new RenamedOperationClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             renamedOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -38,17 +37,17 @@ class RenamedOperationClientTestBase extends TestProxyTestBase {
         }
         renamedOperationClient = renamedOperationClientbuilder.buildClient();
 
-        RenamedOperationClientBuilder groupClientbuilder =
-                new RenamedOperationClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        RenamedOperationClientBuilder groupClientbuilder = new RenamedOperationClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             groupClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             groupClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         groupClient = groupClientbuilder.buildGroupClient();
+
     }
 }

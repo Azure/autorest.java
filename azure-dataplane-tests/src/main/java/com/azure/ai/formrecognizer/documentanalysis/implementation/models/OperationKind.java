@@ -8,28 +8,37 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Type of operation. */
+/**
+ * Type of operation.
+ */
 public final class OperationKind extends ExpandableStringEnum<OperationKind> {
-    /** Static value documentModelBuild for OperationKind. */
+    /**
+     * Static value documentModelBuild for OperationKind.
+     */
     public static final OperationKind DOCUMENT_MODEL_BUILD = fromString("documentModelBuild");
 
-    /** Static value documentModelCompose for OperationKind. */
+    /**
+     * Static value documentModelCompose for OperationKind.
+     */
     public static final OperationKind DOCUMENT_MODEL_COMPOSE = fromString("documentModelCompose");
 
-    /** Static value documentModelCopyTo for OperationKind. */
+    /**
+     * Static value documentModelCopyTo for OperationKind.
+     */
     public static final OperationKind DOCUMENT_MODEL_COPY_TO = fromString("documentModelCopyTo");
 
     /**
      * Creates a new instance of OperationKind value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public OperationKind() {}
+    public OperationKind() {
+    }
 
     /**
      * Creates or finds a OperationKind from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding OperationKind.
      */
@@ -40,7 +49,7 @@ public final class OperationKind extends ExpandableStringEnum<OperationKind> {
 
     /**
      * Gets known OperationKind values.
-     *
+     * 
      * @return known OperationKind values.
      */
     public static Collection<OperationKind> values() {

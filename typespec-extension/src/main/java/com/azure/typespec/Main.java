@@ -8,7 +8,11 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.TypeSpecFluentPlugin;
+import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
@@ -17,7 +21,6 @@ import com.azure.typespec.model.EmitterOptions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -27,8 +30,9 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +40,9 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,15 +78,37 @@ public class Main {
         if (Files.exists(outputDirPath)) {
             try (Stream<Path> filestream = Files.list(outputDirPath)) {
                 Set<String> filenames = filestream
-                        .map(p -> p.getFileName().toString())
-                        .map(name -> name.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+                    .map(p -> p.getFileName().toString())
+                    .map(name -> name.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toSet());
 
                 // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                 sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
             }
         }
 
+        if (emitterOptions.getFluent() == null) {
+            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
+        } else {
+            handleFluent(codeModel, emitterOptions, sdkIntegration);
+        }
+    }
+
+    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration) {
+        // initialize plugin
+        TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
+
+        // client
+        Client client = fluentPlugin.processClient(codeModel);
+
+        // template
+        FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
+
+        // write
+        formatAndWriteJavaFiles(fluentPlugin, javaPackage.getJavaFiles().stream().collect(Collectors.toMap(JavaFile::getFilePath, javaFile -> javaFile.getContents().toString())), JavaSettings.getInstance());
+    }
+
+    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
         // initialize plugin
         TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 
@@ -107,39 +135,86 @@ public class Main {
 
         // handle customization
         javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
-
-        // format
-        Formatter formatter = new Formatter();
-
-        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaFiles.entrySet().parallelStream().forEach(entry -> {
-            String filePath = entry.getKey();
-            String fileContent = entry.getValue();
-            String formattedSource = fileContent;
-            try {
-                formattedSource = formatter.formatSourceAndFixImports(fileContent);
-            } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputDir() + filePath, e);
-                // but we continue so user can still check the file and see why format fails
-            }
-            formattedFiles.put(filePath, formattedSource);
-        });
-
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        formatAndWriteJavaFiles(typeSpecPlugin, javaFiles, settings);
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
-        String artifactId = ClientModelUtil.getArtifactId();
-        if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+        if (settings.isBranded()) {
+            String artifactId = ClientModelUtil.getArtifactId();
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project.version}\n", null);
+            }
         }
         System.exit(0);
+    }
+
+    private static void formatAndWriteJavaFiles(NewPlugin typeSpecPlugin, Map<String, String> javaFiles,
+                                                JavaSettings settings) {
+        if (!settings.isSkipFormatting()) {
+            try {
+                Path tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
+                tmpDir.toFile().deleteOnExit();
+
+                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                    Path file = tmpDir.resolve(javaFile.getKey());
+                    Files.createDirectories(file.getParent());
+                    Files.writeString(file, javaFile.getValue()).toFile().deleteOnExit();
+                }
+
+                Path pomPath = tmpDir.resolve("spotless-pom.xml");
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("spotless-pom.xml"), pomPath);
+                Files.copy(Main.class.getClassLoader().getResourceAsStream("eclipse-format-azure-sdk-for-java.xml"),
+                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
+
+                attemptMavenSpotless(pomPath);
+
+                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                    Path file = tmpDir.resolve(javaFile.getKey());
+                    typeSpecPlugin.writeFile(javaFile.getKey(), Files.readString(file), null);
+                }
+            } catch (IOException ex) {
+                throw new UncheckedIOException(ex);
+            }
+        } else {
+            for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
+                typeSpecPlugin.writeFile(javaFile.getValue(), javaFile.getKey(), null);
+            }
+        }
+    }
+
+    private static void attemptMavenSpotless(Path pomPath) {
+        String[] command = isWindows()
+            ? new String[] { "cmd", "/c", "mvn.cmd", "spotless:apply", "-f", pomPath.toString() }
+            : new String[] { "mvn", "spotless:apply", "-f", pomPath.toString() };
+
+        try {
+            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
+            outputFile.deleteOnExit();
+            Process process = new ProcessBuilder(command)
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
+                .start();
+            process.waitFor(60, TimeUnit.SECONDS);
+
+            if (process.isAlive() || process.exitValue() != 0) {
+                process.destroyForcibly();
+                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
+                    + Files.readString(outputFile.toPath()));
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
+        }
+    }
+
+    private static boolean isWindows() {
+        String osName = System.getProperty("os.name");
+        return osName != null && osName.startsWith("Windows");
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
@@ -180,7 +255,7 @@ public class Main {
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
-        String file = readFile(filename);
+        String file = Files.readString(Paths.get(filename));
 
         Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
@@ -192,11 +267,6 @@ public class Main {
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = yamlMapper.loadAs(file, CodeModel.class);
-        return codeModel;
-    }
-
-    private static String readFile(String path) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        return yamlMapper.loadAs(file, CodeModel.class);
     }
 }

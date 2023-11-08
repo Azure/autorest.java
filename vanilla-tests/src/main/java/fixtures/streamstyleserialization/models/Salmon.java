@@ -11,14 +11,11 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.List;
 
-/** The Salmon model. */
+/**
+ * The Salmon model.
+ */
 @Fluent
 public class Salmon extends Fish {
-    /*
-     * The fishtype property.
-     */
-    private static final String FISHTYPE = "salmon";
-
     /*
      * The location property.
      */
@@ -29,12 +26,15 @@ public class Salmon extends Fish {
      */
     private Boolean iswild;
 
-    /** Creates an instance of Salmon class. */
-    public Salmon() {}
+    /**
+     * Creates an instance of Salmon class.
+     */
+    public Salmon() {
+    }
 
     /**
      * Get the location property: The location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -43,7 +43,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the location property: The location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the Salmon object itself.
      */
@@ -54,7 +54,7 @@ public class Salmon extends Fish {
 
     /**
      * Get the iswild property: The iswild property.
-     *
+     * 
      * @return the iswild value.
      */
     public Boolean iswild() {
@@ -63,7 +63,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the iswild property: The iswild property.
-     *
+     * 
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
@@ -72,21 +72,27 @@ public class Salmon extends Fish {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -95,7 +101,7 @@ public class Salmon extends Fish {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -106,7 +112,7 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "salmon");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
@@ -117,84 +123,78 @@ public class Salmon extends Fish {
 
     /**
      * Reads an instance of Salmon from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Salmon.
      */
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    String discriminatorValue = null;
-                    JsonReader readerToUse = reader.bufferObject();
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
 
-                    readerToUse.nextToken(); // Prepare for reading
-                    while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = readerToUse.getFieldName();
-                        readerToUse.nextToken();
-                        if ("fishtype".equals(fieldName)) {
-                            discriminatorValue = readerToUse.getString();
-                            break;
-                        } else {
-                            readerToUse.skipChildren();
-                        }
-                    }
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("fishtype".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
 
-                    if (discriminatorValue != null) {
-                        readerToUse = readerToUse.reset();
-                    }
-                    // Use the discriminator value to determine which subtype should be deserialized.
-                    if (discriminatorValue == null || "salmon".equals(discriminatorValue)) {
-                        return fromJsonKnownDiscriminator(readerToUse);
-                    } else if ("smart_salmon".equals(discriminatorValue)) {
-                        return SmartSalmon.fromJson(readerToUse);
-                    } else {
-                        throw new IllegalStateException(
-                                "Discriminator field 'fishtype' didn't match one of the expected values 'salmon' or 'smart_salmon'. It was: '"
-                                        + discriminatorValue
-                                        + "'.");
-                    }
-                });
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if (discriminatorValue == null || "salmon".equals(discriminatorValue)) {
+                return fromJsonKnownDiscriminator(readerToUse);
+            } else if ("smart_salmon".equals(discriminatorValue)) {
+                return SmartSalmon.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'fishtype' didn't match one of the expected values 'salmon' or 'smart_salmon'. It was: '"
+                        + discriminatorValue + "'.");
+            }
+        });
     }
 
     static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    Salmon deserializedSalmon = new Salmon();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            Salmon deserializedSalmon = new Salmon();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("fishtype".equals(fieldName)) {
-                            String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
-                                throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
-                                                + fishtype
-                                                + "'.");
-                            }
-                        } else if ("length".equals(fieldName)) {
-                            deserializedSalmon.setLength(reader.getFloat());
-                        } else if ("species".equals(fieldName)) {
-                            deserializedSalmon.setSpecies(reader.getString());
-                        } else if ("siblings".equals(fieldName)) {
-                            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                            deserializedSalmon.setSiblings(siblings);
-                        } else if ("location".equals(fieldName)) {
-                            deserializedSalmon.location = reader.getString();
-                        } else if ("iswild".equals(fieldName)) {
-                            deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
-                        } else {
-                            reader.skipChildren();
-                        }
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"salmon".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
+                                + fishtype + "'.");
                     }
+                } else if ("length".equals(fieldName)) {
+                    deserializedSalmon.setLength(reader.getFloat());
+                } else if ("species".equals(fieldName)) {
+                    deserializedSalmon.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSalmon.setSiblings(siblings);
+                } else if ("location".equals(fieldName)) {
+                    deserializedSalmon.location = reader.getString();
+                } else if ("iswild".equals(fieldName)) {
+                    deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedSalmon;
-                });
+            return deserializedSalmon;
+        });
     }
 }

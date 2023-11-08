@@ -20,14 +20,17 @@ import java.time.Duration;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DurationClient type. */
+/**
+ * Initializes a new instance of the asynchronous DurationClient type.
+ */
 @ServiceClient(builder = DurationClientBuilder.class, isAsync = true)
 public final class HeaderAsyncClient {
-    @Generated private final HeadersImpl serviceClient;
+    @Generated
+    private final HeadersImpl serviceClient;
 
     /**
      * Initializes an instance of HeaderAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,7 +40,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -54,7 +57,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,8 +74,8 @@ public final class HeaderAsyncClient {
 
     /**
      * The iso8601Array operation.
-     *
-     * @param duration Array of DurationModel.
+     * 
+     * @param duration Array of Duration.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -88,7 +91,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,7 +108,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -122,7 +125,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -142,7 +145,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -162,8 +165,8 @@ public final class HeaderAsyncClient {
 
     /**
      * The iso8601Array operation.
-     *
-     * @param duration Array of DurationModel.
+     * 
+     * @param duration Array of Duration.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -182,7 +185,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -202,7 +205,7 @@ public final class HeaderAsyncClient {
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param duration A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

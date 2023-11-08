@@ -12,14 +12,11 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringPutWhitespace {
     public static void main(String[] args) {
-        StringOperationClient stringOperationClient =
-                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient
+            = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringputwhitespace.stringputwhitespace
-        RequestOptions requestOptions =
-                new RequestOptions()
-                        .setBody(
-                                BinaryData.fromString(
-                                        "\"    Now is the time for all good men to come to the aid of their country    \""));
+        RequestOptions requestOptions = new RequestOptions().setBody(
+            BinaryData.fromString("\"    Now is the time for all good men to come to the aid of their country    \""));
         Response<Void> response = stringOperationClient.putWhitespaceWithResponse(requestOptions);
         // END:fixtures.bodystring.generated.stringputwhitespace.stringputwhitespace
     }

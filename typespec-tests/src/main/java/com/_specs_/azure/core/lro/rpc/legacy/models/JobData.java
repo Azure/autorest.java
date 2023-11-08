@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Data of the job. */
+/**
+ * Data of the job.
+ */
 @Immutable
 public final class JobData {
     /*
@@ -21,7 +23,7 @@ public final class JobData {
 
     /**
      * Creates an instance of JobData class.
-     *
+     * 
      * @param comment the comment value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class JobData {
 
     /**
      * Get the comment property: Comment.
-     *
+     * 
      * @return the comment value.
      */
     @Generated

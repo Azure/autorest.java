@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The User model. */
+/**
+ * The User model.
+ */
 @Immutable
 public final class User {
     /*
@@ -21,7 +23,7 @@ public final class User {
 
     /**
      * Creates an instance of User class.
-     *
+     * 
      * @param user the user value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class User {
 
     /**
      * Get the user property: The user property.
-     *
+     * 
      * @return the user value.
      */
     @Generated

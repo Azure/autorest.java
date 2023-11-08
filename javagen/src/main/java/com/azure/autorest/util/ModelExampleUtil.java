@@ -15,6 +15,7 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
+import com.azure.autorest.model.clientmodel.examplemodel.BinaryDataNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ClientModelNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
 import com.azure.autorest.model.clientmodel.examplemodel.ListNode;
@@ -106,6 +107,8 @@ public class ModelExampleUtil {
             }
         } else if (type == ClassType.Object) {
             node = new ObjectNode(type, objectValue);
+        } else if (type == ClassType.BinaryData && objectValue != null) {
+            node = new BinaryDataNode(type, objectValue);
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
@@ -173,15 +176,33 @@ public class ModelExampleUtil {
                     clientModelNode.getClientModelProperties().put(childNode, additionalPropertiesProperty);
                 }
             } else {
-                throw new IllegalStateException("Model type not found for type " + type + " and value " + objectValue);
+                // e.g. do not throw exception, use defaultValueExpression
+                node = defaultNode(type, wireType, objectValue);
             }
         } else if (objectValue == null) {
             node = null;
         } else {
-            LiteralNode literalNode = new LiteralNode(type, objectValue);
-            node = literalNode;
+            node = defaultNode(type, wireType, objectValue);
+        }
+        return node;
+    }
 
-            String literalValue = convertLiteralToClientValue(wireType, objectValue.toString());
+    /**
+     * Default String literal node.
+     * Generated example will be the type's defaultValueExpression.
+     *
+     * @param clientType the client type
+     * @param wireType the wire type
+     * @param exampleValue the example value
+     * @return string literal node
+     */
+    private static ExampleNode defaultNode(IType clientType, IType wireType, Object exampleValue) {
+        ExampleNode node;
+        LiteralNode literalNode = new LiteralNode(clientType, exampleValue);
+        node = literalNode;
+
+        if (exampleValue != null) {
+            String literalValue = convertLiteralToClientValue(wireType, exampleValue.toString());
             literalNode.setLiteralsValue(literalValue);
         }
         return node;

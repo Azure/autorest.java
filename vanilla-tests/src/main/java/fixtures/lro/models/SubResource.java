@@ -7,7 +7,9 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SubResource model. */
+/**
+ * The SubResource model.
+ */
 @Immutable
 public class SubResource {
     /*
@@ -16,12 +18,15 @@ public class SubResource {
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
-    /** Creates an instance of SubResource class. */
-    public SubResource() {}
+    /**
+     * Creates an instance of SubResource class.
+     */
+    public SubResource() {
+    }
 
     /**
      * Get the id property: Sub Resource Id.
-     *
+     * 
      * @return the id value.
      */
     public String getId() {
@@ -30,8 +35,9 @@ public class SubResource {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a Virtual Machine Scale Set. */
+/**
+ * Describes a Virtual Machine Scale Set.
+ */
 @JsonFlatten
 @Fluent
 public class VirtualMachineScaleSet {
@@ -18,12 +20,15 @@ public class VirtualMachineScaleSet {
     @JsonProperty(value = "properties.virtualMachineProfile")
     private VirtualMachineScaleSetVMProfile virtualMachineProfile;
 
-    /** Creates an instance of VirtualMachineScaleSet class. */
-    public VirtualMachineScaleSet() {}
+    /**
+     * Creates an instance of VirtualMachineScaleSet class.
+     */
+    public VirtualMachineScaleSet() {
+    }
 
     /**
      * Get the virtualMachineProfile property: The virtual machine profile.
-     *
+     * 
      * @return the virtualMachineProfile value.
      */
     public VirtualMachineScaleSetVMProfile getVirtualMachineProfile() {
@@ -32,7 +37,7 @@ public class VirtualMachineScaleSet {
 
     /**
      * Set the virtualMachineProfile property: The virtual machine profile.
-     *
+     * 
      * @param virtualMachineProfile the virtualMachineProfile value to set.
      * @return the VirtualMachineScaleSet object itself.
      */
@@ -43,7 +48,7 @@ public class VirtualMachineScaleSet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

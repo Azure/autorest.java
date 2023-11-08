@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import fixtures.requiredoptionalbody.implementation.RequiredOptionalBodyClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous RequiredOptionalBodyClient type. */
+/**
+ * Initializes a new instance of the asynchronous RequiredOptionalBodyClient type.
+ */
 @ServiceClient(builder = RequiredOptionalBodyClientBuilder.class, isAsync = true)
 public final class RequiredOptionalBodyAsyncClient {
-    @Generated private final RequiredOptionalBodyClientImpl serviceClient;
+    @Generated
+    private final RequiredOptionalBodyClientImpl serviceClient;
 
     /**
      * Initializes an instance of RequiredOptionalBodyAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class RequiredOptionalBodyAsyncClient {
 
     /**
      * Creates or updates a deployment.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -54,9 +57,9 @@ public final class RequiredOptionalBodyAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -73,7 +76,7 @@ public final class RequiredOptionalBodyAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param deployment The deployment properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,26 +88,35 @@ public final class RequiredOptionalBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateDeploymentWithResponse(
-            BinaryData deployment, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> createOrUpdateDeploymentWithResponse(BinaryData deployment,
+        RequestOptions requestOptions) {
         return this.serviceClient.createOrUpdateDeploymentWithResponseAsync(deployment, requestOptions);
     }
 
     /**
      * optional object.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -121,9 +133,9 @@ public final class RequiredOptionalBodyAsyncClient {
      *     }
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -140,7 +152,7 @@ public final class RequiredOptionalBodyAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

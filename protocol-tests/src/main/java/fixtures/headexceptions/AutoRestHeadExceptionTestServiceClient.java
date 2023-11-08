@@ -16,14 +16,17 @@ import com.azure.core.http.rest.Response;
 import fixtures.headexceptions.implementation.HeadExceptionsImpl;
 import fixtures.headexceptions.models.CustomizedException;
 
-/** Initializes a new instance of the synchronous AutoRestHeadExceptionTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestHeadExceptionTestServiceClient type.
+ */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class)
 public final class AutoRestHeadExceptionTestServiceClient {
-    @Generated private final HeadExceptionsImpl serviceClient;
+    @Generated
+    private final HeadExceptionsImpl serviceClient;
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestServiceClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -33,7 +36,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
 
     /**
      * Return 200 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -49,7 +52,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
 
     /**
      * Return 204 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -65,7 +68,7 @@ public final class AutoRestHeadExceptionTestServiceClient {
 
     /**
      * Return 404 status code if successful.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws CustomizedException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

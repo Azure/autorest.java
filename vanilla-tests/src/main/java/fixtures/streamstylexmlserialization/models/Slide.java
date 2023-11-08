@@ -15,7 +15,9 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** A slide in a slideshow. */
+/**
+ * A slide in a slideshow.
+ */
 @Fluent
 public final class Slide implements XmlSerializable<Slide> {
     /*
@@ -33,12 +35,15 @@ public final class Slide implements XmlSerializable<Slide> {
      */
     private List<String> items = new ArrayList<>();
 
-    /** Creates an instance of Slide class. */
-    public Slide() {}
+    /**
+     * Creates an instance of Slide class.
+     */
+    public Slide() {
+    }
 
     /**
      * Get the type property: The type property.
-     *
+     * 
      * @return the type value.
      */
     public String getType() {
@@ -47,7 +52,7 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Set the type property: The type property.
-     *
+     * 
      * @param type the type value to set.
      * @return the Slide object itself.
      */
@@ -58,7 +63,7 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Get the title property: The title property.
-     *
+     * 
      * @return the title value.
      */
     public String getTitle() {
@@ -67,7 +72,7 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Set the title property: The title property.
-     *
+     * 
      * @param title the title value to set.
      * @return the Slide object itself.
      */
@@ -78,7 +83,7 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Get the items property: The items property.
-     *
+     * 
      * @return the items value.
      */
     public List<String> getItems() {
@@ -87,7 +92,7 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Set the items property: The items property.
-     *
+     * 
      * @param items the items value to set.
      * @return the Slide object itself.
      */
@@ -98,10 +103,11 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
@@ -126,10 +132,10 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Reads an instance of Slide from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of Slide if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Slide.
      */
     public static Slide fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -138,44 +144,42 @@ public final class Slide implements XmlSerializable<Slide> {
 
     /**
      * Reads an instance of Slide from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of Slide if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     *     XML null.
+     * XML null.
      * @throws XMLStreamException If an error occurs while reading the Slide.
      */
     public static Slide fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slide" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    Slide deserializedSlide = new Slide();
-                    deserializedSlide.type = reader.getStringAttribute(null, "type");
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Slide deserializedSlide = new Slide();
+            deserializedSlide.type = reader.getStringAttribute(null, "type");
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("title".equals(elementName.getLocalPart())) {
-                            deserializedSlide.title = reader.getStringElement();
-                        } else if ("items".equals(elementName.getLocalPart())) {
-                            if (deserializedSlide.items == null) {
-                                deserializedSlide.items = new ArrayList<>();
-                            }
-                            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                                elementName = reader.getElementName();
-                                if ("item".equals(elementName.getLocalPart())) {
-                                    deserializedSlide.items.add(reader.getStringElement());
-                                } else {
-                                    reader.skipElement();
-                                }
-                            }
+                if ("title".equals(elementName.getLocalPart())) {
+                    deserializedSlide.title = reader.getStringElement();
+                } else if ("items".equals(elementName.getLocalPart())) {
+                    if (deserializedSlide.items == null) {
+                        deserializedSlide.items = new ArrayList<>();
+                    }
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        elementName = reader.getElementName();
+                        if ("item".equals(elementName.getLocalPart())) {
+                            deserializedSlide.items.add(reader.getStringElement());
                         } else {
                             reader.skipElement();
                         }
                     }
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedSlide;
-                });
+            return deserializedSlide;
+        });
     }
 }

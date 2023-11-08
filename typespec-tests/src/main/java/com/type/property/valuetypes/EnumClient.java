@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.valuetypes.implementation.EnumsImpl;
 import com.type.property.valuetypes.models.EnumProperty;
 
-/** Initializes a new instance of the synchronous ValueTypesClient type. */
+/**
+ * Initializes a new instance of the synchronous ValueTypesClient type.
+ */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class EnumClient {
-    @Generated private final EnumsImpl serviceClient;
+    @Generated
+    private final EnumsImpl serviceClient;
 
     /**
      * Initializes an instance of EnumClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,15 +38,15 @@ public final class EnumClient {
 
     /**
      * Get call.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,15 +62,15 @@ public final class EnumClient {
 
     /**
      * Put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -84,7 +87,7 @@ public final class EnumClient {
 
     /**
      * Get call.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -102,7 +105,7 @@ public final class EnumClient {
 
     /**
      * Put operation.
-     *
+     * 
      * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

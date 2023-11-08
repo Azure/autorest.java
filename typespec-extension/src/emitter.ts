@@ -17,6 +17,8 @@ export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
 
+  "branded"?: boolean;
+
   "service-name"?: string;
   "service-versions"?: string[];
 
@@ -35,6 +37,8 @@ export interface EmitterOptions {
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
 
+  "fluent"?: string;
+
   "dev-options"?: DevOptions;
 }
 
@@ -51,6 +55,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
+
+    "branded": { type: "boolean", nullable: true, default: true },
 
     // service
     "service-name": { type: "string", nullable: true },
@@ -74,6 +80,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
+
+    "fluent": { type: "string", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

@@ -6,9 +6,13 @@ package fixtures.requiredheaderquery;
 
 import com.azure.core.util.ServiceVersion;
 
-/** Service version of DpgRequiredHeaderQueryClient. */
+/**
+ * Service version of DpgRequiredHeaderQueryClient.
+ */
 public enum DpgRequiredHeaderQueryServiceVersion implements ServiceVersion {
-    /** Enum value 1.0.0. */
+    /**
+     * Enum value 1.0.0.
+     */
     V1_0_0("1.0.0");
 
     private final String version;
@@ -17,7 +21,9 @@ public enum DpgRequiredHeaderQueryServiceVersion implements ServiceVersion {
         this.version = version;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getVersion() {
         return this.version;
@@ -25,7 +31,7 @@ public enum DpgRequiredHeaderQueryServiceVersion implements ServiceVersion {
 
     /**
      * Gets the latest service version supported by this client library.
-     *
+     * 
      * @return The latest {@link DpgRequiredHeaderQueryServiceVersion}.
      */
     public static DpgRequiredHeaderQueryServiceVersion getLatest() {

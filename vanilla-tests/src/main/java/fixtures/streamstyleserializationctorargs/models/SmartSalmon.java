@@ -14,14 +14,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/** The SmartSalmon model. */
+/**
+ * The SmartSalmon model.
+ */
 @Fluent
 public final class SmartSalmon extends Salmon {
-    /*
-     * The fishtype property.
-     */
-    private static final String FISHTYPE = "smart_salmon";
-
     /*
      * The college_degree property.
      */
@@ -34,7 +31,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Creates an instance of SmartSalmon class.
-     *
+     * 
      * @param length the length value to set.
      */
     public SmartSalmon(float length) {
@@ -43,7 +40,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Get the collegeDegree property: The college_degree property.
-     *
+     * 
      * @return the collegeDegree value.
      */
     public String getCollegeDegree() {
@@ -52,7 +49,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Set the collegeDegree property: The college_degree property.
-     *
+     * 
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.
      */
@@ -63,7 +60,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Get the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @return the additionalProperties value.
      */
     public Map<String, Object> getAdditionalProperties() {
@@ -72,7 +69,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Set the additionalProperties property: Dictionary of &lt;any&gt;.
-     *
+     * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
@@ -81,28 +78,36 @@ public final class SmartSalmon extends Salmon {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setLocation(String location) {
         super.setLocation(location);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setIswild(Boolean iswild) {
         super.setIswild(iswild);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SmartSalmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -111,7 +116,7 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -122,7 +127,7 @@ public final class SmartSalmon extends Salmon {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "smart_salmon");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
@@ -139,78 +144,74 @@ public final class SmartSalmon extends Salmon {
 
     /**
      * Reads an instance of SmartSalmon from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of SmartSalmon if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the SmartSalmon.
      */
     public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    boolean lengthFound = false;
-                    float length = 0.0f;
-                    String species = null;
-                    List<Fish> siblings = null;
-                    String location = null;
-                    Boolean iswild = null;
-                    String collegeDegree = null;
-                    Map<String, Object> additionalProperties = null;
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            boolean lengthFound = false;
+            float length = 0.0f;
+            String species = null;
+            List<Fish> siblings = null;
+            String location = null;
+            Boolean iswild = null;
+            String collegeDegree = null;
+            Map<String, Object> additionalProperties = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("fishtype".equals(fieldName)) {
-                            String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
-                                throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
-                                                + fishtype
-                                                + "'.");
-                            }
-                        } else if ("length".equals(fieldName)) {
-                            length = reader.getFloat();
-                            lengthFound = true;
-                        } else if ("species".equals(fieldName)) {
-                            species = reader.getString();
-                        } else if ("siblings".equals(fieldName)) {
-                            siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                        } else if ("location".equals(fieldName)) {
-                            location = reader.getString();
-                        } else if ("iswild".equals(fieldName)) {
-                            iswild = reader.getNullable(JsonReader::getBoolean);
-                        } else if ("college_degree".equals(fieldName)) {
-                            collegeDegree = reader.getString();
-                        } else {
-                            if (additionalProperties == null) {
-                                additionalProperties = new LinkedHashMap<>();
-                            }
-
-                            additionalProperties.put(fieldName, reader.readUntyped());
-                        }
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"smart_salmon".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
+                                + fishtype + "'.");
                     }
-                    if (lengthFound) {
-                        SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
-                        deserializedSmartSalmon.setSpecies(species);
-                        deserializedSmartSalmon.setSiblings(siblings);
-                        deserializedSmartSalmon.setLocation(location);
-                        deserializedSmartSalmon.setIswild(iswild);
-                        deserializedSmartSalmon.collegeDegree = collegeDegree;
-                        deserializedSmartSalmon.additionalProperties = additionalProperties;
-
-                        return deserializedSmartSalmon;
-                    }
-                    List<String> missingProperties = new ArrayList<>();
-                    if (!lengthFound) {
-                        missingProperties.add("length");
+                } else if ("length".equals(fieldName)) {
+                    length = reader.getFloat();
+                    lengthFound = true;
+                } else if ("species".equals(fieldName)) {
+                    species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                } else if ("location".equals(fieldName)) {
+                    location = reader.getString();
+                } else if ("iswild".equals(fieldName)) {
+                    iswild = reader.getNullable(JsonReader::getBoolean);
+                } else if ("college_degree".equals(fieldName)) {
+                    collegeDegree = reader.getString();
+                } else {
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
                     }
 
-                    throw new IllegalStateException(
-                            "Missing required property/properties: " + String.join(", ", missingProperties));
-                });
+                    additionalProperties.put(fieldName, reader.readUntyped());
+                }
+            }
+            if (lengthFound) {
+                SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
+                deserializedSmartSalmon.setSpecies(species);
+                deserializedSmartSalmon.setSiblings(siblings);
+                deserializedSmartSalmon.setLocation(location);
+                deserializedSmartSalmon.setIswild(iswild);
+                deserializedSmartSalmon.collegeDegree = collegeDegree;
+                deserializedSmartSalmon.additionalProperties = additionalProperties;
+
+                return deserializedSmartSalmon;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!lengthFound) {
+                missingProperties.add("length");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

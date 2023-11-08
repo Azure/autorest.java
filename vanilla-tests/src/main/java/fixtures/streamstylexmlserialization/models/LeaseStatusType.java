@@ -4,15 +4,23 @@
 
 package fixtures.streamstylexmlserialization.models;
 
-/** Defines values for LeaseStatusType. */
+/**
+ * Defines values for LeaseStatusType.
+ */
 public enum LeaseStatusType {
-    /** Enum value locked. */
+    /**
+     * Enum value locked.
+     */
     LOCKED("locked"),
 
-    /** Enum value unlocked. */
+    /**
+     * Enum value unlocked.
+     */
     UNLOCKED("unlocked");
 
-    /** The actual serialized value for a LeaseStatusType instance. */
+    /**
+     * The actual serialized value for a LeaseStatusType instance.
+     */
     private final String value;
 
     LeaseStatusType(String value) {
@@ -21,7 +29,7 @@ public enum LeaseStatusType {
 
     /**
      * Parses a serialized value to a LeaseStatusType instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed LeaseStatusType object, or null if unable to parse.
      */
@@ -38,7 +46,9 @@ public enum LeaseStatusType {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return this.value;

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.enums.extensible.implementation.ExtensibleClientImpl;
 import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 
-/** Initializes a new instance of the synchronous ExtensibleClient type. */
+/**
+ * Initializes a new instance of the synchronous ExtensibleClient type.
+ */
 @ServiceClient(builder = ExtensibleClientBuilder.class)
 public final class ExtensibleClient {
-    @Generated private final ExtensibleClientImpl serviceClient;
+    @Generated
+    private final ExtensibleClientImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class ExtensibleClient {
 
     /**
      * The getKnownValue operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,13 +60,13 @@ public final class ExtensibleClient {
 
     /**
      * The getUnknownValue operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -79,13 +82,13 @@ public final class ExtensibleClient {
 
     /**
      * The putKnownValue operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,13 +105,13 @@ public final class ExtensibleClient {
 
     /**
      * The putUnknownValue operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -125,7 +128,7 @@ public final class ExtensibleClient {
 
     /**
      * The getKnownValue operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -138,13 +141,13 @@ public final class ExtensibleClient {
     public DaysOfWeekExtensibleEnum getKnownValue() {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(
-                getKnownValueWithResponse(requestOptions).getValue().toObject(String.class));
+        return DaysOfWeekExtensibleEnum
+            .fromString(getKnownValueWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**
      * The getUnknownValue operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -157,13 +160,13 @@ public final class ExtensibleClient {
     public DaysOfWeekExtensibleEnum getUnknownValue() {
         // Generated convenience method for getUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return DaysOfWeekExtensibleEnum.fromString(
-                getUnknownValueWithResponse(requestOptions).getValue().toObject(String.class));
+        return DaysOfWeekExtensibleEnum
+            .fromString(getUnknownValueWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**
      * The putKnownValue operation.
-     *
+     * 
      * @param body Days of the week.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -182,7 +185,7 @@ public final class ExtensibleClient {
 
     /**
      * The putUnknownValue operation.
-     *
+     * 
      * @param body Days of the week.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

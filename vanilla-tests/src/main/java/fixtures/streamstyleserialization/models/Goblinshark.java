@@ -13,14 +13,11 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 
-/** The Goblinshark model. */
+/**
+ * The Goblinshark model.
+ */
 @Fluent
 public final class Goblinshark extends Shark {
-    /*
-     * The fishtype property.
-     */
-    private static final String FISHTYPE = "goblin";
-
     /*
      * The jawsize property.
      */
@@ -31,12 +28,15 @@ public final class Goblinshark extends Shark {
      */
     private GoblinSharkColor color;
 
-    /** Creates an instance of Goblinshark class. */
-    public Goblinshark() {}
+    /**
+     * Creates an instance of Goblinshark class.
+     */
+    public Goblinshark() {
+    }
 
     /**
      * Get the jawsize property: The jawsize property.
-     *
+     * 
      * @return the jawsize value.
      */
     public Integer getJawsize() {
@@ -45,7 +45,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the jawsize property: The jawsize property.
-     *
+     * 
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
@@ -56,7 +56,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Get the color property: Colors possible.
-     *
+     * 
      * @return the color value.
      */
     public GoblinSharkColor getColor() {
@@ -65,7 +65,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Set the color property: Colors possible.
-     *
+     * 
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
@@ -74,35 +74,45 @@ public final class Goblinshark extends Shark {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Goblinshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -111,7 +121,7 @@ public final class Goblinshark extends Shark {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -122,7 +132,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", FISHTYPE);
+        jsonWriter.writeStringField("fishtype", "goblin");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
         jsonWriter.writeStringField("species", getSpecies());
@@ -135,55 +145,50 @@ public final class Goblinshark extends Shark {
 
     /**
      * Reads an instance of Goblinshark from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     *     polymorphic discriminator.
+     * polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    Goblinshark deserializedGoblinshark = new Goblinshark();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            Goblinshark deserializedGoblinshark = new Goblinshark();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("fishtype".equals(fieldName)) {
-                            String fishtype = reader.getString();
-                            if (!FISHTYPE.equals(fishtype)) {
-                                throw new IllegalStateException(
-                                        "'fishtype' was expected to be non-null and equal to '"
-                                                + FISHTYPE
-                                                + "'. The found 'fishtype' was '"
-                                                + fishtype
-                                                + "'.");
-                            }
-                        } else if ("length".equals(fieldName)) {
-                            deserializedGoblinshark.setLength(reader.getFloat());
-                        } else if ("birthday".equals(fieldName)) {
-                            deserializedGoblinshark.setBirthday(
-                                    reader.getNullable(
-                                            nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
-                        } else if ("species".equals(fieldName)) {
-                            deserializedGoblinshark.setSpecies(reader.getString());
-                        } else if ("siblings".equals(fieldName)) {
-                            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                            deserializedGoblinshark.setSiblings(siblings);
-                        } else if ("age".equals(fieldName)) {
-                            deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
-                        } else if ("jawsize".equals(fieldName)) {
-                            deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
-                        } else if ("color".equals(fieldName)) {
-                            deserializedGoblinshark.color = GoblinSharkColor.fromString(reader.getString());
-                        } else {
-                            reader.skipChildren();
-                        }
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"goblin".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
+                                + fishtype + "'.");
                     }
+                } else if ("length".equals(fieldName)) {
+                    deserializedGoblinshark.setLength(reader.getFloat());
+                } else if ("birthday".equals(fieldName)) {
+                    deserializedGoblinshark.setBirthday(
+                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                } else if ("species".equals(fieldName)) {
+                    deserializedGoblinshark.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedGoblinshark.setSiblings(siblings);
+                } else if ("age".equals(fieldName)) {
+                    deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("jawsize".equals(fieldName)) {
+                    deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
+                } else if ("color".equals(fieldName)) {
+                    deserializedGoblinshark.color = GoblinSharkColor.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedGoblinshark;
-                });
+            return deserializedGoblinshark;
+        });
     }
 }

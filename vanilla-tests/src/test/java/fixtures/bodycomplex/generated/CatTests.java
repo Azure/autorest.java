@@ -13,10 +13,9 @@ import org.junit.jupiter.api.Assertions;
 public final class CatTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        Cat model =
-                BinaryData.fromString(
-                                "{\"color\":\"jbpzvgnwzsymg\",\"hates\":[{\"food\":\"cyzkohdbihanuf\",\"id\":808084535,\"name\":\"jysagith\"}],\"id\":731883185,\"name\":\"bifpikxwczb\"}")
-                        .toObject(Cat.class);
+        Cat model = BinaryData.fromString(
+            "{\"color\":\"jbpzvgnwzsymg\",\"hates\":[{\"food\":\"cyzkohdbihanuf\",\"id\":808084535,\"name\":\"jysagith\"}],\"id\":731883185,\"name\":\"bifpikxwczb\"}")
+            .toObject(Cat.class);
         Assertions.assertEquals(731883185, model.getId());
         Assertions.assertEquals("bifpikxwczb", model.getName());
         Assertions.assertEquals("jbpzvgnwzsymg", model.getColor());
@@ -27,14 +26,8 @@ public final class CatTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Cat model =
-                new Cat()
-                        .setId(731883185)
-                        .setName("bifpikxwczb")
-                        .setColor("jbpzvgnwzsymg")
-                        .setHates(
-                                Arrays.asList(
-                                        new Dog().setId(808084535).setName("jysagith").setFood("cyzkohdbihanuf")));
+        Cat model = new Cat().setId(731883185).setName("bifpikxwczb").setColor("jbpzvgnwzsymg")
+            .setHates(Arrays.asList(new Dog().setId(808084535).setName("jysagith").setFood("cyzkohdbihanuf")));
         model = BinaryData.fromObject(model).toObject(Cat.class);
         Assertions.assertEquals(731883185, model.getId());
         Assertions.assertEquals("bifpikxwczb", model.getName());

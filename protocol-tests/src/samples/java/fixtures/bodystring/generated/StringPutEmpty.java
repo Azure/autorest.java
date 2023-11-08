@@ -12,8 +12,8 @@ import fixtures.bodystring.StringOperationClientBuilder;
 
 public class StringPutEmpty {
     public static void main(String[] args) {
-        StringOperationClient stringOperationClient =
-                new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
+        StringOperationClient stringOperationClient
+            = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodystring.generated.stringputempty.stringputempty
         RequestOptions requestOptions = new RequestOptions().setBody(BinaryData.fromString("\"\""));
         Response<Void> response = stringOperationClient.putEmptyWithResponse(requestOptions);

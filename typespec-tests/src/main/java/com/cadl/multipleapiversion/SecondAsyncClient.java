@@ -17,17 +17,20 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.multipleapiversion.implementation.SecondClientImpl;
-import com.cadl.multipleapiversion.models.Resource;
+import com.cadl.multipleapiversion.models.Resource2;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SecondClient type. */
+/**
+ * Initializes a new instance of the asynchronous SecondClient type.
+ */
 @ServiceClient(builder = SecondClientBuilder.class, isAsync = true)
 public final class SecondAsyncClient {
-    @Generated private final SecondClientImpl serviceClient;
+    @Generated
+    private final SecondClientImpl serviceClient;
 
     /**
      * Initializes an instance of SecondAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,9 +40,9 @@ public final class SecondAsyncClient {
 
     /**
      * Resource read operation template.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -47,7 +50,7 @@ public final class SecondAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,7 +67,7 @@ public final class SecondAsyncClient {
 
     /**
      * Resource read operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -76,11 +79,10 @@ public final class SecondAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> get(String name) {
+    public Mono<Resource2> get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        return getWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Resource2.class));
     }
 }

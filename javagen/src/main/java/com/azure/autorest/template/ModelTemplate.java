@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -28,7 +29,6 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -135,9 +135,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If code is being generated with the behavior to return an empty byte array when the default value
             // expression is null and the model has any array types that will need conversion within getter methods
             // generate a static byte[] that will be returned instead of creating a new instance each get.
-            if (settings.isNullByteArrayMapsToEmptyArray()
-                && model.getProperties().stream().anyMatch(property -> property.getClientType() instanceof ArrayType
-                    && property.getWireType() != property.getClientType())) {
+            if (isGenerateConstantEmptyByteArray(model, settings)) {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
@@ -309,7 +307,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
         if (model.isStronglyTypedHeader()) {
             ClassType.HttpHeaders.addImportsTo(imports, false);
-            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+            ClassType.HttpHeaderName.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.
@@ -551,6 +549,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
+            if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
+                // Stream-style serialization doesn't need the polymorphic discriminator constant.
+                continue;
+            }
+
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 
@@ -559,7 +562,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (property.isPolymorphicDiscriminator()) {
                 classBlock.privateStaticFinalVariable(fieldSignature);
-            } else if ((ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization())) {
+            } else if (ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -765,10 +768,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
-            // Then, add all constant properties.
-            for (ClientModelProperty property : constantProperties) {
-                constructor.line(property.getName() + " = " + property.getDefaultValue() + ";");
-            }
+            // constant properties should already be initialized in class variable definition
+//            // Then, add all constant properties.
+//            for (ClientModelProperty property : constantProperties) {
+//                constructor.line(property.getName() + " = " + property.getDefaultValue() + ";");
+//            }
 
             // Finally, add all required properties.
             if (settings.isRequiredFieldsAsConstructorArgs()) {
@@ -877,7 +881,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
-            expression = String.format("CoreUtils.clone(%s)", expression);
+            expression = TemplateHelper.getByteCloneExpression(expression);
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
@@ -923,7 +927,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
-            ? "CoreUtils.clone(" + property.getName() + ")"
+            ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();
 
         if (propertyClientType != propertyWireType) {
@@ -1061,6 +1065,31 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Checks whether to generate constant "private final static byte[] EMPTY_BYTE_ARRAY = new byte[0];"
+     *
+     * @param model the model
+     * @param settings Java settings
+     * @return Whether to generate the constant.
+     */
+    private static boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
+        boolean ret = false;
+        if (settings.isNullByteArrayMapsToEmptyArray()) {
+            ret = model.getProperties().stream()
+                    .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                            && property.getWireType() != property.getClientType());
+
+            // flatten properties
+            if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
+                ret = model.getPropertyReferences().stream()
+                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                        .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
+            }
+        }
+        return ret;
+    }
+
+    /**
      * Writes stream-style serialization logic for serializing to and deserializing from the serialization format that
      * the model uses.
      *
@@ -1074,13 +1103,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            imports.add(Generated.class.getName());
+            Annotation.GENERATED.addImportsTo(imports);
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation(Generated.class.getSimpleName());
+            classBlock.annotation(Annotation.GENERATED.getName());
         }
     }
 

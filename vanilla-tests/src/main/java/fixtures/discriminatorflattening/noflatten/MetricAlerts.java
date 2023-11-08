@@ -21,22 +21,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.discriminatorflattening.noflatten.models.MetricAlertResource;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in MetricAlerts. */
+/**
+ * An instance of this class provides access to all the operations defined in MetricAlerts.
+ */
 public final class MetricAlerts {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final MetricAlertsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final MonitorManagementClient client;
 
     /**
      * Initializes an instance of MetricAlerts.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     MetricAlerts(MonitorManagementClient client) {
-        this.service =
-                RestProxy.create(MetricAlertsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(MetricAlertsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -48,15 +54,15 @@ public final class MetricAlerts {
     @ServiceInterface(name = "MonitorManagementCli")
     public interface MetricAlertsService {
         @Get("/providers/Microsoft.Insights/metricAlerts")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<MetricAlertResource>> get(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<MetricAlertResource>> get(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource along with {@link Response} on successful completion of {@link Mono}.
@@ -64,8 +70,8 @@ public final class MetricAlerts {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MetricAlertResource>> getWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
@@ -73,7 +79,7 @@ public final class MetricAlerts {
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -83,8 +89,8 @@ public final class MetricAlerts {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MetricAlertResource>> getWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get(this.client.getHost(), accept, context);
@@ -92,7 +98,7 @@ public final class MetricAlerts {
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource on successful completion of {@link Mono}.
@@ -104,7 +110,7 @@ public final class MetricAlerts {
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -118,7 +124,7 @@ public final class MetricAlerts {
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -132,7 +138,7 @@ public final class MetricAlerts {
 
     /**
      * Retrieve an alert rule definition.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the metric alert resource.

@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class DogTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        Dog model =
-                BinaryData.fromString("{\"food\":\"cnpqxuhivyqniwby\",\"id\":143848779,\"name\":\"vd\"}")
-                        .toObject(Dog.class);
+        Dog model = BinaryData.fromString("{\"food\":\"cnpqxuhivyqniwby\",\"id\":143848779,\"name\":\"vd\"}")
+            .toObject(Dog.class);
         Assertions.assertEquals(143848779, model.getId());
         Assertions.assertEquals("vd", model.getName());
         Assertions.assertEquals("cnpqxuhivyqniwby", model.getFood());

@@ -7,7 +7,9 @@ package fixtures.multipleinheritance.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Horse model. */
+/**
+ * The Horse model.
+ */
 @Fluent
 public final class Horse extends Pet {
     /*
@@ -16,12 +18,15 @@ public final class Horse extends Pet {
     @JsonProperty(value = "isAShowHorse")
     private Boolean isAShowHorse;
 
-    /** Creates an instance of Horse class. */
-    public Horse() {}
+    /**
+     * Creates an instance of Horse class.
+     */
+    public Horse() {
+    }
 
     /**
      * Get the isAShowHorse property: The isAShowHorse property.
-     *
+     * 
      * @return the isAShowHorse value.
      */
     public Boolean isAShowHorse() {
@@ -30,7 +35,7 @@ public final class Horse extends Pet {
 
     /**
      * Set the isAShowHorse property: The isAShowHorse property.
-     *
+     * 
      * @param isAShowHorse the isAShowHorse value to set.
      * @return the Horse object itself.
      */
@@ -39,7 +44,9 @@ public final class Horse extends Pet {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Horse setName(String name) {
         super.setName(name);
@@ -48,7 +55,7 @@ public final class Horse extends Pet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override

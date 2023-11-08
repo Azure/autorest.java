@@ -328,7 +328,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                             returnTypeHolder, proxyMethod, parameters, pageableItemName,
                             generateOnlyRequiredParameters, defaultOverloadType);
 
-                        if (settings.getSyncMethods() == SyncMethodsGeneration.ALL && !settings.isSyncStackEnabled()) {
+                        if (settings.isGenerateSyncMethods() && !settings.isSyncStackEnabled()) {
                             createSyncPageableClientMethods(operation, isProtocolMethod, settings, methods, builder,
                                 returnTypeHolder, proxyMethod, parameters, pageableItemName,
                                 generateOnlyRequiredParameters, defaultOverloadType);
@@ -478,18 +478,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         returnTypeHolder.asyncReturnType, returnTypeHolder.syncReturnType, proxyMethod, parameters,
                         generateOnlyRequiredParameters, defaultOverloadType);
                 } else {
-                    // If the ProxyMethod is synchronous perform a complete generation of synchronous simple APIs.
                     if (proxyMethod.isSync()) {
+                        // If the ProxyMethod is synchronous perform a complete generation of synchronous simple APIs.
+
                         createSimpleSyncClientMethods(operation, isProtocolMethod, settings, methods, builder,
                             returnTypeHolder, proxyMethod, parameters, generateOnlyRequiredParameters, defaultOverloadType);
                     } else {
                         // Otherwise, perform a complete generation of asynchronous simple APIs.
                         // Then if SyncMethodsGeneration is enabled and Sync Stack is not perform synchronous simple
                         // API generation based on SyncMethodsGeneration configuration.
-                        createSimpleAsyncClientMethods(operation, isProtocolMethod, settings, methods, builder,
-                            returnTypeHolder, proxyMethod, parameters, generateOnlyRequiredParameters, defaultOverloadType);
 
-                        if (settings.getSyncMethods() == SyncMethodsGeneration.ALL && !settings.isSyncStackEnabled()) {
+                        if (settings.getSyncMethods() != SyncMethodsGeneration.SYNC_ONLY) {
+                            // SyncMethodsGeneration.NONE would still generate these
+                            createSimpleAsyncClientMethods(operation, isProtocolMethod, settings, methods, builder,
+                                    returnTypeHolder, proxyMethod, parameters, generateOnlyRequiredParameters, defaultOverloadType);
+                        }
+
+                        if (settings.isGenerateSyncMethods() && !settings.isSyncStackEnabled()) {
                             createSimpleSyncClientMethods(operation, isProtocolMethod, settings, methods, builder,
                                 returnTypeHolder, proxyMethod, parameters, generateOnlyRequiredParameters, defaultOverloadType);
                         }
@@ -724,7 +729,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .groupedParameterRequired(false)
             .methodVisibility(methodVisibility);
 
-        if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
+        if (settings.isGenerateAsyncMethods()) {
             methods.add(builder.build());
         }
 
@@ -748,7 +753,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .groupedParameterRequired(false)
             .methodVisibility(visibilityFunction.methodVisibility(false, defaultOverloadType, false));
 
-        if (settings.getSyncMethods() != SyncMethodsGeneration.NONE) {
+        if (settings.isGenerateAsyncMethods()) {
             methods.add(builder.build());
 
             // overload for versioning
@@ -951,7 +956,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
 
         builder.methodPollingDetails(methodPollingDetails);
-        if (JavaSettings.getInstance().getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+        if (JavaSettings.getInstance().isGenerateAsyncMethods()) {
             // begin method async
             methods.add(builder
                 .returnValue(createLongRunningBeginAsyncReturnValue(operation, syncReturnType, methodPollingDetails))
@@ -977,7 +982,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         if (!proxyMethodUsesFluxByteBuffer &&
-                (JavaSettings.getInstance().getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL
+                (JavaSettings.getInstance().isGenerateSyncMethods()
                         || JavaSettings.getInstance().isSyncStackEnabled())) {
             // begin method sync
             methods.add(builder

@@ -20,14 +20,17 @@ import com.type.property.optional.implementation.RequiredAndOptionalsImpl;
 import com.type.property.optional.models.RequiredAndOptionalProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous OptionalClient type. */
+/**
+ * Initializes a new instance of the asynchronous OptionalClient type.
+ */
 @ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class RequiredAndOptionalAsyncClient {
-    @Generated private final RequiredAndOptionalsImpl serviceClient;
+    @Generated
+    private final RequiredAndOptionalsImpl serviceClient;
 
     /**
      * Initializes an instance of RequiredAndOptionalAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,23 +40,23 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return models that will return all properties in the model along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,23 +66,23 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Get models that will return only the required properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return models that will return only the required properties along with {@link Response} on successful completion
-     *     of {@link Mono}.
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,16 +92,16 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -115,16 +118,16 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Put a body with only required properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -141,7 +144,7 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -154,14 +157,13 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<RequiredAndOptionalProperty> getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAllWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
+        return getAllWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
     }
 
     /**
      * Get models that will return only the required properties.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -174,14 +176,13 @@ public final class RequiredAndOptionalAsyncClient {
     public Mono<RequiredAndOptionalProperty> getRequiredOnly() {
         // Generated convenience method for getRequiredOnlyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getRequiredOnlyWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
+        return getRequiredOnlyWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(RequiredAndOptionalProperty.class));
     }
 
     /**
      * Put a body with all properties present.
-     *
+     * 
      * @param body Model with required and optional properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -201,7 +202,7 @@ public final class RequiredAndOptionalAsyncClient {
 
     /**
      * Put a body with only required properties.
-     *
+     * 
      * @param body Model with required and optional properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

@@ -274,12 +274,12 @@ public class SchemaUtil {
                             .packageName(compositeType.getLanguage().getJava().getNamespace())
                             .usedInXml(treatAsXml(compositeType))
                             .build();
-                    } else if (Objects.equals(name, ClassType.REQUEST_CONDITIONS.getName())
+                    } else if (Objects.equals(name, ClassType.RequestConditions.getName())
                             && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
-                        classType = ClassType.REQUEST_CONDITIONS;
-                    } else if (Objects.equals(name, ClassType.MATCH_CONDITIONS.getName())
+                        classType = ClassType.RequestConditions;
+                    } else if (Objects.equals(name, ClassType.MatchConditions.getName())
                             && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
-                        classType = ClassType.MATCH_CONDITIONS;
+                        classType = ClassType.MatchConditions;
                     }
                 }
             }

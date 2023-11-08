@@ -8,7 +8,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Resource model. */
+/**
+ * The Resource model.
+ */
 @Immutable
 public final class Resource {
     /*
@@ -25,13 +27,16 @@ public final class Resource {
     @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
-    /** Creates an instance of Resource class. */
+    /**
+     * Creates an instance of Resource class.
+     */
     @Generated
-    public Resource() {}
+    public Resource() {
+    }
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -41,7 +46,7 @@ public final class Resource {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

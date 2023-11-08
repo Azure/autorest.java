@@ -11,14 +11,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 
-/** The Salmon model. */
+/**
+ * The Salmon model.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "fishtype",
-        defaultImpl = Salmon.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "fishtype",
+    defaultImpl = Salmon.class)
 @JsonTypeName("salmon")
-@JsonSubTypes({@JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class) })
 @Fluent
 public class Salmon extends Fish {
     /*
@@ -33,12 +35,15 @@ public class Salmon extends Fish {
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
-    /** Creates an instance of Salmon class. */
-    public Salmon() {}
+    /**
+     * Creates an instance of Salmon class.
+     */
+    public Salmon() {
+    }
 
     /**
      * Get the location property: The location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -47,7 +52,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the location property: The location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the Salmon object itself.
      */
@@ -58,7 +63,7 @@ public class Salmon extends Fish {
 
     /**
      * Get the iswild property: The iswild property.
-     *
+     * 
      * @return the iswild value.
      */
     public Boolean iswild() {
@@ -67,7 +72,7 @@ public class Salmon extends Fish {
 
     /**
      * Set the iswild property: The iswild property.
-     *
+     * 
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
@@ -76,21 +81,27 @@ public class Salmon extends Fish {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setLength(float length) {
         super.setLength(length);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Salmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

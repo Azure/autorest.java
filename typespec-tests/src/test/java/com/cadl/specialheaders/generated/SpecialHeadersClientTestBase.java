@@ -22,16 +22,16 @@ class SpecialHeadersClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SpecialHeadersClientBuilder specialHeadersClientbuilder =
-                new SpecialHeadersClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SpecialHeadersClientBuilder specialHeadersClientbuilder = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             specialHeadersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             specialHeadersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         specialHeadersClient = specialHeadersClientbuilder.buildClient();
+
     }
 }

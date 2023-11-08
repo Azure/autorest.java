@@ -7,7 +7,9 @@ package fixtures.modelflattening.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The product documentation. */
+/**
+ * The product documentation.
+ */
 @Fluent
 public class BaseProduct {
     /*
@@ -23,13 +25,16 @@ public class BaseProduct {
     @JsonProperty(value = "base_product_description")
     private String description;
 
-    /** Creates an instance of BaseProduct class. */
-    public BaseProduct() {}
+    /**
+     * Creates an instance of BaseProduct class.
+     */
+    public BaseProduct() {
+    }
 
     /**
      * Get the productId property: Unique identifier representing a specific product for a given latitude &amp;
      * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     *
+     * 
      * @return the productId value.
      */
     public String getProductId() {
@@ -39,7 +44,7 @@ public class BaseProduct {
     /**
      * Set the productId property: Unique identifier representing a specific product for a given latitude &amp;
      * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     *
+     * 
      * @param productId the productId value to set.
      * @return the BaseProduct object itself.
      */
@@ -50,7 +55,7 @@ public class BaseProduct {
 
     /**
      * Get the description property: Description of product.
-     *
+     * 
      * @return the description value.
      */
     public String getDescription() {
@@ -59,7 +64,7 @@ public class BaseProduct {
 
     /**
      * Set the description property: Description of product.
-     *
+     * 
      * @param description the description value to set.
      * @return the BaseProduct object itself.
      */
@@ -70,7 +75,7 @@ public class BaseProduct {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {

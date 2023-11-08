@@ -263,8 +263,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         asyncRestResponseReturnType, proxyMethods);
             }
 
+            final List<ProxyMethod> asyncProxyMethods = new ArrayList<>(proxyMethods);
             if (settings.isSyncStackEnabled()) {
                 addSyncProxyMethods(proxyMethods);
+            }
+            if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.SYNC_ONLY) {
+                proxyMethods.removeAll(asyncProxyMethods);
             }
             result.put(request, proxyMethods);
             parsed.put(request, proxyMethods);

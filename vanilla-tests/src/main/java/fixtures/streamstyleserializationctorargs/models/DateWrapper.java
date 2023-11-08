@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/** The DateWrapper model. */
+/**
+ * The DateWrapper model.
+ */
 @Fluent
 public final class DateWrapper implements JsonSerializable<DateWrapper> {
     /*
@@ -26,12 +28,15 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      */
     private LocalDate leap;
 
-    /** Creates an instance of DateWrapper class. */
-    public DateWrapper() {}
+    /**
+     * Creates an instance of DateWrapper class.
+     */
+    public DateWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public LocalDate getField() {
@@ -40,7 +45,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the DateWrapper object itself.
      */
@@ -51,7 +56,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     /**
      * Get the leap property: The leap property.
-     *
+     * 
      * @return the leap value.
      */
     public LocalDate getLeap() {
@@ -60,7 +65,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     /**
      * Set the leap property: The leap property.
-     *
+     * 
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.
      */
@@ -71,10 +76,11 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -86,32 +92,31 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
 
     /**
      * Reads an instance of DateWrapper from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     *     pointing to JSON null.
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DateWrapper.
      */
     public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    DateWrapper deserializedDateWrapper = new DateWrapper();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            DateWrapper deserializedDateWrapper = new DateWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("field".equals(fieldName)) {
-                            deserializedDateWrapper.field =
-                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
-                        } else if ("leap".equals(fieldName)) {
-                            deserializedDateWrapper.leap =
-                                    reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("field".equals(fieldName)) {
+                    deserializedDateWrapper.field
+                        = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                } else if ("leap".equals(fieldName)) {
+                    deserializedDateWrapper.leap
+                        = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedDateWrapper;
-                });
+            return deserializedDateWrapper;
+        });
     }
 }

@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.type.property.optional.implementation.RequiredAndOptionalsImpl;
 import com.type.property.optional.models.RequiredAndOptionalProperty;
 
-/** Initializes a new instance of the synchronous OptionalClient type. */
+/**
+ * Initializes a new instance of the synchronous OptionalClient type.
+ */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class RequiredAndOptionalClient {
-    @Generated private final RequiredAndOptionalsImpl serviceClient;
+    @Generated
+    private final RequiredAndOptionalsImpl serviceClient;
 
     /**
      * Initializes an instance of RequiredAndOptionalClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,16 +38,16 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,16 +63,16 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Get models that will return only the required properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -85,16 +88,16 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Put a body with all properties present.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -111,16 +114,16 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Put a body with only required properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -137,7 +140,7 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Get models that will return all properties in the model.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -155,7 +158,7 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Get models that will return only the required properties.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -173,7 +176,7 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Put a body with all properties present.
-     *
+     * 
      * @param body Model with required and optional properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -192,7 +195,7 @@ public final class RequiredAndOptionalClient {
 
     /**
      * Put a body with only required properties.
-     *
+     * 
      * @param body Model with required and optional properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

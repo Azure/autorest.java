@@ -44,7 +44,7 @@ public final class Salmon extends Fish {
 
     /**
      * Creates an instance of Salmon class.
-     *
+     * 
      * @param age the age value to set.
      */
     @Generated
@@ -55,7 +55,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the friends property: The friends property.
-     *
+     * 
      * @return the friends value.
      */
     @Generated
@@ -65,7 +65,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the friends property: The friends property.
-     *
+     * 
      * @param friends the friends value to set.
      * @return the Salmon object itself.
      */
@@ -77,7 +77,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the hate property: The hate property.
-     *
+     * 
      * @return the hate value.
      */
     @Generated
@@ -87,7 +87,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the hate property: The hate property.
-     *
+     * 
      * @param hate the hate value to set.
      * @return the Salmon object itself.
      */
@@ -99,7 +99,7 @@ public final class Salmon extends Fish {
 
     /**
      * Get the partner property: The partner property.
-     *
+     * 
      * @return the partner value.
      */
     @Generated
@@ -109,7 +109,7 @@ public final class Salmon extends Fish {
 
     /**
      * Set the partner property: The partner property.
-     *
+     * 
      * @param partner the partner value to set.
      * @return the Salmon object itself.
      */

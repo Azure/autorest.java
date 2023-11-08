@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The ByteWrapper model. */
+/**
+ * The ByteWrapper model.
+ */
 @Fluent
 public final class ByteWrapper {
     /*
@@ -17,12 +19,15 @@ public final class ByteWrapper {
     @JsonProperty(value = "field")
     private byte[] field;
 
-    /** Creates an instance of ByteWrapper class. */
-    public ByteWrapper() {}
+    /**
+     * Creates an instance of ByteWrapper class.
+     */
+    public ByteWrapper() {
+    }
 
     /**
      * Get the field property: The field property.
-     *
+     * 
      * @return the field value.
      */
     public byte[] getField() {
@@ -31,7 +36,7 @@ public final class ByteWrapper {
 
     /**
      * Set the field property: The field property.
-     *
+     * 
      * @param field the field value to set.
      * @return the ByteWrapper object itself.
      */

@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.client.structure.service.implementation.ClientBClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ClientBClient type. */
+/**
+ * Initializes a new instance of the asynchronous ClientBClient type.
+ */
 @ServiceClient(builder = ClientBClientBuilder.class, isAsync = true)
 public final class ClientBAsyncClient {
-    @Generated private final ClientBClientImpl serviceClient;
+    @Generated
+    private final ClientBClientImpl serviceClient;
 
     /**
      * Initializes an instance of ClientBAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +70,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,7 +86,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedTwo operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -101,7 +104,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedFour operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -119,7 +122,7 @@ public final class ClientBAsyncClient {
 
     /**
      * The renamedSix operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

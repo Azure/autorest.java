@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** The Rfc7231DatetimeProperty model. */
+/**
+ * The Rfc7231DatetimeProperty model.
+ */
 @Immutable
 public final class Rfc7231DatetimeProperty {
     /*
@@ -23,7 +25,7 @@ public final class Rfc7231DatetimeProperty {
 
     /**
      * Creates an instance of Rfc7231DatetimeProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -39,7 +41,7 @@ public final class Rfc7231DatetimeProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

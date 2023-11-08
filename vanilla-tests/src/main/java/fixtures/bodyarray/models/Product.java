@@ -7,7 +7,9 @@ package fixtures.bodyarray.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Product model. */
+/**
+ * The Product model.
+ */
 @Fluent
 public final class Product {
     /*
@@ -22,12 +24,15 @@ public final class Product {
     @JsonProperty(value = "string")
     private String string;
 
-    /** Creates an instance of Product class. */
-    public Product() {}
+    /**
+     * Creates an instance of Product class.
+     */
+    public Product() {
+    }
 
     /**
      * Get the integer property: The integer property.
-     *
+     * 
      * @return the integer value.
      */
     public Integer getInteger() {
@@ -36,7 +41,7 @@ public final class Product {
 
     /**
      * Set the integer property: The integer property.
-     *
+     * 
      * @param integer the integer value to set.
      * @return the Product object itself.
      */
@@ -47,7 +52,7 @@ public final class Product {
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     public String getString() {
@@ -56,7 +61,7 @@ public final class Product {
 
     /**
      * Set the string property: The string property.
-     *
+     * 
      * @param string the string value to set.
      * @return the Product object itself.
      */
@@ -67,8 +72,9 @@ public final class Product {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

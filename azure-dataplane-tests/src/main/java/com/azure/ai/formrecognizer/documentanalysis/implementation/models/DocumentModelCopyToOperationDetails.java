@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
-/** Get Operation response object. */
+/**
+ * Get Operation response object.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("documentModelCopyTo")
 @Fluent
@@ -22,12 +24,15 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     @JsonProperty(value = "result")
     private DocumentModelDetails result;
 
-    /** Creates an instance of DocumentModelCopyToOperationDetails class. */
-    public DocumentModelCopyToOperationDetails() {}
+    /**
+     * Creates an instance of DocumentModelCopyToOperationDetails class.
+     */
+    public DocumentModelCopyToOperationDetails() {
+    }
 
     /**
      * Get the result property: Operation result upon success.
-     *
+     * 
      * @return the result value.
      */
     public DocumentModelDetails getResult() {
@@ -36,7 +41,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
 
     /**
      * Set the result property: Operation result upon success.
-     *
+     * 
      * @param result the result value to set.
      * @return the DocumentModelCopyToOperationDetails object itself.
      */
@@ -45,63 +50,81 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setOperationId(String operationId) {
         super.setOperationId(operationId);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setStatus(OperationStatus status) {
         super.setStatus(status);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setPercentCompleted(Integer percentCompleted) {
         super.setPercentCompleted(percentCompleted);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setCreatedDateTime(OffsetDateTime createdDateTime) {
         super.setCreatedDateTime(createdDateTime);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setLastUpdatedDateTime(OffsetDateTime lastUpdatedDateTime) {
         super.setLastUpdatedDateTime(lastUpdatedDateTime);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setResourceLocation(String resourceLocation) {
         super.setResourceLocation(resourceLocation);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setApiVersion(String apiVersion) {
         super.setApiVersion(apiVersion);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setTags(Map<String, String> tags) {
         super.setTags(tags);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocumentModelCopyToOperationDetails setError(Error error) {
         super.setError(error);

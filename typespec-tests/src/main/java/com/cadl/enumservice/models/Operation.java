@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Operation model. */
+/**
+ * The Operation model.
+ */
 @Immutable
 public final class Operation {
     /*
@@ -17,7 +19,7 @@ public final class Operation {
      */
     @Generated
     @JsonProperty(value = "name")
-    private NameModel name;
+    private OperationName name;
 
     /*
      * The best property.
@@ -48,6 +50,13 @@ public final class Operation {
     private ColorModel color;
 
     /*
+     * The unit property.
+     */
+    @Generated
+    @JsonProperty(value = "unit")
+    private Unit unit;
+
+    /*
      * The priorityValue property.
      */
     @Generated
@@ -68,42 +77,45 @@ public final class Operation {
     @JsonProperty(value = "colorModelValue")
     private ColorModel colorModelValue = ColorModel.BLUE;
 
+    /*
+     * The unitValue property.
+     */
+    @Generated
+    @JsonProperty(value = "unitValue")
+    private Unit unitValue = Unit.MILLIGRAM;
+
     /**
      * Creates an instance of Operation class.
-     *
+     * 
      * @param name the name value to set.
      * @param priority the priority value to set.
      * @param color the color value to set.
+     * @param unit the unit value to set.
      */
     @Generated
     @JsonCreator
-    private Operation(
-            @JsonProperty(value = "name") NameModel name,
-            @JsonProperty(value = "priority") Priority priority,
-            @JsonProperty(value = "color") ColorModel color) {
-        best = true;
-        age = 50L;
-        priorityValue = Priority.LOW;
-        colorValue = Color.GREEN;
-        colorModelValue = ColorModel.BLUE;
+    private Operation(@JsonProperty(value = "name") OperationName name,
+        @JsonProperty(value = "priority") Priority priority, @JsonProperty(value = "color") ColorModel color,
+        @JsonProperty(value = "unit") Unit unit) {
         this.name = name;
         this.priority = priority;
         this.color = color;
+        this.unit = unit;
     }
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated
-    public NameModel getName() {
+    public OperationName getName() {
         return this.name;
     }
 
     /**
      * Get the best property: The best property.
-     *
+     * 
      * @return the best value.
      */
     @Generated
@@ -113,7 +125,7 @@ public final class Operation {
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     @Generated
@@ -123,7 +135,7 @@ public final class Operation {
 
     /**
      * Get the priority property: The priority property.
-     *
+     * 
      * @return the priority value.
      */
     @Generated
@@ -133,7 +145,7 @@ public final class Operation {
 
     /**
      * Get the color property: The color property.
-     *
+     * 
      * @return the color value.
      */
     @Generated
@@ -142,8 +154,18 @@ public final class Operation {
     }
 
     /**
+     * Get the unit property: The unit property.
+     * 
+     * @return the unit value.
+     */
+    @Generated
+    public Unit getUnit() {
+        return this.unit;
+    }
+
+    /**
      * Get the priorityValue property: The priorityValue property.
-     *
+     * 
      * @return the priorityValue value.
      */
     @Generated
@@ -153,7 +175,7 @@ public final class Operation {
 
     /**
      * Get the colorValue property: The colorValue property.
-     *
+     * 
      * @return the colorValue value.
      */
     @Generated
@@ -163,11 +185,21 @@ public final class Operation {
 
     /**
      * Get the colorModelValue property: The colorModelValue property.
-     *
+     * 
      * @return the colorModelValue value.
      */
     @Generated
     public ColorModel getColorModelValue() {
         return this.colorModelValue;
+    }
+
+    /**
+     * Get the unitValue property: The unitValue property.
+     * 
+     * @return the unitValue value.
+     */
+    @Generated
+    public Unit getUnitValue() {
+        return this.unitValue;
     }
 }

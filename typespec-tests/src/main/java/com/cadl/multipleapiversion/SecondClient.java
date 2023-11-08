@@ -16,16 +16,19 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipleapiversion.implementation.SecondClientImpl;
-import com.cadl.multipleapiversion.models.Resource;
+import com.cadl.multipleapiversion.models.Resource2;
 
-/** Initializes a new instance of the synchronous SecondClient type. */
+/**
+ * Initializes a new instance of the synchronous SecondClient type.
+ */
 @ServiceClient(builder = SecondClientBuilder.class)
 public final class SecondClient {
-    @Generated private final SecondClientImpl serviceClient;
+    @Generated
+    private final SecondClientImpl serviceClient;
 
     /**
      * Initializes an instance of SecondClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class SecondClient {
 
     /**
      * Resource read operation template.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -45,7 +48,7 @@ public final class SecondClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,7 +65,7 @@ public final class SecondClient {
 
     /**
      * Resource read operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -74,9 +77,9 @@ public final class SecondClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String name) {
+    public Resource2 get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+        return getWithResponse(name, requestOptions).getValue().toObject(Resource2.class);
     }
 }

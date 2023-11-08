@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.patch.implementation.PatchClientImpl;
 
-/** Initializes a new instance of the synchronous PatchClient type. */
+/**
+ * Initializes a new instance of the synchronous PatchClient type.
+ */
 @ServiceClient(builder = PatchClientBuilder.class)
 public final class PatchClient {
-    @Generated private final PatchClientImpl serviceClient;
+    @Generated
+    private final PatchClientImpl serviceClient;
 
     /**
      * Initializes an instance of PatchClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,9 +37,9 @@ public final class PatchClient {
 
     /**
      * The createOrUpdate operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -45,9 +48,9 @@ public final class PatchClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -56,7 +59,7 @@ public final class PatchClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -68,8 +71,8 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateWithResponse(
-            String name, BinaryData body, RequestOptions requestOptions) {
+    public Response<BinaryData> createOrUpdateWithResponse(String name, BinaryData body,
+        RequestOptions requestOptions) {
         // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponse(name, body, requestOptions);
     }

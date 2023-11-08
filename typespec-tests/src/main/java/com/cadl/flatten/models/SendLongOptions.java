@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Options for sendLong API. */
+/**
+ * Options for sendLong API.
+ */
 @Fluent
 public final class SendLongOptions {
     /*
@@ -70,17 +72,15 @@ public final class SendLongOptions {
 
     /**
      * Creates an instance of SendLongOptions class.
-     *
+     * 
      * @param id the id value to set.
      * @param input the input value to set.
      * @param dataInt the dataInt value to set.
      */
     @Generated
     @JsonCreator
-    public SendLongOptions(
-            @JsonProperty(value = "id") String id,
-            @JsonProperty(value = "input") String input,
-            @JsonProperty(value = "dataInt") int dataInt) {
+    public SendLongOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "input") String input,
+        @JsonProperty(value = "dataInt") int dataInt) {
         this.id = id;
         this.input = input;
         this.dataInt = dataInt;
@@ -88,7 +88,7 @@ public final class SendLongOptions {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -98,7 +98,7 @@ public final class SendLongOptions {
 
     /**
      * Get the filter property: The filter property.
-     *
+     * 
      * @return the filter value.
      */
     @Generated
@@ -108,7 +108,7 @@ public final class SendLongOptions {
 
     /**
      * Set the filter property: The filter property.
-     *
+     * 
      * @param filter the filter value to set.
      * @return the SendLongOptions object itself.
      */
@@ -120,7 +120,7 @@ public final class SendLongOptions {
 
     /**
      * Get the user property: The user property.
-     *
+     * 
      * @return the user value.
      */
     @Generated
@@ -130,7 +130,7 @@ public final class SendLongOptions {
 
     /**
      * Set the user property: The user property.
-     *
+     * 
      * @param user the user value to set.
      * @return the SendLongOptions object itself.
      */
@@ -142,7 +142,7 @@ public final class SendLongOptions {
 
     /**
      * Get the input property: The input property.
-     *
+     * 
      * @return the input value.
      */
     @Generated
@@ -152,7 +152,7 @@ public final class SendLongOptions {
 
     /**
      * Get the dataInt property: The dataInt property.
-     *
+     * 
      * @return the dataInt value.
      */
     @Generated
@@ -162,7 +162,7 @@ public final class SendLongOptions {
 
     /**
      * Get the dataIntOptional property: The dataIntOptional property.
-     *
+     * 
      * @return the dataIntOptional value.
      */
     @Generated
@@ -172,7 +172,7 @@ public final class SendLongOptions {
 
     /**
      * Set the dataIntOptional property: The dataIntOptional property.
-     *
+     * 
      * @param dataIntOptional the dataIntOptional value to set.
      * @return the SendLongOptions object itself.
      */
@@ -184,7 +184,7 @@ public final class SendLongOptions {
 
     /**
      * Get the dataLong property: The dataLong property.
-     *
+     * 
      * @return the dataLong value.
      */
     @Generated
@@ -194,7 +194,7 @@ public final class SendLongOptions {
 
     /**
      * Set the dataLong property: The dataLong property.
-     *
+     * 
      * @param dataLong the dataLong value to set.
      * @return the SendLongOptions object itself.
      */
@@ -206,7 +206,7 @@ public final class SendLongOptions {
 
     /**
      * Get the dataFloat property: The data_float property.
-     *
+     * 
      * @return the dataFloat value.
      */
     @Generated
@@ -216,7 +216,7 @@ public final class SendLongOptions {
 
     /**
      * Set the dataFloat property: The data_float property.
-     *
+     * 
      * @param dataFloat the dataFloat value to set.
      * @return the SendLongOptions object itself.
      */

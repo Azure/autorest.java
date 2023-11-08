@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.server.path.multiple.implementation.MultipleClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous MultipleClient type. */
+/**
+ * Initializes a new instance of the asynchronous MultipleClient type.
+ */
 @ServiceClient(builder = MultipleClientBuilder.class, isAsync = true)
 public final class MultipleAsyncClient {
-    @Generated private final MultipleClientImpl serviceClient;
+    @Generated
+    private final MultipleClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultipleAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class MultipleAsyncClient {
 
     /**
      * The noOperationParams operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -51,7 +54,7 @@ public final class MultipleAsyncClient {
 
     /**
      * The withOperationPathParam operation.
-     *
+     * 
      * @param keyword A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -68,7 +71,7 @@ public final class MultipleAsyncClient {
 
     /**
      * The noOperationParams operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -86,7 +89,7 @@ public final class MultipleAsyncClient {
 
     /**
      * The withOperationPathParam operation.
-     *
+     * 
      * @param keyword A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

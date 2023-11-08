@@ -23,17 +23,23 @@ import com.azure.core.util.FluxUtil;
 import fixtures.nonstringenum.models.IntEnum;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Ints. */
+/**
+ * An instance of this class provides access to all the operations defined in Ints.
+ */
 public final class IntsImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final IntsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final NonStringEnumsClientImpl client;
 
     /**
      * Initializes an instance of IntsImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     IntsImpl(NonStringEnumsClientImpl client) {
@@ -49,24 +55,21 @@ public final class IntsImpl {
     @ServiceInterface(name = "NonStringEnumsClient")
     public interface IntsService {
         @Put("/nonStringEnums/int/put")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> put(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") IntEnum input,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<String>> put(@HostParam("$host") String host, @BodyParam("application/json") IntEnum input,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/nonStringEnums/int/get")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<IntEnum>> get(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<IntEnum>> get(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
     }
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -76,8 +79,8 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putWithResponseAsync(IntEnum input) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.put(this.client.getHost(), input, accept, context));
@@ -85,7 +88,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -96,8 +99,8 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putWithResponseAsync(IntEnum input, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.put(this.client.getHost(), input, accept, context);
@@ -105,7 +108,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,7 +122,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body on successful completion of {@link Mono}.
@@ -132,7 +135,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -147,7 +150,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -162,7 +165,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @param input Input int enum.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -176,7 +179,7 @@ public final class IntsImpl {
 
     /**
      * Put an int enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response.
@@ -189,7 +192,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an int enum along with {@link Response} on successful completion of {@link Mono}.
@@ -197,8 +200,8 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntEnum>> getWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
@@ -206,7 +209,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -216,8 +219,8 @@ public final class IntsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntEnum>> getWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get(this.client.getHost(), accept, context);
@@ -225,7 +228,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an int enum on successful completion of {@link Mono}.
@@ -237,7 +240,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -251,7 +254,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -265,7 +268,7 @@ public final class IntsImpl {
 
     /**
      * Get an int enum.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an int enum.

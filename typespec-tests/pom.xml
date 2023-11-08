@@ -7,29 +7,12 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.4</version>
+    <version>1.0.0-beta.5</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-typespec-tests</artifactId>
   <version>1.0.0-beta.1</version>
-
-  <repositories>
-    <repository>
-      <id>azuresdkmaven</id>
-      <url>https://azsdkartifacts.blob.core.windows.net/maven</url>
-    </repository>
-    <repository>
-      <id>azure-sdk-for-java</id>
-      <url>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-java/maven/v1</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 
   <dependencies>
     <dependency>
@@ -39,17 +22,17 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
-      <version>1.10.3</version>
+      <version>1.10.4</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-experimental</artifactId>
-      <version>1.0.0-beta.44</version>
+      <version>1.0.0-beta.45</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.8</version>
+      <version>1.13.9</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -61,13 +44,13 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>4.5.1</version>
+      <version>4.11.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.32</version>
+      <version>3.4.33</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -78,7 +61,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.21.0</version>
+      <version>1.21.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

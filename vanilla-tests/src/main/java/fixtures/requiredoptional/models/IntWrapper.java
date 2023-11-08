@@ -7,7 +7,9 @@ package fixtures.requiredoptional.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The IntWrapper model. */
+/**
+ * The IntWrapper model.
+ */
 @Fluent
 public final class IntWrapper {
     /*
@@ -16,12 +18,15 @@ public final class IntWrapper {
     @JsonProperty(value = "value", required = true)
     private int value;
 
-    /** Creates an instance of IntWrapper class. */
-    public IntWrapper() {}
+    /**
+     * Creates an instance of IntWrapper class.
+     */
+    public IntWrapper() {
+    }
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     public int getValue() {
@@ -30,7 +35,7 @@ public final class IntWrapper {
 
     /**
      * Set the value property: The value property.
-     *
+     * 
      * @param value the value value to set.
      * @return the IntWrapper object itself.
      */
@@ -41,8 +46,9 @@ public final class IntWrapper {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

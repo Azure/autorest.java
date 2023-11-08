@@ -22,14 +22,17 @@ import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous SpreadClient type. */
+/**
+ * Initializes a new instance of the asynchronous SpreadClient type.
+ */
 @ServiceClient(builder = SpreadClientBuilder.class, isAsync = true)
 public final class AliasAsyncClient {
-    @Generated private final AliasImpl serviceClient;
+    @Generated
+    private final AliasImpl serviceClient;
 
     /**
      * Initializes an instance of AliasAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -39,15 +42,15 @@ public final class AliasAsyncClient {
 
     /**
      * The spreadAsRequestBody operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,15 +67,15 @@ public final class AliasAsyncClient {
 
     /**
      * The spreadAsRequestParameter operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
@@ -85,16 +88,16 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestParameterWithResponse(
-            String id, String xMsTestHeader, BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<Void>> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader,
+        BinaryData request, RequestOptions requestOptions) {
         return this.serviceClient.spreadAsRequestParameterWithResponseAsync(id, xMsTestHeader, request, requestOptions);
     }
 
     /**
      * The spreadWithMultipleParameters operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prop1: String (Required)
@@ -105,7 +108,7 @@ public final class AliasAsyncClient {
      *     prop6: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param request The request parameter.
@@ -118,15 +121,15 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadWithMultipleParametersWithResponse(
-            String id, String xMsTestHeader, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadWithMultipleParametersWithResponseAsync(
-                id, xMsTestHeader, request, requestOptions);
+    public Mono<Response<Void>> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader,
+        BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.spreadWithMultipleParametersWithResponseAsync(id, xMsTestHeader, request,
+            requestOptions);
     }
 
     /**
      * The spreadAsRequestBody operation.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,7 +152,7 @@ public final class AliasAsyncClient {
 
     /**
      * The spreadAsRequestParameter operation.
-     *
+     * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
      * @param name A sequence of textual characters.
@@ -170,12 +173,12 @@ public final class AliasAsyncClient {
         requestObj.put("name", name);
         BinaryData request = BinaryData.fromObject(requestObj);
         return spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
      * The spreadWithMultipleParameters operation.
-     *
+     * 
      * @param options Options for spreadWithMultipleParameters API.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -201,6 +204,6 @@ public final class AliasAsyncClient {
         requestObj.put("prop6", options.getProp6());
         BinaryData request = BinaryData.fromObject(requestObj);
         return spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .flatMap(FluxUtil::toMono);
     }
 }

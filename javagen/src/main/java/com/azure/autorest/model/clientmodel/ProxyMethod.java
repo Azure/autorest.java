@@ -390,33 +390,34 @@ public class ProxyMethod {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
-                imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
+                Annotation.UNEXPECTED_RESPONSE_EXCEPTION_TYPE.addImportsTo(imports);
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
             if (getUnexpectedResponseExceptionTypes() != null) {
-                imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
+                Annotation.UNEXPECTED_RESPONSE_EXCEPTION_TYPE.addImportsTo(imports);
                 getUnexpectedResponseExceptionTypes().keySet().forEach(e -> e.addImportsTo(imports, includeImplementationImports));
             }
             if (isResumable()) {
                 imports.add("com.azure.core.annotation.ResumeOperation");
             }
-            imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer
-                .toPascalCase(getHttpMethod().toString().toLowerCase())));
+            imports.add(String.format("%1$s.annotation.%2$s",
+                    ExternalPackage.CORE.getPackageName(),
+                    CodeNamer.toPascalCase(getHttpMethod().toString().toLowerCase())));
 
             if (settings.isFluent()) {
-                imports.add("com.azure.core.annotation.Headers");
+                Annotation.HEADERS.addImportsTo(imports);
             }
-            imports.add("com.azure.core.annotation.ExpectedResponses");
+            Annotation.EXPECTED_RESPONSE.addImportsTo(imports);
 
             if (getReturnValueWireType() != null) {
-                imports.add("com.azure.core.annotation.ReturnValueWireType");
+                Annotation.RETURN_VALUE_WIRE_TYPE.addImportsTo(imports);
                 returnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 
             returnType.addImportsTo(imports, includeImplementationImports);
 
             if (ContentType.APPLICATION_X_WWW_FORM_URLENCODED.equals(this.requestContentType)) {
-                imports.add("com.azure.core.annotation.FormParam");
+                Annotation.FORM_PARAM.addImportsTo(imports);
             }
 
             for (ProxyMethodParameter parameter : parameters) {

@@ -122,7 +122,7 @@ public class FluentNamer extends Preprocessor {
         return new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     }
 
-    private CodeModel transform(CodeModel codeModel) {
+    public CodeModel transform(CodeModel codeModel) {
         logger.info("Load fluent settings");
         FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
         CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));

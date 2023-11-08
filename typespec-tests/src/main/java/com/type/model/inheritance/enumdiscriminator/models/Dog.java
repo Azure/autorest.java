@@ -12,14 +12,16 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** Test extensible enum type for discriminator. */
+/**
+ * Test extensible enum type for discriminator.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Dog.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Dog.class)
 @JsonTypeName("Dog")
-@JsonSubTypes({@JsonSubTypes.Type(name = "golden", value = Golden.class)})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "golden", value = Golden.class) })
 @Immutable
 public class Dog {
     /*
@@ -31,7 +33,7 @@ public class Dog {
 
     /**
      * Creates an instance of Dog class.
-     *
+     * 
      * @param weight the weight value to set.
      */
     @Generated
@@ -42,7 +44,7 @@ public class Dog {
 
     /**
      * Get the weight property: Weight of the dog.
-     *
+     * 
      * @return the weight value.
      */
     @Generated

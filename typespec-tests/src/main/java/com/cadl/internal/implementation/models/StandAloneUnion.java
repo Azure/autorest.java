@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The StandAloneUnion model. */
+/**
+ * The StandAloneUnion model.
+ */
 @Immutable
 public final class StandAloneUnion {
     /*
@@ -17,26 +19,26 @@ public final class StandAloneUnion {
      */
     @Generated
     @JsonProperty(value = "data")
-    private DataModelBase data;
+    private StandAloneUnionDataModelBase data;
 
     /**
      * Creates an instance of StandAloneUnion class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
     @JsonCreator
-    private StandAloneUnion(@JsonProperty(value = "data") DataModelBase data) {
+    private StandAloneUnion(@JsonProperty(value = "data") StandAloneUnionDataModelBase data) {
         this.data = data;
     }
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated
-    public DataModelBase getData() {
+    public StandAloneUnionDataModelBase getData() {
         return this.data;
     }
 }

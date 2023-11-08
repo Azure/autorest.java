@@ -10,10 +10,8 @@ import com.cadl.response.ResponseClientBuilder;
 
 public class ResponseOpExists {
     public static void main(String[] args) {
-        ResponseClient responseClient =
-                new ResponseClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
-                        .buildClient();
+        ResponseClient responseClient = new ResponseClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.response.generated.exists.responseopexists
         boolean response = responseClient.exists();
         // END:com.cadl.response.generated.exists.responseopexists

@@ -26,11 +26,10 @@ class FirstClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        FirstClientBuilder firstClientbuilder =
-                new FirstClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FirstClientBuilder firstClientbuilder
+            = new FirstClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             firstClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -38,16 +37,16 @@ class FirstClientTestBase extends TestProxyTestBase {
         }
         firstClient = firstClientbuilder.buildClient();
 
-        SecondClientBuilder secondClientbuilder =
-                new SecondClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        SecondClientBuilder secondClientbuilder
+            = new SecondClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             secondClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             secondClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         secondClient = secondClientbuilder.buildClient();
+
     }
 }

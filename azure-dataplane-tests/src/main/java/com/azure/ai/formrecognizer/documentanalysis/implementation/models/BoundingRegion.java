@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** Bounding polygon on a specific page of the input. */
+/**
+ * Bounding polygon on a specific page of the input.
+ */
 @Fluent
 public final class BoundingRegion {
     /*
@@ -23,12 +25,15 @@ public final class BoundingRegion {
     @JsonProperty(value = "polygon", required = true)
     private List<Float> polygon;
 
-    /** Creates an instance of BoundingRegion class. */
-    public BoundingRegion() {}
+    /**
+     * Creates an instance of BoundingRegion class.
+     */
+    public BoundingRegion() {
+    }
 
     /**
      * Get the pageNumber property: 1-based page number of page containing the bounding region.
-     *
+     * 
      * @return the pageNumber value.
      */
     public int getPageNumber() {
@@ -37,7 +42,7 @@ public final class BoundingRegion {
 
     /**
      * Set the pageNumber property: 1-based page number of page containing the bounding region.
-     *
+     * 
      * @param pageNumber the pageNumber value to set.
      * @return the BoundingRegion object itself.
      */
@@ -48,7 +53,7 @@ public final class BoundingRegion {
 
     /**
      * Get the polygon property: Bounding polygon on the page, or the entire page if not specified.
-     *
+     * 
      * @return the polygon value.
      */
     public List<Float> getPolygon() {
@@ -57,7 +62,7 @@ public final class BoundingRegion {
 
     /**
      * Set the polygon property: Bounding polygon on the page, or the entire page if not specified.
-     *
+     * 
      * @param polygon the polygon value to set.
      * @return the BoundingRegion object itself.
      */

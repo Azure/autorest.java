@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-/** Model with a datetime property. */
+/**
+ * Model with a datetime property.
+ */
 @Immutable
 public final class DatetimeProperty {
     /*
@@ -29,22 +31,21 @@ public final class DatetimeProperty {
 
     /**
      * Creates an instance of DatetimeProperty class.
-     *
+     * 
      * @param requiredProperty the requiredProperty value to set.
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
     @JsonCreator
-    public DatetimeProperty(
-            @JsonProperty(value = "requiredProperty") String requiredProperty,
-            @JsonProperty(value = "nullableProperty") OffsetDateTime nullableProperty) {
+    public DatetimeProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
+        @JsonProperty(value = "nullableProperty") OffsetDateTime nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
 
     /**
      * Get the requiredProperty property: Required property.
-     *
+     * 
      * @return the requiredProperty value.
      */
     @Generated
@@ -54,7 +55,7 @@ public final class DatetimeProperty {
 
     /**
      * Get the nullableProperty property: Property.
-     *
+     * 
      * @return the nullableProperty value.
      */
     @Generated
