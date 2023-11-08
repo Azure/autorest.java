@@ -4,7 +4,7 @@ param (
 )
 
 if ($RebuildJar) {
-    mvn clean install package -f ../pom.xml -Plocal -Ptsp -DskipTests
+    mvn clean install -f ../pom.xml -P local,tsp -DskipTests "-Djacoco.skip"
     if ($LASTEXITCODE -ne 0) {
         exit $LASTEXITCODE
     }
