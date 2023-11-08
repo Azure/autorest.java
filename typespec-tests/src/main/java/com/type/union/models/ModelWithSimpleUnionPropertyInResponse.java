@@ -50,7 +50,7 @@ public final class ModelWithSimpleUnionPropertyInResponse
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntyped(this.simpleUnion.toObject(Object.class));
+        jsonWriter.writeUntypedField("simpleUnion", this.simpleUnion.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 

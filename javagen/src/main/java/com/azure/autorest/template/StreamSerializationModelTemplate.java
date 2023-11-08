@@ -291,9 +291,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(fieldSerializationMethod + ";");
             }
         } else if (wireType == ClassType.Object) {
-            methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ");");
+            methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
         } else if (wireType == ClassType.BinaryData) {
-            methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ".toObject(Object.class));");
+            methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));");
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);

@@ -38,7 +38,7 @@ class UnionsClientTest {
 
     @Test
     void sendSecondNamedUnionValue() {
-        client.sendFirstNamedUnionValue(new ModelWithNamedUnionProperty(BinaryData.fromObject(new Model2("model2", 2))));
+        client.sendSecondNamedUnionValue(new ModelWithNamedUnionProperty(BinaryData.fromObject(new Model2("model2", 2))));
     }
 
     @Test
