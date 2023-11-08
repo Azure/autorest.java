@@ -16,6 +16,10 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.UnionClientImpl;
+import com.type.union.models.ModelWithNamedUnionProperty;
+import com.type.union.models.ModelWithNamedUnionPropertyInResponse;
+import com.type.union.models.ModelWithSimpleUnionProperty;
+import com.type.union.models.ModelWithSimpleUnionPropertyInResponse;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -42,7 +46,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -57,7 +61,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendInt' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntWithResponse(input, requestOptions);
     }
 
@@ -68,7 +71,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -83,7 +86,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendIntArray' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntArrayWithResponse(input, requestOptions);
     }
 
@@ -94,7 +96,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -109,7 +111,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendFirstNamedUnionValueWithResponse(input, requestOptions);
     }
 
@@ -120,7 +121,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -135,7 +136,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendSecondNamedUnionValueWithResponse(input, requestOptions);
     }
 
@@ -146,7 +146,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -160,7 +160,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> receiveStringWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveString' refers Union 'string | int32[]'
         return this.serviceClient.receiveStringWithResponse(requestOptions);
     }
 
@@ -171,7 +170,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -185,7 +184,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> receiveIntArrayWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveIntArray' refers Union 'string | int32[]'
         return this.serviceClient.receiveIntArrayWithResponse(requestOptions);
     }
 
@@ -196,7 +194,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -210,7 +208,6 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> receiveFirstNamedUnionValueWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.receiveFirstNamedUnionValueWithResponse(requestOptions);
     }
 
@@ -221,7 +218,7 @@ public final class UnionClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -235,7 +232,158 @@ public final class UnionClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> receiveSecondNamedUnionValueWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.receiveSecondNamedUnionValueWithResponse(requestOptions);
+    }
+
+    /**
+     * The sendInt operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void sendInt(ModelWithSimpleUnionProperty input) {
+        // Generated convenience method for sendIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        sendIntWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The sendIntArray operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void sendIntArray(ModelWithSimpleUnionProperty input) {
+        // Generated convenience method for sendIntArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        sendIntArrayWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The sendFirstNamedUnionValue operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void sendFirstNamedUnionValue(ModelWithNamedUnionProperty input) {
+        // Generated convenience method for sendFirstNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        sendFirstNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The sendSecondNamedUnionValue operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void sendSecondNamedUnionValue(ModelWithNamedUnionProperty input) {
+        // Generated convenience method for sendSecondNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        sendSecondNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The receiveString operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithSimpleUnionPropertyInResponse receiveString() {
+        // Generated convenience method for receiveStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveStringWithResponse(requestOptions).getValue()
+            .toObject(ModelWithSimpleUnionPropertyInResponse.class);
+    }
+
+    /**
+     * The receiveIntArray operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithSimpleUnionPropertyInResponse receiveIntArray() {
+        // Generated convenience method for receiveIntArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveIntArrayWithResponse(requestOptions).getValue()
+            .toObject(ModelWithSimpleUnionPropertyInResponse.class);
+    }
+
+    /**
+     * The receiveFirstNamedUnionValue operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithNamedUnionPropertyInResponse receiveFirstNamedUnionValue() {
+        // Generated convenience method for receiveFirstNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveFirstNamedUnionValueWithResponse(requestOptions).getValue()
+            .toObject(ModelWithNamedUnionPropertyInResponse.class);
+    }
+
+    /**
+     * The receiveSecondNamedUnionValue operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ModelWithNamedUnionPropertyInResponse receiveSecondNamedUnionValue() {
+        // Generated convenience method for receiveSecondNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveSecondNamedUnionValueWithResponse(requestOptions).getValue()
+            .toObject(ModelWithNamedUnionPropertyInResponse.class);
     }
 }
