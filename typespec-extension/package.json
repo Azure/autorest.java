@@ -60,18 +60,18 @@
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
-    "@types/lodash": "~4.14.199",
-    "@types/js-yaml": "~4.0.7",
-    "@types/mocha": "~10.0.2",
-    "@types/node": "~20.8.4",
+    "@types/lodash": "~4.14.201",
+    "@types/js-yaml": "~4.0.9",
+    "@types/mocha": "~10.0.4",
+    "@types/node": "~20.9.0",
     "@types/prettier": "~2.7.3",
     "c8": "~8.0.1",
-    "eslint": "~8.51.0",
+    "eslint": "~8.53.0",
     "mocha": "~10.2.0",
     "rimraf": "~5.0.5",
     "typescript": "~5.2.2",
-    "@typescript-eslint/parser": "~6.7.5",
-    "@typescript-eslint/eslint-plugin": "~6.7.5",
+    "@typescript-eslint/parser": "~6.10.0",
+    "@typescript-eslint/eslint-plugin": "~6.10.0",
     "eslint-plugin-deprecation": "~2.0.0"
   }
 }
