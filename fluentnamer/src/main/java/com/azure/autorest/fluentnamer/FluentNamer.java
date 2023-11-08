@@ -40,7 +40,7 @@ public class FluentNamer extends Preprocessor {
     public FluentNamer(NewPlugin plugin, Connection connection, String pluginName, String sessionId) {
         super(plugin, connection, pluginName, sessionId);
         this.logger = new PluginLogger(this, FluentNamer.class);
-        Preprocessor.instance = this;
+        FluentNamer.instance = this;
     }
 
     public static FluentNamer getPluginInstance() {

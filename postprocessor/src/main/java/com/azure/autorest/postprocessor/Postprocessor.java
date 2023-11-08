@@ -176,7 +176,8 @@ public class Postprocessor {
 
     private static String getReadme(NewPlugin plugin) {
         List<String> configurationFiles = plugin.getValue(List.class, "configurationFiles");
-        return configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
+        return configurationFiles == null || configurationFiles.isEmpty() ? null
+            : configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
     }
 
     private static String getBaseDirectory(NewPlugin plugin) {
