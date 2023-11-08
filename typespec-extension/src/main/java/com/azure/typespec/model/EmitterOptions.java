@@ -22,7 +22,7 @@ public class EmitterOptions {
     private String outputDir;
 
     @JsonProperty(value = "branded")
-    private Boolean branded = true;
+    private Boolean branded = false;
 
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
