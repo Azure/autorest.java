@@ -20,10 +20,10 @@ import com.generic.core.exception.ResourceModifiedException;
 import com.generic.core.exception.ResourceNotFoundException;
 import com.generic.core.http.Response;
 import com.generic.core.http.RestProxy;
-import com.generic.core.models.RequestOptions;
 import com.generic.core.http.pipeline.HttpPipeline;
 import com.generic.core.models.BinaryData;
 import com.generic.core.models.Context;
+import com.generic.core.models.RequestOptions;
 
 /**
  * Initializes a new instance of the OpenAIClient type.
