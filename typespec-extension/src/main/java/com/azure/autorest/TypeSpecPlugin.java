@@ -18,12 +18,13 @@ import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.FileUtil;
 import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -76,17 +77,7 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(emitterOptions.getOutputDir(), fileName).toAbsolutePath().toFile();
-        File parentFile = outputFile.getParentFile();
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-
-        try {
-            Files.writeString(outputFile.toPath(), content);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
@@ -166,7 +157,12 @@ public class TypeSpecPlugin extends Javagen {
 
     public static class MockConnection extends Connection {
         public MockConnection() {
-            super(null, null);
+            super(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    // NO-OP
+                }
+            }, null);
         }
     }
 

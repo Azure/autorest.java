@@ -33,6 +33,14 @@ enum Priority {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @fixed
+enum Unit {
+  Grams: 1,
+  KiloGrams: 0.001,
+  Milligram: 1000,
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+@fixed
 enum OperationStateValues {
   Running,
   Completed,
@@ -45,9 +53,11 @@ model Operation {
   age: 50;
   priority: Priority;
   color: ColorModel;
+  unit: Unit;
   priorityValue: Priority.Low;
   colorValue: Color.Green;
   colorModelValue: ColorModel.Blue;
+  unitValue: Unit.Milligram;
 }
 
 @route("/enum")
