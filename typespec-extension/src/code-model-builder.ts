@@ -1627,6 +1627,9 @@ export class CodeModelBuilder {
 
         case "url":
           return this.processUrlSchema(type, nameHint);
+
+        case "decimal":
+          return this.processNumberSchema(type, nameHint);
       }
 
       if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {

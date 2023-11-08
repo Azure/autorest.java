@@ -57,6 +57,13 @@ public final class Builtin {
     private long safeint;
 
     /*
+     * The decimal property.
+     */
+    @Generated
+    @JsonProperty(value = "decimal")
+    private double decimal;
+
+    /*
      * The long property.
      */
     @Generated
@@ -142,6 +149,7 @@ public final class Builtin {
      * @param bytes the bytes value to set.
      * @param intProperty the intProperty value to set.
      * @param safeint the safeint value to set.
+     * @param decimal the decimal value to set.
      * @param longProperty the longProperty value to set.
      * @param floatProperty the floatProperty value to set.
      * @param doubleProperty the doubleProperty value to set.
@@ -159,9 +167,10 @@ public final class Builtin {
     public Builtin(@JsonProperty(value = "boolean") boolean booleanProperty,
         @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes,
         @JsonProperty(value = "int") int intProperty, @JsonProperty(value = "safeint") long safeint,
-        @JsonProperty(value = "long") long longProperty, @JsonProperty(value = "float") double floatProperty,
-        @JsonProperty(value = "double") double doubleProperty, @JsonProperty(value = "duration") Duration duration,
-        @JsonProperty(value = "date") LocalDate date, @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
+        @JsonProperty(value = "decimal") double decimal, @JsonProperty(value = "long") long longProperty,
+        @JsonProperty(value = "float") double floatProperty, @JsonProperty(value = "double") double doubleProperty,
+        @JsonProperty(value = "duration") Duration duration, @JsonProperty(value = "date") LocalDate date,
+        @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
         @JsonProperty(value = "stringList") List<String> stringList,
         @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict, @JsonProperty(value = "url") String url,
         @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
@@ -171,6 +180,7 @@ public final class Builtin {
         this.bytes = bytes;
         this.intProperty = intProperty;
         this.safeint = safeint;
+        this.decimal = decimal;
         this.longProperty = longProperty;
         this.floatProperty = floatProperty;
         this.doubleProperty = doubleProperty;
@@ -232,6 +242,16 @@ public final class Builtin {
     @Generated
     public long getSafeint() {
         return this.safeint;
+    }
+
+    /**
+     * Get the decimal property: The decimal property.
+     * 
+     * @return the decimal value.
+     */
+    @Generated
+    public double getDecimal() {
+        return this.decimal;
     }
 
     /**
