@@ -4,6 +4,8 @@
 package com.azure.autorest.preprocessor;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.MessageChannel;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
@@ -14,7 +16,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -27,6 +28,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,30 +40,28 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Preprocessor {
-    protected final NewPlugin plugin;
+public class Preprocessor extends NewPlugin {
+    protected final NewPlugin wrappedPlugin;
     private final Logger logger;
     protected final Connection connection;
-    protected final Yaml yamlMapper;
-    protected final ObjectMapper jsonMapper;
 
-    public Preprocessor(NewPlugin plugin, Connection connection, Yaml yamlMapper, ObjectMapper jsonMapper) {
-        this.plugin = plugin;
-        this.logger = new PluginLogger(plugin, Preprocessor.class);
+    public Preprocessor(NewPlugin wrappedPlugin, Connection connection, String pluginName, String sessionId) {
+        super(connection, pluginName, sessionId);
+
+        this.wrappedPlugin = wrappedPlugin;
+        this.logger = new PluginLogger(this, Preprocessor.class);
         this.connection = connection;
-        this.yamlMapper = yamlMapper;
-        this.jsonMapper = jsonMapper;
     }
 
     public CodeModel processCodeModel() {
-        List<String> allFiles = plugin.listInputs();
+        List<String> allFiles = wrappedPlugin.listInputs();
         List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
             throw new RuntimeException(
                 String.format("Generator received incorrect number of inputs: %s : %s}", files.size(),
                     String.join(", ", files)));
         }
-        String file = plugin.readFile(files.get(0));
+        String file = wrappedPlugin.readFile(files.get(0));
         try {
             Files.writeString(Paths.get("code-model.yaml"), file);
         } catch (Exception e) {
@@ -168,25 +168,32 @@ public class Preprocessor {
                     }));
             });
 
-            codeModel.getSchemas().getObjects().stream().flatMap(s -> s.getProperties().stream())
-                .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema).forEach(p -> {
-                    ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                    SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                        Preprocessor::convertToChoiceSchema);
-                    p.setSchema(sealedChoiceSchema);
-                });
+            boolean noneFlatten = JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE;
+            for (ObjectSchema s : codeModel.getSchemas().getObjects()) {
+                for (com.azure.autorest.extension.base.model.codemodel.Property p : s.getProperties()) {
+                    if (p.isRequired()) {
+                        continue;
+                    }
 
-            if (JavaSettings.getInstance().getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                codeModel.getSchemas().getObjects().stream().flatMap(s -> s.getProperties().stream())
-                    .filter(p -> !p.isRequired() && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten())
-                    .filter(p -> p.getSchema() instanceof ObjectSchema).forEach(
-                        p -> ((ObjectSchema) p.getSchema()).getProperties().stream()
-                            .filter(p1 -> p1.getSchema() instanceof ConstantSchema).forEach(p1 -> {
+                    if (p.getSchema() instanceof ConstantSchema) {
+                        ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
+                        SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                            Preprocessor::convertToChoiceSchema);
+                        p.setSchema(sealedChoiceSchema);
+                    } else if (noneFlatten
+                        && p.getExtensions() != null && p.getExtensions().isXmsClientFlatten()
+                        && p.getSchema() instanceof ObjectSchema) {
+                        ObjectSchema objectSchema = (ObjectSchema) p.getSchema();
+                        for (com.azure.autorest.extension.base.model.codemodel.Property p1 : objectSchema.getProperties()) {
+                            if (p1.getSchema() instanceof ConstantSchema) {
                                 ConstantSchema constantSchema = (ConstantSchema) p1.getSchema();
                                 SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(
                                     constantSchema, Preprocessor::convertToChoiceSchema);
                                 p1.setSchema(sealedChoiceSchema);
-                            }));
+                            }
+                        }
+                    }
+                }
             }
 
             codeModel.getSchemas().getSealedChoices().addAll(convertedChoiceSchemas.values());
@@ -208,5 +215,95 @@ public class Preprocessor {
         choice.setLanguage(constantSchema.getValue().getLanguage());
         sealedChoiceSchema.setChoices(Collections.singletonList(choice));
         return sealedChoiceSchema;
+    }
+
+    @Override
+    public String readFile(String fileName) {
+        return wrappedPlugin.readFile(fileName);
+    }
+
+    @Override
+    public <T> T getValue(Type type, String key) {
+        return wrappedPlugin.getValue(type, key);
+    }
+
+    @Override
+    public String getStringValue(String key) {
+        return wrappedPlugin.getStringValue(key);
+    }
+
+    @Override
+    public String getStringValue(String key, String defaultValue) {
+        return wrappedPlugin.getStringValue(key, defaultValue);
+    }
+
+    @Override
+    public String getStringValue(String[] keys, String defaultValue) {
+        return wrappedPlugin.getStringValue(keys, defaultValue);
+    }
+
+    @Override
+    public Boolean getBooleanValue(String key) {
+        return wrappedPlugin.getBooleanValue(key);
+    }
+
+    @Override
+    public boolean getBooleanValue(String key, boolean defaultValue) {
+        return wrappedPlugin.getBooleanValue(key, defaultValue);
+    }
+
+    @Override
+    public List<String> listInputs() {
+        return wrappedPlugin.listInputs();
+    }
+
+    @Override
+    public List<String> listInputs(String artifactType) {
+        return wrappedPlugin.listInputs(artifactType);
+    }
+
+    @Override
+    public void message(Message message) {
+        wrappedPlugin.message(message);
+    }
+
+    @Override
+    public void message(MessageChannel channel, String text, Throwable error, List<String> keys) {
+        wrappedPlugin.message(channel, text, error, keys);
+    }
+
+    @Override
+    public void writeFile(String fileName, String content, List<Object> sourceMap) {
+        wrappedPlugin.writeFile(fileName, content, sourceMap);
+    }
+
+    @Override
+    public void writeFile(String fileName, String content, List<Object> sourceMap, String artifactType) {
+        wrappedPlugin.writeFile(fileName, content, sourceMap, artifactType);
+    }
+
+    @Override
+    public void protectFiles(String path) {
+        wrappedPlugin.protectFiles(path);
+    }
+
+    @Override
+    public String getConfigurationFile(String fileName) {
+        return wrappedPlugin.getConfigurationFile(fileName);
+    }
+
+    @Override
+    public void updateConfigurationFile(String filename, String content) {
+        wrappedPlugin.updateConfigurationFile(filename, content);
+    }
+
+    @Override
+    public boolean process() {
+        throw new UnsupportedOperationException("Use processCodeModel instead.");
+    }
+
+    @Override
+    public boolean processInternal() {
+        throw new UnsupportedOperationException("Use processCodeModel instead.");
     }
 }

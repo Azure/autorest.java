@@ -13,9 +13,7 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.CodeNamer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,13 +22,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FluentNamer extends Preprocessor {
-    private final Logger logger;
     private static NewPlugin plugin;
+    private final Logger logger;
 
-    public FluentNamer(NewPlugin plugin, Connection connection, Yaml yamlMapper, ObjectMapper jsonMapper) {
-        super(plugin, connection, yamlMapper, jsonMapper);
-        this.logger = new PluginLogger(plugin, FluentNamer.class);
-        FluentNamer.plugin = plugin;
+    public FluentNamer(NewPlugin plugin, Connection connection, String pluginName, String sessionId) {
+        super(plugin, connection, pluginName, sessionId);
+        this.logger = new PluginLogger(this, FluentNamer.class);
+        FluentNamer.plugin = this;
     }
 
     public static NewPlugin getPluginInstance() {
@@ -39,13 +37,13 @@ public class FluentNamer extends Preprocessor {
 
     public CodeModel processCodeModel() {
         try {
-            List<String> files = plugin.listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
             if (files.size() != 1) {
                 throw new RuntimeException(String
                         .format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
             }
             // Read input file
-            String file = plugin.readFile(files.get(0));
+            String file = readFile(files.get(0));
             // Write the input code model file to a local code model file to help debugging
             createInputCodeModelFile(file);
             // Deserialize the input code model string to CodeModel object
@@ -68,7 +66,7 @@ public class FluentNamer extends Preprocessor {
 
     public CodeModel transform(CodeModel codeModel) {
         logger.info("Load fluent settings");
-        FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(plugin);
+        FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
         CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
 
         // Step 2: Transform
@@ -78,8 +76,6 @@ public class FluentNamer extends Preprocessor {
 
         codeModel = new Transformer().transform(codeModel);
 
-        codeModel = transformer.postTransform(codeModel);
-
-        return codeModel;
+        return transformer.postTransform(codeModel);
     }
 }

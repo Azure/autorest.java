@@ -34,9 +34,9 @@ public abstract class NewPlugin {
     protected final ObjectMapper jsonMapper;
     protected final Yaml yamlMapper;
 
-    protected Connection connection;
-    private String plugin;
-    private String sessionId;
+    protected final Connection connection;
+    protected final String pluginName;
+    protected final String sessionId;
 
     public String readFile(String fileName) {
         return connection.request(jsonMapper.constructType(String.class), "ReadFile", sessionId, fileName);
@@ -181,9 +181,9 @@ public abstract class NewPlugin {
         connection.notify("Message", sessionId, message);
     }
 
-    public NewPlugin(Connection connection, String plugin, String sessionId) {
+    public NewPlugin(Connection connection, String pluginName, String sessionId) {
         this.connection = connection;
-        this.plugin = plugin;
+        this.pluginName = pluginName;
         this.sessionId = sessionId;
         this.jsonMapper = new ObjectMapper()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)

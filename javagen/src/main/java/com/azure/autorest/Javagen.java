@@ -75,7 +75,7 @@ public class Javagen extends NewPlugin {
 
         try {
             // Step 1: Parse input yaml as CodeModel
-            CodeModel codeModel = new Preprocessor(this, connection, yamlMapper, jsonMapper)
+            CodeModel codeModel = new Preprocessor(this, connection, pluginName, sessionId)
                 .processCodeModel();
 
             // Step 2: Map

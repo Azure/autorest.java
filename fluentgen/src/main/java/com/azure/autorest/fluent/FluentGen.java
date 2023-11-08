@@ -100,7 +100,7 @@ public class FluentGen extends Javagen {
 
             logger.info("Read YAML");
             // Parse yaml to code model
-            CodeModel codeModel = new FluentNamer(this, connection, yamlMapper, jsonMapper)
+            CodeModel codeModel = new FluentNamer(this, connection, pluginName, sessionId)
                 .processCodeModel();
 
             // Map code model to client model
