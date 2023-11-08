@@ -40,7 +40,7 @@ jobs:
 
       - name: Build autorest-java, install modules
         run: |
-          mvn package install -f pom.xml -P local,tsp --no-transfer-progress
+          mvn install -f pom.xml -P local,tsp --no-transfer-progress
 
       - name: Generate test code for autorest-java
         if: ${{ inputs.scope == 'all' || inputs.scope == 'autorest' }}
