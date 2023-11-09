@@ -387,7 +387,7 @@ export class CodeModelBuilder {
 
       // lambda to mark model as public
       const modelAsPublic = (model: Model | Enum) => {
-        // // check it does not contain Union
+        // check it does not contain Union
         // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
         // if (union) {
         //   const errorMsg = `Model '${getTypeName(
