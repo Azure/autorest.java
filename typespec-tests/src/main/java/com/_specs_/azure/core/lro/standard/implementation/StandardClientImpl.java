@@ -24,7 +24,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -35,6 +34,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
@@ -401,7 +401,7 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, User> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
+    public PollerFlux<PollOperationDetails, User> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
@@ -411,7 +411,7 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(User.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
     /**
@@ -447,7 +447,7 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of details about a user.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, User> beginCreateOrReplaceWithModel(String name, BinaryData resource,
+    public SyncPoller<PollOperationDetails, User> beginCreateOrReplaceWithModel(String name, BinaryData resource,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
@@ -457,7 +457,7 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(User.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
     /**
@@ -649,7 +649,8 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, Void> beginDeleteWithModelAsync(String name, RequestOptions requestOptions) {
+    public PollerFlux<PollOperationDetails, Void> beginDeleteWithModelAsync(String name,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
@@ -657,7 +658,7 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(Void.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -691,7 +692,7 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
+    public SyncPoller<PollOperationDetails, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
@@ -699,7 +700,7 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(Void.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -901,7 +902,7 @@ public final class StandardClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedUser> beginExportWithModelAsync(String name, String format,
+    public PollerFlux<PollOperationDetails, ExportedUser> beginExportWithModelAsync(String name, String format,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.exportWithResponseAsync(name, format, requestOptions),
@@ -911,7 +912,7 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedUser.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }
 
     /**
@@ -946,7 +947,7 @@ public final class StandardClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedUser> beginExportWithModel(String name, String format,
+    public SyncPoller<PollOperationDetails, ExportedUser> beginExportWithModel(String name, String format,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.exportWithResponse(name, format, requestOptions),
@@ -956,6 +957,6 @@ public final class StandardClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedUser.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }
 }
