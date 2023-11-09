@@ -61,73 +61,137 @@ public final class HeadersImpl {
     @ServiceInterface(name = "BytesClientHeaders")
     public interface HeadersService {
         @Get("/encode/bytes/header/default")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> defaultMethod(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/default")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> defaultMethodSync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> base64Sync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64Url(@HeaderParam("value") Base64Url value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> base64UrlSync(@HeaderParam("value") Base64Url value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url-array")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> base64UrlArray(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url-array")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> base64UrlArraySync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);

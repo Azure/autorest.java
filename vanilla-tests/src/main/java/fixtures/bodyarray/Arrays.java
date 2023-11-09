@@ -67,435 +67,573 @@ public final class Arrays {
     @ServiceInterface(name = "AutoRestSwaggerBATAr")
     public interface ArraysService {
         @Get("/array/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String host,
             @BodyParam("application/json") List<String> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/boolean/tfft")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Boolean>>> getBooleanTfft(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/boolean/tfft")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String host,
             @BodyParam("application/json") List<Boolean> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/boolean/true.null.false")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/boolean/true.boolean.false")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Boolean>>> getBooleanInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/integer/1.-1.3.300")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getIntegerValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/integer/1.-1.3.300")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putIntegerValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Integer> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/integer/1.null.zero")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getIntInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/integer/1.integer.0")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Integer>>> getIntInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/long/1.-1.3.300")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Long>>> getLongValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/array/prim/long/1.-1.3.300")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLongValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Long> arrayBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/long/1.null.zero")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Long>>> getLongInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/long/1.integer.0")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Long>>> getLongInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/float/0--0.01-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Float>>> getFloatValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/array/prim/float/0--0.01-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloatValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Float> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/float/0.0-null-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Float>>> getFloatInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/float/1.number.0")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Float>>> getFloatInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/double/0--0.01-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Double>>> getDoubleValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/double/0--0.01-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDoubleValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Double> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/double/0.0-null-1.2e20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Double>>> getDoubleInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/double/1.number.0")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Double>>> getDoubleInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/string/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<String>>> getStringValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/string/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putStringValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<String> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/enum/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<FooEnum>>> getEnumValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/enum/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEnumValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<FooEnum> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/string-enum/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Enum0>>> getStringEnumValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/string-enum/foo1.foo2.foo3")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putStringEnumValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Enum1> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/string/foo.null.foo2")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<String>>> getStringWithNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/string/foo.123.foo2")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<String>>> getStringWithInvalid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/uuid/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<UUID>>> getUuidValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/array/prim/uuid/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUuidValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<UUID> arrayBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/uuid/invalidchars")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<UUID>>> getUuidInvalidChars(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<LocalDate>>> getDateValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<LocalDate> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/date/invalidnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<LocalDate>>> getDateInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date/invalidchars")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<LocalDate>>> getDateInvalidChars(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date-time/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<OffsetDateTime> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/date-time/invalidnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time/invalidchars")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/date-time-rfc1123/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/date-time-rfc1123/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String host,
             @BodyParam("application/json") List<DateTimeRfc1123> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/duration/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Duration>>> getDurationValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/prim/duration/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDurationValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Duration> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/byte/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<byte[]>>> getByteValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/array/prim/byte/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putByteValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<byte[]> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/prim/byte/invalidnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<byte[]>>> getByteInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/prim/base64url/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<byte[]>>> getBase64Url(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/complex/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Product>>> getComplexNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Product>>> getComplexEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/itemnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Product>>> getComplexItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/itemempty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Product>>> getComplexItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/complex/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Product>>> getComplexValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/complex/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplexValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Product> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/array/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<List<String>>>> getArrayNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<List<String>>>> getArrayEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/itemnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<List<String>>>> getArrayItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/itemempty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<List<String>>>> getArrayItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<List<String>>>> getArrayValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putArrayValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<List<String>> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/array/dictionary/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/itemnull")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/itemempty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/array/dictionary/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<Map<String, String>>>> getDictionaryValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/array/dictionary/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host,
             @BodyParam("application/json") List<Map<String, String>> arrayBody, @HeaderParam("Accept") String accept,

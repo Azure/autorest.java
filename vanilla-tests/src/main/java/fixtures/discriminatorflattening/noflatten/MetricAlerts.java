@@ -54,7 +54,9 @@ public final class MetricAlerts {
     @ServiceInterface(name = "MonitorManagementCli")
     public interface MetricAlertsService {
         @Get("/providers/Microsoft.Insights/metricAlerts")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<MetricAlertResource>> get(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

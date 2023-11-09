@@ -46,7 +46,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutorestSecurityInfo type.
  */
-@ServiceClientBuilder(serviceClients = { AutorestSecurityInfo.class })
+@ServiceClientBuilder(serviceClients = {
+    AutorestSecurityInfo.class
+})
 public final class AutorestSecurityInfoBuilder
     implements HttpTrait<AutorestSecurityInfoBuilder>, ConfigurationTrait<AutorestSecurityInfoBuilder>,
     TokenCredentialTrait<AutorestSecurityInfoBuilder>, KeyCredentialTrait<AutorestSecurityInfoBuilder> {
@@ -57,7 +59,9 @@ public final class AutorestSecurityInfoBuilder
     private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final String[] DEFAULT_SCOPES = new String[] { "https://atlas.microsoft.com/.default" };
+    private static final String[] DEFAULT_SCOPES = new String[] {
+        "https://atlas.microsoft.com/.default"
+    };
 
     @Generated
     private static final Map<String, String> PROPERTIES = new HashMap<>();

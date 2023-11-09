@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DefaultValueClient type.
  */
-@ServiceClientBuilder(serviceClients = { DefaultValueClient.class })
+@ServiceClientBuilder(serviceClients = {
+    DefaultValueClient.class
+})
 public final class DefaultValueClientBuilder
     implements HttpTrait<DefaultValueClientBuilder>, ConfigurationTrait<DefaultValueClientBuilder> {
     @Generated

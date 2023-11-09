@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestParameterFlattening type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestParameterFlattening.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestParameterFlattening.class
+})
 public final class AutoRestParameterFlatteningBuilder
     implements HttpTrait<AutoRestParameterFlatteningBuilder>, ConfigurationTrait<AutoRestParameterFlatteningBuilder> {
     @Generated

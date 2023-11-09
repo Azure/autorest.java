@@ -58,37 +58,69 @@ public final class PublicOperationsImpl {
     @ServiceInterface(name = "AccessClientPublicOp")
     public interface PublicOperationsService {
         @Get("/azure/client-generator-core/access/publicOperation/noDecoratorInPublic")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> noDecoratorInPublic(@QueryParam("name") String name,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/noDecoratorInPublic")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> noDecoratorInPublicSync(@QueryParam("name") String name,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> publicDecoratorInPublic(@QueryParam("name") String name,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> publicDecoratorInPublicSync(@QueryParam("name") String name,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);

@@ -86,31 +86,41 @@ public final class ContainerRegistriesImpl {
     @ServiceInterface(name = "AzureContainerRegist")
     public interface ContainerRegistriesService {
         @Get("/v2/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<Void>> checkDockerV2Support(@HostParam("url") String url, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/v2/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<Void> checkDockerV2SupportSync(@HostParam("url") String url, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<BinaryData>> getManifest(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<BinaryData> getManifestSync(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifest(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
@@ -119,7 +129,9 @@ public final class ContainerRegistriesImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifest(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
@@ -128,7 +140,9 @@ public final class ContainerRegistriesImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesCreateManifestHeaders, Void> createManifestSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
@@ -137,61 +151,79 @@ public final class ContainerRegistriesImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<Void>> deleteManifest(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/v2/{name}/manifests/{reference}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<Void> deleteManifestSync(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/_catalog")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetRepositoriesHeaders, Repositories>> getRepositories(
             @HostParam("url") String url, @QueryParam("last") String last, @QueryParam("n") Integer n,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/_catalog")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetRepositoriesHeaders, Repositories> getRepositoriesSync(
             @HostParam("url") String url, @QueryParam("last") String last, @QueryParam("n") Integer n,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ContainerRepositoryProperties>> getProperties(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ContainerRepositoryProperties> getPropertiesSync(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/acr/v1/{name}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<DeleteRepositoryResult>> deleteRepository(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/acr/v1/{name}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<DeleteRepositoryResult> deleteRepositorySync(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/acr/v1/{name}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ContainerRepositoryProperties>> updateProperties(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
@@ -199,7 +231,9 @@ public final class ContainerRegistriesImpl {
             Context context);
 
         @Patch("/acr/v1/{name}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ContainerRepositoryProperties> updatePropertiesSync(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("api-version") String apiVersion,
@@ -207,7 +241,9 @@ public final class ContainerRegistriesImpl {
             Context context);
 
         @Get("/acr/v1/{name}/_tags")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetTagsHeaders, TagList>> getTags(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("last") String last, @QueryParam("n") Integer n,
@@ -215,7 +251,9 @@ public final class ContainerRegistriesImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_tags")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetTagsHeaders, TagList> getTagsSync(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("last") String last, @QueryParam("n") Integer n,
@@ -223,21 +261,27 @@ public final class ContainerRegistriesImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ArtifactTagPropertiesInternal>> getTagProperties(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ArtifactTagPropertiesInternal> getTagPropertiesSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ArtifactTagPropertiesInternal>> updateTagAttributes(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
@@ -245,7 +289,9 @@ public final class ContainerRegistriesImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ArtifactTagPropertiesInternal> updateTagAttributesSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("reference") String reference,
@@ -253,21 +299,27 @@ public final class ContainerRegistriesImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<Void>> deleteTag(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/acr/v1/{name}/_tags/{reference}")
-        @ExpectedResponses({ 202, 404 })
+        @ExpectedResponses({
+            202, 404
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<Void> deleteTagSync(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_manifests")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetManifestsHeaders, AcrManifests>> getManifests(
             @HostParam("url") String url, @PathParam("name") String name, @QueryParam("last") String last,
@@ -275,7 +327,9 @@ public final class ContainerRegistriesImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_manifests")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetManifestsHeaders, AcrManifests> getManifestsSync(
             @HostParam("url") String url, @PathParam("name") String name, @QueryParam("last") String last,
@@ -283,21 +337,27 @@ public final class ContainerRegistriesImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_manifests/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ArtifactManifestPropertiesInternal>> getManifestProperties(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/acr/v1/{name}/_manifests/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ArtifactManifestPropertiesInternal> getManifestPropertiesSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/acr/v1/{name}/_manifests/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<ArtifactManifestPropertiesInternal>> updateManifestProperties(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest,
@@ -306,7 +366,9 @@ public final class ContainerRegistriesImpl {
             Context context);
 
         @Patch("/acr/v1/{name}/_manifests/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<ArtifactManifestPropertiesInternal> updateManifestPropertiesSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest,
@@ -315,42 +377,54 @@ public final class ContainerRegistriesImpl {
             Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetRepositoriesNextHeaders, Repositories>> getRepositoriesNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetRepositoriesNextHeaders, Repositories> getRepositoriesNextSync(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetTagsNextHeaders, TagList>> getTagsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetTagsNextHeaders, TagList> getTagsNextSync(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistriesGetManifestsNextHeaders, AcrManifests>> getManifestsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistriesGetManifestsNextHeaders, AcrManifests> getManifestsNextSync(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("url") String url,

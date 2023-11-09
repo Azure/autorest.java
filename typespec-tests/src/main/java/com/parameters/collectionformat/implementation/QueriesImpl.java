@@ -59,91 +59,171 @@ public final class QueriesImpl {
     @ServiceInterface(name = "CollectionFormatClie")
     public interface QueriesService {
         @Get("/parameters/collection-format/query/multi")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> multi(@QueryParam(value = "colors", multipleQueryParams = true) List<String> colors,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/multi")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> multiSync(@QueryParam(value = "colors", multipleQueryParams = true) List<String> colors,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/ssv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> ssv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/ssv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> ssvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/tsv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> tsv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/tsv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> tsvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/pipes")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> pipes(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/pipes")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> pipesSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/csv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> csv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/csv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> csvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);

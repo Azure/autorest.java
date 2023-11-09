@@ -43,7 +43,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the CustomClient type.
  */
-@ServiceClientBuilder(serviceClients = { CustomClient.class, CustomAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    CustomClient.class, CustomAsyncClient.class
+})
 public final class CustomClientBuilder implements HttpTrait<CustomClientBuilder>,
     ConfigurationTrait<CustomClientBuilder>, KeyCredentialTrait<CustomClientBuilder> {
     @Generated

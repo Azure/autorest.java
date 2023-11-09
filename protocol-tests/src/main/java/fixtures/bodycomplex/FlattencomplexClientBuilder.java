@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the FlattencomplexClient type.
  */
-@ServiceClientBuilder(serviceClients = { FlattencomplexClient.class, FlattencomplexAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    FlattencomplexClient.class, FlattencomplexAsyncClient.class
+})
 public final class FlattencomplexClientBuilder
     implements HttpTrait<FlattencomplexClientBuilder>, ConfigurationTrait<FlattencomplexClientBuilder> {
     @Generated

@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MonitorManagementClient type.
  */
-@ServiceClientBuilder(serviceClients = { MonitorManagementClient.class })
+@ServiceClientBuilder(serviceClients = {
+    MonitorManagementClient.class
+})
 public final class MonitorManagementClientBuilder
     implements HttpTrait<MonitorManagementClientBuilder>, ConfigurationTrait<MonitorManagementClientBuilder> {
     @Generated

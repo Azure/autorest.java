@@ -57,34 +57,66 @@ public final class OptionalExplicitsImpl {
     @ServiceInterface(name = "BodyOptionalityClien")
     public interface OptionalExplicitsService {
         @Post("/parameters/body-optionality/optional-explicit/set")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> set(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/set")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> setSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> omit(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> omitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }

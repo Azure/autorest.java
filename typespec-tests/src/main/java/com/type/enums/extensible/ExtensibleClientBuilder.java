@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ExtensibleClient type.
  */
-@ServiceClientBuilder(serviceClients = { ExtensibleClient.class, ExtensibleAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ExtensibleClient.class, ExtensibleAsyncClient.class
+})
 public final class ExtensibleClientBuilder
     implements HttpTrait<ExtensibleClientBuilder>, ConfigurationTrait<ExtensibleClientBuilder> {
     @Generated

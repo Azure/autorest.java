@@ -21,7 +21,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     property = "kind",
     defaultImpl = AbstractModel.class)
 @JsonTypeName("AbstractModel")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "real", value = RealModel.class) })
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "real", value = RealModel.class)
+})
 @Immutable
 public class AbstractModel {
     /*

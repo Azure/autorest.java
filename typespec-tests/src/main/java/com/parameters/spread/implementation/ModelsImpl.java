@@ -57,19 +57,35 @@ public final class ModelsImpl {
     @ServiceInterface(name = "SpreadClientModels")
     public interface ModelsService {
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/request-body")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData bodyParameter, RequestOptions requestOptions, Context context);

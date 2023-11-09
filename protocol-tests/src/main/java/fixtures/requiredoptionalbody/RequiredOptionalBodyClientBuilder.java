@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the RequiredOptionalBodyClient type.
  */
-@ServiceClientBuilder(serviceClients = { RequiredOptionalBodyClient.class, RequiredOptionalBodyAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    RequiredOptionalBodyClient.class, RequiredOptionalBodyAsyncClient.class
+})
 public final class RequiredOptionalBodyClientBuilder
     implements HttpTrait<RequiredOptionalBodyClientBuilder>, ConfigurationTrait<RequiredOptionalBodyClientBuilder> {
     @Generated

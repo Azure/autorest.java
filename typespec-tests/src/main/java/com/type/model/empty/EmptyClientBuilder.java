@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the EmptyClient type.
  */
-@ServiceClientBuilder(serviceClients = { EmptyClient.class, EmptyAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    EmptyClient.class, EmptyAsyncClient.class
+})
 public final class EmptyClientBuilder implements HttpTrait<EmptyClientBuilder>, ConfigurationTrait<EmptyClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

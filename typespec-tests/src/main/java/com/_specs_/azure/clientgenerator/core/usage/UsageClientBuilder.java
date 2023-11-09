@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the UsageClient type.
  */
-@ServiceClientBuilder(serviceClients = { UsageClient.class, UsageAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    UsageClient.class, UsageAsyncClient.class
+})
 public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, ConfigurationTrait<UsageClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

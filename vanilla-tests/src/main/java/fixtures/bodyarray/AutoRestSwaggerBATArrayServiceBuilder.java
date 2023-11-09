@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATArrayService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestSwaggerBATArrayService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestSwaggerBATArrayService.class
+})
 public final class AutoRestSwaggerBATArrayServiceBuilder implements HttpTrait<AutoRestSwaggerBATArrayServiceBuilder>,
     ConfigurationTrait<AutoRestSwaggerBATArrayServiceBuilder> {
     @Generated

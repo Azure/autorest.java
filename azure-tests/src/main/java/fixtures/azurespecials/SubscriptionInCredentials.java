@@ -55,32 +55,42 @@ public final class SubscriptionInCredentials {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface SubscriptionInCredentialsService {
         @Post("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodGlobalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodGlobalNull(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodGlobalNotProvidedValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postPathGlobalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postSwaggerGlobalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);

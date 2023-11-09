@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestHttpInfrastructureTestService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestHttpInfrastructureTestService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestHttpInfrastructureTestService.class
+})
 public final class AutoRestHttpInfrastructureTestServiceBuilder
     implements HttpTrait<AutoRestHttpInfrastructureTestServiceBuilder>,
     ConfigurationTrait<AutoRestHttpInfrastructureTestServiceBuilder> {

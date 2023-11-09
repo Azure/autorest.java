@@ -56,26 +56,34 @@ public final class DurationOperations {
     @ServiceInterface(name = "AutoRestDurationTest")
     public interface DurationOperationsService {
         @Get("/duration/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Duration>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/duration/positiveduration")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host,
             @BodyParam("application/json") Duration durationBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/duration/positiveduration")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Duration>> getPositiveDuration(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/duration/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Duration>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

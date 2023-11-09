@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PetStoreInc type.
  */
-@ServiceClientBuilder(serviceClients = { PetStoreInc.class })
+@ServiceClientBuilder(serviceClients = {
+    PetStoreInc.class
+})
 public final class PetStoreIncBuilder implements HttpTrait<PetStoreIncBuilder>, ConfigurationTrait<PetStoreIncBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

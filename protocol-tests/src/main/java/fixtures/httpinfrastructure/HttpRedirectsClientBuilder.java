@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the HttpRedirectsClient type.
  */
-@ServiceClientBuilder(serviceClients = { HttpRedirectsClient.class, HttpRedirectsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    HttpRedirectsClient.class, HttpRedirectsAsyncClient.class
+})
 public final class HttpRedirectsClientBuilder
     implements HttpTrait<HttpRedirectsClientBuilder>, ConfigurationTrait<HttpRedirectsClientBuilder> {
     @Generated

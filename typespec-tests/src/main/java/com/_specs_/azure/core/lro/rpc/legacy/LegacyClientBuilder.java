@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LegacyClient type.
  */
-@ServiceClientBuilder(serviceClients = { LegacyClient.class, LegacyAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    LegacyClient.class, LegacyAsyncClient.class
+})
 public final class LegacyClientBuilder
     implements HttpTrait<LegacyClientBuilder>, ConfigurationTrait<LegacyClientBuilder> {
     @Generated

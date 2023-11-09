@@ -41,13 +41,13 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestComplexTestService type.
  */
-@ServiceClientBuilder(
-    serviceClients = { BasicClient.class, PrimitiveClient.class, ArrayClient.class, DictionaryClient.class,
-        InheritanceClient.class, PolymorphismClient.class, PolymorphicrecursiveClient.class,
-        ReadonlypropertyClient.class, FlattencomplexClient.class, BasicAsyncClient.class, PrimitiveAsyncClient.class,
-        ArrayAsyncClient.class, DictionaryAsyncClient.class, InheritanceAsyncClient.class,
-        PolymorphismAsyncClient.class, PolymorphicrecursiveAsyncClient.class, ReadonlypropertyAsyncClient.class,
-        FlattencomplexAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    BasicClient.class, PrimitiveClient.class, ArrayClient.class, DictionaryClient.class, InheritanceClient.class,
+    PolymorphismClient.class, PolymorphicrecursiveClient.class, ReadonlypropertyClient.class,
+    FlattencomplexClient.class, BasicAsyncClient.class, PrimitiveAsyncClient.class, ArrayAsyncClient.class,
+    DictionaryAsyncClient.class, InheritanceAsyncClient.class, PolymorphismAsyncClient.class,
+    PolymorphicrecursiveAsyncClient.class, ReadonlypropertyAsyncClient.class, FlattencomplexAsyncClient.class
+})
 public final class AutoRestComplexTestServiceBuilder
     implements HttpTrait<AutoRestComplexTestServiceBuilder>, ConfigurationTrait<AutoRestComplexTestServiceBuilder> {
     @Generated

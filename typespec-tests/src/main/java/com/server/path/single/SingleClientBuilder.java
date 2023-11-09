@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SingleClient type.
  */
-@ServiceClientBuilder(serviceClients = { SingleClient.class, SingleAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    SingleClient.class, SingleAsyncClient.class
+})
 public final class SingleClientBuilder implements HttpTrait<SingleClientBuilder>,
     ConfigurationTrait<SingleClientBuilder>, EndpointTrait<SingleClientBuilder> {
     @Generated

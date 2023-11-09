@@ -83,163 +83,215 @@ public final class LrosaDs {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LrosaDsService {
         @Put("/lro/nonretryerror/put/400")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> putNonRetry400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/nonretryerror/put/201/creating/400")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> putNonRetry201Creating400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/nonretryerror/put/201/creating/400/invalidjson")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> putNonRetry201Creating400InvalidJson(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/nonretryerror/putasync/retry/400")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/nonretryerror/delete/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDeleteNonRetry400Response> deleteNonRetry400(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/nonretryerror/delete/202/retry/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDelete202NonRetry400Response> delete202NonRetry400(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/nonretryerror/deleteasync/retry/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/nonretryerror/post/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPostNonRetry400Response> postNonRetry400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/nonretryerror/post/202/retry/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPost202NonRetry400Response> post202NonRetry400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/nonretryerror/postasync/retry/400")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/put/201/noprovisioningstatepayload")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> putError201NoProvisioningStatePayload(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/putasync/retry/nostatus")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatus(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/putasync/retry/nostatuspayload")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayload(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/error/delete/204/nolocation")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Void>> delete204Succeeded(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Delete("/lro/error/deleteasync/retry/nostatus")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatus(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/error/post/202/nolocation")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPost202NoLocationResponse> post202NoLocation(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/error/postasync/retry/nopayload")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayload(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/put/200/invalidjson")
-        @ExpectedResponses({ 200, 204 })
+        @ExpectedResponses({
+            200, 204
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> put200InvalidJson(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/putasync/retry/invalidheader")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeader(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/error/putasync/retry/invalidjsonpolling")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPolling(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/error/delete/202/retry/invalidheader")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeader(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/error/deleteasync/retry/invalidheader")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeader(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/error/deleteasync/retry/invalidjsonpolling")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPolling(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/error/post/202/retry/invalidheader")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeader(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/error/postasync/retry/invalidheader")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeader(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/error/postasync/retry/invalidjsonpolling")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPolling(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,

@@ -21,8 +21,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     property = "sharktype",
     defaultImpl = Shark.class)
 @JsonTypeName("shark")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "saw", value = SawShark.class),
-    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class) })
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "saw", value = SawShark.class),
+    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class)
+})
 @Immutable
 public class Shark extends Fish {
     /*

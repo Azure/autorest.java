@@ -53,7 +53,9 @@ public final class Odatas {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface OdatasService {
         @Get("/azurespecials/odata/filter")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getWithFilter(@HostParam("$host") String host, @QueryParam("$filter") String filter,
             @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby,

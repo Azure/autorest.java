@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ClientRequestIdClient type.
  */
-@ServiceClientBuilder(serviceClients = { ClientRequestIdClient.class, ClientRequestIdAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ClientRequestIdClient.class, ClientRequestIdAsyncClient.class
+})
 public final class ClientRequestIdClientBuilder
     implements HttpTrait<ClientRequestIdClientBuilder>, ConfigurationTrait<ClientRequestIdClientBuilder> {
     @Generated

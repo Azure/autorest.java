@@ -56,87 +56,115 @@ public final class Ints {
     @ServiceInterface(name = "AutoRestIntegerTestS")
     public interface IntsService {
         @Get("/int/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Integer>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/int/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Integer>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/int/overflowint32")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Integer>> getOverflowInt32(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/int/underflowint32")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Integer>> getUnderflowInt32(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/int/overflowint64")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Long>> getOverflowInt64(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/int/underflowint64")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Long>> getUnderflowInt64(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/int/max/32")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMax32(@HostParam("$host") String host, @BodyParam("application/json") int intBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/max/64")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMax64(@HostParam("$host") String host, @BodyParam("application/json") long intBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/min/32")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMin32(@HostParam("$host") String host, @BodyParam("application/json") int intBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/min/64")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMin64(@HostParam("$host") String host, @BodyParam("application/json") long intBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/unixtime")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUnixTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/int/unixtime")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUnixTimeDate(@HostParam("$host") String host,
             @BodyParam("application/json") long intBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/invalidunixtime")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getInvalidUnixTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/int/nullunixtime")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(long.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getNullUnixTime(@HostParam("$host") String host,

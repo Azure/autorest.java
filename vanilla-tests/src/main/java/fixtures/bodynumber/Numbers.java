@@ -55,149 +55,197 @@ public final class Numbers {
     @ServiceInterface(name = "AutoRestNumberTestSe")
     public interface NumbersService {
         @Get("/number/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Float>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/invalidfloat")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Float>> getInvalidFloat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/invaliddouble")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getInvalidDouble(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/invaliddecimal")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BigDecimal>> getInvalidDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/number/big/float/3.402823e+20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigFloat(@HostParam("$host") String host,
             @BodyParam("application/json") float numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/big/float/3.402823e+20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Float>> getBigFloat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/number/big/double/2.5976931e+101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDouble(@HostParam("$host") String host,
             @BodyParam("application/json") double numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/big/double/2.5976931e+101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getBigDouble(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/number/big/double/99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDoublePositiveDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") double numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/big/double/99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getBigDoublePositiveDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/number/big/double/-99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDoubleNegativeDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") double numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/big/double/-99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getBigDoubleNegativeDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/number/big/decimal/2.5976931e+101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") BigDecimal numberBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/big/decimal/2.5976931e+101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BigDecimal>> getBigDecimal(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/number/big/decimal/99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDecimalPositiveDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") BigDecimal numberBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/big/decimal/99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BigDecimal>> getBigDecimalPositiveDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/number/big/decimal/-99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBigDecimalNegativeDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") BigDecimal numberBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/big/decimal/-99999999.99")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BigDecimal>> getBigDecimalNegativeDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/number/small/float/3.402823e-20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putSmallFloat(@HostParam("$host") String host,
             @BodyParam("application/json") float numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/small/float/3.402823e-20")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getSmallFloat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/number/small/double/2.5976931e-101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putSmallDouble(@HostParam("$host") String host,
             @BodyParam("application/json") double numberBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/number/small/double/2.5976931e-101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Double>> getSmallDouble(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/number/small/decimal/2.5976931e-101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putSmallDecimal(@HostParam("$host") String host,
             @BodyParam("application/json") BigDecimal numberBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/number/small/decimal/2.5976931e-101")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BigDecimal>> getSmallDecimal(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);

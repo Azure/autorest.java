@@ -74,210 +74,278 @@ public final class Xmls {
     @ServiceInterface(name = "AutoRestSwaggerBATXM")
     public interface XmlsService {
         @Get("/xml/complex-type-ref-no-meta")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<RootWithRefAndNoMeta>> getComplexTypeRefNoMeta(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/complex-type-ref-no-meta")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putComplexTypeRefNoMeta(@HostParam("$host") String host,
             @BodyParam("application/xml") RootWithRefAndNoMeta model, Context context);
 
         @Get("/xml/complex-type-ref-with-meta")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<RootWithRefAndMeta>> getComplexTypeRefWithMeta(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/complex-type-ref-with-meta")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putComplexTypeRefWithMeta(@HostParam("$host") String host,
             @BodyParam("application/xml") RootWithRefAndMeta model, Context context);
 
         @Get("/xml/simple")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Slideshow>> getSimple(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/xml/simple")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putSimple(@HostParam("$host") String host,
             @BodyParam("application/xml") Slideshow slideshow, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/xml/wrapped-lists")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<AppleBarrel>> getWrappedLists(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/wrapped-lists")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putWrappedLists(@HostParam("$host") String host,
             @BodyParam("application/xml") AppleBarrel wrappedLists, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/xml/headers")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<XmlsGetHeadersResponse> getHeaders(@HostParam("$host") String host, Context context);
 
         @Get("/xml/empty-list")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Slideshow>> getEmptyList(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/xml/empty-list")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmptyList(@HostParam("$host") String host,
             @BodyParam("application/xml") Slideshow slideshow, Context context);
 
         @Get("/xml/empty-wrapped-lists")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<AppleBarrel>> getEmptyWrappedLists(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/empty-wrapped-lists")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmptyWrappedLists(@HostParam("$host") String host,
             @BodyParam("application/xml") AppleBarrel appleBarrel, Context context);
 
         @Get("/xml/root-list")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<List<Banana>>> getRootList(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/xml/root-list")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putRootList(@HostParam("$host") String host,
             @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/root-list-single-item")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<List<Banana>>> getRootListSingleItem(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/root-list-single-item")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putRootListSingleItem(@HostParam("$host") String host,
             @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/empty-root-list")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<List<Banana>>> getEmptyRootList(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/empty-root-list")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmptyRootList(@HostParam("$host") String host,
             @BodyParam("application/xml") BananaWrapper bananas, Context context);
 
         @Get("/xml/empty-child-element")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Banana>> getEmptyChildElement(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/empty-child-element")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putEmptyChildElement(@HostParam("$host") String host,
             @BodyParam("application/xml") Banana banana, Context context);
 
         @Get("/xml/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ListContainersResponse>> listContainers(@HostParam("$host") String host,
             @QueryParam("comp") String comp, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/xml/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<StorageServiceProperties>> getServiceProperties(@HostParam("$host") String host,
             @QueryParam("comp") String comp, @QueryParam("restype") String restype,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putServiceProperties(@HostParam("$host") String host, @QueryParam("comp") String comp,
             @QueryParam("restype") String restype, @BodyParam("application/xml") StorageServiceProperties properties,
             Context context);
 
         @Get("/xml/mycontainer")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<SignedIdentifierWrapper>> getAcls(@HostParam("$host") String host,
             @QueryParam("comp") String comp, @QueryParam("restype") String restype,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/mycontainer")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putAcls(@HostParam("$host") String host, @QueryParam("comp") String comp,
             @QueryParam("restype") String restype, @BodyParam("application/xml") SignedIdentifierWrapper properties,
             Context context);
 
         @Get("/xml/mycontainer")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ListBlobsResponse>> listBlobs(@HostParam("$host") String host, @QueryParam("comp") String comp,
             @QueryParam("restype") String restype, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/jsoninput")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> jsonInput(@HostParam("$host") String host,
             @BodyParam("application/json") JsonInput properties, Context context);
 
         @Get("/xml/jsonoutput")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<JsonOutput>> jsonOutput(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/xml/x-ms-text")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ObjectWithXMsTextProperty>> getXMsText(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/xml/bytes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ModelWithByteProperty>> getBytes(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/bytes")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBinary(@HostParam("$host") String host,
             @BodyParam("application/xml") ModelWithByteProperty slideshow, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/xml/url")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ModelWithUrlProperty>> getUri(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/xml/url")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUri(@HostParam("$host") String host,
             @BodyParam("application/xml") ModelWithUrlProperty model, @HeaderParam("Accept") String accept,

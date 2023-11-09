@@ -53,20 +53,32 @@ public final class HeadExceptions {
     @ServiceInterface(name = "AutoRestHeadExceptio")
     public interface HeadExceptionsService {
         @Head("/http/success/200")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = { 404 })
+        @ExpectedResponses({
+            200
+        })
+        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = {
+            404
+        })
         @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/204")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = { 404 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = {
+            404
+        })
         @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/404")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = { 404 })
+        @ExpectedResponses({
+            204
+        })
+        @UnexpectedResponseExceptionType(value = ResourceExistsException.class, code = {
+            404
+        })
         @UnexpectedResponseExceptionType(ResourceNotFoundException.class)
         Mono<Response<Void>> head404(@HostParam("$host") String host, Context context);
     }

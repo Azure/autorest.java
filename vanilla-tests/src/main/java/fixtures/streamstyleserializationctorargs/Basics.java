@@ -57,73 +57,97 @@ public final class Basics {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface BasicsService {
         @Get("/complex/basic/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Basic> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/basic/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion,
             @BodyParam("application/json") Basic complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/basic/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putValidSync(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion,
             @BodyParam("application/json") Basic complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/basic/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Basic> getInvalidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Basic> getEmptySync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Basic> getNullSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/notprovided")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Basic>> getNotProvided(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/basic/notprovided")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Basic> getNotProvidedSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

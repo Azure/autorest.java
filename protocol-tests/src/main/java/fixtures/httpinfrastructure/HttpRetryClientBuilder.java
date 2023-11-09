@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the HttpRetryClient type.
  */
-@ServiceClientBuilder(serviceClients = { HttpRetryClient.class, HttpRetryAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    HttpRetryClient.class, HttpRetryAsyncClient.class
+})
 public final class HttpRetryClientBuilder
     implements HttpTrait<HttpRetryClientBuilder>, ConfigurationTrait<HttpRetryClientBuilder> {
     @Generated

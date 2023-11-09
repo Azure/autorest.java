@@ -55,13 +55,17 @@ public final class Flattencomplexes {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<MyBaseType>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/flatten/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<MyBaseType> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

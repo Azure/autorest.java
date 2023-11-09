@@ -46,7 +46,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the UnionClient type.
  */
-@ServiceClientBuilder(serviceClients = { UnionClient.class, UnionAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    UnionClient.class, UnionAsyncClient.class
+})
 public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder>,
     TokenCredentialTrait<UnionClientBuilder>, KeyCredentialTrait<UnionClientBuilder> {
     @Generated
@@ -56,7 +58,9 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final String[] DEFAULT_SCOPES = new String[] { "https://security.microsoft.com/.default" };
+    private static final String[] DEFAULT_SCOPES = new String[] {
+        "https://security.microsoft.com/.default"
+    };
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-union.properties");

@@ -66,103 +66,137 @@ public final class Contants {
     @ServiceInterface(name = "AutoRestSwaggerConst")
     public interface ContantsService {
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefault(@HostParam("$host") String host,
             @QueryParam("input") NoModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") String input, Context context);
 
         @Put("/constants/putNoModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefault(@HostParam("$host") String host,
             @QueryParam("input") String input, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") NoModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredTwoValueDefault(@HostParam("$host") String host,
             @QueryParam("input") NoModelAsStringRequiredTwoValueDefaultOpEnum input, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") String input, Context context);
 
         @Put("/constants/putNoModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefault(@HostParam("$host") String host,
             @QueryParam("input") String input, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredTwoValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredTwoValueDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringNoRequiredTwoValueDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringNoRequiredOneValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringNoRequiredOneValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringNoRequiredOneValueDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringNoRequiredOneValueDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredTwoValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringRequiredTwoValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringRequiredTwoValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredTwoValueDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringRequiredTwoValueDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueNoDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredOneValueNoDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringRequiredOneValueNoDefaultOpEnum input, Context context);
 
         @Put("/constants/putModelAsStringRequiredOneValueDefault")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putModelAsStringRequiredOneValueDefault(@HostParam("$host") String host,
             @QueryParam("input") ModelAsStringRequiredOneValueDefaultOpEnum input, Context context);
 
         @Put("/constants/clientConstants/{path-constant}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putClientConstants(@HostParam("$host") String host,
             @HeaderParam("header-constant") boolean headerConstant, @QueryParam("query-constant") int queryConstant,

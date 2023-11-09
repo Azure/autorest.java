@@ -60,115 +60,153 @@ public final class HttpSuccess {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpSuccessService {
         @Head("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> get200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Options("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> options200(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put200(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> patch200(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> post200(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/200")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> delete200(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/success/201")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put201(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/201")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> post201(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/success/202")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put202(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/202")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> patch202(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/202")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> post202(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/202")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> delete202(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/success/204")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/http/success/204")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put204(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/success/204")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> patch204(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/http/success/204")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> post204(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/success/204")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> delete204(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/http/success/404")
-        @ExpectedResponses({ 204, 404 })
+        @ExpectedResponses({
+            204, 404
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> head404(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

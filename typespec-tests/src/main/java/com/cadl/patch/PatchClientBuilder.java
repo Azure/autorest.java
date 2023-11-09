@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PatchClient type.
  */
-@ServiceClientBuilder(serviceClients = { PatchClient.class, PatchAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    PatchClient.class, PatchAsyncClient.class
+})
 public final class PatchClientBuilder implements HttpTrait<PatchClientBuilder>, ConfigurationTrait<PatchClientBuilder>,
     EndpointTrait<PatchClientBuilder> {
     @Generated

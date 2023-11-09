@@ -40,9 +40,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DurationClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { QueryClient.class, PropertyClient.class, HeaderClient.class, QueryAsyncClient.class,
-        PropertyAsyncClient.class, HeaderAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    QueryClient.class, PropertyClient.class, HeaderClient.class, QueryAsyncClient.class, PropertyAsyncClient.class,
+    HeaderAsyncClient.class
+})
 public final class DurationClientBuilder
     implements HttpTrait<DurationClientBuilder>, ConfigurationTrait<DurationClientBuilder> {
     @Generated

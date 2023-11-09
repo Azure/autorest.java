@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultipleInheritanceServiceClient type.
  */
-@ServiceClientBuilder(serviceClients = { MultipleInheritanceServiceClient.class })
+@ServiceClientBuilder(serviceClients = {
+    MultipleInheritanceServiceClient.class
+})
 public final class MultipleInheritanceServiceClientBuilder implements
     HttpTrait<MultipleInheritanceServiceClientBuilder>, ConfigurationTrait<MultipleInheritanceServiceClientBuilder> {
     @Generated

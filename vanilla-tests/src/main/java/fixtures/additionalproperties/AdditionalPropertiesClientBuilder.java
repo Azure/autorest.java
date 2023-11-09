@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AdditionalPropertiesClient type.
  */
-@ServiceClientBuilder(serviceClients = { AdditionalPropertiesClient.class })
+@ServiceClientBuilder(serviceClients = {
+    AdditionalPropertiesClient.class
+})
 public final class AdditionalPropertiesClientBuilder
     implements HttpTrait<AdditionalPropertiesClientBuilder>, ConfigurationTrait<AdditionalPropertiesClientBuilder> {
     @Generated

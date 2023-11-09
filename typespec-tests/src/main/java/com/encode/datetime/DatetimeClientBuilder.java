@@ -40,9 +40,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DatetimeClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { QueryClient.class, PropertyClient.class, HeaderClient.class, ResponseHeaderClient.class,
-        QueryAsyncClient.class, PropertyAsyncClient.class, HeaderAsyncClient.class, ResponseHeaderAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    QueryClient.class, PropertyClient.class, HeaderClient.class, ResponseHeaderClient.class, QueryAsyncClient.class,
+    PropertyAsyncClient.class, HeaderAsyncClient.class, ResponseHeaderAsyncClient.class
+})
 public final class DatetimeClientBuilder
     implements HttpTrait<DatetimeClientBuilder>, ConfigurationTrait<DatetimeClientBuilder> {
     @Generated

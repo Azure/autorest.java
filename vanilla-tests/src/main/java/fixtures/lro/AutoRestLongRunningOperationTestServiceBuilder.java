@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestLongRunningOperationTestService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestLongRunningOperationTestService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestLongRunningOperationTestService.class
+})
 public final class AutoRestLongRunningOperationTestServiceBuilder
     implements HttpTrait<AutoRestLongRunningOperationTestServiceBuilder>,
     ConfigurationTrait<AutoRestLongRunningOperationTestServiceBuilder> {

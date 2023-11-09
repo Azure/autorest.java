@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestParameterizedHostTestClient type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestParameterizedHostTestClient.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestParameterizedHostTestClient.class
+})
 public final class AutoRestParameterizedHostTestClientBuilder
     implements HttpTrait<AutoRestParameterizedHostTestClientBuilder>,
     ConfigurationTrait<AutoRestParameterizedHostTestClientBuilder> {

@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SpecialHeader type.
  */
-@ServiceClientBuilder(serviceClients = { SpecialHeader.class })
+@ServiceClientBuilder(serviceClients = {
+    SpecialHeader.class
+})
 public final class SpecialHeaderBuilder
     implements HttpTrait<SpecialHeaderBuilder>, ConfigurationTrait<SpecialHeaderBuilder> {
     @Generated

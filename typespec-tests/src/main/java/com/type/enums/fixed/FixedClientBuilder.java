@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the FixedClient type.
  */
-@ServiceClientBuilder(serviceClients = { FixedClient.class, FixedAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    FixedClient.class, FixedAsyncClient.class
+})
 public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, ConfigurationTrait<FixedClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

@@ -57,154 +57,198 @@ public final class DatetimeOperations {
     @ServiceInterface(name = "AutoRestDateTimeTest")
     public interface DatetimeOperationsService {
         @Get("/datetime/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/overflow")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getOverflow(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/underflow")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUnderflow(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/utc")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUtcMaxDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/datetime/max/utc7ms")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUtcMaxDateTime7Digits(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/max/utc/lowercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/utc/uppercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/utc7ms/uppercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime7Digits(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/localpositiveoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLocalPositiveOffsetMaxDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/max/localpositiveoffset/lowercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/localpositiveoffset/uppercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/max/localnegativeoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLocalNegativeOffsetMaxDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/max/localnegativeoffset/uppercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/max/localnegativeoffset/lowercase")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/utc")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUtcMinDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/min/utc")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/localpositiveoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLocalPositiveOffsetMinDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/min/localpositiveoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetime/min/localnegativeoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLocalNegativeOffsetMinDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") OffsetDateTime datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetime/min/localnegativeoffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetime/min/localnooffset")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTime(@HostParam("$host") String host,

@@ -71,35 +71,45 @@ public final class SchemasImpl {
     @ServiceInterface(name = "AzureSchemaRegistryS")
     public interface SchemasService {
         @Get("/$schemaGroups/$schemas/{id}")
-        @ExpectedResponses({ 200, 200 })
+        @ExpectedResponses({
+            200, 200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getById(@HostParam("endpoint") String endpoint,
             @PathParam("id") String id, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/$schemas/{id}")
-        @ExpectedResponses({ 200, 200 })
+        @ExpectedResponses({
+            200, 200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         ResponseBase<SchemasGetByIdHeaders, BinaryData> getByIdSync(@HostParam("endpoint") String endpoint,
             @PathParam("id") String id, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SchemaVersions>> getVersions(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<SchemaVersions> getVersionsSync(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
-        @ExpectedResponses({ 200, 200 })
+        @ExpectedResponses({
+            200, 200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>> getSchemaVersion(
             @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
@@ -107,7 +117,9 @@ public final class SchemasImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
-        @ExpectedResponses({ 200, 200 })
+        @ExpectedResponses({
+            200, 200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         ResponseBase<SchemasGetSchemaVersionHeaders, BinaryData> getSchemaVersionSync(
             @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
@@ -115,7 +127,9 @@ public final class SchemasImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContent(
             @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
@@ -125,7 +139,9 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContent(
             @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
@@ -135,7 +151,9 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         ResponseBase<SchemasQueryIdByContentHeaders, Void> queryIdByContentSync(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
@@ -144,7 +162,9 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasRegisterHeaders, Void>> register(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
@@ -153,7 +173,9 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<ResponseBase<SchemasRegisterHeaders, Void>> register(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
@@ -162,7 +184,9 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         ResponseBase<SchemasRegisterHeaders, Void> registerSync(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
@@ -171,13 +195,17 @@ public final class SchemasImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SchemaVersions>> getVersionsNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<SchemaVersions> getVersionsNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, Context context);

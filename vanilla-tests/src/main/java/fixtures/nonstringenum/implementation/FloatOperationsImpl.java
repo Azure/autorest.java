@@ -56,13 +56,17 @@ public final class FloatOperationsImpl {
     @ServiceInterface(name = "NonStringEnumsClient")
     public interface FloatOperationsService {
         @Put("/nonStringEnums/float/put")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> put(@HostParam("$host") String host, @BodyParam("application/json") FloatEnum input,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/nonStringEnums/float/get")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<FloatEnum>> get(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

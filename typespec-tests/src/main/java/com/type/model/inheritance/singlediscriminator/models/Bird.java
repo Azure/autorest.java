@@ -21,9 +21,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     property = "kind",
     defaultImpl = Bird.class)
 @JsonTypeName("Bird")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "seagull", value = SeaGull.class),
     @JsonSubTypes.Type(name = "sparrow", value = Sparrow.class),
-    @JsonSubTypes.Type(name = "goose", value = Goose.class), @JsonSubTypes.Type(name = "eagle", value = Eagle.class) })
+    @JsonSubTypes.Type(name = "goose", value = Goose.class), @JsonSubTypes.Type(name = "eagle", value = Eagle.class)
+})
 @Immutable
 public class Bird {
     /*

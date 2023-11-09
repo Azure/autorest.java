@@ -40,9 +40,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ScalarClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { StringOperationClient.class, BooleanOperationClient.class, UnknownClient.class,
-        StringOperationAsyncClient.class, BooleanOperationAsyncClient.class, UnknownAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    StringOperationClient.class, BooleanOperationClient.class, UnknownClient.class, StringOperationAsyncClient.class,
+    BooleanOperationAsyncClient.class, UnknownAsyncClient.class
+})
 public final class ScalarClientBuilder
     implements HttpTrait<ScalarClientBuilder>, ConfigurationTrait<ScalarClientBuilder> {
     @Generated

@@ -63,7 +63,9 @@ public final class ParameterGroupings {
     @ServiceInterface(name = "AutoRestParameterGro")
     public interface ParameterGroupingsService {
         @Post("/parameterGrouping/postRequired/{path}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequired(@HostParam("$host") String host,
             @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query,
@@ -71,20 +73,26 @@ public final class ParameterGroupings {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/parameterGrouping/postOptional")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptional(@HostParam("$host") String host,
             @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/parameterGrouping/postReservedWords")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postReservedWords(@HostParam("$host") String host, @QueryParam("from") String from,
             @QueryParam("accept") String accept, @HeaderParam("Accept") String acceptParam, Context context);
 
         @Post("/parameterGrouping/postMultipleParameterGroups")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMultiParamGroups(@HostParam("$host") String host,
             @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne,
@@ -92,14 +100,18 @@ public final class ParameterGroupings {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/parameterGrouping/sharedParameterGroupObject")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postSharedParameterGroupObject(@HostParam("$host") String host,
             @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/parameterGrouping/groupWithConstant")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> groupWithConstant(@HostParam("$host") String host,
             @HeaderParam("groupedConstant") String groupedConstant,

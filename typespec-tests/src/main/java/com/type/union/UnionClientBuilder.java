@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the UnionClient type.
  */
-@ServiceClientBuilder(serviceClients = { UnionClient.class, UnionAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    UnionClient.class, UnionAsyncClient.class
+})
 public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

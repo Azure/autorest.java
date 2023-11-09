@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the InheritanceClient type.
  */
-@ServiceClientBuilder(serviceClients = { InheritanceClient.class, InheritanceAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    InheritanceClient.class, InheritanceAsyncClient.class
+})
 public final class InheritanceClientBuilder
     implements HttpTrait<InheritanceClientBuilder>, ConfigurationTrait<InheritanceClientBuilder> {
     @Generated

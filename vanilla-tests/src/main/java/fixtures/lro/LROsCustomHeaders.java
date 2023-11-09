@@ -66,25 +66,33 @@ public final class LROsCustomHeaders {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LROsCustomHeadersService {
         @Put("/lro/customheader/putasync/retry/succeeded")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/customheader/put/201/creating/succeeded/200")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> put201CreatingSucceeded200(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/customheader/post/202/retry/200")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/customheader/postasync/retry/succeeded")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);

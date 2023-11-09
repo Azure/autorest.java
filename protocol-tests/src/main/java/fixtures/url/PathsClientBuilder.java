@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PathsClient type.
  */
-@ServiceClientBuilder(serviceClients = { PathsClient.class, PathsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    PathsClient.class, PathsAsyncClient.class
+})
 public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, ConfigurationTrait<PathsClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

@@ -134,73 +134,95 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceInterface(name = "AutoRestResourceFlat")
     public interface AutoRestResourceFlatteningTestServiceService {
         @Put("/model-flatten/array")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putArray(@HostParam("$host") String host,
             @BodyParam("application/json") List<Resource> resourceArray, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/model-flatten/array")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<FlattenedProduct>>> getArray(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/wrappedarray")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putWrappedArray(@HostParam("$host") String host,
             @BodyParam("application/json") List<WrappedProduct> resourceArray, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/model-flatten/wrappedarray")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<List<ProductWrapper>>> getWrappedArray(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/dictionary")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDictionary(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, FlattenedProduct> resourceDictionary,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/model-flatten/dictionary")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, FlattenedProduct>>> getDictionary(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/resourcecollection")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putResourceCollection(@HostParam("$host") String host,
             @BodyParam("application/json") ResourceCollection resourceComplexObject,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/model-flatten/resourcecollection")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ResourceCollection>> getResourceCollection(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/model-flatten/customFlattening")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SimpleProduct>> putSimpleProduct(@HostParam("$host") String host,
             @BodyParam("application/json") SimpleProduct simpleBodyProduct, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/model-flatten/customFlattening")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SimpleProduct>> postFlattenedSimpleProduct(@HostParam("$host") String host,
             @BodyParam("application/json") SimpleProduct simpleBodyProduct, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/model-flatten/customFlattening/parametergrouping/{name}/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SimpleProduct>> putSimpleProductWithGrouping(@HostParam("$host") String host,
             @PathParam("name") String name, @BodyParam("application/json") SimpleProduct simpleBodyProduct,

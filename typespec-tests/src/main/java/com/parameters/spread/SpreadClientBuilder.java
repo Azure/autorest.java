@@ -40,8 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SpreadClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { ModelClient.class, AliasClient.class, ModelAsyncClient.class, AliasAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ModelClient.class, AliasClient.class, ModelAsyncClient.class, AliasAsyncClient.class
+})
 public final class SpreadClientBuilder
     implements HttpTrait<SpreadClientBuilder>, ConfigurationTrait<SpreadClientBuilder> {
     @Generated

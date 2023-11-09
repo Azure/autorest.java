@@ -70,44 +70,58 @@ public final class LRORetrys {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LRORetrysService {
         @Put("/lro/retryerror/put/201/creating/succeeded/200")
-        @ExpectedResponses({ 200, 201 })
+        @ExpectedResponses({
+            200, 201
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<Response<Product>> put201CreatingSucceeded200(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/retryerror/putasync/retry/succeeded")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceeded(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
-        @ExpectedResponses({ 200, 202 })
+        @ExpectedResponses({
+            200, 202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/retryerror/delete/202/retry/200")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysDelete202Retry200Response> delete202Retry200(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/retryerror/deleteasync/retry/succeeded")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysDeleteAsyncRelativeRetrySucceededResponse> deleteAsyncRelativeRetrySucceeded(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/retryerror/post/202/retry/200")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysPost202Retry200Response> post202Retry200(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/retryerror/postasync/retry/succeeded")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
         Mono<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceeded(
             @HostParam("$host") String host, @BodyParam("application/json") Product product,

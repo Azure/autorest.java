@@ -56,49 +56,65 @@ public final class DateOperations {
     @ServiceInterface(name = "AutoRestDateTestServ")
     public interface DateOperationsService {
         @Get("/date/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/date/invaliddate")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getInvalidDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/date/overflowdate")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getOverflowDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/date/underflowdate")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getUnderflowDate(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/date/max")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMaxDate(@HostParam("$host") String host,
             @BodyParam("application/json") LocalDate dateBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/date/max")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getMaxDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/date/min")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMinDate(@HostParam("$host") String host,
             @BodyParam("application/json") LocalDate dateBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/date/min")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LocalDate>> getMinDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

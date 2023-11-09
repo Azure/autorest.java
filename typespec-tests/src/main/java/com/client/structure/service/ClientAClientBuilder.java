@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ClientAClient type.
  */
-@ServiceClientBuilder(serviceClients = { ClientAClient.class, ClientAAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ClientAClient.class, ClientAAsyncClient.class
+})
 public final class ClientAClientBuilder implements HttpTrait<ClientAClientBuilder>,
     ConfigurationTrait<ClientAClientBuilder>, EndpointTrait<ClientAClientBuilder> {
     @Generated

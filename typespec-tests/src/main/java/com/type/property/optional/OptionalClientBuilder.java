@@ -40,12 +40,13 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the OptionalClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { StringOperationClient.class, BytesClient.class, DatetimeOperationClient.class,
-        DurationOperationClient.class, CollectionsByteClient.class, CollectionsModelClient.class,
-        RequiredAndOptionalClient.class, StringOperationAsyncClient.class, BytesAsyncClient.class,
-        DatetimeOperationAsyncClient.class, DurationOperationAsyncClient.class, CollectionsByteAsyncClient.class,
-        CollectionsModelAsyncClient.class, RequiredAndOptionalAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    StringOperationClient.class, BytesClient.class, DatetimeOperationClient.class, DurationOperationClient.class,
+    CollectionsByteClient.class, CollectionsModelClient.class, RequiredAndOptionalClient.class,
+    StringOperationAsyncClient.class, BytesAsyncClient.class, DatetimeOperationAsyncClient.class,
+    DurationOperationAsyncClient.class, CollectionsByteAsyncClient.class, CollectionsModelAsyncClient.class,
+    RequiredAndOptionalAsyncClient.class
+})
 public final class OptionalClientBuilder
     implements HttpTrait<OptionalClientBuilder>, ConfigurationTrait<OptionalClientBuilder> {
     @Generated

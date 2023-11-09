@@ -56,65 +56,85 @@ public final class Arrays {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface ArraysService {
         @Get("/complex/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ArrayWrapper>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<ArrayWrapper> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/array/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putValidSync(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ArrayWrapper>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<ArrayWrapper> getEmptySync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/array/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putEmptySync(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/array/notprovided")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ArrayWrapper>> getNotProvided(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/array/notprovided")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<ArrayWrapper> getNotProvidedSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

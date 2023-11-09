@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LrosCustomHeaderClient type.
  */
-@ServiceClientBuilder(serviceClients = { LrosCustomHeaderClient.class, LrosCustomHeaderAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    LrosCustomHeaderClient.class, LrosCustomHeaderAsyncClient.class
+})
 public final class LrosCustomHeaderClientBuilder
     implements HttpTrait<LrosCustomHeaderClientBuilder>, ConfigurationTrait<LrosCustomHeaderClientBuilder> {
     @Generated

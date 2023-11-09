@@ -55,7 +55,9 @@ public final class Groups {
     @ServiceInterface(name = "MicrosoftAzureTestUr")
     public interface GroupsService {
         @Get("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<SampleResourceGroup>> getSampleResourceGroup(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId,

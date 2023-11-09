@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MicrosoftAzureTestUrl type.
  */
-@ServiceClientBuilder(serviceClients = { MicrosoftAzureTestUrl.class })
+@ServiceClientBuilder(serviceClients = {
+    MicrosoftAzureTestUrl.class
+})
 public final class MicrosoftAzureTestUrlBuilder
     implements HttpTrait<MicrosoftAzureTestUrlBuilder>, ConfigurationTrait<MicrosoftAzureTestUrlBuilder> {
     @Generated

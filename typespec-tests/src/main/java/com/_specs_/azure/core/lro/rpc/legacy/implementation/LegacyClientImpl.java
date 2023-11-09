@@ -134,20 +134,36 @@ public final class LegacyClientImpl {
     @ServiceInterface(name = "LegacyClient")
     public interface LegacyClientService {
         @Post("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs")
-        @ExpectedResponses({ 200, 202 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200, 202
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createJob(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
             RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs")
-        @ExpectedResponses({ 200, 202 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            200, 202
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createJobSync(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,

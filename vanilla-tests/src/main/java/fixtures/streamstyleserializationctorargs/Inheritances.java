@@ -57,25 +57,33 @@ public final class Inheritances {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface InheritancesService {
         @Get("/complex/inheritance/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Siamese>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/inheritance/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Siamese> getValidSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/inheritance/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host,
             @BodyParam("application/json") Siamese complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/inheritance/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putValidSync(@HostParam("$host") String host, @BodyParam("application/json") Siamese complexBody,
             @HeaderParam("Accept") String accept, Context context);

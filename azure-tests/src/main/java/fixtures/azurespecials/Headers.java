@@ -56,21 +56,27 @@ public final class Headers {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface HeadersService {
         @Post("/azurespecials/customNamedRequestId")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestId(@HostParam("$host") String host,
             @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/azurespecials/customNamedRequestIdParamGrouping")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(
             @HostParam("$host") String host, @HeaderParam("foo-client-request-id") String fooClientRequestId,
             @HeaderParam("Accept") String accept, Context context);
 
         @Head("/azurespecials/customNamedRequestIdHead")
-        @ExpectedResponses({ 200, 404 })
+        @ExpectedResponses({
+            200, 404
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(@HostParam("$host") String host,
             @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("Accept") String accept,

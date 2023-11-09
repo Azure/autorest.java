@@ -43,7 +43,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the OAuth2Client type.
  */
-@ServiceClientBuilder(serviceClients = { OAuth2Client.class, OAuth2AsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    OAuth2Client.class, OAuth2AsyncClient.class
+})
 public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>,
     ConfigurationTrait<OAuth2ClientBuilder>, TokenCredentialTrait<OAuth2ClientBuilder> {
     @Generated
@@ -53,7 +55,9 @@ public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>
     private static final String SDK_VERSION = "version";
 
     @Generated
-    private static final String[] DEFAULT_SCOPES = new String[] { "https://security.microsoft.com/.default" };
+    private static final String[] DEFAULT_SCOPES = new String[] {
+        "https://security.microsoft.com/.default"
+    };
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("authentication-oauth2.properties");

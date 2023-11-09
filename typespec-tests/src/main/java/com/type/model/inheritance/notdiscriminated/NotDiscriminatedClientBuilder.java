@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the NotDiscriminatedClient type.
  */
-@ServiceClientBuilder(serviceClients = { NotDiscriminatedClient.class, NotDiscriminatedAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    NotDiscriminatedClient.class, NotDiscriminatedAsyncClient.class
+})
 public final class NotDiscriminatedClientBuilder
     implements HttpTrait<NotDiscriminatedClientBuilder>, ConfigurationTrait<NotDiscriminatedClientBuilder> {
     @Generated

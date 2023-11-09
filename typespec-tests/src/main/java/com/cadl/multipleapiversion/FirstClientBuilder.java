@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the FirstClient type.
  */
-@ServiceClientBuilder(serviceClients = { FirstClient.class, FirstAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    FirstClient.class, FirstAsyncClient.class
+})
 public final class FirstClientBuilder implements HttpTrait<FirstClientBuilder>, ConfigurationTrait<FirstClientBuilder>,
     EndpointTrait<FirstClientBuilder> {
     @Generated

@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DpgRequiredHeaderQueryClient type.
  */
-@ServiceClientBuilder(serviceClients = { DpgRequiredHeaderQueryClient.class, DpgRequiredHeaderQueryAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    DpgRequiredHeaderQueryClient.class, DpgRequiredHeaderQueryAsyncClient.class
+})
 public final class DpgRequiredHeaderQueryClientBuilder
     implements HttpTrait<DpgRequiredHeaderQueryClientBuilder>, ConfigurationTrait<DpgRequiredHeaderQueryClientBuilder> {
     @Generated

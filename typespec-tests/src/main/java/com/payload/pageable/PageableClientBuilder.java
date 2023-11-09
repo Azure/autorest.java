@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PageableClient type.
  */
-@ServiceClientBuilder(serviceClients = { PageableClient.class, PageableAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    PageableClient.class, PageableAsyncClient.class
+})
 public final class PageableClientBuilder
     implements HttpTrait<PageableClientBuilder>, ConfigurationTrait<PageableClientBuilder> {
     @Generated

@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ParmaterizedEndpointClient type.
  */
-@ServiceClientBuilder(serviceClients = { ParmaterizedEndpointClient.class, ParmaterizedEndpointAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ParmaterizedEndpointClient.class, ParmaterizedEndpointAsyncClient.class
+})
 public final class ParmaterizedEndpointClientBuilder implements HttpTrait<ParmaterizedEndpointClientBuilder>,
     ConfigurationTrait<ParmaterizedEndpointClientBuilder>, EndpointTrait<ParmaterizedEndpointClientBuilder> {
     @Generated

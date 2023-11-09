@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LrosaDsClient type.
  */
-@ServiceClientBuilder(serviceClients = { LrosaDsClient.class, LrosaDsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    LrosaDsClient.class, LrosaDsAsyncClient.class
+})
 public final class LrosaDsClientBuilder
     implements HttpTrait<LrosaDsClientBuilder>, ConfigurationTrait<LrosaDsClientBuilder> {
     @Generated

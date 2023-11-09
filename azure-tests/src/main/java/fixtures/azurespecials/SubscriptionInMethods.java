@@ -54,25 +54,33 @@ public final class SubscriptionInMethods {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface SubscriptionInMethodsService {
         @Post("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodLocalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postMethodLocalNull(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postPathLocalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postSwaggerLocalValid(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId, @HeaderParam("Accept") String accept, Context context);

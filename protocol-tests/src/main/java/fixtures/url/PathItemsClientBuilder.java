@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PathItemsClient type.
  */
-@ServiceClientBuilder(serviceClients = { PathItemsClient.class, PathItemsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    PathItemsClient.class, PathItemsAsyncClient.class
+})
 public final class PathItemsClientBuilder
     implements HttpTrait<PathItemsClientBuilder>, ConfigurationTrait<PathItemsClientBuilder> {
     @Generated

@@ -40,8 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestPagingTestServiceClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { AutoRestPagingTestServiceClient.class, AutoRestPagingTestServiceAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestPagingTestServiceClient.class, AutoRestPagingTestServiceAsyncClient.class
+})
 public final class AutoRestPagingTestServiceClientBuilder implements HttpTrait<AutoRestPagingTestServiceClientBuilder>,
     ConfigurationTrait<AutoRestPagingTestServiceClientBuilder> {
     @Generated

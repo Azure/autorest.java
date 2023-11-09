@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the NamingClient type.
  */
-@ServiceClientBuilder(serviceClients = { NamingClient.class, NamingAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    NamingClient.class, NamingAsyncClient.class
+})
 public final class NamingClientBuilder implements HttpTrait<NamingClientBuilder>,
     ConfigurationTrait<NamingClientBuilder>, EndpointTrait<NamingClientBuilder> {
     @Generated

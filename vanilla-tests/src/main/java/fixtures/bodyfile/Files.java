@@ -53,19 +53,25 @@ public final class Files {
     @ServiceInterface(name = "AutoRestSwaggerBATFi")
     public interface FilesService {
         @Get("/files/stream/nonempty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BinaryData>> getFile(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/files/stream/verylarge")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BinaryData>> getFileLarge(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/files/stream/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BinaryData>> getEmptyFile(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

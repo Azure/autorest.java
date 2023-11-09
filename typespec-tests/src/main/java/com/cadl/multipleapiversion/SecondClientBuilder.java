@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SecondClient type.
  */
-@ServiceClientBuilder(serviceClients = { SecondClient.class, SecondAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    SecondClient.class, SecondAsyncClient.class
+})
 public final class SecondClientBuilder implements HttpTrait<SecondClientBuilder>,
     ConfigurationTrait<SecondClientBuilder>, EndpointTrait<SecondClientBuilder> {
     @Generated

@@ -54,12 +54,16 @@ public final class XMsClientRequestIds {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface XMsClientRequestIdsService {
         @Get("/azurespecials/overwrite/x-ms-client-request-id/method/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HostParam("$host") String host, Context context);
 
         @Get("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramGet(@HostParam("$host") String host,
             @HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("Accept") String accept,

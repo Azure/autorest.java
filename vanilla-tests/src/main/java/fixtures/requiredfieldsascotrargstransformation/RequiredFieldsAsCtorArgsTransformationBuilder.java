@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the RequiredFieldsAsCtorArgsTransformation type.
  */
-@ServiceClientBuilder(serviceClients = { RequiredFieldsAsCtorArgsTransformation.class })
+@ServiceClientBuilder(serviceClients = {
+    RequiredFieldsAsCtorArgsTransformation.class
+})
 public final class RequiredFieldsAsCtorArgsTransformationBuilder
     implements HttpTrait<RequiredFieldsAsCtorArgsTransformationBuilder>,
     ConfigurationTrait<RequiredFieldsAsCtorArgsTransformationBuilder> {

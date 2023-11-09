@@ -56,39 +56,51 @@ public final class DictionariesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface DictionariesService {
         @Get("/complex/dictionary/typed/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DictionaryWrapper>> getValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/dictionary/typed/valid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host,
             @BodyParam("application/json") DictionaryWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/dictionary/typed/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DictionaryWrapper>> getEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/dictionary/typed/empty")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String host,
             @BodyParam("application/json") DictionaryWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/dictionary/typed/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DictionaryWrapper>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/dictionary/typed/notprovided")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);

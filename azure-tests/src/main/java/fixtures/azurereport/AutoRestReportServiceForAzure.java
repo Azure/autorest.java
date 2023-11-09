@@ -122,7 +122,9 @@ public final class AutoRestReportServiceForAzure {
     @ServiceInterface(name = "AutoRestReportServic")
     public interface AutoRestReportServiceForAzureService {
         @Get("/report/azure")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getReport(@HostParam("$host") String host,
             @QueryParam("qualifier") String qualifier, @HeaderParam("Accept") String accept, Context context);

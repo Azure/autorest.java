@@ -164,7 +164,9 @@ public final class AutoRestValidationTest {
     @ServiceInterface(name = "AutoRestValidationTe")
     public interface AutoRestValidationTestService {
         @Get("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Product>> validationOfMethodParameters(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId,
@@ -172,7 +174,9 @@ public final class AutoRestValidationTest {
             @QueryParam("apiVersion") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Product>> validationOfBody(@HostParam("$host") String host,
             @PathParam("subscriptionId") String subscriptionId,
@@ -181,13 +185,17 @@ public final class AutoRestValidationTest {
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/validation/constantsInPath/{constantParam}/value")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getWithConstantInPath(@HostParam("$host") String host,
             @PathParam("constantParam") String constantParam, Context context);
 
         @Post("/validation/constantsInPath/{constantParam}/value")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Product>> postWithConstantInBody(@HostParam("$host") String host,
             @PathParam("constantParam") String constantParam, @BodyParam("application/json") Product body,

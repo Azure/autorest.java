@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DictionaryClient type.
  */
-@ServiceClientBuilder(serviceClients = { DictionaryClient.class, DictionaryAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    DictionaryClient.class, DictionaryAsyncClient.class
+})
 public final class DictionaryClientBuilder
     implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
     @Generated

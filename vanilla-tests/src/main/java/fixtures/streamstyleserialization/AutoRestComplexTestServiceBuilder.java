@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestComplexTestService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestComplexTestService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestComplexTestService.class
+})
 public final class AutoRestComplexTestServiceBuilder
     implements HttpTrait<AutoRestComplexTestServiceBuilder>, ConfigurationTrait<AutoRestComplexTestServiceBuilder> {
     @Generated

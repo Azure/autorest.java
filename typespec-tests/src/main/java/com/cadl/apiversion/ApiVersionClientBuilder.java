@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ApiVersionClient type.
  */
-@ServiceClientBuilder(serviceClients = { ApiVersionClient.class, ApiVersionAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ApiVersionClient.class, ApiVersionAsyncClient.class
+})
 public final class ApiVersionClientBuilder implements HttpTrait<ApiVersionClientBuilder>,
     ConfigurationTrait<ApiVersionClientBuilder>, EndpointTrait<ApiVersionClientBuilder> {
     @Generated

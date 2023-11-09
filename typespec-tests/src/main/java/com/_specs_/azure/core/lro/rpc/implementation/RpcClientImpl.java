@@ -133,20 +133,36 @@ public final class RpcClientImpl {
     @ServiceInterface(name = "RpcClient")
     public interface RpcClientService {
         @Post("/azure/core/lro/rpc/generations:submit")
-        @ExpectedResponses({ 202 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            202
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> longRunningRpc(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,
             RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/generations:submit")
-        @ExpectedResponses({ 202 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @ExpectedResponses({
+            202
+        })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
+            401
+        })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
+            404
+        })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
+            409
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> longRunningRpcSync(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,

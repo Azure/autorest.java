@@ -44,7 +44,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the FormRecognizerClient type.
  */
-@ServiceClientBuilder(serviceClients = { FormRecognizerClient.class, FormRecognizerAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    FormRecognizerClient.class, FormRecognizerAsyncClient.class
+})
 public final class FormRecognizerClientBuilder
     implements HttpTrait<FormRecognizerClientBuilder>, ConfigurationTrait<FormRecognizerClientBuilder>,
     KeyCredentialTrait<FormRecognizerClientBuilder>, EndpointTrait<FormRecognizerClientBuilder> {

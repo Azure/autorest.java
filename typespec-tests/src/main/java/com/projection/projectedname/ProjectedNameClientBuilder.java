@@ -40,9 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ProjectedNameClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { ProjectedNameClient.class, PropertyClient.class, ProjectedNameAsyncClient.class,
-        PropertyAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    ProjectedNameClient.class, PropertyClient.class, ProjectedNameAsyncClient.class, PropertyAsyncClient.class
+})
 public final class ProjectedNameClientBuilder
     implements HttpTrait<ProjectedNameClientBuilder>, ConfigurationTrait<ProjectedNameClientBuilder> {
     @Generated

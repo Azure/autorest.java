@@ -71,83 +71,109 @@ public final class PagingsImpl {
     @ServiceInterface(name = "AutoRestPagingTestSe")
     public interface PagingsService {
         @Get("/paging/noitemname")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> getNoItemNamePages(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/emptynextlink")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> getEmptyNextLinkNamePages(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/nullnextlink")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getNullNextLinkNamePages(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/single")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePages(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/single/getWithBodyParams")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesWithBodyParams(@HostParam("$host") String host,
             @BodyParam("application/json") BodyParamModel parameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/paging/firstResponseEmpty/1")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> firstResponseEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePages(@HostParam("$host") String host,
             @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults,
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/getWithQueryParams")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getWithQueryParams(@HostParam("$host") String host,
             @QueryParam("requiredQueryParameter") int requiredQueryParameter,
             @QueryParam("queryConstant") boolean queryConstant, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/duplicateParams/1")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> duplicateParams(@HostParam("$host") String host,
             @QueryParam("$filter") String filter, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/maxPageSize")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> pageWithMaxPageSize(@HostParam("$host") String host,
             @QueryParam("$maxpagesize") String maxpagesize, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/nextOperationWithQueryParams")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> nextOperationWithQueryParams(@HostParam("$host") String host,
             @QueryParam("queryConstant") boolean queryConstant, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/odata")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> getOdataMultiplePages(@HostParam("$host") String host,
             @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults,
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/withpath/{offset}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesWithOffset(@HostParam("$host") String host,
             @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults,
@@ -155,70 +181,92 @@ public final class PagingsImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/retryfirst")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesRetryFirst(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/retrysecond")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesRetrySecond(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/single/failure")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesFailure(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/failure")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesFailure(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/failureuri")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesFailureUri(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> getMultiplePagesFragmentNextLink(@HostParam("$host") String host,
             @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> getMultiplePagesFragmentWithGroupingNextLink(@HostParam("$host") String host,
             @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/paging/multiple/lro")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesLRO(@HostParam("$host") String host,
             @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults,
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/apiVersion/append/1")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> appendApiVersion(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/apiVersion/replace/1")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> replaceApiVersion(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> nextFragment(@HostParam("$host") String host,
             @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant,
@@ -226,7 +274,9 @@ public final class PagingsImpl {
             Context context);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> nextFragmentWithGrouping(@HostParam("$host") String host,
             @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant,
@@ -234,47 +284,61 @@ public final class PagingsImpl {
             Context context);
 
         @Get("/paging/itemNameWithXMSClientName")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientName(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> getNoItemNamePagesNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> getEmptyNextLinkNamePagesNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesWithBodyParamsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValue>> firstResponseEmptyNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
@@ -282,21 +346,27 @@ public final class PagingsImpl {
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> duplicateParamsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> pageWithMaxPageSizeNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OdataProductResult>> getOdataMultiplePagesNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
@@ -304,7 +374,9 @@ public final class PagingsImpl {
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesWithOffsetNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
@@ -312,42 +384,54 @@ public final class PagingsImpl {
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesRetryFirstNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesRetrySecondNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getSinglePagesFailureNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesFailureNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesFailureUriNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getMultiplePagesLRONext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
@@ -355,21 +439,27 @@ public final class PagingsImpl {
             @HeaderParam("timeout") Integer timeout, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> appendApiVersionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> replaceApiVersionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientNameNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,

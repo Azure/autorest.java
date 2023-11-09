@@ -41,8 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the TwoOperationGroupClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { Group1Client.class, Group2Client.class, Group1AsyncClient.class, Group2AsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    Group1Client.class, Group2Client.class, Group1AsyncClient.class, Group2AsyncClient.class
+})
 public final class TwoOperationGroupClientBuilder implements HttpTrait<TwoOperationGroupClientBuilder>,
     ConfigurationTrait<TwoOperationGroupClientBuilder>, EndpointTrait<TwoOperationGroupClientBuilder> {
     @Generated

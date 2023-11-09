@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the VersioningClient type.
  */
-@ServiceClientBuilder(serviceClients = { VersioningClient.class, VersioningAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    VersioningClient.class, VersioningAsyncClient.class
+})
 public final class VersioningClientBuilder implements HttpTrait<VersioningClientBuilder>,
     ConfigurationTrait<VersioningClientBuilder>, EndpointTrait<VersioningClientBuilder> {
     @Generated

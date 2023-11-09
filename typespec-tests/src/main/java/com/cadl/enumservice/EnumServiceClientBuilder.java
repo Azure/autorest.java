@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the EnumServiceClient type.
  */
-@ServiceClientBuilder(serviceClients = { EnumServiceClient.class, EnumServiceAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    EnumServiceClient.class, EnumServiceAsyncClient.class
+})
 public final class EnumServiceClientBuilder implements HttpTrait<EnumServiceClientBuilder>,
     ConfigurationTrait<EnumServiceClientBuilder>, EndpointTrait<EnumServiceClientBuilder> {
     @Generated

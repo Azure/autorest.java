@@ -128,7 +128,9 @@ public final class MediaTypesClient {
     @ServiceInterface(name = "MediaTypesClient")
     public interface MediaTypesClientService {
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType contentType,
@@ -136,7 +138,9 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType contentType,
@@ -144,13 +148,17 @@ public final class MediaTypesClient {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyze")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
             @BodyParam("application/json") SourcePath input, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType contentType,
@@ -158,7 +166,9 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") Long contentLength, Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType contentType,
@@ -166,20 +176,26 @@ public final class MediaTypesClient {
             Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
             @BodyParam("application/json") SourcePath input, Context context);
 
         @Post("/mediatypes/contentTypeWithEncoding")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> contentTypeWithEncoding(@HostParam("$host") String host,
             @BodyParam("text/plain; charset=UTF-8") String input, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/mediatypes/binaryBodyTwoContentTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType1 contentType,
@@ -187,7 +203,9 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyTwoContentTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType1 contentType,
@@ -195,7 +213,9 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyThreeContentTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType2 contentType,
@@ -203,7 +223,9 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/binaryBodyThreeContentTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType2 contentType,
@@ -211,33 +233,43 @@ public final class MediaTypesClient {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") BinaryData message,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host, @BodyParam("text/plain") String message,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
             @BodyParam("application/json") Object message, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/textAndJson")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putTextAndJsonBody(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType3 contentType, @BodyParam("text/plain") String message,

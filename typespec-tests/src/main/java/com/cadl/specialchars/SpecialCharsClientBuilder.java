@@ -41,7 +41,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SpecialCharsClient type.
  */
-@ServiceClientBuilder(serviceClients = { SpecialCharsClient.class, SpecialCharsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    SpecialCharsClient.class, SpecialCharsAsyncClient.class
+})
 public final class SpecialCharsClientBuilder implements HttpTrait<SpecialCharsClientBuilder>,
     ConfigurationTrait<SpecialCharsClientBuilder>, EndpointTrait<SpecialCharsClientBuilder> {
     @Generated

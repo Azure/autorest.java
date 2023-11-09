@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the TraitsClient type.
  */
-@ServiceClientBuilder(serviceClients = { TraitsClient.class, TraitsAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    TraitsClient.class, TraitsAsyncClient.class
+})
 public final class TraitsClientBuilder
     implements HttpTrait<TraitsClientBuilder>, ConfigurationTrait<TraitsClientBuilder> {
     @Generated

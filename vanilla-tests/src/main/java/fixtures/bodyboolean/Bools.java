@@ -54,37 +54,49 @@ public final class Bools {
     @ServiceInterface(name = "AutoRestBoolTestServ")
     public interface BoolsService {
         @Get("/bool/true")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> getTrue(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/bool/true")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/bool/false")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> getFalse(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/bool/false")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/bool/null")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/bool/invalid")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

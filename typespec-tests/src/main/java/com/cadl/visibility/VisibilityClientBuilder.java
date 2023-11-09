@@ -41,9 +41,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the VisibilityClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = { VisibilityClient.class, VisibilityReadClient.class, VisibilityWriteClient.class,
-        VisibilityAsyncClient.class, VisibilityReadAsyncClient.class, VisibilityWriteAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    VisibilityClient.class, VisibilityReadClient.class, VisibilityWriteClient.class, VisibilityAsyncClient.class,
+    VisibilityReadAsyncClient.class, VisibilityWriteAsyncClient.class
+})
 public final class VisibilityClientBuilder implements HttpTrait<VisibilityClientBuilder>,
     ConfigurationTrait<VisibilityClientBuilder>, EndpointTrait<VisibilityClientBuilder> {
     @Generated

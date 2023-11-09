@@ -60,55 +60,73 @@ public final class HttpRetries {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpRetriesService {
         @Head("/http/retry/408")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> head408(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/http/retry/500")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put500(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/retry/500")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> patch500(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/retry/502")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> get502(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Options("/http/retry/502")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> options502(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/http/retry/503")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> post503(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/retry/503")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> delete503(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/retry/504")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> put504(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/retry/504")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> patch504(@HostParam("$host") String host,
             @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);

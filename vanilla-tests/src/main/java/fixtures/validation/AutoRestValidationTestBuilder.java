@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestValidationTest type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestValidationTest.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestValidationTest.class
+})
 public final class AutoRestValidationTestBuilder
     implements HttpTrait<AutoRestValidationTestBuilder>, ConfigurationTrait<AutoRestValidationTestBuilder> {
     @Generated

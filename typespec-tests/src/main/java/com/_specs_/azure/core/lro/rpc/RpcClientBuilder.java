@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the RpcClient type.
  */
-@ServiceClientBuilder(serviceClients = { RpcClient.class, RpcAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    RpcClient.class, RpcAsyncClient.class
+})
 public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, ConfigurationTrait<RpcClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

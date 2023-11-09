@@ -76,75 +76,97 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceInterface(name = "AzureContainerRegist")
     public interface ContainerRegistryBlobsService {
         @Get("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200, 307 })
+        @ExpectedResponses({
+            200, 307
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData>> getBlob(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200, 307 })
+        @ExpectedResponses({
+            200, 307
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData> getBlobSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, @HeaderParam("Accept") String accept,
             Context context);
 
         @Head("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200, 307 })
+        @ExpectedResponses({
+            200, 307
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void>> checkBlobExists(
             @HostParam("url") String url, @PathParam("name") String name, @PathParam("digest") String digest,
             @HeaderParam("Accept") String accept, Context context);
 
         @Head("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200, 307 })
+        @ExpectedResponses({
+            200, 307
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void> checkBlobExistsSync(
             @HostParam("url") String url, @PathParam("name") String name, @PathParam("digest") String digest,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void>> deleteBlob(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, Context context);
 
         @Delete("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void> deleteBlobSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, Context context);
 
         @Post("/v2/{name}/blobs/uploads/")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void>> mountBlob(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("from") String from, @QueryParam("mount") String mount,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/v2/{name}/blobs/uploads/")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void> mountBlobSync(@HostParam("url") String url,
             @PathParam("name") String name, @QueryParam("from") String from, @QueryParam("mount") String mount,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void>> getUploadStatus(
             @HostParam("url") String url, @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void> getUploadStatusSync(
             @HostParam("url") String url, @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
             @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>> uploadChunk(@HostParam("url") String url,
             @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
@@ -152,7 +174,9 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>> uploadChunk(@HostParam("url") String url,
             @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
@@ -160,7 +184,9 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void> uploadChunkSync(@HostParam("url") String url,
             @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
@@ -168,7 +194,9 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>> completeUpload(
             @HostParam("url") String url, @QueryParam("digest") String digest,
@@ -177,7 +205,9 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>> completeUpload(
             @HostParam("url") String url, @QueryParam("digest") String digest,
@@ -186,7 +216,9 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 201 })
+        @ExpectedResponses({
+            201
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void> completeUploadSync(@HostParam("url") String url,
             @QueryParam("digest") String digest, @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
@@ -194,54 +226,70 @@ public final class ContainerRegistryBlobsImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<Void>> cancelUpload(@HostParam("url") String url,
             @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/{nextBlobUuidLink}")
-        @ExpectedResponses({ 204 })
+        @ExpectedResponses({
+            204
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<Void> cancelUploadSync(@HostParam("url") String url,
             @PathParam(value = "nextBlobUuidLink", encoded = true) String nextLink,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/v2/{name}/blobs/uploads/")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void>> startUpload(@HostParam("url") String url,
             @PathParam("name") String name, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/v2/{name}/blobs/uploads/")
-        @ExpectedResponses({ 202 })
+        @ExpectedResponses({
+            202
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void> startUploadSync(@HostParam("url") String url,
             @PathParam("name") String name, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 206 })
+        @ExpectedResponses({
+            206
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData>> getChunk(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, @HeaderParam("Range") String range,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 206 })
+        @ExpectedResponses({
+            206
+        })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData> getChunkSync(@HostParam("url") String url,
             @PathParam("name") String name, @PathParam("digest") String digest, @HeaderParam("Range") String range,
             @HeaderParam("Accept") String accept, Context context);
 
         @Head("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void>> checkChunkExists(
             @HostParam("url") String url, @PathParam("name") String name, @PathParam("digest") String digest,
             @HeaderParam("Range") String range, @HeaderParam("Accept") String accept, Context context);
 
         @Head("/v2/{name}/blobs/{digest}")
-        @ExpectedResponses({ 200 })
+        @ExpectedResponses({
+            200
+        })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void> checkChunkExistsSync(
             @HostParam("url") String url, @PathParam("name") String name, @PathParam("digest") String digest,

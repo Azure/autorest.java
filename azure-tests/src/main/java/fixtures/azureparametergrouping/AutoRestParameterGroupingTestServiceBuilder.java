@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestParameterGroupingTestService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestParameterGroupingTestService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestParameterGroupingTestService.class
+})
 public final class AutoRestParameterGroupingTestServiceBuilder
     implements HttpTrait<AutoRestParameterGroupingTestServiceBuilder>,
     ConfigurationTrait<AutoRestParameterGroupingTestServiceBuilder> {

@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestResourceFlatteningTestService type.
  */
-@ServiceClientBuilder(serviceClients = { AutoRestResourceFlatteningTestService.class })
+@ServiceClientBuilder(serviceClients = {
+    AutoRestResourceFlatteningTestService.class
+})
 public final class AutoRestResourceFlatteningTestServiceBuilder
     implements HttpTrait<AutoRestResourceFlatteningTestServiceBuilder>,
     ConfigurationTrait<AutoRestResourceFlatteningTestServiceBuilder> {

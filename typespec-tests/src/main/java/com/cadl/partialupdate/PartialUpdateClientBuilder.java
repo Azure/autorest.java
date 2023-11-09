@@ -40,7 +40,9 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PartialUpdateClient type.
  */
-@ServiceClientBuilder(serviceClients = { PartialUpdateClient.class, PartialUpdateAsyncClient.class })
+@ServiceClientBuilder(serviceClients = {
+    PartialUpdateClient.class, PartialUpdateAsyncClient.class
+})
 public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdateClientBuilder>,
     ConfigurationTrait<PartialUpdateClientBuilder>, EndpointTrait<PartialUpdateClientBuilder> {
 
