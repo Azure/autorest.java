@@ -267,7 +267,7 @@ public class SchemaUtil {
                         && compositeType.getLanguage().getJava().getNamespace() != null) {
 
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
-                    if (ClassType.PollOperationDetails.getName().equals(name)
+                    if (Objects.equals(name, ClassType.PollOperationDetails.getName())
                         && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.PollOperationDetails.getPackage())) {
                         classType = ClassType.PollOperationDetails;
                     } else if (Objects.equals(name, ClassType.RequestConditions.getName())
