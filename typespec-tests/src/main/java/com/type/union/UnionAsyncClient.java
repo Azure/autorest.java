@@ -15,7 +15,12 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.UnionClientImpl;
+import com.type.union.models.ModelWithNamedUnionProperty;
+import com.type.union.models.ModelWithNamedUnionPropertyInResponse;
+import com.type.union.models.ModelWithSimpleUnionProperty;
+import com.type.union.models.ModelWithSimpleUnionPropertyInResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,7 +48,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -58,7 +63,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendIntWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendInt' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntWithResponseAsync(input, requestOptions);
     }
 
@@ -69,7 +73,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -84,7 +88,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendIntArrayWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendIntArray' refers Union 'int32 | int32[]'
         return this.serviceClient.sendIntArrayWithResponseAsync(input, requestOptions);
     }
 
@@ -95,7 +98,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -110,7 +113,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendFirstNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendFirstNamedUnionValueWithResponseAsync(input, requestOptions);
     }
 
@@ -121,7 +123,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -136,7 +138,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendSecondNamedUnionValueWithResponse(BinaryData input, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'sendSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.sendSecondNamedUnionValueWithResponseAsync(input, requestOptions);
     }
 
@@ -147,7 +148,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -161,7 +162,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> receiveStringWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveString' refers Union 'string | int32[]'
         return this.serviceClient.receiveStringWithResponseAsync(requestOptions);
     }
 
@@ -172,7 +172,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -186,7 +186,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> receiveIntArrayWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveIntArray' refers Union 'string | int32[]'
         return this.serviceClient.receiveIntArrayWithResponseAsync(requestOptions);
     }
 
@@ -197,7 +196,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -211,7 +210,6 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> receiveFirstNamedUnionValueWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveFirstNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.receiveFirstNamedUnionValueWithResponseAsync(requestOptions);
     }
 
@@ -222,7 +220,7 @@ public final class UnionAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -236,7 +234,164 @@ public final class UnionAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> receiveSecondNamedUnionValueWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'receiveSecondNamedUnionValue' refers Union 'MyNamedUnion'
         return this.serviceClient.receiveSecondNamedUnionValueWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The sendInt operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> sendInt(ModelWithSimpleUnionProperty input) {
+        // Generated convenience method for sendIntWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return sendIntWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The sendIntArray operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> sendIntArray(ModelWithSimpleUnionProperty input) {
+        // Generated convenience method for sendIntArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return sendIntArrayWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The sendFirstNamedUnionValue operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> sendFirstNamedUnionValue(ModelWithNamedUnionProperty input) {
+        // Generated convenience method for sendFirstNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return sendFirstNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions)
+            .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The sendSecondNamedUnionValue operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> sendSecondNamedUnionValue(ModelWithNamedUnionProperty input) {
+        // Generated convenience method for sendSecondNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return sendSecondNamedUnionValueWithResponse(BinaryData.fromObject(input), requestOptions)
+            .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The receiveString operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithSimpleUnionPropertyInResponse> receiveString() {
+        // Generated convenience method for receiveStringWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveStringWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ModelWithSimpleUnionPropertyInResponse.class));
+    }
+
+    /**
+     * The receiveIntArray operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithSimpleUnionPropertyInResponse> receiveIntArray() {
+        // Generated convenience method for receiveIntArrayWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveIntArrayWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ModelWithSimpleUnionPropertyInResponse.class));
+    }
+
+    /**
+     * The receiveFirstNamedUnionValue operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithNamedUnionPropertyInResponse> receiveFirstNamedUnionValue() {
+        // Generated convenience method for receiveFirstNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveFirstNamedUnionValueWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ModelWithNamedUnionPropertyInResponse.class));
+    }
+
+    /**
+     * The receiveSecondNamedUnionValue operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ModelWithNamedUnionPropertyInResponse> receiveSecondNamedUnionValue() {
+        // Generated convenience method for receiveSecondNamedUnionValueWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return receiveSecondNamedUnionValueWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ModelWithNamedUnionPropertyInResponse.class));
     }
 }

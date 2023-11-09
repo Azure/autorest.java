@@ -162,6 +162,9 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getEnableSyncStack() != null) {
             SETTINGS_MAP.put("enable-sync-stack", options.getEnableSyncStack());
         }
+        if (options.getStreamStyleSerialization() != null) {
+            SETTINGS_MAP.put("stream-style-serialization", options.getStreamStyleSerialization());
+        }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);

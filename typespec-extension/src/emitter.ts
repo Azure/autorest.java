@@ -31,13 +31,14 @@ export interface EmitterOptions {
   "examples-directory"?: string;
 
   "enable-sync-stack"?: boolean;
+  "stream-style-serialization"?: boolean;
 
   "partial-update"?: boolean;
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
 
-  "fluent"?: string;
+  "arm"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -74,6 +75,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "examples-directory": { type: "string", nullable: true },
 
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+    "stream-style-serialization": { type: "boolean", nullable: true, default: false },
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
@@ -81,7 +83,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
 
-    "fluent": { type: "string", nullable: true },
+    "arm": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
@@ -108,6 +110,8 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
+
+    options["arm"] = codeModel.arm;
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 

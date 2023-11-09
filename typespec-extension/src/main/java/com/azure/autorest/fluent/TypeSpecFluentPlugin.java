@@ -46,8 +46,8 @@ public class TypeSpecFluentPlugin extends FluentGen {
         if (emitterOptions.getGenerateTests() != null) {
             SETTINGS_MAP.put("generate-tests", emitterOptions.getGenerateTests());
         }
-        if (emitterOptions.getFluent() != null) {
-            SETTINGS_MAP.put("fluent", emitterOptions.getFluent());
+        if (emitterOptions.getArm()) {
+            SETTINGS_MAP.put("fluent", "lite");
         }
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
 

@@ -41,7 +41,10 @@ public class EmitterOptions {
     private Boolean generateSamples = true;
 
     @JsonProperty(value = "enable-sync-stack")
-    private Boolean enableSyncStack;
+    private Boolean enableSyncStack = true;
+
+    @JsonProperty(value = "stream-style-serialization")
+    private Boolean streamStyleSerialization = false;
 
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
@@ -55,8 +58,8 @@ public class EmitterOptions {
     @JsonProperty(value="customization-class")
     private String customizationClass;
 
-    @JsonProperty(value = "fluent")
-    private String fluent;
+    @JsonProperty(value = "arm")
+    private Boolean arm = false;
 
     public String getNamespace() {
         return namespace;
@@ -84,6 +87,10 @@ public class EmitterOptions {
 
     public Boolean getEnableSyncStack() {
         return enableSyncStack;
+    }
+
+    public Boolean getStreamStyleSerialization() {
+        return streamStyleSerialization;
     }
 
     public EmitterOptions setNamespace(String namespace) {
@@ -120,8 +127,8 @@ public class EmitterOptions {
         return branded;
     }
 
-    public String getFluent() {
-        return fluent;
+    public Boolean getArm() {
+        return arm;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

@@ -83,10 +83,10 @@ public class Main {
             }
         }
 
-        if (emitterOptions.getFluent() == null) {
-            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
-        } else {
+        if (emitterOptions.getArm()) {
             handleFluent(codeModel, emitterOptions, sdkIntegration);
+        } else {
+            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
         }
     }
 

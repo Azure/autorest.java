@@ -291,7 +291,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(fieldSerializationMethod + ";");
             }
         } else if (wireType == ClassType.Object) {
-            methodBlock.line("jsonWriter.writeUntyped(" + propertyValueGetter + ");");
+            methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
+        } else if (wireType == ClassType.BinaryData) {
+            methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));");
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
@@ -934,6 +936,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     "reader.readUntyped()", fromSuper);
             } else {
                 deserializationBlock.line(property.getName() + " = reader.readUntyped();");
+            }
+        } else if (wireType == ClassType.BinaryData) {
+            if (!hasConstructorArguments) {
+                handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
+                    "BinaryData.fromObject(reader.readUntyped())", fromSuper);
+            } else {
+                deserializationBlock.line(property.getName() + " = BinaryData.fromObject(reader.readUntyped());");
             }
         } else if (wireType instanceof IterableType) {
             if (!hasConstructorArguments) {
