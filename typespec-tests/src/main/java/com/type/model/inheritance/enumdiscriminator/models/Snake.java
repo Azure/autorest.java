@@ -6,30 +6,22 @@ package com.type.model.inheritance.enumdiscriminator.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Test fixed enum type for discriminator.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "kind",
-    defaultImpl = Snake.class)
-@JsonTypeName("Snake")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "cobra", value = Cobra.class) })
 @Immutable
-public class Snake {
+public class Snake implements JsonSerializable<Snake> {
     /*
      * Length of the snake
      */
     @Generated
-    @JsonProperty(value = "length")
-    private int length;
+    private final int length;
 
     /**
      * Creates an instance of Snake class.
@@ -37,8 +29,7 @@ public class Snake {
      * @param length the length value to set.
      */
     @Generated
-    @JsonCreator
-    public Snake(@JsonProperty(value = "length") int length) {
+    public Snake(int length) {
         this.length = length;
     }
 
@@ -50,5 +41,52 @@ public class Snake {
     @Generated
     public int getLength() {
         return this.length;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("length", this.length);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Snake from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Snake if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Snake.
+     */
+    public static Snake fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
+
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("kind".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
+
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("cobra".equals(discriminatorValue)) {
+                return Cobra.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'kind' didn't match one of the expected values 'cobra'");
+            }
+        });
     }
 }

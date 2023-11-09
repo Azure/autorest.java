@@ -4,9 +4,6 @@
 
 package com.type.enums.fixed.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Days of the week.
  */
@@ -61,7 +58,6 @@ public enum DaysOfWeekEnum {
      * @param value the serialized value to parse.
      * @return the parsed DaysOfWeekEnum object, or null if unable to parse.
      */
-    @JsonCreator
     public static DaysOfWeekEnum fromString(String value) {
         if (value == null) {
             return null;
@@ -78,7 +74,6 @@ public enum DaysOfWeekEnum {
     /**
      * {@inheritDoc}
      */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

@@ -7,33 +7,35 @@ package com.cadl.union.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.BinaryData;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Result model.
  */
 @Immutable
-public final class Result {
+public final class Result implements JsonSerializable<Result> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /*
      * The result property.
      */
     @Generated
-    @JsonProperty(value = "result")
-    private Result result;
+    private final Result result;
 
     /*
      * The data property.
      */
     @Generated
-    @JsonProperty(value = "data")
     private BinaryData data;
 
     /**
@@ -43,8 +45,7 @@ public final class Result {
      * @param result the result value to set.
      */
     @Generated
-    @JsonCreator
-    private Result(@JsonProperty(value = "name") String name, @JsonProperty(value = "result") Result result) {
+    private Result(String name, Result result) {
         this.name = name;
         this.result = result;
     }
@@ -77,5 +78,65 @@ public final class Result {
     @Generated
     public BinaryData getData() {
         return this.data;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeJsonField("result", this.result);
+        jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Result from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Result if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Result.
+     */
+    public static Result fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            boolean resultFound = false;
+            Result result = null;
+            BinaryData data = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else if ("result".equals(fieldName)) {
+                    result = Result.fromJson(reader);
+                    resultFound = true;
+                } else if ("data".equals(fieldName)) {
+                    data = BinaryData.fromObject(reader.readUntyped());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound && resultFound) {
+                Result deserializedResult = new Result(name, result);
+                deserializedResult.data = data;
+
+                return deserializedResult;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+            if (!resultFound) {
+                missingProperties.add("result");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

@@ -7,21 +7,26 @@ package com.encode.datetime.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The Rfc7231DatetimeProperty model.
  */
 @Immutable
-public final class Rfc7231DatetimeProperty {
+public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231DatetimeProperty> {
     /*
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value")
-    private DateTimeRfc1123 value;
+    private final DateTimeRfc1123 value;
 
     /**
      * Creates an instance of Rfc7231DatetimeProperty class.
@@ -31,12 +36,6 @@ public final class Rfc7231DatetimeProperty {
     @Generated
     public Rfc7231DatetimeProperty(OffsetDateTime value) {
         this.value = new DateTimeRfc1123(value);
-    }
-
-    @Generated
-    @JsonCreator
-    private Rfc7231DatetimeProperty(@JsonProperty(value = "value") DateTimeRfc1123 value) {
-        this(value.getDateTime());
     }
 
     /**
@@ -50,5 +49,55 @@ public final class Rfc7231DatetimeProperty {
             return null;
         }
         return this.value.getDateTime();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("value", Objects.toString(this.value, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Rfc7231DatetimeProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Rfc7231DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Rfc7231DatetimeProperty.
+     */
+    public static Rfc7231DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean valueFound = false;
+            OffsetDateTime value = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("value".equals(fieldName)) {
+                    DateTimeRfc1123 value
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                    if (value != null) {
+                        value = value.getDateTime();
+                    }
+                    valueFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (valueFound) {
+                Rfc7231DatetimeProperty deserializedRfc7231DatetimeProperty = new Rfc7231DatetimeProperty(value);
+
+                return deserializedRfc7231DatetimeProperty;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!valueFound) {
+                missingProperties.add("value");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

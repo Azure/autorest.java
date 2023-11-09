@@ -7,139 +7,125 @@ package com.cadl.builtin.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The Builtin model.
  */
 @Immutable
-public final class Builtin {
+public final class Builtin implements JsonSerializable<Builtin> {
     /*
      * The boolean property.
      */
     @Generated
-    @JsonProperty(value = "boolean")
-    private boolean booleanProperty;
+    private final boolean booleanProperty;
 
     /*
      * The string property.
      */
     @Generated
-    @JsonProperty(value = "string")
-    private String string;
+    private final String string;
 
     /*
      * The bytes property.
      */
     @Generated
-    @JsonProperty(value = "bytes")
-    private byte[] bytes;
+    private final byte[] bytes;
 
     /*
      * The int property.
      */
     @Generated
-    @JsonProperty(value = "int")
-    private int intProperty;
+    private final int intProperty;
 
     /*
      * The safeint property.
      */
     @Generated
-    @JsonProperty(value = "safeint")
-    private long safeint;
+    private final long safeint;
 
     /*
      * The decimal property.
      */
     @Generated
-    @JsonProperty(value = "decimal")
-    private double decimal;
+    private final double decimal;
 
     /*
      * The long property.
      */
     @Generated
-    @JsonProperty(value = "long")
-    private long longProperty;
+    private final long longProperty;
 
     /*
      * The float property.
      */
     @Generated
-    @JsonProperty(value = "float")
-    private double floatProperty;
+    private final double floatProperty;
 
     /*
      * The double property.
      */
     @Generated
-    @JsonProperty(value = "double")
-    private double doubleProperty;
+    private final double doubleProperty;
 
     /*
      * The duration property.
      */
     @Generated
-    @JsonProperty(value = "duration")
-    private Duration duration;
+    private final Duration duration;
 
     /*
      * The date property.
      */
     @Generated
-    @JsonProperty(value = "date")
-    private LocalDate date;
+    private final LocalDate date;
 
     /*
      * The dateTime property.
      */
     @Generated
-    @JsonProperty(value = "dateTime")
-    private OffsetDateTime dateTime;
+    private final OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
     @Generated
-    @JsonProperty(value = "stringList")
-    private List<String> stringList;
+    private final List<String> stringList;
 
     /*
      * The bytesDict property.
      */
     @Generated
-    @JsonProperty(value = "bytesDict")
-    private Map<String, byte[]> bytesDict;
+    private final Map<String, byte[]> bytesDict;
 
     /*
      * The url property.
      */
     @Generated
-    @JsonProperty(value = "url")
-    private String url;
+    private final String url;
 
     /*
      * The nullableFloatDict property.
      */
     @Generated
-    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
-    @JsonProperty(value = "nullableFloatDict")
-    private Map<String, Double> nullableFloatDict;
+    private final Map<String, Double> nullableFloatDict;
 
     /*
      * The encoded property.
      */
     @Generated
-    @JsonProperty(value = "encoded")
-    private Encoded encoded;
+    private final Encoded encoded;
 
     /**
      * Creates an instance of Builtin class.
@@ -163,18 +149,10 @@ public final class Builtin {
      * @param encoded the encoded value to set.
      */
     @Generated
-    @JsonCreator
-    public Builtin(@JsonProperty(value = "boolean") boolean booleanProperty,
-        @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes,
-        @JsonProperty(value = "int") int intProperty, @JsonProperty(value = "safeint") long safeint,
-        @JsonProperty(value = "decimal") double decimal, @JsonProperty(value = "long") long longProperty,
-        @JsonProperty(value = "float") double floatProperty, @JsonProperty(value = "double") double doubleProperty,
-        @JsonProperty(value = "duration") Duration duration, @JsonProperty(value = "date") LocalDate date,
-        @JsonProperty(value = "dateTime") OffsetDateTime dateTime,
-        @JsonProperty(value = "stringList") List<String> stringList,
-        @JsonProperty(value = "bytesDict") Map<String, byte[]> bytesDict, @JsonProperty(value = "url") String url,
-        @JsonProperty(value = "nullableFloatDict") Map<String, Double> nullableFloatDict,
-        @JsonProperty(value = "encoded") Encoded encoded) {
+    public Builtin(boolean booleanProperty, String string, byte[] bytes, int intProperty, long safeint, double decimal,
+        long longProperty, double floatProperty, double doubleProperty, Duration duration, LocalDate date,
+        OffsetDateTime dateTime, List<String> stringList, Map<String, byte[]> bytesDict, String url,
+        Map<String, Double> nullableFloatDict, Encoded encoded) {
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;
@@ -362,5 +340,201 @@ public final class Builtin {
     @Generated
     public Encoded getEncoded() {
         return this.encoded;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("boolean", this.booleanProperty);
+        jsonWriter.writeStringField("string", this.string);
+        jsonWriter.writeBinaryField("bytes", this.bytes);
+        jsonWriter.writeIntField("int", this.intProperty);
+        jsonWriter.writeLongField("safeint", this.safeint);
+        jsonWriter.writeDoubleField("decimal", this.decimal);
+        jsonWriter.writeLongField("long", this.longProperty);
+        jsonWriter.writeDoubleField("float", this.floatProperty);
+        jsonWriter.writeDoubleField("double", this.doubleProperty);
+        jsonWriter.writeStringField("duration", Objects.toString(this.duration, null));
+        jsonWriter.writeStringField("date", Objects.toString(this.date, null));
+        jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
+        jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
+        jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
+        jsonWriter.writeStringField("url", this.url);
+        jsonWriter.writeMapField("nullableFloatDict", this.nullableFloatDict,
+            (writer, element) -> writer.writeDouble(element));
+        jsonWriter.writeJsonField("encoded", this.encoded);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Builtin from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Builtin if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Builtin.
+     */
+    public static Builtin fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean booleanPropertyFound = false;
+            boolean booleanProperty = false;
+            boolean stringFound = false;
+            String string = null;
+            boolean bytesFound = false;
+            byte[] bytes = null;
+            boolean intPropertyFound = false;
+            int intProperty = 0;
+            boolean safeintFound = false;
+            long safeint = 0L;
+            boolean decimalFound = false;
+            double decimal = 0.0;
+            boolean longPropertyFound = false;
+            long longProperty = 0L;
+            boolean floatPropertyFound = false;
+            double floatProperty = 0.0;
+            boolean doublePropertyFound = false;
+            double doubleProperty = 0.0;
+            boolean durationFound = false;
+            Duration duration = null;
+            boolean dateFound = false;
+            LocalDate date = null;
+            boolean dateTimeFound = false;
+            OffsetDateTime dateTime = null;
+            boolean stringListFound = false;
+            List<String> stringList = null;
+            boolean bytesDictFound = false;
+            Map<String, byte[]> bytesDict = null;
+            boolean urlFound = false;
+            String url = null;
+            boolean nullableFloatDictFound = false;
+            Map<String, Double> nullableFloatDict = null;
+            boolean encodedFound = false;
+            Encoded encoded = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("boolean".equals(fieldName)) {
+                    booleanProperty = reader.getBoolean();
+                    booleanPropertyFound = true;
+                } else if ("string".equals(fieldName)) {
+                    string = reader.getString();
+                    stringFound = true;
+                } else if ("bytes".equals(fieldName)) {
+                    bytes = reader.getBinary();
+                    bytesFound = true;
+                } else if ("int".equals(fieldName)) {
+                    intProperty = reader.getInt();
+                    intPropertyFound = true;
+                } else if ("safeint".equals(fieldName)) {
+                    safeint = reader.getLong();
+                    safeintFound = true;
+                } else if ("decimal".equals(fieldName)) {
+                    decimal = reader.getDouble();
+                    decimalFound = true;
+                } else if ("long".equals(fieldName)) {
+                    longProperty = reader.getLong();
+                    longPropertyFound = true;
+                } else if ("float".equals(fieldName)) {
+                    floatProperty = reader.getDouble();
+                    floatPropertyFound = true;
+                } else if ("double".equals(fieldName)) {
+                    doubleProperty = reader.getDouble();
+                    doublePropertyFound = true;
+                } else if ("duration".equals(fieldName)) {
+                    duration = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                    durationFound = true;
+                } else if ("date".equals(fieldName)) {
+                    date = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                    dateFound = true;
+                } else if ("dateTime".equals(fieldName)) {
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    dateTimeFound = true;
+                } else if ("stringList".equals(fieldName)) {
+                    stringList = reader.readArray(reader1 -> reader1.getString());
+                    stringListFound = true;
+                } else if ("bytesDict".equals(fieldName)) {
+                    bytesDict = reader.readMap(reader1 -> reader1.getBinary());
+                    bytesDictFound = true;
+                } else if ("url".equals(fieldName)) {
+                    url = reader.getString();
+                    urlFound = true;
+                } else if ("nullableFloatDict".equals(fieldName)) {
+                    nullableFloatDict = reader.readMap(reader1 -> reader1.getDouble());
+                    nullableFloatDictFound = true;
+                } else if ("encoded".equals(fieldName)) {
+                    encoded = Encoded.fromJson(reader);
+                    encodedFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (booleanPropertyFound && stringFound && bytesFound && intPropertyFound && safeintFound && decimalFound
+                && longPropertyFound && floatPropertyFound && doublePropertyFound && durationFound && dateFound
+                && dateTimeFound && stringListFound && bytesDictFound && urlFound && nullableFloatDictFound
+                && encodedFound) {
+                Builtin deserializedBuiltin = new Builtin(booleanProperty, string, bytes, intProperty, safeint, decimal,
+                    longProperty, floatProperty, doubleProperty, duration, date, dateTime, stringList, bytesDict, url,
+                    nullableFloatDict, encoded);
+
+                return deserializedBuiltin;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!booleanPropertyFound) {
+                missingProperties.add("boolean");
+            }
+            if (!stringFound) {
+                missingProperties.add("string");
+            }
+            if (!bytesFound) {
+                missingProperties.add("bytes");
+            }
+            if (!intPropertyFound) {
+                missingProperties.add("int");
+            }
+            if (!safeintFound) {
+                missingProperties.add("safeint");
+            }
+            if (!decimalFound) {
+                missingProperties.add("decimal");
+            }
+            if (!longPropertyFound) {
+                missingProperties.add("long");
+            }
+            if (!floatPropertyFound) {
+                missingProperties.add("float");
+            }
+            if (!doublePropertyFound) {
+                missingProperties.add("double");
+            }
+            if (!durationFound) {
+                missingProperties.add("duration");
+            }
+            if (!dateFound) {
+                missingProperties.add("date");
+            }
+            if (!dateTimeFound) {
+                missingProperties.add("dateTime");
+            }
+            if (!stringListFound) {
+                missingProperties.add("stringList");
+            }
+            if (!bytesDictFound) {
+                missingProperties.add("bytesDict");
+            }
+            if (!urlFound) {
+                missingProperties.add("url");
+            }
+            if (!nullableFloatDictFound) {
+                missingProperties.add("nullableFloatDict");
+            }
+            if (!encodedFound) {
+                missingProperties.add("encoded");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

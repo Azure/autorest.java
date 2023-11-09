@@ -4,9 +4,6 @@
 
 package com.cadl.enumservice.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Defines values for Unit.
  */
@@ -41,7 +38,6 @@ public enum Unit {
      * @param value the serialized value to parse.
      * @return the parsed Unit object, or null if unable to parse.
      */
-    @JsonCreator
     public static Unit fromDouble(double value) {
         Unit[] items = Unit.values();
         for (Unit item : items) {
@@ -57,7 +53,6 @@ public enum Unit {
      * 
      * @return the double value.
      */
-    @JsonValue
     public double toDouble() {
         return this.value;
     }

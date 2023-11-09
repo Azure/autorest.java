@@ -6,49 +6,48 @@ package com.type.model.visibility.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Output model with visibility properties.
  */
 @Immutable
-public final class VisibilityModel {
+public final class VisibilityModel implements JsonSerializable<VisibilityModel> {
     /*
      * Required string, illustrating a readonly property.
      */
     @Generated
-    @JsonProperty(value = "readProp", access = JsonProperty.Access.WRITE_ONLY)
     private String readProp;
 
     /*
      * Required int32, illustrating a query property.
      */
     @Generated
-    @JsonProperty(value = "queryProp")
-    private Integer queryProp;
+    private final Integer queryProp;
 
     /*
      * Required string[], illustrating a create property.
      */
     @Generated
-    @JsonProperty(value = "createProp")
-    private List<String> createProp;
+    private final List<String> createProp;
 
     /*
      * Required int32[], illustrating a update property.
      */
     @Generated
-    @JsonProperty(value = "updateProp")
-    private List<Integer> updateProp;
+    private final List<Integer> updateProp;
 
     /*
      * Required bool, illustrating a delete property.
      */
     @Generated
-    @JsonProperty(value = "deleteProp")
-    private Boolean deleteProp;
+    private final Boolean deleteProp;
 
     /**
      * Creates an instance of VisibilityModel class.
@@ -59,11 +58,7 @@ public final class VisibilityModel {
      * @param deleteProp the deleteProp value to set.
      */
     @Generated
-    @JsonCreator
-    public VisibilityModel(@JsonProperty(value = "queryProp") Integer queryProp,
-        @JsonProperty(value = "createProp") List<String> createProp,
-        @JsonProperty(value = "updateProp") List<Integer> updateProp,
-        @JsonProperty(value = "deleteProp") Boolean deleteProp) {
+    public VisibilityModel(Integer queryProp, List<String> createProp, List<Integer> updateProp, Boolean deleteProp) {
         this.queryProp = queryProp;
         this.createProp = createProp;
         this.updateProp = updateProp;
@@ -118,5 +113,83 @@ public final class VisibilityModel {
     @Generated
     public Boolean isDeleteProp() {
         return this.deleteProp;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("queryProp", this.queryProp);
+        jsonWriter.writeArrayField("createProp", this.createProp, (writer, element) -> writer.writeString(element));
+        jsonWriter.writeArrayField("updateProp", this.updateProp, (writer, element) -> writer.writeInt(element));
+        jsonWriter.writeBooleanField("deleteProp", this.deleteProp);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of VisibilityModel from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of VisibilityModel if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the VisibilityModel.
+     */
+    public static VisibilityModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String readProp = null;
+            boolean queryPropFound = false;
+            Integer queryProp = null;
+            boolean createPropFound = false;
+            List<String> createProp = null;
+            boolean updatePropFound = false;
+            List<Integer> updateProp = null;
+            boolean deletePropFound = false;
+            Boolean deleteProp = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("readProp".equals(fieldName)) {
+                    readProp = reader.getString();
+                } else if ("queryProp".equals(fieldName)) {
+                    queryProp = reader.getNullable(JsonReader::getInt);
+                    queryPropFound = true;
+                } else if ("createProp".equals(fieldName)) {
+                    createProp = reader.readArray(reader1 -> reader1.getString());
+                    createPropFound = true;
+                } else if ("updateProp".equals(fieldName)) {
+                    updateProp = reader.readArray(reader1 -> reader1.getInt());
+                    updatePropFound = true;
+                } else if ("deleteProp".equals(fieldName)) {
+                    deleteProp = reader.getNullable(JsonReader::getBoolean);
+                    deletePropFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (queryPropFound && createPropFound && updatePropFound && deletePropFound) {
+                VisibilityModel deserializedVisibilityModel
+                    = new VisibilityModel(queryProp, createProp, updateProp, deleteProp);
+                deserializedVisibilityModel.readProp = readProp;
+
+                return deserializedVisibilityModel;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!queryPropFound) {
+                missingProperties.add("queryProp");
+            }
+            if (!createPropFound) {
+                missingProperties.add("createProp");
+            }
+            if (!updatePropFound) {
+                missingProperties.add("updateProp");
+            }
+            if (!deletePropFound) {
+                missingProperties.add("deleteProp");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }
