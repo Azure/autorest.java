@@ -175,7 +175,8 @@ public class TypeSpecPlugin extends Javagen {
         }
 
         if (options.getCustomizationClass() != null) {
-            SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
+            SETTINGS_MAP.put("customization-class",
+                Paths.get(options.getOutputDir()).resolve(options.getCustomizationClass()).toAbsolutePath().toString());
         }
 
         if (options.getBranded() == Boolean.FALSE) {
