@@ -31,6 +31,7 @@ export interface EmitterOptions {
   "examples-directory"?: string;
 
   "enable-sync-stack"?: boolean;
+  "stream-style-serialization"?: boolean;
 
   "partial-update"?: boolean;
   "custom-types"?: string;
@@ -74,6 +75,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "examples-directory": { type: "string", nullable: true },
 
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+    "stream-style-serialization": { type: "boolean", nullable: true, default: false },
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
