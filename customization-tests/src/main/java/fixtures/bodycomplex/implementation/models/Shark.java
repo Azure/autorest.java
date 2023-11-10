@@ -21,7 +21,8 @@ import java.util.List;
     property = "fishtype",
     defaultImpl = Shark.class)
 @JsonTypeName("shark")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
     @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class),
     @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent

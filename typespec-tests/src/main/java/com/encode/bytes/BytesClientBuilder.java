@@ -41,9 +41,17 @@ import java.util.Objects;
  * A builder for creating a new instance of the BytesClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { QueryClient.class, PropertyClient.class, HeaderClient.class, RequestBodyClient.class,
-        ResponseBodyClient.class, QueryAsyncClient.class, PropertyAsyncClient.class, HeaderAsyncClient.class,
-        RequestBodyAsyncClient.class, ResponseBodyAsyncClient.class })
+    serviceClients = {
+        QueryClient.class,
+        PropertyClient.class,
+        HeaderClient.class,
+        RequestBodyClient.class,
+        ResponseBodyClient.class,
+        QueryAsyncClient.class,
+        PropertyAsyncClient.class,
+        HeaderAsyncClient.class,
+        RequestBodyAsyncClient.class,
+        ResponseBodyAsyncClient.class })
 public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, ConfigurationTrait<BytesClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

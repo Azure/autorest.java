@@ -41,8 +41,14 @@ import java.util.Objects;
  * A builder for creating a new instance of the SpecialWordsClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { ModelsClient.class, ModelPropertiesClient.class, OperationsClient.class, ParametersClient.class,
-        ModelsAsyncClient.class, ModelPropertiesAsyncClient.class, OperationsAsyncClient.class,
+    serviceClients = {
+        ModelsClient.class,
+        ModelPropertiesClient.class,
+        OperationsClient.class,
+        ParametersClient.class,
+        ModelsAsyncClient.class,
+        ModelPropertiesAsyncClient.class,
+        OperationsAsyncClient.class,
         ParametersAsyncClient.class })
 public final class SpecialWordsClientBuilder
     implements HttpTrait<SpecialWordsClientBuilder>, ConfigurationTrait<SpecialWordsClientBuilder> {
