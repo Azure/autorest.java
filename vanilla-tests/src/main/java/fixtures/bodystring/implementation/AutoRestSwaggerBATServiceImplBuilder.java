@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestSwaggerBATServiceImpl.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestSwaggerBATServiceImpl.class })
 public final class AutoRestSwaggerBATServiceImplBuilder implements HttpTrait<AutoRestSwaggerBATServiceImplBuilder>,
     ConfigurationTrait<AutoRestSwaggerBATServiceImplBuilder> {
     @Generated

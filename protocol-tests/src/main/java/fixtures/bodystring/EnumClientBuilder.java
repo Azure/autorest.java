@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the EnumClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    EnumClient.class, EnumAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { EnumClient.class, EnumAsyncClient.class })
 public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, ConfigurationTrait<EnumClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

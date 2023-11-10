@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DpgMultiMediaTypesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    DpgMultiMediaTypesClient.class, DpgMultiMediaTypesAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { DpgMultiMediaTypesClient.class, DpgMultiMediaTypesAsyncClient.class })
 public final class DpgMultiMediaTypesClientBuilder
     implements HttpTrait<DpgMultiMediaTypesClientBuilder>, ConfigurationTrait<DpgMultiMediaTypesClientBuilder> {
     @Generated

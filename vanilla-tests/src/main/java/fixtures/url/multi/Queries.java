@@ -57,27 +57,21 @@ public final class Queries {
     @ServiceInterface(name = "AutoRestUrlMutliColl")
     public interface QueriesService {
         @Get("/queries/array/multi/string/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiNull(@HostParam("$host") String host,
             @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/multi/string/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiEmpty(@HostParam("$host") String host,
             @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/multi/string/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringMultiValid(@HostParam("$host") String host,
             @QueryParam(value = "arrayQuery", multipleQueryParams = true) List<String> arrayQuery,

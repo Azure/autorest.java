@@ -65,36 +65,20 @@ public final class LROsImpl {
     @ServiceInterface(name = "AutoRestLongRunningO")
     public interface LROsService {
         @Put("/lro/put/200/succeeded")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put200Succeeded(@HostParam("Endpoint") String endpoint,
             @HostParam("ProjectName") String projectName, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Put("/lro/put/200/succeeded")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> put200SucceededSync(@HostParam("Endpoint") String endpoint,
             @HostParam("ProjectName") String projectName, @HeaderParam("Accept") String accept,

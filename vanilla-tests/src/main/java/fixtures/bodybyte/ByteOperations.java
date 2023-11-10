@@ -55,41 +55,31 @@ public final class ByteOperations {
     @ServiceInterface(name = "AutoRestSwaggerBATBy")
     public interface ByteOperationsService {
         @Get("/byte/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<byte[]>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/byte/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<byte[]>> getEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/byte/nonAscii")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<byte[]>> getNonAscii(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/byte/nonAscii")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNonAscii(@HostParam("$host") String host,
             @BodyParam("application/json") byte[] byteBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/byte/invalid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<byte[]>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

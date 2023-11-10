@@ -59,73 +59,55 @@ public final class PolymorphismsImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PolymorphismsService {
         @Get("/complex/polymorphism/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Fish>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/polymorphism/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/dotsyntax")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DotFish>> getDotSyntax(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/polymorphism/complicated")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Salmon>> getComplicated(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/polymorphism/complicated")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplicated(@HostParam("$host") String host,
             @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingdiscriminator")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Salmon>> putMissingDiscriminator(@HostParam("$host") String host,
             @BodyParam("application/json") Salmon complexBody, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host,
             @BodyParam("application/json") Fish complexBody, @HeaderParam("Accept") String accept, Context context);

@@ -54,33 +54,25 @@ public final class ApiVersionLocals {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface ApiVersionLocalsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/local/2.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodLocalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/local/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodLocalNull(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/local/2.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathLocalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerLocalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);

@@ -24,8 +24,7 @@ import java.util.Map;
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "documentModelBuild", value = DocumentModelBuildOperationDetails.class),
     @JsonSubTypes.Type(name = "documentModelCompose", value = DocumentModelComposeOperationDetails.class),
-    @JsonSubTypes.Type(name = "documentModelCopyTo", value = DocumentModelCopyToOperationDetails.class)
-})
+    @JsonSubTypes.Type(name = "documentModelCopyTo", value = DocumentModelCopyToOperationDetails.class) })
 @Fluent
 public class OperationDetails {
     /*

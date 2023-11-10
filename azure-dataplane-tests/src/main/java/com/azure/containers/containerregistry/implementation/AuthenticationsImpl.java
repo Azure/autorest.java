@@ -60,9 +60,7 @@ public final class AuthenticationsImpl {
     public interface AuthenticationsService {
         // @Multipart not supported by RestProxy
         @Post("/oauth2/exchange")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<AcrRefreshToken>> exchangeAadAccessTokenForAcrRefreshToken(@HostParam("url") String url,
             @QueryParam("api-version") String apiVersion, @FormParam("grant_type") PostContentSchemaGrantType grantType,
@@ -72,9 +70,7 @@ public final class AuthenticationsImpl {
 
         // @Multipart not supported by RestProxy
         @Post("/oauth2/exchange")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<AcrRefreshToken> exchangeAadAccessTokenForAcrRefreshTokenSync(@HostParam("url") String url,
             @QueryParam("api-version") String apiVersion, @FormParam("grant_type") PostContentSchemaGrantType grantType,
@@ -84,9 +80,7 @@ public final class AuthenticationsImpl {
 
         // @Multipart not supported by RestProxy
         @Post("/oauth2/token")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Mono<Response<AcrAccessToken>> exchangeAcrRefreshTokenForAcrAccessToken(@HostParam("url") String url,
             @QueryParam("api-version") String apiVersion, @FormParam("service") String service,
@@ -95,9 +89,7 @@ public final class AuthenticationsImpl {
 
         // @Multipart not supported by RestProxy
         @Post("/oauth2/token")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<AcrAccessToken> exchangeAcrRefreshTokenForAcrAccessTokenSync(@HostParam("url") String url,
             @QueryParam("api-version") String apiVersion, @FormParam("service") String service,

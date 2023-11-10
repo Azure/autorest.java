@@ -40,9 +40,8 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBatHeaderServiceClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestSwaggerBatHeaderServiceClient.class, AutoRestSwaggerBatHeaderServiceAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = { AutoRestSwaggerBatHeaderServiceClient.class, AutoRestSwaggerBatHeaderServiceAsyncClient.class })
 public final class AutoRestSwaggerBatHeaderServiceClientBuilder
     implements HttpTrait<AutoRestSwaggerBatHeaderServiceClientBuilder>,
     ConfigurationTrait<AutoRestSwaggerBatHeaderServiceClientBuilder> {

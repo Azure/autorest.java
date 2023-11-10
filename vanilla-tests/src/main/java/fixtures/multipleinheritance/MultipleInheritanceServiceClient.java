@@ -128,81 +128,61 @@ public final class MultipleInheritanceServiceClient {
     @ServiceInterface(name = "MultipleInheritanceS")
     public interface MultipleInheritanceServiceClientService {
         @Get("/multipleInheritance/horse")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Horse>> getHorse(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/multipleInheritance/horse")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putHorse(@HostParam("$host") String host, @BodyParam("application/json") Horse horse,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/pet")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Pet>> getPet(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/multipleInheritance/pet")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putPet(@HostParam("$host") String host, @BodyParam("application/json") Pet pet,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/feline")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Feline>> getFeline(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/multipleInheritance/feline")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putFeline(@HostParam("$host") String host, @BodyParam("application/json") Feline feline,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/cat")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Cat>> getCat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/multipleInheritance/cat")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putCat(@HostParam("$host") String host, @BodyParam("application/json") Cat cat,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/multipleInheritance/kitten")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Kitten>> getKitten(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/multipleInheritance/kitten")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> putKitten(@HostParam("$host") String host, @BodyParam("application/json") Kitten kitten,
             @HeaderParam("Accept") String accept, Context context);

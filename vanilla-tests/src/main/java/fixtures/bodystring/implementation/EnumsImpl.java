@@ -57,50 +57,38 @@ public final class EnumsImpl implements Enums {
     @ServiceInterface(name = "AutoRestSwaggerBATSe")
     public interface EnumsService {
         @Get("/string/enum/notExpandable")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Colors>> getNotExpandable(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/string/enum/notExpandable")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNotExpandable(@HostParam("$host") String host,
             @BodyParam("application/json") Colors stringBody, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/string/enum/Referenced")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Colors>> getReferenced(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/string/enum/Referenced")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putReferenced(@HostParam("$host") String host,
             @BodyParam("application/json") Colors enumStringBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/string/enum/ReferencedConstant")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/string/enum/ReferencedConstant")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host,
             @BodyParam("application/json") RefColorConstant enumStringBody, @HeaderParam("Accept") String accept,

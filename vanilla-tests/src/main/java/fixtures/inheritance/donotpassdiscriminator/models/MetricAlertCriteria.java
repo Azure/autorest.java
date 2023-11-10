@@ -28,8 +28,7 @@ import java.util.regex.Pattern;
 @JsonSubTypes({
     @JsonSubTypes.Type(
         name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-        value = MetricAlertSingleResourceMultipleMetricCriteria.class)
-})
+        value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
 @JsonFlatten
 @Fluent
 public class MetricAlertCriteria {

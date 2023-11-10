@@ -59,54 +59,42 @@ public final class Pets {
     @ServiceInterface(name = "AdditionalProperties")
     public interface PetsService {
         @Put("/additionalProperties/true")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<PetAPTrue>> createAPTrue(@HostParam("$host") String host,
             @BodyParam("application/json") PetAPTrue createParameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/additionalProperties/true-subclass")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<CatAPTrue>> createCatAPTrue(@HostParam("$host") String host,
             @BodyParam("application/json") CatAPTrue createParameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/additionalProperties/type/object")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<PetAPObject>> createAPObject(@HostParam("$host") String host,
             @BodyParam("application/json") PetAPObject createParameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/additionalProperties/type/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<PetAPString>> createAPString(@HostParam("$host") String host,
             @BodyParam("application/json") PetAPString createParameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/additionalProperties/in/properties")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<PetAPInProperties>> createAPInProperties(@HostParam("$host") String host,
             @BodyParam("application/json") PetAPInProperties createParameters, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/additionalProperties/in/properties/with/additionalProperties/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPString(@HostParam("$host") String host,
             @BodyParam("application/json") PetAPInPropertiesWithAPString createParameters,

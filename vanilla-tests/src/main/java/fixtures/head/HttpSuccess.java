@@ -52,23 +52,17 @@ public final class HttpSuccess {
     @ServiceInterface(name = "AutoRestHeadTestServ")
     public interface HttpSuccessService {
         @Head("/http/success/200")
-        @ExpectedResponses({
-            200, 404
-        })
+        @ExpectedResponses({ 200, 404 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> head200(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/204")
-        @ExpectedResponses({
-            204, 404
-        })
+        @ExpectedResponses({ 204, 404 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> head204(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/404")
-        @ExpectedResponses({
-            204, 404
-        })
+        @ExpectedResponses({ 204, 404 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> head404(@HostParam("$host") String host, Context context);
     }

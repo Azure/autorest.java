@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ReadonlypropertyClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ReadonlypropertyClient.class, ReadonlypropertyAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ReadonlypropertyClient.class, ReadonlypropertyAsyncClient.class })
 public final class ReadonlypropertyClientBuilder
     implements HttpTrait<ReadonlypropertyClientBuilder>, ConfigurationTrait<ReadonlypropertyClientBuilder> {
     @Generated

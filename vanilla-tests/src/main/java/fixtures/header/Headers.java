@@ -72,234 +72,176 @@ public final class Headers {
     @ServiceInterface(name = "AutoRestSwaggerBATHe")
     public interface HeadersService {
         @Post("/header/param/existingkey")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramExistingKey(@HostParam("$host") String host,
             @HeaderParam("User-Agent") String userAgent, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/existingkey")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/protectedkey")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String host,
             @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/protectedkey")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") int value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") long value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") float value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") double value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") boolean value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") String value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") LocalDate value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") OffsetDateTime value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") Duration value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") String value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/param/prim/enum")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario,
             @HeaderParam("value") GreyscaleColors value, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/response/prim/enum")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String host,
             @HeaderParam("scenario") String scenario, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> customRequestId(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

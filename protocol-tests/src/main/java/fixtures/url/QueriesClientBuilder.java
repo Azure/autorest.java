@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the QueriesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    QueriesClient.class, QueriesAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { QueriesClient.class, QueriesAsyncClient.class })
 public final class QueriesClientBuilder
     implements HttpTrait<QueriesClientBuilder>, ConfigurationTrait<QueriesClientBuilder> {
     @Generated

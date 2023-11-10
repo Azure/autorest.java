@@ -20,9 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     property = "kind",
     defaultImpl = MyBaseType.class)
 @JsonTypeName("MyBaseType")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class) })
 @JsonFlatten
 @Fluent
 public class MyBaseType {

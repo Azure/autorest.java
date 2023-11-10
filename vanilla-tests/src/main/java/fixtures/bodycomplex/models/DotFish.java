@@ -20,9 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     property = "fish\\.type",
     defaultImpl = DotFish.class)
 @JsonTypeName("DotFish")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)
-})
+@JsonSubTypes({ @JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class) })
 @JsonFlatten
 @Immutable
 public class DotFish {

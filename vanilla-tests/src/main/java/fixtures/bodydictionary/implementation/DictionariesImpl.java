@@ -64,540 +64,410 @@ public final class DictionariesImpl {
     @ServiceInterface(name = "AutoRestSwaggerBATDi")
     public interface DictionariesService {
         @Get("/dictionary/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, String> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/nullvalue")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getNullValue(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/nullkey")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getNullKey(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/keyemptystring")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/invalid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getInvalid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/boolean/tfft")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/boolean/tfft")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Boolean> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/boolean/true.null.false")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/boolean/true.boolean.false")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/integer/1.-1.3.300")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/integer/1.-1.3.300")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putIntegerValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Integer> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/integer/1.null.zero")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/integer/1.integer.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/long/1.-1.3.300")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Long>>> getLongValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/long/1.-1.3.300")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLongValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Long> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/long/1.null.zero")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/long/1.integer.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/float/0--0.01-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Float>>> getFloatValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/float/0--0.01-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloatValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Float> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/float/0.0-null-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/float/1.number.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/double/0--0.01-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/double/0--0.01-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDoubleValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Double> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/double/0.0-null-1.2e20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/double/1.number.0")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/string/foo1.foo2.foo3")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getStringValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/string/foo1.foo2.foo3")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putStringValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, String> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/string/foo.null.foo2")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getStringWithNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/string/foo.123.foo2")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, LocalDate> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/date/invalidnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date/invalidchars")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date-time/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, OffsetDateTime> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/date-time/invalidnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time/invalidchars")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/date-time-rfc1123/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/date-time-rfc1123/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, DateTimeRfc1123> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/duration/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/duration/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDurationValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Duration> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/byte/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/prim/byte/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putByteValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, byte[]> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/prim/byte/invalidnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/prim/base64url/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/itemnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/itemempty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/complex/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/complex/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplexValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Widget> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/array/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/itemnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/itemempty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/array/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/array/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putArrayValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, List<String>> arrayBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/dictionary/dictionary/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Map<String, String>>>> getDictionaryNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Map<String, String>>>> getDictionaryEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/itemnull")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemNull(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/itemempty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Map<String, String>>>> getDictionaryItemEmpty(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/dictionary/dictionary/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Map<String, String>>>> getDictionaryValid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/dictionary/dictionary/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host,
             @BodyParam("application/json") Map<String, Map<String, String>> arrayBody,

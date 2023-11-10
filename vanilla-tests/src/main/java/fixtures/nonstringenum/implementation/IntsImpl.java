@@ -55,17 +55,13 @@ public final class IntsImpl {
     @ServiceInterface(name = "NonStringEnumsClient")
     public interface IntsService {
         @Put("/nonStringEnums/int/put")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> put(@HostParam("$host") String host, @BodyParam("application/json") IntEnum input,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/nonStringEnums/int/get")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<IntEnum>> get(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

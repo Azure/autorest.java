@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestUrlMutliCollectionFormatTestService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestUrlMutliCollectionFormatTestService.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestUrlMutliCollectionFormatTestService.class })
 public final class AutoRestUrlMutliCollectionFormatTestServiceBuilder
     implements HttpTrait<AutoRestUrlMutliCollectionFormatTestServiceBuilder>,
     ConfigurationTrait<AutoRestUrlMutliCollectionFormatTestServiceBuilder> {

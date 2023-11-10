@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestDurationTestService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestDurationTestService.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestDurationTestService.class })
 public final class AutoRestDurationTestServiceBuilder
     implements HttpTrait<AutoRestDurationTestServiceBuilder>, ConfigurationTrait<AutoRestDurationTestServiceBuilder> {
     @Generated

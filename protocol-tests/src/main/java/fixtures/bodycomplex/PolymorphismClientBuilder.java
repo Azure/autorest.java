@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PolymorphismClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    PolymorphismClient.class, PolymorphismAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { PolymorphismClient.class, PolymorphismAsyncClient.class })
 public final class PolymorphismClientBuilder
     implements HttpTrait<PolymorphismClientBuilder>, ConfigurationTrait<PolymorphismClientBuilder> {
     @Generated

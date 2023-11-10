@@ -54,25 +54,19 @@ public final class HttpFailures {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Boolean>> getEmptyError(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/http/failure/nomodel/error")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> getNoModelError(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/http/failure/nomodel/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> getNoModelEmpty(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);

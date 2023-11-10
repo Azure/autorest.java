@@ -67,374 +67,286 @@ public final class Primitives {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PrimitivesService {
         @Get("/complex/primitive/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<IntWrapper>> getInt(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<IntWrapper> getIntSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putInt(@HostParam("$host") String host,
             @BodyParam("application/json") IntWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/integer")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putIntSync(@HostParam("$host") String host,
             @BodyParam("application/json") IntWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<LongWrapper>> getLong(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<LongWrapper> getLongSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLong(@HostParam("$host") String host,
             @BodyParam("application/json") LongWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/long")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putLongSync(@HostParam("$host") String host,
             @BodyParam("application/json") LongWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<FloatWrapper>> getFloat(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<FloatWrapper> getFloatSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloat(@HostParam("$host") String host,
             @BodyParam("application/json") FloatWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/float")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putFloatSync(@HostParam("$host") String host,
             @BodyParam("application/json") FloatWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DoubleWrapper>> getDouble(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<DoubleWrapper> getDoubleSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDouble(@HostParam("$host") String host,
             @BodyParam("application/json") DoubleWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/double")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putDoubleSync(@HostParam("$host") String host,
             @BodyParam("application/json") DoubleWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<BooleanWrapper>> getBool(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<BooleanWrapper> getBoolSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBool(@HostParam("$host") String host,
             @BodyParam("application/json") BooleanWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/bool")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putBoolSync(@HostParam("$host") String host,
             @BodyParam("application/json") BooleanWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<StringWrapper>> getString(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<StringWrapper> getStringSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putString(@HostParam("$host") String host,
             @BodyParam("application/json") StringWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/string")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putStringSync(@HostParam("$host") String host,
             @BodyParam("application/json") StringWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DateWrapper>> getDate(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<DateWrapper> getDateSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDate(@HostParam("$host") String host,
             @BodyParam("application/json") DateWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/date")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putDateSync(@HostParam("$host") String host,
             @BodyParam("application/json") DateWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DatetimeWrapper>> getDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/primitive/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<DatetimeWrapper> getDateTimeSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") DatetimeWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/datetime")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putDateTimeSync(@HostParam("$host") String host,
             @BodyParam("application/json") DatetimeWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Datetimerfc1123Wrapper> getDateTimeRfc1123Sync(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123(@HostParam("$host") String host,
             @BodyParam("application/json") Datetimerfc1123Wrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/datetimerfc1123")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putDateTimeRfc1123Sync(@HostParam("$host") String host,
             @BodyParam("application/json") Datetimerfc1123Wrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<DurationWrapper>> getDuration(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/complex/primitive/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<DurationWrapper> getDurationSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDuration(@HostParam("$host") String host,
             @BodyParam("application/json") DurationWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/duration")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putDurationSync(@HostParam("$host") String host,
             @BodyParam("application/json") DurationWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ByteWrapper>> getByte(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/complex/primitive/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<ByteWrapper> getByteSync(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putByte(@HostParam("$host") String host,
             @BodyParam("application/json") ByteWrapper complexBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/primitive/byte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Response<Void> putByteSync(@HostParam("$host") String host,
             @BodyParam("application/json") ByteWrapper complexBody, @HeaderParam("Accept") String accept,

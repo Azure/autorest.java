@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the HttpFailureClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    HttpFailureClient.class, HttpFailureAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { HttpFailureClient.class, HttpFailureAsyncClient.class })
 public final class HttpFailureClientBuilder
     implements HttpTrait<HttpFailureClientBuilder>, ConfigurationTrait<HttpFailureClientBuilder> {
     @Generated

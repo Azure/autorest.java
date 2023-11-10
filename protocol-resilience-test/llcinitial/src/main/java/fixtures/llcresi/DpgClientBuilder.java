@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DpgClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    DpgClient.class, DpgAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { DpgClient.class, DpgAsyncClient.class })
 public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, ConfigurationTrait<DpgClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

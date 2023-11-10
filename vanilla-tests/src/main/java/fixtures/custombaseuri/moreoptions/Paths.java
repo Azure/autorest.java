@@ -54,9 +54,7 @@ public final class Paths {
     @ServiceInterface(name = "AutoRestParameterize")
     public interface PathsService {
         @Get("/customuri/{subscriptionId}/{keyName}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret,
             @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName,

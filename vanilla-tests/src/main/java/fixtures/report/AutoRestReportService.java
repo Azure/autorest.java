@@ -122,17 +122,13 @@ public final class AutoRestReportService {
     @ServiceInterface(name = "AutoRestReportServic")
     public interface AutoRestReportServiceService {
         @Get("/report")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getReport(@HostParam("$host") String host,
             @QueryParam("qualifier") String qualifier, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/report/optional")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Map<String, Integer>>> getOptionalReport(@HostParam("$host") String host,
             @QueryParam("qualifier") String qualifier, @HeaderParam("Accept") String accept, Context context);

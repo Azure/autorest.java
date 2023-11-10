@@ -44,9 +44,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the FormRecognizerClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    FormRecognizerClientImpl.class
-})
+@ServiceClientBuilder(serviceClients = { FormRecognizerClientImpl.class })
 public final class FormRecognizerClientImplBuilder
     implements HttpTrait<FormRecognizerClientImplBuilder>, ConfigurationTrait<FormRecognizerClientImplBuilder>,
     AzureKeyCredentialTrait<FormRecognizerClientImplBuilder>, EndpointTrait<FormRecognizerClientImplBuilder> {

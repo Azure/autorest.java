@@ -21,8 +21,8 @@ import java.util.List;
     defaultImpl = Fish.class)
 @JsonTypeName("Fish")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "salmon", value = Salmon.class), @JsonSubTypes.Type(name = "shark", value = Shark.class)
-})
+    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+    @JsonSubTypes.Type(name = "shark", value = Shark.class) })
 @Fluent
 public class Fish {
     /*

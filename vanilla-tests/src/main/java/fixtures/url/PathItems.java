@@ -55,9 +55,7 @@ public final class PathItems {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface PathItemsService {
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getAllWithValues(@HostParam("$host") String host,
             @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -69,9 +67,7 @@ public final class PathItems {
             Context context);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getGlobalQueryNull(@HostParam("$host") String host,
             @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -83,9 +79,7 @@ public final class PathItems {
             Context context);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getGlobalAndLocalQueryNull(@HostParam("$host") String host,
             @PathParam("pathItemStringPath") String pathItemStringPath,
@@ -97,9 +91,7 @@ public final class PathItems {
             Context context);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getLocalPathItemQueryNull(@HostParam("$host") String host,
             @PathParam("pathItemStringPath") String pathItemStringPath,

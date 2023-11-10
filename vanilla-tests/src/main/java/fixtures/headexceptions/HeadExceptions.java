@@ -52,23 +52,17 @@ public final class HeadExceptions {
     @ServiceInterface(name = "AutoRestHeadExceptio")
     public interface HeadExceptionsService {
         @Head("/http/success/200")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/204")
-        @ExpectedResponses({
-            204
-        })
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/404")
-        @ExpectedResponses({
-            204
-        })
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head404(@HostParam("$host") String host, Context context);
     }

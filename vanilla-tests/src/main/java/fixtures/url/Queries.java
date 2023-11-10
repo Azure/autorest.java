@@ -60,283 +60,213 @@ public final class Queries {
     @ServiceInterface(name = "AutoRestUrlTestServi")
     public interface QueriesService {
         @Get("/queries/bool/true")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @QueryParam("boolQuery") boolean boolQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/bool/false")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host,
             @QueryParam("boolQuery") boolean boolQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/bool/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getBooleanNull(@HostParam("$host") String host, @QueryParam("boolQuery") Boolean boolQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/1000000")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @QueryParam("intQuery") int intQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/-1000000")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host,
             @QueryParam("intQuery") int intQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/int/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getIntNull(@HostParam("$host") String host, @QueryParam("intQuery") Integer intQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/10000000000")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @QueryParam("longQuery") long longQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/-10000000000")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host,
             @QueryParam("longQuery") long longQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/long/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getLongNull(@HostParam("$host") String host, @QueryParam("longQuery") Long longQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/1.034E+20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host,
             @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/-1.034E-20")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host,
             @QueryParam("floatQuery") float floatQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/float/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> floatNull(@HostParam("$host") String host, @QueryParam("floatQuery") Float floatQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/9999999.999")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host,
             @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/-9999999.999")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host,
             @QueryParam("doubleQuery") double doubleQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/double/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> doubleNull(@HostParam("$host") String host, @QueryParam("doubleQuery") Double doubleQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/unicode/")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringUnicode(@HostParam("$host") String host,
             @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host,
             @QueryParam("stringQuery") String stringQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/string/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringNull(@HostParam("$host") String host, @QueryParam("stringQuery") String stringQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/enum/green%20color")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> enumValid(@HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/enum/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> enumNull(@HostParam("$host") String host, @QueryParam("enumQuery") UriColor enumQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/multibyte")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/byte/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> byteNull(@HostParam("$host") String host, @QueryParam("byteQuery") String byteQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/date/2012-01-01")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateValid(@HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/date/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateNull(@HostParam("$host") String host, @QueryParam("dateQuery") LocalDate dateQuery,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/datetime/2012-01-01T01%3A01%3A01Z")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host,
             @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/queries/datetime/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host,
             @QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/queries/array/csv/string/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvValid(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/csv/string/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvNull(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/csv/string/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringCsvEmpty(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/none/string/empty")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringNoCollectionFormatEmpty(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/ssv/string/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringSsvValid(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/tsv/string/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringTsvValid(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/queries/array/pipes/string/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> arrayStringPipesValid(@HostParam("$host") String host,
             @QueryParam("arrayQuery") String arrayQuery, @HeaderParam("Accept") String accept, Context context);

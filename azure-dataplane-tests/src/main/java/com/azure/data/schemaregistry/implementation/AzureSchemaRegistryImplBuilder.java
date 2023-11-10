@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AzureSchemaRegistry type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AzureSchemaRegistryImpl.class
-})
+@ServiceClientBuilder(serviceClients = { AzureSchemaRegistryImpl.class })
 public final class AzureSchemaRegistryImplBuilder implements HttpTrait<AzureSchemaRegistryImplBuilder>,
     ConfigurationTrait<AzureSchemaRegistryImplBuilder>, EndpointTrait<AzureSchemaRegistryImplBuilder> {
     @Generated

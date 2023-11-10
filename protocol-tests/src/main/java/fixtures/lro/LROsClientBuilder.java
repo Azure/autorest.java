@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LROsClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    LROsClient.class, LROsAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { LROsClient.class, LROsAsyncClient.class })
 public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, ConfigurationTrait<LROsClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

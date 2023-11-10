@@ -54,33 +54,25 @@ public final class ApiVersionDefaults {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface ApiVersionDefaultsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodGlobalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodGlobalNotProvidedValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathGlobalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerGlobalValid(@HostParam("$host") String host,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);

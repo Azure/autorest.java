@@ -70,229 +70,177 @@ public final class Explicits {
     @ServiceInterface(name = "AutoRestRequiredOpti")
     public interface ExplicitsService {
         @Put("/reqopt/explicit/optional/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/explicit/optional/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") BinaryData bodyParameter,
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/explicit/required/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putRequiredBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/explicit/required/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putRequiredBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") BinaryData bodyParameter,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/requied/integer/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredIntegerParameter(@HostParam("$host") String host,
             @BodyParam("application/json") int bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/optional/integer/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalIntegerParameter(@HostParam("$host") String host,
             @BodyParam("application/json") Integer bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/integer/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredIntegerProperty(@HostParam("$host") String host,
             @BodyParam("application/json") IntWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/integer/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalIntegerProperty(@HostParam("$host") String host,
             @BodyParam("application/json") IntOptionalWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/integer/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredIntegerHeader(@HostParam("$host") String host,
             @HeaderParam("headerParameter") int headerParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/optional/integer/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalIntegerHeader(@HostParam("$host") String host,
             @HeaderParam("headerParameter") Integer headerParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/string/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredStringParameter(@HostParam("$host") String host,
             @BodyParam("application/json") String bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/optional/string/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalStringParameter(@HostParam("$host") String host,
             @BodyParam("application/json") String bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/requied/string/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredStringProperty(@HostParam("$host") String host,
             @BodyParam("application/json") StringWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/string/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalStringProperty(@HostParam("$host") String host,
             @BodyParam("application/json") StringOptionalWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/string/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredStringHeader(@HostParam("$host") String host,
             @HeaderParam("headerParameter") String headerParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/string/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalStringHeader(@HostParam("$host") String host,
             @HeaderParam("bodyParameter") String bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/reqopt/requied/class/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredClassParameter(@HostParam("$host") String host,
             @BodyParam("application/json") Product bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/class/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalClassParameter(@HostParam("$host") String host,
             @BodyParam("application/json") Product bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/class/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredClassProperty(@HostParam("$host") String host,
             @BodyParam("application/json") ClassWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/class/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalClassProperty(@HostParam("$host") String host,
             @BodyParam("application/json") ClassOptionalWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/array/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredArrayParameter(@HostParam("$host") String host,
             @BodyParam("application/json") List<String> bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/array/parameter")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalArrayParameter(@HostParam("$host") String host,
             @BodyParam("application/json") List<String> bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/array/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredArrayProperty(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/array/property")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalArrayProperty(@HostParam("$host") String host,
             @BodyParam("application/json") ArrayOptionalWrapper bodyParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/requied/array/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postRequiredArrayHeader(@HostParam("$host") String host,
             @HeaderParam("headerParameter") String headerParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Post("/reqopt/optional/array/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> postOptionalArrayHeader(@HostParam("$host") String host,
             @HeaderParam("headerParameter") String headerParameter, @HeaderParam("Accept") String accept,

@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestReportService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestReportService.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestReportService.class })
 public final class AutoRestReportServiceBuilder
     implements HttpTrait<AutoRestReportServiceBuilder>, ConfigurationTrait<AutoRestReportServiceBuilder> {
     @Generated

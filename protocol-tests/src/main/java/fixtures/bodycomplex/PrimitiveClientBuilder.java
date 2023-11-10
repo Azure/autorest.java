@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PrimitiveClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    PrimitiveClient.class, PrimitiveAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { PrimitiveClient.class, PrimitiveAsyncClient.class })
 public final class PrimitiveClientBuilder
     implements HttpTrait<PrimitiveClientBuilder>, ConfigurationTrait<PrimitiveClientBuilder> {
     @Generated

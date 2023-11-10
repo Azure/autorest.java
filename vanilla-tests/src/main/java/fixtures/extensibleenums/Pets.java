@@ -56,17 +56,13 @@ public final class Pets {
     @ServiceInterface(name = "PetStoreIncPets")
     public interface PetsService {
         @Get("/extensibleenums/pet/{petId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Pet>> getByPetId(@HostParam("$host") String host, @PathParam("petId") String petId,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/extensibleenums/pet/addPet")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam,
             @HeaderParam("Accept") String accept, Context context);

@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MediaTypesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    MediaTypesClient.class, MediaTypesAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { MediaTypesClient.class, MediaTypesAsyncClient.class })
 public final class MediaTypesClientBuilder
     implements HttpTrait<MediaTypesClientBuilder>, ConfigurationTrait<MediaTypesClientBuilder> {
     @Generated

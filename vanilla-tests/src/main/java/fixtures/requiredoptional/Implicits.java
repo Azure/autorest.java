@@ -60,78 +60,60 @@ public final class Implicits {
     @ServiceInterface(name = "AutoRestRequiredOpti")
     public interface ImplicitsService {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getRequiredPath(@HostParam("$host") String host,
             @PathParam("pathParameter") String pathParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/query")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalQuery(@HostParam("$host") String host,
             @QueryParam("queryParameter") String queryParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/header")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalHeader(@HostParam("$host") String host,
             @HeaderParam("queryParameter") String queryParameter, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/reqopt/implicit/optional/body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBody(@HostParam("$host") String host,
             @BodyParam("application/json") String bodyParameter, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") Flux<ByteBuffer> bodyParameter,
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/reqopt/implicit/optional/binary-body")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putOptionalBinaryBody(@HostParam("$host") String host,
             @BodyParam("application/octet-stream") BinaryData bodyParameter,
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/reqopt/global/required/path/{required-global-path}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host,
             @PathParam("required-global-path") String requiredGlobalPath, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/reqopt/global/required/query")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host,
             @QueryParam("required-global-query") String requiredGlobalQuery, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/reqopt/global/optional/query")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host,
             @QueryParam("optional-global-query") Integer optionalGlobalQuery, @HeaderParam("Accept") String accept,

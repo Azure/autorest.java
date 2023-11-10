@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultipleResponsesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    MultipleResponsesClient.class, MultipleResponsesAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { MultipleResponsesClient.class, MultipleResponsesAsyncClient.class })
 public final class MultipleResponsesClientBuilder
     implements HttpTrait<MultipleResponsesClientBuilder>, ConfigurationTrait<MultipleResponsesClientBuilder> {
     @Generated

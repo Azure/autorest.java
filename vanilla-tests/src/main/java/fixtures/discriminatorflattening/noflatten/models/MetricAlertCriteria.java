@@ -26,8 +26,7 @@ import java.util.Map;
 @JsonSubTypes({
     @JsonSubTypes.Type(
         name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-        value = MetricAlertSingleResourceMultipleMetricCriteria.class)
-})
+        value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
 @Fluent
 public class MetricAlertCriteria {
     /*

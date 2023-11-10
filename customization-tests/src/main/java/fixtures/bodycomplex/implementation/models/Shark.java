@@ -24,8 +24,7 @@ import java.util.List;
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
     @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
-})
+    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent
 public class Shark extends Fish {
     /*

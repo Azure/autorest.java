@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the PolymorphicrecursiveClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    PolymorphicrecursiveClient.class, PolymorphicrecursiveAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { PolymorphicrecursiveClient.class, PolymorphicrecursiveAsyncClient.class })
 public final class PolymorphicrecursiveClientBuilder
     implements HttpTrait<PolymorphicrecursiveClientBuilder>, ConfigurationTrait<PolymorphicrecursiveClientBuilder> {
     @Generated

@@ -63,9 +63,7 @@ public final class Headers {
     @ServiceInterface(name = "SpecialHeaderHeaders")
     public interface HeadersService {
         @Post("/status/500")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Object>> paramRepeatabilityRequest(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
@@ -73,9 +71,7 @@ public final class Headers {
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
 
         @Put("/status/500")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Object>> paramRepeatabilityRequestPut(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
@@ -83,17 +79,13 @@ public final class Headers {
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
 
         @Get("/status/500")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Object>> paramRepeatabilityRequestGet(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/specialHeader/repeatabilityRequestLRO")
-        @ExpectedResponses({
-            200, 202
-        })
+        @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Object>> paramRepeatabilityRequestLRO(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
@@ -101,9 +93,7 @@ public final class Headers {
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
 
         @Post("/specialHeader/repeatabilityRequestPageable")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ProductResultValue>> paramRepeatabilityRequestPageable(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
@@ -111,9 +101,7 @@ public final class Headers {
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<ProductResultValue>> paramRepeatabilityRequestPageableNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,

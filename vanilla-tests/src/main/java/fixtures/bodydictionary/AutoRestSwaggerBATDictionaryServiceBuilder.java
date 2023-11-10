@@ -41,9 +41,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATDictionaryService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestSwaggerBATDictionaryServiceClient.class, AutoRestSwaggerBATDictionaryServiceAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = {
+        AutoRestSwaggerBATDictionaryServiceClient.class,
+        AutoRestSwaggerBATDictionaryServiceAsyncClient.class })
 public final class AutoRestSwaggerBATDictionaryServiceBuilder
     implements HttpTrait<AutoRestSwaggerBATDictionaryServiceBuilder>,
     ConfigurationTrait<AutoRestSwaggerBATDictionaryServiceBuilder> {

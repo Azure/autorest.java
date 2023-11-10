@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestHeadExceptionTestService type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestHeadExceptionTestService.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestHeadExceptionTestService.class })
 public final class AutoRestHeadExceptionTestServiceBuilder implements
     HttpTrait<AutoRestHeadExceptionTestServiceBuilder>, ConfigurationTrait<AutoRestHeadExceptionTestServiceBuilder> {
     @Generated

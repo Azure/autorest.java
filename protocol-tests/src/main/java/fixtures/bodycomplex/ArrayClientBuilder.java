@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ArrayClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ArrayClient.class, ArrayAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ArrayClient.class, ArrayAsyncClient.class })
 public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, ConfigurationTrait<ArrayClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

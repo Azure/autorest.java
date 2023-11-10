@@ -58,81 +58,63 @@ public final class Datetimerfc1123s {
     @ServiceInterface(name = "AutoRestRFC1123DateT")
     public interface Datetimerfc1123sService {
         @Get("/datetimerfc1123/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getNull(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetimerfc1123/invalid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getInvalid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetimerfc1123/overflow")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getOverflow(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/underflow")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUnderflow(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetimerfc1123/max")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUtcMaxDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") DateTimeRfc1123 datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetimerfc1123/max/lowercase")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/datetimerfc1123/max/uppercase")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTime(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Put("/datetimerfc1123/min")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putUtcMinDateTime(@HostParam("$host") String host,
             @BodyParam("application/json") DateTimeRfc1123 datetimeBody, @HeaderParam("Accept") String accept,
             Context context);
 
         @Get("/datetimerfc1123/min")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host,

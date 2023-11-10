@@ -40,9 +40,10 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ConstantAndClientParameterServiceClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ConstantAndClientParameterServiceClient.class, ConstantAndClientParameterServiceAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = {
+        ConstantAndClientParameterServiceClient.class,
+        ConstantAndClientParameterServiceAsyncClient.class })
 public final class ConstantAndClientParameterServiceClientBuilder
     implements HttpTrait<ConstantAndClientParameterServiceClientBuilder>,
     ConfigurationTrait<ConstantAndClientParameterServiceClientBuilder> {

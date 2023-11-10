@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LroRetrysClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    LroRetrysClient.class, LroRetrysAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { LroRetrysClient.class, LroRetrysAsyncClient.class })
 public final class LroRetrysClientBuilder
     implements HttpTrait<LroRetrysClientBuilder>, ConfigurationTrait<LroRetrysClientBuilder> {
     @Generated

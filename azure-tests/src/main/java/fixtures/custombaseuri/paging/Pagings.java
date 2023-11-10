@@ -59,34 +59,26 @@ public final class Pagings {
     @ServiceInterface(name = "AutoRestParameterize")
     public interface PagingsService {
         @Get("/paging/customurl/partialnextlink")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getPagesPartialUrl(@HostParam("accountName") String accountName,
             @HostParam("host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/customurl/partialnextlinkop")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getPagesPartialUrlOperation(@HostParam("accountName") String accountName,
             @HostParam("host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/paging/customurl/{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getPagesPartialUrlOperationNext(@HostParam("accountName") String accountName,
             @HostParam("host") String host, @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResult>> getPagesPartialUrlNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink,

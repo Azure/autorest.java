@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the BodyFormsDataURLEncoded type.
  */
-@ServiceClientBuilder(serviceClients = {
-    BodyFormsDataURLEncoded.class
-})
+@ServiceClientBuilder(serviceClients = { BodyFormsDataURLEncoded.class })
 public final class BodyFormsDataURLEncodedBuilder
     implements HttpTrait<BodyFormsDataURLEncodedBuilder>, ConfigurationTrait<BodyFormsDataURLEncodedBuilder> {
     @Generated

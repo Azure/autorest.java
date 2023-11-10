@@ -55,60 +55,46 @@ public final class SkipUrlEncodings {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface SkipUrlEncodingsService {
         @Get("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodPathValid(@HostParam("$host") String host,
             @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathValid(@HostParam("$host") String host,
             @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerPathValid(@HostParam("$host") String host,
             @PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/method/query/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodQueryValid(@HostParam("$host") String host,
             @QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/method/query/null")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getMethodQueryNull(@HostParam("$host") String host,
             @QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/path/query/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getPathQueryValid(@HostParam("$host") String host,
             @QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/skipUrlEncoding/swagger/query/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getSwaggerQueryValid(@HostParam("$host") String host,
             @QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("Accept") String accept, Context context);

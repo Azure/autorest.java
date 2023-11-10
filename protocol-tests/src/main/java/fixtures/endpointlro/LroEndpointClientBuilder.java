@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LroEndpointClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    LroEndpointClient.class, LroEndpointAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { LroEndpointClient.class, LroEndpointAsyncClient.class })
 public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClientBuilder>,
     ConfigurationTrait<LroEndpointClientBuilder>, EndpointTrait<LroEndpointClientBuilder> {
     @Generated

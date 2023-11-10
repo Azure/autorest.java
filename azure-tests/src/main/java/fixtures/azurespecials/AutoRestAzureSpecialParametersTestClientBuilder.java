@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the AutoRestAzureSpecialParametersTestClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    AutoRestAzureSpecialParametersTestClient.class
-})
+@ServiceClientBuilder(serviceClients = { AutoRestAzureSpecialParametersTestClient.class })
 public final class AutoRestAzureSpecialParametersTestClientBuilder
     implements HttpTrait<AutoRestAzureSpecialParametersTestClientBuilder>,
     ConfigurationTrait<AutoRestAzureSpecialParametersTestClientBuilder> {

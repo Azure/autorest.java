@@ -57,9 +57,7 @@ public final class Formdataurlencodeds {
     public interface FormdataurlencodedsService {
         // @Multipart not supported by RestProxy
         @Post("/formsdataurlencoded/pet/add/{petId}")
-        @ExpectedResponses({
-            200, 405
-        })
+        @ExpectedResponses({ 200, 405 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> updatePetWithForm(@HostParam("$host") String host, @PathParam("petId") int petId,
             @FormParam("pet_type") PetType petType, @FormParam("pet_food") PetFood petFood,
@@ -68,9 +66,7 @@ public final class Formdataurlencodeds {
 
         // @Multipart not supported by RestProxy
         @Post("/formsdataurlencoded/partialConstantBody")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> partialConstantBody(@HostParam("$host") String host,
             @FormParam("grant_type") String grantType, @FormParam("service") String service,

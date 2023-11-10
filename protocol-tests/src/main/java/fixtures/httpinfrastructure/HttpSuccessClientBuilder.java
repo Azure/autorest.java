@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the HttpSuccessClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    HttpSuccessClient.class, HttpSuccessAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { HttpSuccessClient.class, HttpSuccessAsyncClient.class })
 public final class HttpSuccessClientBuilder
     implements HttpTrait<HttpSuccessClientBuilder>, ConfigurationTrait<HttpSuccessClientBuilder> {
     @Generated

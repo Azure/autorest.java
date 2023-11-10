@@ -56,17 +56,13 @@ public final class PolymorphicrecursivesImpl {
     @ServiceInterface(name = "AutoRestComplexTestS")
     public interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Fish>> getValid(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
             Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody,
             @HeaderParam("Accept") String accept, Context context);

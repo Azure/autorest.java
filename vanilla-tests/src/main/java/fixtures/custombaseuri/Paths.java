@@ -52,9 +52,7 @@ public final class Paths {
     @ServiceInterface(name = "AutoRestParameterize")
     public interface PathsService {
         @Get("/customuri")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host,
             @HeaderParam("Accept") String accept, Context context);

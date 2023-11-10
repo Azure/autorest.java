@@ -56,9 +56,7 @@ public final class AvailabilitySets {
     @ServiceInterface(name = "AutoRestParameterFla")
     public interface AvailabilitySetsService {
         @Patch("/parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> update(@HostParam("$host") String host,
             @PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset,

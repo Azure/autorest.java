@@ -183,9 +183,7 @@ public final class FormRecognizerClientImpl {
     @ServiceInterface(name = "FormRecognizerClient")
     public interface FormRecognizerClientService {
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
@@ -195,9 +193,7 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
@@ -207,9 +203,7 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
@@ -219,9 +213,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<AnalyzeDocumentHeaders, Void>> analyzeDocument(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
@@ -231,9 +223,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:analyze")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         ResponseBase<AnalyzeDocumentHeaders, Void> analyzeDocumentSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
@@ -243,27 +233,21 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}/analyzeResults/{resultId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<AnalyzeResultOperation>> getAnalyzeDocumentResult(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @PathParam("resultId") String resultId,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}/analyzeResults/{resultId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<AnalyzeResultOperation> getAnalyzeDocumentResultSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @PathParam("resultId") String resultId,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:build")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<BuildDocumentModelHeaders, Void>> buildDocumentModel(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion,
@@ -271,9 +255,7 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Post("/documentModels:build")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         ResponseBase<BuildDocumentModelHeaders, Void> buildDocumentModelSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion,
@@ -281,9 +263,7 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Post("/documentModels:compose")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<ComposeDocumentModelHeaders, Void>> composeDocumentModel(
             @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
@@ -291,9 +271,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:compose")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         ResponseBase<ComposeDocumentModelHeaders, Void> composeDocumentModelSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion,
@@ -301,9 +279,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:authorizeCopy")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<CopyAuthorization>> authorizeCopyDocumentModel(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion,
@@ -311,9 +287,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels:authorizeCopy")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<CopyAuthorization> authorizeCopyDocumentModelSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion,
@@ -321,9 +295,7 @@ public final class FormRecognizerClientImpl {
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:copyTo")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<ResponseBase<CopyDocumentModelToHeaders, Void>> copyDocumentModelTo(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
@@ -331,9 +303,7 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Post("/documentModels/{modelId}:copyTo")
-        @ExpectedResponses({
-            202
-        })
+        @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         ResponseBase<CopyDocumentModelToHeaders, Void> copyDocumentModelToSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
@@ -341,138 +311,106 @@ public final class FormRecognizerClientImpl {
             Context context);
 
         @Get("/operations")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetOperationsResponse>> getOperations(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetOperationsResponse> getOperationsSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations/{operationId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<OperationDetails>> getOperation(@HostParam("endpoint") String endpoint,
             @PathParam("operationId") String operationId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/operations/{operationId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<OperationDetails> getOperationSync(@HostParam("endpoint") String endpoint,
             @PathParam("operationId") String operationId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetDocumentModelsResponse>> getDocumentModels(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetDocumentModelsResponse> getDocumentModelsSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<DocumentModelDetails>> getDocumentModel(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/documentModels/{modelId}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<DocumentModelDetails> getDocumentModelSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/documentModels/{modelId}")
-        @ExpectedResponses({
-            204
-        })
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<Void>> deleteDocumentModel(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/documentModels/{modelId}")
-        @ExpectedResponses({
-            204
-        })
+        @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<Void> deleteDocumentModelSync(@HostParam("endpoint") String endpoint,
             @PathParam("modelId") String modelId, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/info")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<ResourceDetails>> getResourceDetails(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/info")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<ResourceDetails> getResourceDetailsSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetOperationsResponse>> getOperationsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetOperationsResponse> getOperationsNextSync(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Mono<Response<GetDocumentModelsResponse>> getDocumentModelsNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("{nextLink}")
-        @ExpectedResponses({
-            200
-        })
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorResponseException.class)
         Response<GetDocumentModelsResponse> getDocumentModelsNextSync(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
