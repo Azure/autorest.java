@@ -84,6 +84,12 @@ public final class Pagings {
             @PathParam(value = "nextLink", encoded = true) String nextLink,
             @HostParam("accountName") String accountName, @HostParam("host") String host,
             @HeaderParam("Accept") String accept, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<ProductResult>> getPagesPartialUrlOperationNextNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
     }
 
     /**
@@ -435,6 +441,40 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getPagesPartialUrlOperationNextAsync(String accountName, String nextLink) {
+        return new PagedFlux<>(() -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink),
+            nextLink -> getPagesPartialUrlOperationNextNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL.
+     * 
+     * @param accountName Account Name.
+     * @param nextLink Next link for the list operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getPagesPartialUrlOperationNextAsync(String accountName, String nextLink,
+        Context context) {
+        return new PagedFlux<>(() -> getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink, context),
+            nextLink -> getPagesPartialUrlOperationNextNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL.
+     * 
+     * @param accountName Account Name.
+     * @param nextLink Next link for the list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -457,6 +497,38 @@ public final class Pagings {
     public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(String accountName, String nextLink,
         Context context) {
         return getPagesPartialUrlOperationNextSinglePageAsync(accountName, nextLink, context).block();
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL.
+     * 
+     * @param accountName Account Name.
+     * @param nextLink Next link for the list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagesPartialUrlOperationNext(String accountName, String nextLink) {
+        return new PagedIterable<>(getPagesPartialUrlOperationNextAsync(accountName, nextLink));
+    }
+
+    /**
+     * A paging operation that combines custom url, paging and partial URL.
+     * 
+     * @param accountName Account Name.
+     * @param nextLink Next link for the list operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getPagesPartialUrlOperationNext(String accountName, String nextLink,
+        Context context) {
+        return new PagedIterable<>(getPagesPartialUrlOperationNextAsync(accountName, nextLink, context));
     }
 
     /**
@@ -556,5 +628,82 @@ public final class Pagings {
     public PagedResponse<Product> getPagesPartialUrlNextSinglePage(String nextLink, String accountName,
         Context context) {
         return getPagesPartialUrlNextSinglePageAsync(nextLink, accountName, context).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.getPagesPartialUrlOperationNextNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextNextSinglePageAsync(String nextLink,
+        Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return service.getPagesPartialUrlOperationNextNext(nextLink, context)
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlOperationNextNextSinglePage(String nextLink) {
+        return getPagesPartialUrlOperationNextNextSinglePageAsync(nextLink).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> getPagesPartialUrlOperationNextNextSinglePage(String nextLink, Context context) {
+        return getPagesPartialUrlOperationNextNextSinglePageAsync(nextLink, context).block();
     }
 }

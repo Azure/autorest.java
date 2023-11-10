@@ -371,6 +371,18 @@ public final class PagingsImpl {
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<OdataProductResult>>
+            nextFragmentNext(@PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<OdataProductResult>> nextFragmentWithGroupingNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ProductResultValueWithXMSClientName>> getPagingModelWithItemNameWithXMSClientNameNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
@@ -3777,6 +3789,41 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> nextFragmentAsync(String apiVersion, String tenant, String nextLink) {
+        return new PagedFlux<>(() -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink),
+            nextLink -> nextFragmentNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> nextFragmentAsync(String apiVersion, String tenant, String nextLink, Context context) {
+        return new PagedFlux<>(() -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, context),
+            nextLink -> nextFragmentNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3800,6 +3847,39 @@ public final class PagingsImpl {
     public PagedResponse<Product> nextFragmentSinglePage(String apiVersion, String tenant, String nextLink,
         Context context) {
         return nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, context).block();
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragment(String apiVersion, String tenant, String nextLink) {
+        return new PagedIterable<>(nextFragmentAsync(apiVersion, tenant, nextLink));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragment(String apiVersion, String tenant, String nextLink, Context context) {
+        return new PagedIterable<>(nextFragmentAsync(apiVersion, tenant, nextLink, context));
     }
 
     /**
@@ -3881,6 +3961,41 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> nextFragmentWithGroupingAsync(String nextLink,
+        CustomParameterGroup customParameterGroup) {
+        return new PagedFlux<>(() -> nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup),
+            nextLink -> nextFragmentWithGroupingNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> nextFragmentWithGroupingAsync(String nextLink, CustomParameterGroup customParameterGroup,
+        Context context) {
+        return new PagedFlux<>(() -> nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup, context),
+            nextLink -> nextFragmentWithGroupingNextSinglePageAsync(nextLink, context));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -3904,6 +4019,38 @@ public final class PagingsImpl {
     public PagedResponse<Product> nextFragmentWithGroupingSinglePage(String nextLink,
         CustomParameterGroup customParameterGroup, Context context) {
         return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup, context).block();
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragmentWithGrouping(String nextLink, CustomParameterGroup customParameterGroup) {
+        return new PagedIterable<>(nextFragmentWithGroupingAsync(nextLink, customParameterGroup));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragmentWithGrouping(String nextLink, CustomParameterGroup customParameterGroup,
+        Context context) {
+        return new PagedIterable<>(nextFragmentWithGroupingAsync(nextLink, customParameterGroup, context));
     }
 
     /**
@@ -5775,6 +5922,158 @@ public final class PagingsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionNextSinglePage(String nextLink, Context context) {
         return replaceApiVersionNextSinglePageAsync(nextLink, context).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextFragmentNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.nextFragmentNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getOdataNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextFragmentNextSinglePageAsync(String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return service.nextFragmentNext(nextLink, context)
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getOdataNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> nextFragmentNextSinglePage(String nextLink) {
+        return nextFragmentNextSinglePageAsync(nextLink).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> nextFragmentNextSinglePage(String nextLink, Context context) {
+        return nextFragmentNextSinglePageAsync(nextLink, context).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextFragmentWithGroupingNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return FluxUtil.withContext(context -> service.nextFragmentWithGroupingNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getOdataNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> nextFragmentWithGroupingNextSinglePageAsync(String nextLink, Context context) {
+        if (nextLink == null) {
+            return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
+        }
+        return service.nextFragmentWithGroupingNext(nextLink, context)
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                res.getValue().getValues(), res.getValue().getOdataNextLink(), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> nextFragmentWithGroupingNextSinglePage(String nextLink) {
+        return nextFragmentWithGroupingNextSinglePageAsync(nextLink).block();
+    }
+
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PagedResponse<Product> nextFragmentWithGroupingNextSinglePage(String nextLink, Context context) {
+        return nextFragmentWithGroupingNextSinglePageAsync(nextLink, context).block();
     }
 
     /**

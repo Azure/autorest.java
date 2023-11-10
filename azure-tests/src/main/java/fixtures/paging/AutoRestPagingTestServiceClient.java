@@ -799,6 +799,75 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragment(String apiVersion, String tenant, String nextLink) {
+        return this.serviceClient.nextFragment(apiVersion, tenant, nextLink);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragment(String apiVersion, String tenant, String nextLink, Context context) {
+        return this.serviceClient.nextFragment(apiVersion, tenant, nextLink, context);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragmentWithGrouping(String nextLink, CustomParameterGroup customParameterGroup) {
+        return this.serviceClient.nextFragmentWithGrouping(nextLink, customParameterGroup);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Parameter group.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> nextFragmentWithGrouping(String nextLink, CustomParameterGroup customParameterGroup,
+        Context context) {
+        return this.serviceClient.nextFragmentWithGrouping(nextLink, customParameterGroup, context);
+    }
+
+    /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.

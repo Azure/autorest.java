@@ -929,6 +929,44 @@ public final class PagingsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> nextFragmentNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            RequestOptions requestOptions, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> nextFragmentNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            RequestOptions requestOptions, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> nextFragmentWithGroupingNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink, RequestOptions requestOptions,
+            Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> nextFragmentWithGroupingNextSync(
+            @PathParam(value = "nextLink", encoded = true) String nextLink, RequestOptions requestOptions,
+            Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getPagingModelWithItemNameWithXmsClientNameNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("$host") String host,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
@@ -4410,6 +4448,40 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> nextFragmentAsync(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(() -> nextFragmentSinglePageAsync(apiVersion, tenant, nextLink, requestOptions),
+            nextLink -> nextFragmentNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4420,6 +4492,40 @@ public final class PagingsImpl {
             requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> nextFragment(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(() -> nextFragmentSinglePage(apiVersion, tenant, nextLink, requestOptions),
+            nextLink -> nextFragmentNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -4479,6 +4585,41 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> nextFragmentWithGroupingAsync(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(
+            () -> nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink, requestOptions),
+            nextLink -> nextFragmentWithGroupingNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -4489,6 +4630,41 @@ public final class PagingsImpl {
             nextLink, accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> nextFragmentWithGrouping(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(
+            () -> nextFragmentWithGroupingSinglePage(apiVersion, tenant, nextLink, requestOptions),
+            nextLink -> nextFragmentWithGroupingNextSinglePage(nextLink, requestOptionsForNextPage));
     }
 
     /**
@@ -6098,6 +6274,133 @@ public final class PagingsImpl {
             = service.replaceApiVersionNextSync(nextLink, this.client.getHost(), accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "values"), getNextLink(res.getValue(), "nextLink"), null);
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> nextFragmentNextSinglePageAsync(String nextLink,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.nextFragmentNext(nextLink, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> nextFragmentNextSinglePage(String nextLink, RequestOptions requestOptions) {
+        Response<BinaryData> res = service.nextFragmentNextSync(nextLink, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null);
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingNextSinglePageAsync(String nextLink,
+        RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.nextFragmentWithGroupingNext(nextLink, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> nextFragmentWithGroupingNextSinglePage(String nextLink,
+        RequestOptions requestOptions) {
+        Response<BinaryData> res = service.nextFragmentWithGroupingNextSync(nextLink, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "values"), getNextLink(res.getValue(), "odata.nextLink"), null);
     }
 
     /**

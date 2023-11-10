@@ -801,6 +801,68 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> nextFragment(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        return this.serviceClient.nextFragmentAsync(apiVersion, tenant, nextLink, requestOptions);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> nextFragmentWithGrouping(String apiVersion, String tenant, String nextLink,
+        RequestOptions requestOptions) {
+        return this.serviceClient.nextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, requestOptions);
+    }
+
+    /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      * <p>
      * <strong>Response Body Schema</strong>
