@@ -57,1123 +57,595 @@ public final class ModelsImpl {
     @ServiceInterface(name = "SpecialWordsClientMo")
     public interface ModelsService {
         @Post("/special-words/models/and")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withAnd(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/and")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withAndSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/as")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withAs(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/as")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withAsSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/assert")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withAssert(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/assert")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withAssertSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/async")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withAsync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/async")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withAsyncSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/await")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withAwait(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/await")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withAwaitSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/break")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withBreak(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/break")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withBreakSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/class")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withClass(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/class")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withClassSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/constructor")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withConstructor(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/constructor")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withConstructorSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/continue")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withContinue(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/continue")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withContinueSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/def")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withDef(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/def")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withDefSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/del")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withDel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/del")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withDelSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/elif")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withElif(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/elif")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withElifSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/else")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withElse(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/else")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withElseSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/except")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withExcept(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/except")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withExceptSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/exec")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withExec(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/exec")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withExecSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/finally")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withFinally(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/finally")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withFinallySync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/for")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withFor(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/for")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withForSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/from")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withFrom(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/from")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withFromSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/global")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withGlobal(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/global")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withGlobalSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/if")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withIf(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/if")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withIfSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/import")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withImport(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/import")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withImportSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/in")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withIn(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/in")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withInSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/is")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withIs(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/is")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withIsSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/lambda")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withLambda(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/lambda")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withLambdaSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/not")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withNot(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/not")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withNotSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/or")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withOr(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/or")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withOrSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/pass")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withPass(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/pass")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withPassSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/raise")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withRaise(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/raise")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withRaiseSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/return")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withReturn(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/return")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withReturnSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/try")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withTry(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/try")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withTrySync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/while")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withWhile(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/while")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withWhileSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/with")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> with(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/with")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/yield")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withYield(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/yield")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withYieldSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);

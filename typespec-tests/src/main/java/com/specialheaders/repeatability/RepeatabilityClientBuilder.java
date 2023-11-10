@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the RepeatabilityClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    RepeatabilityClient.class, RepeatabilityAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { RepeatabilityClient.class, RepeatabilityAsyncClient.class })
 public final class RepeatabilityClientBuilder
     implements HttpTrait<RepeatabilityClientBuilder>, ConfigurationTrait<RepeatabilityClientBuilder> {
     @Generated

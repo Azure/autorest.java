@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultipleClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    MultipleClient.class, MultipleAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { MultipleClient.class, MultipleAsyncClient.class })
 public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuilder>,
     ConfigurationTrait<MultipleClientBuilder>, EndpointTrait<MultipleClientBuilder> {
     @Generated

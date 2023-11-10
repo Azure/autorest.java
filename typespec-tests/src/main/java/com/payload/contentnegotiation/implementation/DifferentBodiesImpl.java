@@ -57,69 +57,37 @@ public final class DifferentBodiesImpl {
     @ServiceInterface(name = "ContentNegotiationCl")
     public interface DifferentBodiesService {
         @Get("/content-negotiation/different-body")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getAvatarAsPng(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/content-negotiation/different-body")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getAvatarAsPngSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/content-negotiation/different-body")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getAvatarAsJson(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/content-negotiation/different-body")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getAvatarAsJsonSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);

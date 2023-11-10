@@ -61,171 +61,91 @@ public final class QueriesImpl {
     @ServiceInterface(name = "DurationClientQuerie")
     public interface QueriesService {
         @Get("/encode/duration/query/default")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> defaultMethod(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/default")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> defaultMethodSync(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/iso8601")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> iso8601(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/iso8601")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> iso8601Sync(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/int32-seconds")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> int32Seconds(@QueryParam("input") long input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/int32-seconds")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> int32SecondsSync(@QueryParam("input") long input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/float-seconds")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> floatSeconds(@QueryParam("input") double input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/float-seconds")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> floatSecondsSync(@QueryParam("input") double input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/int32-seconds-array")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> int32SecondsArray(@QueryParam("input") String input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/int32-seconds-array")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> int32SecondsArraySync(@QueryParam("input") String input, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);

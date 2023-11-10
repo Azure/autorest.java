@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the HttpbinClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    HttpbinClient.class, HttpbinAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { HttpbinClient.class, HttpbinAsyncClient.class })
 public final class HttpbinClientBuilder
     implements HttpTrait<HttpbinClientBuilder>, ConfigurationTrait<HttpbinClientBuilder> {
     @Generated

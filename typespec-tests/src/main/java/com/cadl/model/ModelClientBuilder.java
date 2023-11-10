@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ModelClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ModelClient.class, ModelAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ModelClient.class, ModelAsyncClient.class })
 public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, ConfigurationTrait<ModelClientBuilder>,
     EndpointTrait<ModelClientBuilder> {
     @Generated

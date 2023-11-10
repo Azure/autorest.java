@@ -107,273 +107,145 @@ public final class EnumDiscriminatorClientImpl {
     @ServiceInterface(name = "EnumDiscriminatorCli")
     public interface EnumDiscriminatorClientService {
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getExtensibleModel(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getExtensibleModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/extensible-enum")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putExtensibleModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/extensible-enum")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> putExtensibleModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getExtensibleModelMissingDiscriminator(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getExtensibleModelMissingDiscriminatorSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getExtensibleModelWrongDiscriminator(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getExtensibleModelWrongDiscriminatorSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getFixedModel(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getFixedModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/fixed-enum")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> putFixedModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/fixed-enum")
-        @ExpectedResponses({
-            204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> putFixedModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getFixedModelMissingDiscriminator(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getFixedModelMissingDiscriminatorSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getFixedModelWrongDiscriminator(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator")
-        @ExpectedResponses({
-            200
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getFixedModelWrongDiscriminatorSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);

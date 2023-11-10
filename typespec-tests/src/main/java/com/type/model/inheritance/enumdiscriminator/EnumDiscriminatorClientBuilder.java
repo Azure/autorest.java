@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the EnumDiscriminatorClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    EnumDiscriminatorClient.class, EnumDiscriminatorAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { EnumDiscriminatorClient.class, EnumDiscriminatorAsyncClient.class })
 public final class EnumDiscriminatorClientBuilder
     implements HttpTrait<EnumDiscriminatorClientBuilder>, ConfigurationTrait<EnumDiscriminatorClientBuilder> {
     @Generated

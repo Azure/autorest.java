@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SingleDiscriminatorClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    SingleDiscriminatorClient.class, SingleDiscriminatorAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { SingleDiscriminatorClient.class, SingleDiscriminatorAsyncClient.class })
 public final class SingleDiscriminatorClientBuilder
     implements HttpTrait<SingleDiscriminatorClientBuilder>, ConfigurationTrait<SingleDiscriminatorClientBuilder> {
     @Generated

@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the LiteralServiceClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    LiteralServiceClient.class, LiteralServiceAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { LiteralServiceClient.class, LiteralServiceAsyncClient.class })
 public final class LiteralServiceClientBuilder implements HttpTrait<LiteralServiceClientBuilder>,
     ConfigurationTrait<LiteralServiceClientBuilder>, EndpointTrait<LiteralServiceClientBuilder> {
     @Generated

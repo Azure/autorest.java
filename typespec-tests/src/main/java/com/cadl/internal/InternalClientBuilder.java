@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the InternalClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    InternalClient.class, InternalAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { InternalClient.class, InternalAsyncClient.class })
 public final class InternalClientBuilder implements HttpTrait<InternalClientBuilder>,
     ConfigurationTrait<InternalClientBuilder>, EndpointTrait<InternalClientBuilder> {
     @Generated

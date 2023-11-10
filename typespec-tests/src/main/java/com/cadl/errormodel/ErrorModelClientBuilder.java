@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ErrorModelClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ErrorModelClient.class, ErrorModelAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ErrorModelClient.class, ErrorModelAsyncClient.class })
 public final class ErrorModelClientBuilder implements HttpTrait<ErrorModelClientBuilder>,
     ConfigurationTrait<ErrorModelClientBuilder>, EndpointTrait<ErrorModelClientBuilder> {
     @Generated

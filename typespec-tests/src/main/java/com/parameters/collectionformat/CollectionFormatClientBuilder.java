@@ -40,9 +40,8 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the CollectionFormatClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    QueryClient.class, HeaderClient.class, QueryAsyncClient.class, HeaderAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = { QueryClient.class, HeaderClient.class, QueryAsyncClient.class, HeaderAsyncClient.class })
 public final class CollectionFormatClientBuilder
     implements HttpTrait<CollectionFormatClientBuilder>, ConfigurationTrait<CollectionFormatClientBuilder> {
     @Generated

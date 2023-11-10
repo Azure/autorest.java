@@ -41,9 +41,8 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ResiliencyServiceDrivenClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ResiliencyServiceDrivenClient.class, ResiliencyServiceDrivenAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = { ResiliencyServiceDrivenClient.class, ResiliencyServiceDrivenAsyncClient.class })
 public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<ResiliencyServiceDrivenClientBuilder>,
     ConfigurationTrait<ResiliencyServiceDrivenClientBuilder>, EndpointTrait<ResiliencyServiceDrivenClientBuilder> {
     @Generated

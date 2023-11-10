@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ResponseClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ResponseClient.class, ResponseAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ResponseClient.class, ResponseAsyncClient.class })
 public final class ResponseClientBuilder implements HttpTrait<ResponseClientBuilder>,
     ConfigurationTrait<ResponseClientBuilder>, EndpointTrait<ResponseClientBuilder> {
     @Generated

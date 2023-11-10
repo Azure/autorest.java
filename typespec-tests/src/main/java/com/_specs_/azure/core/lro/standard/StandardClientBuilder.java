@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the StandardClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    StandardClient.class, StandardAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { StandardClient.class, StandardAsyncClient.class })
 public final class StandardClientBuilder
     implements HttpTrait<StandardClientBuilder>, ConfigurationTrait<StandardClientBuilder> {
     @Generated

@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ConditionalRequestClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ConditionalRequestClient.class, ConditionalRequestAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ConditionalRequestClient.class, ConditionalRequestAsyncClient.class })
 public final class ConditionalRequestClientBuilder
     implements HttpTrait<ConditionalRequestClientBuilder>, ConfigurationTrait<ConditionalRequestClientBuilder> {
     @Generated

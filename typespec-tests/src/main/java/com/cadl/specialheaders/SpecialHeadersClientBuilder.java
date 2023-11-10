@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SpecialHeadersClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    SpecialHeadersClient.class, SpecialHeadersAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { SpecialHeadersClient.class, SpecialHeadersAsyncClient.class })
 public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeadersClientBuilder>,
     ConfigurationTrait<SpecialHeadersClientBuilder>, EndpointTrait<SpecialHeadersClientBuilder> {
     @Generated

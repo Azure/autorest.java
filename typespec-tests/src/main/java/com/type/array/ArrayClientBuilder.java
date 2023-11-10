@@ -40,14 +40,28 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ArrayClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    Int32ValueClient.class, Int64ValueClient.class, BooleanValueClient.class, StringValueClient.class,
-    Float32ValueClient.class, DatetimeValueClient.class, DurationValueClient.class, UnknownValueClient.class,
-    ModelValueClient.class, NullableFloatValueClient.class, Int32ValueAsyncClient.class, Int64ValueAsyncClient.class,
-    BooleanValueAsyncClient.class, StringValueAsyncClient.class, Float32ValueAsyncClient.class,
-    DatetimeValueAsyncClient.class, DurationValueAsyncClient.class, UnknownValueAsyncClient.class,
-    ModelValueAsyncClient.class, NullableFloatValueAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = {
+        Int32ValueClient.class,
+        Int64ValueClient.class,
+        BooleanValueClient.class,
+        StringValueClient.class,
+        Float32ValueClient.class,
+        DatetimeValueClient.class,
+        DurationValueClient.class,
+        UnknownValueClient.class,
+        ModelValueClient.class,
+        NullableFloatValueClient.class,
+        Int32ValueAsyncClient.class,
+        Int64ValueAsyncClient.class,
+        BooleanValueAsyncClient.class,
+        StringValueAsyncClient.class,
+        Float32ValueAsyncClient.class,
+        DatetimeValueAsyncClient.class,
+        DurationValueAsyncClient.class,
+        UnknownValueAsyncClient.class,
+        ModelValueAsyncClient.class,
+        NullableFloatValueAsyncClient.class })
 public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, ConfigurationTrait<ArrayClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

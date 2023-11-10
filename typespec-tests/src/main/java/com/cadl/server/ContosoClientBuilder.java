@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ContosoClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ContosoClient.class, ContosoAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ContosoClient.class, ContosoAsyncClient.class })
 public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilder>,
     ConfigurationTrait<ContosoClientBuilder>, EndpointTrait<ContosoClientBuilder> {
     @Generated

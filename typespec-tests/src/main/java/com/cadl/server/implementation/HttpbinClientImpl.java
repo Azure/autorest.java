@@ -142,36 +142,20 @@ public final class HttpbinClientImpl {
     @ServiceInterface(name = "HttpbinClient")
     public interface HttpbinClientService {
         @Get("/status/{code}")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> status(@HostParam("domain") String domain, @HostParam("tld") String tld,
             @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/status/{code}")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> statusSync(@HostParam("domain") String domain, @HostParam("tld") String tld,
             @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,

@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultipartClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    MultipartClient.class, MultipartAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { MultipartClient.class, MultipartAsyncClient.class })
 public final class MultipartClientBuilder implements HttpTrait<MultipartClientBuilder>,
     ConfigurationTrait<MultipartClientBuilder>, EndpointTrait<MultipartClientBuilder> {
     @Generated

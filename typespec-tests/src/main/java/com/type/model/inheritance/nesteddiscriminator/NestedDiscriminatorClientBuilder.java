@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the NestedDiscriminatorClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    NestedDiscriminatorClient.class, NestedDiscriminatorAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { NestedDiscriminatorClient.class, NestedDiscriminatorAsyncClient.class })
 public final class NestedDiscriminatorClientBuilder
     implements HttpTrait<NestedDiscriminatorClientBuilder>, ConfigurationTrait<NestedDiscriminatorClientBuilder> {
     @Generated

@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the WireTypeClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    WireTypeClient.class, WireTypeAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { WireTypeClient.class, WireTypeAsyncClient.class })
 public final class WireTypeClientBuilder implements HttpTrait<WireTypeClientBuilder>,
     ConfigurationTrait<WireTypeClientBuilder>, EndpointTrait<WireTypeClientBuilder> {
     @Generated

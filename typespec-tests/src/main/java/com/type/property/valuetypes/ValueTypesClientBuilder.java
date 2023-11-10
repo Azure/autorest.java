@@ -40,19 +40,46 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ValueTypesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    BooleanOperationClient.class, StringOperationClient.class, BytesClient.class, IntClient.class,
-    FloatOperationClient.class, DatetimeOperationClient.class, DurationOperationClient.class, EnumClient.class,
-    ExtensibleEnumClient.class, ModelClient.class, CollectionsStringClient.class, CollectionsIntClient.class,
-    CollectionsModelClient.class, DictionaryStringClient.class, NeverClient.class, UnknownStringClient.class,
-    UnknownIntClient.class, UnknownDictClient.class, UnknownArrayClient.class, BooleanOperationAsyncClient.class,
-    StringOperationAsyncClient.class, BytesAsyncClient.class, IntAsyncClient.class, FloatOperationAsyncClient.class,
-    DatetimeOperationAsyncClient.class, DurationOperationAsyncClient.class, EnumAsyncClient.class,
-    ExtensibleEnumAsyncClient.class, ModelAsyncClient.class, CollectionsStringAsyncClient.class,
-    CollectionsIntAsyncClient.class, CollectionsModelAsyncClient.class, DictionaryStringAsyncClient.class,
-    NeverAsyncClient.class, UnknownStringAsyncClient.class, UnknownIntAsyncClient.class, UnknownDictAsyncClient.class,
-    UnknownArrayAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = {
+        BooleanOperationClient.class,
+        StringOperationClient.class,
+        BytesClient.class,
+        IntClient.class,
+        FloatOperationClient.class,
+        DatetimeOperationClient.class,
+        DurationOperationClient.class,
+        EnumClient.class,
+        ExtensibleEnumClient.class,
+        ModelClient.class,
+        CollectionsStringClient.class,
+        CollectionsIntClient.class,
+        CollectionsModelClient.class,
+        DictionaryStringClient.class,
+        NeverClient.class,
+        UnknownStringClient.class,
+        UnknownIntClient.class,
+        UnknownDictClient.class,
+        UnknownArrayClient.class,
+        BooleanOperationAsyncClient.class,
+        StringOperationAsyncClient.class,
+        BytesAsyncClient.class,
+        IntAsyncClient.class,
+        FloatOperationAsyncClient.class,
+        DatetimeOperationAsyncClient.class,
+        DurationOperationAsyncClient.class,
+        EnumAsyncClient.class,
+        ExtensibleEnumAsyncClient.class,
+        ModelAsyncClient.class,
+        CollectionsStringAsyncClient.class,
+        CollectionsIntAsyncClient.class,
+        CollectionsModelAsyncClient.class,
+        DictionaryStringAsyncClient.class,
+        NeverAsyncClient.class,
+        UnknownStringAsyncClient.class,
+        UnknownIntAsyncClient.class,
+        UnknownDictAsyncClient.class,
+        UnknownArrayAsyncClient.class })
 public final class ValueTypesClientBuilder
     implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
     @Generated

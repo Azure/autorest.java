@@ -40,9 +40,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the BasicClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    BasicClient.class, BasicAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { BasicClient.class, BasicAsyncClient.class })
 public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, ConfigurationTrait<BasicClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";

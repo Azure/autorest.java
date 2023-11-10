@@ -40,15 +40,30 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the DictionaryClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    Int32ValueClient.class, Int64ValueClient.class, BooleanValueClient.class, StringValueClient.class,
-    Float32ValueClient.class, DatetimeValueClient.class, DurationValueClient.class, UnknownValueClient.class,
-    ModelValueClient.class, RecursiveModelValueClient.class, NullableFloatValueClient.class,
-    Int32ValueAsyncClient.class, Int64ValueAsyncClient.class, BooleanValueAsyncClient.class,
-    StringValueAsyncClient.class, Float32ValueAsyncClient.class, DatetimeValueAsyncClient.class,
-    DurationValueAsyncClient.class, UnknownValueAsyncClient.class, ModelValueAsyncClient.class,
-    RecursiveModelValueAsyncClient.class, NullableFloatValueAsyncClient.class
-})
+@ServiceClientBuilder(
+    serviceClients = {
+        Int32ValueClient.class,
+        Int64ValueClient.class,
+        BooleanValueClient.class,
+        StringValueClient.class,
+        Float32ValueClient.class,
+        DatetimeValueClient.class,
+        DurationValueClient.class,
+        UnknownValueClient.class,
+        ModelValueClient.class,
+        RecursiveModelValueClient.class,
+        NullableFloatValueClient.class,
+        Int32ValueAsyncClient.class,
+        Int64ValueAsyncClient.class,
+        BooleanValueAsyncClient.class,
+        StringValueAsyncClient.class,
+        Float32ValueAsyncClient.class,
+        DatetimeValueAsyncClient.class,
+        DurationValueAsyncClient.class,
+        UnknownValueAsyncClient.class,
+        ModelValueAsyncClient.class,
+        RecursiveModelValueAsyncClient.class,
+        NullableFloatValueAsyncClient.class })
 public final class DictionaryClientBuilder
     implements HttpTrait<DictionaryClientBuilder>, ConfigurationTrait<DictionaryClientBuilder> {
     @Generated

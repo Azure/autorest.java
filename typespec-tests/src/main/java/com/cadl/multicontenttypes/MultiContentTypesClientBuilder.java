@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultiContentTypesClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    MultiContentTypesClient.class, MultiContentTypesAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { MultiContentTypesClient.class, MultiContentTypesAsyncClient.class })
 public final class MultiContentTypesClientBuilder implements HttpTrait<MultiContentTypesClientBuilder>,
     ConfigurationTrait<MultiContentTypesClientBuilder>, EndpointTrait<MultiContentTypesClientBuilder> {
     @Generated

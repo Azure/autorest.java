@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ProtocolAndConvenientClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ProtocolAndConvenientClient.class, ProtocolAndConvenientAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ProtocolAndConvenientClient.class, ProtocolAndConvenientAsyncClient.class })
 public final class ProtocolAndConvenientClientBuilder implements HttpTrait<ProtocolAndConvenientClientBuilder>,
     ConfigurationTrait<ProtocolAndConvenientClientBuilder>, EndpointTrait<ProtocolAndConvenientClientBuilder> {
     @Generated

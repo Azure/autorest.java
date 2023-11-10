@@ -43,9 +43,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ApiKeyClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    ApiKeyClient.class, ApiKeyAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { ApiKeyClient.class, ApiKeyAsyncClient.class })
 public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>,
     ConfigurationTrait<ApiKeyClientBuilder>, KeyCredentialTrait<ApiKeyClientBuilder> {
     @Generated

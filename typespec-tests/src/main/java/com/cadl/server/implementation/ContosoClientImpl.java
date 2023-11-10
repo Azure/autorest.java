@@ -143,36 +143,20 @@ public final class ContosoClientImpl {
     @ServiceInterface(name = "ContosoClient")
     public interface ContosoClientService {
         @Get("/contoso/{group}")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
             @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/contoso/{group}")
-        @ExpectedResponses({
-            200, 204
-        })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = {
-            401
-        })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = {
-            404
-        })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = {
-            409
-        })
+        @ExpectedResponses({ 200, 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> getSync(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
             @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,

@@ -41,9 +41,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the BuiltinClient type.
  */
-@ServiceClientBuilder(serviceClients = {
-    BuiltinClient.class, BuiltinAsyncClient.class
-})
+@ServiceClientBuilder(serviceClients = { BuiltinClient.class, BuiltinAsyncClient.class })
 public final class BuiltinClientBuilder implements HttpTrait<BuiltinClientBuilder>,
     ConfigurationTrait<BuiltinClientBuilder>, EndpointTrait<BuiltinClientBuilder> {
     @Generated
