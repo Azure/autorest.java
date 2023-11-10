@@ -274,13 +274,18 @@ public class Transformer {
         operationGroupName = operationGroup.getLanguage().getJava().getName();
         operationNameTmp = CodeNamer.getMethodName(operationGroupAndName);
       }
+      // In case nextPage operationName conflicts with the operation name itself
+      // https://github.com/Azure/azure-rest-api-specs/blob/6301be1289cf6b8cf44074f0e4229c2adf822991/specification/paloaltonetworks/resource-manager/PaloAltoNetworks.Cloudngfw/stable/2023-09-01/PaloAltoNetworks.Cloudngfw.json#L3621C23-L3624
+      if (operationNameTmp.equals(operation.getLanguage().getJava().getName())) {
+          operationNameTmp = getDefaultNextPageOperationName(operationNameTmp);
+      }
 
       if (!operation.getResponses().isEmpty() && operation.getResponses().iterator().next().getSchema() != null) {
         Schema responseSchema = operation.getResponses().iterator().next().getSchema();
         PagingNextOperationSignature signature = new PagingNextOperationSignature(operationGroupName, operationNameTmp);
         if (pagingNextOperationResponseSchemaMap.containsKey(signature) && pagingNextOperationResponseSchemaMap.get(signature) != responseSchema) {
           // method signature conflict for different response schema, try a different operation name
-          operationName = operation.getLanguage().getJava().getName() + "Next";
+          operationName = getDefaultNextPageOperationName(operation.getLanguage().getJava().getName());
           signature = new PagingNextOperationSignature(operationGroupName, operationName);
         } else {
           operationName = operationNameTmp;
@@ -291,7 +296,7 @@ public class Transformer {
       }
     } else {
       operationGroupName = operationGroup.getLanguage().getJava().getName();
-      operationName = operation.getLanguage().getJava().getName() + "Next";
+      operationName = getDefaultNextPageOperationName(operation.getLanguage().getJava().getName());
     }
     if (!client.getOperationGroups().stream()
         .anyMatch(og -> og.getLanguage().getJava().getName().equals(operationGroupName))) {
@@ -406,7 +411,11 @@ public class Transformer {
     }
   }
 
-  private void renameType(Metadata schema) {
+    private String getDefaultNextPageOperationName(String operationName) {
+        return operationName + "Next";
+    }
+
+    private void renameType(Metadata schema) {
     Language language = schema.getLanguage().getDefault();
     Language java = addJavaLanguage(schema);
     java.setName(CodeNamer.getTypeName(language.getName()));

@@ -104,6 +104,10 @@ REM model inherit ErrorResponse
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+REM x-ms-pageable nextPage operationName collision
+CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/6301be1289cf6b8cf44074f0e4229c2adf822991/specification/paloaltonetworks/resource-manager/PaloAltoNetworks.Cloudngfw/stable/2023-09-01/PaloAltoNetworks.Cloudngfw.json --java.namespace=com.azure.mgmtlitetest.paloaltonetworksngfw
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 REM schema clean-up
 CALL autorest --version=%AUTOREST_CORE_VERSION% %FLUENTLITE_ARGUMENTS% --regenerate-pom=false --input-file=./swagger/schema-cleanup.json --java.namespace=com.azure.mgmtlitetest.schemacleanup
 if %errorlevel% neq 0 exit /b %errorlevel%

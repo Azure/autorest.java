@@ -22,6 +22,7 @@ import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.LiveEventStatus;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
+import com.azure.mgmtlitetest.paloaltonetworksngfw.PaloaltonetworksngfwManager;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -197,5 +198,10 @@ public class LiteCompilationTests {
         CommonPostActionResponseForStateUpdate actionResponse = mock(CommonPostActionResponseForStateUpdate.class);
         ManagementError error = actionResponse.error();
         error = actionResponse.innerModel().error();
+    }
+
+    public void testPostPageable() {
+        PaloaltonetworksngfwManager manager = mock(PaloaltonetworksngfwManager.class);
+        manager.localRulestacks().listAppIds(anyString(), anyString());
     }
 }
