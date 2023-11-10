@@ -452,7 +452,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (enumType.getElementType() == ClassType.String) {
                 return String.format("%s.toString()", name);
             } else {
-                return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
+                return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToMethodName());
             }
         } else if (type instanceof IterableType) {
             if (parameter.getCollectionFormat() == CollectionFormat.MULTI && parameter.getExplode()) {

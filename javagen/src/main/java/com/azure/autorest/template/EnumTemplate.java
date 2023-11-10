@@ -130,7 +130,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             String typeName = elementType.getClientType().toString();
 
             // This will be 'from*'.
-            String converterName = enumType.getFromJsonMethodName();
+            String converterName = enumType.getFromMethodName();
 
             enumBlock.javadocComment("The actual serialized value for a " + enumName + " instance.");
             enumBlock.privateFinalMemberVariable(typeName, "value");
@@ -173,7 +173,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     enumBlock.annotation("JsonValue");
                 }
             }
-            enumBlock.publicMethod(typeName + " " + enumType.getToJsonMethodName() + "()",
+            enumBlock.publicMethod(typeName + " " + enumType.getToMethodName() + "()",
                 function -> function.methodReturn("this.value"));
         });
     }
@@ -190,7 +190,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
      */
     protected String createEnumJsonCreatorIfCheck(EnumType enumType) {
         IType enumElementType = enumType.getElementType();
-        String toJsonMethodName = enumType.getToJsonMethodName();
+        String toJsonMethodName = enumType.getToMethodName();
 
         if (enumElementType == PrimitiveType.Float) {
             return String.format("Float.floatToIntBits(item.%s()) == Float.floatToIntBits(value)", toJsonMethodName);

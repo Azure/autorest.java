@@ -125,7 +125,7 @@ public class EnumType implements IType {
      *
      * @return The method name used to convert JSON to the enum type.
      */
-    public final String getFromJsonMethodName() {
+    public final String getFromMethodName() {
         return "from" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
@@ -134,7 +134,7 @@ public class EnumType implements IType {
      *
      * @return The method name used to convert the enum type to JSON.
      */
-    public final String getToJsonMethodName() {
+    public final String getToMethodName() {
         return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
@@ -165,35 +165,27 @@ public class EnumType implements IType {
 
     @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
-        return String.format("%s.%s(%s.getString())", name, getFromJsonMethodName(), jsonReaderName);
+        return name + "." + getFromMethodName() + "(" + elementType.jsonDeserializationMethod(jsonReaderName) + ")";
     }
 
     @Override
     public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
-        return fieldName == null
-            ? String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter)
-            : String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
-                jsonWriterName, fieldName, valueGetter);
+        String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
+        return elementType.jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter);
     }
 
     @Override
     public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
-        String createCall = name + "::" + getFromJsonMethodName();
-        if (attributeName == null) {
-            return String.format("getNullableElement(%s)", createCall);
-        } else {
-            return (attributeNamespace == null)
-                ? String.format("getNullableAttribute(null, \"%s\", %s)", attributeName, createCall)
-                : String.format("getNullableAttribute(\"%s\", \"%s\", %s)", attributeNamespace, attributeName, createCall);
-        }
+        String elementTypeXmlDeserialization = elementType.xmlDeserializationMethod(attributeName, attributeNamespace);
+        return name + "." + getFromMethodName() + "(" + elementTypeXmlDeserialization + ")";
     }
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
         String valueGetter, boolean isAttribute, boolean nameIsVariable) {
-        String value = "Objects.toString(" + valueGetter + ", null)";
-        return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeString", attributeOrElementName, namespaceUri,
-            value, isAttribute, nameIsVariable);
+        String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
+        return elementType.xmlSerializationMethodCall(xmlWriterName, attributeOrElementName, namespaceUri,
+            actualValueGetter, isAttribute, nameIsVariable);
     }
 
     @Override
