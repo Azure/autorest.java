@@ -9,45 +9,91 @@ import org.apache.tools.tar.TarInputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 public class EclipseLanguageServerFacade {
+    private static final String DOWNLOAD_BASE_URL
+        = "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/";
     private final Process server;
 
-    public EclipseLanguageServerFacade(int port) {
-        this(null, port);
+    OutputStream getOutputStream() {
+        return server.getOutputStream();
     }
 
-    public EclipseLanguageServerFacade(String pathToLanguageServerPlugin, int port) {
+    InputStream getInputStream() {
+        return server.getInputStream();
+    }
+
+    boolean isAlive() {
+        return server.isAlive();
+    }
+
+    String getServerError() {
+        try {
+            return new String(server.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
+    }
+
+    public EclipseLanguageServerFacade(String pathToLanguageServerPlugin) {
         Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
         try {
-            Path languageServerPath = (pathToLanguageServerPlugin == null)
-                ? getLanguageServerDirectory()
+            Path languageServerPath = (pathToLanguageServerPlugin == null) ? getLanguageServerDirectory()
                 : Paths.get(pathToLanguageServerPlugin).resolve("jdt-language-server");
 
-            String command = "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 " +
-                "-Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 " +
-                "-Declipse.product=org.eclipse.jdt.ls.core.product -Dlog.protocol=true -Dlog.level=ALL " +
-                "-noverify -Xmx1G -jar ./plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar ";
-            double version = Double.parseDouble(System.getProperty("java.specification.version"));
-            if (version >= 9) {
-                command += "--add-modules=ALL-SYSTEM --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED ";
-            }
+            List<String> command = new ArrayList<>();
+            command.add("java");
+            command.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044");
+            command.add("-Declipse.application=org.eclipse.jdt.ls.core.id1");
+            command.add("-Dosgi.bundles.defaultStartLevel=4");
+            command.add("-Declipse.product=org.eclipse.jdt.ls.core.product");
+            command.add("-Dlog.protocol=true");
+            command.add("-Dlog.level=ALL");
+            command.add("-noverify");
+            command.add("-Xmx1G");
+            command.add("-jar");
+
+            // TODO (alzimmer): Supporting newer versions of Eclipse language server are more complex than just calling
+            //  the new start JAR. Continue using the previous version of the language server until we can support
+            //  newer versions.
+            // Start v1.12.0
+            command.add("./plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar");
+            //            // This will need to get update when the target version of Eclipse language server changes.
+            //            if (Runtime.version().feature() < 17) {
+            //                // JAR to start v1.12.0
+            //                command.add("./plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar");
+            //            } else {
+            //                // JAR to start v1.29.0
+            //                command.add("./plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar");
+            //            }
+
+            command.add("--add-modules=ALL-SYSTEM");
+            command.add("--add-opens java.base/java.util=ALL-UNNAMED");
+            command.add("--add-opens java.base/java.lang=ALL-UNNAMED");
+
+            command.add("-configuration");
             if (Utils.isWindows()) {
-                command += "-configuration ./config_win";
+                command.add("./config_win");
             } else if (Utils.isMac()) {
-                command += "-configuration ./config_mac";
+                command.add("./config_mac");
             } else {
-                command += "-configuration ./config_linux";
+                command.add("./config_linux");
             }
 
-            server = Runtime.getRuntime().exec(command, new String[]{"CLIENT_PORT=" + port},
-                languageServerPath.toFile());
+            server = new ProcessBuilder(command).redirectOutput(ProcessBuilder.Redirect.PIPE)
+                .redirectInput(ProcessBuilder.Redirect.PIPE).redirectErrorStream(true)
+                .directory(languageServerPath.toFile()).start();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -57,23 +103,27 @@ public class EclipseLanguageServerFacade {
         Path tmp = Paths.get(System.getProperty("java.io.tmpdir"));
         Path autorestLanguageServer = tmp.resolve("autorest-java-language-server");
 
-        int javaVersion = Runtime.version().feature();
-        URL downloadUrl;
-        Path languageServerPath;
-        if (javaVersion < 17) {
-            // Eclipse JDT language server version 1.12.0 is the last version that supports Java 11, which is
-            // autorest.java's baseline.
-            downloadUrl = URI.create("https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.12.0/jdt-language-server-1.12.0-202206011637.tar.gz")
-                .toURL();
-            languageServerPath = autorestLanguageServer.resolve("1.12.0");
-        } else {
-            // Eclipse JDT language server version 1.29.0 is the latest version that supports Java 17.
-            // In the future this else statement may need to be replaced with an else if as newer versions of
-            // Eclipse JDT language server may baseline on Java 21 (or later).
-            downloadUrl = URI.create("https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.29.0/jdt-language-server-1.29.0-202310261436.tar.gz")
-                .toURL();
-            languageServerPath = autorestLanguageServer.resolve("1.29.0");
-        }
+        // TODO (alzimmer): Supporting newer versions of Eclipse language server are more complex than just calling
+        //  the new start JAR. Continue using the previous version of the language server until we can support
+        //  newer versions.
+        URL downloadUrl = URI.create(DOWNLOAD_BASE_URL + "1.12.0/jdt-language-server-1.12.0-202206011637.tar.gz")
+            .toURL();
+        Path languageServerPath = autorestLanguageServer.resolve("1.12.0");
+        //        int javaVersion = Runtime.version().feature();
+        //        if (javaVersion < 17) {
+        //            // Eclipse JDT language server version 1.12.0 is the last version that supports Java 11, which is
+        //            // autorest.java's baseline.
+        //            downloadUrl = URI.create(
+        //                    ECLIPSE_LS_DOWNLOAD_BASE_URL + "1.12.0/jdt-language-server-1.12.0-202206011637.tar.gz")
+        //                .toURL();
+        //            languageServerPath = autorestLanguageServer.resolve("1.12.0");
+        //        } else {
+        //            // Eclipse JDT language server version 1.29.0 is the latest version that supports Java 17.
+        //            // In the future this else statement may need to be replaced with an else if as newer versions of
+        //            // Eclipse JDT language server may baseline on Java 21 (or later).
+        //            downloadUrl = URI.create(ECLIPSE_LS_DOWNLOAD_BASE_URL + "1.29.0/jdt-language-server-1.29.0-202310261436.tar.gz").toURL();
+        //            languageServerPath = autorestLanguageServer.resolve("1.29.0");
+        //        }
 
         Path languageServer = languageServerPath.resolve("jdt-language-server");
         if (!Files.exists(languageServerPath) || !Files.exists(languageServer)) {
