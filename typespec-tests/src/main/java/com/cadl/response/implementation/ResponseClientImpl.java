@@ -4,6 +4,7 @@
 
 package com.cadl.response.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
@@ -11,6 +12,7 @@ import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -31,9 +33,18 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.DefaultPollingStrategy;
+import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
+import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.ResponseServiceVersion;
+import com.cadl.response.models.OperationDetails1;
+import com.cadl.response.models.OperationDetails2;
+import java.time.Duration;
 import reactor.core.publisher.Mono;
 
 /**
@@ -254,6 +265,46 @@ public final class ResponseClientImpl {
         Response<Boolean> existsSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
+
+        @Post("/response/lro-invalid-poll-response")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> lroInvalidPollResponse(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+
+        @Post("/response/lro-invalid-poll-response")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> lroInvalidPollResponseSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+
+        @Post("/response/lro-invalid-result")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> lroInvalidResult(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+
+        @Post("/response/lro-invalid-result")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> lroInvalidResultSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -547,5 +598,406 @@ public final class ResponseClientImpl {
         final String accept = "application/json";
         return service.existsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions,
             Context.NONE);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> lroInvalidPollResponseWithResponseAsync(BinaryData resource,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.lroInvalidPollResponse(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), accept, resource, requestOptions, context));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<Void> lroInvalidPollResponseWithResponse(BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.lroInvalidPollResponseSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+            resource, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponseAsync(BinaryData resource,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationDetails1, OperationDetails1>
+        beginLroInvalidPollResponseWithModelAsync(BinaryData resource, RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(OperationDetails1.class),
+            TypeReference.createInstance(OperationDetails1.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponseWithModel(BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(OperationDetails1.class),
+            TypeReference.createInstance(OperationDetails1.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> lroInvalidResultWithResponseAsync(BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.lroInvalidResult(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), accept, resource, requestOptions, context));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<Void> lroInvalidResultWithResponse(BinaryData resource, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.lroInvalidResultSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, resource,
+            requestOptions, Context.NONE);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResultAsync(BinaryData resource,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.lroInvalidResultWithResponse(resource, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModelAsync(BinaryData resource,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(OperationDetails2.class),
+            TypeReference.createInstance(OperationDetails2.class));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModel(BinaryData resource,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.lroInvalidResultWithResponse(resource, requestOptions),
+            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
+                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
+                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                    : Context.NONE)
+                .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(OperationDetails2.class),
+            TypeReference.createInstance(OperationDetails2.class));
     }
 }
