@@ -55,7 +55,7 @@ public final class OpenAIClientImpl {
      */
     public OpenAIClientImpl(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.service = RestProxy.create(OpenAIClientService.class, this.httpPipeline, null);
+        this.service = RestProxy.create(OpenAIClientService.class, this.httpPipeline);
     }
 
     /**
