@@ -640,7 +640,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName;
+    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -820,18 +820,7 @@ export class CodeModelBuilder {
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        let finalResult = lroMetadata.logicalResult;
-        if (
-          verb === "post" &&
-          lroMetadata.finalStep &&
-          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-          lroMetadata.finalStep.target.name !== "result" &&
-          lroMetadata.logicalResult !== lroMetadata.envelopeResult
-        ) {
-          // fix the case that @lroResult is not "result" property
-          finalResult = lroMetadata.envelopeResult;
-        }
-
+        const finalResult = useNewPollStrategy ? lroMetadata.logicalResult : lroMetadata.envelopeResult;
         const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
@@ -2592,7 +2581,7 @@ export class CodeModelBuilder {
   }
 
   private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && !!getExtensions(program, op)?.get("x-ms-long-running-operation");
+    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {
