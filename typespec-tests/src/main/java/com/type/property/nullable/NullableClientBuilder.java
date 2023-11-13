@@ -41,10 +41,19 @@ import java.util.Objects;
  * A builder for creating a new instance of the NullableClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { StringOperationClient.class, BytesClient.class, DatetimeOperationClient.class,
-        DurationOperationClient.class, CollectionsByteClient.class, CollectionsModelClient.class,
-        StringOperationAsyncClient.class, BytesAsyncClient.class, DatetimeOperationAsyncClient.class,
-        DurationOperationAsyncClient.class, CollectionsByteAsyncClient.class, CollectionsModelAsyncClient.class })
+    serviceClients = {
+        StringOperationClient.class,
+        BytesClient.class,
+        DatetimeOperationClient.class,
+        DurationOperationClient.class,
+        CollectionsByteClient.class,
+        CollectionsModelClient.class,
+        StringOperationAsyncClient.class,
+        BytesAsyncClient.class,
+        DatetimeOperationAsyncClient.class,
+        DurationOperationAsyncClient.class,
+        CollectionsByteAsyncClient.class,
+        CollectionsModelAsyncClient.class })
 public final class NullableClientBuilder
     implements HttpTrait<NullableClientBuilder>, ConfigurationTrait<NullableClientBuilder> {
     @Generated
