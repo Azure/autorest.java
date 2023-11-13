@@ -14,19 +14,30 @@ import com.generic.core.http.Response;
 import com.generic.core.models.BinaryData;
 import com.generic.core.models.RequestOptions;
 import com.openai.implementation.OpenAIClientImpl;
+import com.openai.models.CreateChatCompletionRequest;
+import com.openai.models.CreateChatCompletionResponse;
+import com.openai.models.CreateCompletionRequest;
+import com.openai.models.CreateCompletionResponse;
 import com.openai.models.CreateEditRequest;
 import com.openai.models.CreateEditResponse;
+import com.openai.models.CreateEmbeddingRequest;
+import com.openai.models.CreateEmbeddingResponse;
 import com.openai.models.CreateFineTuneRequest;
+import com.openai.models.CreateFineTuningJobRequest;
 import com.openai.models.CreateImageRequest;
+import com.openai.models.CreateModerationRequest;
+import com.openai.models.CreateModerationResponse;
 import com.openai.models.DeleteFileResponse;
 import com.openai.models.DeleteModelResponse;
 import com.openai.models.FineTune;
+import com.openai.models.FineTuningJob;
 import com.openai.models.ImagesResponse;
 import com.openai.models.ListFilesResponse;
 import com.openai.models.ListFineTuneEventsResponse;
 import com.openai.models.ListFineTunesResponse;
 import com.openai.models.ListFineTuningJobEventsResponse;
 import com.openai.models.ListModelsResponse;
+import com.openai.models.ListPaginatedFineTuningJobsResponse;
 import com.openai.models.Model;
 import com.openai.models.OpenAIFile;
 
@@ -155,12 +166,12 @@ public final class OpenAIClient {
      *             }
      *         }
      *     ]
-     *     function_call: CreateChatCompletionRequestFunctionCallModelBase (Optional)
+     *     function_call: BinaryData (Optional)
      *     temperature: Double (Optional)
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: StopModelBase (Optional)
+     *     stop: BinaryData (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
@@ -213,8 +224,6 @@ public final class OpenAIClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createChatCompletionWithResponse(BinaryData createChatCompletionRequest,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createChatCompletion' refers Union 'none | auto |
-        // ChatCompletionFunctionCallOption'
         return this.serviceClient.createChatCompletionWithResponse(createChatCompletionRequest, requestOptions);
     }
 
@@ -234,7 +243,7 @@ public final class OpenAIClient {
      *     validation_file: String (Optional)
      *     model: String(babbage-002/davinci-002/gpt-3.5-turbo) (Required)
      *     hyperparameters (Optional): {
-     *         n_epochs: CreateFineTuningJobRequestNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     suffix: String (Optional)
      * }
@@ -253,7 +262,7 @@ public final class OpenAIClient {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -280,7 +289,6 @@ public final class OpenAIClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createFineTuningJobWithResponse(BinaryData job, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createFineTuningJob' refers Union 'auto | NEpochs'
         return this.serviceClient.createFineTuningJobWithResponse(job, requestOptions);
     }
 
@@ -328,7 +336,7 @@ public final class OpenAIClient {
      *             organization_id: String (Required)
      *             status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *             hyperparameters (Required): {
-     *                 n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *                 n_epochs: BinaryData (Optional)
      *             }
      *             training_file: String (Required)
      *             validation_file: String (Required)
@@ -357,7 +365,6 @@ public final class OpenAIClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> listPaginatedFineTuningJobsWithResponse(RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'listPaginatedFineTuningJobs' refers Union 'auto | NEpochs'
         return this.serviceClient.listPaginatedFineTuningJobsWithResponse(requestOptions);
     }
 
@@ -379,7 +386,7 @@ public final class OpenAIClient {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -407,7 +414,6 @@ public final class OpenAIClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> retrieveFineTuningJobWithResponse(String fineTuningJobId,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'retrieveFineTuningJob' refers Union 'auto | NEpochs'
         return this.serviceClient.retrieveFineTuningJobWithResponse(fineTuningJobId, requestOptions);
     }
 
@@ -487,7 +493,7 @@ public final class OpenAIClient {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -514,7 +520,6 @@ public final class OpenAIClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> cancelFineTuningJobWithResponse(String fineTuningJobId, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'cancelFineTuningJob' refers Union 'auto | NEpochs'
         return this.serviceClient.cancelFineTuningJobWithResponse(fineTuningJobId, requestOptions);
     }
 
@@ -526,13 +531,13 @@ public final class OpenAIClient {
      * <pre>{@code
      * {
      *     model: String(babbage-002/davinci-002/text-davinci-003/text-davinci-002/text-davinci-001/code-davinci-002/text-curie-001/text-babbage-001/text-ada-001) (Required)
-     *     prompt: PromptModelBase (Required)
+     *     prompt: BinaryData (Required)
      *     suffix: String (Optional)
      *     temperature: Double (Optional)
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: StopModelBase (Optional)
+     *     stop: BinaryData (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
@@ -597,7 +602,6 @@ public final class OpenAIClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createCompletionWithResponse(BinaryData createCompletionRequest,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createCompletion' refers Union 'Prompt'
         return this.serviceClient.createCompletionWithResponse(createCompletionRequest, requestOptions);
     }
 
@@ -660,7 +664,7 @@ public final class OpenAIClient {
      * <pre>{@code
      * {
      *     model: String(text-embedding-ada-002) (Required)
-     *     input: CreateEmbeddingRequestInputModelBase (Required)
+     *     input: BinaryData (Required)
      *     user: String (Optional)
      * }
      * }</pre>
@@ -698,8 +702,6 @@ public final class OpenAIClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createEmbeddingWithResponse(BinaryData embedding, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createEmbedding' refers Union 'string | string[] | TokenArray
-        // | TokenArrayArray'
         return this.serviceClient.createEmbeddingWithResponse(embedding, requestOptions);
     }
 
@@ -1454,7 +1456,7 @@ public final class OpenAIClient {
      * </p>
      * <pre>{@code
      * {
-     *     input: CreateModerationRequestInputModelBase (Required)
+     *     input: BinaryData (Required)
      *     model: String(text-moderation-latest/text-moderation-stable) (Optional)
      * }
      * }</pre>
@@ -1510,8 +1512,124 @@ public final class OpenAIClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createModerationWithResponse(BinaryData content, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createModeration' refers Union 'string | string[]'
         return this.serviceClient.createModerationWithResponse(content, requestOptions);
+    }
+
+    /**
+     * The createChatCompletion operation.
+     * 
+     * @param createChatCompletionRequest The createChatCompletionRequest parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a chat completion response returned by model, based on the provided input.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CreateChatCompletionResponse createChatCompletion(CreateChatCompletionRequest createChatCompletionRequest) {
+        // Generated convenience method for createChatCompletionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createChatCompletionWithResponse(BinaryData.fromObject(createChatCompletionRequest), requestOptions)
+            .getValue().toObject(CreateChatCompletionResponse.class);
+    }
+
+    /**
+     * Creates a job that fine-tunes a specified model from a given dataset.
+     * 
+     * Response includes details of the enqueued job including job status and the name of the
+     * fine-tuned models once complete.
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * 
+     * @param job The job parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public FineTuningJob createFineTuningJob(CreateFineTuningJobRequest job) {
+        // Generated convenience method for createFineTuningJobWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createFineTuningJobWithResponse(BinaryData.fromObject(job), requestOptions).getValue()
+            .toObject(FineTuningJob.class);
+    }
+
+    /**
+     * The listPaginatedFineTuningJobs operation.
+     * 
+     * @param after Identifier for the last job from the previous pagination request.
+     * @param limit Number of fine-tuning jobs to retrieve.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ListPaginatedFineTuningJobsResponse listPaginatedFineTuningJobs(String after, Long limit) {
+        // Generated convenience method for listPaginatedFineTuningJobsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (after != null) {
+            requestOptions.addQueryParam("after", after);
+        }
+        if (limit != null) {
+            requestOptions.addQueryParam("limit", String.valueOf(limit));
+        }
+        return listPaginatedFineTuningJobsWithResponse(requestOptions).getValue()
+            .toObject(ListPaginatedFineTuningJobsResponse.class);
+    }
+
+    /**
+     * The listPaginatedFineTuningJobs operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ListPaginatedFineTuningJobsResponse listPaginatedFineTuningJobs() {
+        // Generated convenience method for listPaginatedFineTuningJobsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return listPaginatedFineTuningJobsWithResponse(requestOptions).getValue()
+            .toObject(ListPaginatedFineTuningJobsResponse.class);
+    }
+
+    /**
+     * Get info about a fine-tuning job.
+     * 
+     * [Learn more about fine-tuning](/docs/guides/fine-tuning).
+     * 
+     * @param fineTuningJobId A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public FineTuningJob retrieveFineTuningJob(String fineTuningJobId) {
+        // Generated convenience method for retrieveFineTuningJobWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return retrieveFineTuningJobWithResponse(fineTuningJobId, requestOptions).getValue()
+            .toObject(FineTuningJob.class);
     }
 
     /**
@@ -1565,6 +1683,48 @@ public final class OpenAIClient {
     }
 
     /**
+     * Immediately cancel a fine-tune job.
+     * 
+     * @param fineTuningJobId The ID of the fine-tuning job to cancel.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public FineTuningJob cancelFineTuningJob(String fineTuningJobId) {
+        // Generated convenience method for cancelFineTuningJobWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return cancelFineTuningJobWithResponse(fineTuningJobId, requestOptions).getValue()
+            .toObject(FineTuningJob.class);
+    }
+
+    /**
+     * The createCompletion operation.
+     * 
+     * @param createCompletionRequest The createCompletionRequest parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return represents a completion response from the API.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CreateCompletionResponse createCompletion(CreateCompletionRequest createCompletionRequest) {
+        // Generated convenience method for createCompletionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createCompletionWithResponse(BinaryData.fromObject(createCompletionRequest), requestOptions).getValue()
+            .toObject(CreateCompletionResponse.class);
+    }
+
+    /**
      * The createEdit operation.
      * 
      * @param edit The edit parameter.
@@ -1583,6 +1743,27 @@ public final class OpenAIClient {
         RequestOptions requestOptions = new RequestOptions();
         return createEditWithResponse(BinaryData.fromObject(edit), requestOptions).getValue()
             .toObject(CreateEditResponse.class);
+    }
+
+    /**
+     * Creates an embedding vector representing the input text.
+     * 
+     * @param embedding The embedding parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CreateEmbeddingResponse createEmbedding(CreateEmbeddingRequest embedding) {
+        // Generated convenience method for createEmbeddingWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createEmbeddingWithResponse(BinaryData.fromObject(embedding), requestOptions).getValue()
+            .toObject(CreateEmbeddingResponse.class);
     }
 
     /**
@@ -1881,5 +2062,26 @@ public final class OpenAIClient {
         RequestOptions requestOptions = new RequestOptions();
         return createImageWithResponse(BinaryData.fromObject(image), requestOptions).getValue()
             .toObject(ImagesResponse.class);
+    }
+
+    /**
+     * Classifies if text violates OpenAI's Content Policy.
+     * 
+     * @param content The content parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public CreateModerationResponse createModeration(CreateModerationRequest content) {
+        // Generated convenience method for createModerationWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createModerationWithResponse(BinaryData.fromObject(content), requestOptions).getValue()
+            .toObject(CreateModerationResponse.class);
     }
 }
