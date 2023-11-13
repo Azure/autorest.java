@@ -49,6 +49,46 @@ model Resource {
 
 model ResourceArray is Resource[];
 
+// no "id" property
+model OperationDetails1 {
+  @doc("Operation ID")
+  @key
+  @visibility("read", "create")
+  operationId: uuid;
+
+  status: Azure.Core.Foundations.OperationState;
+  error?: Azure.Core.Foundations.Error;
+
+  @lroResult
+  result?: Resource;
+}
+
+// no "result" property
+model OperationDetails2 {
+  @doc("Operation ID")
+  @key
+  @visibility("read", "create")
+  id: uuid;
+
+  status: Azure.Core.Foundations.OperationState;
+  error?: Azure.Core.Foundations.Error;
+
+  @lroResult
+  lroResult?: Resource;
+}
+
+op CustomLongRunningOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model
+> is Foundations.Operation<
+  TParams,
+  AcceptedResponse & {
+    @pollingLocation
+    @header("Operation-Location")
+    operationLocation: ResourceLocation<TResponse>;
+  }
+>;
+
 @Azure.ClientGenerator.Core.client({
   name: "ResponseClient",
   service: Cadl.Response,
@@ -105,4 +145,12 @@ interface ResponseOp {
     {},
     Foundations.ErrorResponse
   >;
+
+  // OperationDetails does not have "id" property
+  @route("/lro-invalid-poll-response")
+  lroInvalidPollResponse is CustomLongRunningOperation<Resource, OperationDetails1>;
+
+  // OperationDetails does not have "result" property
+  @route("/lro-invalid-result")
+  lroInvalidResult is CustomLongRunningOperation<Resource, OperationDetails2>;
 }
