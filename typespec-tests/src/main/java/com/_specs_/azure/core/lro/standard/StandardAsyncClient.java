@@ -15,9 +15,9 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 
 /**
@@ -167,7 +167,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, User> beginCreateOrReplace(String name, User resource) {
+    public PollerFlux<PollOperationDetails, User> beginCreateOrReplace(String name, User resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -189,7 +189,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, Void> beginDelete(String name) {
+    public PollerFlux<PollOperationDetails, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -212,7 +212,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedUser> beginExport(String name, String format) {
+    public PollerFlux<PollOperationDetails, ExportedUser> beginExport(String name, String format) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, format, requestOptions);

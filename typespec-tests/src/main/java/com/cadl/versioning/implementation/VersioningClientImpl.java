@@ -20,7 +20,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -35,6 +34,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
@@ -526,7 +526,7 @@ public final class VersioningClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedResource> beginExportWithModelAsync(String name,
+    public PollerFlux<PollOperationDetails, ExportedResource> beginExportWithModelAsync(String name,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.exportWithResponseAsync(name, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
@@ -535,7 +535,8 @@ public final class VersioningClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedResource.class));
+            TypeReference.createInstance(PollOperationDetails.class),
+            TypeReference.createInstance(ExportedResource.class));
     }
 
     /**
@@ -592,7 +593,8 @@ public final class VersioningClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExportWithModel(String name, RequestOptions requestOptions) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExportWithModel(String name,
+        RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.exportWithResponse(name, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
@@ -600,7 +602,8 @@ public final class VersioningClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ExportedResource.class));
+            TypeReference.createInstance(PollOperationDetails.class),
+            TypeReference.createInstance(ExportedResource.class));
     }
 
     /**

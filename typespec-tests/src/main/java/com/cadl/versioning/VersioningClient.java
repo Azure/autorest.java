@@ -12,11 +12,11 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.versioning.implementation.VersioningClientImpl;
 import com.cadl.versioning.models.ExportedResource;
@@ -169,7 +169,7 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(String name, String projectFileVersion,
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion,
         String projectedFileFormat) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
@@ -201,7 +201,7 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(String name, String projectFileVersion) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (projectFileVersion != null) {
@@ -224,7 +224,7 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(String name) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModel(name, requestOptions);

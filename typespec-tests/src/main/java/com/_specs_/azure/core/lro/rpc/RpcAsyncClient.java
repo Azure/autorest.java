@@ -15,9 +15,9 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 
 /**
@@ -95,7 +95,7 @@ public final class RpcAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
+    public PollerFlux<PollOperationDetails, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLongRunningRpcWithModelAsync(BinaryData.fromObject(generationOptions),

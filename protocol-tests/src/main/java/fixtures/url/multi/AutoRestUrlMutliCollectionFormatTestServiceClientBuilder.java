@@ -41,7 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the AutoRestUrlMutliCollectionFormatTestServiceClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { AutoRestUrlMutliCollectionFormatTestServiceClient.class,
+    serviceClients = {
+        AutoRestUrlMutliCollectionFormatTestServiceClient.class,
         AutoRestUrlMutliCollectionFormatTestServiceAsyncClient.class })
 public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     implements HttpTrait<AutoRestUrlMutliCollectionFormatTestServiceClientBuilder>,
