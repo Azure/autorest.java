@@ -245,7 +245,7 @@ export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadat
     if (useNewStrategy) {
       const idProperty = lroMetadata.envelopeResult.properties.get("id");
       const statusProperty = lroMetadata.envelopeResult.properties.get("status");
-      useNewStrategy = !!(idProperty && statusProperty && !idProperty.optional && !statusProperty.optional);
+      useNewStrategy = Boolean(idProperty && statusProperty && !idProperty.optional && !statusProperty.optional);
     }
   }
 
