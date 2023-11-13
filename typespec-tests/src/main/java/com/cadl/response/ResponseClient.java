@@ -15,8 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.implementation.ResponseClientImpl;
+import com.cadl.response.models.OperationDetails1;
+import com.cadl.response.models.OperationDetails2;
 import com.cadl.response.models.Resource;
 import java.util.List;
 
@@ -183,6 +186,64 @@ public final class ResponseClient {
     }
 
     /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidPollResponse(resource, requestOptions);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidResult(resource, requestOptions);
+    }
+
+    /**
      * The getBinary operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -286,6 +347,46 @@ public final class ResponseClient {
         // Generated convenience method for existsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return existsWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * The most basic operation.
+     * 
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+        // Generated convenience method for beginLroInvalidPollResponseWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginLroInvalidPollResponseWithModel(BinaryData.fromObject(resource), requestOptions);
+    }
+
+    /**
+     * The most basic operation.
+     * 
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+        // Generated convenience method for beginLroInvalidResultWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(resource), requestOptions);
     }
 
     @Generated
