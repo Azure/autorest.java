@@ -123,7 +123,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollResultSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -2459,7 +2459,7 @@ export class CodeModelBuilder {
   get pollResultSchema(): ObjectSchema {
     return (
       this._pollResultSchema ??
-      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+      (this._pollResultSchema = createPollOperationDetailsSchema(this.codeModel.schemas, this.stringSchema))
     );
   }
 
