@@ -55,7 +55,7 @@ public final class OpenAIClientImpl {
      */
     public OpenAIClientImpl(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.service = RestProxy.create(OpenAIClientService.class, this.httpPipeline, null);
+        this.service = RestProxy.create(OpenAIClientService.class, this.httpPipeline);
     }
 
     /**
@@ -434,12 +434,12 @@ public final class OpenAIClientImpl {
      *             }
      *         }
      *     ]
-     *     function_call: CreateChatCompletionRequestFunctionCallModelBase (Optional)
+     *     function_call: BinaryData (Optional)
      *     temperature: Double (Optional)
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: StopModelBase (Optional)
+     *     stop: BinaryData (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
@@ -511,7 +511,7 @@ public final class OpenAIClientImpl {
      *     validation_file: String (Optional)
      *     model: String(babbage-002/davinci-002/gpt-3.5-turbo) (Required)
      *     hyperparameters (Optional): {
-     *         n_epochs: CreateFineTuningJobRequestNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     suffix: String (Optional)
      * }
@@ -530,7 +530,7 @@ public final class OpenAIClientImpl {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -604,7 +604,7 @@ public final class OpenAIClientImpl {
      *             organization_id: String (Required)
      *             status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *             hyperparameters (Required): {
-     *                 n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *                 n_epochs: BinaryData (Optional)
      *             }
      *             training_file: String (Required)
      *             validation_file: String (Required)
@@ -654,7 +654,7 @@ public final class OpenAIClientImpl {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -761,7 +761,7 @@ public final class OpenAIClientImpl {
      *     organization_id: String (Required)
      *     status: String(created/pending/running/succeeded/failed/cancelled) (Required)
      *     hyperparameters (Required): {
-     *         n_epochs: FineTuningJobNEpochsModelBase (Optional)
+     *         n_epochs: BinaryData (Optional)
      *     }
      *     training_file: String (Required)
      *     validation_file: String (Required)
@@ -799,13 +799,13 @@ public final class OpenAIClientImpl {
      * <pre>{@code
      * {
      *     model: String(babbage-002/davinci-002/text-davinci-003/text-davinci-002/text-davinci-001/code-davinci-002/text-curie-001/text-babbage-001/text-ada-001) (Required)
-     *     prompt: PromptModelBase (Required)
+     *     prompt: BinaryData (Required)
      *     suffix: String (Optional)
      *     temperature: Double (Optional)
      *     top_p: Double (Optional)
      *     n: Long (Optional)
      *     max_tokens: Long (Optional)
-     *     stop: StopModelBase (Optional)
+     *     stop: BinaryData (Optional)
      *     presence_penalty: Double (Optional)
      *     frequency_penalty: Double (Optional)
      *     logit_bias (Optional): {
@@ -932,7 +932,7 @@ public final class OpenAIClientImpl {
      * <pre>{@code
      * {
      *     model: String(text-embedding-ada-002) (Required)
-     *     input: CreateEmbeddingRequestInputModelBase (Required)
+     *     input: BinaryData (Required)
      *     user: String (Optional)
      * }
      * }</pre>
@@ -1721,7 +1721,7 @@ public final class OpenAIClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     input: CreateModerationRequestInputModelBase (Required)
+     *     input: BinaryData (Required)
      *     model: String(text-moderation-latest/text-moderation-stable) (Optional)
      * }
      * }</pre>
