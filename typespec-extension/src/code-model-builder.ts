@@ -637,7 +637,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName;
+    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -2578,7 +2578,7 @@ export class CodeModelBuilder {
   }
 
   private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && !!getExtensions(program, op)?.get("x-ms-long-running-operation");
+    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {
