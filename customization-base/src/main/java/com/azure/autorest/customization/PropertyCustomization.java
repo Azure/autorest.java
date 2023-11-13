@@ -5,13 +5,12 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeAction;
 import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
-import com.azure.autorest.customization.implementation.ls.models.TextEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
+import org.eclipse.lsp4j.CodeAction;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
@@ -72,10 +71,10 @@ public final class PropertyCustomization extends CodeCustomization {
         String propertyPascalName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
         String newPascalName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
         for (SymbolInformation symbol : symbols) {
-            if (symbol.getKind() == SymbolKind.FIELD) {
+            if (symbol.getKind() == SymbolKind.Field) {
                 WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
                 Utils.applyWorkspaceEdit(edit, editor, languageClient);
-            } else if (symbol.getKind() == SymbolKind.METHOD) {
+            } else if (symbol.getKind() == SymbolKind.Method) {
                 String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
                     .replace(propertyName, newName);
                 methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
@@ -115,24 +114,19 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization generateGetterAndSetter() {
-        Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange())
+        Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange(),
+                JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString())
             .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
             .findFirst();
         if (generateAccessors.isPresent()) {
-            WorkspaceEditCommand command;
-            if (generateAccessors.get().getCommand() instanceof WorkspaceEditCommand) {
-                command = (WorkspaceEditCommand) generateAccessors.get().getCommand();
-                for (WorkspaceEdit workspaceEdit : command.getArguments()) {
-                    Utils.applyWorkspaceEdit(workspaceEdit, editor, languageClient);
-                }
-                List<TextEdit> formats = languageClient.format(fileUri);
-                Utils.applyTextEdits(fileUri, formats, editor, languageClient);
+            Utils.applyWorkspaceEdit(generateAccessors.get().getEdit(), editor, languageClient);
+            List<TextEdit> formats = languageClient.format(fileUri);
+            Utils.applyTextEdits(fileUri, formats, editor, languageClient);
 
-                String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-                new PackageCustomization(editor, languageClient, packageName)
-                    .getClass(className)
-                    .getMethod(setterMethod).setReturnType(className, "this");
-            }
+            String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
+            new PackageCustomization(editor, languageClient, packageName)
+                .getClass(className)
+                .getMethod(setterMethod).setReturnType(className, "this");
         }
 
         return this;
@@ -154,7 +148,7 @@ public final class PropertyCustomization extends CodeCustomization {
     public PropertyCustomization setModifier(int modifiers) {
         String target = " *(?:(?:public|protected|private|static|final|transient|volatile) ?)*(.* )";
         languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.Field)
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
                 target + propertyName, "$1" + propertyName, Modifier.fieldModifiers(), modifiers));

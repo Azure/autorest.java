@@ -4,9 +4,7 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-
-import java.net.URI;
+import org.eclipse.lsp4j.SymbolInformation;
 
 /**
  * Base class for all code based customizations.
@@ -15,7 +13,7 @@ public abstract class CodeCustomization {
     final Editor editor;
     final EclipseLanguageClient languageClient;
     final SymbolInformation symbol;
-    final URI fileUri;
+    final String fileUri;
     final String fileName;
 
     CodeCustomization(Editor editor, EclipseLanguageClient languageClient, SymbolInformation symbol) {
@@ -59,7 +57,7 @@ public abstract class CodeCustomization {
      *
      * @return The URI of the file.
      */
-    public final URI getFileUri() {
+    public final String getFileUri() {
         return fileUri;
     }
 

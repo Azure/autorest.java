@@ -5,9 +5,9 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
 import java.util.Objects;
@@ -115,11 +115,11 @@ public final class ConstantCustomization extends CodeCustomization {
                 return symbolName.contains(lowercaseConstantName)
                     || symbolName.contains(lowercaseCurrentCamelName);
             }).forEach(symbol -> {
-                if (symbol.getKind() == SymbolKind.CONSTANT) {
+                if (symbol.getKind() == SymbolKind.Constant) {
                     WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(),
                         newName);
                     Utils.applyWorkspaceEdit(edit, editor, languageClient);
-                } else if (symbol.getKind() == SymbolKind.METHOD) {
+                } else if (symbol.getKind() == SymbolKind.Method) {
                     String methodName = symbol.getName().replace(currentCamelName, newCamelName)
                         .replace(constantName, newName);
                     methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");

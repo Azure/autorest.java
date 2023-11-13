@@ -7,22 +7,20 @@ import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.CodeCustomization;
 import com.azure.autorest.customization.Editor;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.CodeActionKind;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.TextEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEditCommand;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.AnnotationExpr;
+import org.eclipse.lsp4j.CodeActionKind;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,21 +35,6 @@ import java.util.stream.Collectors;
 
 public class Utils {
     /**
-     * This pattern matches a single line Javadoc and captures its content in group 1.
-     */
-    public static final Pattern SINGLE_LINE_JAVADOC_PATTERN = Pattern.compile("^\\s*\\/\\*\\*(.*?)\\*\\/\\s*$");
-
-    /**
-     * This pattern matches a Javadoc start line.
-     */
-    public static final Pattern JAVADOC_START_PATTERN = Pattern.compile("^\\s*\\/\\*\\*\\s*$");
-
-    /**
-     * This pattern matches a Javadoc end line.
-     */
-    public static final Pattern JAVADOC_END_PATTERN = Pattern.compile("^\\s*\\*\\/\\s*$");
-
-    /**
      * This pattern determines the indentation of the passed string. Effectively it creates a group containing all
      * spaces before the first word character.
      */
@@ -61,11 +44,6 @@ public class Utils {
      * This pattern matches a Java package declaration.
      */
     private static final Pattern PACKAGE_PATTERN = Pattern.compile("package\\s[\\w\\.]+;");
-
-    /**
-     * This pattern matches a Java import.
-     */
-    private static final Pattern IMPORT_PATTERN = Pattern.compile("import\\s(?:static\\s)?[\\w\\.]+;");
 
     /**
      * This pattern matches anything then the space.
@@ -95,27 +73,31 @@ public class Utils {
     private static final Pattern ENDING_OF_PARAMETERS_PATTERN = Pattern.compile("^(.*)\\)\\s*\\{.*$");
 
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
+        if (workspaceEdit == null || workspaceEdit.getChanges() == null || workspaceEdit.getChanges().isEmpty()) {
+            return;
+        }
+
         List<FileEvent> changes = new ArrayList<>();
-        for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
-            int i = edit.getKey().toString().indexOf("src/main/java/");
-            String fileName = edit.getKey().toString().substring(i);
+        for (Map.Entry<String, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
+            int i = edit.getKey().indexOf("src/main/java/");
+            String fileName = edit.getKey().substring(i);
             if (editor.getContents().containsKey(fileName)) {
                 for (TextEdit textEdit : edit.getValue()) {
                     editor.replace(fileName, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
                 }
                 FileEvent fileEvent = new FileEvent();
                 fileEvent.setUri(edit.getKey());
-                fileEvent.setType(FileChangeType.CHANGED);
+                fileEvent.setType(FileChangeType.Changed);
                 changes.add(fileEvent);
             }
         }
         languageClient.notifyWatchedFilesChanged(changes);
     }
 
-    public static void applyTextEdits(URI fileUri, List<TextEdit> textEdits, Editor editor, EclipseLanguageClient languageClient) {
+    public static void applyTextEdits(String fileUri, List<TextEdit> textEdits, Editor editor, EclipseLanguageClient languageClient) {
         List<FileEvent> changes = new ArrayList<>();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
+        int i = fileUri.indexOf("src/main/java/");
+        String fileName = fileUri.substring(i);
         if (editor.getContents().containsKey(fileName)) {
             for (int j = textEdits.size() - 1; j >= 0; j--) {
                 TextEdit textEdit = textEdits.get(j);
@@ -123,7 +105,7 @@ public class Utils {
             }
             FileEvent fileEvent = new FileEvent();
             fileEvent.setUri(fileUri);
-            fileEvent.setType(FileChangeType.CHANGED);
+            fileEvent.setType(FileChangeType.Changed);
             changes.add(fileEvent);
         }
         languageClient.notifyWatchedFilesChanged(changes);
@@ -181,9 +163,9 @@ public class Utils {
         String replaceTarget, String modifierReplaceBase, int validaTypeModifiers, int newModifiers) {
         validateModifiers(validaTypeModifiers, newModifiers);
 
-        URI fileUri = symbol.getLocation().getUri();
-        int i = fileUri.toString().indexOf("src/main/java/");
-        String fileName = fileUri.toString().substring(i);
+        String fileUri = symbol.getLocation().getUri();
+        int i = fileUri.indexOf("src/main/java/");
+        String fileName = fileUri.substring(i);
 
         int line = symbol.getLocation().getRange().getStart().getLine();
         Position start = new Position(line, 0);
@@ -292,7 +274,7 @@ public class Utils {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
         String fileName = customization.getFileName();
-        URI fileUri = customization.getFileUri();
+        String fileUri = customization.getFileUri();
         EclipseLanguageClient languageClient = customization.getLanguageClient();
 
         if (!annotation.startsWith("@")) {
@@ -306,7 +288,7 @@ public class Utils {
 
             FileEvent fileEvent = new FileEvent();
             fileEvent.setUri(fileUri);
-            fileEvent.setType(FileChangeType.CHANGED);
+            fileEvent.setType(FileChangeType.Changed);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
             organizeImportsOnRange(languageClient, editor, fileUri, symbol.getLocation().getRange());
@@ -360,10 +342,10 @@ public class Utils {
      * @param languageClient The {@link EclipseLanguageClient} sending the file changed notification.
      * @param fileUri The URI of the file that was changed.
      */
-    public static void sendFilesChangeNotification(EclipseLanguageClient languageClient, URI fileUri) {
+    public static void sendFilesChangeNotification(EclipseLanguageClient languageClient, String fileUri) {
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
     }
 
@@ -410,7 +392,7 @@ public class Utils {
         editor.replaceWithIndentedContent(fileName, oldBodyStart, oldBodyEnd, newBody, methodContentIndent.length());
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(customization.getFileUri());
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         customization.getLanguageClient().notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
         // Return the refreshed customization.
@@ -422,7 +404,7 @@ public class Utils {
         SymbolInformation symbol = customization.getSymbol();
         Editor editor = customization.getEditor();
         String fileName = customization.getFileName();
-        URI fileUri = customization.getFileUri();
+        String fileUri = customization.getFileUri();
         EclipseLanguageClient languageClient = customization.getLanguageClient();
 
         // Beginning line of the symbol.
@@ -454,7 +436,7 @@ public class Utils {
 
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
         return refreshCustomizationSupplier.get();
@@ -477,11 +459,10 @@ public class Utils {
      */
     public static <T extends CodeCustomization> T addImports(List<String> importsToAdd,
         ClassCustomization customization, Supplier<T> refreshCustomizationSupplier) {
-        CodeCustomization codeCustomization = customization;
-        EclipseLanguageClient languageClient = codeCustomization.getLanguageClient();
-        Editor editor = codeCustomization.getEditor();
-        URI fileUri = codeCustomization.getFileUri();
-        String fileName = codeCustomization.getFileName();
+        EclipseLanguageClient languageClient = customization.getLanguageClient();
+        Editor editor = customization.getEditor();
+        String fileUri = customization.getFileUri();
+        String fileName = customization.getFileName();
 
         // Only add imports if they exist.
         if (!isNullOrEmpty(importsToAdd)) {
@@ -501,23 +482,18 @@ public class Utils {
 
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
         return refreshCustomizationSupplier.get();
     }
 
-    public static void organizeImportsOnRange(EclipseLanguageClient languageClient, Editor editor, URI fileUri,
+    public static void organizeImportsOnRange(EclipseLanguageClient languageClient, Editor editor, String fileUri,
         Range range) {
-        languageClient.listCodeActions(fileUri, range).stream()
-            .filter(ca -> ca.getKind().equals(CodeActionKind.SOURCE_ORGANIZEIMPORTS.toString()))
+        languageClient.listCodeActions(fileUri, range, CodeActionKind.SourceOrganizeImports).stream()
+            .filter(ca -> ca.getKind().equals(CodeActionKind.SourceOrganizeImports))
             .findFirst()
-            .ifPresent(action -> {
-                if (action.getCommand() instanceof WorkspaceEditCommand) {
-                    ((WorkspaceEditCommand) action.getCommand()).getArguments().forEach(importEdit ->
-                        Utils.applyWorkspaceEdit(importEdit, editor, languageClient));
-                }
-            });
+            .ifPresent(action -> Utils.applyWorkspaceEdit(action.getEdit(), editor, languageClient));
     }
 
     public static boolean isWindows() {

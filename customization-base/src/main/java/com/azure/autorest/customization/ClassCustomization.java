@@ -5,18 +5,17 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.SymbolKind;
-import com.azure.autorest.customization.implementation.ls.models.TextEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.models.Position;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -118,7 +117,7 @@ public final class ClassCustomization extends CodeCustomization {
 
         // Find the last field symbol.
         Optional<SymbolInformation> lastSymbol = languageClient.listDocumentSymbols(fileUri).stream()
-                .filter(symbol -> symbol.getKind() == SymbolKind.FIELD)
+                .filter(symbol -> symbol.getKind() == SymbolKind.Field)
                 .reduce((first, second) -> second);
 
         int indentAmount = INDENT_LENGTH;
@@ -171,7 +170,7 @@ public final class ClassCustomization extends CodeCustomization {
         }
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(methodName)
-                && si.getKind() == SymbolKind.METHOD)
+                && si.getKind() == SymbolKind.Method)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodNameOrSignature))
             .findFirst();
         if (!methodSymbol.isPresent()) {
@@ -216,7 +215,7 @@ public final class ClassCustomization extends CodeCustomization {
 
         List<SymbolInformation> constructorSymbol = languageClient.listDocumentSymbols(fileUri)
             .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(constructorName)
-                && si.getKind() == SymbolKind.CONSTRUCTOR)
+                && si.getKind() == SymbolKind.Constructor)
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
                 .contains(constructorNameOrSignature))
             .collect(Collectors.toList());
@@ -251,7 +250,7 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public PropertyCustomization getProperty(String propertyName) {
         Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.FIELD)
+            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.Field)
             .findFirst();
 
         if (!propertySymbol.isPresent()) {
@@ -272,7 +271,7 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public ConstantCustomization getConstant(String constantName) {
         Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(constantName) && si.getKind() == SymbolKind.CONSTANT)
+            .stream().filter(si -> si.getName().equals(constantName) && si.getKind() == SymbolKind.Constant)
             .findFirst();
 
         if (!propertySymbol.isPresent()) {
@@ -321,7 +320,7 @@ public final class ClassCustomization extends CodeCustomization {
 
         // Find all constructor and field symbols.
         List<SymbolInformation> constructorLocationFinder = languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(symbol -> symbol.getKind() == SymbolKind.FIELD || symbol.getKind() == SymbolKind.CONSTRUCTOR)
+            .filter(symbol -> symbol.getKind() == SymbolKind.Field || symbol.getKind() == SymbolKind.Constructor)
             .collect(Collectors.toList());
 
         // If no constructors or fields exist in the class place the constructor after the class declaration line.
@@ -335,7 +334,7 @@ public final class ClassCustomization extends CodeCustomization {
             // If the last symbol before the new constructor is a field only a new line needs to be inserted.
             // Otherwise if the last symbol is a constructor its closing '}' needs to be found and then a new line
             // needs to be inserted.
-            if (symbol.getKind() == SymbolKind.FIELD) {
+            if (symbol.getKind() == SymbolKind.Field) {
                 constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
             } else {
                 constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
@@ -445,7 +444,7 @@ public final class ClassCustomization extends CodeCustomization {
         editor.replace(fileName, start, end, "");
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
         return this;
@@ -461,9 +460,9 @@ public final class ClassCustomization extends CodeCustomization {
         WorkspaceEdit workspaceEdit = languageClient.renameSymbol(fileUri,
             symbol.getLocation().getRange().getStart(), newName);
         List<FileEvent> changes = new ArrayList<>();
-        for (Map.Entry<URI, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
-            int i = edit.getKey().toString().indexOf("src/main/java/");
-            String oldEntry = edit.getKey().toString().substring(i);
+        for (Map.Entry<String, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
+            int i = edit.getKey().indexOf("src/main/java/");
+            String oldEntry = edit.getKey().substring(i);
             if (editor.getContents().containsKey(oldEntry)) {
                 for (TextEdit textEdit : edit.getValue()) {
                     editor.replace(oldEntry, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
@@ -473,15 +472,15 @@ public final class ClassCustomization extends CodeCustomization {
                 if (oldEntry.endsWith("/" + className + ".java")) {
                     String newEntry = oldEntry.replace(className + ".java", newName + ".java");
                     editor.renameFile(oldEntry, newEntry);
-                    URI newUri = URI.create(edit.getKey().toString().replace(className + ".java", newName + ".java"));
-                    fileEvent.setType(FileChangeType.DELETED);
+                    String newUri = edit.getKey().replace(className + ".java", newName + ".java");
+                    fileEvent.setType(FileChangeType.Deleted);
                     changes.add(fileEvent);
                     FileEvent newFile = new FileEvent();
                     newFile.setUri(newUri);
-                    newFile.setType(FileChangeType.CREATED);
+                    newFile.setType(FileChangeType.Created);
                     changes.add(newFile);
                 } else {
-                    fileEvent.setType(FileChangeType.CHANGED);
+                    fileEvent.setType(FileChangeType.Changed);
                     changes.add(fileEvent);
                 }
             }
@@ -513,7 +512,7 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public ClassCustomization setModifier(int modifiers) {
         languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.CLASS)
+            .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.Class)
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
                 "(?:.+ )?class " + className, "class " + className, Modifier.classModifiers(), modifiers));
@@ -533,7 +532,7 @@ public final class ClassCustomization extends CodeCustomization {
         }
 
         Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.CLASS)
+            .stream().filter(si -> si.getKind() == SymbolKind.Class)
             .findFirst();
         if (symbol.isPresent()) {
             if (editor.getContents().containsKey(fileName)) {
@@ -543,7 +542,7 @@ public final class ClassCustomization extends CodeCustomization {
 
                 FileEvent fileEvent = new FileEvent();
                 fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.CHANGED);
+                fileEvent.setType(FileChangeType.Changed);
                 languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
                 Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.get().getLocation().getRange());
@@ -572,7 +571,7 @@ public final class ClassCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
-        URI fileUri = symbol.getLocation().getUri();
+        String fileUri = symbol.getLocation().getUri();
         languageClient.listDocumentSymbols(fileUri).stream()
             .filter(si -> si.getName().toLowerCase().contains(enumMemberName.toLowerCase()))
             .forEach(symbol -> {
@@ -596,7 +595,7 @@ public final class ClassCustomization extends CodeCustomization {
 
         FileEvent fileEvent = new FileEvent();
         fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.CHANGED);
+        fileEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
 
         return refreshSymbol();
