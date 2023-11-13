@@ -343,8 +343,11 @@ export class CodeModelBuilder {
 
           case "http":
             {
-              const schemeOrApiKeyPrefix = scheme.scheme;
+              let schemeOrApiKeyPrefix: string = scheme.scheme;
               if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
+                // HTTP Authentication should use "Basic token" or "Bearer token"
+                schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
+
                 if (!(this.options.branded === false)) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
