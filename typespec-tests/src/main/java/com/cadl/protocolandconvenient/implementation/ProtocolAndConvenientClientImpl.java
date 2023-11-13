@@ -22,7 +22,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -38,6 +37,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.UrlBuilder;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
@@ -800,8 +800,8 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ResourceI> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public PollerFlux<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModelAsync(String name,
+        BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
@@ -810,7 +810,7 @@ public final class ProtocolAndConvenientClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ResourceI.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ResourceI.class));
     }
 
     /**
@@ -846,7 +846,7 @@ public final class ProtocolAndConvenientClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ResourceI> beginCreateOrReplaceWithModel(String name, BinaryData resource,
+    public SyncPoller<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModel(String name, BinaryData resource,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
@@ -856,7 +856,7 @@ public final class ProtocolAndConvenientClientImpl {
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext() : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollResult.class), TypeReference.createInstance(ResourceI.class));
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ResourceI.class));
     }
 
     /**

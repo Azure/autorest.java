@@ -41,9 +41,15 @@ import java.util.Objects;
  * A builder for creating a new instance of the AccessClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { PublicOperationClient.class, InternalOperationClient.class, SharedModelInOperationClient.class,
-        RelativeModelInOperationClient.class, PublicOperationAsyncClient.class, InternalOperationAsyncClient.class,
-        SharedModelInOperationAsyncClient.class, RelativeModelInOperationAsyncClient.class })
+    serviceClients = {
+        PublicOperationClient.class,
+        InternalOperationClient.class,
+        SharedModelInOperationClient.class,
+        RelativeModelInOperationClient.class,
+        PublicOperationAsyncClient.class,
+        InternalOperationAsyncClient.class,
+        SharedModelInOperationAsyncClient.class,
+        RelativeModelInOperationAsyncClient.class })
 public final class AccessClientBuilder
     implements HttpTrait<AccessClientBuilder>, ConfigurationTrait<AccessClientBuilder> {
     @Generated

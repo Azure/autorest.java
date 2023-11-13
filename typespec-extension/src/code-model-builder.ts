@@ -123,7 +123,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollResultSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -145,7 +145,6 @@ import {
   isSameLiteralTypes,
   getAccess,
   getUsage,
-  unionReferredByType,
   getUnionDescription,
   modelIs,
   getModelNameForProperty,
@@ -162,12 +161,12 @@ import {
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
-  operationRefersUnion,
   operationIsMultipart,
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
 import pkg from "lodash";
+import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -390,14 +389,14 @@ export class CodeModelBuilder {
       // lambda to mark model as public
       const modelAsPublic = (model: Model | Enum) => {
         // check it does not contain Union
-        const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
-        if (union) {
-          const errorMsg = `Model '${getTypeName(
-            model,
-            this.typeNameOptions,
-          )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-          throw new Error(errorMsg);
-        }
+        // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+        // if (union) {
+        //   const errorMsg = `Model '${getTypeName(
+        //     model,
+        //     this.typeNameOptions,
+        //   )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+        //   throw new Error(errorMsg);
+        // }
 
         const schema = this.processSchema(model, model.name);
 
@@ -490,6 +489,9 @@ export class CodeModelBuilder {
   private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
     for (const client of clients) {
+      if (client.arm) {
+        this.codeModel.arm = true;
+      }
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -658,17 +660,18 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else {
-        const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
-        if (union) {
-          // and Union
-          generateConvenienceApi = false;
-          apiComment = `Convenience API is not generated, as operation '${
-            op.operation.name
-          }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-          this.logWarning(apiComment);
-        }
       }
+      // else {
+      //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+      //   if (union) {
+      //     // and Union
+      //     generateConvenienceApi = false;
+      //     apiComment = `Convenience API is not generated, as operation '${
+      //       op.operation.name
+      //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+      //     this.logWarning(apiComment);
+      //   }
+      // }
     }
     if (generateConvenienceApi && convenienceApiName) {
       codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -740,7 +743,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
+    this.processRouteForLongRunning(codeModelOperation, operation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -857,6 +860,7 @@ export class CodeModelBuilder {
 
   private processRouteForLongRunning(
     op: CodeModelOperation,
+    operation: Operation,
     responses: HttpOperationResponse[],
     lroMetadata: LongRunningMetadata,
   ) {
@@ -877,6 +881,11 @@ export class CodeModelBuilder {
           }
         }
       }
+    }
+
+    if (this.isArmLongRunningOperation(this.program, operation)) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
     }
   }
 
@@ -1628,6 +1637,9 @@ export class CodeModelBuilder {
 
         case "url":
           return this.processUrlSchema(type, nameHint);
+
+        case "decimal":
+          return this.processNumberSchema(type, nameHint);
       }
 
       if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
@@ -2447,7 +2459,7 @@ export class CodeModelBuilder {
   get pollResultSchema(): ObjectSchema {
     return (
       this._pollResultSchema ??
-      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+      (this._pollResultSchema = createPollOperationDetailsSchema(this.codeModel.schemas, this.stringSchema))
     );
   }
 
@@ -2574,6 +2586,10 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
+  }
+
+  private isArmLongRunningOperation(program: Program, op: Operation) {
+    return this.codeModel.arm && !!getExtensions(program, op)?.get("x-ms-long-running-operation");
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

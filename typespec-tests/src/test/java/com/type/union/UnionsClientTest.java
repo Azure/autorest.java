@@ -3,10 +3,18 @@
 
 package com.type.union;
 
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.type.union.models.Model1;
+import com.type.union.models.Model2;
+import com.type.union.models.ModelWithNamedUnionProperty;
+import com.type.union.models.ModelWithNamedUnionPropertyInResponse;
+import com.type.union.models.ModelWithSimpleUnionProperty;
+import com.type.union.models.ModelWithSimpleUnionPropertyInResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 class UnionsClientTest {
 
@@ -14,45 +22,45 @@ class UnionsClientTest {
 
     @Test
     void sendInt() {
-        client.sendIntWithResponse(BinaryData.fromString("{ \"simpleUnion\": 1 }"), null);
+        client.sendInt(new ModelWithSimpleUnionProperty(BinaryData.fromObject(1)));
     }
 
     @Test
     void sendIntArray() {
-        client.sendIntArrayWithResponse(BinaryData.fromString("{ \"simpleUnion\": [1, 2] }\n"), null);
+        client.sendIntArray(new ModelWithSimpleUnionProperty(BinaryData.fromObject(Arrays.asList(1, 2))));
     }
 
     @Test
     void sendFirstNamedUnionValue() {
-        client.sendFirstNamedUnionValueWithResponse(BinaryData.fromString("{ \"namedUnion\": { \"name\": \"model1\", \"prop1\": 1 } }"), null);
+        client.sendFirstNamedUnionValue(new ModelWithNamedUnionProperty(BinaryData.fromObject(new Model1("model1", 1))));
     }
 
     @Test
     void sendSecondNamedUnionValue() {
-        client.sendSecondNamedUnionValueWithResponse(BinaryData.fromString("{ \"namedUnion\": { \"name\": \"model2\", \"prop2\": 2 } }\n"), null);
+        client.sendSecondNamedUnionValue(new ModelWithNamedUnionProperty(BinaryData.fromObject(new Model2("model2", 2))));
     }
 
     @Test
     void receiveString() {
-        Response<BinaryData> response = client.receiveStringWithResponse(null);
-        Assertions.assertNotNull(response.getValue());
+        ModelWithSimpleUnionPropertyInResponse response = client.receiveString();
+        Assertions.assertEquals("string", response.getSimpleUnion().toObject(String.class));
     }
 
     @Test
     void receiveIntArray() {
-        Response<BinaryData> response = client.receiveIntArrayWithResponse(null);
-        Assertions.assertNotNull(response.getValue());
+        ModelWithSimpleUnionPropertyInResponse response = client.receiveIntArray();
+        Assertions.assertEquals(Arrays.asList(1, 2), response.getSimpleUnion().toObject(List.class));
     }
 
     @Test
     void receiveFirstNamedUnionValue() {
-        Response<BinaryData> response = client.receiveFirstNamedUnionValueWithResponse(null);
-        Assertions.assertNotNull(response.getValue());
+        ModelWithNamedUnionPropertyInResponse response = client.receiveFirstNamedUnionValue();
+        Assertions.assertEquals(1, response.getNamedUnion().toObject(Model1.class).getProp1());
     }
 
     @Test
     void receiveSecondNamedUnionValue() {
-        Response<BinaryData> response = client.receiveSecondNamedUnionValueWithResponse(null);
-        Assertions.assertNotNull(response.getValue());
+        ModelWithNamedUnionPropertyInResponse response = client.receiveSecondNamedUnionValue();
+        Assertions.assertEquals(2, response.getNamedUnion().toObject(Model2.class).getProp2());
     }
 }

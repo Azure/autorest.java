@@ -40,7 +40,10 @@ import java.util.Objects;
  * A builder for creating a new instance of the AutoRestSwaggerBatServiceClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { StringOperationClient.class, EnumClient.class, StringOperationAsyncClient.class,
+    serviceClients = {
+        StringOperationClient.class,
+        EnumClient.class,
+        StringOperationAsyncClient.class,
         EnumAsyncClient.class })
 public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<AutoRestSwaggerBatServiceClientBuilder>,
     ConfigurationTrait<AutoRestSwaggerBatServiceClientBuilder> {

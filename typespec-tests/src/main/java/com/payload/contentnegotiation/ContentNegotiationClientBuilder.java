@@ -41,7 +41,10 @@ import java.util.Objects;
  * A builder for creating a new instance of the ContentNegotiationClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { SameBodyClient.class, DifferentBodyClient.class, SameBodyAsyncClient.class,
+    serviceClients = {
+        SameBodyClient.class,
+        DifferentBodyClient.class,
+        SameBodyAsyncClient.class,
         DifferentBodyAsyncClient.class })
 public final class ContentNegotiationClientBuilder
     implements HttpTrait<ContentNegotiationClientBuilder>, ConfigurationTrait<ContentNegotiationClientBuilder> {

@@ -302,14 +302,14 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType HttpPipeline = getClassTypeBuilder(com.azure.core.http.HttpPipeline.class)
-            .build();
+        .build();
 
     public static final ClassType AndroidHttpPipeline = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http").name("HttpPipeline")
         .build();
 
     public static final ClassType RestProxy = getClassTypeBuilder(com.azure.core.http.rest.RestProxy.class)
-            .build();
+        .build();
 
     public static final ClassType AndroidRestProxy = new ClassType.Builder(false)
         .packageName("com.azure.android.core.rest").name("RestProxy")
@@ -320,7 +320,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType JsonSerializer = getClassTypeBuilder(com.azure.core.util.serializer.JsonSerializer.class)
-            .build();
+        .build();
 
     public static final ClassType AndroidJacksonSerder = new ClassType.Builder(false)
         .packageName("com.azure.android.core.serde.jackson").name("JacksonSerder")
@@ -404,7 +404,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType KeyCredential = getClassTypeBuilder(com.azure.core.credential.KeyCredential.class)
-            .build();
+        .build();
 
     public static final ClassType RetryPolicy = new ClassType.Builder(false)
         .knownClass(com.azure.core.http.policy.RetryPolicy.class)
@@ -492,6 +492,9 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType KeyCredentialTrait = getClassTypeBuilder(com.azure.core.client.traits.KeyCredentialTrait.class)
+        .build();
+
+    public static final ClassType PollOperationDetails = getClassTypeBuilder(com.azure.core.util.polling.PollOperationDetails.class)
         .build();
 
     public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)

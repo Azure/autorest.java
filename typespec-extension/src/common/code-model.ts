@@ -19,6 +19,8 @@ export interface CodeModel extends Metadata {
   security: Security;
 
   clients: Array<Client>;
+
+  arm?: boolean;
 }
 
 export class CodeModel extends Metadata implements CodeModel {

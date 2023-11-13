@@ -30,15 +30,15 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.union.UnionServiceVersion;
+import com.cadl.union.models.Result;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
@@ -240,7 +240,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -270,7 +270,7 @@ public final class UnionClientImpl {
      *     user (Optional): {
      *         user: String (Required)
      *     }
-     *     input: InputModelBase (Required)
+     *     input: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -321,7 +321,7 @@ public final class UnionClientImpl {
      *     }
      *     input: String (Required)
      *     dataInt: int (Required)
-     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataUnion: BinaryData (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
      * }
@@ -375,7 +375,7 @@ public final class UnionClientImpl {
      *     }
      *     input: String (Required)
      *     dataInt: int (Required)
-     *     dataUnion: DataUnionModelBase (Optional)
+     *     dataUnion: BinaryData (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
      * }
@@ -412,7 +412,7 @@ public final class UnionClientImpl {
      * </tr>
      * <tr>
      * <td>data</td>
-     * <td>DataModelBase</td>
+     * <td>BinaryData</td>
      * <td>No</td>
      * <td>The data parameter</td>
      * </tr>
@@ -447,7 +447,7 @@ public final class UnionClientImpl {
      * </tr>
      * <tr>
      * <td>data</td>
-     * <td>DataModelBase</td>
+     * <td>BinaryData</td>
      * <td>No</td>
      * <td>The data parameter</td>
      * </tr>
@@ -566,11 +566,12 @@ public final class UnionClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginGenerateAsync(RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.generateWithResponseAsync(requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -604,11 +605,90 @@ public final class UnionClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.generateWithResponse(requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<PollOperationDetails, Result> beginGenerateWithModelAsync(RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.generateWithResponseAsync(requestOptions),
+            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Result.class));
+    }
+
+    /**
+     * A long-running remote procedure call (RPC) operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<PollOperationDetails, Result> beginGenerateWithModel(RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.generateWithResponse(requestOptions),
+            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+                new PollingStrategyOptions(this.getHttpPipeline())
+                    .setEndpoint("{endpoint}/openai".replace("{endpoint}", this.getEndpoint()))
+                    .setContext(requestOptions != null && requestOptions.getContext() != null
+                        ? requestOptions.getContext() : Context.NONE)
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
+            TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Result.class));
     }
 }

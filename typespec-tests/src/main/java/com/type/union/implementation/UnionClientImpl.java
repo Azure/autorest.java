@@ -256,7 +256,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -281,7 +281,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -306,7 +306,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -331,7 +331,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertySimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -356,7 +356,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -383,7 +383,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -408,7 +408,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -435,7 +435,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -460,7 +460,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -484,7 +484,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -508,7 +508,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -532,7 +532,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     simpleUnion: ModelWithSimpleUnionPropertyInResponseSimpleUnionModelBase (Required)
+     *     simpleUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -556,7 +556,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -580,7 +580,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -604,7 +604,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -628,7 +628,7 @@ public final class UnionClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     namedUnion: MyNamedUnionModelBase (Required)
+     *     namedUnion: BinaryData (Required)
      * }
      * }</pre>
      * 
