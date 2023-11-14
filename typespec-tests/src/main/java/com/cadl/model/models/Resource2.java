@@ -6,27 +6,30 @@ package com.cadl.model.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Resource2 model.
  */
 @Immutable
-public final class Resource2 {
+public final class Resource2 implements JsonSerializable<Resource2> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /*
      * The data2 property.
      */
     @Generated
-    @JsonProperty(value = "data2")
-    private InputOutputData2 data2;
+    private final InputOutputData2 data2;
 
     /**
      * Creates an instance of Resource2 class.
@@ -35,8 +38,7 @@ public final class Resource2 {
      * @param data2 the data2 value to set.
      */
     @Generated
-    @JsonCreator
-    public Resource2(@JsonProperty(value = "name") String name, @JsonProperty(value = "data2") InputOutputData2 data2) {
+    public Resource2(String name, InputOutputData2 data2) {
         this.name = name;
         this.data2 = data2;
     }
@@ -59,5 +61,60 @@ public final class Resource2 {
     @Generated
     public InputOutputData2 getData2() {
         return this.data2;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeJsonField("data2", this.data2);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Resource2 from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Resource2 if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Resource2.
+     */
+    public static Resource2 fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            boolean data2Found = false;
+            InputOutputData2 data2 = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else if ("data2".equals(fieldName)) {
+                    data2 = InputOutputData2.fromJson(reader);
+                    data2Found = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound && data2Found) {
+                Resource2 deserializedResource2 = new Resource2(name, data2);
+
+                return deserializedResource2;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+            if (!data2Found) {
+                missingProperties.add("data2");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

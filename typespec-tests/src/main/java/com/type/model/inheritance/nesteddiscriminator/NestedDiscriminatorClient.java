@@ -43,6 +43,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -68,6 +69,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -93,6 +95,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -118,6 +121,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -143,6 +147,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>
@@ -168,6 +173,7 @@ public final class NestedDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     age: int (Required)
      * }
      * }</pre>

@@ -728,22 +728,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
     }
 
-    private static String stripQuotes(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
-        }
-
-        if (str.charAt(0) == '"' && str.charAt(str.length() - 1) == '"') {
-            return str.substring(1, str.length() - 1);
-        } else if (str.charAt(0) == '"') {
-            return str.substring(1);
-        } else if (str.charAt(str.length() - 1) == '"') {
-            return str.substring(0, str.length() - 1);
-        } else {
-            return str;
-        }
-    }
-
     /**
      * Initializes the local variables needed to maintain what has been deserialized.
      *
@@ -925,11 +909,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 // returns null which would have been passed to OffsetDateTime.ofInstant(Instant, ZoneId) which would
                 // have thrown a NullPointerException.
                 if (wireType.isNullable()) {
-                    deserializationBlock.line(wireType + " " + property.getName() + " = " + simpleDeserialization
-                            + ";");
-                    deserializationBlock.ifBlock(property.getName() + " != null", ifBlock -> {
-                        simpleDeserializationConsumer.accept(wireType.convertToClientType(property.getName()), ifBlock);
-                    });
+                    // Check if the property is required, if so use a holder name as there will be an existing holder
+                    // variable for the value that will be used in the constructor.
+                    String holderName = property.isRequired() ? property.getName() + "Holder" : property.getName();
+                    deserializationBlock.line(wireType + " " + holderName + " = " + simpleDeserialization + ";");
+                    deserializationBlock.ifBlock(holderName + " != null", ifBlock ->
+                        simpleDeserializationConsumer.accept(wireType.convertToClientType(holderName), ifBlock));
                 } else {
                     simpleDeserializationConsumer.accept(wireType.convertToClientType(simpleDeserialization),
                             deserializationBlock);
@@ -970,7 +955,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
             deserializationBlock.text(property.getName() + " = ");
             deserializeJsonContainerProperty(deserializationBlock, "readArray", wireType,
-                ((IterableType) wireType).getElementType(), 0);
+                ((IterableType) wireType).getElementType(), ((IterableType) clientType).getElementType(), 0);
 
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property, property.getName(),
@@ -985,7 +970,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // becomes reality this will need to be reworked to handle that case.
             deserializationBlock.text(property.getName() + " = ");
             deserializeJsonContainerProperty(deserializationBlock, "readMap", wireType,
-                ((MapType) wireType).getValueType(), 0);
+                ((MapType) wireType).getValueType(), ((MapType) clientType).getValueType(), 0);
 
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property, property.getName(),
@@ -1008,41 +993,65 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param methodBlock The method handling deserialization.
      * @param utilityMethod The method aiding in the deserialization of the container.
      * @param containerType The container type.
-     * @param elementType The element type for the container, for a {@link List} this is the element type and for a
+     * @param elementWireType The element type for the container, for a {@link List} this is the element type and for a
      * {@link Map} this is the value type.
      * @param depth Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
      * {@code Map} is being handled and then 1 when {@code List} is being handled.
      */
     private static void deserializeJsonContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
-        IType elementType, int depth) {
+        IType elementWireType, IType elementClientType, int depth) {
         String callingReaderName = depth == 0 ? "reader" : "reader" + depth;
         String lambdaReaderName = "reader" + (depth + 1);
-        String valueDeserializationMethod = getSimpleJsonDeserialization(elementType, lambdaReaderName);
+        String valueDeserializationMethod = getSimpleJsonDeserialization(elementWireType, lambdaReaderName);
+        boolean convertToClientType = (elementClientType != elementWireType);
 
-        methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> ");
+        methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> {");
         methodBlock.indent(() -> {
             if (valueDeserializationMethod != null) {
-                methodBlock.line(valueDeserializationMethod);
-            } else if (elementType == ClassType.Object) {
+                if (convertToClientType) {
+                    // If the wire type is nullable don't attempt to call the convert to client type until it's known that
+                    // a value was deserialized. This protects against cases such as UnixTimeLong where the wire type is
+                    // Long and the client type of OffsetDateTime. This is converted using Instant.ofEpochMilli(long) which
+                    // would result in a null if the Long is null, which is already guarded using
+                    // reader.readNullable(nonNullReader -> Instant.ofEpochMillis(nonNullReader.readLong())) but this itself
+                    // returns null which would have been passed to OffsetDateTime.ofInstant(Instant, ZoneId) which would
+                    // have thrown a NullPointerException.
+                    if (elementWireType.isNullable()) {
+                        // Check if the property is required, if so use a holder name as there will be an existing holder
+                        // variable for the value that will be used in the constructor.
+                        String holderName = lambdaReaderName + "ValueHolder";
+                        methodBlock.line(elementWireType + " " + holderName + " = " + valueDeserializationMethod + ";");
+                        methodBlock.ifBlock(holderName + " != null",
+                            ifBlock -> ifBlock.methodReturn(elementWireType.convertToClientType(holderName)))
+                            .elseBlock(elseBlock -> elseBlock.methodReturn("null"));
+                    } else {
+                        methodBlock.methodReturn(elementWireType.convertToClientType(valueDeserializationMethod));
+                    }
+                } else {
+                    methodBlock.methodReturn(valueDeserializationMethod);
+                }
+            } else if (elementWireType == ClassType.Object) {
                 methodBlock.line(lambdaReaderName + ".readUntyped()");
-            } else if (elementType instanceof IterableType) {
-                deserializeJsonContainerProperty(methodBlock, "readArray", elementType,
-                    ((IterableType) elementType).getElementType(), depth + 1);
-            } else if (elementType instanceof MapType) {
+            } else if (elementWireType instanceof IterableType) {
+                deserializeJsonContainerProperty(methodBlock, "readArray", elementWireType,
+                    ((IterableType) elementWireType).getElementType(),
+                    ((IterableType) elementClientType).getElementType(), depth + 1);
+            } else if (elementWireType instanceof MapType) {
                 // Assumption is that the key type for the Map is a String. This may not always hold true and when that
                 // becomes reality this will need to be reworked to handle that case.
-                deserializeJsonContainerProperty(methodBlock, "readMap", elementType,
-                    ((MapType) elementType).getValueType(), depth + 1);
+                deserializeJsonContainerProperty(methodBlock, "readMap", elementWireType,
+                    ((MapType) elementWireType).getValueType(), ((MapType) elementClientType).getValueType(),
+                    depth + 1);
             } else {
-                throw new RuntimeException("Unknown value type " + elementType + " in " + containerType
+                throw new RuntimeException("Unknown value type " + elementWireType + " in " + containerType
                     + " serialization. Need to add support for it.");
             }
         });
 
         if (depth > 0) {
-            methodBlock.line(")");
+            methodBlock.line("})");
         } else {
-            methodBlock.line(");");
+            methodBlock.line("});");
         }
     }
 

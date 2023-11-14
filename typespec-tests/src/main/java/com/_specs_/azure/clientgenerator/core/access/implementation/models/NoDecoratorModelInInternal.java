@@ -6,20 +6,24 @@ package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used in an internal operation, should be generated but not exported.
  */
 @Immutable
-public final class NoDecoratorModelInInternal {
+public final class NoDecoratorModelInInternal implements JsonSerializable<NoDecoratorModelInInternal> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of NoDecoratorModelInInternal class.
@@ -27,8 +31,7 @@ public final class NoDecoratorModelInInternal {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    private NoDecoratorModelInInternal(@JsonProperty(value = "name") String name) {
+    private NoDecoratorModelInInternal(String name) {
         this.name = name;
     }
 
@@ -40,5 +43,52 @@ public final class NoDecoratorModelInInternal {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of NoDecoratorModelInInternal from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of NoDecoratorModelInInternal if the JsonReader was pointing to an instance of it, or null if
+     * it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the NoDecoratorModelInInternal.
+     */
+    public static NoDecoratorModelInInternal fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound) {
+                NoDecoratorModelInInternal deserializedNoDecoratorModelInInternal
+                    = new NoDecoratorModelInInternal(name);
+
+                return deserializedNoDecoratorModelInInternal;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

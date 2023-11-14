@@ -6,30 +6,22 @@ package com.type.model.inheritance.singlediscriminator.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "kind",
-    defaultImpl = Dinosaur.class)
-@JsonTypeName("Dinosaur")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "t-rex", value = TRex.class) })
 @Immutable
-public class Dinosaur {
+public class Dinosaur implements JsonSerializable<Dinosaur> {
     /*
      * The size property.
      */
     @Generated
-    @JsonProperty(value = "size")
-    private int size;
+    private final int size;
 
     /**
      * Creates an instance of Dinosaur class.
@@ -37,8 +29,7 @@ public class Dinosaur {
      * @param size the size value to set.
      */
     @Generated
-    @JsonCreator
-    protected Dinosaur(@JsonProperty(value = "size") int size) {
+    protected Dinosaur(int size) {
         this.size = size;
     }
 
@@ -50,5 +41,52 @@ public class Dinosaur {
     @Generated
     public int getSize() {
         return this.size;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("size", this.size);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Dinosaur from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Dinosaur if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Dinosaur.
+     */
+    public static Dinosaur fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
+
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("kind".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
+
+            if (discriminatorValue != null) {
+                readerToUse = readerToUse.reset();
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("t-rex".equals(discriminatorValue)) {
+                return TRex.fromJson(readerToUse);
+            } else {
+                throw new IllegalStateException(
+                    "Discriminator field 'kind' didn't match one of the expected values 't-rex'");
+            }
+        });
     }
 }

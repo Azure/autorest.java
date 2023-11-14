@@ -6,7 +6,6 @@ package com.cadl.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -48,7 +47,6 @@ public final class ColorModel extends ExpandableStringEnum<ColorModel> {
      * @return the corresponding ColorModel.
      */
     @Generated
-    @JsonCreator
     public static ColorModel fromString(String name) {
         return fromString(name, ColorModel.class);
     }

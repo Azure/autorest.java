@@ -6,19 +6,23 @@ package com.type.property.optional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Objects;
 
 /**
  * Model with a duration property.
  */
 @Fluent
-public final class DurationProperty {
+public final class DurationProperty implements JsonSerializable<DurationProperty> {
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "property")
     private Duration property;
 
     /**
@@ -48,5 +52,39 @@ public final class DurationProperty {
     public DurationProperty setProperty(Duration property) {
         this.property = property;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("property", Objects.toString(this.property, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DurationProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DurationProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the DurationProperty.
+     */
+    public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DurationProperty deserializedDurationProperty = new DurationProperty();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    deserializedDurationProperty.property
+                        = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDurationProperty;
+        });
     }
 }

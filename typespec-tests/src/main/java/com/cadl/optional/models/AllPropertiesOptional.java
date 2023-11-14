@@ -7,141 +7,128 @@ package com.cadl.optional.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The AllPropertiesOptional model.
  */
 @Immutable
-public final class AllPropertiesOptional {
+public final class AllPropertiesOptional implements JsonSerializable<AllPropertiesOptional> {
     /*
      * The boolean property.
      */
     @Generated
-    @JsonProperty(value = "boolean")
     private Boolean booleanProperty;
 
     /*
      * The booleanNullable property.
      */
     @Generated
-    @JsonProperty(value = "booleanNullable")
     private Boolean booleanNullable;
 
     /*
      * The booleanRequired property.
      */
     @Generated
-    @JsonProperty(value = "booleanRequired")
     private Boolean booleanRequired;
 
     /*
      * The booleanRequiredNullable property.
      */
     @Generated
-    @JsonProperty(value = "booleanRequiredNullable")
     private Boolean booleanRequiredNullable;
 
     /*
      * The string property.
      */
     @Generated
-    @JsonProperty(value = "string")
     private String string;
 
     /*
      * The stringNullable property.
      */
     @Generated
-    @JsonProperty(value = "stringNullable")
     private String stringNullable;
 
     /*
      * The stringRequired property.
      */
     @Generated
-    @JsonProperty(value = "stringRequired")
     private String stringRequired;
 
     /*
      * The stringRequiredNullable property.
      */
     @Generated
-    @JsonProperty(value = "stringRequiredNullable")
     private String stringRequiredNullable;
 
     /*
      * The bytes property.
      */
     @Generated
-    @JsonProperty(value = "bytes")
     private byte[] bytes;
 
     /*
      * The int property.
      */
     @Generated
-    @JsonProperty(value = "int")
     private Integer intProperty;
 
     /*
      * The long property.
      */
     @Generated
-    @JsonProperty(value = "long")
     private Long longProperty;
 
     /*
      * The float property.
      */
     @Generated
-    @JsonProperty(value = "float")
     private Double floatProperty;
 
     /*
      * The double property.
      */
     @Generated
-    @JsonProperty(value = "double")
     private Double doubleProperty;
 
     /*
      * The duration property.
      */
     @Generated
-    @JsonProperty(value = "duration")
     private Duration duration;
 
     /*
      * The dateTime property.
      */
     @Generated
-    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The stringList property.
      */
     @Generated
-    @JsonProperty(value = "stringList")
     private List<String> stringList;
 
     /*
      * The bytesDict property.
      */
     @Generated
-    @JsonProperty(value = "bytesDict")
     private Map<String, byte[]> bytesDict;
 
     /*
      * The immutable property.
      */
     @Generated
-    @JsonProperty(value = "immutable")
     private ImmutableModel immutable;
 
     /**
@@ -329,5 +316,98 @@ public final class AllPropertiesOptional {
     @Generated
     public ImmutableModel getImmutable() {
         return this.immutable;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("boolean", this.booleanProperty);
+        jsonWriter.writeBooleanField("booleanNullable", this.booleanNullable);
+        jsonWriter.writeBooleanField("booleanRequired", this.booleanRequired);
+        jsonWriter.writeBooleanField("booleanRequiredNullable", this.booleanRequiredNullable);
+        jsonWriter.writeStringField("string", this.string);
+        jsonWriter.writeStringField("stringNullable", this.stringNullable);
+        jsonWriter.writeStringField("stringRequired", this.stringRequired);
+        jsonWriter.writeStringField("stringRequiredNullable", this.stringRequiredNullable);
+        jsonWriter.writeBinaryField("bytes", this.bytes);
+        jsonWriter.writeNumberField("int", this.intProperty);
+        jsonWriter.writeNumberField("long", this.longProperty);
+        jsonWriter.writeNumberField("float", this.floatProperty);
+        jsonWriter.writeNumberField("double", this.doubleProperty);
+        jsonWriter.writeStringField("duration", Objects.toString(this.duration, null));
+        jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
+        jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
+        jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
+        jsonWriter.writeJsonField("immutable", this.immutable);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of AllPropertiesOptional from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of AllPropertiesOptional if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the AllPropertiesOptional.
+     */
+    public static AllPropertiesOptional fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            AllPropertiesOptional deserializedAllPropertiesOptional = new AllPropertiesOptional();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("boolean".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.booleanProperty = reader.getNullable(JsonReader::getBoolean);
+                } else if ("booleanNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.booleanNullable = reader.getNullable(JsonReader::getBoolean);
+                } else if ("booleanRequired".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.booleanRequired = reader.getNullable(JsonReader::getBoolean);
+                } else if ("booleanRequiredNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.booleanRequiredNullable
+                        = reader.getNullable(JsonReader::getBoolean);
+                } else if ("string".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.string = reader.getString();
+                } else if ("stringNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.stringNullable = reader.getString();
+                } else if ("stringRequired".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.stringRequired = reader.getString();
+                } else if ("stringRequiredNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.stringRequiredNullable = reader.getString();
+                } else if ("bytes".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.bytes = reader.getBinary();
+                } else if ("int".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.intProperty = reader.getNullable(JsonReader::getInt);
+                } else if ("long".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.longProperty = reader.getNullable(JsonReader::getLong);
+                } else if ("float".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.floatProperty = reader.getNullable(JsonReader::getDouble);
+                } else if ("double".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.doubleProperty = reader.getNullable(JsonReader::getDouble);
+                } else if ("duration".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.duration
+                        = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                } else if ("dateTime".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.dateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("stringList".equals(fieldName)) {
+                    List<String> stringList = reader.readArray(reader1 -> {
+                        return reader1.getString();
+                    });
+                    deserializedAllPropertiesOptional.stringList = stringList;
+                } else if ("bytesDict".equals(fieldName)) {
+                    Map<String, byte[]> bytesDict = reader.readMap(reader1 -> {
+                        return reader1.getBinary();
+                    });
+                    deserializedAllPropertiesOptional.bytesDict = bytesDict;
+                } else if ("immutable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.immutable = ImmutableModel.fromJson(reader);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedAllPropertiesOptional;
+        });
     }
 }

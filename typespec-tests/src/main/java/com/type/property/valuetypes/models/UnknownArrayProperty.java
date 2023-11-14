@@ -6,20 +6,24 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model with a property unknown, and the data is an array.
  */
 @Immutable
-public final class UnknownArrayProperty {
+public final class UnknownArrayProperty implements JsonSerializable<UnknownArrayProperty> {
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "property")
-    private Object property;
+    private final Object property;
 
     /**
      * Creates an instance of UnknownArrayProperty class.
@@ -27,8 +31,7 @@ public final class UnknownArrayProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public UnknownArrayProperty(@JsonProperty(value = "property") Object property) {
+    public UnknownArrayProperty(Object property) {
         this.property = property;
     }
 
@@ -40,5 +43,51 @@ public final class UnknownArrayProperty {
     @Generated
     public Object getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeUntypedField("property", this.property);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of UnknownArrayProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of UnknownArrayProperty if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the UnknownArrayProperty.
+     */
+    public static UnknownArrayProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean propertyFound = false;
+            Object property = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    property = reader.readUntyped();
+                    propertyFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (propertyFound) {
+                UnknownArrayProperty deserializedUnknownArrayProperty = new UnknownArrayProperty(property);
+
+                return deserializedUnknownArrayProperty;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!propertyFound) {
+                missingProperties.add("property");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

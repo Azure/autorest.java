@@ -70,7 +70,9 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
                 reader.nextToken();
 
                 if ("data".equals(fieldName)) {
-                    data = reader.readArray(reader1 -> reader1.getString());
+                    data = reader.readArray(reader1 -> {
+                        return reader1.getString();
+                    });
                     dataFound = true;
                 } else {
                     reader.skipChildren();

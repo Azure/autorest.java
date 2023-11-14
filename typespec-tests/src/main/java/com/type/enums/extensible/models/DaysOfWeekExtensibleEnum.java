@@ -6,7 +6,6 @@ package com.type.enums.extensible.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -72,7 +71,6 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
      * @return the corresponding DaysOfWeekExtensibleEnum.
      */
     @Generated
-    @JsonCreator
     public static DaysOfWeekExtensibleEnum fromString(String name) {
         return fromString(name, DaysOfWeekExtensibleEnum.class);
     }

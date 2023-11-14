@@ -6,27 +6,30 @@ package com.cadl.visibility.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The RoundTripModel model.
  */
 @Immutable
-public final class RoundTripModel {
+public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /*
      * The secretName property.
      */
     @Generated
-    @JsonProperty(value = "secretName")
-    private String secretName;
+    private final String secretName;
 
     /**
      * Creates an instance of RoundTripModel class.
@@ -35,9 +38,7 @@ public final class RoundTripModel {
      * @param secretName the secretName value to set.
      */
     @Generated
-    @JsonCreator
-    public RoundTripModel(@JsonProperty(value = "name") String name,
-        @JsonProperty(value = "secretName") String secretName) {
+    public RoundTripModel(String name, String secretName) {
         this.name = name;
         this.secretName = secretName;
     }
@@ -60,5 +61,60 @@ public final class RoundTripModel {
     @Generated
     public String getSecretName() {
         return this.secretName;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("secretName", this.secretName);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of RoundTripModel from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of RoundTripModel if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the RoundTripModel.
+     */
+    public static RoundTripModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            boolean secretNameFound = false;
+            String secretName = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else if ("secretName".equals(fieldName)) {
+                    secretName = reader.getString();
+                    secretNameFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound && secretNameFound) {
+                RoundTripModel deserializedRoundTripModel = new RoundTripModel(name, secretName);
+
+                return deserializedRoundTripModel;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+            if (!secretNameFound) {
+                missingProperties.add("secretName");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

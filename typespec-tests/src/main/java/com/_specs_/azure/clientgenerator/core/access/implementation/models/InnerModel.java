@@ -6,20 +6,24 @@ package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used in internal operations, should be generated but not exported.
  */
 @Immutable
-public final class InnerModel {
+public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of InnerModel class.
@@ -27,8 +31,7 @@ public final class InnerModel {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    private InnerModel(@JsonProperty(value = "name") String name) {
+    private InnerModel(String name) {
         this.name = name;
     }
 
@@ -40,5 +43,51 @@ public final class InnerModel {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of InnerModel from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the InnerModel.
+     */
+    public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound) {
+                InnerModel deserializedInnerModel = new InnerModel(name);
+
+                return deserializedInnerModel;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }
