@@ -7,34 +7,36 @@ package com.cadl.union.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Result model.
  */
 @Fluent
-public class Result {
+public class Result implements JsonSerializable<Result> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /*
      * The result property.
      */
     @Generated
-    @JsonProperty(value = "result")
     private Result result;
 
     /*
      * The data property.
      */
     @Generated
-    @JsonProperty(value = "data")
-    private BinaryData data;
+    private final BinaryData data;
 
     /**
      * Creates an instance of Result class.
@@ -43,8 +45,7 @@ public class Result {
      * @param data the data value to set.
      */
     @Generated
-    @JsonCreator
-    public Result(@JsonProperty(value = "name") String name, @JsonProperty(value = "data") BinaryData data) {
+    public Result(String name, BinaryData data) {
         this.name = name;
         this.data = data;
     }
@@ -89,5 +90,70 @@ public class Result {
     @Generated
     public BinaryData getData() {
         return this.data;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        if (this.data != null) {
+            jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
+        }
+        jsonWriter.writeJsonField("result", this.result);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Result from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Result if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Result.
+     */
+    public static Result fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean nameFound = false;
+            String name = null;
+            boolean dataFound = false;
+            BinaryData data = null;
+            Result result = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                    nameFound = true;
+                } else if ("data".equals(fieldName)) {
+                    Object dataAsObject = reader.readUntyped();
+                    if (data != null) {
+                        data = BinaryData.fromObject(dataAsObject);
+                    }
+                    dataFound = true;
+                } else if ("result".equals(fieldName)) {
+                    result = Result.fromJson(reader);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (nameFound && dataFound) {
+                Result deserializedResult = new Result(name, data);
+                deserializedResult.result = result;
+
+                return deserializedResult;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!nameFound) {
+                missingProperties.add("name");
+            }
+            if (!dataFound) {
+                missingProperties.add("data");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }
