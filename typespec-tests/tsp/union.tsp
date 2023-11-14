@@ -61,8 +61,8 @@ model ArrayData {
 
 model Result {
   name: string;
-  result: Result;
-  data?: bytes | Result;
+  result?: Result;
+  data: bytes | Result;
 }
 
 model Query {
