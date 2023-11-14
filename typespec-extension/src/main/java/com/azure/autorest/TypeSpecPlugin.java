@@ -205,9 +205,11 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getCustomTypeSubpackage() != null) {
             SETTINGS_MAP.put("custom-types-subpackage", options.getCustomTypeSubpackage());
         }
-
         if (options.getCustomizationClass() != null) {
             SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
+        }
+        if (emitterOptions.getPolling() != null) {
+            SETTINGS_MAP.put("polling", options.getPolling());
         }
 
         if (options.getBranded() == Boolean.FALSE) {
