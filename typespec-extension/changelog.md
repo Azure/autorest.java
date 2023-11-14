@@ -9,6 +9,7 @@ Compatible with compiler 0.50.
 Compatible with compiler 0.50.
 
 - Supported `branded: false` for prototype of non-Azure SDK.
+- Supported generate `Union` as `BinaryData`.
 
 ## 0.10.0 (2023-10-23)
 
