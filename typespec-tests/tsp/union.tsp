@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Union",
@@ -59,15 +61,22 @@ model ArrayData {
   data: string[];
 }
 
+@usage(Usage.input | Usage.output)
 model Result {
   name: string;
-  result: Result;
-  data?: bytes | Result;
+  result?: Result;
+  data: bytes | Result;
 }
 
 model Query {
   @query
   data?: url | bytes;
+}
+
+@usage(Usage.input | Usage.output)
+model SubResult extends Result {
+  text?: string;
+  arrayData?: bytes | ArrayData;
 }
 
 @route("/union")
