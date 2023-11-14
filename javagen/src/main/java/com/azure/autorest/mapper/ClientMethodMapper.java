@@ -415,7 +415,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     if (pollingDetails != null) {
                         // try lroMetadata
-                        methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails, settings);
+                        methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails);
 
                         // fallback to JavaSettings.PollingDetails
                         if (methodPollingDetails == null) {
@@ -1654,8 +1654,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static MethodPollingDetails methodPollingDetailsFromMetadata(
         Operation operation,
-        JavaSettings.PollingDetails pollingDetails,
-        JavaSettings settings) {
+        JavaSettings.PollingDetails pollingDetails) {
 
         if (pollingDetails == null || operation.getConvenienceApi() == null) {
             return null;
@@ -1663,7 +1662,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         MethodPollingDetails methodPollingDetails = null;
         if (operation.getLroMetadata() != null) {
-            // Only Typespec would have longRunningMetadata
+            // Only TypeSpec would have longRunningMetadata
 
             LongRunningMetadata metadata = operation.getLroMetadata();
             ObjectMapper objectMapper = Mappers.getObjectMapper();
@@ -1671,6 +1670,32 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             IType finalType = metadata.getFinalResultType() == null
                     ? PrimitiveType.Void
                     : objectMapper.map(metadata.getFinalResultType());
+
+            // merge with PollingDetails on intermediateType and finalType
+            if (pollingDetails.getIntermediateType() != null) {
+                String intermediateTypeName;
+                String intermediateTypePackage;
+                if (pollingDetails.getIntermediateType().contains(".")) {
+                    intermediateTypeName = ANYTHING_THEN_PERIOD.matcher(pollingDetails.getIntermediateType()).replaceAll("");
+                    intermediateTypePackage = pollingDetails.getIntermediateType().replace("." + intermediateTypeName, "");
+                } else {
+                    intermediateTypeName = pollingDetails.getIntermediateType();
+                    intermediateTypePackage = JavaSettings.getInstance().getPackage();
+                }
+                intermediateType = new ClassType.Builder().packageName(intermediateTypePackage).name(intermediateTypeName).build();
+            }
+            if (pollingDetails.getFinalType() != null) {
+                String finalTypeName;
+                String finalTypePackage;
+                if (pollingDetails.getFinalType().contains(".")) {
+                    finalTypeName = ANYTHING_THEN_PERIOD.matcher(pollingDetails.getFinalType()).replaceAll("");
+                    finalTypePackage = pollingDetails.getFinalType().replace("." + finalTypeName, "");
+                } else {
+                    finalTypeName = pollingDetails.getFinalType();
+                    finalTypePackage = JavaSettings.getInstance().getPackage();
+                }
+                finalType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
+            }
 
             String pollingStrategy = metadata.getPollingStrategy() == null
                     ? pollingDetails.getStrategy()

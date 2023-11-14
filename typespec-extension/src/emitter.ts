@@ -37,6 +37,7 @@ export interface EmitterOptions {
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
+  "polling"?: any;
 
   "arm"?: boolean;
 
@@ -82,6 +83,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
+    "polling": { type: "object", additionalProperties: true, nullable: true },
 
     "arm": { type: "boolean", nullable: true },
 

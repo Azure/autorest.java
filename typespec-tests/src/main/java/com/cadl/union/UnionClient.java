@@ -12,10 +12,10 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.union.implementation.UnionClientImpl;
 import com.cadl.union.models.Result;
@@ -322,7 +322,7 @@ public final class UnionClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, Result> beginGenerate() {
+    public SyncPoller<PollOperationDetails, Result> beginGenerate() {
         // Generated convenience method for beginGenerateWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginGenerateWithModel(requestOptions);

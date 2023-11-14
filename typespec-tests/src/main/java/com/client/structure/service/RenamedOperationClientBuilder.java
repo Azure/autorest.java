@@ -42,7 +42,10 @@ import java.util.Objects;
  * A builder for creating a new instance of the RenamedOperationClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { RenamedOperationClient.class, GroupClient.class, RenamedOperationAsyncClient.class,
+    serviceClients = {
+        RenamedOperationClient.class,
+        GroupClient.class,
+        RenamedOperationAsyncClient.class,
         GroupAsyncClient.class })
 public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOperationClientBuilder>,
     ConfigurationTrait<RenamedOperationClientBuilder>, EndpointTrait<RenamedOperationClientBuilder> {

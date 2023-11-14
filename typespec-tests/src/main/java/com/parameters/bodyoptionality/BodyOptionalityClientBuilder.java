@@ -41,7 +41,10 @@ import java.util.Objects;
  * A builder for creating a new instance of the BodyOptionalityClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { BodyOptionalityClient.class, OptionalExplicitClient.class, BodyOptionalityAsyncClient.class,
+    serviceClients = {
+        BodyOptionalityClient.class,
+        OptionalExplicitClient.class,
+        BodyOptionalityAsyncClient.class,
         OptionalExplicitAsyncClient.class })
 public final class BodyOptionalityClientBuilder
     implements HttpTrait<BodyOptionalityClientBuilder>, ConfigurationTrait<BodyOptionalityClientBuilder> {

@@ -25,9 +25,10 @@ import java.util.regex.Pattern;
     property = "odata\\.type",
     defaultImpl = MetricAlertCriteria.class)
 @JsonTypeName("MetricAlertCriteria")
-@JsonSubTypes({ @JsonSubTypes.Type(
-    name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-    value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
+@JsonSubTypes({
+    @JsonSubTypes.Type(
+        name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+        value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
 @JsonFlatten
 @Fluent
 public class MetricAlertCriteria {
