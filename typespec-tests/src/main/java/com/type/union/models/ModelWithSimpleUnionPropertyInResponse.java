@@ -50,9 +50,7 @@ public final class ModelWithSimpleUnionPropertyInResponse
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.simpleUnion != null) {
-            jsonWriter.writeUntypedField("simpleUnion", this.simpleUnion.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("simpleUnion", this.simpleUnion.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -74,10 +72,7 @@ public final class ModelWithSimpleUnionPropertyInResponse
                 reader.nextToken();
 
                 if ("simpleUnion".equals(fieldName)) {
-                    Object simpleUnionAsObject = reader.readUntyped();
-                    if (simpleUnionAsObject != null) {
-                        simpleUnion = BinaryData.fromObject(simpleUnionAsObject);
-                    }
+                    simpleUnion = BinaryData.fromObject(reader.readUntyped());
                     simpleUnionFound = true;
                 } else {
                     reader.skipChildren();

@@ -50,9 +50,7 @@ public final class ModelWithNamedUnionPropertyInResponse
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.namedUnion != null) {
-            jsonWriter.writeUntypedField("namedUnion", this.namedUnion.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("namedUnion", this.namedUnion.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -74,10 +72,7 @@ public final class ModelWithNamedUnionPropertyInResponse
                 reader.nextToken();
 
                 if ("namedUnion".equals(fieldName)) {
-                    Object namedUnionAsObject = reader.readUntyped();
-                    if (namedUnionAsObject != null) {
-                        namedUnion = BinaryData.fromObject(namedUnionAsObject);
-                    }
+                    namedUnion = BinaryData.fromObject(reader.readUntyped());
                     namedUnionFound = true;
                 } else {
                     reader.skipChildren();
