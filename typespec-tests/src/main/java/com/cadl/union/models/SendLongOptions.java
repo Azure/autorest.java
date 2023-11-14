@@ -7,65 +7,68 @@ package com.cadl.union.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Options for sendLong API.
  */
 @Fluent
-public final class SendLongOptions implements JsonSerializable<SendLongOptions> {
+public final class SendLongOptions {
     /*
      * The id property.
      */
     @Generated
-    private final String id;
+    @JsonProperty(value = "id")
+    private String id;
 
     /*
      * The filter property.
      */
     @Generated
+    @JsonProperty(value = "filter")
     private String filter;
 
     /*
      * The user property.
      */
     @Generated
+    @JsonProperty(value = "user")
     private User user;
 
     /*
      * The input property.
      */
     @Generated
-    private final String input;
+    @JsonProperty(value = "input")
+    private String input;
 
     /*
      * The dataInt property.
      */
     @Generated
-    private final int dataInt;
+    @JsonProperty(value = "dataInt")
+    private int dataInt;
 
     /*
      * The dataUnion property.
      */
     @Generated
+    @JsonProperty(value = "dataUnion")
     private BinaryData dataUnion;
 
     /*
      * The dataLong property.
      */
     @Generated
+    @JsonProperty(value = "dataLong")
     private Long dataLong;
 
     /*
      * The data_float property.
      */
     @Generated
+    @JsonProperty(value = "data_float")
     private Double dataFloat;
 
     /**
@@ -76,7 +79,9 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
      * @param dataInt the dataInt value to set.
      */
     @Generated
-    public SendLongOptions(String id, String input, int dataInt) {
+    @JsonCreator
+    public SendLongOptions(@JsonProperty(value = "id") String id, @JsonProperty(value = "input") String input,
+        @JsonProperty(value = "dataInt") int dataInt) {
         this.id = id;
         this.input = input;
         this.dataInt = dataInt;
@@ -220,99 +225,5 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
     public SendLongOptions setDataFloat(Double dataFloat) {
         this.dataFloat = dataFloat;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
-        jsonWriter.writeStringField("input", this.input);
-        jsonWriter.writeIntField("dataInt", this.dataInt);
-        jsonWriter.writeStringField("filter", this.filter);
-        jsonWriter.writeJsonField("user", this.user);
-        if (this.dataUnion != null) {
-            jsonWriter.writeUntypedField("dataUnion", this.dataUnion.toObject(Object.class));
-        }
-        jsonWriter.writeNumberField("dataLong", this.dataLong);
-        jsonWriter.writeNumberField("data_float", this.dataFloat);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of SendLongOptions from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SendLongOptions if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the SendLongOptions.
-     */
-    public static SendLongOptions fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean idFound = false;
-            String id = null;
-            boolean inputFound = false;
-            String input = null;
-            boolean dataIntFound = false;
-            int dataInt = 0;
-            String filter = null;
-            User user = null;
-            BinaryData dataUnion = null;
-            Long dataLong = null;
-            Double dataFloat = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    id = reader.getString();
-                    idFound = true;
-                } else if ("input".equals(fieldName)) {
-                    input = reader.getString();
-                    inputFound = true;
-                } else if ("dataInt".equals(fieldName)) {
-                    dataInt = reader.getInt();
-                    dataIntFound = true;
-                } else if ("filter".equals(fieldName)) {
-                    filter = reader.getString();
-                } else if ("user".equals(fieldName)) {
-                    user = User.fromJson(reader);
-                } else if ("dataUnion".equals(fieldName)) {
-                    Object dataUnionAsObject = reader.readUntyped();
-                    if (dataUnion != null) {
-                        dataUnion = BinaryData.fromObject(dataUnionAsObject);
-                    }
-                } else if ("dataLong".equals(fieldName)) {
-                    dataLong = reader.getNullable(JsonReader::getLong);
-                } else if ("data_float".equals(fieldName)) {
-                    dataFloat = reader.getNullable(JsonReader::getDouble);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            if (idFound && inputFound && dataIntFound) {
-                SendLongOptions deserializedSendLongOptions = new SendLongOptions(id, input, dataInt);
-                deserializedSendLongOptions.filter = filter;
-                deserializedSendLongOptions.user = user;
-                deserializedSendLongOptions.dataUnion = dataUnion;
-                deserializedSendLongOptions.dataLong = dataLong;
-                deserializedSendLongOptions.dataFloat = dataFloat;
-
-                return deserializedSendLongOptions;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!idFound) {
-                missingProperties.add("id");
-            }
-            if (!inputFound) {
-                missingProperties.add("input");
-            }
-            if (!dataIntFound) {
-                missingProperties.add("dataInt");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
-        });
     }
 }

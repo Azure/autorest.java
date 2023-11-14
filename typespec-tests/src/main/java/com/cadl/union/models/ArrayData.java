@@ -6,24 +6,21 @@ package com.cadl.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * The ArrayData model.
  */
 @Immutable
-public final class ArrayData implements JsonSerializable<ArrayData> {
+public final class ArrayData {
     /*
      * The data property.
      */
     @Generated
-    private final List<String> data;
+    @JsonProperty(value = "data")
+    private List<String> data;
 
     /**
      * Creates an instance of ArrayData class.
@@ -31,7 +28,8 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
      * @param data the data value to set.
      */
     @Generated
-    public ArrayData(List<String> data) {
+    @JsonCreator
+    public ArrayData(@JsonProperty(value = "data") List<String> data) {
         this.data = data;
     }
 
@@ -43,51 +41,5 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
     @Generated
     public List<String> getData() {
         return this.data;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("data", this.data, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ArrayData from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ArrayData if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ArrayData.
-     */
-    public static ArrayData fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean dataFound = false;
-            List<String> data = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("data".equals(fieldName)) {
-                    data = reader.readArray(reader1 -> reader1.getString());
-                    dataFound = true;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            if (dataFound) {
-                ArrayData deserializedArrayData = new ArrayData(data);
-
-                return deserializedArrayData;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
-        });
     }
 }

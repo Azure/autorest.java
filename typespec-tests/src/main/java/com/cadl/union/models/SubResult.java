@@ -4,31 +4,29 @@
 
 package com.cadl.union.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The SubResult model.
  */
-@Immutable
+@Fluent
 public final class SubResult extends Result {
     /*
      * The text property.
      */
     @Generated
+    @JsonProperty(value = "text")
     private String text;
 
     /*
      * The arrayData property.
      */
     @Generated
+    @JsonProperty(value = "arrayData")
     private BinaryData arrayData;
 
     /**
@@ -38,7 +36,8 @@ public final class SubResult extends Result {
      * @param data the data value to set.
      */
     @Generated
-    private SubResult(String name, BinaryData data) {
+    @JsonCreator
+    public SubResult(@JsonProperty(value = "name") String name, @JsonProperty(value = "data") BinaryData data) {
         super(name, data);
     }
 
@@ -53,6 +52,18 @@ public final class SubResult extends Result {
     }
 
     /**
+     * Set the text property: The text property.
+     * 
+     * @param text the text value to set.
+     * @return the SubResult object itself.
+     */
+    @Generated
+    public SubResult setText(String text) {
+        this.text = text;
+        return this;
+    }
+
+    /**
      * Get the arrayData property: The arrayData property.
      * 
      * @return the arrayData value.
@@ -62,83 +73,25 @@ public final class SubResult extends Result {
         return this.arrayData;
     }
 
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", getName());
-        if (getData() != null) {
-            jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
-        }
-        jsonWriter.writeJsonField("result", getResult());
-        jsonWriter.writeStringField("text", this.text);
-        if (this.arrayData != null) {
-            jsonWriter.writeUntypedField("arrayData", this.arrayData.toObject(Object.class));
-        }
-        return jsonWriter.writeEndObject();
+    /**
+     * Set the arrayData property: The arrayData property.
+     * 
+     * @param arrayData the arrayData value to set.
+     * @return the SubResult object itself.
+     */
+    @Generated
+    public SubResult setArrayData(BinaryData arrayData) {
+        this.arrayData = arrayData;
+        return this;
     }
 
     /**
-     * Reads an instance of SubResult from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SubResult if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the SubResult.
+     * {@inheritDoc}
      */
-    public static SubResult fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
-            String name = null;
-            boolean dataFound = false;
-            BinaryData data = null;
-            Result result = null;
-            String text = null;
-            BinaryData arrayData = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("name".equals(fieldName)) {
-                    name = reader.getString();
-                    nameFound = true;
-                } else if ("data".equals(fieldName)) {
-                    Object dataAsObject = reader.readUntyped();
-                    if (data != null) {
-                        data = BinaryData.fromObject(dataAsObject);
-                    }
-                    dataFound = true;
-                } else if ("result".equals(fieldName)) {
-                    result = Result.fromJson(reader);
-                } else if ("text".equals(fieldName)) {
-                    text = reader.getString();
-                } else if ("arrayData".equals(fieldName)) {
-                    Object arrayDataAsObject = reader.readUntyped();
-                    if (arrayData != null) {
-                        arrayData = BinaryData.fromObject(arrayDataAsObject);
-                    }
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            if (nameFound && dataFound) {
-                SubResult deserializedSubResult = new SubResult(name, data);
-                deserializedSubResult.setResult(result);
-                deserializedSubResult.text = text;
-                deserializedSubResult.arrayData = arrayData;
-
-                return deserializedSubResult;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
-        });
+    @Generated
+    @Override
+    public SubResult setResult(Result result) {
+        super.setResult(result);
+        return this;
     }
 }

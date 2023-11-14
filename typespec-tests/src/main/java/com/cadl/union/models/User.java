@@ -6,24 +6,20 @@ package com.cadl.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The User model.
  */
 @Immutable
-public final class User implements JsonSerializable<User> {
+public final class User {
     /*
      * The user property.
      */
     @Generated
-    private final String user;
+    @JsonProperty(value = "user")
+    private String user;
 
     /**
      * Creates an instance of User class.
@@ -31,7 +27,8 @@ public final class User implements JsonSerializable<User> {
      * @param user the user value to set.
      */
     @Generated
-    public User(String user) {
+    @JsonCreator
+    public User(@JsonProperty(value = "user") String user) {
         this.user = user;
     }
 
@@ -43,51 +40,5 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public String getUser() {
         return this.user;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("user", this.user);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of User from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of User if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the User.
-     */
-    public static User fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean userFound = false;
-            String user = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("user".equals(fieldName)) {
-                    user = reader.getString();
-                    userFound = true;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            if (userFound) {
-                User deserializedUser = new User(user);
-
-                return deserializedUser;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!userFound) {
-                missingProperties.add("user");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
-        });
     }
 }
