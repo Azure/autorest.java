@@ -537,12 +537,16 @@ public final class CreateChatCompletionRequest implements JsonSerializable<Creat
         jsonWriter.writeStringField("model", Objects.toString(this.model, null));
         jsonWriter.writeArrayField("messages", this.messages, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeArrayField("functions", this.functions, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeUntypedField("function_call", this.functionCall.toObject(Object.class));
+        if (this.functionCall != null) {
+            jsonWriter.writeUntypedField("function_call", this.functionCall.toObject(Object.class));
+        }
         jsonWriter.writeNumberField("temperature", this.temperature);
         jsonWriter.writeNumberField("top_p", this.topP);
         jsonWriter.writeNumberField("n", this.n);
         jsonWriter.writeNumberField("max_tokens", this.maxTokens);
-        jsonWriter.writeUntypedField("stop", this.stop.toObject(Object.class));
+        if (this.stop != null) {
+            jsonWriter.writeUntypedField("stop", this.stop.toObject(Object.class));
+        }
         jsonWriter.writeNumberField("presence_penalty", this.presencePenalty);
         jsonWriter.writeNumberField("frequency_penalty", this.frequencyPenalty);
         jsonWriter.writeMapField("logit_bias", this.logitBias, (writer, element) -> writer.writeLong(element));

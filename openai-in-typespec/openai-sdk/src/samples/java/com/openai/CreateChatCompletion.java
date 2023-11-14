@@ -17,20 +17,26 @@ import java.util.List;
 public final class CreateChatCompletion {
     public static void main(String[] args) {
         OpenAIClient openAIClient = new OpenAIClientBuilder()
-                .credential(new KeyCredential(System.getenv("OPENAI_SECRET_KEY")))
+                .credential(new KeyCredential(System.getenv("OPENAI_API_KEY")))
                 .buildClient();
 
         List<ChatCompletionRequestMessage> messages = new ArrayList<>();
-        messages.add(new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.SYSTEM, "You are a helpful assistant."));
         messages.add(new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.USER, "Who won the world series in 2020?"));
-        messages.add(new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.USER, "The Los Angeles Dodgers won the World Series in 2020."));
         messages.add(new ChatCompletionRequestMessage(ChatCompletionRequestMessageRole.USER, "Where was it played?"));
 
 
         CreateChatCompletionResponse chatCompletionResponse
                 = openAIClient.createChatCompletion(
-                        new CreateChatCompletionRequest(CreateChatCompletionRequestModel.GPT4, messages));
+                        new CreateChatCompletionRequest(CreateChatCompletionRequestModel.GPT_3_5_TURBO, messages));
 
         System.out.println("Model used for Chat completion: " + chatCompletionResponse.getModel());
+        System.out.println("Retrieved the following choices for a chat completion:");
+
+        System.out.println("\nRole\t\tMessage");
+        chatCompletionResponse.getChoices().stream()
+                .forEach(choice -> System.out.printf("%s\t%s%n", choice.getMessage().getRole(),
+                        choice.getMessage().getContent()));
+
+
     }
 }
