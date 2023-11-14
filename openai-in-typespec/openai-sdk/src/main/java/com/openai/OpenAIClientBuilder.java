@@ -62,7 +62,7 @@ public final class OpenAIClientBuilder {
         HttpPipelineBuilder httpPipelineBuilder = new HttpPipelineBuilder();
         List<HttpPipelinePolicy> policies = new ArrayList<>();
         if (keyCredential != null) {
-            policies.add(new KeyCredentialPolicy("Authorization", keyCredential, "Bearer"));
+            policies.add(new KeyCredentialPolicy("authorization", keyCredential, "Bearer"));
         }
         httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));
         return httpPipelineBuilder.build();
