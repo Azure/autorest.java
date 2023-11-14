@@ -3,6 +3,7 @@
 
 package com.azure.typespec.model;
 
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -10,7 +11,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmitterOptions {
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
@@ -57,6 +60,9 @@ public class EmitterOptions {
 
     @JsonProperty(value="customization-class")
     private String customizationClass;
+
+    @JsonProperty(value = "polling")
+    private Map<String, JavaSettings.PollingDetails> polling = new HashMap<>();
 
     @JsonProperty(value = "arm")
     private Boolean arm = false;
@@ -121,6 +127,14 @@ public class EmitterOptions {
 
     public String getCustomizationClass() {
         return customizationClass;
+    }
+
+    public Map<String, JavaSettings.PollingDetails> getPolling() {
+        return polling;
+    }
+
+    public void setPolling(Map<String, JavaSettings.PollingDetails> polling) {
+        this.polling = polling;
     }
 
     public Boolean getBranded() {
