@@ -70,6 +70,11 @@ model Query {
   data?: url | bytes;
 }
 
+model SubResult {
+  text?: string;
+  arrayData?: bytes | ArrayData;
+}
+
 @route("/union")
 interface UnionFlattenOp {
   @route("send")

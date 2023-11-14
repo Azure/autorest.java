@@ -47,6 +47,8 @@ function Generate($tspFile) {
     $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationEncodeBytes.java"""
   } elseif ($tspFile -match "type[\\/]union[\\/]main.tsp") {
     $tspOptions = "--options=""@azure-tools/typespec-java.stream-style-serialization=true"""
+  } elseif ($tspFile -match "tsp[\\/]union[\\/]main.tsp") {
+    $tspOptions = "--options=""@azure-tools/typespec-java.stream-style-serialization=true"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
