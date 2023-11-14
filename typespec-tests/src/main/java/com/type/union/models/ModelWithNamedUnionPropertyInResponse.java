@@ -75,7 +75,7 @@ public final class ModelWithNamedUnionPropertyInResponse
 
                 if ("namedUnion".equals(fieldName)) {
                     Object namedUnionAsObject = reader.readUntyped();
-                    if (namedUnion != null) {
+                    if (namedUnionAsObject != null) {
                         namedUnion = BinaryData.fromObject(namedUnionAsObject);
                     }
                     namedUnionFound = true;

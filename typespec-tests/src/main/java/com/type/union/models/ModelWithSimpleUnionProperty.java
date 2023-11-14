@@ -74,7 +74,7 @@ public final class ModelWithSimpleUnionProperty implements JsonSerializable<Mode
 
                 if ("simpleUnion".equals(fieldName)) {
                     Object simpleUnionAsObject = reader.readUntyped();
-                    if (simpleUnion != null) {
+                    if (simpleUnionAsObject != null) {
                         simpleUnion = BinaryData.fromObject(simpleUnionAsObject);
                     }
                     simpleUnionFound = true;

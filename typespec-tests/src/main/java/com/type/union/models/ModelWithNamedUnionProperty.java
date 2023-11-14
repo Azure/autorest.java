@@ -74,7 +74,7 @@ public final class ModelWithNamedUnionProperty implements JsonSerializable<Model
 
                 if ("namedUnion".equals(fieldName)) {
                     Object namedUnionAsObject = reader.readUntyped();
-                    if (namedUnion != null) {
+                    if (namedUnionAsObject != null) {
                         namedUnion = BinaryData.fromObject(namedUnionAsObject);
                     }
                     namedUnionFound = true;

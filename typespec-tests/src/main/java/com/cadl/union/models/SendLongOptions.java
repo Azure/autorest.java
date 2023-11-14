@@ -279,7 +279,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
                     user = User.fromJson(reader);
                 } else if ("dataUnion".equals(fieldName)) {
                     Object dataUnionAsObject = reader.readUntyped();
-                    if (dataUnion != null) {
+                    if (dataUnionAsObject != null) {
                         dataUnion = BinaryData.fromObject(dataUnionAsObject);
                     }
                 } else if ("dataLong".equals(fieldName)) {
