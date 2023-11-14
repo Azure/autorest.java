@@ -23,9 +23,10 @@ import java.util.Map;
     property = "odata.type",
     defaultImpl = MetricAlertCriteria.class)
 @JsonTypeName("MetricAlertCriteria")
-@JsonSubTypes({ @JsonSubTypes.Type(
-    name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-    value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
+@JsonSubTypes({
+    @JsonSubTypes.Type(
+        name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+        value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
 @Fluent
 public class MetricAlertCriteria {
     /*

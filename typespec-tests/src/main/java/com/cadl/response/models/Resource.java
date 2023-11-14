@@ -4,15 +4,15 @@
 
 package com.cadl.response.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Resource model.
  */
-@Immutable
+@Fluent
 public final class Resource {
     /*
      * The id property.
@@ -49,7 +49,7 @@ public final class Resource {
      */
     @Generated
     @JsonCreator
-    private Resource(@JsonProperty(value = "type") String type) {
+    public Resource(@JsonProperty(value = "type") String type) {
         this.type = type;
     }
 
@@ -81,6 +81,18 @@ public final class Resource {
     @Generated
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     * 
+     * @param description the description value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setDescription(String description) {
+        this.description = description;
+        return this;
     }
 
     /**

@@ -494,6 +494,9 @@ public class ClassType implements IType {
     public static final ClassType KeyCredentialTrait = getClassTypeBuilder(com.azure.core.client.traits.KeyCredentialTrait.class)
         .build();
 
+    public static final ClassType PollOperationDetails = getClassTypeBuilder(com.azure.core.util.polling.PollOperationDetails.class)
+        .build();
+
     public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)
         .build();
 

@@ -123,7 +123,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollResultSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -343,8 +343,11 @@ export class CodeModelBuilder {
 
           case "http":
             {
-              const schemeOrApiKeyPrefix = scheme.scheme;
+              let schemeOrApiKeyPrefix: string = scheme.scheme;
               if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
+                // HTTP Authentication should use "Basic token" or "Bearer token"
+                schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
+
                 if (!(this.options.branded === false)) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
@@ -637,7 +640,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName;
+    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -817,18 +820,7 @@ export class CodeModelBuilder {
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        let finalResult = lroMetadata.logicalResult;
-        if (
-          verb === "post" &&
-          lroMetadata.finalStep &&
-          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-          lroMetadata.finalStep.target.name !== "result" &&
-          lroMetadata.logicalResult !== lroMetadata.envelopeResult
-        ) {
-          // fix the case that @lroResult is not "result" property
-          finalResult = lroMetadata.envelopeResult;
-        }
-
+        const finalResult = useNewPollStrategy ? lroMetadata.logicalResult : lroMetadata.envelopeResult;
         const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
@@ -2459,7 +2451,7 @@ export class CodeModelBuilder {
   get pollResultSchema(): ObjectSchema {
     return (
       this._pollResultSchema ??
-      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+      (this._pollResultSchema = createPollOperationDetailsSchema(this.codeModel.schemas, this.stringSchema))
     );
   }
 
@@ -2589,7 +2581,7 @@ export class CodeModelBuilder {
   }
 
   private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && !!getExtensions(program, op)?.get("x-ms-long-running-operation");
+    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {
