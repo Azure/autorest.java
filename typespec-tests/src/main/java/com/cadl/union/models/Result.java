@@ -96,9 +96,7 @@ public class Result implements JsonSerializable<Result> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
-        if (this.data != null) {
-            jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -127,10 +125,7 @@ public class Result implements JsonSerializable<Result> {
                     name = reader.getString();
                     nameFound = true;
                 } else if ("data".equals(fieldName)) {
-                    Object dataAsObject = reader.readUntyped();
-                    if (dataAsObject != null) {
-                        data = BinaryData.fromObject(dataAsObject);
-                    }
+                    data = BinaryData.fromObject(reader.readUntyped());
                     dataFound = true;
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);

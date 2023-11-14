@@ -100,9 +100,7 @@ public final class SubResult extends Result {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        if (getData() != null) {
-            jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
         jsonWriter.writeJsonField("result", getResult());
         jsonWriter.writeStringField("text", this.text);
         if (this.arrayData != null) {
@@ -137,10 +135,7 @@ public final class SubResult extends Result {
                     name = reader.getString();
                     nameFound = true;
                 } else if ("data".equals(fieldName)) {
-                    Object dataAsObject = reader.readUntyped();
-                    if (dataAsObject != null) {
-                        data = BinaryData.fromObject(dataAsObject);
-                    }
+                    data = BinaryData.fromObject(reader.readUntyped());
                     dataFound = true;
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);
