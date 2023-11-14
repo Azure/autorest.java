@@ -70,7 +70,7 @@ model Query {
   data?: url | bytes;
 }
 
-model SubResult {
+model SubResult extends Result {
   text?: string;
   arrayData?: bytes | ArrayData;
 }
