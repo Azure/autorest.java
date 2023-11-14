@@ -8,7 +8,6 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
@@ -16,97 +15,86 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Result model.
+ * The SubResult model.
  */
 @Immutable
-public class Result implements JsonSerializable<Result> {
+public final class SubResult extends Result {
     /*
-     * The name property.
+     * The text property.
      */
     @Generated
-    private final String name;
+    private String text;
 
     /*
-     * The result property.
+     * The arrayData property.
      */
     @Generated
-    private Result result;
-
-    /*
-     * The data property.
-     */
-    @Generated
-    private final BinaryData data;
+    private BinaryData arrayData;
 
     /**
-     * Creates an instance of Result class.
+     * Creates an instance of SubResult class.
      * 
      * @param name the name value to set.
      * @param data the data value to set.
      */
     @Generated
-    protected Result(String name, BinaryData data) {
-        this.name = name;
-        this.data = data;
+    private SubResult(String name, BinaryData data) {
+        super(name, data);
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the text property: The text property.
      * 
-     * @return the name value.
+     * @return the text value.
      */
     @Generated
-    public String getName() {
-        return this.name;
+    public String getText() {
+        return this.text;
     }
 
     /**
-     * Get the result property: The result property.
+     * Get the arrayData property: The arrayData property.
      * 
-     * @return the result value.
+     * @return the arrayData value.
      */
     @Generated
-    public Result getResult() {
-        return this.result;
-    }
-
-    /**
-     * Get the data property: The data property.
-     * 
-     * @return the data value.
-     */
-    @Generated
-    public BinaryData getData() {
-        return this.data;
+    public BinaryData getArrayData() {
+        return this.arrayData;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", this.name);
-        if (this.data != null) {
-            jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
+        jsonWriter.writeStringField("name", getName());
+        if (getData() != null) {
+            jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
         }
-        jsonWriter.writeJsonField("result", this.result);
+        jsonWriter.writeJsonField("result", getResult());
+        jsonWriter.writeStringField("text", this.text);
+        if (this.arrayData != null) {
+            jsonWriter.writeUntypedField("arrayData", this.arrayData.toObject(Object.class));
+        }
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of Result from the JsonReader.
+     * Reads an instance of SubResult from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Result if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of SubResult if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Result.
+     * @throws IOException If an error occurs while reading the SubResult.
      */
-    public static Result fromJson(JsonReader jsonReader) throws IOException {
+    public static SubResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean nameFound = false;
             String name = null;
             boolean dataFound = false;
             BinaryData data = null;
             Result result = null;
+            String text = null;
+            BinaryData arrayData = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -122,15 +110,24 @@ public class Result implements JsonSerializable<Result> {
                     dataFound = true;
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);
+                } else if ("text".equals(fieldName)) {
+                    text = reader.getString();
+                } else if ("arrayData".equals(fieldName)) {
+                    Object arrayDataAsObject = reader.readUntyped();
+                    if (arrayData != null) {
+                        arrayData = BinaryData.fromObject(arrayDataAsObject);
+                    }
                 } else {
                     reader.skipChildren();
                 }
             }
             if (nameFound && dataFound) {
-                Result deserializedResult = new Result(name, data);
-                deserializedResult.result = result;
+                SubResult deserializedSubResult = new SubResult(name, data);
+                deserializedSubResult.setResult(result);
+                deserializedSubResult.text = text;
+                deserializedSubResult.arrayData = arrayData;
 
-                return deserializedResult;
+                return deserializedSubResult;
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {
