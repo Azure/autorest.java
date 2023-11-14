@@ -629,7 +629,9 @@ public final class CreateCompletionRequest implements JsonSerializable<CreateCom
         jsonWriter.writeNumberField("top_p", this.topP);
         jsonWriter.writeNumberField("n", this.n);
         jsonWriter.writeNumberField("max_tokens", this.maxTokens);
-        jsonWriter.writeUntypedField("stop", this.stop.toObject(Object.class));
+        if (this.stop != null) {
+            jsonWriter.writeUntypedField("stop", this.stop.toObject(Object.class));
+        }
         jsonWriter.writeNumberField("presence_penalty", this.presencePenalty);
         jsonWriter.writeNumberField("frequency_penalty", this.frequencyPenalty);
         jsonWriter.writeMapField("logit_bias", this.logitBias, (writer, element) -> writer.writeLong(element));
@@ -691,7 +693,10 @@ public final class CreateCompletionRequest implements JsonSerializable<CreateCom
                 } else if ("max_tokens".equals(fieldName)) {
                     maxTokens = reader.getNullable(JsonReader::getLong);
                 } else if ("stop".equals(fieldName)) {
-                    stop = BinaryData.fromObject(reader.readUntyped());
+                    Object stopAsObject = reader.readUntyped();
+                    if (stopAsObject != null) {
+                        stop = BinaryData.fromObject(stopAsObject);
+                    }
                 } else if ("presence_penalty".equals(fieldName)) {
                     presencePenalty = reader.getNullable(JsonReader::getDouble);
                 } else if ("frequency_penalty".equals(fieldName)) {

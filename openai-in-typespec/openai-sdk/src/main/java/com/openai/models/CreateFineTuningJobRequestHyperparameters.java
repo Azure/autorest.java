@@ -60,7 +60,9 @@ public final class CreateFineTuningJobRequestHyperparameters
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("n_epochs", this.nEpochs.toObject(Object.class));
+        if (this.nEpochs != null) {
+            jsonWriter.writeUntypedField("n_epochs", this.nEpochs.toObject(Object.class));
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -81,8 +83,11 @@ public final class CreateFineTuningJobRequestHyperparameters
                 reader.nextToken();
 
                 if ("n_epochs".equals(fieldName)) {
-                    deserializedCreateFineTuningJobRequestHyperparameters.nEpochs
-                        = BinaryData.fromObject(reader.readUntyped());
+                    Object nEpochsAsObject = reader.readUntyped();
+                    if (nEpochsAsObject != null) {
+                        deserializedCreateFineTuningJobRequestHyperparameters.nEpochs
+                            = BinaryData.fromObject(nEpochsAsObject);
+                    }
                 } else {
                     reader.skipChildren();
                 }

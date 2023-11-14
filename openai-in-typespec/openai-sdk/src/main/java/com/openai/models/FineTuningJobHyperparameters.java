@@ -51,7 +51,9 @@ public final class FineTuningJobHyperparameters implements JsonSerializable<Fine
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("n_epochs", this.nEpochs.toObject(Object.class));
+        if (this.nEpochs != null) {
+            jsonWriter.writeUntypedField("n_epochs", this.nEpochs.toObject(Object.class));
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -71,7 +73,10 @@ public final class FineTuningJobHyperparameters implements JsonSerializable<Fine
                 reader.nextToken();
 
                 if ("n_epochs".equals(fieldName)) {
-                    deserializedFineTuningJobHyperparameters.nEpochs = BinaryData.fromObject(reader.readUntyped());
+                    Object nEpochsAsObject = reader.readUntyped();
+                    if (nEpochsAsObject != null) {
+                        deserializedFineTuningJobHyperparameters.nEpochs = BinaryData.fromObject(nEpochsAsObject);
+                    }
                 } else {
                     reader.skipChildren();
                 }
