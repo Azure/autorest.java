@@ -957,7 +957,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (wireType.isNullable()) {
                 String propertyNameAsObject = property.getName() + "AsObject";
                 deserializationBlock.line("Object " + propertyNameAsObject + " = reader.readUntyped();");
-                deserializationBlock.ifBlock(property.getName() + " != null", ifBlock -> {
+                deserializationBlock.ifBlock(propertyNameAsObject + " != null", ifBlock -> {
                     binaryDataDeserializationConsumer.accept(propertyNameAsObject, ifBlock);
                 });
             } else {

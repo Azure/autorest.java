@@ -128,7 +128,7 @@ public class Result implements JsonSerializable<Result> {
                     nameFound = true;
                 } else if ("data".equals(fieldName)) {
                     Object dataAsObject = reader.readUntyped();
-                    if (data != null) {
+                    if (dataAsObject != null) {
                         data = BinaryData.fromObject(dataAsObject);
                     }
                     dataFound = true;
