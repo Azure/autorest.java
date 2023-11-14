@@ -9,10 +9,10 @@ import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionK
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
-import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -70,18 +70,20 @@ public final class PropertyCustomization extends CodeCustomization {
             .collect(Collectors.toList());
         String propertyPascalName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
         String newPascalName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
+
+        List<WorkspaceEdit> edits = new ArrayList<>();
         for (SymbolInformation symbol : symbols) {
             if (symbol.getKind() == SymbolKind.Field) {
-                WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName);
-                Utils.applyWorkspaceEdit(edit, editor, languageClient);
+                edits.add(languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName));
             } else if (symbol.getKind() == SymbolKind.Method) {
                 String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
                     .replace(propertyName, newName);
                 methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
-                WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName);
-                Utils.applyWorkspaceEdit(edit, editor, languageClient);
+                edits.add(languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName));
             }
         }
+
+        Utils.applyWorkspaceEdits(edits, editor, languageClient);
         return refreshCustomization(newName);
     }
 
@@ -120,8 +122,6 @@ public final class PropertyCustomization extends CodeCustomization {
             .findFirst();
         if (generateAccessors.isPresent()) {
             Utils.applyWorkspaceEdit(generateAccessors.get().getEdit(), editor, languageClient);
-            List<TextEdit> formats = languageClient.format(fileUri);
-            Utils.applyTextEdits(fileUri, formats, editor, languageClient);
 
             String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
             new PackageCustomization(editor, languageClient, packageName)
@@ -148,7 +148,7 @@ public final class PropertyCustomization extends CodeCustomization {
     public PropertyCustomization setModifier(int modifiers) {
         String target = " *(?:(?:public|protected|private|static|final|transient|volatile) ?)*(.* )";
         languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.Field)
+            .stream().filter(si -> si.getKind() == SymbolKind.Field && si.getName().equals(propertyName))
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
                 target + propertyName, "$1" + propertyName, Modifier.fieldModifiers(), modifiers));

@@ -23,6 +23,7 @@ import java.io.File;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -73,25 +74,41 @@ public class Utils {
     private static final Pattern ENDING_OF_PARAMETERS_PATTERN = Pattern.compile("^(.*)\\)\\s*\\{.*$");
 
     public static void applyWorkspaceEdit(WorkspaceEdit workspaceEdit, Editor editor, EclipseLanguageClient languageClient) {
-        if (workspaceEdit == null || workspaceEdit.getChanges() == null || workspaceEdit.getChanges().isEmpty()) {
+        Map<String, FileEvent> changes = new HashMap<>();
+        applyWorkspaceEditInternal(workspaceEdit.getChanges(), changes, editor);
+        languageClient.notifyWatchedFilesChanged(new ArrayList<>(changes.values()));
+    }
+
+    public static void applyWorkspaceEdits(List<WorkspaceEdit> workspaceEdits, Editor editor,
+        EclipseLanguageClient languageClient) {
+        if (workspaceEdits == null || workspaceEdits.isEmpty()) {
             return;
         }
 
-        List<FileEvent> changes = new ArrayList<>();
-        for (Map.Entry<String, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
+        Map<String, FileEvent> changes = new HashMap<>();
+        for (WorkspaceEdit workspaceEdit : workspaceEdits) {
+            applyWorkspaceEditInternal(workspaceEdit.getChanges(), changes, editor);
+        }
+
+        languageClient.notifyWatchedFilesChanged(new ArrayList<>(changes.values()));
+    }
+
+    private static void applyWorkspaceEditInternal(Map<String, List<TextEdit>> edits,
+        Map<String, FileEvent> changes, Editor editor) {
+        if (edits == null || edits.isEmpty()) {
+            return;
+        }
+
+        for (Map.Entry<String, List<TextEdit>> edit : edits.entrySet()) {
             int i = edit.getKey().indexOf("src/main/java/");
             String fileName = edit.getKey().substring(i);
             if (editor.getContents().containsKey(fileName)) {
                 for (TextEdit textEdit : edit.getValue()) {
                     editor.replace(fileName, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
                 }
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(edit.getKey());
-                fileEvent.setType(FileChangeType.Changed);
-                changes.add(fileEvent);
+                changes.putIfAbsent(fileName, new FileEvent(edit.getKey(), FileChangeType.Changed));
             }
         }
-        languageClient.notifyWatchedFilesChanged(changes);
     }
 
     public static void applyTextEdits(String fileUri, List<TextEdit> textEdits, Editor editor, EclipseLanguageClient languageClient) {
@@ -192,13 +209,6 @@ public class Utils {
         }
 
         throw orThrow.get();
-    }
-
-    public static <T, S> S returnIfPresentOrElse(Optional<T> optional, Function<T, S> returnFormatter,
-        Supplier<S> orElse) {
-        return optional.isPresent()
-            ? returnFormatter.apply(optional.get())
-            : orElse.get();
     }
 
     public static void writeLine(StringBuilder stringBuilder, String text) {

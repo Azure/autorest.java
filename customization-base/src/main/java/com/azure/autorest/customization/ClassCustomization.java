@@ -169,11 +169,11 @@ public final class ClassCustomization extends CodeCustomization {
             methodName = methodNameOrSignature;
         }
         Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(methodName)
-                && si.getKind() == SymbolKind.Method)
+            .stream().filter(si -> si.getKind() == SymbolKind.Method
+                && MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(methodName))
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodNameOrSignature))
             .findFirst();
-        if (!methodSymbol.isPresent()) {
+        if (methodSymbol.isEmpty()) {
             throw new IllegalArgumentException("Method " + methodNameOrSignature + " does not exist in class " + className);
         }
         if (methodSignature == null) {
@@ -214,8 +214,8 @@ public final class ClassCustomization extends CodeCustomization {
         }
 
         List<SymbolInformation> constructorSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(constructorName)
-                && si.getKind() == SymbolKind.Constructor)
+            .stream().filter(si -> si.getKind() == SymbolKind.Constructor
+                && MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(constructorName))
             .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
                 .contains(constructorNameOrSignature))
             .collect(Collectors.toList());
@@ -225,7 +225,7 @@ public final class ClassCustomization extends CodeCustomization {
                 + "class. Use a more specific constructor signature.");
         }
 
-        if (constructorSymbol.size() == 0) {
+        if (constructorSymbol.isEmpty()) {
             throw new IllegalArgumentException("Constructor " + constructorNameOrSignature + " does not exist in class "
                 + className);
         }
@@ -250,10 +250,10 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public PropertyCustomization getProperty(String propertyName) {
         Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(propertyName) && si.getKind() == SymbolKind.Field)
+            .stream().filter(si -> si.getKind() == SymbolKind.Field && si.getName().equals(propertyName))
             .findFirst();
 
-        if (!propertySymbol.isPresent()) {
+        if (propertySymbol.isEmpty()) {
             throw new IllegalArgumentException("Property " + propertyName + " does not exist in class " + className);
         }
 
@@ -271,10 +271,10 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public ConstantCustomization getConstant(String constantName) {
         Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().equals(constantName) && si.getKind() == SymbolKind.Constant)
+            .stream().filter(si -> si.getKind() == SymbolKind.Constant && si.getName().equals(constantName))
             .findFirst();
 
-        if (!propertySymbol.isPresent()) {
+        if (propertySymbol.isEmpty()) {
             throw new IllegalArgumentException("Constant " + constantName + " does not exist in class " + className);
         }
 
@@ -489,9 +489,9 @@ public final class ClassCustomization extends CodeCustomization {
 
         String packagePath = packageName.replace(".", "/");
         Optional<SymbolInformation> newClassSymbol = languageClient.findWorkspaceSymbol(newName)
-            .stream().filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + newName + ".java"))
+            .stream().filter(si -> si.getLocation().getUri().endsWith(packagePath + "/" + newName + ".java"))
             .findFirst();
-        if (!newClassSymbol.isPresent()) {
+        if (newClassSymbol.isEmpty()) {
             throw new IllegalArgumentException("Renamed failed with new class " + newName + " not found.");
         }
         return new ClassCustomization(editor, languageClient, packageName, newName, newClassSymbol.get());
@@ -512,7 +512,7 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public ClassCustomization setModifier(int modifiers) {
         languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getName().equals(className) && si.getKind() == SymbolKind.Class)
+            .stream().filter(si -> si.getKind() == SymbolKind.Class && si.getName().equals(className))
             .findFirst()
             .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
                 "(?:.+ )?class " + className, "class " + className, Modifier.classModifiers(), modifiers));
@@ -572,13 +572,17 @@ public final class ClassCustomization extends CodeCustomization {
      */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
         String fileUri = symbol.getLocation().getUri();
-        languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(si -> si.getName().toLowerCase().contains(enumMemberName.toLowerCase()))
-            .forEach(symbol -> {
-                WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(),
-                    newName);
-                Utils.applyWorkspaceEdit(edit, editor, languageClient);
-            });
+        String lowercaseEnumMemberName = enumMemberName.toLowerCase();
+
+        List<WorkspaceEdit> edits = new ArrayList<>();
+        for (SymbolInformation si : languageClient.listDocumentSymbols(fileUri)) {
+            if (!si.getName().toLowerCase().contains(lowercaseEnumMemberName)) {
+                continue;
+            }
+
+            edits.add(languageClient.renameSymbol(fileUri, si.getLocation().getRange().getStart(), newName));
+        }
+        Utils.applyWorkspaceEdits(edits, editor, languageClient);
         return this;
     }
 

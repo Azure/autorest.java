@@ -275,8 +275,11 @@ public class Connection {
                                 CallerResponse<?> f = tasks.remove(id);
 
                                 try {
-                                    f.completeExceptionally(new RuntimeException(
-                                        field.getValue().get("message").asText() + " (" + field.getValue().get("data").asText() + ")"));
+                                    String message = field.getValue().get("message").asText();
+                                    if (field.getValue().has("data")) {
+                                        message += " (" + field.getValue().get("data").asText() + ")";
+                                    }
+                                    f.completeExceptionally(new RuntimeException(message));
                                 } catch (Exception e) {
                                     f.completeExceptionally(e);
                                 }

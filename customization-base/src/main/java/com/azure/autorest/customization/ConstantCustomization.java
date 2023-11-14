@@ -10,6 +10,8 @@ import org.eclipse.lsp4j.SymbolKind;
 import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -108,27 +110,24 @@ public final class ConstantCustomization extends CodeCustomization {
         String lowercaseCurrentCamelName = currentCamelName.toLowerCase();
         String newCamelName = constantToMethodName(newName);
 
-        languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(si -> {
-                String symbolName = si.getName().toLowerCase();
-                // Need to check is the symbol matches the constant name or expected method name.
-                return symbolName.contains(lowercaseConstantName)
-                    || symbolName.contains(lowercaseCurrentCamelName);
-            }).forEach(symbol -> {
-                if (symbol.getKind() == SymbolKind.Constant) {
-                    WorkspaceEdit edit = languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(),
-                        newName);
-                    Utils.applyWorkspaceEdit(edit, editor, languageClient);
-                } else if (symbol.getKind() == SymbolKind.Method) {
-                    String methodName = symbol.getName().replace(currentCamelName, newCamelName)
-                        .replace(constantName, newName);
-                    methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
-                    WorkspaceEdit edit = languageClient.renameSymbol(fileUri,
-                        symbol.getLocation().getRange().getStart(), methodName);
-                    Utils.applyWorkspaceEdit(edit, editor, languageClient);
-                }
-            });
+        List<WorkspaceEdit> edits = new ArrayList<>();
+        for (SymbolInformation si : languageClient.listDocumentSymbols(fileUri)) {
+            String symbolName = si.getName().toLowerCase();
+            if (!symbolName.contains(lowercaseConstantName) && !symbolName.contains(lowercaseCurrentCamelName)) {
+                continue;
+            }
 
+            if (si.getKind() == SymbolKind.Constant) {
+                edits.add(languageClient.renameSymbol(fileUri, si.getLocation().getRange().getStart(), newName));
+            } else if (si.getKind() == SymbolKind.Method) {
+                String methodName = si.getName().replace(currentCamelName, newCamelName)
+                    .replace(constantName, newName);
+                methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
+                edits.add(languageClient.renameSymbol(fileUri, si.getLocation().getRange().getStart(), methodName));
+            }
+        }
+
+        Utils.applyWorkspaceEdits(edits, editor, languageClient);
         return refreshCustomization(newName);
     }
 
@@ -140,7 +139,7 @@ public final class ConstantCustomization extends CodeCustomization {
         StringBuilder camelBuilder = new StringBuilder(constantName.length());
 
         for (String word : constantName.split("_")) {
-            if (word.length() == 0) {
+            if (word.isEmpty()) {
                 continue;
             }
 

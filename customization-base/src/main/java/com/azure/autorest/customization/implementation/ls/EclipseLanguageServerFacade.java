@@ -33,11 +33,16 @@ public class EclipseLanguageServerFacade {
             String command = "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 " +
                 "-Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 " +
                 "-Declipse.product=org.eclipse.jdt.ls.core.product -Dlog.protocol=true -Dlog.level=ALL " +
-                "-noverify -Xmx1G -jar ./plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar ";
-            double version = Double.parseDouble(System.getProperty("java.specification.version"));
-            if (version >= 9) {
-                command += "--add-modules=ALL-SYSTEM --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED ";
+                "-noverify -Xmx1G -jar";
+
+            if (Runtime.version().feature() >= 17) {
+                command += " ./plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar ";
+            } else {
+                command += " ./plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar ";
             }
+
+            command += "--add-modules=ALL-SYSTEM --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED ";
+
             if (Utils.isWindows()) {
                 command += "-configuration ./config_win";
             } else if (Utils.isMac()) {

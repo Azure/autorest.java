@@ -17,18 +17,15 @@ import org.eclipse.lsp4j.CodeActionKind;
 import org.eclipse.lsp4j.CodeActionKindCapabilities;
 import org.eclipse.lsp4j.CodeActionLiteralSupportCapabilities;
 import org.eclipse.lsp4j.CodeActionParams;
-import org.eclipse.lsp4j.CodeActionResolveSupportCapabilities;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
-import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.FileEvent;
-import org.eclipse.lsp4j.FormattingOptions;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.RenameParams;
-import org.eclipse.lsp4j.ServerCapabilities;
+import org.eclipse.lsp4j.ShowDocumentCapabilities;
 import org.eclipse.lsp4j.SymbolCapabilities;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
@@ -36,6 +33,9 @@ import org.eclipse.lsp4j.SymbolKindCapabilities;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WindowClientCapabilities;
+import org.eclipse.lsp4j.WindowShowMessageRequestActionItemCapabilities;
+import org.eclipse.lsp4j.WindowShowMessageRequestCapabilities;
 import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceFolder;
@@ -52,6 +52,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -59,7 +60,6 @@ public class EclipseLanguageClient implements AutoCloseable {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final Gson GSON = new MessageJsonHandler(null).getDefaultGsonBuilder().create();
 
-    private static final Type LIST_TEXT_EDIT = createParameterizedType(List.class, TextEdit.class);
     private static final Type LIST_SYMBOL_INFORMATION = createParameterizedType(List.class, SymbolInformation.class);
     private static final Type LIST_CODE_ACTION = createParameterizedType(List.class, CodeAction.class);
 
@@ -68,7 +68,6 @@ public class EclipseLanguageClient implements AutoCloseable {
     private final ServerSocket serverSocket;
     private final AtomicReference<Socket> clientSocket = new AtomicReference<>();
     private final String workspaceDir;
-    private ServerCapabilities serverCapabilities;
 
     public EclipseLanguageClient(String workspaceDir) {
         this(null, workspaceDir);
@@ -118,32 +117,33 @@ public class EclipseLanguageClient implements AutoCloseable {
         initializeParams.getWorkspaceFolders().add(workspaceFolder);
         initializeParams.setTrace("message");
         initializeParams.setCapabilities(new ClientCapabilities());
-        initializeParams.getCapabilities().setWorkspace(new WorkspaceClientCapabilities());
-        initializeParams.getCapabilities().getWorkspace().setSymbol(new SymbolCapabilities(false));
-        initializeParams.getCapabilities().getWorkspace().getSymbol().setSymbolKind(new SymbolKindCapabilities());
-        initializeParams.getCapabilities().getWorkspace().getSymbol().getSymbolKind().setValueSet(Arrays.asList(SymbolKind.values()));
-        initializeParams.getCapabilities().getWorkspace().setWorkspaceFolders(true);
-        initializeParams.getCapabilities().setTextDocument(new TextDocumentClientCapabilities());
-        initializeParams.getCapabilities().getTextDocument().setCodeAction(new CodeActionCapabilities(false));
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().setResolveSupport(new CodeActionResolveSupportCapabilities(Collections.emptyList()));
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().setCodeActionLiteralSupport(new CodeActionLiteralSupportCapabilities());
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().setCodeActionKind(new CodeActionKindCapabilities());
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().setValueSet(new ArrayList<>());
 
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.QuickFix);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.Refactor);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.RefactorExtract);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.RefactorInline);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.RefactorRewrite);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.Source);
-        initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(CodeActionKind.SourceOrganizeImports);
+        // Configure window capabilities to disable everything as the server is run in headless mode.
+        WindowClientCapabilities windowClientCapabilities = new WindowClientCapabilities();
+        windowClientCapabilities.setWorkDoneProgress(false);
+        windowClientCapabilities.setShowDocument(new ShowDocumentCapabilities(false));
+        windowClientCapabilities.setShowMessage(new WindowShowMessageRequestCapabilities());
+        windowClientCapabilities.getShowMessage().setMessageActionItem(new WindowShowMessageRequestActionItemCapabilities(false));
+        initializeParams.getCapabilities().setWindow(windowClientCapabilities);
 
-        for (JavaCodeActionKind javaCodeActionKind : JavaCodeActionKind.values()) {
-            initializeParams.getCapabilities().getTextDocument().getCodeAction().getCodeActionLiteralSupport().getCodeActionKind().getValueSet().add(javaCodeActionKind.toString());
-        }
+        // Configure workspace capabilities to support workspace folders and all symbol kinds.
+        WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
+        workspaceClientCapabilities.setWorkspaceFolders(true);
+        workspaceClientCapabilities.setSymbol(new SymbolCapabilities(
+            new SymbolKindCapabilities(Arrays.asList(SymbolKind.values())), false));
 
-        InitializeResult initializeResult = sendRequest(connection, "initialize", initializeParams, InitializeResult.class);
-        this.serverCapabilities = initializeResult.getCapabilities();
+        // Configure text document capabilities to support code actions and all code action kinds.
+        List<String> supportedCodeActions = new ArrayList<>(Arrays.asList(CodeActionKind.QuickFix,
+            CodeActionKind.Refactor, CodeActionKind.RefactorExtract, CodeActionKind.RefactorInline,
+            CodeActionKind.RefactorRewrite, CodeActionKind.Source, CodeActionKind.SourceOrganizeImports));
+        EnumSet.allOf(JavaCodeActionKind.class)
+            .forEach(javaCodeActionKind -> supportedCodeActions.add(javaCodeActionKind.toString()));
+        TextDocumentClientCapabilities textDocumentClientCapabilities = new TextDocumentClientCapabilities();
+        textDocumentClientCapabilities.setCodeAction(new CodeActionCapabilities(
+            new CodeActionLiteralSupportCapabilities(new CodeActionKindCapabilities(supportedCodeActions)), false));
+        initializeParams.getCapabilities().setTextDocument(textDocumentClientCapabilities);
+
+        sendRequest(connection, "initialize", initializeParams, InitializeResult.class);
         connection.notifyWithObject("initialized", null);
         try {
             Thread.sleep(2500);
@@ -152,24 +152,20 @@ public class EclipseLanguageClient implements AutoCloseable {
         }
     }
 
-    public List<TextEdit> format(String fileUri) {
-        if (serverCapabilities.getDocumentFormattingProvider().getLeft()) {
-            DocumentFormattingParams params = new DocumentFormattingParams();
-            params.setTextDocument(new TextDocumentIdentifier(fileUri));
-            params.setOptions(new FormattingOptions());
-            params.getOptions().setTabSize(4);
-            params.getOptions().setInsertSpaces(true);
-            params.getOptions().setTrimTrailingWhitespace(true);
-
-            return sendRequest(connection, "textDocument/formatting", params, LIST_TEXT_EDIT);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-
     public void notifyWatchedFilesChanged(List<FileEvent> changes) {
+        if (changes == null || changes.isEmpty()) {
+            return;
+        }
+
         DidChangeWatchedFilesParams params = new DidChangeWatchedFilesParams(changes);
         connection.notifyWithSerializedObject("workspace/didChangeWatchedFiles", GSON.toJson(params));
+        try {
+            // Wait for a moment as notify requests don't have a response. So, they're effectively fire and forget,
+            // which can result in some race conditions with customizations.
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<SymbolInformation> findWorkspaceSymbol(String query) {
@@ -192,16 +188,13 @@ public class EclipseLanguageClient implements AutoCloseable {
         renameParams.setPosition(symbolPosition);
         renameParams.setNewName(newName);
 
-        return sendRequest(connection, "textDocument/rename", renameParams, WorkspaceEdit.class);
+        return replaceTabsWithSpaces(sendRequest(connection, "textDocument/rename", renameParams, WorkspaceEdit.class));
     }
 
     public List<CodeAction> listCodeActions(String fileUri, Range range, String codeActionKind) {
-        CodeActionParams codeActionParams = new CodeActionParams();
-        codeActionParams.setTextDocument(new TextDocumentIdentifier(fileUri));
-        codeActionParams.setRange(range);
         CodeActionContext context = new CodeActionContext(Collections.emptyList());
         context.setOnly(Collections.singletonList(codeActionKind));
-        codeActionParams.setContext(context);
+        CodeActionParams codeActionParams = new CodeActionParams(new TextDocumentIdentifier(fileUri), range, context);
 
         List<CodeAction> codeActions = sendRequest(connection, "textDocument/codeAction", codeActionParams, LIST_CODE_ACTION);
         for (CodeAction codeAction : codeActions) {
@@ -210,12 +203,26 @@ public class EclipseLanguageClient implements AutoCloseable {
             }
 
             if ("java.apply.workspaceEdit".equals(codeAction.getCommand().getCommand())) {
-                codeAction.setEdit(GSON.fromJson((JsonObject) codeAction.getCommand().getArguments().get(0),
-                    WorkspaceEdit.class));
+                codeAction.setEdit(replaceTabsWithSpaces(
+                    GSON.fromJson((JsonObject) codeAction.getCommand().getArguments().get(0), WorkspaceEdit.class)));
             }
         }
 
         return codeActions;
+    }
+
+    private WorkspaceEdit replaceTabsWithSpaces(WorkspaceEdit workspaceEdit) {
+        if (workspaceEdit.getChanges() == null) {
+            return workspaceEdit;
+        }
+
+        for (List<TextEdit> textEdits : workspaceEdit.getChanges().values()) {
+            for (TextEdit textEdit : textEdits) {
+                textEdit.setNewText(textEdit.getNewText().replace("\t", "    "));
+            }
+        }
+
+        return workspaceEdit;
     }
 
     public void close() {
