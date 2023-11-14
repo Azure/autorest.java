@@ -1,8 +1,14 @@
 # Release History
 
+## 0.11.1 (2023-11-14)
+
+Compatible with compiler 0.50.
+
 ## 0.11.0 (2023-11-13)
 
 Compatible with compiler 0.50.
+
+- Supported `branded: false` for prototype of non-Azure SDK.
 
 ## 0.10.0 (2023-10-23)
 
