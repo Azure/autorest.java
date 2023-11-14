@@ -328,6 +328,7 @@ public class Connection {
         try {
             write(("Content-Length: " + buffer.length + "\r\n\r\n").getBytes(StandardCharsets.US_ASCII));
             write(buffer);
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

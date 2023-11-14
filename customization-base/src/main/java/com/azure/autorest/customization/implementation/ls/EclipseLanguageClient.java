@@ -47,14 +47,11 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class EclipseLanguageClient implements AutoCloseable {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -65,8 +62,6 @@ public class EclipseLanguageClient implements AutoCloseable {
 
     private final EclipseLanguageServerFacade server;
     private final Connection connection;
-    private final ServerSocket serverSocket;
-    private final AtomicReference<Socket> clientSocket = new AtomicReference<>();
     private final String workspaceDir;
 
     public EclipseLanguageClient(String workspaceDir) {
@@ -74,33 +69,16 @@ public class EclipseLanguageClient implements AutoCloseable {
     }
 
     public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir) {
-        this.workspaceDir = new File(workspaceDir).toURI().toString();
         try {
-            serverSocket = new ServerSocket(0);
-            int port = serverSocket.getLocalPort();
-            Thread thread = new Thread(() -> {
-                try {
-                    clientSocket.set(serverSocket.accept());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            thread.start();
-            Thread.sleep(1000);
-            if (pathToLanguageServerPlugin == null) {
-                this.server = new EclipseLanguageServerFacade(port);
-            } else {
-                this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin, port);
-            }
-            thread.join(10 * 1000);
-            if (clientSocket.get() == null) {
-                throw new IllegalStateException("EclipseLanguageServer failed to start on CLIENT_PORT " + port + ". "
-                        + "Make sure you have stopped any previous EclipseLanguageServer. "
-                        + "If not sure, you may kill all 'java' process.");
-            }
-            connection = new Connection(clientSocket.get().getOutputStream(), clientSocket.get().getInputStream());
+            this.workspaceDir = new File(workspaceDir).toURI().toString();
+            this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin);
+            this.connection = new Connection(server.getOutputStream(), server.getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+
+        if (!server.isAlive()) {
+            throw new RuntimeException("Language server failed to start: " + server.getServerError());
         }
     }
 
@@ -228,8 +206,6 @@ public class EclipseLanguageClient implements AutoCloseable {
     public void close() {
         try {
             connection.notifyWithObject("exit", null);
-            clientSocket.get().close();
-            serverSocket.close();
             connection.stop();
             server.shutdown();
         } catch (Exception e) {
