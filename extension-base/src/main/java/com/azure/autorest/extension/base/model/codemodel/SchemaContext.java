@@ -20,7 +20,9 @@ public enum SchemaContext {
 
     ANONYMOUS("anonymous"),
 
-    INTERNAL("internal");
+    INTERNAL("internal"),
+
+    JSONMERGEPATCH("json-merge-patch");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();
