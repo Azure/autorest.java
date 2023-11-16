@@ -3,15 +3,16 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GraalVmConfig;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -38,12 +39,17 @@ import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.template.TestProxyAssetsTemplate;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -162,6 +168,29 @@ public class JavaPackage {
         }
 
         addJavaFile(javaFile);
+
+        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
+        // will serialize and deserialize ResponseError.
+        if (ClientModelUtil.isUsingResponseError(model, settings)) {
+            javaFile = javaFileFactory.createSourceFile(settings.getPackage(settings.getImplementationSubpackage()),
+                "ResponseErrorUtils");
+            if (filePaths.contains(javaFile.getFilePath())) {
+                // Already generated the utility method.
+                return;
+            }
+
+            try (InputStream inputStream = Javagen.class.getClassLoader().getResourceAsStream("ResponseErrorUtils.java");
+                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+                Iterator<String> linesIterator = bufferedReader.lines().iterator();
+                while (linesIterator.hasNext()) {
+                    javaFile.line(linesIterator.next());
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to read ResponseErrorUtils.java", e);
+            }
+
+            addJavaFile(javaFile);
+        }
     }
 
     public final void addException(String packageKeyword, String name, ClientException model) {

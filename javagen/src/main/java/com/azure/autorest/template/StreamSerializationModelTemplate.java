@@ -78,6 +78,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClassType.JsonWriter.addImportsTo(imports, false);
             ClassType.JsonReader.addImportsTo(imports, false);
             ClassType.JsonToken.addImportsTo(imports, false);
+            imports.add(settings.getImplementationSubpackage() + ".ResponseErrorUtils");
         }
 
         ClassType.CoreUtils.addImportsTo(imports, false);
@@ -281,7 +282,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
-        if (fieldSerializationMethod != null) {
+        if (wireType == ClassType.ResponseError) {
+            // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
+            methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
+            methodBlock.line("ResponseErrorUtils.toJson(jsonWriter, " + propertyValueGetter + ");");
+        } else if (fieldSerializationMethod != null) {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
                 // check is required to prevent a NullPointerException when converting the value.
@@ -351,7 +356,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         methodBlock.indent(() -> {
-            if (valueSerializationMethod != null) {
+            if (elementType == ClassType.ResponseError) {
+                // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
+                methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
+                methodBlock.line("ResponseErrorUtils.toJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
+            } else if (valueSerializationMethod != null) {
                 methodBlock.line(valueSerializationMethod);
             } else if (elementType == ClassType.Object) {
                 methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
@@ -922,7 +931,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleJsonDeserialization(wireType, "reader");
-        if (simpleDeserialization != null) {
+        if (wireType == ClassType.ResponseError) {
+            // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
+            if (!hasConstructorArguments) {
+                handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
+                    "ResponseErrorUtils.fromJson(reader)", fromSuper);
+            } else {
+                deserializationBlock.line(property.getName() + " = ResponseErrorUtils.fromJson(reader);");
+            }
+        } else if (simpleDeserialization != null) {
             // Need to convert the wire type to the client type for constructors.
             // Need to convert the wire type to the client type for public setters.
             boolean convertToClientType = (clientType != wireType)
@@ -1049,7 +1066,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " ->");
         }
         methodBlock.indent(() -> {
-            if (valueDeserializationMethod != null) {
+            if (elementWireType == ClassType.ResponseError) {
+                // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
+                methodBlock.line("ResponseErrorUtils.fromJson(" + lambdaReaderName + ")");
+            } else if (valueDeserializationMethod != null) {
                 if (convertToClientType) {
                     // If the wire type is nullable don't attempt to call the convert to client type until it's known that
                     // a value was deserialized. This protects against cases such as UnixTimeLong where the wire type is

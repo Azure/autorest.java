@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -536,5 +537,27 @@ public class ClientModelUtil {
                 return true;
             }
         }
+    }
+
+    /**
+     * Checks whether any types used in the model are ResponseError to generate a utility class to handle its
+     * serialization and deserialization.
+     *
+     * @param model the model
+     * @param settings Java settings
+     * @return Whether to generate the ResponseError utility class.
+     */
+    public static boolean isUsingResponseError(ClientModel model, JavaSettings settings) {
+        boolean ret;
+        ret = model.getProperties().stream().anyMatch(property -> property.getClientType() == ClassType.ResponseError);
+
+        // flatten properties
+        if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            ret = model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ClassType.ResponseError);
+        }
+
+        return ret;
     }
 }

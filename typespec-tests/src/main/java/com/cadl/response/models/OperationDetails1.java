@@ -11,6 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import implementation.ResponseErrorUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +102,8 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("operationId", this.operationId);
         jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
-        jsonWriter.writeJsonField("error", this.error);
+        jsonWriter.writeFieldName("error");
+        ResponseErrorUtils.toJson(jsonWriter, this.error);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -134,7 +136,7 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
                     status = OperationState.fromString(reader.getString());
                     statusFound = true;
                 } else if ("error".equals(fieldName)) {
-                    error = ResponseError.fromJson(reader);
+                    error = ResponseErrorUtils.fromJson(reader);
                 } else if ("result".equals(fieldName)) {
                     result = Resource.fromJson(reader);
                 } else {

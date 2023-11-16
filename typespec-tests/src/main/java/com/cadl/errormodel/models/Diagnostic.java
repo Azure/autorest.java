@@ -11,6 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import implementation.ResponseErrorUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,8 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
-        jsonWriter.writeJsonField("error", this.error);
+        jsonWriter.writeFieldName("error");
+        ResponseErrorUtils.toJson(jsonWriter, this.error);
         return jsonWriter.writeEndObject();
     }
 
@@ -95,7 +97,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
                     name = reader.getString();
                     nameFound = true;
                 } else if ("error".equals(fieldName)) {
-                    error = ResponseError.fromJson(reader);
+                    error = ResponseErrorUtils.fromJson(reader);
                     errorFound = true;
                 } else {
                     reader.skipChildren();
