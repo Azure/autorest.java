@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -79,17 +77,9 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
                 }
             }
             if (valueFound) {
-                DefaultDurationProperty deserializedDefaultDurationProperty = new DefaultDurationProperty(value);
-
-                return deserializedDefaultDurationProperty;
+                return new DefaultDurationProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

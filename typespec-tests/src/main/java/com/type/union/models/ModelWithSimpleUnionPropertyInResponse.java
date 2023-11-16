@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ModelWithSimpleUnionPropertyInResponse model.
@@ -79,18 +77,9 @@ public final class ModelWithSimpleUnionPropertyInResponse
                 }
             }
             if (simpleUnionFound) {
-                ModelWithSimpleUnionPropertyInResponse deserializedModelWithSimpleUnionPropertyInResponse
-                    = new ModelWithSimpleUnionPropertyInResponse(simpleUnion);
-
-                return deserializedModelWithSimpleUnionPropertyInResponse;
+                return new ModelWithSimpleUnionPropertyInResponse(simpleUnion);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!simpleUnionFound) {
-                missingProperties.add("simpleUnion");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: simpleUnion");
         });
     }
 }

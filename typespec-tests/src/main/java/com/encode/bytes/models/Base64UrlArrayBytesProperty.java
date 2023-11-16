@@ -13,7 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +25,7 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
      * The value property.
      */
     @Generated
-    private final List<Base64Url> value;
+    private List<Base64Url> value;
 
     /**
      * Creates an instance of Base64UrlArrayBytesProperty class.
@@ -97,18 +96,9 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
                 }
             }
             if (valueFound) {
-                Base64UrlArrayBytesProperty deserializedBase64UrlArrayBytesProperty
-                    = new Base64UrlArrayBytesProperty(value);
-
-                return deserializedBase64UrlArrayBytesProperty;
+                return new Base64UrlArrayBytesProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

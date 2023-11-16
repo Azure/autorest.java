@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is base model for not-discriminated normal multiple levels inheritance.
@@ -77,17 +75,9 @@ public class Pet implements JsonSerializable<Pet> {
                 }
             }
             if (nameFound) {
-                Pet deserializedPet = new Pet(name);
-
-                return deserializedPet;
+                return new Pet(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

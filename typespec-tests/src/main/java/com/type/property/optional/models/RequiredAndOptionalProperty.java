@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Model with required and optional properties.
@@ -115,13 +113,7 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
 
                 return deserializedRequiredAndOptionalProperty;
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!requiredPropertyFound) {
-                missingProperties.add("requiredProperty");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: requiredProperty");
         });
     }
 }

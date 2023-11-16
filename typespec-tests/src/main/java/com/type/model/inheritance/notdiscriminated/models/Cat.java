@@ -84,9 +84,7 @@ public class Cat extends Pet {
                 }
             }
             if (nameFound && ageFound) {
-                Cat deserializedCat = new Cat(name, age);
-
-                return deserializedCat;
+                return new Cat(name, age);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The StandAloneDataInner model.
@@ -77,17 +75,9 @@ public final class StandAloneDataInner implements JsonSerializable<StandAloneDat
                 }
             }
             if (nameFound) {
-                StandAloneDataInner deserializedStandAloneDataInner = new StandAloneDataInner(name);
-
-                return deserializedStandAloneDataInner;
+                return new StandAloneDataInner(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

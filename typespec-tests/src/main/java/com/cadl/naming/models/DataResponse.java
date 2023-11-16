@@ -167,9 +167,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
                 }
             }
             if (nameFound && dataFound && dataTypeFound && statusFound) {
-                DataResponse deserializedDataResponse = new DataResponse(name, data, dataType, status);
-
-                return deserializedDataResponse;
+                return new DataResponse(name, data, dataType, status);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

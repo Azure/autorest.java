@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used in an internal operation but with public decorator, should be generated and exported.
@@ -77,18 +75,9 @@ public final class PublicDecoratorModelInInternal implements JsonSerializable<Pu
                 }
             }
             if (nameFound) {
-                PublicDecoratorModelInInternal deserializedPublicDecoratorModelInInternal
-                    = new PublicDecoratorModelInInternal(name);
-
-                return deserializedPublicDecoratorModelInInternal;
+                return new PublicDecoratorModelInInternal(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

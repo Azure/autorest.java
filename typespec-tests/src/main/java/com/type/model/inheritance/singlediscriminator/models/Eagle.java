@@ -10,7 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -157,13 +156,9 @@ public final class Eagle extends Bird {
                     wingspan = reader.getInt();
                     wingspanFound = true;
                 } else if ("friends".equals(fieldName)) {
-                    friends = reader.readArray(reader1 -> {
-                        return Bird.fromJson(reader1);
-                    });
+                    friends = reader.readArray(reader1 -> Bird.fromJson(reader1));
                 } else if ("hate".equals(fieldName)) {
-                    hate = reader.readMap(reader1 -> {
-                        return Bird.fromJson(reader1);
-                    });
+                    hate = reader.readMap(reader1 -> Bird.fromJson(reader1));
                 } else if ("partner".equals(fieldName)) {
                     partner = Bird.fromJson(reader);
                 } else {
@@ -178,13 +173,7 @@ public final class Eagle extends Bird {
 
                 return deserializedEagle;
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!wingspanFound) {
-                missingProperties.add("wingspan");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: wingspan");
         });
     }
 }

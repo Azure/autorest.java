@@ -101,9 +101,7 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
                 }
             }
             if (nameFound && resourceUriFound) {
-                ExportedUser deserializedExportedUser = new ExportedUser(name, resourceUri);
-
-                return deserializedExportedUser;
+                return new ExportedUser(name, resourceUri);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The LanguageProjectedNameModel model.
@@ -77,18 +75,9 @@ public final class LanguageProjectedNameModel implements JsonSerializable<Langua
                 }
             }
             if (javaNameFound) {
-                LanguageProjectedNameModel deserializedLanguageProjectedNameModel
-                    = new LanguageProjectedNameModel(javaName);
-
-                return deserializedLanguageProjectedNameModel;
+                return new LanguageProjectedNameModel(javaName);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!javaNameFound) {
-                missingProperties.add("defaultName");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: defaultName");
         });
     }
 }

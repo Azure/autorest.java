@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The PngImageAsJson model.
@@ -78,17 +76,9 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
                 }
             }
             if (contentFound) {
-                PngImageAsJson deserializedPngImageAsJson = new PngImageAsJson(content);
-
-                return deserializedPngImageAsJson;
+                return new PngImageAsJson(content);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!contentFound) {
-                missingProperties.add("content");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: content");
         });
     }
 }

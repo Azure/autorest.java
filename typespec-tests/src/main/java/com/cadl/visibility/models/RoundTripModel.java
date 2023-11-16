@@ -101,9 +101,7 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
                 }
             }
             if (nameFound && secretNameFound) {
-                RoundTripModel deserializedRoundTripModel = new RoundTripModel(name, secretName);
-
-                return deserializedRoundTripModel;
+                return new RoundTripModel(name, secretName);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

@@ -59,26 +59,22 @@ public final class SawShark extends Shark {
                 reader.nextToken();
 
                 if ("sharktype".equals(fieldName)) {
-                    String sharktype = reader.getString();
+                    sharktype = reader.getString();
                     if (!"saw".equals(sharktype)) {
                         throw new IllegalStateException(
                             "'sharktype' was expected to be non-null and equal to 'saw'. The found 'sharktype' was '"
                                 + sharktype + "'.");
                     }
+                    sharktypeFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                     ageFound = true;
-                } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
-                    sharktypeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (ageFound && sharktypeFound) {
-                SawShark deserializedSawShark = new SawShark(age, sharktype);
-
-                return deserializedSawShark;
+                return new SawShark(age, sharktype);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!ageFound) {

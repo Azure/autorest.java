@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Model with extensible enum properties.
@@ -77,17 +75,9 @@ public final class ExtensibleEnumProperty implements JsonSerializable<Extensible
                 }
             }
             if (propertyFound) {
-                ExtensibleEnumProperty deserializedExtensibleEnumProperty = new ExtensibleEnumProperty(property);
-
-                return deserializedExtensibleEnumProperty;
+                return new ExtensibleEnumProperty(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

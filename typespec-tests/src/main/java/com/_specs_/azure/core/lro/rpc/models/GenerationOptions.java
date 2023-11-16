@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Options for the generation.
@@ -77,17 +75,9 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
                 }
             }
             if (promptFound) {
-                GenerationOptions deserializedGenerationOptions = new GenerationOptions(prompt);
-
-                return deserializedGenerationOptions;
+                return new GenerationOptions(prompt);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!promptFound) {
-                missingProperties.add("prompt");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: prompt");
         });
     }
 }

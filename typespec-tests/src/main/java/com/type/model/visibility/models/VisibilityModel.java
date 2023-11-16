@@ -155,14 +155,10 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
                     queryProp = reader.getNullable(JsonReader::getInt);
                     queryPropFound = true;
                 } else if ("createProp".equals(fieldName)) {
-                    createProp = reader.readArray(reader1 -> {
-                        return reader1.getString();
-                    });
+                    createProp = reader.readArray(reader1 -> reader1.getString());
                     createPropFound = true;
                 } else if ("updateProp".equals(fieldName)) {
-                    updateProp = reader.readArray(reader1 -> {
-                        return reader1.getInt();
-                    });
+                    updateProp = reader.readArray(reader1 -> reader1.getInt());
                     updatePropFound = true;
                 } else if ("deleteProp".equals(fieldName)) {
                     deleteProp = reader.getNullable(JsonReader::getBoolean);

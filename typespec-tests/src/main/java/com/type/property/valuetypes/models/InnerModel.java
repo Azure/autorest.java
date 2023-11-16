@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Inner model. Will be a property type for ModelWithModelProperties.
@@ -77,17 +75,9 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
                 }
             }
             if (propertyFound) {
-                InnerModel deserializedInnerModel = new InnerModel(property);
-
-                return deserializedInnerModel;
+                return new InnerModel(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

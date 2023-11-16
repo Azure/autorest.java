@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Model with a string property.
@@ -77,17 +75,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
                 }
             }
             if (propertyFound) {
-                StringProperty deserializedStringProperty = new StringProperty(property);
-
-                return deserializedStringProperty;
+                return new StringProperty(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

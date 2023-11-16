@@ -12,7 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,27 +75,16 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader.readArray(reader1 -> {
-                        return Duration.ofNanos((long) (reader1.getDouble() * 1000_000_000L));
-                    });
+                    value = reader.readArray(reader1 -> Duration.ofNanos((long) (reader1.getDouble() * 1000_000_000L)));
                     valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (valueFound) {
-                FloatSecondsDurationArrayProperty deserializedFloatSecondsDurationArrayProperty
-                    = new FloatSecondsDurationArrayProperty(value);
-
-                return deserializedFloatSecondsDurationArrayProperty;
+                return new FloatSecondsDurationArrayProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

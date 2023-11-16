@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Record used both as operation parameter and return type.
@@ -77,17 +75,9 @@ public final class InputOutputRecord implements JsonSerializable<InputOutputReco
                 }
             }
             if (requiredPropFound) {
-                InputOutputRecord deserializedInputOutputRecord = new InputOutputRecord(requiredProp);
-
-                return deserializedInputOutputRecord;
+                return new InputOutputRecord(requiredProp);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!requiredPropFound) {
-                missingProperties.add("requiredProp");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: requiredProp");
         });
     }
 }

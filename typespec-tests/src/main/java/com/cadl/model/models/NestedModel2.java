@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The NestedModel2 model.
@@ -77,17 +75,9 @@ public final class NestedModel2 implements JsonSerializable<NestedModel2> {
                 }
             }
             if (dataFound) {
-                NestedModel2 deserializedNestedModel2 = new NestedModel2(data);
-
-                return deserializedNestedModel2;
+                return new NestedModel2(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

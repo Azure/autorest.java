@@ -84,9 +84,7 @@ public final class Model1 extends BaseModel {
                 }
             }
             if (nameFound && prop1Found) {
-                Model1 deserializedModel1 = new Model1(name, prop1);
-
-                return deserializedModel1;
+                return new Model1(name, prop1);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

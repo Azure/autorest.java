@@ -102,10 +102,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
                 }
             }
             if (dateTimeRfc7231Found && base64UrlFound) {
-                SubClassBothMismatch deserializedSubClassBothMismatch
-                    = new SubClassBothMismatch(dateTimeRfc7231, base64Url);
-
-                return deserializedSubClassBothMismatch;
+                return new SubClassBothMismatch(dateTimeRfc7231, base64Url);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!dateTimeRfc7231Found) {

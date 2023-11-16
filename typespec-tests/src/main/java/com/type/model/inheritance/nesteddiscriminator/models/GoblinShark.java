@@ -59,26 +59,22 @@ public final class GoblinShark extends Shark {
                 reader.nextToken();
 
                 if ("sharktype".equals(fieldName)) {
-                    String sharktype = reader.getString();
+                    sharktype = reader.getString();
                     if (!"goblin".equals(sharktype)) {
                         throw new IllegalStateException(
                             "'sharktype' was expected to be non-null and equal to 'goblin'. The found 'sharktype' was '"
                                 + sharktype + "'.");
                     }
+                    sharktypeFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                     ageFound = true;
-                } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
-                    sharktypeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (ageFound && sharktypeFound) {
-                GoblinShark deserializedGoblinShark = new GoblinShark(age, sharktype);
-
-                return deserializedGoblinShark;
+                return new GoblinShark(age, sharktype);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!ageFound) {

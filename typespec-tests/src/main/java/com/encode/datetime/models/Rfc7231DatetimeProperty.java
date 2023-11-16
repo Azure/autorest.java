@@ -13,8 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -87,17 +85,9 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
                 }
             }
             if (valueFound) {
-                Rfc7231DatetimeProperty deserializedRfc7231DatetimeProperty = new Rfc7231DatetimeProperty(value);
-
-                return deserializedRfc7231DatetimeProperty;
+                return new Rfc7231DatetimeProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

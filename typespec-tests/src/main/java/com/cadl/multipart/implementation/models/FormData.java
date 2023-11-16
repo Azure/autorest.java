@@ -102,9 +102,7 @@ public final class FormData implements JsonSerializable<FormData> {
                 }
             }
             if (nameFound && imageFound) {
-                FormData deserializedFormData = new FormData(name, image);
-
-                return deserializedFormData;
+                return new FormData(name, image);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

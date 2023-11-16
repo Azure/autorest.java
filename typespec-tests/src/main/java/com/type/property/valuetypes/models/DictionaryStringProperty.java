@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -71,26 +69,16 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = reader.readMap(reader1 -> {
-                        return reader1.getString();
-                    });
+                    property = reader.readMap(reader1 -> reader1.getString());
                     propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (propertyFound) {
-                DictionaryStringProperty deserializedDictionaryStringProperty = new DictionaryStringProperty(property);
-
-                return deserializedDictionaryStringProperty;
+                return new DictionaryStringProperty(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

@@ -102,9 +102,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
                 }
             }
             if (nameFound && errorFound) {
-                Diagnostic deserializedDiagnostic = new Diagnostic(name, error);
-
-                return deserializedDiagnostic;
+                return new Diagnostic(name, error);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

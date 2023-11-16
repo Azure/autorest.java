@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The UnixTimestampDatetimeProperty model.
@@ -80,18 +78,9 @@ public final class UnixTimestampDatetimeProperty implements JsonSerializable<Uni
                 }
             }
             if (valueFound) {
-                UnixTimestampDatetimeProperty deserializedUnixTimestampDatetimeProperty
-                    = new UnixTimestampDatetimeProperty(value);
-
-                return deserializedUnixTimestampDatetimeProperty;
+                return new UnixTimestampDatetimeProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

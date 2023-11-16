@@ -248,11 +248,8 @@ public final class SpreadWithMultipleParametersOptions
             }
             if (idFound && xMsTestHeaderFound && prop1Found && prop2Found && prop3Found && prop4Found && prop5Found
                 && prop6Found) {
-                SpreadWithMultipleParametersOptions deserializedSpreadWithMultipleParametersOptions
-                    = new SpreadWithMultipleParametersOptions(id, xMsTestHeader, prop1, prop2, prop3, prop4, prop5,
-                        prop6);
-
-                return deserializedSpreadWithMultipleParametersOptions;
+                return new SpreadWithMultipleParametersOptions(id, xMsTestHeader, prop1, prop2, prop3, prop4, prop5,
+                    prop6);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!idFound) {

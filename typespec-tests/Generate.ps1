@@ -98,7 +98,6 @@ Remove-Item ./existingcode -Recurse -Force
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
 foreach ($tspFile in (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Name -Recurse)) {
-  Write-Host $tspFile
   generate "./http/$tspFile"
 }
 Remove-Item ./http -Recurse -Force

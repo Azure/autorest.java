@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Golden dog model.
@@ -69,17 +67,9 @@ public final class Golden extends Dog {
                 }
             }
             if (weightFound) {
-                Golden deserializedGolden = new Golden(weight);
-
-                return deserializedGolden;
+                return new Golden(weight);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!weightFound) {
-                missingProperties.add("weight");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: weight");
         });
     }
 }

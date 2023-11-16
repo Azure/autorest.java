@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Model model.
@@ -90,35 +88,21 @@ public final class Model implements JsonSerializable<Model> {
      */
     public static Model fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean literalFound = false;
-            String literal = null;
             ModelOptionalLiteral optionalLiteral = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("literal".equals(fieldName)) {
-                    literal = reader.getString();
-                    literalFound = true;
-                } else if ("optionalLiteral".equals(fieldName)) {
+                if ("optionalLiteral".equals(fieldName)) {
                     optionalLiteral = ModelOptionalLiteral.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (literalFound) {
-                Model deserializedModel = new Model();
-                deserializedModel.optionalLiteral = optionalLiteral;
+            Model deserializedModel = new Model();
+            deserializedModel.optionalLiteral = optionalLiteral;
 
-                return deserializedModel;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!literalFound) {
-                missingProperties.add("literal");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedModel;
         });
     }
 }

@@ -95,19 +95,14 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
                     requiredProperty = reader.getString();
                     requiredPropertyFound = true;
                 } else if ("nullableProperty".equals(fieldName)) {
-                    nullableProperty = reader.readArray(reader1 -> {
-                        return reader1.getBinary();
-                    });
+                    nullableProperty = reader.readArray(reader1 -> reader1.getBinary());
                     nullablePropertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                CollectionsByteProperty deserializedCollectionsByteProperty
-                    = new CollectionsByteProperty(requiredProperty, nullableProperty);
-
-                return deserializedCollectionsByteProperty;
+                return new CollectionsByteProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

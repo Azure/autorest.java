@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ModelWithNamedUnionPropertyInResponse model.
@@ -79,18 +77,9 @@ public final class ModelWithNamedUnionPropertyInResponse
                 }
             }
             if (namedUnionFound) {
-                ModelWithNamedUnionPropertyInResponse deserializedModelWithNamedUnionPropertyInResponse
-                    = new ModelWithNamedUnionPropertyInResponse(namedUnion);
-
-                return deserializedModelWithNamedUnionPropertyInResponse;
+                return new ModelWithNamedUnionPropertyInResponse(namedUnion);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!namedUnionFound) {
-                missingProperties.add("namedUnion");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: namedUnion");
         });
     }
 }

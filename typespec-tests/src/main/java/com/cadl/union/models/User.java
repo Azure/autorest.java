@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The User model.
@@ -77,17 +75,9 @@ public final class User implements JsonSerializable<User> {
                 }
             }
             if (userFound) {
-                User deserializedUser = new User(user);
-
-                return deserializedUser;
+                return new User(user);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!userFound) {
-                missingProperties.add("user");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: user");
         });
     }
 }

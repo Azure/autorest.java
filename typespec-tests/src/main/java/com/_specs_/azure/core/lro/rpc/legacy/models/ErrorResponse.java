@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A response containing error details.
@@ -78,17 +76,9 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
                 }
             }
             if (errorFound) {
-                ErrorResponse deserializedErrorResponse = new ErrorResponse(error);
-
-                return deserializedErrorResponse;
+                return new ErrorResponse(error);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!errorFound) {
-                missingProperties.add("error");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: error");
         });
     }
 }

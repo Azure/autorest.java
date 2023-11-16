@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The RequestParameters model.
@@ -77,17 +75,9 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
                 }
             }
             if (typeFound) {
-                RequestParameters deserializedRequestParameters = new RequestParameters(type);
-
-                return deserializedRequestParameters;
+                return new RequestParameters(type);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!typeFound) {
-                missingProperties.add("type");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: type");
         });
     }
 }

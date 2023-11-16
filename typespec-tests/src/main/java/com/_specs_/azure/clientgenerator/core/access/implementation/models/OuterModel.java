@@ -84,9 +84,7 @@ public final class OuterModel extends BaseModel {
                 }
             }
             if (nameFound && innerFound) {
-                OuterModel deserializedOuterModel = new OuterModel(name, inner);
-
-                return deserializedOuterModel;
+                return new OuterModel(name, inner);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

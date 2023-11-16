@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Int32SecondsDurationProperty model.
@@ -78,18 +76,9 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
                 }
             }
             if (valueFound) {
-                Int32SecondsDurationProperty deserializedInt32SecondsDurationProperty
-                    = new Int32SecondsDurationProperty(value);
-
-                return deserializedInt32SecondsDurationProperty;
+                return new Int32SecondsDurationProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

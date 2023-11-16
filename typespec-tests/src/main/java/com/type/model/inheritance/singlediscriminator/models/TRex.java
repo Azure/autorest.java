@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The second level legacy model in polymorphic single level inheritance.
@@ -69,17 +67,9 @@ public final class TRex extends Dinosaur {
                 }
             }
             if (sizeFound) {
-                TRex deserializedTRex = new TRex(size);
-
-                return deserializedTRex;
+                return new TRex(size);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!sizeFound) {
-                missingProperties.add("size");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: size");
         });
     }
 }

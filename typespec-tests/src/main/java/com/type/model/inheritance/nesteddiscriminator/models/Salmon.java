@@ -10,7 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -157,13 +156,9 @@ public final class Salmon extends Fish {
                     age = reader.getInt();
                     ageFound = true;
                 } else if ("friends".equals(fieldName)) {
-                    friends = reader.readArray(reader1 -> {
-                        return Fish.fromJson(reader1);
-                    });
+                    friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("hate".equals(fieldName)) {
-                    hate = reader.readMap(reader1 -> {
-                        return Fish.fromJson(reader1);
-                    });
+                    hate = reader.readMap(reader1 -> Fish.fromJson(reader1));
                 } else if ("partner".equals(fieldName)) {
                     partner = Fish.fromJson(reader);
                 } else {
@@ -178,13 +173,7 @@ public final class Salmon extends Fish {
 
                 return deserializedSalmon;
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!ageFound) {
-                missingProperties.add("age");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: age");
         });
     }
 }

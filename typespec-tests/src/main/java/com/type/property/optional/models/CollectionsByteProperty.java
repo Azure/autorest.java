@@ -76,9 +76,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    List<byte[]> property = reader.readArray(reader1 -> {
-                        return reader1.getBinary();
-                    });
+                    List<byte[]> property = reader.readArray(reader1 -> reader1.getBinary());
                     deserializedCollectionsByteProperty.property = property;
                 } else {
                     reader.skipChildren();

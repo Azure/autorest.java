@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * summary of Data
@@ -84,17 +82,9 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
                 }
             }
             if (dataFound) {
-                BinaryData deserializedBinaryData = new BinaryData(data);
-
-                return deserializedBinaryData;
+                return new BinaryData(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

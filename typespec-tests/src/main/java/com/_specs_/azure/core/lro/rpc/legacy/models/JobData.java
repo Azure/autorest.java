@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Data of the job.
@@ -77,17 +75,9 @@ public final class JobData implements JsonSerializable<JobData> {
                 }
             }
             if (commentFound) {
-                JobData deserializedJobData = new JobData(comment);
-
-                return deserializedJobData;
+                return new JobData(comment);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!commentFound) {
-                missingProperties.add("comment");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: comment");
         });
     }
 }

@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,26 +69,16 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
                 reader.nextToken();
 
                 if ("data".equals(fieldName)) {
-                    data = reader.readArray(reader1 -> {
-                        return reader1.getString();
-                    });
+                    data = reader.readArray(reader1 -> reader1.getString());
                     dataFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (dataFound) {
-                ArrayData deserializedArrayData = new ArrayData(data);
-
-                return deserializedArrayData;
+                return new ArrayData(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

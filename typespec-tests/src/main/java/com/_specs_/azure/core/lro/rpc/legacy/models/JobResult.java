@@ -138,13 +138,9 @@ public final class JobResult implements JsonSerializable<JobResult> {
                 } else if ("status".equals(fieldName)) {
                     status = JobStatus.fromString(reader.getString());
                 } else if ("errors".equals(fieldName)) {
-                    errors = reader.readArray(reader1 -> {
-                        return ErrorResponse.fromJson(reader1);
-                    });
+                    errors = reader.readArray(reader1 -> ErrorResponse.fromJson(reader1));
                 } else if ("results".equals(fieldName)) {
-                    results = reader.readArray(reader1 -> {
-                        return reader1.getString();
-                    });
+                    results = reader.readArray(reader1 -> reader1.getString());
                 } else {
                     reader.skipChildren();
                 }

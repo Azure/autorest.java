@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -103,9 +102,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
                     property = reader.getString();
                     propertyFound = true;
                 } else if ("children".equals(fieldName)) {
-                    children = reader.readArray(reader1 -> {
-                        return InnerModel.fromJson(reader1);
-                    });
+                    children = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
                 } else {
                     reader.skipChildren();
                 }
@@ -116,13 +113,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
                 return deserializedInnerModel;
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

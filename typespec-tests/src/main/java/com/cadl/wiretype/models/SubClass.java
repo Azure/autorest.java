@@ -94,9 +94,7 @@ public final class SubClass extends SuperClassMismatch {
                 }
             }
             if (dateTimeRfc7231Found && dateTimeFound) {
-                SubClass deserializedSubClass = new SubClass(dateTimeRfc7231, dateTime);
-
-                return deserializedSubClass;
+                return new SubClass(dateTimeRfc7231, dateTime);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!dateTimeRfc7231Found) {

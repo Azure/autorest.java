@@ -13,8 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -87,17 +85,9 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
                 }
             }
             if (dateTimeRfc7231Found) {
-                SuperClassMismatch deserializedSuperClassMismatch = new SuperClassMismatch(dateTimeRfc7231);
-
-                return deserializedSuperClassMismatch;
+                return new SuperClassMismatch(dateTimeRfc7231);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dateTimeRfc7231Found) {
-                missingProperties.add("dateTimeRfc7231");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: dateTimeRfc7231");
         });
     }
 }

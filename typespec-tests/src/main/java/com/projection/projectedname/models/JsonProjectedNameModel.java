@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The JsonProjectedNameModel model.
@@ -77,17 +75,9 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
                 }
             }
             if (defaultNameFound) {
-                JsonProjectedNameModel deserializedJsonProjectedNameModel = new JsonProjectedNameModel(defaultName);
-
-                return deserializedJsonProjectedNameModel;
+                return new JsonProjectedNameModel(defaultName);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!defaultNameFound) {
-                missingProperties.add("wireName");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: wireName");
         });
     }
 }

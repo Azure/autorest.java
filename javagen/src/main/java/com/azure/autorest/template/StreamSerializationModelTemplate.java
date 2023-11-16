@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -624,13 +625,21 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         fieldNameVariableName);
 
                     ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
-                        ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
+                        if (propertiesManager.isDiscriminatorRequired()) {
+                            ifAction.line(discriminatorProperty.getName() + " = reader.getString();");
+                        } else {
+                            ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
+                        }
                         String ifStatement2 = String.format("!\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getName());
                         ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line("throw new IllegalStateException("
                             + "\"'%s' was expected to be non-null and equal to '%s'. The found '%s' was '\" + %s + \"'.\");",
                             discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
+
+                        if (propertiesManager.isDiscriminatorRequired()) {
+                            ifAction.line(discriminatorProperty.getName() + "Found = true;");
+                        }
                     });
                 }
 
@@ -640,9 +649,24 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     handleJsonPropertyDeserialization(property, propertiesManager.getDeserializedModelName(),
                         whileBlock, ifBlockReference, fieldNameVariableName, fromSuper,
                         propertiesManager.hasConstructorArguments(), settings);
-                propertiesManager.forEachSuperRequiredProperty(property -> consumer.accept(property, true));
+                // Constants and required polymorphic discriminators are skipped.
+                // Constants aren't deserialized and polymorphic discriminators are handled separately.
+                Predicate<ClientModelProperty> skipRequiredProperty = property -> property.isConstant()
+                    || (propertiesManager.isDiscriminatorRequired() && Objects.equals(property.getSerializedName(), propertiesManager.getModel().getPolymorphicDiscriminator()));
+                propertiesManager.forEachSuperRequiredProperty(property -> {
+                    if (skipRequiredProperty.test(property)) {
+                        return;
+                    }
+
+                    consumer.accept(property, true);
+                });
                 propertiesManager.forEachSuperSetterProperty(property -> consumer.accept(property, true));
-                propertiesManager.forEachRequiredProperty(property -> consumer.accept(property, false));
+                propertiesManager.forEachRequiredProperty(property -> {
+                    if (skipRequiredProperty.test(property)) {
+                        return;
+                    }
+                    consumer.accept(property, false);
+                });
                 propertiesManager.forEachSetterProperty(property -> consumer.accept(property, false));
 
                 ifBlock = ifBlockReference.get();
@@ -745,9 +769,21 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else {
                 Consumer<ClientModelProperty> initializeLocalVariable = property ->
                     initializeLocalVariable(methodBlock, property, settings);
-                propertiesManager.forEachSuperRequiredProperty(initializeLocalVariable);
+                propertiesManager.forEachSuperRequiredProperty(property -> {
+                    if (property.isConstant()) {
+                        // Constants are never deserialized.
+                        return;
+                    }
+                    initializeLocalVariable.accept(property);
+                });
                 propertiesManager.forEachSuperSetterProperty(initializeLocalVariable);
-                propertiesManager.forEachRequiredProperty(initializeLocalVariable);
+                propertiesManager.forEachRequiredProperty(property -> {
+                    if (property.isConstant()) {
+                        // Constants are never deserialized.
+                        return;
+                    }
+                    initializeLocalVariable.accept(property);
+                });
                 propertiesManager.forEachSetterProperty(initializeLocalVariable);
             }
         } else {
@@ -1004,8 +1040,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String lambdaReaderName = "reader" + (depth + 1);
         String valueDeserializationMethod = getSimpleJsonDeserialization(elementWireType, lambdaReaderName);
         boolean convertToClientType = (elementClientType != elementWireType);
+        boolean useCodeBlockLambda = valueDeserializationMethod != null && elementWireType.isNullable()
+            && convertToClientType;
 
-        methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> {");
+        if (useCodeBlockLambda) {
+            methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " -> {");
+        } else {
+            methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " ->");
+        }
         methodBlock.indent(() -> {
             if (valueDeserializationMethod != null) {
                 if (convertToClientType) {
@@ -1025,10 +1067,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                             ifBlock -> ifBlock.methodReturn(elementWireType.convertToClientType(holderName)))
                             .elseBlock(elseBlock -> elseBlock.methodReturn("null"));
                     } else {
-                        methodBlock.methodReturn(elementWireType.convertToClientType(valueDeserializationMethod));
+                        methodBlock.line(elementWireType.convertToClientType(valueDeserializationMethod));
                     }
                 } else {
-                    methodBlock.methodReturn(valueDeserializationMethod);
+                    methodBlock.line(valueDeserializationMethod);
                 }
             } else if (elementWireType == ClassType.Object) {
                 methodBlock.line(lambdaReaderName + ".readUntyped()");
@@ -1048,10 +1090,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         });
 
-        if (depth > 0) {
-            methodBlock.line("})");
+        if (useCodeBlockLambda) {
+            if (depth > 0) {
+                methodBlock.line("})");
+            } else {
+                methodBlock.line("});");
+            }
         } else {
-            methodBlock.line("});");
+            if (depth > 0) {
+                methodBlock.line(")");
+            } else {
+                methodBlock.line(");");
+            }
         }
     }
 
@@ -1118,13 +1168,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.ifBlock(ifStatementBuilder.toString(), ifAction ->
                     createObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, isXml));
 
-                methodBlock.line("List<String> missingProperties = new ArrayList<>();");
-                propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
-                propertiesManager.forEachRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
+                if (propertiesManager.getRequiredPropertiesCount() == 1) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    propertiesManager.forEachSuperRequiredProperty(property -> stringBuilder.append(property.getSerializedName()));
+                    propertiesManager.forEachRequiredProperty(property -> stringBuilder.append(property.getSerializedName()));
+                    methodBlock.line("throw new IllegalStateException(\"Missing required property: " + stringBuilder + "\");");
+                } else {
+                    methodBlock.line("List<String> missingProperties = new ArrayList<>();");
+                    propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
+                    propertiesManager.forEachRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
 
-                methodBlock.line();
-                methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \""
-                    + "+ String.join(\", \", missingProperties));");
+                    methodBlock.line();
+                    methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \" + String.join(\", \", missingProperties));");
+                }
             } else {
                 createObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, isXml);
             }
@@ -1136,6 +1192,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void createObjectAndReturn(JavaBlock methodBlock, String modelName, String constructorArgs,
         ClientModelPropertiesManager propertiesManager, boolean isXml) {
         if (propertiesManager.hasConstructorArguments()) {
+            if (propertiesManager.getSetterPropertiesCount() == 0
+                && propertiesManager.getReadOnlyPropertiesCount() == 0
+                && propertiesManager.getAdditionalProperties() == null) {
+                methodBlock.methodReturn("new " + modelName + "(" + constructorArgs + ")");
+                return;
+            }
+
             methodBlock.line(modelName + " " + propertiesManager.getDeserializedModelName() + " = new " + modelName
                 + "(" + constructorArgs + ");");
 
@@ -1173,6 +1236,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
+        // Constants are ignored during deserialization.
+        if (property.isConstant()) {
+            return;
+        }
+
         if (ifCheck.length() > 0) {
             ifCheck.append(" && ");
         }
@@ -1184,6 +1252,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaSettings settings) {
         // XML attributes and text don't need checks.
         if (property.isXmlAttribute() || property.isXmlText() || !includePropertyInConstructor(property, settings)) {
+            return;
+        }
+
+        // Constants are ignored during deserialization.
+        if (property.isConstant()) {
             return;
         }
 

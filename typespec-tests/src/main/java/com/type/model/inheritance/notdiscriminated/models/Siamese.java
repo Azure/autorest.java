@@ -91,9 +91,7 @@ public final class Siamese extends Cat {
                 }
             }
             if (nameFound && ageFound && smartFound) {
-                Siamese deserializedSiamese = new Siamese(name, age, smart);
-
-                return deserializedSiamese;
+                return new Siamese(name, age, smart);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

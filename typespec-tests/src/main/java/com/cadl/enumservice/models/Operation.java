@@ -225,24 +225,12 @@ public final class Operation implements JsonSerializable<Operation> {
         return jsonReader.readObject(reader -> {
             boolean nameFound = false;
             OperationName name = null;
-            boolean bestFound = false;
-            boolean best = false;
-            boolean ageFound = false;
-            long age = 0L;
             boolean priorityFound = false;
             Priority priority = null;
             boolean colorFound = false;
             ColorModel color = null;
             boolean unitFound = false;
             Unit unit = null;
-            boolean priorityValueFound = false;
-            Priority priorityValue = null;
-            boolean colorValueFound = false;
-            Color colorValue = null;
-            boolean colorModelValueFound = false;
-            ColorModel colorModelValue = null;
-            boolean unitValueFound = false;
-            Unit unitValue = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -250,12 +238,6 @@ public final class Operation implements JsonSerializable<Operation> {
                 if ("name".equals(fieldName)) {
                     name = OperationName.fromString(reader.getString());
                     nameFound = true;
-                } else if ("best".equals(fieldName)) {
-                    best = reader.getBoolean();
-                    bestFound = true;
-                } else if ("age".equals(fieldName)) {
-                    age = reader.getLong();
-                    ageFound = true;
                 } else if ("priority".equals(fieldName)) {
                     priority = Priority.fromLong(reader.getLong());
                     priorityFound = true;
@@ -265,37 +247,16 @@ public final class Operation implements JsonSerializable<Operation> {
                 } else if ("unit".equals(fieldName)) {
                     unit = Unit.fromDouble(reader.getDouble());
                     unitFound = true;
-                } else if ("priorityValue".equals(fieldName)) {
-                    priorityValue = Priority.fromLong(reader.getLong());
-                    priorityValueFound = true;
-                } else if ("colorValue".equals(fieldName)) {
-                    colorValue = Color.fromString(reader.getString());
-                    colorValueFound = true;
-                } else if ("colorModelValue".equals(fieldName)) {
-                    colorModelValue = ColorModel.fromString(reader.getString());
-                    colorModelValueFound = true;
-                } else if ("unitValue".equals(fieldName)) {
-                    unitValue = Unit.fromDouble(reader.getDouble());
-                    unitValueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && bestFound && ageFound && priorityFound && colorFound && unitFound && priorityValueFound
-                && colorValueFound && colorModelValueFound && unitValueFound) {
-                Operation deserializedOperation = new Operation(name, priority, color, unit);
-
-                return deserializedOperation;
+            if (nameFound && priorityFound && colorFound && unitFound) {
+                return new Operation(name, priority, color, unit);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {
                 missingProperties.add("name");
-            }
-            if (!bestFound) {
-                missingProperties.add("best");
-            }
-            if (!ageFound) {
-                missingProperties.add("age");
             }
             if (!priorityFound) {
                 missingProperties.add("priority");
@@ -305,18 +266,6 @@ public final class Operation implements JsonSerializable<Operation> {
             }
             if (!unitFound) {
                 missingProperties.add("unit");
-            }
-            if (!priorityValueFound) {
-                missingProperties.add("priorityValue");
-            }
-            if (!colorValueFound) {
-                missingProperties.add("colorValue");
-            }
-            if (!colorModelValueFound) {
-                missingProperties.add("colorModelValue");
-            }
-            if (!unitValueFound) {
-                missingProperties.add("unitValue");
             }
 
             throw new IllegalStateException(

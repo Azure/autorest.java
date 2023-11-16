@@ -563,13 +563,9 @@ public final class Optional implements JsonSerializable<Optional> {
                 } else if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("stringList".equals(fieldName)) {
-                    stringList = reader.readArray(reader1 -> {
-                        return reader1.getString();
-                    });
+                    stringList = reader.readArray(reader1 -> reader1.getString());
                 } else if ("bytesDict".equals(fieldName)) {
-                    bytesDict = reader.readMap(reader1 -> {
-                        return reader1.getBinary();
-                    });
+                    bytesDict = reader.readMap(reader1 -> reader1.getBinary());
                 } else {
                     reader.skipChildren();
                 }

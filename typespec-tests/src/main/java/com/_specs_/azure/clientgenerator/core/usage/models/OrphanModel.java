@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Not used anywhere, but access is override to public so still need to be generated and exported with serialization.
@@ -77,17 +75,9 @@ public final class OrphanModel implements JsonSerializable<OrphanModel> {
                 }
             }
             if (nameFound) {
-                OrphanModel deserializedOrphanModel = new OrphanModel(name);
-
-                return deserializedOrphanModel;
+                return new OrphanModel(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

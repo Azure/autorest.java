@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The InputOutputData2 model.
@@ -77,17 +75,9 @@ public final class InputOutputData2 implements JsonSerializable<InputOutputData2
                 }
             }
             if (dataFound) {
-                InputOutputData2 deserializedInputOutputData2 = new InputOutputData2(data);
-
-                return deserializedInputOutputData2;
+                return new InputOutputData2(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

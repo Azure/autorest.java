@@ -101,9 +101,7 @@ public final class Resource3 implements JsonSerializable<Resource3> {
                 }
             }
             if (nameFound && outputData3Found) {
-                Resource3 deserializedResource3 = new Resource3(name, outputData3);
-
-                return deserializedResource3;
+                return new Resource3(name, outputData3);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

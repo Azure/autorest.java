@@ -101,9 +101,7 @@ public final class Resource2 implements JsonSerializable<Resource2> {
                 }
             }
             if (nameFound && data2Found) {
-                Resource2 deserializedResource2 = new Resource2(name, data2);
-
-                return deserializedResource2;
+                return new Resource2(name, data2);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {

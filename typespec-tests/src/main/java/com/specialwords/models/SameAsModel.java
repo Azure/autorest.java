@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The SameAsModel model.
@@ -77,17 +75,9 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
                 }
             }
             if (sameAsModelFound) {
-                SameAsModel deserializedSameAsModel = new SameAsModel(sameAsModel);
-
-                return deserializedSameAsModel;
+                return new SameAsModel(sameAsModel);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!sameAsModelFound) {
-                missingProperties.add("SameAsModel");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: SameAsModel");
         });
     }
 }

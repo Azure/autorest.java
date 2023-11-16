@@ -95,19 +95,14 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
                     requiredProperty = reader.getString();
                     requiredPropertyFound = true;
                 } else if ("nullableProperty".equals(fieldName)) {
-                    nullableProperty = reader.readArray(reader1 -> {
-                        return InnerModel.fromJson(reader1);
-                    });
+                    nullableProperty = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
                     nullablePropertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                CollectionsModelProperty deserializedCollectionsModelProperty
-                    = new CollectionsModelProperty(requiredProperty, nullableProperty);
-
-                return deserializedCollectionsModelProperty;
+                return new CollectionsModelProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

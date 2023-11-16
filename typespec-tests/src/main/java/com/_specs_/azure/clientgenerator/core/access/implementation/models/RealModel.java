@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used in internal operations, should be generated but not exported.
@@ -69,17 +67,9 @@ public final class RealModel extends AbstractModel {
                 }
             }
             if (nameFound) {
-                RealModel deserializedRealModel = new RealModel(name);
-
-                return deserializedRealModel;
+                return new RealModel(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

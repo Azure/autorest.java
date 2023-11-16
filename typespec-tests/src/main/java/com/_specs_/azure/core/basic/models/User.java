@@ -141,9 +141,7 @@ public final class User implements JsonSerializable<User> {
                 } else if ("etag".equals(fieldName)) {
                     etag = reader.getString();
                 } else if ("orders".equals(fieldName)) {
-                    orders = reader.readArray(reader1 -> {
-                        return UserOrder.fromJson(reader1);
-                    });
+                    orders = reader.readArray(reader1 -> UserOrder.fromJson(reader1));
                 } else {
                     reader.skipChildren();
                 }

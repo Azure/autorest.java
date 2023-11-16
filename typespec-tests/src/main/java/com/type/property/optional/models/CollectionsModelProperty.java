@@ -76,9 +76,7 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    List<StringProperty> property = reader.readArray(reader1 -> {
-                        return StringProperty.fromJson(reader1);
-                    });
+                    List<StringProperty> property = reader.readArray(reader1 -> StringProperty.fromJson(reader1));
                     deserializedCollectionsModelProperty.property = property;
                 } else {
                     reader.skipChildren();

@@ -101,9 +101,7 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
                 }
             }
             if (idFound && nameFound) {
-                ReadDog deserializedReadDog = new ReadDog(id, name);
-
-                return deserializedReadDog;
+                return new ReadDog(id, name);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!idFound) {

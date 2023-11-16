@@ -103,10 +103,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                DurationProperty deserializedDurationProperty
-                    = new DurationProperty(requiredProperty, nullableProperty);
-
-                return deserializedDurationProperty;
+                return new DurationProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

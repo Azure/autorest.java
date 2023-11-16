@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Result of the generation.
@@ -77,17 +75,9 @@ public final class GenerationResult implements JsonSerializable<GenerationResult
                 }
             }
             if (dataFound) {
-                GenerationResult deserializedGenerationResult = new GenerationResult(data);
-
-                return deserializedGenerationResult;
+                return new GenerationResult(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

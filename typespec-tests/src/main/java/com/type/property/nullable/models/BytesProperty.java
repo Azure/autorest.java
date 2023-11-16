@@ -102,9 +102,7 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                BytesProperty deserializedBytesProperty = new BytesProperty(requiredProperty, nullableProperty);
-
-                return deserializedBytesProperty;
+                return new BytesProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

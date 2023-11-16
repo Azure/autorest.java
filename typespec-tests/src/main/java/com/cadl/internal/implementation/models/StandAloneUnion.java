@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The StandAloneUnion model.
@@ -78,17 +76,9 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
                 }
             }
             if (dataFound) {
-                StandAloneUnion deserializedStandAloneUnion = new StandAloneUnion(data);
-
-                return deserializedStandAloneUnion;
+                return new StandAloneUnion(data);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: data");
         });
     }
 }

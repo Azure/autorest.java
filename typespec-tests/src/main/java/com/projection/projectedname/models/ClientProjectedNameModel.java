@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ClientProjectedNameModel model.
@@ -77,18 +75,9 @@ public final class ClientProjectedNameModel implements JsonSerializable<ClientPr
                 }
             }
             if (clientNameFound) {
-                ClientProjectedNameModel deserializedClientProjectedNameModel
-                    = new ClientProjectedNameModel(clientName);
-
-                return deserializedClientProjectedNameModel;
+                return new ClientProjectedNameModel(clientName);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!clientNameFound) {
-                missingProperties.add("defaultName");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: defaultName");
         });
     }
 }

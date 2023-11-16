@@ -101,9 +101,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
                 }
             }
             if (idFound && resourceUriFound) {
-                ExportedResource deserializedExportedResource = new ExportedResource(id, resourceUri);
-
-                return deserializedExportedResource;
+                return new ExportedResource(id, resourceUri);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!idFound) {

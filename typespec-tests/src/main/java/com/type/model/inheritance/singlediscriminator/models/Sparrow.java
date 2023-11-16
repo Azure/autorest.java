@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The second level model in polymorphic single level inheritance.
@@ -69,17 +67,9 @@ public final class Sparrow extends Bird {
                 }
             }
             if (wingspanFound) {
-                Sparrow deserializedSparrow = new Sparrow(wingspan);
-
-                return deserializedSparrow;
+                return new Sparrow(wingspan);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!wingspanFound) {
-                missingProperties.add("wingspan");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: wingspan");
         });
     }
 }

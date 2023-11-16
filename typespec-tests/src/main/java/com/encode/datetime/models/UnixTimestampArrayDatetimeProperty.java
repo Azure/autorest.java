@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,27 +76,17 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader.readArray(reader1 -> {
-                        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader1.getLong()), ZoneOffset.UTC);
-                    });
+                    value = reader.readArray(
+                        reader1 -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader1.getLong()), ZoneOffset.UTC));
                     valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (valueFound) {
-                UnixTimestampArrayDatetimeProperty deserializedUnixTimestampArrayDatetimeProperty
-                    = new UnixTimestampArrayDatetimeProperty(value);
-
-                return deserializedUnixTimestampArrayDatetimeProperty;
+                return new UnixTimestampArrayDatetimeProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

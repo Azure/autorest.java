@@ -452,22 +452,16 @@ public final class Builtin implements JsonSerializable<Builtin> {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     dateTimeFound = true;
                 } else if ("stringList".equals(fieldName)) {
-                    stringList = reader.readArray(reader1 -> {
-                        return reader1.getString();
-                    });
+                    stringList = reader.readArray(reader1 -> reader1.getString());
                     stringListFound = true;
                 } else if ("bytesDict".equals(fieldName)) {
-                    bytesDict = reader.readMap(reader1 -> {
-                        return reader1.getBinary();
-                    });
+                    bytesDict = reader.readMap(reader1 -> reader1.getBinary());
                     bytesDictFound = true;
                 } else if ("url".equals(fieldName)) {
                     url = reader.getString();
                     urlFound = true;
                 } else if ("nullableFloatDict".equals(fieldName)) {
-                    nullableFloatDict = reader.readMap(reader1 -> {
-                        return reader1.getDouble();
-                    });
+                    nullableFloatDict = reader.readMap(reader1 -> reader1.getDouble());
                     nullableFloatDictFound = true;
                 } else if ("encoded".equals(fieldName)) {
                     encoded = Encoded.fromJson(reader);
@@ -480,11 +474,9 @@ public final class Builtin implements JsonSerializable<Builtin> {
                 && longPropertyFound && floatPropertyFound && doublePropertyFound && durationFound && dateFound
                 && dateTimeFound && stringListFound && bytesDictFound && urlFound && nullableFloatDictFound
                 && encodedFound) {
-                Builtin deserializedBuiltin = new Builtin(booleanProperty, string, bytes, intProperty, safeint, decimal,
-                    longProperty, floatProperty, doubleProperty, duration, date, dateTime, stringList, bytesDict, url,
+                return new Builtin(booleanProperty, string, bytes, intProperty, safeint, decimal, longProperty,
+                    floatProperty, doubleProperty, duration, date, dateTime, stringList, bytesDict, url,
                     nullableFloatDict, encoded);
-
-                return deserializedBuiltin;
             }
             List<String> missingProperties = new ArrayList<>();
             if (!booleanPropertyFound) {

@@ -101,9 +101,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                StringProperty deserializedStringProperty = new StringProperty(requiredProperty, nullableProperty);
-
-                return deserializedStringProperty;
+                return new StringProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

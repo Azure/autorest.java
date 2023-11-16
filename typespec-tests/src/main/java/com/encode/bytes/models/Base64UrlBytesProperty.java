@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -86,17 +84,9 @@ public final class Base64UrlBytesProperty implements JsonSerializable<Base64UrlB
                 }
             }
             if (valueFound) {
-                Base64UrlBytesProperty deserializedBase64UrlBytesProperty = new Base64UrlBytesProperty(value);
-
-                return deserializedBase64UrlBytesProperty;
+                return new Base64UrlBytesProperty(value);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!valueFound) {
-                missingProperties.add("value");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: value");
         });
     }
 }

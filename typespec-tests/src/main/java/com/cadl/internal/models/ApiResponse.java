@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ApiResponse model.
@@ -77,17 +75,9 @@ public final class ApiResponse implements JsonSerializable<ApiResponse> {
                 }
             }
             if (nameFound) {
-                ApiResponse deserializedApiResponse = new ApiResponse(name);
-
-                return deserializedApiResponse;
+                return new ApiResponse(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

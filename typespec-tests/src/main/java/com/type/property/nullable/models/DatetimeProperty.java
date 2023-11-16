@@ -104,10 +104,7 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 }
             }
             if (requiredPropertyFound && nullablePropertyFound) {
-                DatetimeProperty deserializedDatetimeProperty
-                    = new DatetimeProperty(requiredProperty, nullableProperty);
-
-                return deserializedDatetimeProperty;
+                return new DatetimeProperty(requiredProperty, nullableProperty);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!requiredPropertyFound) {

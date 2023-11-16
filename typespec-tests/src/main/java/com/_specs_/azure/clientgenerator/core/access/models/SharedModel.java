@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used by both public and internal operation. It should be generated and exported.
@@ -77,17 +75,9 @@ public final class SharedModel implements JsonSerializable<SharedModel> {
                 }
             }
             if (nameFound) {
-                SharedModel deserializedSharedModel = new SharedModel(name);
-
-                return deserializedSharedModel;
+                return new SharedModel(name);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: name");
         });
     }
 }

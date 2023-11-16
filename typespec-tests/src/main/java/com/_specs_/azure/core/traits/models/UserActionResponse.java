@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User action response.
@@ -77,17 +75,9 @@ public final class UserActionResponse implements JsonSerializable<UserActionResp
                 }
             }
             if (userActionResultFound) {
-                UserActionResponse deserializedUserActionResponse = new UserActionResponse(userActionResult);
-
-                return deserializedUserActionResponse;
+                return new UserActionResponse(userActionResult);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!userActionResultFound) {
-                missingProperties.add("userActionResult");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: userActionResult");
         });
     }
 }

@@ -111,26 +111,22 @@ public class Shark extends Fish {
                 reader.nextToken();
 
                 if ("sharktype".equals(fieldName)) {
-                    String sharktype = reader.getString();
+                    sharktype = reader.getString();
                     if (!"shark".equals(sharktype)) {
                         throw new IllegalStateException(
                             "'sharktype' was expected to be non-null and equal to 'shark'. The found 'sharktype' was '"
                                 + sharktype + "'.");
                     }
+                    sharktypeFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                     ageFound = true;
-                } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
-                    sharktypeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (ageFound && sharktypeFound) {
-                Shark deserializedShark = new Shark(age, sharktype);
-
-                return deserializedShark;
+                return new Shark(age, sharktype);
             }
             List<String> missingProperties = new ArrayList<>();
             if (!ageFound) {

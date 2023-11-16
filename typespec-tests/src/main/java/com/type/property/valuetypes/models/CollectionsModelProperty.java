@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,26 +69,16 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = reader.readArray(reader1 -> {
-                        return InnerModel.fromJson(reader1);
-                    });
+                    property = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
                     propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
             if (propertyFound) {
-                CollectionsModelProperty deserializedCollectionsModelProperty = new CollectionsModelProperty(property);
-
-                return deserializedCollectionsModelProperty;
+                return new CollectionsModelProperty(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

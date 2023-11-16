@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -79,17 +77,9 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 }
             }
             if (propertyFound) {
-                DatetimeProperty deserializedDatetimeProperty = new DatetimeProperty(property);
-
-                return deserializedDatetimeProperty;
+                return new DatetimeProperty(property);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!propertyFound) {
-                missingProperties.add("property");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: property");
         });
     }
 }

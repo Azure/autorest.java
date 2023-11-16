@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Cobra model.
@@ -69,17 +67,9 @@ public final class Cobra extends Snake {
                 }
             }
             if (lengthFound) {
-                Cobra deserializedCobra = new Cobra(length);
-
-                return deserializedCobra;
+                return new Cobra(length);
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
-                missingProperties.add("length");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: length");
         });
     }
 }
