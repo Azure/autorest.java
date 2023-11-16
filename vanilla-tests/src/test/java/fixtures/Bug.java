@@ -16,5 +16,11 @@ public class Bug {
         MetricAlertCriteria criteria = new MetricAlertSingleResourceMultipleMetricCriteria();
         String json = BinaryData.fromObject(criteria).toString();
         Assertions.assertTrue(json.contains("SingleResourceMultipleMetricCriteria"));
+
+        criteria = BinaryData.fromString(json).toObject(MetricAlertCriteria.class);
+        Assertions.assertTrue(criteria instanceof MetricAlertCriteria);
+
+        json = "{\"odata.type\": \"invalid\"}";
+        criteria = BinaryData.fromString(json).toObject(MetricAlertCriteria.class);
     }
 }
