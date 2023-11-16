@@ -781,12 +781,13 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
         xmlWriter.writeStringElement("Content-Disposition", this.contentDisposition);
         xmlWriter.writeStringElement("Cache-Control", this.cacheControl);
         xmlWriter.writeNumberElement("x-ms-blob-sequence-number", this.blobSequenceNumber);
-        xmlWriter.writeStringElement("BlobType", Objects.toString(this.blobType, null));
-        xmlWriter.writeStringElement("LeaseStatus", Objects.toString(this.leaseStatus, null));
-        xmlWriter.writeStringElement("LeaseState", Objects.toString(this.leaseState, null));
-        xmlWriter.writeStringElement("LeaseDuration", Objects.toString(this.leaseDuration, null));
+        xmlWriter.writeStringElement("BlobType", this.blobType == null ? null : this.blobType.toString());
+        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
+        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
+        xmlWriter.writeStringElement("LeaseDuration",
+            this.leaseDuration == null ? null : this.leaseDuration.toString());
         xmlWriter.writeStringElement("CopyId", this.copyId);
-        xmlWriter.writeStringElement("CopyStatus", Objects.toString(this.copyStatus, null));
+        xmlWriter.writeStringElement("CopyStatus", this.copyStatus == null ? null : this.copyStatus.toString());
         xmlWriter.writeStringElement("CopySource", this.copySource);
         xmlWriter.writeStringElement("CopyProgress", this.copyProgress);
         xmlWriter.writeStringElement("CopyCompletionTime", Objects.toString(this.copyCompletionTime, null));
@@ -796,9 +797,10 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
         xmlWriter.writeStringElement("DestinationSnapshot", this.destinationSnapshot);
         xmlWriter.writeStringElement("DeletedTime", Objects.toString(this.deletedTime, null));
         xmlWriter.writeNumberElement("RemainingRetentionDays", this.remainingRetentionDays);
-        xmlWriter.writeStringElement("AccessTier", Objects.toString(this.accessTier, null));
+        xmlWriter.writeStringElement("AccessTier", this.accessTier == null ? null : this.accessTier.toString());
         xmlWriter.writeBooleanElement("AccessTierInferred", this.accessTierInferred);
-        xmlWriter.writeStringElement("ArchiveStatus", Objects.toString(this.archiveStatus, null));
+        xmlWriter.writeStringElement("ArchiveStatus",
+            this.archiveStatus == null ? null : this.archiveStatus.toString());
         return xmlWriter.writeEndElement();
     }
 
@@ -854,17 +856,17 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                 } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
                 } else if ("BlobType".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.blobType = reader.getNullableElement(BlobType::fromString);
+                    deserializedBlobProperties.blobType = reader.BlobType.fromString(getStringElement());
                 } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
+                    deserializedBlobProperties.leaseStatus = reader.LeaseStatusType.fromString(getStringElement());
                 } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                    deserializedBlobProperties.leaseState = reader.LeaseStateType.fromString(getStringElement());
                 } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
+                    deserializedBlobProperties.leaseDuration = reader.LeaseDurationType.fromString(getStringElement());
                 } else if ("CopyId".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.copyId = reader.getStringElement();
                 } else if ("CopyStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.copyStatus = reader.getNullableElement(CopyStatusType::fromString);
+                    deserializedBlobProperties.copyStatus = reader.CopyStatusType.fromString(getStringElement());
                 } else if ("CopySource".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.copySource = reader.getStringElement();
                 } else if ("CopyProgress".equals(elementName.getLocalPart())) {
@@ -884,11 +886,11 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                 } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
                 } else if ("AccessTier".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.accessTier = reader.getNullableElement(AccessTier::fromString);
+                    deserializedBlobProperties.accessTier = reader.AccessTier.fromString(getStringElement());
                 } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
                 } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.archiveStatus = reader.getNullableElement(ArchiveStatus::fromString);
+                    deserializedBlobProperties.archiveStatus = reader.ArchiveStatus.fromString(getStringElement());
                 } else {
                     reader.skipElement();
                 }

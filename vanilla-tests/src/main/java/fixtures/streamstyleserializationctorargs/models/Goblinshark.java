@@ -126,7 +126,7 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
         jsonWriter.writeNumberField("jawsize", this.jawsize);
-        jsonWriter.writeStringField("color", Objects.toString(this.color, null));
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
     }
 

@@ -396,8 +396,9 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
             jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
             jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
             jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
-            jsonWriter.writeStringField("architecture", Objects.toString(this.architecture, null));
-            jsonWriter.writeStringField("os", Objects.toString(this.operatingSystem, null));
+            jsonWriter.writeStringField("architecture",
+                this.architecture == null ? null : this.architecture.toString());
+            jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());
             jsonWriter.writeArrayField("references", this.relatedArtifacts,
                 (writer, element) -> writer.writeJson(element));
             jsonWriter.writeArrayField("tags", this.tags, (writer, element) -> writer.writeString(element));

@@ -10,7 +10,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * The Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema model.
@@ -162,7 +161,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("grant_type", Objects.toString(this.grantType, null));
+        jsonWriter.writeStringField("grant_type", this.grantType == null ? null : this.grantType.toString());
         jsonWriter.writeStringField("service", this.service);
         jsonWriter.writeStringField("tenant", this.tenant);
         jsonWriter.writeStringField("refresh_token", this.refreshToken);

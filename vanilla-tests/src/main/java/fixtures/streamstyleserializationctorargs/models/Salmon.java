@@ -9,7 +9,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -202,13 +201,7 @@ public class Salmon extends Fish {
 
                 return deserializedSalmon;
             }
-            List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
-                missingProperties.add("length");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            throw new IllegalStateException("Missing required property: length");
         });
     }
 }
