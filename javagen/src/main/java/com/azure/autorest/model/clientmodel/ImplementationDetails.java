@@ -70,7 +70,14 @@ public class ImplementationDetails {
          * <p>
          * Codegen should generate the class in implementation package.
          */
-        INTERNAL("internal");
+        INTERNAL("internal"),
+
+        /**
+         * Model used in json-merge-patch operation
+         * <p>
+         * Codegen should handle serialization and deserialization specially for json-merge-patch model
+         */
+        JSON_MERGE_PATCH("json-merge-patch");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
         static {
