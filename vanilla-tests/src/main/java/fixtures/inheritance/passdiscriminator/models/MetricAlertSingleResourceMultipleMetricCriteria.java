@@ -27,9 +27,8 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     /*
      * specifies the type of the alert criteria.
      */
-    @JsonTypeId
     @JsonProperty(value = "odata\\.type", required = true)
-    private static final Odatatype ODATA_TYPE
+    private Odatatype ODATA_TYPE
         = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
 
     /*
