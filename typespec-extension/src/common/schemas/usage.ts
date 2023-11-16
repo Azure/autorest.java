@@ -21,6 +21,9 @@ export enum SchemaContext {
 
   /** Schema as anonymous model. This usage does not propagate. */
   Anonymous = "anonymous",
+
+  /** Schema is used in json-merge-patch operation */
+  JsonMergePatch = "json-merge-patch",
 }
 
 export interface SchemaUsage {

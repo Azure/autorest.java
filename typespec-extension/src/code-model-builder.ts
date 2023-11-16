@@ -1235,6 +1235,10 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
     }
 
+    if (operationIsJsonMergePatch(httpOperation)) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
+    }
+
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
       // anonymous model
 
