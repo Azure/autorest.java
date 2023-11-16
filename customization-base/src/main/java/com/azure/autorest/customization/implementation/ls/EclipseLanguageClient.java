@@ -78,6 +78,7 @@ public class EclipseLanguageClient implements AutoCloseable {
         }
 
         if (!server.isAlive()) {
+            server.shutdown();
             throw new RuntimeException("Language server failed to start: " + server.getServerError());
         }
     }

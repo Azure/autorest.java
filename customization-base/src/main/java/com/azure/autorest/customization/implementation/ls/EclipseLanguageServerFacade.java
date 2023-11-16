@@ -155,7 +155,7 @@ public class EclipseLanguageServerFacade {
 
     public void shutdown() {
         if (server != null && server.isAlive()) {
-            server.destroy();
+            server.destroyForcibly();
         }
     }
 }
