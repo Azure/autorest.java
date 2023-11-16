@@ -1216,7 +1216,7 @@ export class CodeModelBuilder {
     } else {
       schema = this.processSchema(body, body.name);
     }
-    const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
