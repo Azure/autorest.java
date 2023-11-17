@@ -5,7 +5,7 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+import org.eclipse.lsp4j.SymbolInformation;
 
 import java.util.Optional;
 
@@ -13,8 +13,8 @@ import java.util.Optional;
  * The top level customization for an AutoRest generated client library.
  */
 public final class LibraryCustomization {
-    private EclipseLanguageClient languageClient;
-    private Editor editor;
+    private final EclipseLanguageClient languageClient;
+    private final Editor editor;
 
     LibraryCustomization(Editor editor, EclipseLanguageClient languageClient) {
         this.editor = editor;
