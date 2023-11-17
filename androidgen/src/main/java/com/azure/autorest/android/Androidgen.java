@@ -21,20 +21,13 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.postprocessor.Postprocessor;
+import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.template.Templates;
 import org.slf4j.Logger;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.LoaderOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.inspector.TrustedTagInspector;
-import org.yaml.snakeyaml.introspector.Property;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.Tag;
-import org.yaml.snakeyaml.representer.Representer;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Androidgen extends Javagen {
@@ -55,38 +48,10 @@ public class Androidgen extends Javagen {
     public boolean processInternal() {
         this.clear();
 
-        JavaSettings settings = JavaSettings.getInstance();
-
-        List<String> allFiles = listInputs();
-        List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-        if (files.size() != 1) {
-            throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-        }
-
         try {
             // Step 1: Parse input yaml as CodeModel
-            String file = readFile(files.get(0));
-            Representer representer = new Representer(new DumperOptions()) {
-                @Override
-                protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
-                                                              Tag customTag) {
-                    // if value of property is null, ignore it.
-                    if (propertyValue == null) {
-                        return null;
-                    }
-                    else {
-                        return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
-                    }
-                }
-            };
-
-            LoaderOptions loaderOptions = new LoaderOptions();
-            loaderOptions.setCodePointLimit(50 * 1024 * 1024);
-            loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-            loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
-            loaderOptions.setTagInspector(new TrustedTagInspector());
-            Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-            CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
+            CodeModel codeModel = new Preprocessor(this, connection, pluginName, sessionId)
+                .processCodeModel();
 
             // Step 2: Map
             Mappers.setFactory(new AndroidMapperFactory());
@@ -109,6 +74,7 @@ public class Androidgen extends Javagen {
             for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
                 javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
             }
+
             for (AsyncSyncClient syncClient : client.getSyncClients()) {
                 javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
             }
@@ -160,8 +126,8 @@ public class Androidgen extends Javagen {
 
             // TODO: POM, Manager
             //Step 4: Print to files
-            javaPackage.getJavaFiles().forEach(javaFile ->
-                    writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null));
+            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())));
 
             String artifactId = JavaSettings.getInstance().getArtifactId();
             if (!(artifactId == null || artifactId.isEmpty())) {

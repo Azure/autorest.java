@@ -21,15 +21,11 @@ public abstract class Customization {
     /**
      * Start the customization process. This is called by the post processor in AutoRest.
      *
-     * @param files the list of files generated in the previous steps in AutoRest
+     * @param files the map of files generated in the previous steps in AutoRest
      * @param logger the logger
-     * @return the list of files after customization
+     * @return the map of files after customization
      */
     public final Map<String, String> run(Map<String, String> files, Logger logger) {
-        return run(null, files, logger);
-    }
-
-    final Map<String, String> run(String pathToLanguageServerPlugin, Map<String, String> files, Logger logger) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -46,7 +42,7 @@ public abstract class Customization {
         }
 
         // Start language client
-        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(pathToLanguageServerPlugin,
+        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(null,
             tempDirWithPrefix.toString())) {
             languageClient.initialize();
             customize(new LibraryCustomization(editor, languageClient), logger);

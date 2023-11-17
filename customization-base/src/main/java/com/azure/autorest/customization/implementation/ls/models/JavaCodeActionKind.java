@@ -5,6 +5,7 @@ package com.azure.autorest.customization.implementation.ls.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import org.eclipse.lsp4j.CodeActionKind;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public enum JavaCodeActionKind {
     /**
      * Base kind for "generate" source actions
      */
-    SOURCE_GENERATE(CodeActionKind.SOURCE + ".generate"),
+    SOURCE_GENERATE(CodeActionKind.Source + ".generate"),
 
     /**
      * Generate accessors kind
@@ -43,42 +44,42 @@ public enum JavaCodeActionKind {
     /**
      * Override/Implement methods kind
      */
-    SOURCE_OVERRIDE_METHODS(CodeActionKind.SOURCE + ".overrideMethods"),
+    SOURCE_OVERRIDE_METHODS(CodeActionKind.Source + ".overrideMethods"),
 
     /**
      * Extract to method kind
      */
-    REFACTOR_EXTRACT_METHOD(CodeActionKind.REFACTOR_EXTRACT + ".function"), // using `.function` instead of `.method` to match existing keybinding),
+    REFACTOR_EXTRACT_METHOD(CodeActionKind.RefactorExtract + ".function"), // using `.function` instead of `.method` to match existing keybinding),
 
     /**
      * Extract to constant kind
      */
-    REFACTOR_EXTRACT_CONSTANT(CodeActionKind.REFACTOR_EXTRACT + ".constant"),
+    REFACTOR_EXTRACT_CONSTANT(CodeActionKind.RefactorExtract + ".constant"),
 
     /**
      * Extract to variable kind
      */
-    REFACTOR_EXTRACT_VARIABLE(CodeActionKind.REFACTOR_EXTRACT + ".variable"),
+    REFACTOR_EXTRACT_VARIABLE(CodeActionKind.RefactorExtract + ".variable"),
 
     /**
      * Extract to field kind
      */
-    REFACTOR_EXTRACT_FIELD(CodeActionKind.REFACTOR_EXTRACT + ".field"),
+    REFACTOR_EXTRACT_FIELD(CodeActionKind.RefactorExtract + ".field"),
 
     /**
      * Move kind
      */
-    REFACTOR_MOVE(CodeActionKind.REFACTOR + ".move"),
+    REFACTOR_MOVE(CodeActionKind.Refactor + ".move"),
 
     /**
      * Assign statement to new local variable
      */
-    REFACTOR_ASSIGN_VARIABLE(CodeActionKind.REFACTOR + ".assign.variable"),
+    REFACTOR_ASSIGN_VARIABLE(CodeActionKind.Refactor + ".assign.variable"),
 
     /**
      * Assign statement to new field
      */
-    REFACTOR_ASSIGN_FIELD(CodeActionKind.REFACTOR + ".assign.field"),
+    REFACTOR_ASSIGN_FIELD(CodeActionKind.Refactor + ".assign.field"),
 
     /**
      * Base kind for "quickassist" code actions

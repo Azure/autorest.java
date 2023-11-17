@@ -32,6 +32,11 @@
       <artifactId>azure-autorest-fluentnamer</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
+    <dependency>
+      <groupId>com.azure.tools</groupId>
+      <artifactId>azure-autorest-postprocessor</artifactId>
+      <version>1.0.0-beta.1</version>
+    </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
