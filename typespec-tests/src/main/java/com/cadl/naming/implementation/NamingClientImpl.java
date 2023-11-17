@@ -132,7 +132,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData request,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData dataRequest,
             RequestOptions requestOptions, Context context);
 
         @Post("/naming")
@@ -142,7 +142,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> postSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData request,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData dataRequest,
             RequestOptions requestOptions, Context context);
 
         @Get("/naming")
@@ -216,7 +216,7 @@ public final class NamingClientImpl {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * 
      * description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -227,11 +227,11 @@ public final class NamingClientImpl {
      * @return summary of Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponseAsync(String name, BinaryData request,
+    public Mono<Response<BinaryData>> postWithResponseAsync(String name, BinaryData dataRequest,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.post(this.getEndpoint(), name, accept, request, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.post(this.getEndpoint(), name, accept, dataRequest, requestOptions, context));
     }
 
     /**
@@ -286,7 +286,7 @@ public final class NamingClientImpl {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * 
      * description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -297,9 +297,9 @@ public final class NamingClientImpl {
      * @return summary of Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+    public Response<BinaryData> postWithResponse(String name, BinaryData dataRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postSync(this.getEndpoint(), name, accept, request, requestOptions, Context.NONE);
+        return service.postSync(this.getEndpoint(), name, accept, dataRequest, requestOptions, Context.NONE);
     }
 
     /**

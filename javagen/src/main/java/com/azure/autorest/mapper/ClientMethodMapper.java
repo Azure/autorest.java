@@ -417,7 +417,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         // try lroMetadata
                         methodPollingDetails = methodPollingDetailsFromMetadata(operation, pollingDetails);
 
-                        // fallback to JavaSettings.PollingDetails
+                        // result from methodPollingDetails already handled JavaSettings.PollingDetails (as well as LongRunningMetadata)
                         if (methodPollingDetails == null) {
                             methodPollingDetails = new MethodPollingDetails(
                                 pollingDetails.getStrategy(),
@@ -1534,16 +1534,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return pollResponseType;
         }
         if (details != null && details.getIntermediateType() != null) {
-            String intermediateTypeName;
-            String intermediateTypePackage;
-            if (details.getIntermediateType().contains(".")) {
-                intermediateTypeName = ANYTHING_THEN_PERIOD.matcher(details.getIntermediateType()).replaceAll("");
-                intermediateTypePackage = details.getIntermediateType().replace("." + intermediateTypeName, "");
-            } else {
-                intermediateTypeName = details.getIntermediateType();
-                intermediateTypePackage = JavaSettings.getInstance().getPackage();
-            }
-            pollResponseType = new ClassType.Builder().packageName(intermediateTypePackage).name(intermediateTypeName).build();
+            pollResponseType = createTypeFromModelName(details.getIntermediateType(), JavaSettings.getInstance());
         }
         // azure-core wants poll response to be non-null
         if (pollResponseType.asNullable() == ClassType.Void) {
@@ -1559,16 +1550,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return resultType;
         }
         if (details != null && details.getFinalType() != null) {
-            String finalTypeName;
-            String finalTypePackage;
-            if (details.getFinalType().contains(".")) {
-                finalTypeName = ANYTHING_THEN_PERIOD.matcher(details.getFinalType()).replaceAll("");
-                finalTypePackage = details.getFinalType().replace("." + finalTypeName, "");
-            } else {
-                finalTypeName = details.getFinalType();
-                finalTypePackage = JavaSettings.getInstance().getPackage();
-            }
-            resultType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
+            resultType = createTypeFromModelName(details.getFinalType(), JavaSettings.getInstance());
         }
         // azure-core wants poll response to be non-null
         if (resultType.asNullable() == ClassType.Void) {
@@ -1662,8 +1644,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         MethodPollingDetails methodPollingDetails = null;
         if (operation.getLroMetadata() != null) {
-            // Only TypeSpec would have longRunningMetadata
-
+            // only TypeSpec would have LongRunningMetadata
             LongRunningMetadata metadata = operation.getLroMetadata();
             ObjectMapper objectMapper = Mappers.getObjectMapper();
             IType intermediateType = objectMapper.map(metadata.getPollResultType());
@@ -1671,30 +1652,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     ? PrimitiveType.Void
                     : objectMapper.map(metadata.getFinalResultType());
 
-            // merge with PollingDetails on intermediateType and finalType
+            // PollingDetails would override LongRunningMetadata
             if (pollingDetails.getIntermediateType() != null) {
-                String intermediateTypeName;
-                String intermediateTypePackage;
-                if (pollingDetails.getIntermediateType().contains(".")) {
-                    intermediateTypeName = ANYTHING_THEN_PERIOD.matcher(pollingDetails.getIntermediateType()).replaceAll("");
-                    intermediateTypePackage = pollingDetails.getIntermediateType().replace("." + intermediateTypeName, "");
-                } else {
-                    intermediateTypeName = pollingDetails.getIntermediateType();
-                    intermediateTypePackage = JavaSettings.getInstance().getPackage();
-                }
-                intermediateType = new ClassType.Builder().packageName(intermediateTypePackage).name(intermediateTypeName).build();
+                intermediateType = createTypeFromModelName(pollingDetails.getIntermediateType(), JavaSettings.getInstance());
             }
             if (pollingDetails.getFinalType() != null) {
-                String finalTypeName;
-                String finalTypePackage;
-                if (pollingDetails.getFinalType().contains(".")) {
-                    finalTypeName = ANYTHING_THEN_PERIOD.matcher(pollingDetails.getFinalType()).replaceAll("");
-                    finalTypePackage = pollingDetails.getFinalType().replace("." + finalTypeName, "");
-                } else {
-                    finalTypeName = pollingDetails.getFinalType();
-                    finalTypePackage = JavaSettings.getInstance().getPackage();
-                }
-                finalType = new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
+                finalType = createTypeFromModelName(pollingDetails.getFinalType(), JavaSettings.getInstance());
             }
 
             String pollingStrategy = metadata.getPollingStrategy() == null
@@ -1712,6 +1675,25 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     pollingDetails.getPollIntervalInSeconds());
         }
         return methodPollingDetails;
+    }
+
+    /**
+     * Create IType from model name (full name or simple name).
+     *
+     * @param modelName the model name. If it is simple name, package name from JavaSetting will be used.
+     * @return IType of the model
+     */
+    private static IType createTypeFromModelName(String modelName, JavaSettings settings) {
+        String finalTypeName;
+        String finalTypePackage;
+        if (modelName.contains(".")) {
+            finalTypeName = ANYTHING_THEN_PERIOD.matcher(modelName).replaceAll("");
+            finalTypePackage = modelName.replace("." + finalTypeName, "");
+        } else {
+            finalTypeName = modelName;
+            finalTypePackage = JavaSettings.getInstance().getPackage();
+        }
+        return new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
     }
 
     private static MethodNamer resolveMethodNamer(ProxyMethod proxyMethod, ConvenienceApi convenienceApi, boolean isProtocolMethod) {

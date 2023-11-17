@@ -1216,7 +1216,7 @@ export class CodeModelBuilder {
     } else {
       schema = this.processSchema(body, body.name);
     }
-    const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1633,12 +1633,12 @@ export class CodeModelBuilder {
 
         case "url":
           return this.processUrlSchema(type, nameHint);
-
-        case "decimal":
-          return this.processNumberSchema(type, nameHint);
       }
 
-      if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+      if (scalarName.startsWith("decimal")) {
+        // decimal
+        return this.processNumberSchema(type, nameHint);
+      } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
         // integer
         const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
         return this.processIntegerSchema(type, nameHint, integerSize);
