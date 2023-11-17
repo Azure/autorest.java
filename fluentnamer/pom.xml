@@ -41,42 +41,4 @@
       <version>1.11.8</version>
     </dependency>
   </dependencies>
-
-  <profiles>
-    <profile>
-      <id>local</id>
-      <activation>
-        <property>
-          <name>local</name>
-        </property>
-      </activation>
-      <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <archive>
-                    <manifest>
-                      <mainClass>com.azure.autorest.fluentnamer.Main</mainClass>
-                    </manifest>
-                  </archive>
-                  <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                  </descriptorRefs>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

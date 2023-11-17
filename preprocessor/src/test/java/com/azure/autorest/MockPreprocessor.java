@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.yaml.snakeyaml.DumperOptions;
@@ -27,7 +28,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MockPreprocessor extends Preprocessor {
+public class MockPreprocessor extends NewPlugin {
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
     static {
@@ -106,6 +107,11 @@ public class MockPreprocessor extends Preprocessor {
     }
 
     @Override
+    public boolean processInternal() {
+        return false;
+    }
+
+    @Override
     public String readFile(String filename) {
         try {
             InputStream fis = MockPreprocessor.class.getClassLoader().getResourceAsStream(filename);
@@ -124,14 +130,14 @@ public class MockPreprocessor extends Preprocessor {
 
     public  CodeModel performPosttransformUpdates(CodeModel codeModel) {
         if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
-            return convertOptionalConstantsToEnum(codeModel);
+            return Preprocessor.convertOptionalConstantsToEnum(codeModel);
         }
         return codeModel;
     }
 
     public CodeModel performPretransformUpdates(CodeModel codeModel) {
         if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
-            return convertOptionalConstantsToEnum(codeModel);
+            return Preprocessor.convertOptionalConstantsToEnum(codeModel);
         }
         return codeModel;
     }

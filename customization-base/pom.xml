@@ -52,7 +52,7 @@
     </dependency>
     <dependency>
       <groupId>com.github.javaparser</groupId>
-      <artifactId>javaparser-symbol-solver-core</artifactId>
+      <artifactId>javaparser-core</artifactId>
       <version>3.25.6</version>
     </dependency>
     <dependency>
