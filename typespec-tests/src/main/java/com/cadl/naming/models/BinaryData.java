@@ -68,7 +68,6 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
      */
     public static BinaryData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dataFound = false;
             byte[] data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -76,15 +75,11 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
 
                 if ("data".equals(fieldName)) {
                     data = reader.getBinary();
-                    dataFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dataFound) {
-                return new BinaryData(data);
-            }
-            throw new IllegalStateException("Missing required property: data");
+            return new BinaryData(data);
         });
     }
 }

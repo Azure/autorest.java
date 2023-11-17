@@ -61,7 +61,6 @@ public final class ResponseInternal implements JsonSerializable<ResponseInternal
      */
     public static ResponseInternal fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             ResponseInternalInner property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ResponseInternal implements JsonSerializable<ResponseInternal
 
                 if ("property".equals(fieldName)) {
                     property = ResponseInternalInner.fromJson(reader);
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new ResponseInternal(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new ResponseInternal(property);
         });
     }
 }

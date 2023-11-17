@@ -76,24 +76,42 @@ public class Fish implements JsonSerializable<Fish> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("shark".equals(discriminatorValue)) {
-                return Shark.fromJsonKnownDiscriminator(readerToUse);
+                return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
             } else if ("saw".equals(discriminatorValue)) {
-                return SawShark.fromJson(readerToUse);
+                return SawShark.fromJson(readerToUse.reset());
             } else if ("goblin".equals(discriminatorValue)) {
-                return GoblinShark.fromJson(readerToUse);
+                return GoblinShark.fromJson(readerToUse.reset());
             } else if ("salmon".equals(discriminatorValue)) {
-                return Salmon.fromJson(readerToUse);
+                return Salmon.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'shark', 'saw', 'goblin', or 'salmon'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int age = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Fish".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Fish'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Fish(age);
         });
     }
 }

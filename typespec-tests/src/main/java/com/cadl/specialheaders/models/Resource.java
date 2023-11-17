@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Resource model.
@@ -126,7 +124,6 @@ public final class Resource implements JsonSerializable<Resource> {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            boolean typeFound = false;
             String type = null;
             String description = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -139,28 +136,18 @@ public final class Resource implements JsonSerializable<Resource> {
                     name = reader.getString();
                 } else if ("type".equals(fieldName)) {
                     type = reader.getString();
-                    typeFound = true;
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (typeFound) {
-                Resource deserializedResource = new Resource(type);
-                deserializedResource.id = id;
-                deserializedResource.name = name;
-                deserializedResource.description = description;
+            Resource deserializedResource = new Resource(type);
+            deserializedResource.id = id;
+            deserializedResource.name = name;
+            deserializedResource.description = description;
 
-                return deserializedResource;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!typeFound) {
-                missingProperties.add("type");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedResource;
         });
     }
 }

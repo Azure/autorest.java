@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Resource3 model.
@@ -82,9 +80,7 @@ public final class Resource3 implements JsonSerializable<Resource3> {
      */
     public static Resource3 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean outputData3Found = false;
             OutputData3 outputData3 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -92,27 +88,13 @@ public final class Resource3 implements JsonSerializable<Resource3> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("outputData3".equals(fieldName)) {
                     outputData3 = OutputData3.fromJson(reader);
-                    outputData3Found = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && outputData3Found) {
-                return new Resource3(name, outputData3);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!outputData3Found) {
-                missingProperties.add("outputData3");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Resource3(name, outputData3);
         });
     }
 }

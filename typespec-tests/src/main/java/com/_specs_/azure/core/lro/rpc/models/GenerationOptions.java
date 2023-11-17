@@ -61,7 +61,6 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
      */
     public static GenerationOptions fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean promptFound = false;
             String prompt = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
 
                 if ("prompt".equals(fieldName)) {
                     prompt = reader.getString();
-                    promptFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (promptFound) {
-                return new GenerationOptions(prompt);
-            }
-            throw new IllegalStateException("Missing required property: prompt");
+            return new GenerationOptions(prompt);
         });
     }
 }

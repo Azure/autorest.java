@@ -63,7 +63,6 @@ public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDa
      */
     public static DefaultDatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDa
 
                 if ("value".equals(fieldName)) {
                     value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new DefaultDatetimeProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new DefaultDatetimeProperty(value);
         });
     }
 }

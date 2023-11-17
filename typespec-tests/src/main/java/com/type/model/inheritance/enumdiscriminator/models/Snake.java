@@ -76,17 +76,36 @@ public class Snake implements JsonSerializable<Snake> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("cobra".equals(discriminatorValue)) {
-                return Cobra.fromJson(readerToUse);
+                return Cobra.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'cobra'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Snake fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int length = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Snake".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Snake'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("length".equals(fieldName)) {
+                    length = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Snake(length);
         });
     }
 }

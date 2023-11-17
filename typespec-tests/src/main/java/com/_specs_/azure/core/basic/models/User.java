@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,7 +124,6 @@ public final class User implements JsonSerializable<User> {
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;
-            boolean nameFound = false;
             String name = null;
             String etag = null;
             List<UserOrder> orders = null;
@@ -137,7 +135,6 @@ public final class User implements JsonSerializable<User> {
                     id = reader.getInt();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("etag".equals(fieldName)) {
                     etag = reader.getString();
                 } else if ("orders".equals(fieldName)) {
@@ -146,21 +143,12 @@ public final class User implements JsonSerializable<User> {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                User deserializedUser = new User(name);
-                deserializedUser.id = id;
-                deserializedUser.etag = etag;
-                deserializedUser.orders = orders;
+            User deserializedUser = new User(name);
+            deserializedUser.id = id;
+            deserializedUser.etag = etag;
+            deserializedUser.orders = orders;
 
-                return deserializedUser;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedUser;
         });
     }
 }

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -377,39 +376,22 @@ public final class Builtin implements JsonSerializable<Builtin> {
      */
     public static Builtin fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean booleanPropertyFound = false;
             boolean booleanProperty = false;
-            boolean stringFound = false;
             String string = null;
-            boolean bytesFound = false;
             byte[] bytes = null;
-            boolean intPropertyFound = false;
             int intProperty = 0;
-            boolean safeintFound = false;
             long safeint = 0L;
-            boolean decimalFound = false;
             double decimal = 0.0;
-            boolean longPropertyFound = false;
             long longProperty = 0L;
-            boolean floatPropertyFound = false;
             double floatProperty = 0.0;
-            boolean doublePropertyFound = false;
             double doubleProperty = 0.0;
-            boolean durationFound = false;
             Duration duration = null;
-            boolean dateFound = false;
             LocalDate date = null;
-            boolean dateTimeFound = false;
             OffsetDateTime dateTime = null;
-            boolean stringListFound = false;
             List<String> stringList = null;
-            boolean bytesDictFound = false;
             Map<String, byte[]> bytesDict = null;
-            boolean urlFound = false;
             String url = null;
-            boolean nullableFloatDictFound = false;
             Map<String, Double> nullableFloatDict = null;
-            boolean encodedFound = false;
             Encoded encoded = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -417,122 +399,45 @@ public final class Builtin implements JsonSerializable<Builtin> {
 
                 if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getBoolean();
-                    booleanPropertyFound = true;
                 } else if ("string".equals(fieldName)) {
                     string = reader.getString();
-                    stringFound = true;
                 } else if ("bytes".equals(fieldName)) {
                     bytes = reader.getBinary();
-                    bytesFound = true;
                 } else if ("int".equals(fieldName)) {
                     intProperty = reader.getInt();
-                    intPropertyFound = true;
                 } else if ("safeint".equals(fieldName)) {
                     safeint = reader.getLong();
-                    safeintFound = true;
                 } else if ("decimal".equals(fieldName)) {
                     decimal = reader.getDouble();
-                    decimalFound = true;
                 } else if ("long".equals(fieldName)) {
                     longProperty = reader.getLong();
-                    longPropertyFound = true;
                 } else if ("float".equals(fieldName)) {
                     floatProperty = reader.getDouble();
-                    floatPropertyFound = true;
                 } else if ("double".equals(fieldName)) {
                     doubleProperty = reader.getDouble();
-                    doublePropertyFound = true;
                 } else if ("duration".equals(fieldName)) {
                     duration = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
-                    durationFound = true;
                 } else if ("date".equals(fieldName)) {
                     date = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
-                    dateFound = true;
                 } else if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    dateTimeFound = true;
                 } else if ("stringList".equals(fieldName)) {
                     stringList = reader.readArray(reader1 -> reader1.getString());
-                    stringListFound = true;
                 } else if ("bytesDict".equals(fieldName)) {
                     bytesDict = reader.readMap(reader1 -> reader1.getBinary());
-                    bytesDictFound = true;
                 } else if ("url".equals(fieldName)) {
                     url = reader.getString();
-                    urlFound = true;
                 } else if ("nullableFloatDict".equals(fieldName)) {
                     nullableFloatDict = reader.readMap(reader1 -> reader1.getDouble());
-                    nullableFloatDictFound = true;
                 } else if ("encoded".equals(fieldName)) {
                     encoded = Encoded.fromJson(reader);
-                    encodedFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (booleanPropertyFound && stringFound && bytesFound && intPropertyFound && safeintFound && decimalFound
-                && longPropertyFound && floatPropertyFound && doublePropertyFound && durationFound && dateFound
-                && dateTimeFound && stringListFound && bytesDictFound && urlFound && nullableFloatDictFound
-                && encodedFound) {
-                return new Builtin(booleanProperty, string, bytes, intProperty, safeint, decimal, longProperty,
-                    floatProperty, doubleProperty, duration, date, dateTime, stringList, bytesDict, url,
-                    nullableFloatDict, encoded);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!booleanPropertyFound) {
-                missingProperties.add("boolean");
-            }
-            if (!stringFound) {
-                missingProperties.add("string");
-            }
-            if (!bytesFound) {
-                missingProperties.add("bytes");
-            }
-            if (!intPropertyFound) {
-                missingProperties.add("int");
-            }
-            if (!safeintFound) {
-                missingProperties.add("safeint");
-            }
-            if (!decimalFound) {
-                missingProperties.add("decimal");
-            }
-            if (!longPropertyFound) {
-                missingProperties.add("long");
-            }
-            if (!floatPropertyFound) {
-                missingProperties.add("float");
-            }
-            if (!doublePropertyFound) {
-                missingProperties.add("double");
-            }
-            if (!durationFound) {
-                missingProperties.add("duration");
-            }
-            if (!dateFound) {
-                missingProperties.add("date");
-            }
-            if (!dateTimeFound) {
-                missingProperties.add("dateTime");
-            }
-            if (!stringListFound) {
-                missingProperties.add("stringList");
-            }
-            if (!bytesDictFound) {
-                missingProperties.add("bytesDict");
-            }
-            if (!urlFound) {
-                missingProperties.add("url");
-            }
-            if (!nullableFloatDictFound) {
-                missingProperties.add("nullableFloatDict");
-            }
-            if (!encodedFound) {
-                missingProperties.add("encoded");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Builtin(booleanProperty, string, bytes, intProperty, safeint, decimal, longProperty,
+                floatProperty, doubleProperty, duration, date, dateTime, stringList, bytesDict, url, nullableFloatDict,
+                encoded);
         });
     }
 }

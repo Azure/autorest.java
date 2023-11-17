@@ -136,7 +136,6 @@ public final class Eagle extends Bird {
      */
     public static Eagle fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean wingspanFound = false;
             int wingspan = 0;
             List<Bird> friends = null;
             Map<String, Bird> hate = null;
@@ -154,7 +153,6 @@ public final class Eagle extends Bird {
                     }
                 } else if ("wingspan".equals(fieldName)) {
                     wingspan = reader.getInt();
-                    wingspanFound = true;
                 } else if ("friends".equals(fieldName)) {
                     friends = reader.readArray(reader1 -> Bird.fromJson(reader1));
                 } else if ("hate".equals(fieldName)) {
@@ -165,15 +163,12 @@ public final class Eagle extends Bird {
                     reader.skipChildren();
                 }
             }
-            if (wingspanFound) {
-                Eagle deserializedEagle = new Eagle(wingspan);
-                deserializedEagle.friends = friends;
-                deserializedEagle.hate = hate;
-                deserializedEagle.partner = partner;
+            Eagle deserializedEagle = new Eagle(wingspan);
+            deserializedEagle.friends = friends;
+            deserializedEagle.hate = hate;
+            deserializedEagle.partner = partner;
 
-                return deserializedEagle;
-            }
-            throw new IllegalStateException("Missing required property: wingspan");
+            return deserializedEagle;
         });
     }
 }

@@ -63,7 +63,6 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
      */
     public static DefaultDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
 
                 if ("value".equals(fieldName)) {
                     value = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new DefaultDurationProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new DefaultDurationProperty(value);
         });
     }
 }

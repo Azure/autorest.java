@@ -74,7 +74,6 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
      */
     public static Base64UrlArrayBytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             List<byte[]> value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -90,15 +89,11 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
                             return null;
                         }
                     });
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new Base64UrlArrayBytesProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new Base64UrlArrayBytesProperty(value);
         });
     }
 }

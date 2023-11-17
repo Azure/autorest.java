@@ -61,7 +61,6 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
      */
     public static FloatProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             double property = 0.0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
 
                 if ("property".equals(fieldName)) {
                     property = reader.getDouble();
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new FloatProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new FloatProperty(property);
         });
     }
 }

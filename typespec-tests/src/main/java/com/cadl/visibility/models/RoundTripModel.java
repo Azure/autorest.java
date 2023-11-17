@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The RoundTripModel model.
@@ -82,9 +80,7 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
      */
     public static RoundTripModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean secretNameFound = false;
             String secretName = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -92,27 +88,13 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("secretName".equals(fieldName)) {
                     secretName = reader.getString();
-                    secretNameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && secretNameFound) {
-                return new RoundTripModel(name, secretName);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!secretNameFound) {
-                missingProperties.add("secretName");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new RoundTripModel(name, secretName);
         });
     }
 }

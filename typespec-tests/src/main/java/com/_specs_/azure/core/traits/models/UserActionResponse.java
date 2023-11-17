@@ -61,7 +61,6 @@ public final class UserActionResponse implements JsonSerializable<UserActionResp
      */
     public static UserActionResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean userActionResultFound = false;
             String userActionResult = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class UserActionResponse implements JsonSerializable<UserActionResp
 
                 if ("userActionResult".equals(fieldName)) {
                     userActionResult = reader.getString();
-                    userActionResultFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (userActionResultFound) {
-                return new UserActionResponse(userActionResult);
-            }
-            throw new IllegalStateException("Missing required property: userActionResult");
+            return new UserActionResponse(userActionResult);
         });
     }
 }

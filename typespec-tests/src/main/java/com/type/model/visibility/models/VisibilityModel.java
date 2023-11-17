@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -137,13 +136,9 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     public static VisibilityModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String readProp = null;
-            boolean queryPropFound = false;
             Integer queryProp = null;
-            boolean createPropFound = false;
             List<String> createProp = null;
-            boolean updatePropFound = false;
             List<Integer> updateProp = null;
-            boolean deletePropFound = false;
             Boolean deleteProp = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -153,43 +148,21 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
                     readProp = reader.getString();
                 } else if ("queryProp".equals(fieldName)) {
                     queryProp = reader.getNullable(JsonReader::getInt);
-                    queryPropFound = true;
                 } else if ("createProp".equals(fieldName)) {
                     createProp = reader.readArray(reader1 -> reader1.getString());
-                    createPropFound = true;
                 } else if ("updateProp".equals(fieldName)) {
                     updateProp = reader.readArray(reader1 -> reader1.getInt());
-                    updatePropFound = true;
                 } else if ("deleteProp".equals(fieldName)) {
                     deleteProp = reader.getNullable(JsonReader::getBoolean);
-                    deletePropFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (queryPropFound && createPropFound && updatePropFound && deletePropFound) {
-                VisibilityModel deserializedVisibilityModel
-                    = new VisibilityModel(queryProp, createProp, updateProp, deleteProp);
-                deserializedVisibilityModel.readProp = readProp;
+            VisibilityModel deserializedVisibilityModel
+                = new VisibilityModel(queryProp, createProp, updateProp, deleteProp);
+            deserializedVisibilityModel.readProp = readProp;
 
-                return deserializedVisibilityModel;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!queryPropFound) {
-                missingProperties.add("queryProp");
-            }
-            if (!createPropFound) {
-                missingProperties.add("createProp");
-            }
-            if (!updatePropFound) {
-                missingProperties.add("updateProp");
-            }
-            if (!deletePropFound) {
-                missingProperties.add("deleteProp");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedVisibilityModel;
         });
     }
 }

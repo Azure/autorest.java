@@ -61,7 +61,6 @@ public final class ApiResponse implements JsonSerializable<ApiResponse> {
      */
     public static ApiResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ApiResponse implements JsonSerializable<ApiResponse> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                return new ApiResponse(name);
-            }
-            throw new IllegalStateException("Missing required property: name");
+            return new ApiResponse(name);
         });
     }
 }

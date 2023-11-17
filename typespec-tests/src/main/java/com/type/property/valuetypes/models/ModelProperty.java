@@ -61,7 +61,6 @@ public final class ModelProperty implements JsonSerializable<ModelProperty> {
      */
     public static ModelProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             InnerModel property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ModelProperty implements JsonSerializable<ModelProperty> {
 
                 if ("property".equals(fieldName)) {
                     property = InnerModel.fromJson(reader);
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new ModelProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new ModelProperty(property);
         });
     }
 }

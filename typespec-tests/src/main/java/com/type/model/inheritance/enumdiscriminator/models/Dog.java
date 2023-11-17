@@ -76,17 +76,36 @@ public class Dog implements JsonSerializable<Dog> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("golden".equals(discriminatorValue)) {
-                return Golden.fromJson(readerToUse);
+                return Golden.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'golden'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int weight = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Dog".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Dog'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("weight".equals(fieldName)) {
+                    weight = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Dog(weight);
         });
     }
 }

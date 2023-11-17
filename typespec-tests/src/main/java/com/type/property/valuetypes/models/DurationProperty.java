@@ -63,7 +63,6 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      */
     public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             Duration property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
 
                 if ("property".equals(fieldName)) {
                     property = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new DurationProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new DurationProperty(property);
         });
     }
 }

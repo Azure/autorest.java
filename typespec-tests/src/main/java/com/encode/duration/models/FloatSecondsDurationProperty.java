@@ -62,7 +62,6 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
      */
     public static FloatSecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
 
                 if ("value".equals(fieldName)) {
                     value = Duration.ofNanos((long) (reader.getDouble() * 1000_000_000L));
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new FloatSecondsDurationProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new FloatSecondsDurationProperty(value);
         });
     }
 }

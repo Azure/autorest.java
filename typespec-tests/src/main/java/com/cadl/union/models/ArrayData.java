@@ -62,7 +62,6 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
      */
     public static ArrayData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dataFound = false;
             List<String> data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
 
                 if ("data".equals(fieldName)) {
                     data = reader.readArray(reader1 -> reader1.getString());
-                    dataFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dataFound) {
-                return new ArrayData(data);
-            }
-            throw new IllegalStateException("Missing required property: data");
+            return new ArrayData(data);
         });
     }
 }

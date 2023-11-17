@@ -61,7 +61,6 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
      */
     public static RequestParameters fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean typeFound = false;
             RequestType type = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
 
                 if ("type".equals(fieldName)) {
                     type = RequestType.fromString(reader.getString());
-                    typeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (typeFound) {
-                return new RequestParameters(type);
-            }
-            throw new IllegalStateException("Missing required property: type");
+            return new RequestParameters(type);
         });
     }
 }

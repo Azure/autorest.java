@@ -62,7 +62,6 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
      */
     public static StandAloneUnion fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dataFound = false;
             BinaryData data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
 
                 if ("data".equals(fieldName)) {
                     data = BinaryData.fromObject(reader.readUntyped());
-                    dataFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dataFound) {
-                return new StandAloneUnion(data);
-            }
-            throw new IllegalStateException("Missing required property: data");
+            return new StandAloneUnion(data);
         });
     }
 }

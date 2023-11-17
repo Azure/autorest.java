@@ -61,7 +61,6 @@ public final class JobData implements JsonSerializable<JobData> {
      */
     public static JobData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean commentFound = false;
             String comment = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class JobData implements JsonSerializable<JobData> {
 
                 if ("comment".equals(fieldName)) {
                     comment = reader.getString();
-                    commentFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (commentFound) {
-                return new JobData(comment);
-            }
-            throw new IllegalStateException("Missing required property: comment");
+            return new JobData(comment);
         });
     }
 }

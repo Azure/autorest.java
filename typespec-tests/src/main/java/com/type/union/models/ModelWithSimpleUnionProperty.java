@@ -62,7 +62,6 @@ public final class ModelWithSimpleUnionProperty implements JsonSerializable<Mode
      */
     public static ModelWithSimpleUnionProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean simpleUnionFound = false;
             BinaryData simpleUnion = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class ModelWithSimpleUnionProperty implements JsonSerializable<Mode
 
                 if ("simpleUnion".equals(fieldName)) {
                     simpleUnion = BinaryData.fromObject(reader.readUntyped());
-                    simpleUnionFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (simpleUnionFound) {
-                return new ModelWithSimpleUnionProperty(simpleUnion);
-            }
-            throw new IllegalStateException("Missing required property: simpleUnion");
+            return new ModelWithSimpleUnionProperty(simpleUnion);
         });
     }
 }

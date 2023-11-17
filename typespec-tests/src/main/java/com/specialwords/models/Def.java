@@ -61,7 +61,6 @@ public final class Def implements JsonSerializable<Def> {
      */
     public static Def fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class Def implements JsonSerializable<Def> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                return new Def(name);
-            }
-            throw new IllegalStateException("Missing required property: name");
+            return new Def(name);
         });
     }
 }

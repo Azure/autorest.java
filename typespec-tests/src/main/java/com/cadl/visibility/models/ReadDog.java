@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ReadDog model.
@@ -82,9 +80,7 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
      */
     public static ReadDog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean idFound = false;
             int id = 0;
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -92,27 +88,13 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
 
                 if ("id".equals(fieldName)) {
                     id = reader.getInt();
-                    idFound = true;
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (idFound && nameFound) {
-                return new ReadDog(id, name);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!idFound) {
-                missingProperties.add("id");
-            }
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new ReadDog(id, name);
         });
     }
 }

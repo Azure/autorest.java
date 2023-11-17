@@ -61,7 +61,6 @@ public final class UserActionParam implements JsonSerializable<UserActionParam> 
      */
     public static UserActionParam fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean userActionValueFound = false;
             String userActionValue = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class UserActionParam implements JsonSerializable<UserActionParam> 
 
                 if ("userActionValue".equals(fieldName)) {
                     userActionValue = reader.getString();
-                    userActionValueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (userActionValueFound) {
-                return new UserActionParam(userActionValue);
-            }
-            throw new IllegalStateException("Missing required property: userActionValue");
+            return new UserActionParam(userActionValue);
         });
     }
 }

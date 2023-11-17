@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The third level model in the normal multiple levels inheritance.
@@ -67,11 +65,8 @@ public final class Siamese extends Cat {
      */
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean ageFound = false;
             int age = 0;
-            boolean smartFound = false;
             boolean smart = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -79,33 +74,15 @@ public final class Siamese extends Cat {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
-                    ageFound = true;
                 } else if ("smart".equals(fieldName)) {
                     smart = reader.getBoolean();
-                    smartFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && ageFound && smartFound) {
-                return new Siamese(name, age, smart);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!ageFound) {
-                missingProperties.add("age");
-            }
-            if (!smartFound) {
-                missingProperties.add("smart");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Siamese(name, age, smart);
         });
     }
 }

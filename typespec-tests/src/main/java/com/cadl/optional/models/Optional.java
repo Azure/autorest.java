@@ -14,7 +14,6 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -503,13 +502,9 @@ public final class Optional implements JsonSerializable<Optional> {
      */
     public static Optional fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean booleanRequiredFound = false;
             boolean booleanRequired = false;
-            boolean booleanRequiredNullableFound = false;
             Boolean booleanRequiredNullable = null;
-            boolean stringRequiredFound = false;
             String stringRequired = null;
-            boolean stringRequiredNullableFound = false;
             String stringRequiredNullable = null;
             Boolean booleanProperty = null;
             Boolean booleanNullable = null;
@@ -530,16 +525,12 @@ public final class Optional implements JsonSerializable<Optional> {
 
                 if ("booleanRequired".equals(fieldName)) {
                     booleanRequired = reader.getBoolean();
-                    booleanRequiredFound = true;
                 } else if ("booleanRequiredNullable".equals(fieldName)) {
                     booleanRequiredNullable = reader.getNullable(JsonReader::getBoolean);
-                    booleanRequiredNullableFound = true;
                 } else if ("stringRequired".equals(fieldName)) {
                     stringRequired = reader.getString();
-                    stringRequiredFound = true;
                 } else if ("stringRequiredNullable".equals(fieldName)) {
                     stringRequiredNullable = reader.getString();
-                    stringRequiredNullableFound = true;
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getNullable(JsonReader::getBoolean);
                 } else if ("booleanNullable".equals(fieldName)) {
@@ -570,42 +561,23 @@ public final class Optional implements JsonSerializable<Optional> {
                     reader.skipChildren();
                 }
             }
-            if (booleanRequiredFound && booleanRequiredNullableFound && stringRequiredFound
-                && stringRequiredNullableFound) {
-                Optional deserializedOptional
-                    = new Optional(booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable);
-                deserializedOptional.booleanProperty = booleanProperty;
-                deserializedOptional.booleanNullable = booleanNullable;
-                deserializedOptional.string = string;
-                deserializedOptional.stringNullable = stringNullable;
-                deserializedOptional.bytes = bytes;
-                deserializedOptional.intProperty = intProperty;
-                deserializedOptional.longProperty = longProperty;
-                deserializedOptional.floatProperty = floatProperty;
-                deserializedOptional.doubleProperty = doubleProperty;
-                deserializedOptional.duration = duration;
-                deserializedOptional.dateTime = dateTime;
-                deserializedOptional.stringList = stringList;
-                deserializedOptional.bytesDict = bytesDict;
+            Optional deserializedOptional
+                = new Optional(booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable);
+            deserializedOptional.booleanProperty = booleanProperty;
+            deserializedOptional.booleanNullable = booleanNullable;
+            deserializedOptional.string = string;
+            deserializedOptional.stringNullable = stringNullable;
+            deserializedOptional.bytes = bytes;
+            deserializedOptional.intProperty = intProperty;
+            deserializedOptional.longProperty = longProperty;
+            deserializedOptional.floatProperty = floatProperty;
+            deserializedOptional.doubleProperty = doubleProperty;
+            deserializedOptional.duration = duration;
+            deserializedOptional.dateTime = dateTime;
+            deserializedOptional.stringList = stringList;
+            deserializedOptional.bytesDict = bytesDict;
 
-                return deserializedOptional;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!booleanRequiredFound) {
-                missingProperties.add("booleanRequired");
-            }
-            if (!booleanRequiredNullableFound) {
-                missingProperties.add("booleanRequiredNullable");
-            }
-            if (!stringRequiredFound) {
-                missingProperties.add("stringRequired");
-            }
-            if (!stringRequiredNullableFound) {
-                missingProperties.add("stringRequiredNullable");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedOptional;
         });
     }
 }

@@ -61,7 +61,6 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
      */
     public static JsonProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean defaultNameFound = false;
             boolean defaultName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
 
                 if ("wireName".equals(fieldName)) {
                     defaultName = reader.getBoolean();
-                    defaultNameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (defaultNameFound) {
-                return new JsonProjectedNameModel(defaultName);
-            }
-            throw new IllegalStateException("Missing required property: wireName");
+            return new JsonProjectedNameModel(defaultName);
         });
     }
 }

@@ -63,7 +63,6 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
      */
     public static DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             OffsetDateTime property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
 
                 if ("property".equals(fieldName)) {
                     property = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new DatetimeProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new DatetimeProperty(property);
         });
     }
 }

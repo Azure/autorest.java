@@ -76,17 +76,36 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("real".equals(discriminatorValue)) {
-                return RealModel.fromJson(readerToUse);
+                return RealModel.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'real'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static AbstractModel fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"AbstractModel".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'AbstractModel'. The found 'kind' was '"
+                                + kind + "'.");
+                    }
+                } else if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new AbstractModel(name);
         });
     }
 }

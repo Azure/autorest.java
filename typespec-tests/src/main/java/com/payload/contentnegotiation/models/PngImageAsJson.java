@@ -62,7 +62,6 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
      */
     public static PngImageAsJson fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean contentFound = false;
             byte[] content = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
 
                 if ("content".equals(fieldName)) {
                     content = reader.getBinary();
-                    contentFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (contentFound) {
-                return new PngImageAsJson(content);
-            }
-            throw new IllegalStateException("Missing required property: content");
+            return new PngImageAsJson(content);
         });
     }
 }

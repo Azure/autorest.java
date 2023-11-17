@@ -91,7 +91,6 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      */
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             String property = null;
             List<InnerModel> children = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -100,20 +99,16 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
                 if ("property".equals(fieldName)) {
                     property = reader.getString();
-                    propertyFound = true;
                 } else if ("children".equals(fieldName)) {
                     children = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                InnerModel deserializedInnerModel = new InnerModel(property);
-                deserializedInnerModel.children = children;
+            InnerModel deserializedInnerModel = new InnerModel(property);
+            deserializedInnerModel.children = children;
 
-                return deserializedInnerModel;
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return deserializedInnerModel;
         });
     }
 }

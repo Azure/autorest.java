@@ -61,7 +61,6 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
      */
     public static SameAsModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean sameAsModelFound = false;
             String sameAsModel = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
 
                 if ("SameAsModel".equals(fieldName)) {
                     sameAsModel = reader.getString();
-                    sameAsModelFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (sameAsModelFound) {
-                return new SameAsModel(sameAsModel);
-            }
-            throw new IllegalStateException("Missing required property: SameAsModel");
+            return new SameAsModel(sameAsModel);
         });
     }
 }

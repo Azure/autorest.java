@@ -62,7 +62,6 @@ public final class CollectionsIntProperty implements JsonSerializable<Collection
      */
     public static CollectionsIntProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             List<Integer> property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class CollectionsIntProperty implements JsonSerializable<Collection
 
                 if ("property".equals(fieldName)) {
                     property = reader.readArray(reader1 -> reader1.getInt());
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new CollectionsIntProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new CollectionsIntProperty(property);
         });
     }
 }

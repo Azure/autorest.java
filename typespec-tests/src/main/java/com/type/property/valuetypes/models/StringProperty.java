@@ -61,7 +61,6 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
      */
     public static StringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             String property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
 
                 if ("property".equals(fieldName)) {
                     property = reader.getString();
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new StringProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new StringProperty(property);
         });
     }
 }

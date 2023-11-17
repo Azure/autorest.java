@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
@@ -81,30 +79,22 @@ public class Shark extends Fish {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
                 return fromJsonKnownDiscriminator(readerToUse);
             } else if ("saw".equals(discriminatorValue)) {
-                return SawShark.fromJson(readerToUse);
+                return SawShark.fromJson(readerToUse.reset());
             } else if ("goblin".equals(discriminatorValue)) {
-                return GoblinShark.fromJson(readerToUse);
+                return GoblinShark.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'sharktype' didn't match one of the expected values 'shark', 'saw', or 'goblin'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
         });
     }
 
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean ageFound = false;
             int age = 0;
-            boolean sharktypeFound = false;
             String sharktype = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -117,27 +107,13 @@ public class Shark extends Fish {
                             "'sharktype' was expected to be non-null and equal to 'shark'. The found 'sharktype' was '"
                                 + sharktype + "'.");
                     }
-                    sharktypeFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
-                    ageFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (ageFound && sharktypeFound) {
-                return new Shark(age, sharktype);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!ageFound) {
-                missingProperties.add("age");
-            }
-            if (!sharktypeFound) {
-                missingProperties.add("sharktype");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Shark(age, sharktype);
         });
     }
 }

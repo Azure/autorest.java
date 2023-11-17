@@ -63,7 +63,6 @@ public class SuperClass implements JsonSerializable<SuperClass> {
      */
     public static SuperClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dateTimeFound = false;
             OffsetDateTime dateTime = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public class SuperClass implements JsonSerializable<SuperClass> {
 
                 if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    dateTimeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dateTimeFound) {
-                return new SuperClass(dateTime);
-            }
-            throw new IllegalStateException("Missing required property: dateTime");
+            return new SuperClass(dateTime);
         });
     }
 }

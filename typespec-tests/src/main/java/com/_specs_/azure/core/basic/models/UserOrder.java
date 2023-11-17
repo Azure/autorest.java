@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * UserOrder for testing list with expand.
@@ -99,9 +97,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     public static UserOrder fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;
-            boolean userIdFound = false;
             int userId = 0;
-            boolean detailFound = false;
             String detail = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -111,30 +107,16 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
                     id = reader.getInt();
                 } else if ("userId".equals(fieldName)) {
                     userId = reader.getInt();
-                    userIdFound = true;
                 } else if ("detail".equals(fieldName)) {
                     detail = reader.getString();
-                    detailFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (userIdFound && detailFound) {
-                UserOrder deserializedUserOrder = new UserOrder(userId, detail);
-                deserializedUserOrder.id = id;
+            UserOrder deserializedUserOrder = new UserOrder(userId, detail);
+            deserializedUserOrder.id = id;
 
-                return deserializedUserOrder;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!userIdFound) {
-                missingProperties.add("userId");
-            }
-            if (!detailFound) {
-                missingProperties.add("detail");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedUserOrder;
         });
     }
 }

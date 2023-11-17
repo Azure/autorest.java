@@ -64,7 +64,6 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
      */
     public static ErrorResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean errorFound = false;
             ResponseError error = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -72,15 +71,11 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
 
                 if ("error".equals(fieldName)) {
                     error = ResponseErrorUtils.fromJson(reader);
-                    errorFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (errorFound) {
-                return new ErrorResponse(error);
-            }
-            throw new IllegalStateException("Missing required property: error");
+            return new ErrorResponse(error);
         });
     }
 }

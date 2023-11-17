@@ -61,7 +61,6 @@ public final class BooleanProperty implements JsonSerializable<BooleanProperty> 
      */
     public static BooleanProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             boolean property = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class BooleanProperty implements JsonSerializable<BooleanProperty> 
 
                 if ("property".equals(fieldName)) {
                     property = reader.getBoolean();
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new BooleanProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new BooleanProperty(property);
         });
     }
 }

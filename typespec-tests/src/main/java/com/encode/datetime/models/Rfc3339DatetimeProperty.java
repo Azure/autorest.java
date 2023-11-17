@@ -63,7 +63,6 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
      */
     public static Rfc3339DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,15 +70,11 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
 
                 if ("value".equals(fieldName)) {
                     value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new Rfc3339DatetimeProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new Rfc3339DatetimeProperty(value);
         });
     }
 }

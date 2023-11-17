@@ -13,8 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -75,9 +73,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
      */
     public static SubClassBothMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dateTimeRfc7231Found = false;
             OffsetDateTime dateTimeRfc7231 = null;
-            boolean base64UrlFound = false;
             byte[] base64Url = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -89,31 +85,17 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-                    dateTimeRfc7231Found = true;
                 } else if ("base64url".equals(fieldName)) {
                     Base64Url base64UrlHolder
                         = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
                     if (base64UrlHolder != null) {
                         base64Url = base64UrlHolder.decodedBytes();
                     }
-                    base64UrlFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dateTimeRfc7231Found && base64UrlFound) {
-                return new SubClassBothMismatch(dateTimeRfc7231, base64Url);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dateTimeRfc7231Found) {
-                missingProperties.add("dateTimeRfc7231");
-            }
-            if (!base64UrlFound) {
-                missingProperties.add("base64url");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new SubClassBothMismatch(dateTimeRfc7231, base64Url);
         });
     }
 }

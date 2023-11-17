@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Operation model.
@@ -223,13 +221,9 @@ public final class Operation implements JsonSerializable<Operation> {
      */
     public static Operation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             OperationName name = null;
-            boolean priorityFound = false;
             Priority priority = null;
-            boolean colorFound = false;
             ColorModel color = null;
-            boolean unitFound = false;
             Unit unit = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -237,39 +231,17 @@ public final class Operation implements JsonSerializable<Operation> {
 
                 if ("name".equals(fieldName)) {
                     name = OperationName.fromString(reader.getString());
-                    nameFound = true;
                 } else if ("priority".equals(fieldName)) {
                     priority = Priority.fromLong(reader.getLong());
-                    priorityFound = true;
                 } else if ("color".equals(fieldName)) {
                     color = ColorModel.fromString(reader.getString());
-                    colorFound = true;
                 } else if ("unit".equals(fieldName)) {
                     unit = Unit.fromDouble(reader.getDouble());
-                    unitFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && priorityFound && colorFound && unitFound) {
-                return new Operation(name, priority, color, unit);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!priorityFound) {
-                missingProperties.add("priority");
-            }
-            if (!colorFound) {
-                missingProperties.add("color");
-            }
-            if (!unitFound) {
-                missingProperties.add("unit");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Operation(name, priority, color, unit);
         });
     }
 }

@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -84,9 +82,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      */
     public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean requiredPropertyFound = false;
             String requiredProperty = null;
-            boolean nullablePropertyFound = false;
             Duration nullableProperty = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -94,27 +90,13 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
 
                 if ("requiredProperty".equals(fieldName)) {
                     requiredProperty = reader.getString();
-                    requiredPropertyFound = true;
                 } else if ("nullableProperty".equals(fieldName)) {
                     nullableProperty = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
-                    nullablePropertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (requiredPropertyFound && nullablePropertyFound) {
-                return new DurationProperty(requiredProperty, nullableProperty);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!requiredPropertyFound) {
-                missingProperties.add("requiredProperty");
-            }
-            if (!nullablePropertyFound) {
-                missingProperties.add("nullableProperty");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new DurationProperty(requiredProperty, nullableProperty);
         });
     }
 }

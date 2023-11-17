@@ -46,7 +46,6 @@ public final class Golden extends Dog {
      */
     public static Golden fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean weightFound = false;
             int weight = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -61,15 +60,11 @@ public final class Golden extends Dog {
                     }
                 } else if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
-                    weightFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (weightFound) {
-                return new Golden(weight);
-            }
-            throw new IllegalStateException("Missing required property: weight");
+            return new Golden(weight);
         });
     }
 }

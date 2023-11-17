@@ -46,7 +46,6 @@ public final class Sparrow extends Bird {
      */
     public static Sparrow fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean wingspanFound = false;
             int wingspan = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -61,15 +60,11 @@ public final class Sparrow extends Bird {
                     }
                 } else if ("wingspan".equals(fieldName)) {
                     wingspan = reader.getInt();
-                    wingspanFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (wingspanFound) {
-                return new Sparrow(wingspan);
-            }
-            throw new IllegalStateException("Missing required property: wingspan");
+            return new Sparrow(wingspan);
         });
     }
 }

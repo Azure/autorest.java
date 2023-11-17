@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Options for sendLong API.
@@ -246,11 +244,8 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
      */
     public static SendLongOptions fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean idFound = false;
             String id = null;
-            boolean inputFound = false;
             String input = null;
-            boolean dataIntFound = false;
             int dataInt = 0;
             String filter = null;
             User user = null;
@@ -263,13 +258,10 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
 
                 if ("id".equals(fieldName)) {
                     id = reader.getString();
-                    idFound = true;
                 } else if ("input".equals(fieldName)) {
                     input = reader.getString();
-                    inputFound = true;
                 } else if ("dataInt".equals(fieldName)) {
                     dataInt = reader.getInt();
-                    dataIntFound = true;
                 } else if ("filter".equals(fieldName)) {
                     filter = reader.getString();
                 } else if ("user".equals(fieldName)) {
@@ -284,29 +276,14 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
                     reader.skipChildren();
                 }
             }
-            if (idFound && inputFound && dataIntFound) {
-                SendLongOptions deserializedSendLongOptions = new SendLongOptions(id, input, dataInt);
-                deserializedSendLongOptions.filter = filter;
-                deserializedSendLongOptions.user = user;
-                deserializedSendLongOptions.dataIntOptional = dataIntOptional;
-                deserializedSendLongOptions.dataLong = dataLong;
-                deserializedSendLongOptions.dataFloat = dataFloat;
+            SendLongOptions deserializedSendLongOptions = new SendLongOptions(id, input, dataInt);
+            deserializedSendLongOptions.filter = filter;
+            deserializedSendLongOptions.user = user;
+            deserializedSendLongOptions.dataIntOptional = dataIntOptional;
+            deserializedSendLongOptions.dataLong = dataLong;
+            deserializedSendLongOptions.dataFloat = dataFloat;
 
-                return deserializedSendLongOptions;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!idFound) {
-                missingProperties.add("id");
-            }
-            if (!inputFound) {
-                missingProperties.add("input");
-            }
-            if (!dataIntFound) {
-                missingProperties.add("dataInt");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedSendLongOptions;
         });
     }
 }

@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
@@ -82,9 +80,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
      */
     public static StringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean requiredPropertyFound = false;
             String requiredProperty = null;
-            boolean nullablePropertyFound = false;
             String nullableProperty = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -92,27 +88,13 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
 
                 if ("requiredProperty".equals(fieldName)) {
                     requiredProperty = reader.getString();
-                    requiredPropertyFound = true;
                 } else if ("nullableProperty".equals(fieldName)) {
                     nullableProperty = reader.getString();
-                    nullablePropertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (requiredPropertyFound && nullablePropertyFound) {
-                return new StringProperty(requiredProperty, nullableProperty);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!requiredPropertyFound) {
-                missingProperties.add("requiredProperty");
-            }
-            if (!nullablePropertyFound) {
-                missingProperties.add("nullableProperty");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new StringProperty(requiredProperty, nullableProperty);
         });
     }
 }

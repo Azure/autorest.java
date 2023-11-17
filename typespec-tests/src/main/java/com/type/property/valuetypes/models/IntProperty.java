@@ -61,7 +61,6 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
      */
     public static IntProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             int property = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
 
                 if ("property".equals(fieldName)) {
                     property = reader.getInt();
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new IntProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new IntProperty(property);
         });
     }
 }

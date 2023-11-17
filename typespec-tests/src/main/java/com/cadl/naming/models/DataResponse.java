@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * summary of Response
@@ -138,13 +136,9 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
      */
     public static DataResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean dataFound = false;
             BinaryData data = null;
-            boolean dataTypeFound = false;
             TypesModel dataType = null;
-            boolean statusFound = false;
             DataStatus status = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -152,39 +146,17 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("data".equals(fieldName)) {
                     data = BinaryData.fromJson(reader);
-                    dataFound = true;
                 } else if ("type".equals(fieldName)) {
                     dataType = TypesModel.fromString(reader.getString());
-                    dataTypeFound = true;
                 } else if ("status".equals(fieldName)) {
                     status = DataStatus.fromString(reader.getString());
-                    statusFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && dataFound && dataTypeFound && statusFound) {
-                return new DataResponse(name, data, dataType, status);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-            if (!dataTypeFound) {
-                missingProperties.add("type");
-            }
-            if (!statusFound) {
-                missingProperties.add("status");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new DataResponse(name, data, dataType, status);
         });
     }
 }

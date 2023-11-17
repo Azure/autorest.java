@@ -61,7 +61,6 @@ public final class OutputData implements JsonSerializable<OutputData> {
      */
     public static OutputData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dataFound = false;
             String data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class OutputData implements JsonSerializable<OutputData> {
 
                 if ("data".equals(fieldName)) {
                     data = reader.getString();
-                    dataFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dataFound) {
-                return new OutputData(data);
-            }
-            throw new IllegalStateException("Missing required property: data");
+            return new OutputData(data);
         });
     }
 }

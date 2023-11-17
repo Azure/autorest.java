@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The exported user data.
@@ -82,9 +80,7 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
      */
     public static ExportedUser fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean resourceUriFound = false;
             String resourceUri = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -92,27 +88,13 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("resourceUri".equals(fieldName)) {
                     resourceUri = reader.getString();
-                    resourceUriFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && resourceUriFound) {
-                return new ExportedUser(name, resourceUri);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!resourceUriFound) {
-                missingProperties.add("resourceUri");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new ExportedUser(name, resourceUri);
         });
     }
 }

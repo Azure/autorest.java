@@ -62,7 +62,6 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
      */
     public static Int32SecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
 
                 if ("value".equals(fieldName)) {
                     value = Duration.ofSeconds(reader.getLong());
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new Int32SecondsDurationProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new Int32SecondsDurationProperty(value);
         });
     }
 }

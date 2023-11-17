@@ -137,7 +137,6 @@ public final class Resource implements JsonSerializable<Resource> {
      */
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean idFound = false;
             String id = null;
             String aggregate = null;
             String condition = null;
@@ -149,7 +148,6 @@ public final class Resource implements JsonSerializable<Resource> {
 
                 if ("id".equals(fieldName)) {
                     id = reader.getString();
-                    idFound = true;
                 } else if ("aggregate".equals(fieldName)) {
                     aggregate = reader.getString();
                 } else if ("condition".equals(fieldName)) {
@@ -162,16 +160,13 @@ public final class Resource implements JsonSerializable<Resource> {
                     reader.skipChildren();
                 }
             }
-            if (idFound) {
-                Resource deserializedResource = new Resource(id);
-                deserializedResource.aggregate = aggregate;
-                deserializedResource.condition = condition;
-                deserializedResource.requestName = requestName;
-                deserializedResource.value = value;
+            Resource deserializedResource = new Resource(id);
+            deserializedResource.aggregate = aggregate;
+            deserializedResource.condition = condition;
+            deserializedResource.requestName = requestName;
+            deserializedResource.value = value;
 
-                return deserializedResource;
-            }
-            throw new IllegalStateException("Missing required property: id");
+            return deserializedResource;
         });
     }
 }

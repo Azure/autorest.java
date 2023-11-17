@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Resource1 model.
@@ -95,7 +93,6 @@ public final class Resource1 implements JsonSerializable<Resource1> {
      */
     public static Resource1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
             OutputData outputData = null;
             InputOutputData2 outputData2 = null;
@@ -105,7 +102,6 @@ public final class Resource1 implements JsonSerializable<Resource1> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("outputData".equals(fieldName)) {
                     outputData = OutputData.fromJson(reader);
                 } else if ("outputData2".equals(fieldName)) {
@@ -114,20 +110,11 @@ public final class Resource1 implements JsonSerializable<Resource1> {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                Resource1 deserializedResource1 = new Resource1(name);
-                deserializedResource1.outputData = outputData;
-                deserializedResource1.outputData2 = outputData2;
+            Resource1 deserializedResource1 = new Resource1(name);
+            deserializedResource1.outputData = outputData;
+            deserializedResource1.outputData2 = outputData2;
 
-                return deserializedResource1;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedResource1;
         });
     }
 }

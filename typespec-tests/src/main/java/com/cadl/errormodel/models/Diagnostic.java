@@ -13,8 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.errormodel.implementation.ResponseErrorUtils;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Diagnostic model.
@@ -85,9 +83,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
      */
     public static Diagnostic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean errorFound = false;
             ResponseError error = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -95,27 +91,13 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("error".equals(fieldName)) {
                     error = ResponseErrorUtils.fromJson(reader);
-                    errorFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && errorFound) {
-                return new Diagnostic(name, error);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!errorFound) {
-                missingProperties.add("error");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Diagnostic(name, error);
         });
     }
 }

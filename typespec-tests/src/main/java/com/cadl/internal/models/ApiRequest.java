@@ -61,7 +61,6 @@ public final class ApiRequest implements JsonSerializable<ApiRequest> {
      */
     public static ApiRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             RequestInner property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ApiRequest implements JsonSerializable<ApiRequest> {
 
                 if ("property".equals(fieldName)) {
                     property = RequestInner.fromJson(reader);
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new ApiRequest(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new ApiRequest(property);
         });
     }
 }

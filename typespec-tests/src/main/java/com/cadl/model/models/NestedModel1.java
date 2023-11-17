@@ -61,7 +61,6 @@ public final class NestedModel1 implements JsonSerializable<NestedModel1> {
      */
     public static NestedModel1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nested2Found = false;
             NestedModel2 nested2 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class NestedModel1 implements JsonSerializable<NestedModel1> {
 
                 if ("nested2".equals(fieldName)) {
                     nested2 = NestedModel2.fromJson(reader);
-                    nested2Found = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nested2Found) {
-                return new NestedModel1(nested2);
-            }
-            throw new IllegalStateException("Missing required property: nested2");
+            return new NestedModel1(nested2);
         });
     }
 }

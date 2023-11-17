@@ -136,7 +136,6 @@ public final class Salmon extends Fish {
      */
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean ageFound = false;
             int age = 0;
             List<Fish> friends = null;
             Map<String, Fish> hate = null;
@@ -154,7 +153,6 @@ public final class Salmon extends Fish {
                     }
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
-                    ageFound = true;
                 } else if ("friends".equals(fieldName)) {
                     friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("hate".equals(fieldName)) {
@@ -165,15 +163,12 @@ public final class Salmon extends Fish {
                     reader.skipChildren();
                 }
             }
-            if (ageFound) {
-                Salmon deserializedSalmon = new Salmon(age);
-                deserializedSalmon.friends = friends;
-                deserializedSalmon.hate = hate;
-                deserializedSalmon.partner = partner;
+            Salmon deserializedSalmon = new Salmon(age);
+            deserializedSalmon.friends = friends;
+            deserializedSalmon.hate = hate;
+            deserializedSalmon.partner = partner;
 
-                return deserializedSalmon;
-            }
-            throw new IllegalStateException("Missing required property: age");
+            return deserializedSalmon;
         });
     }
 }

@@ -67,7 +67,6 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
      */
     public static Rfc7231DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -79,15 +78,11 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
                     if (valueHolder != null) {
                         value = valueHolder.getDateTime();
                     }
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new Rfc7231DatetimeProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new Rfc7231DatetimeProperty(value);
         });
     }
 }

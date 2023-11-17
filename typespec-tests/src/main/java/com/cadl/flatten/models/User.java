@@ -61,7 +61,6 @@ public final class User implements JsonSerializable<User> {
      */
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean userFound = false;
             String user = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class User implements JsonSerializable<User> {
 
                 if ("user".equals(fieldName)) {
                     user = reader.getString();
-                    userFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (userFound) {
-                return new User(user);
-            }
-            throw new IllegalStateException("Missing required property: user");
+            return new User(user);
         });
     }
 }

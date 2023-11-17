@@ -61,7 +61,6 @@ public final class ClientProjectedNameModel implements JsonSerializable<ClientPr
      */
     public static ClientProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean clientNameFound = false;
             boolean clientName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ClientProjectedNameModel implements JsonSerializable<ClientPr
 
                 if ("defaultName".equals(fieldName)) {
                     clientName = reader.getBoolean();
-                    clientNameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (clientNameFound) {
-                return new ClientProjectedNameModel(clientName);
-            }
-            throw new IllegalStateException("Missing required property: defaultName");
+            return new ClientProjectedNameModel(clientName);
         });
     }
 }

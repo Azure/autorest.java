@@ -62,7 +62,6 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
      */
     public static DefaultBytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             byte[] value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
 
                 if ("value".equals(fieldName)) {
                     value = reader.getBinary();
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new DefaultBytesProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new DefaultBytesProperty(value);
         });
     }
 }

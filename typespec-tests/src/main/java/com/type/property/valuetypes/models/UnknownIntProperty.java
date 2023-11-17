@@ -61,7 +61,6 @@ public final class UnknownIntProperty implements JsonSerializable<UnknownIntProp
      */
     public static UnknownIntProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             Object property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class UnknownIntProperty implements JsonSerializable<UnknownIntProp
 
                 if ("property".equals(fieldName)) {
                     property = reader.readUntyped();
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new UnknownIntProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new UnknownIntProperty(property);
         });
     }
 }

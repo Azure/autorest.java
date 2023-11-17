@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Dog model.
@@ -99,9 +97,7 @@ public final class Dog implements JsonSerializable<Dog> {
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;
-            boolean secretNameFound = false;
             String secretName = null;
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -111,30 +107,16 @@ public final class Dog implements JsonSerializable<Dog> {
                     id = reader.getInt();
                 } else if ("secretName".equals(fieldName)) {
                     secretName = reader.getString();
-                    secretNameFound = true;
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (secretNameFound && nameFound) {
-                Dog deserializedDog = new Dog(secretName, name);
-                deserializedDog.id = id;
+            Dog deserializedDog = new Dog(secretName, name);
+            deserializedDog.id = id;
 
-                return deserializedDog;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!secretNameFound) {
-                missingProperties.add("secretName");
-            }
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedDog;
         });
     }
 }

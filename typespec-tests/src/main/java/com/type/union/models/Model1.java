@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The first one of the unioned model type.
@@ -65,9 +63,7 @@ public final class Model1 extends BaseModel {
      */
     public static Model1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean prop1Found = false;
             int prop1 = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -75,27 +71,13 @@ public final class Model1 extends BaseModel {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("prop1".equals(fieldName)) {
                     prop1 = reader.getInt();
-                    prop1Found = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && prop1Found) {
-                return new Model1(name, prop1);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!prop1Found) {
-                missingProperties.add("prop1");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Model1(name, prop1);
         });
     }
 }

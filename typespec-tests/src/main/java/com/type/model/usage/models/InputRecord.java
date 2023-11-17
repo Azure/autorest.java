@@ -61,7 +61,6 @@ public final class InputRecord implements JsonSerializable<InputRecord> {
      */
     public static InputRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean requiredPropFound = false;
             String requiredProp = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class InputRecord implements JsonSerializable<InputRecord> {
 
                 if ("requiredProp".equals(fieldName)) {
                     requiredProp = reader.getString();
-                    requiredPropFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (requiredPropFound) {
-                return new InputRecord(requiredProp);
-            }
-            throw new IllegalStateException("Missing required property: requiredProp");
+            return new InputRecord(requiredProp);
         });
     }
 }

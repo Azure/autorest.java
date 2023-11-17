@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used in internal operations, should be generated but not exported.
@@ -65,9 +63,7 @@ public final class OuterModel extends BaseModel {
      */
     public static OuterModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean innerFound = false;
             InnerModel inner = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -75,27 +71,13 @@ public final class OuterModel extends BaseModel {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("inner".equals(fieldName)) {
                     inner = InnerModel.fromJson(reader);
-                    innerFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && innerFound) {
-                return new OuterModel(name, inner);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!innerFound) {
-                missingProperties.add("inner");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new OuterModel(name, inner);
         });
     }
 }

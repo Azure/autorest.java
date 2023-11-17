@@ -67,7 +67,6 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
      */
     public static SuperClassMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dateTimeRfc7231Found = false;
             OffsetDateTime dateTimeRfc7231 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -79,15 +78,11 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-                    dateTimeRfc7231Found = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dateTimeRfc7231Found) {
-                return new SuperClassMismatch(dateTimeRfc7231);
-            }
-            throw new IllegalStateException("Missing required property: dateTimeRfc7231");
+            return new SuperClassMismatch(dateTimeRfc7231);
         });
     }
 }

@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Options for spreadWithMultipleParameters API.
@@ -198,21 +196,13 @@ public final class SpreadWithMultipleParametersOptions
      */
     public static SpreadWithMultipleParametersOptions fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean idFound = false;
             String id = null;
-            boolean xMsTestHeaderFound = false;
             String xMsTestHeader = null;
-            boolean prop1Found = false;
             String prop1 = null;
-            boolean prop2Found = false;
             String prop2 = null;
-            boolean prop3Found = false;
             String prop3 = null;
-            boolean prop4Found = false;
             String prop4 = null;
-            boolean prop5Found = false;
             String prop5 = null;
-            boolean prop6Found = false;
             String prop6 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -220,65 +210,25 @@ public final class SpreadWithMultipleParametersOptions
 
                 if ("id".equals(fieldName)) {
                     id = reader.getString();
-                    idFound = true;
                 } else if ("x-ms-test-header".equals(fieldName)) {
                     xMsTestHeader = reader.getString();
-                    xMsTestHeaderFound = true;
                 } else if ("prop1".equals(fieldName)) {
                     prop1 = reader.getString();
-                    prop1Found = true;
                 } else if ("prop2".equals(fieldName)) {
                     prop2 = reader.getString();
-                    prop2Found = true;
                 } else if ("prop3".equals(fieldName)) {
                     prop3 = reader.getString();
-                    prop3Found = true;
                 } else if ("prop4".equals(fieldName)) {
                     prop4 = reader.getString();
-                    prop4Found = true;
                 } else if ("prop5".equals(fieldName)) {
                     prop5 = reader.getString();
-                    prop5Found = true;
                 } else if ("prop6".equals(fieldName)) {
                     prop6 = reader.getString();
-                    prop6Found = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (idFound && xMsTestHeaderFound && prop1Found && prop2Found && prop3Found && prop4Found && prop5Found
-                && prop6Found) {
-                return new SpreadWithMultipleParametersOptions(id, xMsTestHeader, prop1, prop2, prop3, prop4, prop5,
-                    prop6);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!idFound) {
-                missingProperties.add("id");
-            }
-            if (!xMsTestHeaderFound) {
-                missingProperties.add("x-ms-test-header");
-            }
-            if (!prop1Found) {
-                missingProperties.add("prop1");
-            }
-            if (!prop2Found) {
-                missingProperties.add("prop2");
-            }
-            if (!prop3Found) {
-                missingProperties.add("prop3");
-            }
-            if (!prop4Found) {
-                missingProperties.add("prop4");
-            }
-            if (!prop5Found) {
-                missingProperties.add("prop5");
-            }
-            if (!prop6Found) {
-                missingProperties.add("prop6");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new SpreadWithMultipleParametersOptions(id, xMsTestHeader, prop1, prop2, prop3, prop4, prop5, prop6);
         });
     }
 }

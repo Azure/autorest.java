@@ -76,24 +76,42 @@ public class Bird implements JsonSerializable<Bird> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("seagull".equals(discriminatorValue)) {
-                return SeaGull.fromJson(readerToUse);
+                return SeaGull.fromJson(readerToUse.reset());
             } else if ("sparrow".equals(discriminatorValue)) {
-                return Sparrow.fromJson(readerToUse);
+                return Sparrow.fromJson(readerToUse.reset());
             } else if ("goose".equals(discriminatorValue)) {
-                return Goose.fromJson(readerToUse);
+                return Goose.fromJson(readerToUse.reset());
             } else if ("eagle".equals(discriminatorValue)) {
-                return Eagle.fromJson(readerToUse);
+                return Eagle.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'seagull', 'sparrow', 'goose', or 'eagle'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Bird fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int wingspan = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Bird".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Bird'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("wingspan".equals(fieldName)) {
+                    wingspan = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Bird(wingspan);
         });
     }
 }

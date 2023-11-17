@@ -76,17 +76,36 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("t-rex".equals(discriminatorValue)) {
-                return TRex.fromJson(readerToUse);
+                return TRex.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 't-rex'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Dinosaur fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int size = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Dinosaur".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Dinosaur'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("size".equals(fieldName)) {
+                    size = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Dinosaur(size);
         });
     }
 }

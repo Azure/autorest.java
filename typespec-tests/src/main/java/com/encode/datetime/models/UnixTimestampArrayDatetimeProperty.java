@@ -69,7 +69,6 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
      */
     public static UnixTimestampArrayDatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean valueFound = false;
             List<OffsetDateTime> value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -78,15 +77,11 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
                 if ("value".equals(fieldName)) {
                     value = reader.readArray(
                         reader1 -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader1.getLong()), ZoneOffset.UTC));
-                    valueFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (valueFound) {
-                return new UnixTimestampArrayDatetimeProperty(value);
-            }
-            throw new IllegalStateException("Missing required property: value");
+            return new UnixTimestampArrayDatetimeProperty(value);
         });
     }
 }

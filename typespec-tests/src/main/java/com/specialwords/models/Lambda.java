@@ -61,7 +61,6 @@ public final class Lambda implements JsonSerializable<Lambda> {
      */
     public static Lambda fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class Lambda implements JsonSerializable<Lambda> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                return new Lambda(name);
-            }
-            throw new IllegalStateException("Missing required property: name");
+            return new Lambda(name);
         });
     }
 }

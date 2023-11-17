@@ -46,7 +46,6 @@ public final class TRex extends Dinosaur {
      */
     public static TRex fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean sizeFound = false;
             int size = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -61,15 +60,11 @@ public final class TRex extends Dinosaur {
                     }
                 } else if ("size".equals(fieldName)) {
                     size = reader.getInt();
-                    sizeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (sizeFound) {
-                return new TRex(size);
-            }
-            throw new IllegalStateException("Missing required property: size");
+            return new TRex(size);
         });
     }
 }

@@ -61,7 +61,6 @@ public final class LanguageProjectedNameModel implements JsonSerializable<Langua
      */
     public static LanguageProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean javaNameFound = false;
             boolean javaName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class LanguageProjectedNameModel implements JsonSerializable<Langua
 
                 if ("defaultName".equals(fieldName)) {
                     javaName = reader.getBoolean();
-                    javaNameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (javaNameFound) {
-                return new LanguageProjectedNameModel(javaName);
-            }
-            throw new IllegalStateException("Missing required property: defaultName");
+            return new LanguageProjectedNameModel(javaName);
         });
     }
 }

@@ -62,7 +62,6 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
      */
     public static DictionaryStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             Map<String, String> property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -70,15 +69,11 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
 
                 if ("property".equals(fieldName)) {
                     property = reader.readMap(reader1 -> reader1.getString());
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new DictionaryStringProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new DictionaryStringProperty(property);
         });
     }
 }

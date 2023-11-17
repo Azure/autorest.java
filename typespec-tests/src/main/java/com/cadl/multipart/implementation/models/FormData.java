@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The FormData model.
@@ -83,9 +81,7 @@ public final class FormData implements JsonSerializable<FormData> {
      */
     public static FormData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean imageFound = false;
             byte[] image = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -93,27 +89,13 @@ public final class FormData implements JsonSerializable<FormData> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("image".equals(fieldName)) {
                     image = reader.getBinary();
-                    imageFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && imageFound) {
-                return new FormData(name, image);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!imageFound) {
-                missingProperties.add("image");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new FormData(name, image);
         });
     }
 }

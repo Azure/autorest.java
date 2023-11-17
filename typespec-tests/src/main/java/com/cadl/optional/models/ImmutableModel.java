@@ -77,7 +77,6 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
      */
     public static ImmutableModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean stringReadWriteRequiredFound = false;
             String stringReadWriteRequired = null;
             String stringReadOnlyOptional = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -86,20 +85,16 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
 
                 if ("stringReadWriteRequired".equals(fieldName)) {
                     stringReadWriteRequired = reader.getString();
-                    stringReadWriteRequiredFound = true;
                 } else if ("stringReadOnlyOptional".equals(fieldName)) {
                     stringReadOnlyOptional = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (stringReadWriteRequiredFound) {
-                ImmutableModel deserializedImmutableModel = new ImmutableModel(stringReadWriteRequired);
-                deserializedImmutableModel.stringReadOnlyOptional = stringReadOnlyOptional;
+            ImmutableModel deserializedImmutableModel = new ImmutableModel(stringReadWriteRequired);
+            deserializedImmutableModel.stringReadOnlyOptional = stringReadOnlyOptional;
 
-                return deserializedImmutableModel;
-            }
-            throw new IllegalStateException("Missing required property: stringReadWriteRequired");
+            return deserializedImmutableModel;
         });
     }
 }

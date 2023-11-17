@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The third level model SawShark in polymorphic multiple levels inheritance.
@@ -50,9 +48,7 @@ public final class SawShark extends Shark {
      */
     public static SawShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean ageFound = false;
             int age = 0;
-            boolean sharktypeFound = false;
             String sharktype = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -65,27 +61,13 @@ public final class SawShark extends Shark {
                             "'sharktype' was expected to be non-null and equal to 'saw'. The found 'sharktype' was '"
                                 + sharktype + "'.");
                     }
-                    sharktypeFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
-                    ageFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (ageFound && sharktypeFound) {
-                return new SawShark(age, sharktype);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!ageFound) {
-                missingProperties.add("age");
-            }
-            if (!sharktypeFound) {
-                missingProperties.add("sharktype");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new SawShark(age, sharktype);
         });
     }
 }

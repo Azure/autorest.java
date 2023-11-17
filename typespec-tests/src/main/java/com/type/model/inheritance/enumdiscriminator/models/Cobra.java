@@ -46,7 +46,6 @@ public final class Cobra extends Snake {
      */
     public static Cobra fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
             int length = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -61,15 +60,11 @@ public final class Cobra extends Snake {
                     }
                 } else if ("length".equals(fieldName)) {
                     length = reader.getInt();
-                    lengthFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound) {
-                return new Cobra(length);
-            }
-            throw new IllegalStateException("Missing required property: length");
+            return new Cobra(length);
         });
     }
 }

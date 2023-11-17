@@ -46,7 +46,6 @@ public final class RealModel extends AbstractModel {
      */
     public static RealModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -61,15 +60,11 @@ public final class RealModel extends AbstractModel {
                     }
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound) {
-                return new RealModel(name);
-            }
-            throw new IllegalStateException("Missing required property: name");
+            return new RealModel(name);
         });
     }
 }

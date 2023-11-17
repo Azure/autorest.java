@@ -532,10 +532,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 "    } else {",
                 "        readerToUse.skipChildren();",
                 "    }",
-                "}",
-                "",
-                "if (discriminatorValue != null) {",
-                "    readerToUse = readerToUse.reset();",
                 "}"
             ));
 
@@ -563,8 +559,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 ifBlock = ifOrElseIf(methodBlock, ifBlock, "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
                     ifStatement -> ifStatement.methodReturn(childType.getName() + (isSuperTypeWithDiscriminator(childType)
-                        ? ".fromJsonKnownDiscriminator(readerToUse)"
-                        : ".fromJson(readerToUse)")));
+                        ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
+                        : ".fromJson(readerToUse.reset())")));
 
                 if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
                     exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
@@ -577,17 +573,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 }
             }
 
+            // TODO (alzimmer): Add a log message if the discriminator didn't match anything that was expected.
             if (ifBlock == null) {
-                methodBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");");
+                methodBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())");
             } else {
-                ifBlock.elseBlock(elseBlock -> elseBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");"));
+                ifBlock.elseBlock(elseBlock ->
+                    elseBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())"));
             }
         });
 
-        if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
-            readJsonObject(classBlock, propertiesManager, true,
-                methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
-        }
+        readJsonObject(classBlock, propertiesManager, true,
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -646,7 +642,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                             discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
                             discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
 
-                        if (propertiesManager.isDiscriminatorRequired()) {
+                        if (propertiesManager.isDiscriminatorRequired() && !settings.isDisableRequiredJsonAnnotation()) {
                             ifAction.line(discriminatorProperty.getName() + "Found = true;");
                         }
                     });
@@ -808,7 +804,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property,
         JavaSettings settings) {
-        if (includePropertyInConstructor(property, settings)) {
+        if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
             // Required properties need an additional boolean variable to indicate they've been found.
             methodBlock.line("boolean " + property.getName() + "Found = false;");
         }
@@ -1035,7 +1031,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         // If the property was required, mark it as found.
-        if (includePropertyInConstructor(property, settings)) {
+        if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
             deserializationBlock.line(property.getName() + "Found = true;");
         }
     }
@@ -1261,6 +1257,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
+        // Required properties aren't being validated for being found.
+        if (settings.isDisableRequiredJsonAnnotation()) {
+            return;
+        }
+
         if (ifCheck.length() > 0) {
             ifCheck.append(" && ");
         }
@@ -1277,6 +1278,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // Constants are ignored during deserialization.
         if (property.isConstant()) {
+            return;
+        }
+
+        // Required properties aren't being validated for being found.
+        if (settings.isDisableRequiredJsonAnnotation()) {
             return;
         }
 
@@ -1870,7 +1876,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         // If the property was required, mark it as found.
-        if (includePropertyInConstructor(property, settings)) {
+        if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
             deserializationBlock.line(property.getName() + "Found = true;");
         }
     }

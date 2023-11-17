@@ -90,7 +90,6 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
      */
     public static RequiredAndOptionalProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean requiredPropertyFound = false;
             int requiredProperty = 0;
             String optionalProperty = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -99,21 +98,17 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
 
                 if ("requiredProperty".equals(fieldName)) {
                     requiredProperty = reader.getInt();
-                    requiredPropertyFound = true;
                 } else if ("optionalProperty".equals(fieldName)) {
                     optionalProperty = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (requiredPropertyFound) {
-                RequiredAndOptionalProperty deserializedRequiredAndOptionalProperty
-                    = new RequiredAndOptionalProperty(requiredProperty);
-                deserializedRequiredAndOptionalProperty.optionalProperty = optionalProperty;
+            RequiredAndOptionalProperty deserializedRequiredAndOptionalProperty
+                = new RequiredAndOptionalProperty(requiredProperty);
+            deserializedRequiredAndOptionalProperty.optionalProperty = optionalProperty;
 
-                return deserializedRequiredAndOptionalProperty;
-            }
-            throw new IllegalStateException("Missing required property: requiredProperty");
+            return deserializedRequiredAndOptionalProperty;
         });
     }
 }

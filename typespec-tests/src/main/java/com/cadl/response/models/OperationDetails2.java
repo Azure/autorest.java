@@ -13,8 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.response.implementation.ResponseErrorUtils;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The OperationDetails2 model.
@@ -119,9 +117,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
      */
     public static OperationDetails2 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean idFound = false;
             String id = null;
-            boolean statusFound = false;
             OperationState status = null;
             ResponseError error = null;
             Resource lroResult = null;
@@ -131,10 +127,8 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
 
                 if ("id".equals(fieldName)) {
                     id = reader.getString();
-                    idFound = true;
                 } else if ("status".equals(fieldName)) {
                     status = OperationState.fromString(reader.getString());
-                    statusFound = true;
                 } else if ("error".equals(fieldName)) {
                     error = ResponseErrorUtils.fromJson(reader);
                 } else if ("lroResult".equals(fieldName)) {
@@ -143,23 +137,11 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
                     reader.skipChildren();
                 }
             }
-            if (idFound && statusFound) {
-                OperationDetails2 deserializedOperationDetails2 = new OperationDetails2(id, status);
-                deserializedOperationDetails2.error = error;
-                deserializedOperationDetails2.lroResult = lroResult;
+            OperationDetails2 deserializedOperationDetails2 = new OperationDetails2(id, status);
+            deserializedOperationDetails2.error = error;
+            deserializedOperationDetails2.lroResult = lroResult;
 
-                return deserializedOperationDetails2;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!idFound) {
-                missingProperties.add("id");
-            }
-            if (!statusFound) {
-                missingProperties.add("status");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedOperationDetails2;
         });
     }
 }

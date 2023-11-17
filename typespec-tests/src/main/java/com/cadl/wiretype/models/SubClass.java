@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -71,9 +69,7 @@ public final class SubClass extends SuperClassMismatch {
      */
     public static SubClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean dateTimeRfc7231Found = false;
             OffsetDateTime dateTimeRfc7231 = null;
-            boolean dateTimeFound = false;
             OffsetDateTime dateTime = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -85,27 +81,13 @@ public final class SubClass extends SuperClassMismatch {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-                    dateTimeRfc7231Found = true;
                 } else if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                    dateTimeFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (dateTimeRfc7231Found && dateTimeFound) {
-                return new SubClass(dateTimeRfc7231, dateTime);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!dateTimeRfc7231Found) {
-                missingProperties.add("dateTimeRfc7231");
-            }
-            if (!dateTimeFound) {
-                missingProperties.add("dateTime");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new SubClass(dateTimeRfc7231, dateTime);
         });
     }
 }

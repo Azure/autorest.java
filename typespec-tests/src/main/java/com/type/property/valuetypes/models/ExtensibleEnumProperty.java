@@ -61,7 +61,6 @@ public final class ExtensibleEnumProperty implements JsonSerializable<Extensible
      */
     public static ExtensibleEnumProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean propertyFound = false;
             InnerEnum property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -69,15 +68,11 @@ public final class ExtensibleEnumProperty implements JsonSerializable<Extensible
 
                 if ("property".equals(fieldName)) {
                     property = InnerEnum.fromString(reader.getString());
-                    propertyFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (propertyFound) {
-                return new ExtensibleEnumProperty(property);
-            }
-            throw new IllegalStateException("Missing required property: property");
+            return new ExtensibleEnumProperty(property);
         });
     }
 }

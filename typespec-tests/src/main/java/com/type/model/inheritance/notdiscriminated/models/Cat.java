@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The second level model in the normal multiple levels inheritance.
@@ -65,9 +63,7 @@ public class Cat extends Pet {
      */
     public static Cat fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean ageFound = false;
             int age = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -75,27 +71,13 @@ public class Cat extends Pet {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
-                    ageFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && ageFound) {
-                return new Cat(name, age);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!ageFound) {
-                missingProperties.add("age");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new Cat(name, age);
         });
     }
 }
