@@ -152,6 +152,7 @@ Polling configurations can be set through `--polling` setting globally or for ea
 polling:
   {operationId}:
     strategy: {strategy}
+    sync-strategy: {sync-strategy}
     intermediate-type: {intermediate-type}
     final-type: {final-type}
     poll-interval: {poll-interval}
