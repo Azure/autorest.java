@@ -945,14 +945,14 @@ public class JavaSettings {
     public static class PollingDetails {
         @JsonProperty("strategy")
         private String strategy;
+        @JsonProperty("sync-strategy")
+        private String syncStrategy;
         @JsonProperty("intermediate-type")
         private String intermediateType;
         @JsonProperty("final-type")
         private String finalType;
         @JsonProperty("poll-interval")
         private String pollInterval;
-        @JsonProperty("sync-strategy")
-        private String syncStrategy;
 
         public static final String DEFAULT_POLLING_STRATEGY_FORMAT = String.join("\n",
                 "new %s<>(new PollingStrategyOptions({httpPipeline})",
