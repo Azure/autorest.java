@@ -93,7 +93,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * 
      * description of Request.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -105,8 +105,9 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponseAsync(name, request, requestOptions);
+    public Mono<Response<BinaryData>> postWithResponse(String name, BinaryData dataRequest,
+        RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponseAsync(name, dataRequest, requestOptions);
     }
 
     /**
@@ -141,7 +142,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * 
      * description of Request.
      * @param etag summary of etag header parameter
@@ -157,13 +158,13 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name, DataRequest request, String etag) {
+    public Mono<DataResponse> post(String name, DataRequest dataRequest, String etag) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
-        return postWithResponse(name, BinaryData.fromObject(request), requestOptions).flatMap(FluxUtil::toMono)
+        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 
@@ -175,7 +176,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * 
      * description of Request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -188,10 +189,10 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name, DataRequest request) {
+    public Mono<DataResponse> post(String name, DataRequest dataRequest) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(request), requestOptions).flatMap(FluxUtil::toMono)
+        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 

@@ -31,9 +31,6 @@ public class EmitterOptions {
     @JsonProperty(value="service-name")
     private String serviceName;
 
-    @JsonProperty(value="partial-update")
-    private Boolean partialUpdate;
-
     @JsonProperty(value="service-versions")
     private List<String> serviceVersions;
 
@@ -49,8 +46,8 @@ public class EmitterOptions {
     @JsonProperty(value = "stream-style-serialization")
     private Boolean streamStyleSerialization = true;
 
-    @JsonProperty(value="dev-options")
-    private DevOptions devOptions;
+    @JsonProperty(value="partial-update")
+    private Boolean partialUpdate;
 
     @JsonProperty(value="custom-types")
     private String customTypes;
@@ -66,6 +63,9 @@ public class EmitterOptions {
 
     @JsonProperty(value = "arm")
     private Boolean arm = false;
+
+    @JsonProperty(value="dev-options")
+    private DevOptions devOptions;
 
     public String getNamespace() {
         return namespace;
