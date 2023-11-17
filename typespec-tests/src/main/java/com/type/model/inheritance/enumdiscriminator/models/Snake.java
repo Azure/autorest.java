@@ -92,14 +92,7 @@ public class Snake implements JsonSerializable<Snake> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Snake".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Snake'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getInt();
                 } else {
                     reader.skipChildren();

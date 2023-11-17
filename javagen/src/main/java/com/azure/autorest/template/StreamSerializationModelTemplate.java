@@ -583,7 +583,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         readJsonObject(classBlock, propertiesManager, true,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, true, settings));
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -609,11 +609,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         JavaSettings settings) {
         readJsonObject(classBlock, propertiesManager, false,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, false, settings));
     }
 
     private static void writeFromJsonDeserialization(JavaBlock methodBlock,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, boolean fromSuperTypeReading, JavaSettings settings) {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
@@ -624,7 +624,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
                 JavaIfBlock ifBlock = null;
 
-                if (propertiesManager.getDiscriminatorProperty() != null) {
+                if (propertiesManager.getDiscriminatorProperty() != null
+                    && (propertiesManager.isDiscriminatorRequired() || !fromSuperTypeReading)) {
                     ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
                     String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
                         fieldNameVariableName);
@@ -635,12 +636,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         } else {
                             ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
                         }
-                        String ifStatement2 = String.format("!\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
-                            discriminatorProperty.getName());
-                        ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line("throw new IllegalStateException("
-                            + "\"'%s' was expected to be non-null and equal to '%s'. The found '%s' was '\" + %s + \"'.\");",
-                            discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
-                            discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
+
+                        // From super type reading indicates we're calling fromJsonKnownDiscriminator, no need to
+                        // validate the discriminator value as that's already been done.
+                        if (!fromSuperTypeReading) {
+                            String ifStatement2 = String.format("!\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
+                                discriminatorProperty.getName());
+                            ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line(
+                                "throw new IllegalStateException(" + "\"'%s' was expected to be non-null and equal to '%s'. The found '%s' was '\" + %s + \"'.\");",
+                                discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
+                                discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
+                        }
 
                         if (propertiesManager.isDiscriminatorRequired() && !settings.isDisableRequiredJsonAnnotation()) {
                             ifAction.line(discriminatorProperty.getName() + "Found = true;");
