@@ -175,8 +175,9 @@ public class EnumType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
-        String elementTypeXmlDeserialization = elementType.xmlDeserializationMethod(attributeName, attributeNamespace);
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+        String elementTypeXmlDeserialization = elementType.xmlDeserializationMethod(xmlReaderName, attributeName,
+            attributeNamespace);
         return name + "." + getFromMethodName() + "(" + elementTypeXmlDeserialization + ")";
     }
 

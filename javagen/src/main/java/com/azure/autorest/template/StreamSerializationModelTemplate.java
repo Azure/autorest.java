@@ -78,7 +78,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClassType.JsonWriter.addImportsTo(imports, false);
             ClassType.JsonReader.addImportsTo(imports, false);
             ClassType.JsonToken.addImportsTo(imports, false);
-            imports.add(settings.getImplementationSubpackage() + ".ResponseErrorUtils");
+            imports.add(settings.getPackage(settings.getImplementationSubpackage()) + ".ResponseErrorUtils");
         }
 
         ClassType.CoreUtils.addImportsTo(imports, false);
@@ -1913,10 +1913,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 ? wireType + ".fromXml(" + readerName + ")"
                 : wireType + ".fromXml(" + readerName + ", \"" + elementName + "\")";
         } else {
-            String simpleDeserialization = wireType.xmlDeserializationMethod(attributeName, attributeNamespace);
-            if (simpleDeserialization != null) {
-                wireTypeDeserialization = readerName + "." + simpleDeserialization;
-            }
+            wireTypeDeserialization = wireType.xmlDeserializationMethod(readerName, attributeName, attributeNamespace);
         }
 
         return wireTypeDeserialization;

@@ -24,7 +24,7 @@ public class PrimitiveType implements IType {
             .defaultValue("false")
             .serializationMethodBase("writeBoolean")
             .jsonDeserializationMethod("getBoolean()")
-            .xmlAttributeDeserializationTemplate("getBooleanAttribute(%s, %s)")
+            .xmlAttributeDeserializationTemplate("%s.getBooleanAttribute(%s, %s)")
             .xmlElementDeserializationMethod("getBooleanElement()")
             .build();
 
@@ -35,7 +35,7 @@ public class PrimitiveType implements IType {
             .defaultValue("0")
             .serializationMethodBase("writeInt")
             .jsonDeserializationMethod("getInt()")
-            .xmlAttributeDeserializationTemplate("getIntAttribute(%s, %s)")
+            .xmlAttributeDeserializationTemplate("%s.getIntAttribute(%s, %s)")
             .xmlElementDeserializationMethod("getIntElement()")
             .build();
 
@@ -46,7 +46,7 @@ public class PrimitiveType implements IType {
             .defaultValue("0")
             .serializationMethodBase("writeInt")
             .jsonDeserializationMethod("getInt()")
-            .xmlAttributeDeserializationTemplate("getIntAttribute(%s, %s)")
+            .xmlAttributeDeserializationTemplate("%s.getIntAttribute(%s, %s)")
             .xmlElementDeserializationMethod("getIntElement()")
             .build();
 
@@ -61,7 +61,7 @@ public class PrimitiveType implements IType {
             .defaultValue("0.0")
             .serializationMethodBase("writeFloat")
             .jsonDeserializationMethod("getFloat()")
-            .xmlAttributeDeserializationTemplate("getFloatAttribute(%s, %s)")
+            .xmlAttributeDeserializationTemplate("%s.getFloatAttribute(%s, %s)")
             .xmlElementDeserializationMethod("getFloatElement()")
             .build();
 
@@ -77,7 +77,7 @@ public class PrimitiveType implements IType {
             .serializationMethodBase("writeString")
             .wrapSerializationWithObjectsToString(true)
             .jsonDeserializationMethod("getString().charAt(0)")
-            .xmlAttributeDeserializationTemplate("getStringAttribute(%s, %s).charAt(0)")
+            .xmlAttributeDeserializationTemplate("%s.getStringAttribute(%s, %s).charAt(0)")
             .xmlElementDeserializationMethod("getStringElement().charAt(0)")
             .build();
 
@@ -273,14 +273,13 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
         if (attributeName == null) {
-            return xmlElementDeserializationMethod;
+            return xmlReaderName + "." + xmlElementDeserializationMethod;
         } else {
-            return (attributeNamespace == null)
-                ? String.format(xmlAttributeDeserializationTemplate, "null", "\"" + attributeName + "\"")
-                : String.format(xmlAttributeDeserializationTemplate, "\"" + attributeNamespace + "\"",
-                    "\"" + attributeName + "\"");
+            String namespace = attributeNamespace == null ? "null" : "\"" + attributeNamespace + "\"";
+            return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, namespace,
+                "\"" + attributeName + "\"");
         }
     }
 
@@ -330,7 +329,7 @@ public class PrimitiveType implements IType {
                 .serializationMethodBase("writeLong")
                 .wrapSerializationWithObjectsToString(false)
                 .jsonDeserializationMethod("getLong()")
-                .xmlAttributeDeserializationTemplate("getLongAttribute(%s, %s)")
+                .xmlAttributeDeserializationTemplate("%s.getLongAttribute(%s, %s)")
                 .xmlElementDeserializationMethod("getLongElement()");
         }
 
@@ -342,7 +341,7 @@ public class PrimitiveType implements IType {
                 .serializationMethodBase("writeDouble")
                 .wrapSerializationWithObjectsToString(false)
                 .jsonDeserializationMethod("getDouble()")
-                .xmlAttributeDeserializationTemplate("getDoubleAttribute(%s, %s)")
+                .xmlAttributeDeserializationTemplate("%s.getDoubleAttribute(%s, %s)")
                 .xmlElementDeserializationMethod("getDoubleElement()");
         }
 

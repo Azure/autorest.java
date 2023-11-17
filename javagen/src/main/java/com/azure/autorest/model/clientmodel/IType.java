@@ -131,11 +131,12 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an XML
      * deserialization method and support needs to be added.
      *
+     * @param xmlReaderName The name of the {@link com.azure.xml.XmlReader} performing deserialization.
      * @param attributeName The attribute name, if null this is considered to be an element call.
      * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
      * @return The XML deserialization method, or null i it isn't supported directly.
      */
-    String xmlDeserializationMethod(String attributeName, String attributeNamespace);
+    String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace);
 
     /**
      * Gets the method call that will handle XML serialization.

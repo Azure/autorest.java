@@ -254,15 +254,15 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
                 } else if ("Etag".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.etag = reader.getStringElement();
                 } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                    deserializedContainerProperties.leaseStatus = reader.LeaseStatusType.fromString(getStringElement());
+                    deserializedContainerProperties.leaseStatus = LeaseStatusType.fromString(reader.getStringElement());
                 } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                    deserializedContainerProperties.leaseState = reader.LeaseStateType.fromString(getStringElement());
+                    deserializedContainerProperties.leaseState = LeaseStateType.fromString(reader.getStringElement());
                 } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.leaseDuration
-                        = reader.LeaseDurationType.fromString(getStringElement());
+                        = LeaseDurationType.fromString(reader.getStringElement());
                 } else if ("PublicAccess".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.publicAccess
-                        = reader.PublicAccessType.fromString(getStringElement());
+                        = PublicAccessType.fromString(reader.getStringElement());
                 } else {
                     reader.skipElement();
                 }

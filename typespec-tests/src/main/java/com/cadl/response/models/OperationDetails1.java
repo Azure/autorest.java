@@ -11,7 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import implementation.ResponseErrorUtils;
+import com.cadl.response.implementation.ResponseErrorUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

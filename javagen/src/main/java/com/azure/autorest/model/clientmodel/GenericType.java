@@ -293,7 +293,7 @@ public class GenericType implements IType {
     }
 
     @Override
-    public final String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+    public final String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
         return null;
     }
 

@@ -856,17 +856,17 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                 } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
                 } else if ("BlobType".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.blobType = reader.BlobType.fromString(getStringElement());
+                    deserializedBlobProperties.blobType = BlobType.fromString(reader.getStringElement());
                 } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseStatus = reader.LeaseStatusType.fromString(getStringElement());
+                    deserializedBlobProperties.leaseStatus = LeaseStatusType.fromString(reader.getStringElement());
                 } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseState = reader.LeaseStateType.fromString(getStringElement());
+                    deserializedBlobProperties.leaseState = LeaseStateType.fromString(reader.getStringElement());
                 } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.leaseDuration = reader.LeaseDurationType.fromString(getStringElement());
+                    deserializedBlobProperties.leaseDuration = LeaseDurationType.fromString(reader.getStringElement());
                 } else if ("CopyId".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.copyId = reader.getStringElement();
                 } else if ("CopyStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.copyStatus = reader.CopyStatusType.fromString(getStringElement());
+                    deserializedBlobProperties.copyStatus = CopyStatusType.fromString(reader.getStringElement());
                 } else if ("CopySource".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.copySource = reader.getStringElement();
                 } else if ("CopyProgress".equals(elementName.getLocalPart())) {
@@ -886,11 +886,11 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
                 } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
                 } else if ("AccessTier".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.accessTier = reader.AccessTier.fromString(getStringElement());
+                    deserializedBlobProperties.accessTier = AccessTier.fromString(reader.getStringElement());
                 } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
                     deserializedBlobProperties.accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
                 } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
-                    deserializedBlobProperties.archiveStatus = reader.ArchiveStatus.fromString(getStringElement());
+                    deserializedBlobProperties.archiveStatus = ArchiveStatus.fromString(reader.getStringElement());
                 } else {
                     reader.skipElement();
                 }
