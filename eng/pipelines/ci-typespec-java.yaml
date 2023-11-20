@@ -28,7 +28,8 @@ jobs:
 
     variables:
       - template: /eng/pipelines/variables/globals.yml
-        isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+      - name: isMain
+        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
