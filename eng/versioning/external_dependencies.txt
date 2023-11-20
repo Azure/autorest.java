@@ -11,7 +11,7 @@ com.azure:azure-identity;1.11.0
 com.azure:sdk-build-tools;1.0.0
 com.azure.tools:codesnippet-maven-plugin;1.0.0-beta.8
 
-ch.qos.logback:logback-classic;1.4.11
+ch.qos.logback:logback-classic;1.2.3
 com.diffplug.spotless:spotless-maven-plugin;2.40.0
 com.fasterxml.jackson.core:jackson-core;2.13.5
 com.fasterxml.jackson.core:jackson-databind;2.13.5
