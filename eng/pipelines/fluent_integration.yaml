@@ -26,7 +26,7 @@ jobs:
     vmImage: windows-2022
 
   variables:
-    - template: /eng/pipelines/templates/variables/globals.yml
+    - template: /eng/pipelines/variables/globals.yml
 
   steps:
   - task: NodeTool@0

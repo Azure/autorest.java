@@ -27,7 +27,7 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      - template: /eng/pipelines/templates/variables/globals.yml
+      - template: /eng/pipelines/variables/globals.yml
         isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
