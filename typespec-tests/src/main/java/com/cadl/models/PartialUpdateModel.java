@@ -18,63 +18,23 @@ public final class PartialUpdateModel {
     /*
      * The boolean property.
      */
-    @JsonProperty(value = "boolean", required = true)
+    @Generated
+    @JsonProperty(value = "boolean")
     private boolean booleanProperty;
 
     /*
      * The string property.
      */
-    @JsonProperty(value = "string", required = true)
+    @Generated
+    @JsonProperty(value = "string")
     private String string;
 
     /*
      * The bytes property.
      */
-    @JsonProperty(value = "bytes", required = true)
+    @Generated
+    @JsonProperty(value = "bytes")
     private byte[] bytes;
-
-    /**
-     * Creates an instance of PartialUpdateModel class.
-     *
-     * @param booleanProperty the booleanProperty value to set.
-     * @param string the string value to set.
-     * @param bytes the bytes value to set.
-     */
-    @JsonCreator
-    private PartialUpdateModel(@JsonProperty(value = "boolean", required = true) boolean booleanProperty,
-        @JsonProperty(value = "string", required = true) String string,
-        @JsonProperty(value = "bytes", required = true) byte[] bytes) {
-        this.booleanProperty = booleanProperty;
-        this.string = string;
-        this.bytes = bytes;
-    }
-
-    /**
-     * Get the booleanProperty property: The boolean property.
-     *
-     * @return the booleanProperty value.
-     */
-    public boolean isBooleanProperty() {
-        return this.booleanProperty;
-    }
-
-    /**
-     * Get the string property: The string property.
-     *
-     * @return the string value.
-     */
-    public String getString() {
-        return this.string;
-    }
-
-    /**
-     * Get the bytes property: The bytes property.
-     *
-     * @return the bytes value.
-     */
-    public byte[] getBytes() {
-        return CoreUtils.clone(this.bytes);
-    }
 
     /*
      * The aggregation function to be applied on the client metric. Allowed functions
@@ -85,6 +45,52 @@ public final class PartialUpdateModel {
     @Generated
     @JsonProperty(value = "aggregate")
     private String aggregate;
+
+    /**
+     * Creates an instance of PartialUpdateModel class.
+     *
+     * @param booleanProperty the booleanProperty value to set.
+     * @param string the string value to set.
+     * @param bytes the bytes value to set.
+     */
+    @Generated
+    @JsonCreator
+    private PartialUpdateModel(@JsonProperty(value = "boolean") boolean booleanProperty,
+        @JsonProperty(value = "string") String string, @JsonProperty(value = "bytes") byte[] bytes) {
+        this.booleanProperty = booleanProperty;
+        this.string = string;
+        this.bytes = bytes;
+    }
+
+    /**
+     * Get the booleanProperty property: The boolean property.
+     *
+     * @return the booleanProperty value.
+     */
+    @Generated
+    public boolean isBooleanProperty() {
+        return this.booleanProperty;
+    }
+
+    /**
+     * Get the string property: The string property.
+     *
+     * @return the string value.
+     */
+    @Generated
+    public String getString() {
+        return this.string;
+    }
+
+    /**
+     * Get the bytes property: The bytes property.
+     *
+     * @return the bytes value.
+     */
+    @Generated
+    public byte[] getBytes() {
+        return CoreUtils.clone(this.bytes);
+    }
 
     /**
      * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
