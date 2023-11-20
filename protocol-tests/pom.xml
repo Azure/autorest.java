@@ -7,12 +7,12 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-protocol-tests</artifactId>
-  <version>1.0.0-beta.1</version>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-protocol-tests;current} -->
 
   <properties>
     <parallelizeTests>false</parallelizeTests>
@@ -22,23 +22,24 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.10</version>
+      <version>1.13.10</version> <!-- {x-version-update;com.azure:azure-core-http-netty;external_dependency} -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.3</version>
+      <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-api;external_dependency} -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.36</version>
+      <version>1.7.36</version> <!-- {x-version-update;org.slf4j:slf4j-simple;external_dependency} -->
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -48,14 +49,14 @@
       <plugin>
         <artifactId>exec-maven-plugin</artifactId>
         <groupId>org.codehaus.mojo</groupId>
-        <version>1.5.0</version>
+        <version>1.5.0</version> <!-- {x-version-update;org.codehaus.mojo:exec-maven-plugin;external_dependency} -->
         <executions>
         </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.0</version> <!-- {x-version-update;org.codehaus.mojo:build-helper-maven-plugin;external_dependency} -->
         <executions>
           <execution>
             <id>compile-samples-source</id>

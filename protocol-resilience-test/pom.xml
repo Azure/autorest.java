@@ -5,12 +5,13 @@
   <parent>
     <artifactId>azure-autorest-parent</artifactId>
     <groupId>com.azure.tools</groupId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-protocol-resilience-test</artifactId>
-  <version>1.0.0-beta.1</version>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-protocol-resilience-test;current} -->
 
   <modules>
     <module>llcinitial</module>
@@ -22,6 +23,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
   </dependencies>
 
@@ -30,12 +32,12 @@
       <plugin>
         <groupId>org.revapi</groupId>
         <artifactId>revapi-maven-plugin</artifactId>
-        <version>0.14.6</version>
+        <version>0.14.6</version> <!-- {x-version-update;org.revapi:revapi-maven-plugin;external_dependency} -->
         <dependencies>
           <dependency>
             <groupId>org.revapi</groupId>
             <artifactId>revapi-java</artifactId>
-            <version>0.26.1</version>
+            <version>0.26.1</version> <!-- {x-version-update;org.revapi:revapi-java;external_dependency} -->
           </dependency>
         </dependencies>
         <configuration>

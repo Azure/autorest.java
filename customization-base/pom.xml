@@ -10,13 +10,13 @@
   <parent>
     <artifactId>azure-autorest-parent</artifactId>
     <groupId>com.azure.tools</groupId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-customization</artifactId>
-  <version>1.0.0-beta.8</version>
+  <version>1.0.0-beta.8</version> <!-- {x-version-update;com.azure.tools:azure-autorest-customization;current} -->
 
   <name>Microsoft Azure AutoRest for Java Customization</name>
   <description>This module contains the base classes needed for customizing a generated library.</description>
@@ -33,55 +33,55 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.0</version> <!-- {x-version-update;com.azure:azure-json;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-xml</artifactId>
-      <version>1.0.0-beta.2</version>
+      <version>1.0.0-beta.2</version> <!-- {x-version-update;com.azure:azure-xml;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.13.5</version>
+      <version>2.13.5</version> <!-- {x-version-update;com.fasterxml.jackson.core:jackson-databind;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
-      <version>1.0.0-beta.5</version>
+      <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-extension;current} -->
     </dependency>
     <dependency>
       <groupId>com.github.javaparser</groupId>
       <artifactId>javaparser-core</artifactId>
-      <version>3.25.6</version>
+      <version>3.25.6</version> <!-- {x-version-update;com.github.javaparser:javaparser-core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.10.14</version>
+      <version>1.10.14</version> <!-- {x-version-update;org.apache.ant:ant;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>org.eclipse.lsp4j</groupId>
       <artifactId>org.eclipse.lsp4j</artifactId>
-      <version>0.21.1</version>
+      <version>0.21.1</version> <!-- {x-version-update;org.eclipse.lsp4j:org.eclipse.lsp4j;external_dependency} -->
     </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.3</version>
+      <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-api;external_dependency} -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.3</version>
+      <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-engine;external_dependency} -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.9.3</version>
+      <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-params;external_dependency} -->
       <scope>test</scope>
     </dependency>
   </dependencies>

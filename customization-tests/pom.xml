@@ -8,13 +8,13 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>fixtures.bodycomplex</groupId>
   <artifactId>body-complex-customization-test</artifactId>
-  <version>1.0.0-beta.1</version>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;fixtures.bodycomplex:body-complex-customization-test;current} -->
 
   <name>Microsoft Azure client library for Body Complex</name>
   <description>This package contains the body complex client.</description>
@@ -34,18 +34,19 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.10</version>
+      <version>1.13.10</version> <!-- {x-version-update;com.azure:azure-core-http-netty;external_dependency} -->
     </dependency>
 
     <!-- Test Dependencies -->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.22.0</version>
+      <version>1.22.0</version> <!-- {x-version-update;com.azure:azure-core-test;external_dependency} -->
       <scope>test</scope>
     </dependency>
   </dependencies>

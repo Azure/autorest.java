@@ -9,36 +9,38 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-fluentnamer</artifactId>
-  <version>1.0.0-beta.1</version>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-fluentnamer;current} -->
 
   <dependencies>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-preprocessor</artifactId>
-      <version>1.0.0-beta.1</version>
+      <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-preprocessor;current} -->
     </dependency>
 
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-javagen</artifactId>
-      <version>1.0.0-beta.1</version>
+      <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-javagen;current} -->
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>1.11.8</version>
+      <version>1.11.8</version> <!-- {x-version-update;com.azure:azure-core-management;external_dependency} -->
     </dependency>
   </dependencies>
 </project>

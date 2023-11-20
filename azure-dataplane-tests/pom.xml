@@ -3,29 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <parent>
         <groupId>com.azure.tools</groupId>
         <artifactId>azure-autorest-parent</artifactId>
-        <version>1.0.0-beta.5</version>
+        <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-dataplane-tests</artifactId>
-    <version>1.0.0-beta.1</version>
+    <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-dataplane-tests;current} -->
 
     <properties>
         <parallelizeTests>false</parallelizeTests>
@@ -35,51 +23,52 @@
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-core</artifactId>
+            <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
         </dependency>
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-json</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.0</version> <!-- {x-version-update;com.azure:azure-json;external_dependency} -->
         </dependency>
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-xml</artifactId>
-            <version>1.0.0-beta.2</version>
+            <version>1.0.0-beta.2</version> <!-- {x-version-update;com.azure:azure-xml;external_dependency} -->
         </dependency>
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-core-http-netty</artifactId>
-            <version>1.13.10</version>
+            <version>1.13.10</version> <!-- {x-version-update;com.azure:azure-core-http-netty;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.3</version>
+            <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-api;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.3</version>
+            <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-engine;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.9.3</version>
+            <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-params;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
-            <version>3.4.33</version>
+            <version>3.4.33</version> <!-- {x-version-update;io.projectreactor:reactor-test;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.36</version>
+            <version>1.7.36</version> <!-- {x-version-update;org.slf4j:slf4j-simple;external_dependency} -->
             <scope>test</scope>
         </dependency>
     </dependencies>

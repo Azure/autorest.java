@@ -8,12 +8,12 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
   </parent>
 
   <groupId>com.azure.tools</groupId>
-  <artifactId>partial-update-tests</artifactId>
-  <version>1.0.0-beta.1</version>
+  <artifactId>azure-autorest-partial-update-tests</artifactId>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-partial-update-tests;current} -->
   <packaging>pom</packaging>
 
 
@@ -34,6 +34,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
   </dependencies>
 </project>

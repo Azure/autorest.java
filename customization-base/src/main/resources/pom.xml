@@ -5,9 +5,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.azure</groupId>
-  <artifactId>autorest-generated-client</artifactId>
-  <version>1.0.0-beta.1</version>
+  <groupId>com.azure.tools</groupId>
+  <artifactId>autorest-customization-generated-client</artifactId>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:autorest-customization-generated-client;current} -->
 
   <name>Microsoft Azure client library</name>
   <description>This package contains the generated client library.</description>
@@ -30,29 +30,29 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.0</version> <!-- {x-version-update;com.azure:azure-json;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-xml</artifactId>
-      <version>1.0.0-beta.2</version>
+      <version>1.0.0-beta.2</version> <!-- {x-version-update;com.azure:azure-xml;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.45.0</version>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.10</version>
+      <version>1.13.10</version> <!-- {x-version-update;com.azure:azure-core-http-netty;external_dependency} -->
     </dependency>
 
     <!-- Test Dependencies -->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.22.0</version>
+      <version>1.22.0</version> <!-- {x-version-update;com.azure:azure-core-test;external_dependency} -->
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -63,12 +63,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.3.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-assembly-plugin;external_dependency} -->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.10.1</version>
+          <version>3.10.1</version> <!-- {x-version-update;org.apache.maven.plugins:maven-compiler-plugin;external_dependency} -->
           <configuration>
             <source>11</source>
             <target>11</target>

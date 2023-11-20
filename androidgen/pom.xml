@@ -9,38 +9,39 @@
   <parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-parent</artifactId>
-    <version>1.0.0-beta.5</version>
+    <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-androidgen</artifactId>
-  <version>1.0.0-beta.1</version>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-androidgen;current} -->
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.13.5</version>
-    </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-javagen</artifactId>
-      <version>1.0.0-beta.1</version>
+      <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-javagen;current} -->
     </dependency>
     <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
-      <version>1.0.0-beta.5</version>
+      <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-extension;current} -->
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.13.5</version> <!-- {x-version-update;com.fasterxml.jackson.core:jackson-databind;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
+      <version>1.45.0</version> <!-- {x-version-update;com.azure:azure-core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <version>4.13.2</version> <!-- {x-version-update;junit:junit;external_dependency} -->
       <scope>test</scope>
     </dependency>
 
@@ -61,6 +62,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.3.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-assembly-plugin;external_dependency} -->
             <executions>
               <execution>
                 <phase>package</phase>

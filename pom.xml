@@ -6,7 +6,7 @@
 
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-parent</artifactId>
-  <version>1.0.0-beta.5</version>
+  <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
   <packaging>pom</packaging>
 
   <name>Microsoft Azure AutoRest for Java</name>
@@ -50,54 +50,44 @@
     <parallelizeTests>true</parallelizeTests>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.azure</groupId>
-        <artifactId>azure-core</artifactId>
-        <version>1.45.0</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.2.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-clean-plugin;external_dependency} -->
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>3.2.2</version> <!-- {x-version-update;org.apache.maven.plugins:maven-jar-plugin;external_dependency} -->
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.3.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-resources-plugin;external_dependency} -->
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.0.0-M1</version> <!-- {x-version-update;org.apache.maven.plugins:maven-install-plugin;external_dependency} -->
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.3.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-assembly-plugin;external_dependency} -->
         </plugin>
 
         <!-- This plugin runs tests -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.1.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-surefire-plugin;external_dependency} -->
           <configuration>
             <includes>
               <include>**/*Test.java</include>
@@ -127,7 +117,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.10.1</version>
+          <version>3.10.1</version> <!-- {x-version-update;org.apache.maven.plugins:maven-compiler-plugin;external_dependency} -->
           <configuration>
             <source>11</source>
             <target>11</target>
@@ -137,7 +127,7 @@
         <plugin>
           <groupId>com.azure.tools</groupId>
           <artifactId>codesnippet-maven-plugin</artifactId>
-          <version>1.0.0-beta.8</version>
+          <version>1.0.0-beta.8</version> <!-- {x-version-update;com.azure.tools:codesnippet-maven-plugin;external_dependency} -->
           <configuration>
             <skip>${codesnippet.skip}</skip>
           </configuration>
@@ -146,7 +136,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.6.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-javadoc-plugin;external_dependency} -->
           <configuration>
             <source>1.8</source>
             <detectJavaApiLink>false</detectJavaApiLink>
@@ -157,12 +147,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.1.2</version> <!-- {x-version-update;org.apache.maven.plugins:maven-checkstyle-plugin;external_dependency} -->
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>9.2</version>
+              <version>9.2</version> <!-- {x-version-update;com.puppycrawl.tools:checkstyle;external_dependency} -->
             </dependency>
           </dependencies>
           <configuration>
@@ -185,6 +175,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-surefire-plugin;external_dependency} -->
         <configuration>
           <systemPropertyVariables combine.children="append">
             <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
@@ -195,6 +186,7 @@
       <plugin>
         <groupId>com.azure.tools</groupId>
         <artifactId>codesnippet-maven-plugin</artifactId>
+        <version>1.0.0-beta.8</version> <!-- {x-version-update;com.azure.tools:codesnippet-maven-plugin;external_dependency} -->
         <executions>
           <execution>
             <id>update-codesnippets</id>
@@ -208,6 +200,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-javadoc-plugin;external_dependency} -->
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -221,6 +214,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.2</version> <!-- {x-version-update;org.apache.maven.plugins:maven-checkstyle-plugin;external_dependency} -->
         <executions>
           <execution>
             <phase>verify</phase>
@@ -234,7 +228,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.1</version> <!-- {x-version-update;org.apache.maven.plugins:maven-source-plugin;external_dependency} -->
         <configuration>
           <outputDirectory>${packageOutputDirectory}</outputDirectory>
         </configuration>
@@ -253,7 +247,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.0</version> <!-- {x-version-update;org.apache.maven.plugins:maven-antrun-plugin;external_dependency} -->
         <executions>
           <execution>
             <id>copy</id>
@@ -274,7 +268,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.0</version> <!-- {x-version-update;org.codehaus.mojo:build-helper-maven-plugin;external_dependency} -->
         <executions>
           <execution>
             <id>compile-samples-source</id>

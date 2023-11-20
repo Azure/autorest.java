@@ -10,29 +10,29 @@
     <parent>
         <groupId>com.azure.tools</groupId>
         <artifactId>azure-autorest-parent</artifactId>
-        <version>1.0.0-beta.5</version>
+        <version>1.0.0-beta.5</version> <!-- {x-version-update;com.azure.tools:azure-autorest-parent;current} -->
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.azure.tools</groupId>
     <artifactId>azure-autorest-partial-update</artifactId>
-    <version>1.0.0-beta.1</version>
+    <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure.tools:azure-autorest-partial-update;current} -->
 
     <dependencies>
         <dependency>
             <groupId>com.github.javaparser</groupId>
             <artifactId>javaparser-core</artifactId>
-            <version>3.25.6</version>
+            <version>3.25.6</version> <!-- {x-version-update;com.github.javaparser:javaparser-core;external_dependency} -->
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.36</version>
+            <version>1.7.36</version> <!-- {x-version-update;org.slf4j:slf4j-simple;external_dependency} -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.3</version>
+            <version>5.9.3</version> <!-- {x-version-update;org.junit.jupiter:junit-jupiter-api;external_dependency} -->
             <scope>test</scope>
         </dependency>
     </dependencies>
