@@ -98,14 +98,7 @@ public class Bird implements JsonSerializable<Bird> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Bird".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Bird'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("wingspan".equals(fieldName)) {
+                if ("wingspan".equals(fieldName)) {
                     wingspan = reader.getInt();
                 } else {
                     reader.skipChildren();

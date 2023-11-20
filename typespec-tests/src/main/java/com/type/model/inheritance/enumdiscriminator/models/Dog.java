@@ -92,14 +92,7 @@ public class Dog implements JsonSerializable<Dog> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Dog".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Dog'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("weight".equals(fieldName)) {
+                if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
                 } else {
                     reader.skipChildren();

@@ -102,11 +102,6 @@ public class Shark extends Fish {
 
                 if ("sharktype".equals(fieldName)) {
                     sharktype = reader.getString();
-                    if (!"shark".equals(sharktype)) {
-                        throw new IllegalStateException(
-                            "'sharktype' was expected to be non-null and equal to 'shark'. The found 'sharktype' was '"
-                                + sharktype + "'.");
-                    }
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else {

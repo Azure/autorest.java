@@ -92,14 +92,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"AbstractModel".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'AbstractModel'. The found 'kind' was '"
-                                + kind + "'.");
-                    }
-                } else if ("name".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else {
                     reader.skipChildren();

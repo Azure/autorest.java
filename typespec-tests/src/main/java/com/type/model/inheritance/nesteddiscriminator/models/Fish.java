@@ -98,14 +98,7 @@ public class Fish implements JsonSerializable<Fish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Fish".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Fish'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("age".equals(fieldName)) {
+                if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else {
                     reader.skipChildren();

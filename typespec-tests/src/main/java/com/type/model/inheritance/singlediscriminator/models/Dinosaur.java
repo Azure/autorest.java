@@ -92,14 +92,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Dinosaur".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Dinosaur'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("size".equals(fieldName)) {
+                if ("size".equals(fieldName)) {
                     size = reader.getInt();
                 } else {
                     reader.skipChildren();
