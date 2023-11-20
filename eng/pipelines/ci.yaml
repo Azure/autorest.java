@@ -38,12 +38,16 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
+      - template: /eng/pipelines/steps/cache-maven-repository.yml
+        parameters:
+          JobType: 'Autorest'
+
       - task: Maven@3
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '-P local --no-transfer-progress'
+          options: '-P local --no-transfer-progress -T 1C'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -163,3 +167,5 @@ jobs:
       - script: |
           ./protocol-sdk-integration-tests/test.py
         displayName: 'Run Protocol Test on SDK Integration'
+
+      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

@@ -33,6 +33,10 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
+  - template: /eng/pipelines/steps/cache-maven-repository.yml
+    parameters:
+      JobType: 'Post Publish'
+
   - task: PowerShell@2
     displayName: 'Get Package Version'
     inputs:
@@ -58,3 +62,5 @@ jobs:
       PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
       PRLabels: 'DPG'
       OpenAsDraft: 'true'
+
+  - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
