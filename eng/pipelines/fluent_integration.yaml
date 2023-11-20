@@ -25,10 +25,13 @@ jobs:
     name: azsdk-pool-mms-win-2022-general
     vmImage: windows-2022
 
+  variables:
+    - template: /eng/pipelines/templates/variables/globals.yml
+
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '18.x'
+      versionSpec: '$(NodeVersion)'
 
   - script: npm install autorest -g
 
@@ -39,9 +42,9 @@ jobs:
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
+      jdkVersionOption: $(JavaVersion)
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'

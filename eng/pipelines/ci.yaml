@@ -24,13 +24,12 @@ jobs:
 
     timeoutInMinutes: 60
 
-    variables:
-      JavaVersion: 1.11
-      NodeVersion: '18.x'
-
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
       vmImage: "MMSUbuntu20.04"
+
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
 
     steps:
       - task: NodeTool@0
@@ -48,6 +47,7 @@ jobs:
           mavenPomFile: pom.xml
           goals: 'clean install'
           options: '-P local --no-transfer-progress -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

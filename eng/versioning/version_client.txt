@@ -47,6 +47,7 @@ com.azure.tools:azure-autorest-partial-update;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-partial-update-tests;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-postprocessor;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-preprocessor;1.0.0-beta.1;1.0.0-beta.1
+com.azure.tools:azure-autorest-preprocessor-code-format;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-protocol-resilience-tests;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-protocol-tests;1.0.0-beta.1;1.0.0-beta.1
 com.azure.tools:azure-autorest-vanilla-tests;1.0.0-beta.1;1.0.0-beta.1
