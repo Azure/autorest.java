@@ -5,33 +5,38 @@
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 #
 # Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
+$ExitCode = 0
 
-$tspPattern2NamespaceMapping = @{
-  # override namespace for reserved keyword "enum"
-  "type[\\/]enum[\\/]extensible[\\/]*" = "com.type.enums.extensible";
-  "type[\\/]enum[\\/]fixed[\\/]*" = "com.type.enums.fixed";
-
-  # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
-  "resiliency[\\/]srv-driven[\\/]old.tsp" = "com.resiliency.servicedriven.v1"
+$PARALLELIZATION = [Environment]::ProcessorCount - 1
+if ($PARALLELIZATION -lt 1) {
+  $PARALLELIZATION = 1
+} elseif ($PARALLELIZATION -gt 12) {
+  $PARALLELIZATION = 12
 }
 
-function Generate($tspFile) {
-  $overridedNamespace = $null
-  foreach ($tspPattern in $tspPattern2NamespaceMapping.Keys) {
-    if ($tspFile -match $tspPattern) {
-      $overridedNamespace = $tspPattern2NamespaceMapping[$tspPattern]
-      break
-    }
-  }
+Write-Host "Parallelization: $PARALLELIZATION"
+
+$generateScript = {
+  $tspFile = $_
 
   $tspClientFile = $tspFile -replace 'main.tsp', 'client.tsp'
   if (($tspClientFile -match 'client.tsp$') -and (Test-Path $tspClientFile)) {
     $tspFile = $tspClientFile
   }
 
-  $tspOptions = ""
-  if ($overridedNamespace) {
-    $tspOptions = "--options=""@azure-tools/typespec-java.namespace=$overridedNamespace"""
+  # With TypeSpec code generation being parallelized, we need to make sure that the output directory is unique
+  # for each test run. We do this by appending a random number to the output directory.
+  # Without this, we could have multiple runs trying to write to the same directory which introduces race conditions.
+  $tspOptions = "--option ""@azure-tools/typespec-java.emitter-output-dir={project-root}/tsp-output/$(Get-Random)"""
+  if ($tspFile -match "type[\\/]enum[\\/]extensible[\\/]") {
+    # override namespace for reserved keyword "enum"
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.extensible"""
+  } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]") {
+    # override namespace for reserved keyword "enum"
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.fixed"""
+  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
+    # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
@@ -42,36 +47,45 @@ function Generate($tspFile) {
 #     Copy-Item -Path ./customization -Destination ./tsp-output/customization -Recurse -Force
 
     # Add the customization-class option for Java emitter
-    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationTest.java"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationTest.java"""
   } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
-    $tspOptions = "--options=""@azure-tools/typespec-java.customization-class=../customization/src/main/java/CustomizationEncodeBytes.java"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationEncodeBytes.java"""
   } elseif ($tspFile -match "type[\\/]union[\\/]main.tsp") {
-    $tspOptions = "--options=""@azure-tools/typespec-java.stream-style-serialization=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
   } elseif ($tspFile -match "tsp[\\/]union.tsp") {
-    $tspOptions = "--options=""@azure-tools/typespec-java.stream-style-serialization=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
   $tspCommand = "npx tsp compile $tspFile $tspOptions $tspTrace"
-  Write-Host $tspCommand
-  Invoke-Expression $tspCommand
 
-  if ($LASTEXITCODE) {
-    exit $LASTEXITCODE
+  $generateOutput = Invoke-Expression $tspCommand
+  $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
+
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "
+  ========================
+  $tspCommand
+  ========================
+  $([String]::Join("`n", $generateOutput))
+    "
+  } else {
+    Write-Host "
+  ========================
+  $tspCommand
+  ========================
+  SUCCEEDED
+    "
   }
 
-  if (Test-Path ./tsp-output/src/main/java/module-info.java) {
-    Remove-Item ./tsp-output/src/main/java/module-info.java
+  if ($global:ExitCode -ne 0) {
+    exit $global:ExitCode
   }
-
-  Copy-Item -Path ./tsp-output/src -Destination ./ -Recurse -Force -Exclude ReadmeSamples.java
-
-  Remove-Item ./tsp-output -Recurse -Force
 }
 
 ./Setup.ps1
 
-New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force
+New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force | Out-Null
 
 if (Test-Path ./src/main/java/com/cadl/partialupdate) {
   Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
@@ -85,9 +99,10 @@ if (Test-Path ./tsp-output) {
 }
 
 # run other local tests except partial update
-foreach ($tspFile in (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*")) {
-  generate $tspFile
-}
+$job = (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*") | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+
+$job | Wait-Job -Timeout 600
+$job | Receive-Job
 
 # partial update test
 npx tsp compile ./tsp/partialupdate.tsp --options="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
@@ -97,8 +112,13 @@ Remove-Item ./existingcode -Recurse -Force
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-foreach ($tspFile in (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Name -Recurse)) {
-  Write-Host $tspFile
-  generate "./http/$tspFile"
-}
+$job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object { "$_" } | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+
+$job | Wait-Job -Timeout 600
+$job | Receive-Job
+
 Remove-Item ./http -Recurse -Force
+
+Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
+
+Remove-Item ./tsp-output -Recurse -Force
