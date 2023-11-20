@@ -10,8 +10,6 @@ $ExitCode = 0
 $PARALLELIZATION = [Environment]::ProcessorCount - 1
 if ($PARALLELIZATION -lt 1) {
   $PARALLELIZATION = 1
-} elseif ($PARALLELIZATION -gt 12) {
-  $PARALLELIZATION = 12
 }
 
 Write-Host "Parallelization: $PARALLELIZATION"
