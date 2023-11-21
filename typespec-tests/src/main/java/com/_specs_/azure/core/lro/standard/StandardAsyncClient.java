@@ -15,19 +15,22 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 
-/** Initializes a new instance of the asynchronous StandardClient type. */
+/**
+ * Initializes a new instance of the asynchronous StandardClient type.
+ */
 @ServiceClient(builder = StandardClientBuilder.class, isAsync = true)
 public final class StandardAsyncClient {
-    @Generated private final StandardClientImpl serviceClient;
+    @Generated
+    private final StandardClientImpl serviceClient;
 
     /**
      * Initializes an instance of StandardAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,27 +40,27 @@ public final class StandardAsyncClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * 
+     * Creates or replaces a User.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,22 +72,22 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(
-            String name, BinaryData resource, RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginCreateOrReplaceAsync(name, resource, requestOptions);
     }
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Deletes a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(InProgress/Succeeded/Failed/Canceled) (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -95,7 +98,7 @@ public final class StandardAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,11 +115,11 @@ public final class StandardAsyncClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * 
+     * Exports a User.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -131,7 +134,7 @@ public final class StandardAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,9 +152,9 @@ public final class StandardAsyncClient {
 
     /**
      * Adds a user or replaces a user's fields.
-     *
-     * <p>Creates or replaces a User.
-     *
+     * 
+     * Creates or replaces a User.
+     * 
      * @param name The name of user.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -164,7 +167,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, User> beginCreateOrReplace(String name, User resource) {
+    public PollerFlux<PollOperationDetails, User> beginCreateOrReplace(String name, User resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
@@ -172,9 +175,9 @@ public final class StandardAsyncClient {
 
     /**
      * Deletes a user.
-     *
-     * <p>Deletes a User.
-     *
+     * 
+     * Deletes a User.
+     * 
      * @param name The name of user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -186,7 +189,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, Void> beginDelete(String name) {
+    public PollerFlux<PollOperationDetails, Void> beginDelete(String name) {
         // Generated convenience method for beginDeleteWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginDeleteWithModelAsync(name, requestOptions);
@@ -194,9 +197,9 @@ public final class StandardAsyncClient {
 
     /**
      * Exports a user.
-     *
-     * <p>Exports a User.
-     *
+     * 
+     * Exports a User.
+     * 
      * @param name The name of user.
      * @param format The format of the data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -209,7 +212,7 @@ public final class StandardAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResult, ExportedUser> beginExport(String name, String format) {
+    public PollerFlux<PollOperationDetails, ExportedUser> beginExport(String name, String format) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModelAsync(name, format, requestOptions);

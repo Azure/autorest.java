@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -1526,9 +1527,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
             .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
+            .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-            .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+            .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString())
+            .replace(".setServiceVersion(null)", "")
+            .replace(".setEndpoint(null)", "");
     }
 
     private String getSyncPollingStrategy(ClientMethod clientMethod, String contextParam) {
@@ -1555,9 +1559,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
                 .replace("{endpoint}", endpoint)
                 .replace("{context}", contextParam)
+                .replace("{serviceVersion}", getServiceVersionValue(clientMethod))
                 .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
                 .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
-                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString());
+                .replace("{final-type}", clientMethod.getMethodPollingDetails().getFinalType().toString())
+                .replace(".setServiceVersion(null)", "")
+                .replace(".setEndpoint(null)", "");
     }
 
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
@@ -1577,5 +1584,16 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });
+    }
+
+    private static String getServiceVersionValue(ClientMethod clientMethod) {
+        String serviceVersion = "null";
+        if (JavaSettings.getInstance().isDataPlaneClient() && clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            if (clientMethod.getProxyMethod().getParameters().stream()
+                    .anyMatch(p -> p.getOrigin() == ParameterSynthesizedOrigin.API_VERSION)) {
+                serviceVersion = clientMethod.getClientReference() + ".getServiceVersion().getVersion()";
+            }
+        }
+        return serviceVersion;
     }
 }

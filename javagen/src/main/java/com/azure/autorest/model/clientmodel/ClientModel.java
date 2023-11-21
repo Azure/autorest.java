@@ -278,11 +278,11 @@ public class ClientModel {
     }
 
     protected void addImmutableAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.Immutable");
+        Annotation.IMMUTABLE.addImportsTo(imports);
     }
 
     protected void addFluentAnnotationImport(Set<String> imports) {
-        imports.add("com.azure.core.annotation.Fluent");
+        Annotation.FLUENT.addImportsTo(imports);
     }
 
     /**

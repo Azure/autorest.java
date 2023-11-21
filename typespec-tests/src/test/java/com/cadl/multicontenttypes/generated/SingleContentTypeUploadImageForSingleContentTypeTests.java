@@ -5,6 +5,7 @@
 package com.cadl.multicontenttypes.generated;
 
 import com.azure.core.util.BinaryData;
+import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ public final class SingleContentTypeUploadImageForSingleContentTypeTests extends
     @Disabled
     public void testSingleContentTypeUploadImageForSingleContentTypeTests() {
         // method invocation
-        multiContentTypesClient.uploadImageForSingleContentType(BinaryData.fromObject("{}"));
+        multiContentTypesClient.uploadImageForSingleContentType(
+            BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));
     }
 }

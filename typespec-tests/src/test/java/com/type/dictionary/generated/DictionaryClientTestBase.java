@@ -51,10 +51,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        DictionaryClientBuilder int32ValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder int32ValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -62,10 +61,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         int32ValueClient = int32ValueClientbuilder.buildInt32ValueClient();
 
-        DictionaryClientBuilder int64ValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder int64ValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int64ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -73,10 +71,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         int64ValueClient = int64ValueClientbuilder.buildInt64ValueClient();
 
-        DictionaryClientBuilder booleanValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder booleanValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -84,10 +81,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         booleanValueClient = booleanValueClientbuilder.buildBooleanValueClient();
 
-        DictionaryClientBuilder stringValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder stringValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -95,10 +91,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         stringValueClient = stringValueClientbuilder.buildStringValueClient();
 
-        DictionaryClientBuilder float32ValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder float32ValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             float32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -106,10 +101,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         float32ValueClient = float32ValueClientbuilder.buildFloat32ValueClient();
 
-        DictionaryClientBuilder datetimeValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder datetimeValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -117,10 +111,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         datetimeValueClient = datetimeValueClientbuilder.buildDatetimeValueClient();
 
-        DictionaryClientBuilder durationValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder durationValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -128,10 +121,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         durationValueClient = durationValueClientbuilder.buildDurationValueClient();
 
-        DictionaryClientBuilder unknownValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder unknownValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -139,10 +131,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         unknownValueClient = unknownValueClientbuilder.buildUnknownValueClient();
 
-        DictionaryClientBuilder modelValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder modelValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -150,10 +141,9 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         modelValueClient = modelValueClientbuilder.buildModelValueClient();
 
-        DictionaryClientBuilder recursiveModelValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder recursiveModelValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             recursiveModelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -161,15 +151,15 @@ class DictionaryClientTestBase extends TestProxyTestBase {
         }
         recursiveModelValueClient = recursiveModelValueClientbuilder.buildRecursiveModelValueClient();
 
-        DictionaryClientBuilder nullableFloatValueClientbuilder =
-                new DictionaryClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        DictionaryClientBuilder nullableFloatValueClientbuilder
+            = new DictionaryClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableFloatValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             nullableFloatValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         nullableFloatValueClient = nullableFloatValueClientbuilder.buildNullableFloatValueClient();
+
     }
 }

@@ -37,27 +37,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the BodyOptionalityClient type. */
+/**
+ * A builder for creating a new instance of the BodyOptionalityClient type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            BodyOptionalityClient.class,
-            OptionalExplicitClient.class,
-            BodyOptionalityAsyncClient.class,
-            OptionalExplicitAsyncClient.class
-        })
+    serviceClients = {
+        BodyOptionalityClient.class,
+        OptionalExplicitClient.class,
+        BodyOptionalityAsyncClient.class,
+        OptionalExplicitAsyncClient.class })
 public final class BodyOptionalityClientBuilder
-        implements HttpTrait<BodyOptionalityClientBuilder>, ConfigurationTrait<BodyOptionalityClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
-
-    @Generated private static final String SDK_VERSION = "version";
+    implements HttpTrait<BodyOptionalityClientBuilder>, ConfigurationTrait<BodyOptionalityClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
     @Generated
-    private static final Map<String, String> PROPERTIES =
-            CoreUtils.getProperties("parameters-bodyoptionality.properties");
+    private static final String SDK_VERSION = "version";
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private static final Map<String, String> PROPERTIES
+        = CoreUtils.getProperties("parameters-bodyoptionality.properties");
 
-    /** Create an instance of the BodyOptionalityClientBuilder. */
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
+
+    /**
+     * Create an instance of the BodyOptionalityClientBuilder.
+     */
     @Generated
     public BodyOptionalityClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -66,9 +72,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder pipeline(HttpPipeline pipeline) {
@@ -82,9 +91,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder httpClient(HttpClient httpClient) {
@@ -95,9 +107,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -108,9 +123,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -121,9 +139,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -131,7 +152,9 @@ public final class BodyOptionalityClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -143,9 +166,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public BodyOptionalityClientBuilder configuration(Configuration configuration) {
@@ -156,11 +182,12 @@ public final class BodyOptionalityClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the BodyOptionalityClientBuilder.
      */
@@ -172,21 +199,21 @@ public final class BodyOptionalityClientBuilder
 
     /**
      * Builds an instance of BodyOptionalityClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of BodyOptionalityClientImpl.
      */
     @Generated
     private BodyOptionalityClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        BodyOptionalityClientImpl client =
-                new BodyOptionalityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        BodyOptionalityClientImpl client
+            = new BodyOptionalityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -197,35 +224,28 @@ public final class BodyOptionalityClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of BodyOptionalityAsyncClient class.
-     *
+     * 
      * @return an instance of BodyOptionalityAsyncClient.
      */
     @Generated
@@ -235,7 +255,7 @@ public final class BodyOptionalityClientBuilder
 
     /**
      * Builds an instance of OptionalExplicitAsyncClient class.
-     *
+     * 
      * @return an instance of OptionalExplicitAsyncClient.
      */
     @Generated
@@ -245,7 +265,7 @@ public final class BodyOptionalityClientBuilder
 
     /**
      * Builds an instance of BodyOptionalityClient class.
-     *
+     * 
      * @return an instance of BodyOptionalityClient.
      */
     @Generated
@@ -255,7 +275,7 @@ public final class BodyOptionalityClientBuilder
 
     /**
      * Builds an instance of OptionalExplicitClient class.
-     *
+     * 
      * @return an instance of OptionalExplicitClient.
      */
     @Generated

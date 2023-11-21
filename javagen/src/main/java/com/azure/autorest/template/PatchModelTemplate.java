@@ -134,7 +134,7 @@ public class PatchModelTemplate implements IJavaTemplate<ClientModel, JavaFile> 
                             (methodBlock) -> {
                                 String expression;
                                 if (propertyClientType.equals(ArrayType.BYTE_ARRAY)) {
-                                    expression = String.format("CoreUtils.clone(%s)", property.getName());
+                                    expression = TemplateHelper.getByteCloneExpression(property.getName());
                                 } else {
                                     expression = property.getName();
                                 }

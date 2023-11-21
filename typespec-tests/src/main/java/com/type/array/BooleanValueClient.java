@@ -19,14 +19,17 @@ import com.azure.core.util.serializer.TypeReference;
 import com.type.array.implementation.BooleanValuesImpl;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous ArrayClient type. */
+/**
+ * Initializes a new instance of the synchronous ArrayClient type.
+ */
 @ServiceClient(builder = ArrayClientBuilder.class)
 public final class BooleanValueClient {
-    @Generated private final BooleanValuesImpl serviceClient;
+    @Generated
+    private final BooleanValuesImpl serviceClient;
 
     /**
      * Initializes an instance of BooleanValueClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,15 +39,15 @@ public final class BooleanValueClient {
 
     /**
      * The get operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *     boolean (Required)
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,15 +63,15 @@ public final class BooleanValueClient {
 
     /**
      * The put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *     boolean (Required)
      * ]
      * }</pre>
-     *
+     * 
      * @param body Array of GetResponse.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,7 +88,7 @@ public final class BooleanValueClient {
 
     /**
      * The get operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -103,7 +106,7 @@ public final class BooleanValueClient {
 
     /**
      * The put operation.
-     *
+     * 
      * @param body Array of GetResponse.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -121,6 +124,6 @@ public final class BooleanValueClient {
     }
 
     @Generated
-    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN =
-            new TypeReference<List<Boolean>>() {};
+    private static final TypeReference<List<Boolean>> TYPE_REFERENCE_LIST_BOOLEAN = new TypeReference<List<Boolean>>() {
+    };
 }

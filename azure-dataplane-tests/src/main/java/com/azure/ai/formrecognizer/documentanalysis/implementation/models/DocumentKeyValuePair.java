@@ -7,7 +7,9 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** An object representing a form field with distinct field label (key) and field value (may be empty). */
+/**
+ * An object representing a form field with distinct field label (key) and field value (may be empty).
+ */
 @Fluent
 public final class DocumentKeyValuePair {
     /*
@@ -28,12 +30,15 @@ public final class DocumentKeyValuePair {
     @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
-    /** Creates an instance of DocumentKeyValuePair class. */
-    public DocumentKeyValuePair() {}
+    /**
+     * Creates an instance of DocumentKeyValuePair class.
+     */
+    public DocumentKeyValuePair() {
+    }
 
     /**
      * Get the key property: Field label of the key-value pair.
-     *
+     * 
      * @return the key value.
      */
     public DocumentKeyValueElement getKey() {
@@ -42,7 +47,7 @@ public final class DocumentKeyValuePair {
 
     /**
      * Set the key property: Field label of the key-value pair.
-     *
+     * 
      * @param key the key value to set.
      * @return the DocumentKeyValuePair object itself.
      */
@@ -53,7 +58,7 @@ public final class DocumentKeyValuePair {
 
     /**
      * Get the value property: Field value of the key-value pair.
-     *
+     * 
      * @return the value value.
      */
     public DocumentKeyValueElement getValue() {
@@ -62,7 +67,7 @@ public final class DocumentKeyValuePair {
 
     /**
      * Set the value property: Field value of the key-value pair.
-     *
+     * 
      * @param value the value value to set.
      * @return the DocumentKeyValuePair object itself.
      */
@@ -73,7 +78,7 @@ public final class DocumentKeyValuePair {
 
     /**
      * Get the confidence property: Confidence of correctly extracting the key-value pair.
-     *
+     * 
      * @return the confidence value.
      */
     public float getConfidence() {
@@ -82,7 +87,7 @@ public final class DocumentKeyValuePair {
 
     /**
      * Set the confidence property: Confidence of correctly extracting the key-value pair.
-     *
+     * 
      * @param confidence the confidence value to set.
      * @return the DocumentKeyValuePair object itself.
      */

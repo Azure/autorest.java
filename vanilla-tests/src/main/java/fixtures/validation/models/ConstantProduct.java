@@ -7,7 +7,9 @@ package fixtures.validation.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The product documentation. */
+/**
+ * The product documentation.
+ */
 @Fluent
 public final class ConstantProduct {
     /*
@@ -22,15 +24,15 @@ public final class ConstantProduct {
     @JsonProperty(value = "constProperty2", required = true)
     private String constProperty2 = "constant2";
 
-    /** Creates an instance of ConstantProduct class. */
+    /**
+     * Creates an instance of ConstantProduct class.
+     */
     public ConstantProduct() {
-        constProperty = "constant";
-        constProperty2 = "constant2";
     }
 
     /**
      * Get the constProperty property: Constant string.
-     *
+     * 
      * @return the constProperty value.
      */
     public String getConstProperty() {
@@ -39,7 +41,7 @@ public final class ConstantProduct {
 
     /**
      * Set the constProperty property: Constant string.
-     *
+     * 
      * @param constProperty the constProperty value to set.
      * @return the ConstantProduct object itself.
      */
@@ -50,7 +52,7 @@ public final class ConstantProduct {
 
     /**
      * Get the constProperty2 property: Constant string2.
-     *
+     * 
      * @return the constProperty2 value.
      */
     public String getConstProperty2() {
@@ -59,7 +61,7 @@ public final class ConstantProduct {
 
     /**
      * Set the constProperty2 property: Constant string2.
-     *
+     * 
      * @param constProperty2 the constProperty2 value to set.
      * @return the ConstantProduct object itself.
      */
@@ -70,8 +72,9 @@ public final class ConstantProduct {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

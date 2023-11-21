@@ -19,14 +19,17 @@ import com.azure.core.util.FluxUtil;
 import com.type.scalar.implementation.BooleanOperationsImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ScalarClient type. */
+/**
+ * Initializes a new instance of the asynchronous ScalarClient type.
+ */
 @ServiceClient(builder = ScalarClientBuilder.class, isAsync = true)
 public final class BooleanOperationAsyncClient {
-    @Generated private final BooleanOperationsImpl serviceClient;
+    @Generated
+    private final BooleanOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of BooleanOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -36,13 +39,13 @@ public final class BooleanOperationAsyncClient {
 
     /**
      * get boolean value.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,13 +61,13 @@ public final class BooleanOperationAsyncClient {
 
     /**
      * put boolean value.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,7 +84,7 @@ public final class BooleanOperationAsyncClient {
 
     /**
      * get boolean value.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -94,14 +97,13 @@ public final class BooleanOperationAsyncClient {
     public Mono<Boolean> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Boolean.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Boolean.class));
     }
 
     /**
      * put boolean value.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

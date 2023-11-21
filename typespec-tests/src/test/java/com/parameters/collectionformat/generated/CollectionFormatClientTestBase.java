@@ -24,10 +24,9 @@ class CollectionFormatClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        CollectionFormatClientBuilder queryClientbuilder =
-                new CollectionFormatClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        CollectionFormatClientBuilder queryClientbuilder
+            = new CollectionFormatClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -35,15 +34,15 @@ class CollectionFormatClientTestBase extends TestProxyTestBase {
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        CollectionFormatClientBuilder headerClientbuilder =
-                new CollectionFormatClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        CollectionFormatClientBuilder headerClientbuilder
+            = new CollectionFormatClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             headerClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         headerClient = headerClientbuilder.buildHeaderClient();
+
     }
 }

@@ -20,14 +20,17 @@ import java.time.Duration;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DurationClient type. */
+/**
+ * Initializes a new instance of the asynchronous DurationClient type.
+ */
 @ServiceClient(builder = DurationClientBuilder.class, isAsync = true)
 public final class QueryAsyncClient {
-    @Generated private final QueriesImpl serviceClient;
+    @Generated
+    private final QueriesImpl serviceClient;
 
     /**
      * Initializes an instance of QueryAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,7 +40,7 @@ public final class QueryAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -54,7 +57,7 @@ public final class QueryAsyncClient {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,7 +74,7 @@ public final class QueryAsyncClient {
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class QueryAsyncClient {
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,8 +108,8 @@ public final class QueryAsyncClient {
 
     /**
      * The int32SecondsArray operation.
-     *
-     * @param input Array of InputModel.
+     * 
+     * @param input Array of Input.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -122,7 +125,7 @@ public final class QueryAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -142,7 +145,7 @@ public final class QueryAsyncClient {
 
     /**
      * The iso8601 operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -162,7 +165,7 @@ public final class QueryAsyncClient {
 
     /**
      * The int32Seconds operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -182,7 +185,7 @@ public final class QueryAsyncClient {
 
     /**
      * The floatSeconds operation.
-     *
+     * 
      * @param input A duration/time period. e.g 5s, 10h.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -202,8 +205,8 @@ public final class QueryAsyncClient {
 
     /**
      * The int32SecondsArray operation.
-     *
-     * @param input Array of InputModel.
+     * 
+     * @param input Array of Input.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class IntWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        IntWrapper model =
-                BinaryData.fromString("{\"field1\":318397575,\"field2\":1830732530}").toObject(IntWrapper.class);
+        IntWrapper model
+            = BinaryData.fromString("{\"field1\":318397575,\"field2\":1830732530}").toObject(IntWrapper.class);
         Assertions.assertEquals(318397575, model.getField1());
         Assertions.assertEquals(1830732530, model.getField2());
     }

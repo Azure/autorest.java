@@ -38,30 +38,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the VisibilityClient type. */
+/**
+ * A builder for creating a new instance of the VisibilityClient type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            VisibilityClient.class,
-            VisibilityReadClient.class,
-            VisibilityWriteClient.class,
-            VisibilityAsyncClient.class,
-            VisibilityReadAsyncClient.class,
-            VisibilityWriteAsyncClient.class
-        })
-public final class VisibilityClientBuilder
-        implements HttpTrait<VisibilityClientBuilder>,
-                ConfigurationTrait<VisibilityClientBuilder>,
-                EndpointTrait<VisibilityClientBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    serviceClients = {
+        VisibilityClient.class,
+        VisibilityReadClient.class,
+        VisibilityWriteClient.class,
+        VisibilityAsyncClient.class,
+        VisibilityReadAsyncClient.class,
+        VisibilityWriteAsyncClient.class })
+public final class VisibilityClientBuilder implements HttpTrait<VisibilityClientBuilder>,
+    ConfigurationTrait<VisibilityClientBuilder>, EndpointTrait<VisibilityClientBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
     @Generated
     private static final Map<String, String> PROPERTIES = CoreUtils.getProperties("cadl-visibility.properties");
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the VisibilityClientBuilder. */
+    /**
+     * Create an instance of the VisibilityClientBuilder.
+     */
     @Generated
     public VisibilityClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -70,9 +74,12 @@ public final class VisibilityClientBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder pipeline(HttpPipeline pipeline) {
@@ -86,9 +93,12 @@ public final class VisibilityClientBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder httpClient(HttpClient httpClient) {
@@ -99,9 +109,12 @@ public final class VisibilityClientBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -112,9 +125,12 @@ public final class VisibilityClientBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder clientOptions(ClientOptions clientOptions) {
@@ -125,9 +141,12 @@ public final class VisibilityClientBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder retryOptions(RetryOptions retryOptions) {
@@ -135,7 +154,9 @@ public final class VisibilityClientBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -147,9 +168,12 @@ public final class VisibilityClientBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder configuration(Configuration configuration) {
@@ -160,9 +184,12 @@ public final class VisibilityClientBuilder
     /*
      * The service endpoint
      */
-    @Generated private String endpoint;
+    @Generated
+    private String endpoint;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public VisibilityClientBuilder endpoint(String endpoint) {
@@ -173,11 +200,12 @@ public final class VisibilityClientBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the VisibilityClientBuilder.
      */
@@ -189,21 +217,21 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of VisibilityClientImpl.
      */
     @Generated
     private VisibilityClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        VisibilityClientImpl client =
-                new VisibilityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+        VisibilityClientImpl client
+            = new VisibilityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -214,35 +242,28 @@ public final class VisibilityClientBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of VisibilityAsyncClient class.
-     *
+     * 
      * @return an instance of VisibilityAsyncClient.
      */
     @Generated
@@ -252,7 +273,7 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityReadAsyncClient class.
-     *
+     * 
      * @return an instance of VisibilityReadAsyncClient.
      */
     @Generated
@@ -262,7 +283,7 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityWriteAsyncClient class.
-     *
+     * 
      * @return an instance of VisibilityWriteAsyncClient.
      */
     @Generated
@@ -272,7 +293,7 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityClient class.
-     *
+     * 
      * @return an instance of VisibilityClient.
      */
     @Generated
@@ -282,7 +303,7 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityReadClient class.
-     *
+     * 
      * @return an instance of VisibilityReadClient.
      */
     @Generated
@@ -292,7 +313,7 @@ public final class VisibilityClientBuilder
 
     /**
      * Builds an instance of VisibilityWriteClient class.
-     *
+     * 
      * @return an instance of VisibilityWriteClient.
      */
     @Generated

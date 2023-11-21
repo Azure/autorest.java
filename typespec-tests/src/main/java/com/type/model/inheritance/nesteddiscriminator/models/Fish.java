@@ -12,17 +12,18 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** This is base model for polymorphic multiple levels inheritance with a discriminator. */
+/**
+ * This is base model for polymorphic multiple levels inheritance with a discriminator.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "kind",
-        defaultImpl = Fish.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = Fish.class)
 @JsonTypeName("Fish")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "shark", value = Shark.class),
-    @JsonSubTypes.Type(name = "salmon", value = Salmon.class)
-})
+    @JsonSubTypes.Type(name = "salmon", value = Salmon.class) })
 @Immutable
 public class Fish {
     /*
@@ -34,7 +35,7 @@ public class Fish {
 
     /**
      * Creates an instance of Fish class.
-     *
+     * 
      * @param age the age value to set.
      */
     @Generated
@@ -45,7 +46,7 @@ public class Fish {
 
     /**
      * Get the age property: The age property.
-     *
+     * 
      * @return the age value.
      */
     @Generated

@@ -3,7 +3,6 @@
 
 package com.azure.autorest;
 
-import com.azure.autorest.customization.Customization;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -14,21 +13,19 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
-import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.FileUtil;
 import com.azure.typespec.util.ModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -132,16 +129,7 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
-        File outputFile = Paths.get(emitterOptions.getOutputDir(), fileName).toAbsolutePath().toFile();
-        File parentFile = outputFile.getParentFile();
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-            writer.write(content);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
     }
 
@@ -151,9 +139,8 @@ public class TypeSpecPlugin extends Javagen {
             Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
             if (Files.exists(absoluteFilePath)) {
                 try {
-                    String existingFileContent = new String(Files.readAllBytes(absoluteFilePath), StandardCharsets.UTF_8);
-                    String updatedContent = PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
-                    return updatedContent;
+                    String existingFileContent = Files.readString(absoluteFilePath);
+                    return PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -193,40 +180,18 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("use-key-credential", true);
     }
 
-    public Map<String, String> customizeGeneratedCode(Map<String, String> fileContents, String outputDir) {
-        String className = JavaSettings.getInstance().getCustomizationClass();
-
-        if (className == null) {
-            return fileContents;
-        }
-
-        Class<? extends Customization> customizationClass = null;
-        if (className.endsWith(".java")) {
-            customizationClass = Postprocessor.loadCustomizationClassFromJavaCode(className, outputDir, LOGGER);
-        } else {
-            LOGGER.warn("Invalid customization class. No customizations are applied to the generated code."
-                    + " The customization java file should end with .java but was " + className);
-
-            return fileContents;
-        }
-        try {
-            Customization customization = customizationClass.getConstructor().newInstance();
-            LOGGER.info("Running customization, this may take a while...");
-            fileContents = customization.run(fileContents, LOGGER);
-            return fileContents;
-        } catch (Exception e) {
-            LOGGER.error("Unable to complete customization", e);
-            throw new RuntimeException(e);
-        }
-    }
-
     public Map<String, String> getCrossLanguageDefinitionMap() {
         return this.crossLanguageDefinitionsMap;
     }
 
     public static class MockConnection extends Connection {
         public MockConnection() {
-            super(null, null);
+            super(new OutputStream() {
+                @Override
+                public void write(int b) {
+                    // NO-OP
+                }
+            }, null);
         }
     }
 
@@ -255,6 +220,9 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getEnableSyncStack() != null) {
             SETTINGS_MAP.put("enable-sync-stack", options.getEnableSyncStack());
         }
+        if (options.getStreamStyleSerialization() != null) {
+            SETTINGS_MAP.put("stream-style-serialization", options.getStreamStyleSerialization());
+        }
 
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("regenerate-pom", sdkIntegration);
@@ -266,9 +234,24 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getCustomTypeSubpackage() != null) {
             SETTINGS_MAP.put("custom-types-subpackage", options.getCustomTypeSubpackage());
         }
-
         if (options.getCustomizationClass() != null) {
-            SETTINGS_MAP.put("customization-class", options.getCustomizationClass());
+            SETTINGS_MAP.put("customization-class",
+                Paths.get(options.getOutputDir()).resolve(options.getCustomizationClass()).toAbsolutePath().toString());
+        }
+        if (emitterOptions.getPolling() != null) {
+            SETTINGS_MAP.put("polling", options.getPolling());
+        }
+
+        if (options.getBranded() == Boolean.FALSE) {
+            SETTINGS_MAP.put("branded", options.getBranded());
+
+            SETTINGS_MAP.put("sdk-integration", false);
+            SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
+
+            SETTINGS_MAP.put("sync-methods", "sync-only");
+            SETTINGS_MAP.put("stream-style-serialization", true);
+            SETTINGS_MAP.put("generate-samples", false);
+            SETTINGS_MAP.put("generate-tests", false);
         }
 
         JavaSettingsAccessor.setHost(this);

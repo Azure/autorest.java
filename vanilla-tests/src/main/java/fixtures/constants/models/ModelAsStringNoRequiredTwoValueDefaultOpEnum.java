@@ -8,26 +8,33 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** Defines values for ModelAsStringNoRequiredTwoValueDefaultOpEnum. */
+/**
+ * Defines values for ModelAsStringNoRequiredTwoValueDefaultOpEnum.
+ */
 public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
-        extends ExpandableStringEnum<ModelAsStringNoRequiredTwoValueDefaultOpEnum> {
-    /** Static value value1 for ModelAsStringNoRequiredTwoValueDefaultOpEnum. */
+    extends ExpandableStringEnum<ModelAsStringNoRequiredTwoValueDefaultOpEnum> {
+    /**
+     * Static value value1 for ModelAsStringNoRequiredTwoValueDefaultOpEnum.
+     */
     public static final ModelAsStringNoRequiredTwoValueDefaultOpEnum VALUE1 = fromString("value1");
 
-    /** Static value value2 for ModelAsStringNoRequiredTwoValueDefaultOpEnum. */
+    /**
+     * Static value value2 for ModelAsStringNoRequiredTwoValueDefaultOpEnum.
+     */
     public static final ModelAsStringNoRequiredTwoValueDefaultOpEnum VALUE2 = fromString("value2");
 
     /**
      * Creates a new instance of ModelAsStringNoRequiredTwoValueDefaultOpEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Deprecated
-    public ModelAsStringNoRequiredTwoValueDefaultOpEnum() {}
+    public ModelAsStringNoRequiredTwoValueDefaultOpEnum() {
+    }
 
     /**
      * Creates or finds a ModelAsStringNoRequiredTwoValueDefaultOpEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredTwoValueDefaultOpEnum.
      */
@@ -38,7 +45,7 @@ public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
 
     /**
      * Gets known ModelAsStringNoRequiredTwoValueDefaultOpEnum values.
-     *
+     * 
      * @return known ModelAsStringNoRequiredTwoValueDefaultOpEnum values.
      */
     public static Collection<ModelAsStringNoRequiredTwoValueDefaultOpEnum> values() {

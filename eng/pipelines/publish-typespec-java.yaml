@@ -2,7 +2,8 @@ trigger: none
 pr: none
 
 pool:
-  vmImage: "ubuntu-latest"
+  name: "azsdk-pool-mms-ubuntu-2004-general"
+  vmImage: "MMSUbuntu20.04"
 
 jobs:
   - job: Build
@@ -10,7 +11,7 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      JavaVersion: 1.8
+      JavaVersion: 1.11
       NodeVersion: '18.x'
 
     steps:
@@ -20,12 +21,11 @@ jobs:
           versionSpec: '$(NodeVersion)'
 
       - task: Maven@3
-        retryCountOnTaskFailure: 3
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'clean verify package install'
-          options: '-P local,tsp -T 1C --no-transfer-progress'
+          goals: 'clean install'
+          options: '-P local,tsp --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

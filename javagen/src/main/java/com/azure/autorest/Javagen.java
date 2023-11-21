@@ -15,10 +15,10 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
@@ -29,14 +29,16 @@ import com.azure.autorest.model.clientmodel.ServiceVersion;
 import com.azure.autorest.model.clientmodel.TestContext;
 import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.postprocessor.Postprocessor;
+import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -50,9 +52,6 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
@@ -74,16 +73,10 @@ public class Javagen extends NewPlugin {
 
         JavaSettings settings = JavaSettings.getInstance();
 
-        List<String> allFiles = listInputs();
-        List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-        if (files.size() != 1) {
-            throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-        }
-
         try {
             // Step 1: Parse input yaml as CodeModel
-            String fileName = files.get(0);
-            CodeModel codeModel = parseCodeModel(fileName);
+            CodeModel codeModel = new Preprocessor(this, connection, pluginName, sessionId)
+                .processCodeModel();
 
             // Step 2: Map
             Client client = Mappers.getClientMapper().map(codeModel);
@@ -92,34 +85,10 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = writeToTemplates(codeModel, client, settings, true);
 
             //Step 4: Print to files
-            Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-            Formatter formatter = new Formatter();
-
-            // Formatting Java source files can be expensive but can be run in parallel.
-            // Submit each file for formatting as a task on the common ForkJoinPool and then wait until all tasks
-            // complete.
-            AtomicBoolean failedFormatting = new AtomicBoolean();
-            javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-                String formattedSource = javaFile.getContents().toString();
-                if (!settings.isSkipFormatting()) {
-                    try {
-                        formattedSource = formatter.formatSourceAndFixImports(formattedSource);
-                    } catch (Exception e) {
-                        logger.error("Unable to format output file " + javaFile.getFilePath(), e);
-                        failedFormatting.set(true);
-                    }
-                }
-
-                formattedFiles.put(javaFile.getFilePath(), formattedSource);
-            });
-
-            if (failedFormatting.get()) {
-                throw new RuntimeException("Failed to format Java files.");
-            }
-
             // Then for each formatted file write the file. This is done synchronously as there is potential race
             // conditions that can lead to deadlocking.
-            formattedFiles.forEach((filePath, formattedSource) -> writeFile(filePath, formattedSource, null));
+            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())));
 
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
@@ -131,7 +100,7 @@ public class Javagen extends NewPlugin {
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
         } catch (Exception ex) {
             logger.error("Failed to generate code.", ex);

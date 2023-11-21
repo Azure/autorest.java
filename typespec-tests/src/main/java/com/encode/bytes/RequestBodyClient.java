@@ -18,14 +18,17 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.implementation.RequestBodiesImpl;
 
-/** Initializes a new instance of the synchronous BytesClient type. */
+/**
+ * Initializes a new instance of the synchronous BytesClient type.
+ */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class RequestBodyClient {
-    @Generated private final RequestBodiesImpl serviceClient;
+    @Generated
+    private final RequestBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of RequestBodyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,13 +38,13 @@ public final class RequestBodyClient {
 
     /**
      * The defaultMethod operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -58,13 +61,13 @@ public final class RequestBodyClient {
 
     /**
      * The octetStream operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -81,13 +84,13 @@ public final class RequestBodyClient {
 
     /**
      * The customContentType operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -104,13 +107,13 @@ public final class RequestBodyClient {
 
     /**
      * The base64 operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * byte[]
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -127,13 +130,13 @@ public final class RequestBodyClient {
 
     /**
      * The base64Url operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * Base64Url
      * }</pre>
-     *
+     * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -150,7 +153,7 @@ public final class RequestBodyClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -169,7 +172,7 @@ public final class RequestBodyClient {
 
     /**
      * The octetStream operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -188,7 +191,7 @@ public final class RequestBodyClient {
 
     /**
      * The customContentType operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -207,7 +210,7 @@ public final class RequestBodyClient {
 
     /**
      * The base64 operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -226,7 +229,7 @@ public final class RequestBodyClient {
 
     /**
      * The base64Url operation.
-     *
+     * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

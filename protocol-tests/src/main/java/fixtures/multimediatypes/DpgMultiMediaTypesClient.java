@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
 
-/** Initializes a new instance of the synchronous DpgMultiMediaTypesClient type. */
+/**
+ * Initializes a new instance of the synchronous DpgMultiMediaTypesClient type.
+ */
 @ServiceClient(builder = DpgMultiMediaTypesClientBuilder.class)
 public final class DpgMultiMediaTypesClient {
-    @Generated private final DpgMultiMediaTypesClientImpl serviceClient;
+    @Generated
+    private final DpgMultiMediaTypesClientImpl serviceClient;
 
     /**
      * Initializes an instance of DpgMultiMediaTypesClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,19 +37,19 @@ public final class DpgMultiMediaTypesClient {
 
     /**
      * json and binary types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -58,26 +61,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndBinaryTypesJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndBinaryTypesJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and binary types with binary type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -89,26 +92,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndBinaryTypesBinaryFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndBinaryTypesBinaryFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and octet media types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -120,26 +123,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndOctectWithJsonFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndOctectWithJsonFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
      * json and octet media types with octet type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -151,26 +154,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndOctectWithOctetFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndOctectWithOctetFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
      * json and encoding types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -182,26 +185,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(
-            String contentType, BinaryData message, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndEncodingWithJsonFirstWithResponse(String contentType, BinaryData message,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndEncodingWithJsonFirstWithResponse(contentType, message, requestOptions);
     }
 
     /**
      * json and encoding types with encoding type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -213,26 +216,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndEncodingWithEncodingFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndEncodingWithEncodingFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and text types with text type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -244,26 +247,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndTextWithTextFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndTextWithTextFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and text types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -275,26 +278,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndTextWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndTextWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -306,26 +309,26 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndImageWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndImageWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * json and image types with json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -337,36 +340,45 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(
-            String contentType, BinaryData input, RequestOptions requestOptions) {
+    public Response<BinaryData> jsonAndImageObjectTypeWithJsonFirstWithResponse(String contentType, BinaryData input,
+        RequestOptions requestOptions) {
         return this.serviceClient.jsonAndImageObjectTypeWithJsonFirstWithResponse(contentType, input, requestOptions);
     }
 
     /**
      * image type with non-required body.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -382,19 +394,19 @@ public final class DpgMultiMediaTypesClient {
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -405,37 +417,46 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
-            String contentType, RequestOptions requestOptions) {
-        return this.serviceClient.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(
-                contentType, requestOptions);
+    public Response<BinaryData> jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(String contentType,
+        RequestOptions requestOptions) {
+        return this.serviceClient.jsonAndImageBinaryTypeJsonFirstWithNonRequiredBodyWithResponse(contentType,
+            requestOptions);
     }
 
     /**
      * json and image types with non-required body and json type first.
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json", "image/jpeg".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>Content-Type</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>The content type. Allowed values: "application/json", "image/jpeg".</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -445,8 +466,8 @@ public final class DpgMultiMediaTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(
-            RequestOptions requestOptions) {
+    public Response<BinaryData>
+        jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.jsonAndImageObjectTypeJsonFirstWithNonRequiredBodyWithResponse(requestOptions);
     }
 }

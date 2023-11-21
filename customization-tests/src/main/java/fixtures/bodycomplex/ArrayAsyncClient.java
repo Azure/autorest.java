@@ -14,14 +14,17 @@ import fixtures.bodycomplex.implementation.models.ArrayWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous AutoRestComplexTestService type. */
+/**
+ * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class ArrayAsyncClient {
-    @Generated private final ArraysImpl serviceClient;
+    @Generated
+    private final ArraysImpl serviceClient;
 
     /**
      * Initializes an instance of ArrayAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -31,7 +34,7 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property along with {@link Response} on successful completion of {@link Mono}.
@@ -44,7 +47,7 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property on successful completion of {@link Mono}.
@@ -57,9 +60,9 @@ public final class ArrayAsyncClient {
 
     /**
      * Put complex types with array property.
-     *
+     * 
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
+     * jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -73,9 +76,9 @@ public final class ArrayAsyncClient {
 
     /**
      * Put complex types with array property.
-     *
+     * 
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
+     * jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -89,11 +92,11 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property which is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -103,7 +106,7 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property which is empty.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property which is empty on successful completion of {@link Mono}.
@@ -116,7 +119,7 @@ public final class ArrayAsyncClient {
 
     /**
      * Put complex types with array property which is empty.
-     *
+     * 
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -131,7 +134,7 @@ public final class ArrayAsyncClient {
 
     /**
      * Put complex types with array property which is empty.
-     *
+     * 
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -146,11 +149,11 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     *     Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -160,11 +163,11 @@ public final class ArrayAsyncClient {
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return complex types with array property while server doesn't provide a response payload on successful
-     *     completion of {@link Mono}.
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -25,7 +25,7 @@ jobs:
     timeoutInMinutes: 60
 
     variables:
-      JavaVersion: 1.8
+      JavaVersion: 1.11
       NodeVersion: '18.x'
 
     pool:
@@ -39,12 +39,11 @@ jobs:
           versionSpec: '$(NodeVersion)'
 
       - task: Maven@3
-        retryCountOnTaskFailure: 3
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
-          goals: 'clean verify package install'
-          options: '-P local -T 1C --no-transfer-progress'
+          goals: 'clean install'
+          options: '-P local --no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -155,6 +154,7 @@ jobs:
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml
           goals: 'package revapi:check'
+          options: '--no-transfer-progress'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

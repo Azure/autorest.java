@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The StandAloneData model. */
+/**
+ * The StandAloneData model.
+ */
 @Immutable
 public final class StandAloneData {
     /*
@@ -21,7 +23,7 @@ public final class StandAloneData {
 
     /**
      * Creates an instance of StandAloneData class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class StandAloneData {
 
     /**
      * Get the property property: The property property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

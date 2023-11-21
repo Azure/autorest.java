@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The HttpRedirectsPut301Headers model. */
+/**
+ * The HttpRedirectsPut301Headers model.
+ */
 @Fluent
 public final class HttpRedirectsPut301Headers {
     /*
@@ -21,7 +23,7 @@ public final class HttpRedirectsPut301Headers {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of HttpRedirectsPut301Headers class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsPut301Headers(HttpHeaders rawHeaders) {
@@ -30,7 +32,7 @@ public final class HttpRedirectsPut301Headers {
 
     /**
      * Get the location property: The Location property.
-     *
+     * 
      * @return the location value.
      */
     public String getLocation() {
@@ -39,7 +41,7 @@ public final class HttpRedirectsPut301Headers {
 
     /**
      * Set the location property: The Location property.
-     *
+     * 
      * @param location the location value to set.
      * @return the HttpRedirectsPut301Headers object itself.
      */
@@ -50,8 +52,9 @@ public final class HttpRedirectsPut301Headers {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

@@ -22,16 +22,16 @@ class ProtocolAndConvenientClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ProtocolAndConvenientClientBuilder protocolAndConvenientClientbuilder =
-                new ProtocolAndConvenientClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ProtocolAndConvenientClientBuilder protocolAndConvenientClientbuilder = new ProtocolAndConvenientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             protocolAndConvenientClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             protocolAndConvenientClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         protocolAndConvenientClient = protocolAndConvenientClientbuilder.buildClient();
+
     }
 }

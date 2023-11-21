@@ -10,11 +10,14 @@ import argparse
 import subprocess
 import glob
 import json
+import shutil
 from typing import List
 
 sdk_root: str
 
-skip_artifacts: List[str] = ['azure-ai-anomalydetector']
+skip_artifacts: List[str] = [
+    'azure-ai-anomalydetector'  # deprecated
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -44,25 +47,45 @@ def update_emitter(version: str):
     logging.info('Update emitter-package.json to use @azure-tools/typespec-java version %s', version)
 
 
+def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
+    path = os.path.join(module_path, 'src', type, 'java', 'com')
+    for seg in artifact.split('-'):
+        path = os.path.join(path, seg)
+    path = os.path.join(path, 'generated')
+    return path
+
+
 def update_sdks():
     for tsp_location_file in glob.glob(os.path.join(sdk_root, 'sdk/*/*/tsp-location.yaml')):
-        artifact_path = os.path.dirname(tsp_location_file)
-        artifact = os.path.basename(artifact_path)
+        module_path = os.path.dirname(tsp_location_file)
+        artifact = os.path.basename(module_path)
 
         if artifact in skip_artifacts:
             continue
+
+        generated_samples_path = os.path.join(
+            module_path, get_generated_folder_from_artifact(module_path, artifact, 'samples'))
+        generated_test_path = os.path.join(
+            module_path, get_generated_folder_from_artifact(module_path, artifact, 'test'))
+        generated_samples_exists = os.path.isdir(generated_samples_path)
+        generated_test_exists = os.path.isdir(generated_test_path)
 
         logging.info('Generate for module %s', artifact)
 
         cmd = [
             'pwsh',
             os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Sync.ps1'),
-            artifact_path
+            module_path
         ]
         subprocess.check_call(cmd, cwd=sdk_root)
 
         cmd[1] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
         subprocess.check_call(cmd, cwd=sdk_root)
+
+        if not generated_samples_exists:
+            shutil.rmtree(generated_samples_path, ignore_errors=True)
+        if not generated_test_exists:
+            shutil.rmtree(generated_test_path, ignore_errors=True)
 
     cmd = ['git', 'add', '.']
     subprocess.check_call(cmd, cwd=sdk_root)

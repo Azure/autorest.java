@@ -12,9 +12,8 @@ import org.junit.jupiter.api.Assertions;
 public final class BasicTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        Basic model =
-                BinaryData.fromString("{\"id\":268043672,\"name\":\"quvgjxpybczme\",\"color\":\"blacK\"}")
-                        .toObject(Basic.class);
+        Basic model = BinaryData.fromString("{\"id\":268043672,\"name\":\"quvgjxpybczme\",\"color\":\"blacK\"}")
+            .toObject(Basic.class);
         Assertions.assertEquals(268043672, model.getId());
         Assertions.assertEquals("quvgjxpybczme", model.getName());
         Assertions.assertEquals(CMYKColors.BLACK, model.getColor());

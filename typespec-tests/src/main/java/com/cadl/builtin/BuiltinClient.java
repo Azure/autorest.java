@@ -21,14 +21,17 @@ import com.cadl.builtin.implementation.BuiltinClientImpl;
 import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
 
-/** Initializes a new instance of the synchronous BuiltinClient type. */
+/**
+ * Initializes a new instance of the synchronous BuiltinClient type.
+ */
 @ServiceClient(builder = BuiltinClientBuilder.class)
 public final class BuiltinClient {
-    @Generated private final BuiltinClientImpl serviceClient;
+    @Generated
+    private final BuiltinClientImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,31 +41,59 @@ public final class BuiltinClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by https://url.spec.whatwg.org/</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>query-opt</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>query-opt-encoded</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Represent a URL string as described by https://url.spec.whatwg.org/</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Header Parameters</strong>
-     *
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time (UTC)"</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>x-ms-date</td>
+     * <td>OffsetDateTime</td>
+     * <td>No</td>
+     * <td>An instant in coordinated universal time (UTC)"</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addHeader}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -70,6 +101,7 @@ public final class BuiltinClient {
      *     bytes: byte[] (Required)
      *     int: int (Required)
      *     safeint: long (Required)
+     *     decimal: double (Required)
      *     long: long (Required)
      *     float: double (Required)
      *     double: double (Required)
@@ -97,7 +129,7 @@ public final class BuiltinClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -109,16 +141,16 @@ public final class BuiltinClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(
-            String queryParam, String queryParamEncoded, RequestOptions requestOptions) {
+    public Response<BinaryData> readWithResponse(String queryParam, String queryParamEncoded,
+        RequestOptions requestOptions) {
         return this.serviceClient.readWithResponse(queryParam, queryParamEncoded, requestOptions);
     }
 
     /**
      * The write operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -126,6 +158,7 @@ public final class BuiltinClient {
      *     bytes: byte[] (Required)
      *     int: int (Required)
      *     safeint: long (Required)
+     *     decimal: double (Required)
      *     long: long (Required)
      *     float: double (Required)
      *     double: double (Required)
@@ -153,7 +186,7 @@ public final class BuiltinClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -170,7 +203,7 @@ public final class BuiltinClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @param dateTime An instant in coordinated universal time (UTC)".
@@ -187,18 +220,13 @@ public final class BuiltinClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Builtin read(
-            String queryParam,
-            String queryParamEncoded,
-            OffsetDateTime dateTime,
-            String filter,
-            String queryParamOptional,
-            String queryParamOptionalEncoded) {
+    public Builtin read(String queryParam, String queryParamEncoded, OffsetDateTime dateTime, String filter,
+        String queryParamOptional, String queryParamOptionalEncoded) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
-            requestOptions.setHeader(
-                    HttpHeaderName.fromString("x-ms-date"), String.valueOf(new DateTimeRfc1123(dateTime)));
+            requestOptions.setHeader(HttpHeaderName.fromString("x-ms-date"),
+                String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
@@ -214,7 +242,7 @@ public final class BuiltinClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

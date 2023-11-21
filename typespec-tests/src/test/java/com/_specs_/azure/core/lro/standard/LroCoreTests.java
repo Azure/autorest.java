@@ -5,11 +5,11 @@ package com._specs_.azure.core.lro.standard;
 
 import com._specs_.azure.core.lro.standard.models.ExportedUser;
 import com._specs_.azure.core.lro.standard.models.User;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.LongRunningOperationStatus;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
 
@@ -24,10 +24,10 @@ public class LroCoreTests {
 
     @Test
     public void testPut() {
-        SyncPoller<PollResult, User> poller = client.beginCreateOrReplace(
+        SyncPoller<PollOperationDetails, User> poller = client.beginCreateOrReplace(
                 "madge", new User("contributor"));
 
-        PollResponse<PollResult> response = poller.waitForCompletion();
+        PollResponse<PollOperationDetails> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
         User user = poller.getFinalResult();
@@ -49,18 +49,18 @@ public class LroCoreTests {
 
     @Test
     public void testDelete() {
-        SyncPoller<PollResult, Void> poller = client.beginDelete("madge");
+        SyncPoller<PollOperationDetails, Void> poller = client.beginDelete("madge");
 
-        PollResponse<PollResult> response = poller.waitForCompletion();
+        PollResponse<PollOperationDetails> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
     }
 
     @Test
     public void testPost() {
-        SyncPoller<PollResult, ExportedUser> poller = client.beginExport(
+        SyncPoller<PollOperationDetails, ExportedUser> poller = client.beginExport(
                 "madge", "json");
 
-        PollResponse<PollResult> response = poller.waitForCompletion();
+        PollResponse<PollOperationDetails> response = poller.waitForCompletion();
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
         ExportedUser finalResult = poller.getFinalResult();

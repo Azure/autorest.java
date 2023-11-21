@@ -267,19 +267,15 @@ public class SchemaUtil {
                         && compositeType.getLanguage().getJava().getNamespace() != null) {
 
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
-                    if ("PollResult".equals(name)
-                        && compositeType.getLanguage().getJava().getNamespace().startsWith("com.azure.core")) {
-                        classType = new ClassType.Builder()
-                            .name(name)
-                            .packageName(compositeType.getLanguage().getJava().getNamespace())
-                            .usedInXml(treatAsXml(compositeType))
-                            .build();
-                    } else if (Objects.equals(name, ClassType.REQUEST_CONDITIONS.getName())
-                            && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
-                        classType = ClassType.REQUEST_CONDITIONS;
-                    } else if (Objects.equals(name, ClassType.MATCH_CONDITIONS.getName())
-                            && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), "com.azure.core.http")) {
-                        classType = ClassType.MATCH_CONDITIONS;
+                    if (Objects.equals(name, ClassType.PollOperationDetails.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.PollOperationDetails.getPackage())) {
+                        classType = ClassType.PollOperationDetails;
+                    } else if (Objects.equals(name, ClassType.RequestConditions.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.RequestConditions.getPackage())) {
+                        classType = ClassType.RequestConditions;
+                    } else if (Objects.equals(name, ClassType.MatchConditions.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.RequestConditions.getPackage())) {
+                        classType = ClassType.MatchConditions;
                     }
                 }
             }

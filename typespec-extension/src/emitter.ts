@@ -17,6 +17,8 @@ export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
 
+  "branded"?: boolean;
+
   "service-name"?: string;
   "service-versions"?: string[];
 
@@ -29,11 +31,15 @@ export interface EmitterOptions {
   "examples-directory"?: string;
 
   "enable-sync-stack"?: boolean;
+  "stream-style-serialization"?: boolean;
 
   "partial-update"?: boolean;
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
+  "polling"?: any;
+
+  "arm"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -52,6 +58,8 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
 
+    "branded": { type: "boolean", nullable: true, default: true },
+
     // service
     "service-name": { type: "string", nullable: true },
     "service-versions": { type: "array", items: { type: "string" }, nullable: true },
@@ -68,12 +76,16 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "examples-directory": { type: "string", nullable: true },
 
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
+    "stream-style-serialization": { type: "boolean", nullable: true, default: false },
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
+    "polling": { type: "object", additionalProperties: true, nullable: true },
+
+    "arm": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
@@ -100,6 +112,8 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
+
+    options["arm"] = codeModel.arm;
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 

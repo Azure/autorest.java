@@ -126,10 +126,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         return ClassType.HttpPipeline;
     }
 
-    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, com.azure.autorest.extension.base.plugin.JavaSettings settings) {
-        serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                ClassType.SerializerAdapter, "serializerAdapter", true, null,
-                settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+    protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, JavaSettings settings) {
+        if (settings.isBranded()) {
+            serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
+                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                    settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
+        }
     }
 
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
@@ -377,7 +379,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
 
-        if (settings.isFluent()) {
+        if (!settings.isBranded()) {
+            serviceClientConstructors.add(new Constructor(Collections.singletonList(httpPipelineParameter)));
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .constructors(serviceClientConstructors);
+        } else if (settings.isFluent()) {
             ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter.Builder()
                     .description("The Azure environment")
                     .finalParameter(false)

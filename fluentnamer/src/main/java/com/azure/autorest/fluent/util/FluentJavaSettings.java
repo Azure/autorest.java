@@ -237,7 +237,7 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
-        Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentnamer.naming.override");
+        Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentgen.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }

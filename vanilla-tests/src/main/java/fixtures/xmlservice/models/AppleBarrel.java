@@ -12,7 +12,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A barrel of apples. */
+/**
+ * A barrel of apples.
+ */
 @JacksonXmlRootElement(localName = "AppleBarrel")
 @Fluent
 public final class AppleBarrel {
@@ -48,12 +50,15 @@ public final class AppleBarrel {
     @JsonProperty(value = "BadApples")
     private BadApplesWrapper badApples;
 
-    /** Creates an instance of AppleBarrel class. */
-    public AppleBarrel() {}
+    /**
+     * Creates an instance of AppleBarrel class.
+     */
+    public AppleBarrel() {
+    }
 
     /**
      * Get the goodApples property: The GoodApples property.
-     *
+     * 
      * @return the goodApples value.
      */
     public List<String> getGoodApples() {
@@ -65,7 +70,7 @@ public final class AppleBarrel {
 
     /**
      * Set the goodApples property: The GoodApples property.
-     *
+     * 
      * @param goodApples the goodApples value to set.
      * @return the AppleBarrel object itself.
      */
@@ -76,7 +81,7 @@ public final class AppleBarrel {
 
     /**
      * Get the badApples property: The BadApples property.
-     *
+     * 
      * @return the badApples value.
      */
     public List<String> getBadApples() {
@@ -88,7 +93,7 @@ public final class AppleBarrel {
 
     /**
      * Set the badApples property: The BadApples property.
-     *
+     * 
      * @param badApples the badApples value to set.
      * @return the AppleBarrel object itself.
      */
@@ -99,8 +104,9 @@ public final class AppleBarrel {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

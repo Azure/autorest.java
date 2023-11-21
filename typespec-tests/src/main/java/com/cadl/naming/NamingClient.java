@@ -21,14 +21,17 @@ import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
 import com.cadl.naming.models.GetAnonymouseResponse;
 
-/** Initializes a new instance of the synchronous NamingClient type. */
+/**
+ * Initializes a new instance of the synchronous NamingClient type.
+ */
 @ServiceClient(builder = NamingClientBuilder.class)
 public final class NamingClient {
-    @Generated private final NamingClientImpl serviceClient;
+    @Generated
+    private final NamingClientImpl serviceClient;
 
     /**
      * Initializes an instance of NamingClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -38,36 +41,36 @@ public final class NamingClient {
 
     /**
      * Protocol method for POST operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param request summary of Request
+     * @param dataRequest summary of Request
      * @param name summary of name query parameter
      * @return summary of Response along with {@link Response}.
      * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
-     *     code 409.
+     * code 409.
      * @throws ResourceNotFoundException ResourceNotFoundException thrown if the request is rejected by server on status
-     *     code 404.
+     * code 404.
      * @throws ClientAuthenticationException ClientAuthenticationException thrown if the request is rejected by server
-     *     on status code 401.
+     * on status code 401.
      * @throws HttpResponseException HttpResponseException thrown if the request is rejected by server.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponse(name, request, requestOptions);
+    public Response<BinaryData> postWithResponse(String name, BinaryData dataRequest, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponse(name, dataRequest, requestOptions);
     }
 
     /**
      * The getAnonymouse operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,15 +86,18 @@ public final class NamingClient {
 
     /**
      * summary of POST op
-     *
-     * <p>description of POST op.
-     *
+     * 
+     * description of POST op.
+     * 
      * @param name summary of name query parameter
-     *     <p>description of name query parameter.
-     * @param request summary of Request
-     *     <p>description of Request.
+     * 
+     * description of name query parameter.
+     * @param dataRequest summary of Request
+     * 
+     * description of Request.
      * @param etag summary of etag header parameter
-     *     <p>description of etag header parameter.
+     * 
+     * description of etag header parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -102,26 +108,27 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name, DataRequest request, String etag) {
+    public DataResponse post(String name, DataRequest dataRequest, String etag) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
-        return postWithResponse(name, BinaryData.fromObject(request), requestOptions)
-                .getValue()
-                .toObject(DataResponse.class);
+        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).getValue()
+            .toObject(DataResponse.class);
     }
 
     /**
      * summary of POST op
-     *
-     * <p>description of POST op.
-     *
+     * 
+     * description of POST op.
+     * 
      * @param name summary of name query parameter
-     *     <p>description of name query parameter.
-     * @param request summary of Request
-     *     <p>description of Request.
+     * 
+     * description of name query parameter.
+     * @param dataRequest summary of Request
+     * 
+     * description of Request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -132,17 +139,16 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name, DataRequest request) {
+    public DataResponse post(String name, DataRequest dataRequest) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(request), requestOptions)
-                .getValue()
-                .toObject(DataResponse.class);
+        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).getValue()
+            .toObject(DataResponse.class);
     }
 
     /**
      * The getAnonymouse operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

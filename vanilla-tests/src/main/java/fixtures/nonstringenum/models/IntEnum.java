@@ -8,34 +8,47 @@ import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
-/** List of integer enums. */
+/**
+ * List of integer enums.
+ */
 public final class IntEnum extends ExpandableStringEnum<IntEnum> {
-    /** Static value 200 for IntEnum. */
+    /**
+     * Static value 200 for IntEnum.
+     */
     public static final IntEnum TWO_HUNDRED = fromInt(200);
 
-    /** Static value 403 for IntEnum. */
+    /**
+     * Static value 403 for IntEnum.
+     */
     public static final IntEnum FOUR_HUNDRED_THREE = fromInt(403);
 
-    /** Static value 405 for IntEnum. */
+    /**
+     * Static value 405 for IntEnum.
+     */
     public static final IntEnum FOUR_HUNDRED_FIVE = fromInt(405);
 
-    /** Static value 406 for IntEnum. */
+    /**
+     * Static value 406 for IntEnum.
+     */
     public static final IntEnum FOUR_HUNDRED_SIX = fromInt(406);
 
-    /** Static value 429 for IntEnum. */
+    /**
+     * Static value 429 for IntEnum.
+     */
     public static final IntEnum FOUR_HUNDRED_TWENTY_NINE = fromInt(429);
 
     /**
      * Creates a new instance of IntEnum value.
-     *
+     * 
      * @deprecated Use the {@link #fromInt(int)} factory method.
      */
     @Deprecated
-    public IntEnum() {}
+    public IntEnum() {
+    }
 
     /**
      * Creates or finds a IntEnum from its string representation.
-     *
+     * 
      * @param name a name to look for.
      * @return the corresponding IntEnum.
      */
@@ -46,7 +59,7 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
 
     /**
      * Gets known IntEnum values.
-     *
+     * 
      * @return known IntEnum values.
      */
     public static Collection<IntEnum> values() {

@@ -6,10 +6,13 @@ package com.cadl.internal.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The StandAloneUnion model. */
+/**
+ * The StandAloneUnion model.
+ */
 @Immutable
 public final class StandAloneUnion {
     /*
@@ -17,26 +20,26 @@ public final class StandAloneUnion {
      */
     @Generated
     @JsonProperty(value = "data")
-    private DataModelBase data;
+    private BinaryData data;
 
     /**
      * Creates an instance of StandAloneUnion class.
-     *
+     * 
      * @param data the data value to set.
      */
     @Generated
     @JsonCreator
-    private StandAloneUnion(@JsonProperty(value = "data") DataModelBase data) {
+    private StandAloneUnion(@JsonProperty(value = "data") BinaryData data) {
         this.data = data;
     }
 
     /**
      * Get the data property: The data property.
-     *
+     * 
      * @return the data value.
      */
     @Generated
-    public DataModelBase getData() {
+    public BinaryData getData() {
         return this.data;
     }
 }

@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Assertions;
 public final class LongWrapperTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        LongWrapper model =
-                BinaryData.fromString("{\"field1\":4252062726585189836,\"field2\":8175024465191423839}")
-                        .toObject(LongWrapper.class);
+        LongWrapper model = BinaryData.fromString("{\"field1\":4252062726585189836,\"field2\":8175024465191423839}")
+            .toObject(LongWrapper.class);
         Assertions.assertEquals(4252062726585189836L, model.getField1());
         Assertions.assertEquals(8175024465191423839L, model.getField2());
     }

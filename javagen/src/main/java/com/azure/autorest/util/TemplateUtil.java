@@ -19,6 +19,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
+import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -57,6 +58,20 @@ public class TemplateUtil {
     public static final String SAMPLE_CODES = "sample-codes";
 
     public static final String DATE_UTC = "date-utc";
+
+    private static final String[] ESCAPE_REPLACEMENT;
+
+    static {
+        ESCAPE_REPLACEMENT = new String[256];
+        ESCAPE_REPLACEMENT['\\'] = "\\\\";
+        ESCAPE_REPLACEMENT['\t'] = "\\t";
+        ESCAPE_REPLACEMENT['\b'] = "\\b";
+        ESCAPE_REPLACEMENT['\n'] = "\\n";
+        ESCAPE_REPLACEMENT['\r'] = "\\r";
+        ESCAPE_REPLACEMENT['\f'] = "\\f";
+        ESCAPE_REPLACEMENT['\"'] = "\\\"";
+    }
+
     // end of constant for template replacement
 
     /**
@@ -282,5 +297,47 @@ public class TemplateUtil {
             classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
                     ClassType.ClientLogger.toString(), className));
         }
+    }
+
+    /**
+     * Escape String for Java files.
+     *
+     * @param str string to escape
+     * @return escaped string
+     */
+    public static String escapeString(String str) {
+        if (CoreUtils.isNullOrEmpty(str)) {
+            return str;
+        }
+
+        StringBuilder builder = null;
+
+        int last = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            String replacement = c < 256 ? ESCAPE_REPLACEMENT[c] : null;
+
+            if (replacement == null) {
+                continue;
+            }
+
+            if (builder == null) {
+                builder = new StringBuilder(str.length() * 2);
+            }
+
+            if (last != i) {
+                builder.append(str, last, i);
+            }
+
+            builder.append(replacement);
+            last = i + 1;
+        }
+
+        if (builder == null) {
+            return str;
+        }
+
+        builder.append(str, last, str.length());
+        return builder.toString();
     }
 }

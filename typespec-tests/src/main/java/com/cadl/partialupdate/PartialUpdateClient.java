@@ -17,15 +17,17 @@ import com.azure.core.util.BinaryData;
 import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 
-/** Initializes a new instance of the synchronous PartialUpdateClient type. */
+/**
+ * Initializes a new instance of the synchronous PartialUpdateClient type.
+ */
 @ServiceClient(builder = PartialUpdateClientBuilder.class)
 public final class PartialUpdateClient {
 
     /**
      * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -66,7 +68,8 @@ public final class PartialUpdateClient {
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
     }
 
-    @Generated private final PartialUpdateClientImpl serviceClient;
+    @Generated
+    private final PartialUpdateClientImpl serviceClient;
 
     /**
      * Initializes an instance of PartialUpdateClient class.

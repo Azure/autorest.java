@@ -10,7 +10,9 @@ import com.azure.core.util.Base64Url;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Base64UrlBytesProperty model. */
+/**
+ * The Base64UrlBytesProperty model.
+ */
 @Immutable
 public final class Base64UrlBytesProperty {
     /*
@@ -22,7 +24,7 @@ public final class Base64UrlBytesProperty {
 
     /**
      * Creates an instance of Base64UrlBytesProperty class.
-     *
+     * 
      * @param value the value value to set.
      */
     @Generated
@@ -38,7 +40,7 @@ public final class Base64UrlBytesProperty {
 
     /**
      * Get the value property: The value property.
-     *
+     * 
      * @return the value value.
      */
     @Generated

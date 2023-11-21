@@ -12,11 +12,11 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.versioning.implementation.VersioningClientImpl;
 import com.cadl.versioning.models.ExportedResource;
@@ -24,14 +24,17 @@ import com.cadl.versioning.models.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-/** Initializes a new instance of the synchronous VersioningClient type. */
+/**
+ * Initializes a new instance of the synchronous VersioningClient type.
+ */
 @ServiceClient(builder = VersioningClientBuilder.class)
 public final class VersioningClient {
-    @Generated private final VersioningClientImpl serviceClient;
+    @Generated
+    private final VersioningClientImpl serviceClient;
 
     /**
      * Initializes an instance of VersioningClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -41,20 +44,34 @@ public final class VersioningClient {
 
     /**
      * Long-running resource action operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>projectFileVersion</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
+     * <tr>
+     * <td>projectedFileFormat</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>A sequence of textual characters.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -69,7 +86,7 @@ public final class VersioningClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,20 +103,35 @@ public final class VersioningClient {
 
     /**
      * Resource list operation template.
-     *
-     * <p><strong>Query Parameters</strong>
-     *
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>select</td>
+     * <td>List&lt;String&gt;</td>
+     * <td>No</td>
+     * <td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add
+     * string to array.</td>
+     * </tr>
+     * <tr>
+     * <td>filter</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Filter the result list using the given expression.</td>
+     * </tr>
      * </table>
-     *
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -107,7 +139,7 @@ public final class VersioningClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -123,7 +155,7 @@ public final class VersioningClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
      * @param projectedFileFormat A sequence of textual characters.
@@ -137,14 +169,13 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(
-            String name, String projectFileVersion, String projectedFileFormat) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion,
+        String projectedFileFormat) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException(
-                            "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
+                "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
         }
         if (projectFileVersion != null) {
             requestOptions.addQueryParam("projectFileVersion", projectFileVersion, false);
@@ -157,7 +188,7 @@ public final class VersioningClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -170,7 +201,7 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(String name, String projectFileVersion) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (projectFileVersion != null) {
@@ -181,7 +212,7 @@ public final class VersioningClient {
 
     /**
      * Long-running resource action operation template.
-     *
+     * 
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -193,7 +224,7 @@ public final class VersioningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, ExportedResource> beginExport(String name) {
+    public SyncPoller<PollOperationDetails, ExportedResource> beginExport(String name) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginExportWithModel(name, requestOptions);
@@ -201,7 +232,7 @@ public final class VersioningClient {
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @param select Select the specified fields to be included in the response.
      * @param filter Filter the result list using the given expression.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -219,8 +250,7 @@ public final class VersioningClient {
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
             throw LOGGER.logExceptionAsError(
-                    new IllegalArgumentException(
-                            "Parameter filter is only available in api-version 2022-12-01-preview."));
+                new IllegalArgumentException("Parameter filter is only available in api-version 2022-12-01-preview."));
         }
         if (select != null) {
             for (String paramItemValue : select) {
@@ -237,7 +267,7 @@ public final class VersioningClient {
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @param select Select the specified fields to be included in the response.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -264,7 +294,7 @@ public final class VersioningClient {
 
     /**
      * Resource list operation template.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

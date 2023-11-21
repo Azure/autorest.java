@@ -21,15 +21,14 @@ class UnionClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        UnionClientBuilder unionClientbuilder =
-                new UnionClientBuilder()
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder unionClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             unionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         unionClient = unionClientbuilder.buildClient();
+
     }
 }

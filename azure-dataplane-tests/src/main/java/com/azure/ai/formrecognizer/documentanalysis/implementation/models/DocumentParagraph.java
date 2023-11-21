@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** A paragraph object consisting with contiguous lines generally with common alignment and spacing. */
+/**
+ * A paragraph object consisting with contiguous lines generally with common alignment and spacing.
+ */
 @Fluent
 public final class DocumentParagraph {
     /*
@@ -35,12 +37,15 @@ public final class DocumentParagraph {
     @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
-    /** Creates an instance of DocumentParagraph class. */
-    public DocumentParagraph() {}
+    /**
+     * Creates an instance of DocumentParagraph class.
+     */
+    public DocumentParagraph() {
+    }
 
     /**
      * Get the role property: Semantic role of the paragraph.
-     *
+     * 
      * @return the role value.
      */
     public ParagraphRole getRole() {
@@ -49,7 +54,7 @@ public final class DocumentParagraph {
 
     /**
      * Set the role property: Semantic role of the paragraph.
-     *
+     * 
      * @param role the role value to set.
      * @return the DocumentParagraph object itself.
      */
@@ -60,7 +65,7 @@ public final class DocumentParagraph {
 
     /**
      * Get the content property: Concatenated content of the paragraph in reading order.
-     *
+     * 
      * @return the content value.
      */
     public String getContent() {
@@ -69,7 +74,7 @@ public final class DocumentParagraph {
 
     /**
      * Set the content property: Concatenated content of the paragraph in reading order.
-     *
+     * 
      * @param content the content value to set.
      * @return the DocumentParagraph object itself.
      */
@@ -80,7 +85,7 @@ public final class DocumentParagraph {
 
     /**
      * Get the boundingRegions property: Bounding regions covering the paragraph.
-     *
+     * 
      * @return the boundingRegions value.
      */
     public List<BoundingRegion> getBoundingRegions() {
@@ -89,7 +94,7 @@ public final class DocumentParagraph {
 
     /**
      * Set the boundingRegions property: Bounding regions covering the paragraph.
-     *
+     * 
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentParagraph object itself.
      */
@@ -100,7 +105,7 @@ public final class DocumentParagraph {
 
     /**
      * Get the spans property: Location of the paragraph in the reading order concatenated content.
-     *
+     * 
      * @return the spans value.
      */
     public List<DocumentSpan> getSpans() {
@@ -109,7 +114,7 @@ public final class DocumentParagraph {
 
     /**
      * Set the spans property: Location of the paragraph in the reading order concatenated content.
-     *
+     * 
      * @param spans the spans value to set.
      * @return the DocumentParagraph object itself.
      */

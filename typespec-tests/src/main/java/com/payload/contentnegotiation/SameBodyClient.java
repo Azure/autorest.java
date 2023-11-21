@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.payload.contentnegotiation.implementation.SameBodiesImpl;
 
-/** Initializes a new instance of the synchronous ContentNegotiationClient type. */
+/**
+ * Initializes a new instance of the synchronous ContentNegotiationClient type.
+ */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class)
 public final class SameBodyClient {
-    @Generated private final SameBodiesImpl serviceClient;
+    @Generated
+    private final SameBodiesImpl serviceClient;
 
     /**
      * Initializes an instance of SameBodyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,13 +37,13 @@ public final class SameBodyClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,13 +59,13 @@ public final class SameBodyClient {
 
     /**
      * The getAvatarAsJpeg operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -78,7 +81,7 @@ public final class SameBodyClient {
 
     /**
      * The getAvatarAsPng operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -96,7 +99,7 @@ public final class SameBodyClient {
 
     /**
      * The getAvatarAsJpeg operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

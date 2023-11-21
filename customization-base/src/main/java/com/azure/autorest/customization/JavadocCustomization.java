@@ -5,12 +5,11 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -52,7 +51,7 @@ public final class JavadocCustomization {
 
     private final EclipseLanguageClient languageClient;
     private final Editor editor;
-    private final URI fileUri;
+    private final String fileUri;
     private final String fileName;
     private final String indent;
 
@@ -65,7 +64,7 @@ public final class JavadocCustomization {
     private String deprecatedDoc;
     private Range javadocRange;
 
-    JavadocCustomization(Editor editor, EclipseLanguageClient languageClient, URI fileUri, String fileName,
+    JavadocCustomization(Editor editor, EclipseLanguageClient languageClient, String fileUri, String fileName,
         int symbolLine) {
         this.editor = editor;
         this.languageClient = languageClient;
@@ -310,7 +309,7 @@ public final class JavadocCustomization {
         ++symbolLine;
         FileEvent blankLineEvent = new FileEvent();
         blankLineEvent.setUri(fileUri);
-        blankLineEvent.setType(FileChangeType.CHANGED);
+        blankLineEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
     }
 
@@ -439,7 +438,7 @@ public final class JavadocCustomization {
         editor.replace(fileName, javadocRange.getStart(), javadocRange.getEnd(), stringBuilder.toString());
         FileEvent replaceEvent = new FileEvent();
         replaceEvent.setUri(fileUri);
-        replaceEvent.setType(FileChangeType.CHANGED);
+        replaceEvent.setType(FileChangeType.Changed);
         languageClient.notifyWatchedFilesChanged(Collections.singletonList(replaceEvent));
 
         int javadocStartLine = javadocRange.getStart().getLine();

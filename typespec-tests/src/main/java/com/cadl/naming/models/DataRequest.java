@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * summary of Request
- *
- * <p>description of Request.
+ * 
+ * description of Request.
  */
 @Fluent
 public final class DataRequest {
@@ -20,30 +20,33 @@ public final class DataRequest {
      */
     @Generated
     @JsonProperty(value = "parameters")
-    private ParametersModel parameters;
+    private RequestParameters parameters;
 
-    /** Creates an instance of DataRequest class. */
+    /**
+     * Creates an instance of DataRequest class.
+     */
     @Generated
-    public DataRequest() {}
+    public DataRequest() {
+    }
 
     /**
      * Get the parameters property: The parameters property.
-     *
+     * 
      * @return the parameters value.
      */
     @Generated
-    public ParametersModel getParameters() {
+    public RequestParameters getParameters() {
         return this.parameters;
     }
 
     /**
      * Set the parameters property: The parameters property.
-     *
+     * 
      * @param parameters the parameters value to set.
      * @return the DataRequest object itself.
      */
     @Generated
-    public DataRequest setParameters(ParametersModel parameters) {
+    public DataRequest setParameters(RequestParameters parameters) {
         this.parameters = parameters;
         return this;
     }

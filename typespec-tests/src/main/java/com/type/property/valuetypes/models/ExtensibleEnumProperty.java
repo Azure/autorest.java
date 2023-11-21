@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Model with extensible enum properties. */
+/**
+ * Model with extensible enum properties.
+ */
 @Immutable
 public final class ExtensibleEnumProperty {
     /*
@@ -21,7 +23,7 @@ public final class ExtensibleEnumProperty {
 
     /**
      * Creates an instance of ExtensibleEnumProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -32,7 +34,7 @@ public final class ExtensibleEnumProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

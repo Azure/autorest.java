@@ -20,14 +20,17 @@ import com.type.property.valuetypes.implementation.DurationOperationsImpl;
 import com.type.property.valuetypes.models.DurationProperty;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ValueTypesClient type. */
+/**
+ * Initializes a new instance of the asynchronous ValueTypesClient type.
+ */
 @ServiceClient(builder = ValueTypesClientBuilder.class, isAsync = true)
 public final class DurationOperationAsyncClient {
-    @Generated private final DurationOperationsImpl serviceClient;
+    @Generated
+    private final DurationOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of DurationOperationAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class DurationOperationAsyncClient {
 
     /**
      * Get call.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,15 +64,15 @@ public final class DurationOperationAsyncClient {
 
     /**
      * Put operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     property: Duration (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -86,7 +89,7 @@ public final class DurationOperationAsyncClient {
 
     /**
      * Get call.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -99,14 +102,13 @@ public final class DurationOperationAsyncClient {
     public Mono<DurationProperty> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(DurationProperty.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(DurationProperty.class));
     }
 
     /**
      * Put operation.
-     *
+     * 
      * @param body body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

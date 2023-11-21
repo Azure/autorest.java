@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
-/** Model with dictionary string properties. */
+/**
+ * Model with dictionary string properties.
+ */
 @Immutable
 public final class DictionaryStringProperty {
     /*
@@ -22,7 +24,7 @@ public final class DictionaryStringProperty {
 
     /**
      * Creates an instance of DictionaryStringProperty class.
-     *
+     * 
      * @param property the property value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class DictionaryStringProperty {
 
     /**
      * Get the property property: Property.
-     *
+     * 
      * @return the property value.
      */
     @Generated

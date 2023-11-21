@@ -14,9 +14,8 @@ public class PrimitivePutDateTimeRfc1123 {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
         // BEGIN:fixtures.bodycomplex.generated.primitiveputdatetimerfc1123.primitiveputdatetimerfc1123
-        BinaryData complexBody =
-                BinaryData.fromString(
-                        "{\"field\":\"Mon, 01 Jan 0001 12:00:00 GMT\",\"now\":\"Mon, 18 May 2015 11:38:00 GMT\"}");
+        BinaryData complexBody = BinaryData
+            .fromString("{\"field\":\"Mon, 01 Jan 0001 12:00:00 GMT\",\"now\":\"Mon, 18 May 2015 11:38:00 GMT\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putDateTimeRfc1123WithResponse(complexBody, requestOptions);
         // END:fixtures.bodycomplex.generated.primitiveputdatetimerfc1123.primitiveputdatetimerfc1123

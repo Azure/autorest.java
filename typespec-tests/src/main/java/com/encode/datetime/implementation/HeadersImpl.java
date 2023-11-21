@@ -29,17 +29,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in Headers. */
+/**
+ * An instance of this class provides access to all the operations defined in Headers.
+ */
 public final class HeadersImpl {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HeadersService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final DatetimeClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HeadersImpl(DatetimeClientImpl client) {
@@ -48,196 +54,106 @@ public final class HeadersImpl {
     }
 
     /**
-     * The interface defining all the services for DatetimeClientHeaders to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for DatetimeClientHeaders to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DatetimeClientHeader")
     public interface HeadersService {
         @Get("/encode/datetime/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(
-                @HeaderParam("value") DateTimeRfc1123 value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> defaultMethod(@HeaderParam("value") DateTimeRfc1123 value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/default")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(
-                @HeaderParam("value") DateTimeRfc1123 value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> defaultMethodSync(@HeaderParam("value") DateTimeRfc1123 value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc3339")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc3339(
-                @HeaderParam("value") OffsetDateTime value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> rfc3339(@HeaderParam("value") OffsetDateTime value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc3339")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc3339Sync(
-                @HeaderParam("value") OffsetDateTime value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> rfc3339Sync(@HeaderParam("value") OffsetDateTime value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc7231")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc7231(
-                @HeaderParam("value") DateTimeRfc1123 value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> rfc7231(@HeaderParam("value") DateTimeRfc1123 value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc7231")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc7231Sync(
-                @HeaderParam("value") DateTimeRfc1123 value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> rfc7231Sync(@HeaderParam("value") DateTimeRfc1123 value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestamp(
-                @HeaderParam("value") long value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> unixTimestamp(@HeaderParam("value") long value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampSync(
-                @HeaderParam("value") long value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> unixTimestampSync(@HeaderParam("value") long value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestampArray(
-                @HeaderParam("value") String value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Mono<Response<Void>> unixTimestampArray(@HeaderParam("value") String value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp-array")
-        @ExpectedResponses({204})
-        @UnexpectedResponseExceptionType(
-                value = ClientAuthenticationException.class,
-                code = {401})
-        @UnexpectedResponseExceptionType(
-                value = ResourceNotFoundException.class,
-                code = {404})
-        @UnexpectedResponseExceptionType(
-                value = ResourceModifiedException.class,
-                code = {409})
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampArraySync(
-                @HeaderParam("value") String value,
-                @HeaderParam("accept") String accept,
-                RequestOptions requestOptions,
-                Context context);
+        Response<Void> unixTimestampArraySync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -255,7 +171,7 @@ public final class HeadersImpl {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -273,7 +189,7 @@ public final class HeadersImpl {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -290,7 +206,7 @@ public final class HeadersImpl {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -307,7 +223,7 @@ public final class HeadersImpl {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -325,7 +241,7 @@ public final class HeadersImpl {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -343,7 +259,7 @@ public final class HeadersImpl {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -361,7 +277,7 @@ public final class HeadersImpl {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -379,8 +295,8 @@ public final class HeadersImpl {
 
     /**
      * The unixTimestampArray operation.
-     *
-     * @param value Array of ValueModel.
+     * 
+     * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -389,24 +305,20 @@ public final class HeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> unixTimestampArrayWithResponseAsync(
-            List<OffsetDateTime> value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> unixTimestampArrayWithResponseAsync(List<OffsetDateTime> value,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeIterable(
-                                value.stream()
-                                        .map(paramItemValue -> paramItemValue.toEpochSecond())
-                                        .collect(Collectors.toList()),
-                                CollectionFormat.CSV);
-        return FluxUtil.withContext(
-                context -> service.unixTimestampArray(valueConverted, accept, requestOptions, context));
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
+            value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
+            CollectionFormat.CSV);
+        return FluxUtil
+            .withContext(context -> service.unixTimestampArray(valueConverted, accept, requestOptions, context));
     }
 
     /**
      * The unixTimestampArray operation.
-     *
-     * @param value Array of ValueModel.
+     * 
+     * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -417,13 +329,9 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampArrayWithResponse(List<OffsetDateTime> value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted =
-                JacksonAdapter.createDefaultSerializerAdapter()
-                        .serializeIterable(
-                                value.stream()
-                                        .map(paramItemValue -> paramItemValue.toEpochSecond())
-                                        .collect(Collectors.toList()),
-                                CollectionFormat.CSV);
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
+            value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
+            CollectionFormat.CSV);
         return service.unixTimestampArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }
 }

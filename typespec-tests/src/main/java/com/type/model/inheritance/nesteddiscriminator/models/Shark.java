@@ -12,17 +12,18 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-/** The second level model in polymorphic multiple levels inheritance and it defines a new discriminator. */
+/**
+ * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
+ */
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "sharktype",
-        defaultImpl = Shark.class)
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "sharktype",
+    defaultImpl = Shark.class)
 @JsonTypeName("shark")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "saw", value = SawShark.class),
-    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class)
-})
+    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class) })
 @Immutable
 public class Shark extends Fish {
     /*
@@ -34,7 +35,7 @@ public class Shark extends Fish {
 
     /**
      * Creates an instance of Shark class.
-     *
+     * 
      * @param age the age value to set.
      * @param sharktype the sharktype value to set.
      */
@@ -47,7 +48,7 @@ public class Shark extends Fish {
 
     /**
      * Get the sharktype property: The sharktype property.
-     *
+     * 
      * @return the sharktype value.
      */
     @Generated

@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Dog model. */
+/**
+ * The Dog model.
+ */
 @Immutable
 public final class Dog {
     /*
@@ -35,7 +37,7 @@ public final class Dog {
 
     /**
      * Creates an instance of Dog class.
-     *
+     * 
      * @param secretName the secretName value to set.
      * @param name the name value to set.
      */
@@ -48,7 +50,7 @@ public final class Dog {
 
     /**
      * Get the id property: The id property.
-     *
+     * 
      * @return the id value.
      */
     @Generated
@@ -58,7 +60,7 @@ public final class Dog {
 
     /**
      * Get the secretName property: The secretName property.
-     *
+     * 
      * @return the secretName value.
      */
     @Generated
@@ -68,7 +70,7 @@ public final class Dog {
 
     /**
      * Get the name property: The name property.
-     *
+     * 
      * @return the name value.
      */
     @Generated

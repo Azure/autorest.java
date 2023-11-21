@@ -5,13 +5,13 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.FileChangeType;
-import com.azure.autorest.customization.implementation.ls.models.FileEvent;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
-import com.azure.autorest.customization.implementation.ls.models.TextEdit;
-import com.azure.autorest.customization.implementation.ls.models.WorkspaceEdit;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceEdit;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -252,7 +252,7 @@ public final class MethodCustomization extends CodeCustomization {
             editor.insertBlankLine(fileName, line, false);
             FileEvent blankLineEvent = new FileEvent();
             blankLineEvent.setUri(fileUri);
-            blankLineEvent.setType(FileChangeType.CHANGED);
+            blankLineEvent.setType(FileChangeType.Changed);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
 
             TextEdit returnEdit = new TextEdit();
@@ -276,7 +276,7 @@ public final class MethodCustomization extends CodeCustomization {
             editor.insertBlankLine(fileName, line, false);
             FileEvent blankLineEvent = new FileEvent();
             blankLineEvent.setUri(fileUri);
-            blankLineEvent.setType(FileChangeType.CHANGED);
+            blankLineEvent.setType(FileChangeType.Changed);
             languageClient.notifyWatchedFilesChanged(Collections.singletonList(blankLineEvent));
 
             TextEdit returnEdit = new TextEdit();

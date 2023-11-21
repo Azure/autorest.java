@@ -16,20 +16,26 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.implementation.ResponseClientImpl;
+import com.cadl.response.models.OperationDetails1;
+import com.cadl.response.models.OperationDetails2;
 import com.cadl.response.models.Resource;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous ResponseClient type. */
+/**
+ * Initializes a new instance of the asynchronous ResponseClient type.
+ */
 @ServiceClient(builder = ResponseClientBuilder.class, isAsync = true)
 public final class ResponseAsyncClient {
-    @Generated private final ResponseClientImpl serviceClient;
+    @Generated
+    private final ResponseClientImpl serviceClient;
 
     /**
      * Initializes an instance of ResponseAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -39,13 +45,13 @@ public final class ResponseAsyncClient {
 
     /**
      * The getBinary operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,9 +67,9 @@ public final class ResponseAsyncClient {
 
     /**
      * The getArray operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *      (Required){
@@ -74,7 +80,7 @@ public final class ResponseAsyncClient {
      *     }
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,9 +96,9 @@ public final class ResponseAsyncClient {
 
     /**
      * The getAnotherArray operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * [
      *      (Required){
@@ -103,7 +109,7 @@ public final class ResponseAsyncClient {
      *     }
      * ]
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,9 +125,9 @@ public final class ResponseAsyncClient {
 
     /**
      * The createWithHeaders operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -130,7 +136,7 @@ public final class ResponseAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -146,7 +152,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The deleteWithHeaders operation.
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -162,13 +168,13 @@ public final class ResponseAsyncClient {
 
     /**
      * The most basic operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * boolean
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -182,8 +188,66 @@ public final class ResponseAsyncClient {
     }
 
     /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidPollResponseAsync(resource, requestOptions);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidResultAsync(resource, requestOptions);
+    }
+
+    /**
      * The getBinary operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -201,7 +265,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The getArray operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -214,14 +278,13 @@ public final class ResponseAsyncClient {
     public Mono<List<Resource>> getArray() {
         // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getArrayWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
+        return getArrayWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
     }
 
     /**
      * The getAnotherArray operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -234,14 +297,13 @@ public final class ResponseAsyncClient {
     public Mono<List<Resource>> getAnotherArray() {
         // Generated convenience method for getAnotherArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAnotherArrayWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
+        return getAnotherArrayWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_RESOURCE));
     }
 
     /**
      * The createWithHeaders operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -254,14 +316,13 @@ public final class ResponseAsyncClient {
     public Mono<Resource> createWithHeaders() {
         // Generated convenience method for createWithHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createWithHeadersWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        return createWithHeadersWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * The deleteWithHeaders operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -279,7 +340,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The most basic operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -294,7 +355,48 @@ public final class ResponseAsyncClient {
         return existsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
+    /**
+     * The most basic operation.
+     * 
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
     @Generated
-    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE =
-            new TypeReference<List<Resource>>() {};
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+        // Generated convenience method for beginLroInvalidPollResponseWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginLroInvalidPollResponseWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+    }
+
+    /**
+     * The most basic operation.
+     * 
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+        // Generated convenience method for beginLroInvalidResultWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginLroInvalidResultWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+    }
+
+    @Generated
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE
+        = new TypeReference<List<Resource>>() {
+        };
 }

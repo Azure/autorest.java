@@ -38,39 +38,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/** A builder for creating a new instance of the AutoRestComplexTestService type. */
+/**
+ * A builder for creating a new instance of the AutoRestComplexTestService type.
+ */
 @ServiceClientBuilder(
-        serviceClients = {
-            BasicClient.class,
-            PrimitiveClient.class,
-            ArrayClient.class,
-            DictionaryClient.class,
-            InheritanceClient.class,
-            PolymorphismClient.class,
-            PolymorphicrecursiveClient.class,
-            ReadonlypropertyClient.class,
-            FlattencomplexClient.class,
-            BasicAsyncClient.class,
-            PrimitiveAsyncClient.class,
-            ArrayAsyncClient.class,
-            DictionaryAsyncClient.class,
-            InheritanceAsyncClient.class,
-            PolymorphismAsyncClient.class,
-            PolymorphicrecursiveAsyncClient.class,
-            ReadonlypropertyAsyncClient.class,
-            FlattencomplexAsyncClient.class
-        })
+    serviceClients = {
+        BasicClient.class,
+        PrimitiveClient.class,
+        ArrayClient.class,
+        DictionaryClient.class,
+        InheritanceClient.class,
+        PolymorphismClient.class,
+        PolymorphicrecursiveClient.class,
+        ReadonlypropertyClient.class,
+        FlattencomplexClient.class,
+        BasicAsyncClient.class,
+        PrimitiveAsyncClient.class,
+        ArrayAsyncClient.class,
+        DictionaryAsyncClient.class,
+        InheritanceAsyncClient.class,
+        PolymorphismAsyncClient.class,
+        PolymorphicrecursiveAsyncClient.class,
+        ReadonlypropertyAsyncClient.class,
+        FlattencomplexAsyncClient.class })
 public final class AutoRestComplexTestServiceBuilder
-        implements HttpTrait<AutoRestComplexTestServiceBuilder>, ConfigurationTrait<AutoRestComplexTestServiceBuilder> {
-    @Generated private static final String SDK_NAME = "name";
+    implements HttpTrait<AutoRestComplexTestServiceBuilder>, ConfigurationTrait<AutoRestComplexTestServiceBuilder> {
+    @Generated
+    private static final String SDK_NAME = "name";
 
-    @Generated private static final String SDK_VERSION = "version";
+    @Generated
+    private static final String SDK_VERSION = "version";
 
-    @Generated private static final Map<String, String> PROPERTIES = new HashMap<>();
+    @Generated
+    private static final Map<String, String> PROPERTIES = new HashMap<>();
 
-    @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
+    @Generated
+    private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the AutoRestComplexTestServiceBuilder. */
+    /**
+     * Create an instance of the AutoRestComplexTestServiceBuilder.
+     */
     @Generated
     public AutoRestComplexTestServiceBuilder() {
         this.pipelinePolicies = new ArrayList<>();
@@ -79,9 +86,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The HTTP pipeline to send requests through.
      */
-    @Generated private HttpPipeline pipeline;
+    @Generated
+    private HttpPipeline pipeline;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder pipeline(HttpPipeline pipeline) {
@@ -92,9 +102,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The HTTP client used to send the request.
      */
-    @Generated private HttpClient httpClient;
+    @Generated
+    private HttpClient httpClient;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder httpClient(HttpClient httpClient) {
@@ -105,9 +118,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The logging configuration for HTTP requests and responses.
      */
-    @Generated private HttpLogOptions httpLogOptions;
+    @Generated
+    private HttpLogOptions httpLogOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
@@ -118,9 +134,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The client options such as application ID and custom headers to set on a request.
      */
-    @Generated private ClientOptions clientOptions;
+    @Generated
+    private ClientOptions clientOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder clientOptions(ClientOptions clientOptions) {
@@ -131,9 +150,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The retry options to configure retry policy for failed requests.
      */
-    @Generated private RetryOptions retryOptions;
+    @Generated
+    private RetryOptions retryOptions;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder retryOptions(RetryOptions retryOptions) {
@@ -141,7 +163,9 @@ public final class AutoRestComplexTestServiceBuilder
         return this;
     }
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder addPolicy(HttpPipelinePolicy customPolicy) {
@@ -153,9 +177,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The configuration store that is used during construction of the service client.
      */
-    @Generated private Configuration configuration;
+    @Generated
+    private Configuration configuration;
 
-    /** {@inheritDoc}. */
+    /**
+     * {@inheritDoc}.
+     */
     @Generated
     @Override
     public AutoRestComplexTestServiceBuilder configuration(Configuration configuration) {
@@ -166,11 +193,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * server parameter
      */
-    @Generated private String host;
+    @Generated
+    private String host;
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -183,11 +211,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * Api Version
      */
-    @Generated private String apiVersion;
+    @Generated
+    private String apiVersion;
 
     /**
      * Sets Api Version.
-     *
+     * 
      * @param apiVersion the apiVersion value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -200,11 +229,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The serializer to serialize an object into a string
      */
-    @Generated private SerializerAdapter serializerAdapter;
+    @Generated
+    private SerializerAdapter serializerAdapter;
 
     /**
      * Sets The serializer to serialize an object into a string.
-     *
+     * 
      * @param serializerAdapter the serializerAdapter value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -217,11 +247,12 @@ public final class AutoRestComplexTestServiceBuilder
     /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
-    @Generated private RetryPolicy retryPolicy;
+    @Generated
+    private RetryPolicy retryPolicy;
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestComplexTestServiceBuilder.
      */
@@ -233,7 +264,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of AutoRestComplexTestServiceImpl with the provided parameters.
-     *
+     * 
      * @return an instance of AutoRestComplexTestServiceImpl.
      */
     @Generated
@@ -241,17 +272,17 @@ public final class AutoRestComplexTestServiceBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         String localApiVersion = (apiVersion != null) ? apiVersion : "2016-02-29";
-        SerializerAdapter localSerializerAdapter =
-                (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        AutoRestComplexTestServiceImpl client =
-                new AutoRestComplexTestServiceImpl(localPipeline, localSerializerAdapter, localHost, localApiVersion);
+        SerializerAdapter localSerializerAdapter
+            = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
+        AutoRestComplexTestServiceImpl client
+            = new AutoRestComplexTestServiceImpl(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        Configuration buildConfiguration =
-                (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
+        Configuration buildConfiguration
+            = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
         ClientOptions localClientOptions = this.clientOptions == null ? new ClientOptions() : this.clientOptions;
         List<HttpPipelinePolicy> policies = new ArrayList<>();
@@ -262,35 +293,28 @@ public final class AutoRestComplexTestServiceBuilder
         policies.add(new RequestIdPolicy());
         policies.add(new AddHeadersFromContextPolicy());
         HttpHeaders headers = new HttpHeaders();
-        localClientOptions
-                .getHeaders()
-                .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
+        localClientOptions.getHeaders()
+            .forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream()
-                .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
-                .forEach(p -> policies.add(p));
+        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+            .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(httpLogOptions));
-        HttpPipeline httpPipeline =
-                new HttpPipelineBuilder()
-                        .policies(policies.toArray(new HttpPipelinePolicy[0]))
-                        .httpClient(httpClient)
-                        .clientOptions(localClientOptions)
-                        .build();
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
+            .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
     }
 
     /**
      * Builds an instance of BasicAsyncClient class.
-     *
+     * 
      * @return an instance of BasicAsyncClient.
      */
     @Generated
@@ -300,7 +324,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PrimitiveAsyncClient class.
-     *
+     * 
      * @return an instance of PrimitiveAsyncClient.
      */
     @Generated
@@ -310,7 +334,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of ArrayAsyncClient class.
-     *
+     * 
      * @return an instance of ArrayAsyncClient.
      */
     @Generated
@@ -320,7 +344,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of DictionaryAsyncClient class.
-     *
+     * 
      * @return an instance of DictionaryAsyncClient.
      */
     @Generated
@@ -330,7 +354,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of InheritanceAsyncClient class.
-     *
+     * 
      * @return an instance of InheritanceAsyncClient.
      */
     @Generated
@@ -340,7 +364,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PolymorphismAsyncClient class.
-     *
+     * 
      * @return an instance of PolymorphismAsyncClient.
      */
     @Generated
@@ -350,7 +374,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PolymorphicrecursiveAsyncClient class.
-     *
+     * 
      * @return an instance of PolymorphicrecursiveAsyncClient.
      */
     @Generated
@@ -360,7 +384,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of ReadonlypropertyAsyncClient class.
-     *
+     * 
      * @return an instance of ReadonlypropertyAsyncClient.
      */
     @Generated
@@ -370,7 +394,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of FlattencomplexAsyncClient class.
-     *
+     * 
      * @return an instance of FlattencomplexAsyncClient.
      */
     @Generated
@@ -380,7 +404,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of BasicClient class.
-     *
+     * 
      * @return an instance of BasicClient.
      */
     @Generated
@@ -390,7 +414,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PrimitiveClient class.
-     *
+     * 
      * @return an instance of PrimitiveClient.
      */
     @Generated
@@ -400,7 +424,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of ArrayClient class.
-     *
+     * 
      * @return an instance of ArrayClient.
      */
     @Generated
@@ -410,7 +434,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of DictionaryClient class.
-     *
+     * 
      * @return an instance of DictionaryClient.
      */
     @Generated
@@ -420,7 +444,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of InheritanceClient class.
-     *
+     * 
      * @return an instance of InheritanceClient.
      */
     @Generated
@@ -430,7 +454,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PolymorphismClient class.
-     *
+     * 
      * @return an instance of PolymorphismClient.
      */
     @Generated
@@ -440,7 +464,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of PolymorphicrecursiveClient class.
-     *
+     * 
      * @return an instance of PolymorphicrecursiveClient.
      */
     @Generated
@@ -450,7 +474,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of ReadonlypropertyClient class.
-     *
+     * 
      * @return an instance of ReadonlypropertyClient.
      */
     @Generated
@@ -460,7 +484,7 @@ public final class AutoRestComplexTestServiceBuilder
 
     /**
      * Builds an instance of FlattencomplexClient class.
-     *
+     * 
      * @return an instance of FlattencomplexClient.
      */
     @Generated

@@ -16,6 +16,7 @@ model Builtin {
   bytes: bytes;
   int: int32;
   safeint: safeint;
+  decimal: decimal;
   long: int64;
   float: float32;
   double: float64;

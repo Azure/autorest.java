@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -43,7 +42,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(null, Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     @Test
@@ -83,7 +82,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(null, Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {

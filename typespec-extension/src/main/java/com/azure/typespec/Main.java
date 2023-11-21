@@ -8,8 +8,12 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.fluent.TypeSpecFluentPlugin;
+import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
@@ -17,7 +21,6 @@ import com.azure.typespec.model.EmitterOptions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.googlejavaformat.java.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -28,7 +31,6 @@ import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,15 +75,39 @@ public class Main {
         if (Files.exists(outputDirPath)) {
             try (Stream<Path> filestream = Files.list(outputDirPath)) {
                 Set<String> filenames = filestream
-                        .map(p -> p.getFileName().toString())
-                        .map(name -> name.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+                    .map(p -> p.getFileName().toString())
+                    .map(name -> name.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toSet());
 
                 // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                 sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
             }
         }
 
+        if (emitterOptions.getArm()) {
+            handleFluent(codeModel, emitterOptions, sdkIntegration);
+        } else {
+            handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
+        }
+    }
+
+    private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration) {
+        // initialize plugin
+        TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
+
+        // client
+        Client client = fluentPlugin.processClient(codeModel);
+
+        // template
+        FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
+
+        // write
+        Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
+            .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
+            fluentPlugin.getLogger());
+    }
+
+    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
         // initialize plugin
         TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 
@@ -107,38 +133,21 @@ public class Main {
         });
 
         // handle customization
-        javaFiles.putAll(typeSpecPlugin.customizeGeneratedCode(javaFiles, outputDir));
-
-        // format
-        Formatter formatter = new Formatter();
-
-        Map<String, String> formattedFiles = new ConcurrentHashMap<>();
-        javaFiles.entrySet().parallelStream().forEach(entry -> {
-            String filePath = entry.getKey();
-            String fileContent = entry.getValue();
-            String formattedSource = fileContent;
-            try {
-                formattedSource = formatter.formatSourceAndFixImports(fileContent);
-            } catch (Exception e) {
-                LOGGER.error("Failed to format file: {}", emitterOptions.getOutputDir() + filePath, e);
-                // but we continue so user can still check the file and see why format fails
-            }
-            formattedFiles.put(filePath, formattedSource);
-        });
-
         // write output
         // java files
-        formattedFiles.forEach((filePath, formattedSource) -> typeSpecPlugin.writeFile(filePath, formattedSource, null));
+        new Postprocessor(typeSpecPlugin).postProcess(javaFiles);
 
         // XML include POM
         javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
-        String artifactId = ClientModelUtil.getArtifactId();
-        if (!CoreUtils.isNullOrEmpty(artifactId)) {
-            typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                    "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
+        if (settings.isBranded()) {
+            String artifactId = ClientModelUtil.getArtifactId();
+            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
+                        "name=${project.artifactId}\nversion=${project.version}\n", null);
+            }
         }
 
         boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
@@ -198,7 +207,7 @@ public class Main {
     }
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
-        String file = readFile(filename);
+        String file = Files.readString(Paths.get(filename));
 
         Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
@@ -210,11 +219,6 @@ public class Main {
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
         Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = yamlMapper.loadAs(file, CodeModel.class);
-        return codeModel;
-    }
-
-    private static String readFile(String path) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        return yamlMapper.loadAs(file, CodeModel.class);
     }
 }

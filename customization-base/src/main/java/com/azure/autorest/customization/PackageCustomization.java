@@ -5,7 +5,7 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.SymbolInformation;
+import org.eclipse.lsp4j.SymbolInformation;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public final class PackageCustomization {
              // So, when customizing client classes that contain service interface, this can incorrectly return
              // the service interface instead of the client class. So, we should add another check for exact name match
             .filter(si -> si.getName().equals(className))
-            .filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
+            .filter(si -> si.getLocation().getUri().endsWith(packagePath + "/" + className + ".java"))
             .findFirst();
 
         return Utils.returnIfPresentOrThrow(classSymbol,
@@ -52,12 +52,11 @@ public final class PackageCustomization {
      * @return A list of classes that are in this package.
      */
     public List<ClassCustomization> listClasses() {
-        List<ClassCustomization> classCustomizations = languageClient.findWorkspaceSymbol("*")
+        return languageClient.findWorkspaceSymbol("*")
                 .stream()
                 .filter(si -> si.getContainerName().equals(packageName))
                 .map(classSymbol -> new ClassCustomization(editor, languageClient, packageName,
                         classSymbol.getName(), classSymbol))
                 .collect(Collectors.toList());
-        return classCustomizations;
     }
 }

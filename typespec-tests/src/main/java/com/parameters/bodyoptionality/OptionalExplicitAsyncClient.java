@@ -20,14 +20,17 @@ import com.parameters.bodyoptionality.implementation.OptionalExplicitsImpl;
 import com.parameters.bodyoptionality.models.BodyModel;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous BodyOptionalityClient type. */
+/**
+ * Initializes a new instance of the asynchronous BodyOptionalityClient type.
+ */
 @ServiceClient(builder = BodyOptionalityClientBuilder.class, isAsync = true)
 public final class OptionalExplicitAsyncClient {
-    @Generated private final OptionalExplicitsImpl serviceClient;
+    @Generated
+    private final OptionalExplicitsImpl serviceClient;
 
     /**
      * Initializes an instance of OptionalExplicitAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,15 +40,15 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The set operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,15 +64,15 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The omit operation.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -85,7 +88,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The set operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -108,7 +111,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The set operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -126,7 +129,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The omit operation.
-     *
+     * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -149,7 +152,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The omit operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

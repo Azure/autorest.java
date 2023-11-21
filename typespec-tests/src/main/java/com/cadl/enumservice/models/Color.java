@@ -7,18 +7,28 @@ package com.cadl.enumservice.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/** Defines values for Color. */
+/**
+ * Defines values for Color.
+ */
 public enum Color {
-    /** Enum value Red. */
+    /**
+     * Enum value Red.
+     */
     RED("Red"),
 
-    /** Enum value Blue. */
+    /**
+     * Enum value Blue.
+     */
     BLUE("Blue"),
 
-    /** Enum value Green. */
+    /**
+     * Enum value Green.
+     */
     GREEN("Green");
 
-    /** The actual serialized value for a Color instance. */
+    /**
+     * The actual serialized value for a Color instance.
+     */
     private final String value;
 
     Color(String value) {
@@ -27,7 +37,7 @@ public enum Color {
 
     /**
      * Parses a serialized value to a Color instance.
-     *
+     * 
      * @param value the serialized value to parse.
      * @return the parsed Color object, or null if unable to parse.
      */
@@ -45,7 +55,9 @@ public enum Color {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @JsonValue
     @Override
     public String toString() {

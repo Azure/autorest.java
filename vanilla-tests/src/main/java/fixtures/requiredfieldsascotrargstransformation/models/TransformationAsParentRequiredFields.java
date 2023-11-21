@@ -13,7 +13,9 @@ import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-/** The TransformationAsParentRequiredFields model. */
+/**
+ * The TransformationAsParentRequiredFields model.
+ */
 @Immutable
 public final class TransformationAsParentRequiredFields extends TransformationAsRequiredFields {
     /*
@@ -30,7 +32,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
 
     /**
      * Creates an instance of TransformationAsParentRequiredFields class.
-     *
+     * 
      * @param rfc1123Required the rfc1123Required value to set.
      * @param nameRequired the nameRequired value to set.
      * @param urlBase64EncodedRequired the urlBase64EncodedRequired value to set.
@@ -38,37 +40,29 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      * @param rfc1123RequiredChild the rfc1123RequiredChild value to set.
      */
-    private TransformationAsParentRequiredFields(
-            OffsetDateTime rfc1123Required,
-            String nameRequired,
-            byte[] urlBase64EncodedRequired,
-            OffsetDateTime unixTimeLongRequired,
-            OffsetDateTime unixTimeDateTimeRequired,
-            OffsetDateTime rfc1123RequiredChild) {
+    private TransformationAsParentRequiredFields(OffsetDateTime rfc1123Required, String nameRequired,
+        byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired,
+        OffsetDateTime rfc1123RequiredChild) {
         super(rfc1123Required, nameRequired, urlBase64EncodedRequired, unixTimeLongRequired, unixTimeDateTimeRequired);
         this.rfc1123RequiredChild = new DateTimeRfc1123(rfc1123RequiredChild);
     }
 
     @JsonCreator
     private TransformationAsParentRequiredFields(
-            @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
-            @JsonProperty(value = "nameRequired", required = true) String nameRequired,
-            @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
-            @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
-            @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
-            @JsonProperty(value = "rfc1123RequiredChild", required = true) DateTimeRfc1123 rfc1123RequiredChild) {
-        this(
-                rfc1123Required.getDateTime(),
-                nameRequired,
-                urlBase64EncodedRequired.decodedBytes(),
-                OffsetDateTime.ofInstant(Instant.ofEpochSecond(unixTimeLongRequired), ZoneOffset.UTC),
-                unixTimeDateTimeRequired,
-                rfc1123RequiredChild.getDateTime());
+        @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
+        @JsonProperty(value = "nameRequired", required = true) String nameRequired,
+        @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
+        @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
+        @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
+        @JsonProperty(value = "rfc1123RequiredChild", required = true) DateTimeRfc1123 rfc1123RequiredChild) {
+        this(rfc1123Required.getDateTime(), nameRequired, urlBase64EncodedRequired.decodedBytes(),
+            OffsetDateTime.ofInstant(Instant.ofEpochSecond(unixTimeLongRequired), ZoneOffset.UTC),
+            unixTimeDateTimeRequired, rfc1123RequiredChild.getDateTime());
     }
 
     /**
      * Get the rfc1123RequiredChild property: The rfc1123RequiredChild property.
-     *
+     * 
      * @return the rfc1123RequiredChild value.
      */
     public OffsetDateTime getRfc1123RequiredChild() {
@@ -80,7 +74,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
 
     /**
      * Get the rfc1123NonRequiredChild property: The rfc1123NonRequiredChild property.
-     *
+     * 
      * @return the rfc1123NonRequiredChild value.
      */
     public OffsetDateTime getRfc1123NonRequiredChild() {
@@ -92,7 +86,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -100,7 +94,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
         super.validate();
         if (getRfc1123RequiredChild() == null) {
             throw new IllegalArgumentException(
-                    "Missing required property rfc1123RequiredChild in model TransformationAsParentRequiredFields");
+                "Missing required property rfc1123RequiredChild in model TransformationAsParentRequiredFields");
         }
     }
 }

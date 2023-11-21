@@ -10,7 +10,9 @@ import com.azure.core.models.ResponseError;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** A response containing error details. */
+/**
+ * A response containing error details.
+ */
 @Immutable
 public final class ErrorResponse {
     /*
@@ -22,7 +24,7 @@ public final class ErrorResponse {
 
     /**
      * Creates an instance of ErrorResponse class.
-     *
+     * 
      * @param error the error value to set.
      */
     @Generated
@@ -33,7 +35,7 @@ public final class ErrorResponse {
 
     /**
      * Get the error property: The error object.
-     *
+     * 
      * @return the error value.
      */
     @Generated

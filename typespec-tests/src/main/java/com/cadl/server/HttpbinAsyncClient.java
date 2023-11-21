@@ -18,14 +18,17 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.server.implementation.HttpbinClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous HttpbinClient type. */
+/**
+ * Initializes a new instance of the asynchronous HttpbinClient type.
+ */
 @ServiceClient(builder = HttpbinClientBuilder.class, isAsync = true)
 public final class HttpbinAsyncClient {
-    @Generated private final HttpbinClientImpl serviceClient;
+    @Generated
+    private final HttpbinClientImpl serviceClient;
 
     /**
      * Initializes an instance of HttpbinAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,7 +38,7 @@ public final class HttpbinAsyncClient {
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -52,7 +55,7 @@ public final class HttpbinAsyncClient {
 
     /**
      * The status operation.
-     *
+     * 
      * @param code A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

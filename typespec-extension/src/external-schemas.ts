@@ -55,19 +55,23 @@ export function createResponseErrorSchema(schemas: Schemas, stringSchema: String
   return responseErrorSchema;
 }
 
-export function createPollResultSchema(schemas: Schemas, stringSchema: StringSchema): ObjectSchema {
-  const pollResultSchema = new ObjectSchema("PollResult", "Status details for long running operations", {
-    language: {
-      default: {
-        namespace: "Azure.Core.Foundations",
-      },
-      java: {
-        namespace: "com.azure.core.experimental.models",
+export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema: StringSchema): ObjectSchema {
+  const pollOperationDetailsSchema = new ObjectSchema(
+    "PollOperationDetails",
+    "Status details for long running operations",
+    {
+      language: {
+        default: {
+          namespace: "Azure.Core.Foundations",
+        },
+        java: {
+          namespace: "com.azure.core.util.polling",
+        },
       },
     },
-  });
-  schemas.add(pollResultSchema);
-  pollResultSchema.addProperty(
+  );
+  schemas.add(pollOperationDetailsSchema);
+  pollOperationDetailsSchema.addProperty(
     new Property("operationId", "The unique ID of the operation.", stringSchema, {
       serializedName: "id",
       required: true,
@@ -75,7 +79,7 @@ export function createPollResultSchema(schemas: Schemas, stringSchema: StringSch
       readOnly: true,
     }),
   );
-  pollResultSchema.addProperty(
+  pollOperationDetailsSchema.addProperty(
     new Property("status", "The status of the operation.", stringSchema, {
       serializedName: "status",
       required: true,
@@ -84,13 +88,18 @@ export function createPollResultSchema(schemas: Schemas, stringSchema: StringSch
     }),
   );
   const responseErrorSchema = createResponseErrorSchema(schemas, stringSchema);
-  pollResultSchema.addProperty(
+  pollOperationDetailsSchema.addProperty(
     new Property("error", 'Error object that describes the error when status is "Failed".', responseErrorSchema, {
       serializedName: "error",
       required: false,
       nullable: true,
       readOnly: true,
+      language: {
+        java: {
+          namespace: "com.azure.core.models",
+        },
+      },
     }),
   );
-  return pollResultSchema;
+  return pollOperationDetailsSchema;
 }

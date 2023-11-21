@@ -18,14 +18,17 @@ import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous MultipartClient type. */
+/**
+ * Initializes a new instance of the asynchronous MultipartClient type.
+ */
 @ServiceClient(builder = MultipartClientBuilder.class, isAsync = true)
 public final class MultipartAsyncClient {
-    @Generated private final MultipartClientImpl serviceClient;
+    @Generated
+    private final MultipartClientImpl serviceClient;
 
     /**
      * Initializes an instance of MultipartAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -35,9 +38,9 @@ public final class MultipartAsyncClient {
 
     /**
      * request is binary.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     data (Required): {
@@ -46,7 +49,7 @@ public final class MultipartAsyncClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

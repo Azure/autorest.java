@@ -20,14 +20,17 @@ import com.type.enums.fixed.implementation.FixedClientImpl;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous FixedClient type. */
+/**
+ * Initializes a new instance of the asynchronous FixedClient type.
+ */
 @ServiceClient(builder = FixedClientBuilder.class, isAsync = true)
 public final class FixedAsyncClient {
-    @Generated private final FixedClientImpl serviceClient;
+    @Generated
+    private final FixedClientImpl serviceClient;
 
     /**
      * Initializes an instance of FixedAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,13 +40,13 @@ public final class FixedAsyncClient {
 
     /**
      * getKnownValue.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,13 +62,13 @@ public final class FixedAsyncClient {
 
     /**
      * putKnownValue.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -82,13 +85,13 @@ public final class FixedAsyncClient {
 
     /**
      * putUnknownValue.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
-     *
+     * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,7 +108,7 @@ public final class FixedAsyncClient {
 
     /**
      * getKnownValue.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -118,14 +121,13 @@ public final class FixedAsyncClient {
     public Mono<DaysOfWeekEnum> getKnownValue() {
         // Generated convenience method for getKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getKnownValueWithResponse(requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> DaysOfWeekEnum.fromString(protocolMethodData.toObject(String.class)));
+        return getKnownValueWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> DaysOfWeekEnum.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**
      * putKnownValue.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -145,7 +147,7 @@ public final class FixedAsyncClient {
 
     /**
      * putUnknownValue.
-     *
+     * 
      * @param body _.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

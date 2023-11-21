@@ -6,6 +6,7 @@ package com.azure.autorest.fluentnamer;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
@@ -24,31 +25,29 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class FluentNamer extends Preprocessor {
 
-    private final Logger logger = new PluginLogger(this, FluentNamer.class);
+    private final Logger logger;
     private static FluentNamer instance;
 
-    public FluentNamer(Connection connection, String plugin,
-                       String sessionId) {
-        super(connection, plugin, sessionId);
-        instance = this;
-        Preprocessor.instance = this;
+    public FluentNamer(NewPlugin plugin, Connection connection, String pluginName, String sessionId) {
+        super(plugin, connection, pluginName, sessionId);
+        this.logger = new PluginLogger(this, FluentNamer.class);
+        FluentNamer.instance = this;
     }
 
     public static FluentNamer getPluginInstance() {
         return instance;
     }
 
-    @Override
-    public boolean processInternal() {
+    public CodeModel processCodeModel() {
         this.clear();
 
         try {
@@ -57,10 +56,20 @@ public class FluentNamer extends Preprocessor {
                 throw new RuntimeException(String
                         .format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
             }
+
+            Path codeModelFolder;
+            try {
+                codeModelFolder = Files.createTempDirectory("code-model" + UUID.randomUUID());
+                logger.info("Created temp directory for code model: {}", codeModelFolder);
+            } catch (IOException ex) {
+                logger.error("Failed to create temp directory for code model.", ex);
+                throw new RuntimeException("Failed to create temp directory for code model.", ex);
+            }
+
             // Read input file
             String file = readFile(files.get(0));
             // Write the input code model file to a local code model file to help debugging
-            createInputCodeModelFile(file);
+            Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
             // Deserialize the input code model string to CodeModel object
             CodeModel codeModel = loadCodeModel(file);
             // Do necessary transformation
@@ -68,27 +77,15 @@ public class FluentNamer extends Preprocessor {
             // Write to local file (for debugging)
             Yaml newYaml = createYaml();
             String output = newYaml.dump(codeModel);
-            File fluentNamerFile = new File("code-model-fluentnamer-no-tags.yaml");
-            if (!fluentNamerFile.exists()) {
-                fluentNamerFile.createNewFile();
-            }
-            new FileOutputStream(fluentNamerFile).write(output.getBytes(StandardCharsets.UTF_8));
 
             // Output updated code model
-            writeFile(fluentNamerFile.getName(), output, null);
+            Files.writeString(codeModelFolder.resolve("code-model-fluentnamer-no-tags.yaml"), output);
+
+            return codeModel;
         } catch (Exception e) {
             logger.error("Failed to successfully run fluentnamer plugin.", e);
-            return false;
+            throw new RuntimeException("Failed to successfully run fluentnamer plugin.", e);
         }
-        return true;
-    }
-
-    private void createInputCodeModelFile(String file) throws IOException {
-        File tempFile = new File("code-model.yaml");
-        if (!tempFile.exists()) {
-            tempFile.createNewFile();
-        }
-        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
     }
 
     private CodeModel loadCodeModel(String file) throws com.fasterxml.jackson.core.JsonProcessingException {
@@ -122,7 +119,7 @@ public class FluentNamer extends Preprocessor {
         return new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
     }
 
-    private CodeModel transform(CodeModel codeModel) {
+    public CodeModel transform(CodeModel codeModel) {
         logger.info("Load fluent settings");
         FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
         CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));

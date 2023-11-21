@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Assertions;
 public final class DotFishMarketTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        DotFishMarket model =
-                BinaryData.fromString(
-                                "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"paojakhmsbzjh\",\"iswild\":false,\"species\":\"vdphlxaolthqtr\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"pfzfsinzgvfc\",\"iswild\":false,\"species\":\"oxxjtfelluwf\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"onpeqfpjkjlxofp\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"fxxypininmayhuy\"}]}")
-                        .toObject(DotFishMarket.class);
+        DotFishMarket model = BinaryData.fromString(
+            "{\"sampleSalmon\":{\"fish.type\":\"DotSalmon\",\"location\":\"paojakhmsbzjh\",\"iswild\":false,\"species\":\"vdphlxaolthqtr\"},\"salmons\":[{\"fish.type\":\"DotSalmon\",\"location\":\"pfzfsinzgvfc\",\"iswild\":false,\"species\":\"oxxjtfelluwf\"}],\"sampleFish\":{\"fish.type\":\"DotFish\",\"species\":\"onpeqfpjkjlxofp\"},\"fishes\":[{\"fish.type\":\"DotFish\",\"species\":\"fxxypininmayhuy\"}]}")
+            .toObject(DotFishMarket.class);
         Assertions.assertEquals("vdphlxaolthqtr", model.getSampleSalmon().getSpecies());
         Assertions.assertEquals("paojakhmsbzjh", model.getSampleSalmon().getLocation());
         Assertions.assertEquals(false, model.getSampleSalmon().iswild());

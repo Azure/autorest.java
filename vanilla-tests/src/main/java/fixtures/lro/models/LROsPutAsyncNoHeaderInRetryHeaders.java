@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The LROsPutAsyncNoHeaderInRetryHeaders model. */
+/**
+ * The LROsPutAsyncNoHeaderInRetryHeaders model.
+ */
 @Fluent
 public final class LROsPutAsyncNoHeaderInRetryHeaders {
     /*
@@ -23,7 +25,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPutAsyncNoHeaderInRetryHeaders class.
-     *
+     * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPutAsyncNoHeaderInRetryHeaders(HttpHeaders rawHeaders) {
@@ -32,7 +34,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
 
     /**
      * Get the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @return the azureAsyncOperation value.
      */
     public String getAzureAsyncOperation() {
@@ -41,7 +43,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
 
     /**
      * Set the azureAsyncOperation property: The Azure-AsyncOperation property.
-     *
+     * 
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncNoHeaderInRetryHeaders object itself.
      */
@@ -52,8 +54,9 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    public void validate() {}
+    public void validate() {
+    }
 }

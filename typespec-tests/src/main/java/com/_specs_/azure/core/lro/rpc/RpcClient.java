@@ -15,19 +15,22 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.models.PollResult;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 
-/** Initializes a new instance of the synchronous RpcClient type. */
+/**
+ * Initializes a new instance of the synchronous RpcClient type.
+ */
 @ServiceClient(builder = RpcClientBuilder.class)
 public final class RpcClient {
-    @Generated private final RpcClientImpl serviceClient;
+    @Generated
+    private final RpcClientImpl serviceClient;
 
     /**
      * Initializes an instance of RpcClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,17 +40,17 @@ public final class RpcClient {
 
     /**
      * Generate data.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -62,7 +65,7 @@ public final class RpcClient {
      *     }
      * }
      * }</pre>
-     *
+     * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -73,14 +76,14 @@ public final class RpcClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(
-            BinaryData generationOptions, RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData generationOptions,
+        RequestOptions requestOptions) {
         return this.serviceClient.beginLongRunningRpc(generationOptions, requestOptions);
     }
 
     /**
      * Generate data.
-     *
+     * 
      * @param generationOptions Options for the generation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -92,7 +95,7 @@ public final class RpcClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResult, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
+    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLongRunningRpcWithModel(BinaryData.fromObject(generationOptions), requestOptions);

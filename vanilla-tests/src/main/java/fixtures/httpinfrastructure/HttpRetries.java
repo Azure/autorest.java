@@ -27,22 +27,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in HttpRetries. */
+/**
+ * An instance of this class provides access to all the operations defined in HttpRetries.
+ */
 public final class HttpRetries {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final HttpRetriesService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestHttpInfrastructureTestService client;
 
     /**
      * Initializes an instance of HttpRetries.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     HttpRetries(AutoRestHttpInfrastructureTestService client) {
-        this.service =
-                RestProxy.create(HttpRetriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(HttpRetriesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -54,81 +60,63 @@ public final class HttpRetries {
     @ServiceInterface(name = "AutoRestHttpInfrastr")
     public interface HttpRetriesService {
         @Head("/http/retry/408")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head408(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> head408(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Put("/http/retry/500")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put500(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put500(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/retry/500")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch500(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> patch500(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/retry/502")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get502(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Void>> get502(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Options("/http/retry/502")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Boolean>> options502(
-                @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<Boolean>> options502(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Post("/http/retry/503")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post503(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> post503(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/http/retry/503")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete503(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> delete503(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/http/retry/504")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put504(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> put504(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/http/retry/504")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch504(
-                @HostParam("$host") String host,
-                @BodyParam("application/json") Boolean booleanValue,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> patch504(@HostParam("$host") String host,
+            @BodyParam("application/json") Boolean booleanValue, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -136,8 +124,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.head408(this.client.getHost(), accept, context));
@@ -145,7 +133,7 @@ public final class HttpRetries {
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -155,8 +143,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.head408(this.client.getHost(), accept, context);
@@ -164,7 +152,7 @@ public final class HttpRetries {
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -176,7 +164,7 @@ public final class HttpRetries {
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -190,7 +178,7 @@ public final class HttpRetries {
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -204,7 +192,7 @@ public final class HttpRetries {
 
     /**
      * Return 408 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -215,7 +203,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -223,8 +211,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -233,7 +221,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -243,8 +231,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -253,7 +241,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -265,7 +253,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -279,7 +267,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -293,7 +281,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -304,7 +292,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -312,8 +300,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -322,7 +310,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -332,8 +320,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -342,7 +330,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -354,7 +342,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -368,7 +356,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -382,7 +370,7 @@ public final class HttpRetries {
 
     /**
      * Return 500 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -393,7 +381,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -401,8 +389,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get502(this.client.getHost(), accept, context));
@@ -410,7 +398,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -420,8 +408,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.get502(this.client.getHost(), accept, context);
@@ -429,7 +417,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -441,7 +429,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -455,7 +443,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -469,7 +457,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -480,7 +468,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean along with {@link Response} on successful completion of {@link Mono}.
@@ -488,8 +476,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options502WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.options502(this.client.getHost(), accept, context));
@@ -497,7 +485,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -507,8 +495,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> options502WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.options502(this.client.getHost(), accept, context);
@@ -516,7 +504,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean on successful completion of {@link Mono}.
@@ -528,7 +516,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -542,7 +530,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -556,7 +544,7 @@ public final class HttpRetries {
 
     /**
      * Return 502 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return simple boolean.
@@ -568,7 +556,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -576,8 +564,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -586,7 +574,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -596,8 +584,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -606,7 +594,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -618,7 +606,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -632,7 +620,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -646,7 +634,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -657,7 +645,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -665,8 +653,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -675,7 +663,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -685,8 +673,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -695,7 +683,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -707,7 +695,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -721,7 +709,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -735,7 +723,7 @@ public final class HttpRetries {
 
     /**
      * Return 503 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -746,7 +734,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -754,8 +742,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -764,7 +752,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -774,8 +762,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -784,7 +772,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -796,7 +784,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -810,7 +798,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -824,7 +812,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -835,7 +823,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the {@link Response} on successful completion of {@link Mono}.
@@ -843,8 +831,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -853,7 +841,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -863,8 +851,8 @@ public final class HttpRetries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final Boolean booleanValue = true;
         final String accept = "application/json";
@@ -873,7 +861,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return A {@link Mono} that completes when a successful response is received.
@@ -885,7 +873,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -899,7 +887,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -913,7 +901,7 @@ public final class HttpRetries {
 
     /**
      * Return 504 status code, then 200 after retry.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

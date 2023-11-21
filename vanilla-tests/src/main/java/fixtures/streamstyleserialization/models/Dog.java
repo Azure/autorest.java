@@ -10,7 +10,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
-/** The Dog model. */
+/**
+ * The Dog model.
+ */
 @Fluent
 public final class Dog extends Pet {
     /*
@@ -18,12 +20,15 @@ public final class Dog extends Pet {
      */
     private String food;
 
-    /** Creates an instance of Dog class. */
-    public Dog() {}
+    /**
+     * Creates an instance of Dog class.
+     */
+    public Dog() {
+    }
 
     /**
      * Get the food property: The food property.
-     *
+     * 
      * @return the food value.
      */
     public String getFood() {
@@ -32,7 +37,7 @@ public final class Dog extends Pet {
 
     /**
      * Set the food property: The food property.
-     *
+     * 
      * @param food the food value to set.
      * @return the Dog object itself.
      */
@@ -41,14 +46,18 @@ public final class Dog extends Pet {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dog setId(Integer id) {
         super.setId(id);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Dog setName(String name) {
         super.setName(name);
@@ -57,7 +66,7 @@ public final class Dog extends Pet {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
@@ -76,32 +85,31 @@ public final class Dog extends Pet {
 
     /**
      * Reads an instance of Dog from the JsonReader.
-     *
+     * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     *     JSON null.
+     * JSON null.
      * @throws IOException If an error occurs while reading the Dog.
      */
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(
-                reader -> {
-                    Dog deserializedDog = new Dog();
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        String fieldName = reader.getFieldName();
-                        reader.nextToken();
+        return jsonReader.readObject(reader -> {
+            Dog deserializedDog = new Dog();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-                        if ("id".equals(fieldName)) {
-                            deserializedDog.setId(reader.getNullable(JsonReader::getInt));
-                        } else if ("name".equals(fieldName)) {
-                            deserializedDog.setName(reader.getString());
-                        } else if ("food".equals(fieldName)) {
-                            deserializedDog.food = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
+                if ("id".equals(fieldName)) {
+                    deserializedDog.setId(reader.getNullable(JsonReader::getInt));
+                } else if ("name".equals(fieldName)) {
+                    deserializedDog.setName(reader.getString());
+                } else if ("food".equals(fieldName)) {
+                    deserializedDog.food = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
 
-                    return deserializedDog;
-                });
+            return deserializedDog;
+        });
     }
 }

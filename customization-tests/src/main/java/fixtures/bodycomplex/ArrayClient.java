@@ -13,11 +13,14 @@ import fixtures.bodycomplex.implementation.ArraysImpl;
 import fixtures.bodycomplex.implementation.models.ArrayWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 
-/** The sync client containing Array operations. */
+/**
+ * The sync client containing Array operations.
+ */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class ArrayClient {
 
-    @Generated private final ArraysImpl serviceClient;
+    @Generated
+    private final ArraysImpl serviceClient;
 
     /**
      * Initializes an instance of ArrayClient class.
@@ -61,7 +64,7 @@ public final class ArrayClient {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
+     * jumps over the lazy dog".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -78,13 +81,13 @@ public final class ArrayClient {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     *     jumps over the lazy dog".
+     * jumps over the lazy dog".
      * @return The ArrayClient itself
      * @throws RuntimeException RuntimeException RuntimeException RuntimeException all other wrapped checked exceptions
-     *     if the request fails to be sent.
+     * if the request fails to be sent.
      * @throws ErrorException ErrorException ErrorException ErrorException thrown if the request is rejected by server.
      * @throws IllegalArgumentException IllegalArgumentException IllegalArgumentException IllegalArgumentException
-     *     thrown if parameters fail the validation.
+     * thrown if parameters fail the validation.
      * @see ArrayAsyncClient#putValid(ArrayWrapper)
      * @since 1.0.0-beta.1
      */
@@ -159,8 +162,8 @@ public final class ArrayClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     *     Response}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -16,7 +16,9 @@ import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
-/** Properties of a blob. */
+/**
+ * Properties of a blob.
+ */
 @Fluent
 public final class BlobProperties implements XmlSerializable<BlobProperties> {
     /*
@@ -159,12 +161,15 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
      */
     private ArchiveStatus archiveStatus;
 
-    /** Creates an instance of BlobProperties class. */
-    public BlobProperties() {}
+    /**
+     * Creates an instance of BlobProperties class.
+     */
+    public BlobProperties() {
+    }
 
     /**
      * Get the lastModified property: The Last-Modified property.
-     *
+     * 
      * @return the lastModified value.
      */
     public OffsetDateTime getLastModified() {
@@ -176,7 +181,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the lastModified property: The Last-Modified property.
-     *
+     * 
      * @param lastModified the lastModified value to set.
      * @return the BlobProperties object itself.
      */
@@ -191,7 +196,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the etag property: The Etag property.
-     *
+     * 
      * @return the etag value.
      */
     public String getEtag() {
@@ -200,7 +205,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the etag property: The Etag property.
-     *
+     * 
      * @param etag the etag value to set.
      * @return the BlobProperties object itself.
      */
@@ -211,7 +216,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentLength property: Size in bytes.
-     *
+     * 
      * @return the contentLength value.
      */
     public Long getContentLength() {
@@ -220,7 +225,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentLength property: Size in bytes.
-     *
+     * 
      * @param contentLength the contentLength value to set.
      * @return the BlobProperties object itself.
      */
@@ -231,7 +236,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentType property: The Content-Type property.
-     *
+     * 
      * @return the contentType value.
      */
     public String getContentType() {
@@ -240,7 +245,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentType property: The Content-Type property.
-     *
+     * 
      * @param contentType the contentType value to set.
      * @return the BlobProperties object itself.
      */
@@ -251,7 +256,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentEncoding property: The Content-Encoding property.
-     *
+     * 
      * @return the contentEncoding value.
      */
     public String getContentEncoding() {
@@ -260,7 +265,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentEncoding property: The Content-Encoding property.
-     *
+     * 
      * @param contentEncoding the contentEncoding value to set.
      * @return the BlobProperties object itself.
      */
@@ -271,7 +276,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentLanguage property: The Content-Language property.
-     *
+     * 
      * @return the contentLanguage value.
      */
     public String getContentLanguage() {
@@ -280,7 +285,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentLanguage property: The Content-Language property.
-     *
+     * 
      * @param contentLanguage the contentLanguage value to set.
      * @return the BlobProperties object itself.
      */
@@ -291,7 +296,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentMD5 property: The Content-MD5 property.
-     *
+     * 
      * @return the contentMD5 value.
      */
     public String getContentMD5() {
@@ -300,7 +305,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentMD5 property: The Content-MD5 property.
-     *
+     * 
      * @param contentMD5 the contentMD5 value to set.
      * @return the BlobProperties object itself.
      */
@@ -311,7 +316,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the contentDisposition property: The Content-Disposition property.
-     *
+     * 
      * @return the contentDisposition value.
      */
     public String getContentDisposition() {
@@ -320,7 +325,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the contentDisposition property: The Content-Disposition property.
-     *
+     * 
      * @param contentDisposition the contentDisposition value to set.
      * @return the BlobProperties object itself.
      */
@@ -331,7 +336,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the cacheControl property: The Cache-Control property.
-     *
+     * 
      * @return the cacheControl value.
      */
     public String getCacheControl() {
@@ -340,7 +345,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the cacheControl property: The Cache-Control property.
-     *
+     * 
      * @param cacheControl the cacheControl value to set.
      * @return the BlobProperties object itself.
      */
@@ -351,7 +356,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the blobSequenceNumber property: The x-ms-blob-sequence-number property.
-     *
+     * 
      * @return the blobSequenceNumber value.
      */
     public Integer getBlobSequenceNumber() {
@@ -360,7 +365,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the blobSequenceNumber property: The x-ms-blob-sequence-number property.
-     *
+     * 
      * @param blobSequenceNumber the blobSequenceNumber value to set.
      * @return the BlobProperties object itself.
      */
@@ -371,7 +376,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the blobType property: The BlobType property.
-     *
+     * 
      * @return the blobType value.
      */
     public BlobType getBlobType() {
@@ -380,7 +385,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the blobType property: The BlobType property.
-     *
+     * 
      * @param blobType the blobType value to set.
      * @return the BlobProperties object itself.
      */
@@ -391,7 +396,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @return the leaseStatus value.
      */
     public LeaseStatusType getLeaseStatus() {
@@ -400,7 +405,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the leaseStatus property: The LeaseStatus property.
-     *
+     * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the BlobProperties object itself.
      */
@@ -411,7 +416,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the leaseState property: The LeaseState property.
-     *
+     * 
      * @return the leaseState value.
      */
     public LeaseStateType getLeaseState() {
@@ -420,7 +425,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the leaseState property: The LeaseState property.
-     *
+     * 
      * @param leaseState the leaseState value to set.
      * @return the BlobProperties object itself.
      */
@@ -431,7 +436,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @return the leaseDuration value.
      */
     public LeaseDurationType getLeaseDuration() {
@@ -440,7 +445,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the leaseDuration property: The LeaseDuration property.
-     *
+     * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the BlobProperties object itself.
      */
@@ -451,7 +456,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copyId property: The CopyId property.
-     *
+     * 
      * @return the copyId value.
      */
     public String getCopyId() {
@@ -460,7 +465,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copyId property: The CopyId property.
-     *
+     * 
      * @param copyId the copyId value to set.
      * @return the BlobProperties object itself.
      */
@@ -471,7 +476,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copyStatus property: The CopyStatus property.
-     *
+     * 
      * @return the copyStatus value.
      */
     public CopyStatusType getCopyStatus() {
@@ -480,7 +485,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copyStatus property: The CopyStatus property.
-     *
+     * 
      * @param copyStatus the copyStatus value to set.
      * @return the BlobProperties object itself.
      */
@@ -491,7 +496,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copySource property: The CopySource property.
-     *
+     * 
      * @return the copySource value.
      */
     public String getCopySource() {
@@ -500,7 +505,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copySource property: The CopySource property.
-     *
+     * 
      * @param copySource the copySource value to set.
      * @return the BlobProperties object itself.
      */
@@ -511,7 +516,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copyProgress property: The CopyProgress property.
-     *
+     * 
      * @return the copyProgress value.
      */
     public String getCopyProgress() {
@@ -520,7 +525,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copyProgress property: The CopyProgress property.
-     *
+     * 
      * @param copyProgress the copyProgress value to set.
      * @return the BlobProperties object itself.
      */
@@ -531,7 +536,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copyCompletionTime property: The CopyCompletionTime property.
-     *
+     * 
      * @return the copyCompletionTime value.
      */
     public OffsetDateTime getCopyCompletionTime() {
@@ -543,7 +548,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copyCompletionTime property: The CopyCompletionTime property.
-     *
+     * 
      * @param copyCompletionTime the copyCompletionTime value to set.
      * @return the BlobProperties object itself.
      */
@@ -558,7 +563,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the copyStatusDescription property: The CopyStatusDescription property.
-     *
+     * 
      * @return the copyStatusDescription value.
      */
     public String getCopyStatusDescription() {
@@ -567,7 +572,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the copyStatusDescription property: The CopyStatusDescription property.
-     *
+     * 
      * @param copyStatusDescription the copyStatusDescription value to set.
      * @return the BlobProperties object itself.
      */
@@ -578,7 +583,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the serverEncrypted property: The ServerEncrypted property.
-     *
+     * 
      * @return the serverEncrypted value.
      */
     public Boolean isServerEncrypted() {
@@ -587,7 +592,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the serverEncrypted property: The ServerEncrypted property.
-     *
+     * 
      * @param serverEncrypted the serverEncrypted value to set.
      * @return the BlobProperties object itself.
      */
@@ -598,7 +603,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the incrementalCopy property: The IncrementalCopy property.
-     *
+     * 
      * @return the incrementalCopy value.
      */
     public Boolean isIncrementalCopy() {
@@ -607,7 +612,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the incrementalCopy property: The IncrementalCopy property.
-     *
+     * 
      * @param incrementalCopy the incrementalCopy value to set.
      * @return the BlobProperties object itself.
      */
@@ -618,7 +623,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the destinationSnapshot property: The DestinationSnapshot property.
-     *
+     * 
      * @return the destinationSnapshot value.
      */
     public String getDestinationSnapshot() {
@@ -627,7 +632,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the destinationSnapshot property: The DestinationSnapshot property.
-     *
+     * 
      * @param destinationSnapshot the destinationSnapshot value to set.
      * @return the BlobProperties object itself.
      */
@@ -638,7 +643,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the deletedTime property: The DeletedTime property.
-     *
+     * 
      * @return the deletedTime value.
      */
     public OffsetDateTime getDeletedTime() {
@@ -650,7 +655,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the deletedTime property: The DeletedTime property.
-     *
+     * 
      * @param deletedTime the deletedTime value to set.
      * @return the BlobProperties object itself.
      */
@@ -665,7 +670,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the remainingRetentionDays property: The RemainingRetentionDays property.
-     *
+     * 
      * @return the remainingRetentionDays value.
      */
     public Integer getRemainingRetentionDays() {
@@ -674,7 +679,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the remainingRetentionDays property: The RemainingRetentionDays property.
-     *
+     * 
      * @param remainingRetentionDays the remainingRetentionDays value to set.
      * @return the BlobProperties object itself.
      */
@@ -685,7 +690,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the accessTier property: The AccessTier property.
-     *
+     * 
      * @return the accessTier value.
      */
     public AccessTier getAccessTier() {
@@ -694,7 +699,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the accessTier property: The AccessTier property.
-     *
+     * 
      * @param accessTier the accessTier value to set.
      * @return the BlobProperties object itself.
      */
@@ -705,7 +710,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the accessTierInferred property: The AccessTierInferred property.
-     *
+     * 
      * @return the accessTierInferred value.
      */
     public Boolean isAccessTierInferred() {
@@ -714,7 +719,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the accessTierInferred property: The AccessTierInferred property.
-     *
+     * 
      * @param accessTierInferred the accessTierInferred value to set.
      * @return the BlobProperties object itself.
      */
@@ -725,7 +730,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Get the archiveStatus property: The ArchiveStatus property.
-     *
+     * 
      * @return the archiveStatus value.
      */
     public ArchiveStatus getArchiveStatus() {
@@ -734,7 +739,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Set the archiveStatus property: The ArchiveStatus property.
-     *
+     * 
      * @param archiveStatus the archiveStatus value to set.
      * @return the BlobProperties object itself.
      */
@@ -745,7 +750,7 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Validates the instance.
-     *
+     * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
@@ -799,10 +804,10 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Reads an instance of BlobProperties from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the BlobProperties.
      */
@@ -812,97 +817,84 @@ public final class BlobProperties implements XmlSerializable<BlobProperties> {
 
     /**
      * Reads an instance of BlobProperties from the XmlReader.
-     *
+     * 
      * @param xmlReader The XmlReader being read.
      * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     *     cases where the model can deserialize from different root element names.
+     * cases where the model can deserialize from different root element names.
      * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
-     *     pointing to XML null.
+     * pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the BlobProperties.
      */
     public static BlobProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobProperties" : rootElementName;
-        return xmlReader.readObject(
-                finalRootElementName,
-                reader -> {
-                    BlobProperties deserializedBlobProperties = new BlobProperties();
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        QName elementName = reader.getElementName();
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            BlobProperties deserializedBlobProperties = new BlobProperties();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
 
-                        if ("Last-Modified".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
-                        } else if ("Etag".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.etag = reader.getStringElement();
-                        } else if ("Content-Length".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentLength = reader.getNullableElement(Long::parseLong);
-                        } else if ("Content-Type".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentType = reader.getStringElement();
-                        } else if ("Content-Encoding".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentEncoding = reader.getStringElement();
-                        } else if ("Content-Language".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentLanguage = reader.getStringElement();
-                        } else if ("Content-MD5".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentMD5 = reader.getStringElement();
-                        } else if ("Content-Disposition".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.contentDisposition = reader.getStringElement();
-                        } else if ("Cache-Control".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.cacheControl = reader.getStringElement();
-                        } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.blobSequenceNumber =
-                                    reader.getNullableElement(Integer::parseInt);
-                        } else if ("BlobType".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.blobType = reader.getNullableElement(BlobType::fromString);
-                        } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.leaseStatus =
-                                    reader.getNullableElement(LeaseStatusType::fromString);
-                        } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.leaseState =
-                                    reader.getNullableElement(LeaseStateType::fromString);
-                        } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.leaseDuration =
-                                    reader.getNullableElement(LeaseDurationType::fromString);
-                        } else if ("CopyId".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copyId = reader.getStringElement();
-                        } else if ("CopyStatus".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copyStatus =
-                                    reader.getNullableElement(CopyStatusType::fromString);
-                        } else if ("CopySource".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copySource = reader.getStringElement();
-                        } else if ("CopyProgress".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copyProgress = reader.getStringElement();
-                        } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copyCompletionTime =
-                                    reader.getNullableElement(DateTimeRfc1123::new);
-                        } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.copyStatusDescription = reader.getStringElement();
-                        } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.serverEncrypted =
-                                    reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("IncrementalCopy".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.incrementalCopy =
-                                    reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.destinationSnapshot = reader.getStringElement();
-                        } else if ("DeletedTime".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.deletedTime = reader.getNullableElement(DateTimeRfc1123::new);
-                        } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.remainingRetentionDays =
-                                    reader.getNullableElement(Integer::parseInt);
-                        } else if ("AccessTier".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.accessTier = reader.getNullableElement(AccessTier::fromString);
-                        } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.accessTierInferred =
-                                    reader.getNullableElement(Boolean::parseBoolean);
-                        } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
-                            deserializedBlobProperties.archiveStatus =
-                                    reader.getNullableElement(ArchiveStatus::fromString);
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("Last-Modified".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("Etag".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.etag = reader.getStringElement();
+                } else if ("Content-Length".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentLength = reader.getNullableElement(Long::parseLong);
+                } else if ("Content-Type".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentType = reader.getStringElement();
+                } else if ("Content-Encoding".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentEncoding = reader.getStringElement();
+                } else if ("Content-Language".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentLanguage = reader.getStringElement();
+                } else if ("Content-MD5".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentMD5 = reader.getStringElement();
+                } else if ("Content-Disposition".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentDisposition = reader.getStringElement();
+                } else if ("Cache-Control".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.cacheControl = reader.getStringElement();
+                } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
+                } else if ("BlobType".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.blobType = reader.getNullableElement(BlobType::fromString);
+                } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseStatus = reader.getNullableElement(LeaseStatusType::fromString);
+                } else if ("LeaseState".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseDuration = reader.getNullableElement(LeaseDurationType::fromString);
+                } else if ("CopyId".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyId = reader.getStringElement();
+                } else if ("CopyStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyStatus = reader.getNullableElement(CopyStatusType::fromString);
+                } else if ("CopySource".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copySource = reader.getStringElement();
+                } else if ("CopyProgress".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyProgress = reader.getStringElement();
+                } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyCompletionTime = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyStatusDescription = reader.getStringElement();
+                } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.serverEncrypted = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("IncrementalCopy".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.incrementalCopy = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.destinationSnapshot = reader.getStringElement();
+                } else if ("DeletedTime".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.deletedTime = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
+                } else if ("AccessTier".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.accessTier = reader.getNullableElement(AccessTier::fromString);
+                } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.archiveStatus = reader.getNullableElement(ArchiveStatus::fromString);
+                } else {
+                    reader.skipElement();
+                }
+            }
 
-                    return deserializedBlobProperties;
-                });
+            return deserializedBlobProperties;
+        });
     }
 }

@@ -20,14 +20,17 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DatetimeClient type. */
+/**
+ * Initializes a new instance of the asynchronous DatetimeClient type.
+ */
 @ServiceClient(builder = DatetimeClientBuilder.class, isAsync = true)
 public final class QueryAsyncClient {
-    @Generated private final QueriesImpl serviceClient;
+    @Generated
+    private final QueriesImpl serviceClient;
 
     /**
      * Initializes an instance of QueryAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -37,7 +40,7 @@ public final class QueryAsyncClient {
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -54,7 +57,7 @@ public final class QueryAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -71,7 +74,7 @@ public final class QueryAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +91,7 @@ public final class QueryAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -105,8 +108,8 @@ public final class QueryAsyncClient {
 
     /**
      * The unixTimestampArray operation.
-     *
-     * @param value Array of ValueModel.
+     * 
+     * @param value Array of Value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -116,14 +119,14 @@ public final class QueryAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> unixTimestampArrayWithResponse(
-            List<OffsetDateTime> value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> unixTimestampArrayWithResponse(List<OffsetDateTime> value,
+        RequestOptions requestOptions) {
         return this.serviceClient.unixTimestampArrayWithResponseAsync(value, requestOptions);
     }
 
     /**
      * The defaultMethod operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -143,7 +146,7 @@ public final class QueryAsyncClient {
 
     /**
      * The rfc3339 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -163,7 +166,7 @@ public final class QueryAsyncClient {
 
     /**
      * The rfc7231 operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -183,7 +186,7 @@ public final class QueryAsyncClient {
 
     /**
      * The unixTimestamp operation.
-     *
+     * 
      * @param value An instant in coordinated universal time (UTC)".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -203,8 +206,8 @@ public final class QueryAsyncClient {
 
     /**
      * The unixTimestampArray operation.
-     *
-     * @param value Array of ValueModel.
+     * 
+     * @param value Array of Value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

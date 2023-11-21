@@ -17,14 +17,17 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 
-/** Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type. */
+/**
+ * Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type.
+ */
 @ServiceClient(builder = ReadonlypropertyClientBuilder.class)
 public final class ReadonlypropertyClient {
-    @Generated private final ReadonlypropertiesImpl serviceClient;
+    @Generated
+    private final ReadonlypropertiesImpl serviceClient;
 
     /**
      * Initializes an instance of ReadonlypropertyClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -34,16 +37,16 @@ public final class ReadonlypropertyClient {
 
     /**
      * Get complex types that have readonly properties.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,16 +62,16 @@ public final class ReadonlypropertyClient {
 
     /**
      * Put complex types that have readonly properties.
-     *
-     * <p><strong>Request Body Schema</strong>
-     *
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
      * <pre>{@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

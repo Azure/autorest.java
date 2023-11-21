@@ -11,74 +11,88 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
-/** Initializes a new instance of the MicrosoftAzureTestUrl type. */
+/**
+ * Initializes a new instance of the MicrosoftAzureTestUrl type.
+ */
 public final class MicrosoftAzureTestUrl {
-    /** Subscription Id. */
+    /**
+     * Subscription Id.
+     */
     private final String subscriptionId;
 
     /**
      * Gets Subscription Id.
-     *
+     * 
      * @return the subscriptionId value.
      */
     public String getSubscriptionId() {
         return this.subscriptionId;
     }
 
-    /** server parameter. */
+    /**
+     * server parameter.
+     */
     private final String host;
 
     /**
      * Gets server parameter.
-     *
+     * 
      * @return the host value.
      */
     public String getHost() {
         return this.host;
     }
 
-    /** Api Version. */
+    /**
+     * Api Version.
+     */
     private final String apiVersion;
 
     /**
      * Gets Api Version.
-     *
+     * 
      * @return the apiVersion value.
      */
     public String getApiVersion() {
         return this.apiVersion;
     }
 
-    /** The HTTP pipeline to send requests through. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private final HttpPipeline httpPipeline;
 
     /**
      * Gets The HTTP pipeline to send requests through.
-     *
+     * 
      * @return the httpPipeline value.
      */
     public HttpPipeline getHttpPipeline() {
         return this.httpPipeline;
     }
 
-    /** The serializer to serialize an object into a string. */
+    /**
+     * The serializer to serialize an object into a string.
+     */
     private final SerializerAdapter serializerAdapter;
 
     /**
      * Gets The serializer to serialize an object into a string.
-     *
+     * 
      * @return the serializerAdapter value.
      */
     public SerializerAdapter getSerializerAdapter() {
         return this.serializerAdapter;
     }
 
-    /** The Groups object to access its operations. */
+    /**
+     * The Groups object to access its operations.
+     */
     private final Groups groups;
 
     /**
      * Gets the Groups object to access its operations.
-     *
+     * 
      * @return the Groups object.
      */
     public Groups getGroups() {
@@ -87,23 +101,19 @@ public final class MicrosoftAzureTestUrl {
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
+     * 
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
      * @param apiVersion Api Version.
      */
     MicrosoftAzureTestUrl(String subscriptionId, String host, String apiVersion) {
-        this(
-                new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-                JacksonAdapter.createDefaultSerializerAdapter(),
-                subscriptionId,
-                host,
-                apiVersion);
+        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
+            JacksonAdapter.createDefaultSerializerAdapter(), subscriptionId, host, apiVersion);
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
@@ -115,19 +125,15 @@ public final class MicrosoftAzureTestUrl {
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
+     * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param subscriptionId Subscription Id.
      * @param host server parameter.
      * @param apiVersion Api Version.
      */
-    MicrosoftAzureTestUrl(
-            HttpPipeline httpPipeline,
-            SerializerAdapter serializerAdapter,
-            String subscriptionId,
-            String host,
-            String apiVersion) {
+    MicrosoftAzureTestUrl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String subscriptionId,
+        String host, String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.subscriptionId = subscriptionId;

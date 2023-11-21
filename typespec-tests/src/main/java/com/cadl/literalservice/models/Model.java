@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The Model model. */
+/**
+ * The Model model.
+ */
 @Fluent
 public final class Model {
     /*
@@ -23,17 +25,18 @@ public final class Model {
      */
     @Generated
     @JsonProperty(value = "optionalLiteral")
-    private OptionalLiteralModel optionalLiteral;
+    private ModelOptionalLiteral optionalLiteral;
 
-    /** Creates an instance of Model class. */
+    /**
+     * Creates an instance of Model class.
+     */
     @Generated
     public Model() {
-        literal = "literal";
     }
 
     /**
      * Get the literal property: The literal property.
-     *
+     * 
      * @return the literal value.
      */
     @Generated
@@ -43,22 +46,22 @@ public final class Model {
 
     /**
      * Get the optionalLiteral property: The optionalLiteral property.
-     *
+     * 
      * @return the optionalLiteral value.
      */
     @Generated
-    public OptionalLiteralModel getOptionalLiteral() {
+    public ModelOptionalLiteral getOptionalLiteral() {
         return this.optionalLiteral;
     }
 
     /**
      * Set the optionalLiteral property: The optionalLiteral property.
-     *
+     * 
      * @param optionalLiteral the optionalLiteral value to set.
      * @return the Model object itself.
      */
     @Generated
-    public Model setOptionalLiteral(OptionalLiteralModel optionalLiteral) {
+    public Model setOptionalLiteral(ModelOptionalLiteral optionalLiteral) {
         this.optionalLiteral = optionalLiteral;
         return this;
     }

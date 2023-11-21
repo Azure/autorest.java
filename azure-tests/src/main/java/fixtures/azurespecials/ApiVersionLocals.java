@@ -21,23 +21,28 @@ import com.azure.core.util.FluxUtil;
 import fixtures.azurespecials.models.ErrorException;
 import reactor.core.publisher.Mono;
 
-/** An instance of this class provides access to all the operations defined in ApiVersionLocals. */
+/**
+ * An instance of this class provides access to all the operations defined in ApiVersionLocals.
+ */
 public final class ApiVersionLocals {
-    /** The proxy service used to perform REST calls. */
+    /**
+     * The proxy service used to perform REST calls.
+     */
     private final ApiVersionLocalsService service;
 
-    /** The service client containing this operation class. */
+    /**
+     * The service client containing this operation class.
+     */
     private final AutoRestAzureSpecialParametersTestClient client;
 
     /**
      * Initializes an instance of ApiVersionLocals.
-     *
+     * 
      * @param client the instance of the service client containing this operation class.
      */
     ApiVersionLocals(AutoRestAzureSpecialParametersTestClient client) {
-        this.service =
-                RestProxy.create(
-                        ApiVersionLocalsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.service
+            = RestProxy.create(ApiVersionLocalsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
@@ -49,77 +54,65 @@ public final class ApiVersionLocals {
     @ServiceInterface(name = "AutoRestAzureSpecial")
     public interface ApiVersionLocalsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/local/2.0")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getMethodLocalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getMethodLocalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/method/string/none/query/local/null")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getMethodLocalNull(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getMethodLocalNull(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/path/string/none/query/local/2.0")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getPathLocalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getPathLocalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        @ExpectedResponses({200})
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getSwaggerLocalValid(
-                @HostParam("$host") String host,
-                @QueryParam("api-version") String apiVersion,
-                @HeaderParam("Accept") String accept,
-                Context context);
+        Mono<Response<Void>> getSwaggerLocalValid(@HostParam("$host") String host,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getMethodLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getMethodLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -128,7 +121,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method on successful completion of {@link Mono}.
@@ -140,7 +133,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -154,7 +147,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -168,7 +161,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -179,43 +172,43 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion, Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context);
@@ -223,9 +216,9 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -238,7 +231,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method on successful completion of {@link Mono}.
@@ -251,9 +244,9 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -267,9 +260,9 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -283,9 +276,9 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     *     parameter.
+     * parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -297,7 +290,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = null to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -309,39 +302,39 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getPathLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getPathLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -350,7 +343,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method on successful completion of {@link Mono}.
@@ -362,7 +355,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -376,7 +369,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -390,7 +383,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -401,39 +394,39 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-                context -> service.getSwaggerLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil
+            .withContext(context -> service.getSwaggerLocalValid(this.client.getHost(), apiVersion, accept, context));
     }
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     *     {@link Mono}.
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            return Mono.error(
-                    new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String apiVersion = "2.0";
         final String accept = "application/json";
@@ -442,7 +435,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return method with api-version modeled in the method on successful completion of {@link Mono}.
@@ -454,7 +447,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -468,7 +461,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -482,7 +475,7 @@ public final class ApiVersionLocals {
 
     /**
      * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
-     *
+     * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

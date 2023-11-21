@@ -22,16 +22,16 @@ class MultipleClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        MultipleClientBuilder multipleClientbuilder =
-                new MultipleClientBuilder()
-                        .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                        .httpClient(HttpClient.createDefault())
-                        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        MultipleClientBuilder multipleClientbuilder
+            = new MultipleClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             multipleClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
             multipleClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         multipleClient = multipleClientbuilder.buildClient();
+
     }
 }

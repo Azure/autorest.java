@@ -124,7 +124,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollResultSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -146,9 +146,10 @@ import {
   isSameLiteralTypes,
   getAccess,
   getUsage,
-  unionReferredByType,
-  getUnionName,
+  getUnionDescription,
   modelIs,
+  getModelNameForProperty,
+  isAllValueInteger,
 } from "./type-utils.js";
 import {
   getClientApiVersions,
@@ -161,12 +162,12 @@ import {
   isLroNewPollingStrategy,
   operationIsMultipleContentTypes,
   cloneOperationParameter,
-  operationRefersUnion,
   operationIsMultipart,
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
 import pkg from "lodash";
+import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -192,7 +193,7 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.sdkContext = createSdkContext(context as EmitContext<any>);
+    this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
@@ -343,16 +344,23 @@ export class CodeModelBuilder {
 
           case "http":
             {
-              const schemeOrApiKeyPrefix = scheme.scheme;
+              let schemeOrApiKeyPrefix: string = scheme.scheme;
               if (schemeOrApiKeyPrefix === "basic" || schemeOrApiKeyPrefix === "bearer") {
-                this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
-              } else {
-                const keyScheme = new KeySecurityScheme({
-                  name: "authorization",
-                });
-                (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
-                securitySchemes.push(keyScheme);
+                // HTTP Authentication should use "Basic token" or "Bearer token"
+                schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
+
+                if (!(this.options.branded === false)) {
+                  // Azure would not allow BasicAuth or BearerAuth
+                  this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
+                  continue;
+                }
               }
+
+              const keyScheme = new KeySecurityScheme({
+                name: "authorization",
+              });
+              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+              securitySchemes.push(keyScheme);
             }
             break;
         }
@@ -385,14 +393,14 @@ export class CodeModelBuilder {
       // lambda to mark model as public
       const modelAsPublic = (model: Model | Enum) => {
         // check it does not contain Union
-        const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
-        if (union) {
-          const errorMsg = `Model '${getTypeName(
-            model,
-            this.typeNameOptions,
-          )}' cannot be set as access=public, as it refers Union '${getUnionName(union, this.typeNameOptions)}'`;
-          throw new Error(errorMsg);
-        }
+        // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
+        // if (union) {
+        //   const errorMsg = `Model '${getTypeName(
+        //     model,
+        //     this.typeNameOptions,
+        //   )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+        //   throw new Error(errorMsg);
+        // }
 
         const schema = this.processSchema(model, model.name);
 
@@ -439,6 +447,27 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+
+    // deduplicate model name
+    const nameCount = new Map<string, number>();
+    const deduplicateName = (schema: Schema) => {
+      const name = schema.language.default.name;
+      // skip models under "com.azure.core."
+      if (schema.language.default.name && schema.language.default.namespace?.startsWith("com.azure.core.")) {
+        if (!nameCount.has(name)) {
+          nameCount.set(name, 1);
+        } else {
+          const count = nameCount.get(name)!;
+          nameCount.set(name, count + 1);
+          schema.language.default.name = name + count;
+        }
+      }
+    };
+    this.codeModel.schemas.objects?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it has RequestConditions
+    this.codeModel.schemas.choices?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.sealedChoices?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.ors?.forEach((it) => deduplicateName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {
@@ -464,6 +493,9 @@ export class CodeModelBuilder {
   private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
     for (const client of clients) {
+      if (client.arm) {
+        this.codeModel.arm = true;
+      }
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -611,7 +643,7 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = !!convenienceApiName;
+    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -634,17 +666,18 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else {
-        const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
-        if (union) {
-          // and Union
-          generateConvenienceApi = false;
-          apiComment = `Convenience API is not generated, as operation '${
-            op.operation.name
-          }' refers Union '${getUnionName(union, this.typeNameOptions)}'`;
-          this.logWarning(apiComment);
-        }
       }
+      // else {
+      //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+      //   if (union) {
+      //     // and Union
+      //     generateConvenienceApi = false;
+      //     apiComment = `Convenience API is not generated, as operation '${
+      //       op.operation.name
+      //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+      //     this.logWarning(apiComment);
+      //   }
+      // }
     }
     if (generateConvenienceApi && convenienceApiName) {
       codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
@@ -716,7 +749,7 @@ export class CodeModelBuilder {
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
     // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, op.responses, lroMetadata);
+    this.processRouteForLongRunning(codeModelOperation, operation, op.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
@@ -790,7 +823,8 @@ export class CodeModelBuilder {
 
       // finalSchema
       if (verb !== "delete" && lroMetadata.logicalResult) {
-        const finalType = this.findResponseBody(lroMetadata.logicalResult);
+        const finalResult = useNewPollStrategy ? lroMetadata.logicalResult : lroMetadata.envelopeResult;
+        const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
 
@@ -821,6 +855,7 @@ export class CodeModelBuilder {
 
   private processRouteForLongRunning(
     op: CodeModelOperation,
+    operation: Operation,
     responses: HttpOperationResponse[],
     lroMetadata: LongRunningMetadata,
   ) {
@@ -841,6 +876,11 @@ export class CodeModelBuilder {
           }
         }
       }
+    }
+
+    if (this.isArmLongRunningOperation(this.program, operation)) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
     }
   }
 
@@ -1179,7 +1219,7 @@ export class CodeModelBuilder {
     } else {
       schema = this.processSchema(body, body.name);
     }
-    const parameter = new Parameter(body.name, this.getDoc(body), schema, {
+    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1196,6 +1236,10 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
     } else if (op.convenienceApi) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
+    }
+
+    if (operationIsJsonMergePatch(httpOperation)) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1524,7 +1568,7 @@ export class CodeModelBuilder {
         return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
 
       case "Union":
-        return this.processUnionSchema(type, nameHint);
+        return this.processUnionSchema(type, this.getName(type, nameHint));
 
       case "ModelProperty": {
         let schema = undefined;
@@ -1533,7 +1577,8 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          schema = this.processSchema(type.type, nameHint + "Model");
+          const schemaNameHint = pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
+          schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
@@ -1593,7 +1638,10 @@ export class CodeModelBuilder {
           return this.processUrlSchema(type, nameHint);
       }
 
-      if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
+      if (scalarName.startsWith("decimal")) {
+        // decimal
+        return this.processNumberSchema(type, nameHint);
+      } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
         // integer
         const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
         return this.processIntegerSchema(type, nameHint, integerSize);
@@ -1727,7 +1775,11 @@ export class CodeModelBuilder {
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type);
     const valueType =
-      typeof type.members.values().next().value.value === "number" ? this.integerSchema : this.stringSchema;
+      typeof type.members.values().next().value.value === "number"
+        ? isAllValueInteger(Array.from(type.members.values()).map((it) => it.value as number))
+          ? this.integerSchema
+          : this.doubleSchema
+        : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
@@ -1772,7 +1824,13 @@ export class CodeModelBuilder {
     name: string,
   ): ConstantSchema {
     const valueType =
-      type.kind === "String" ? this.stringSchema : type.kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      type.kind === "String"
+        ? this.stringSchema
+        : type.kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger([type.value])
+        ? this.integerSchema
+        : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1784,7 +1842,7 @@ export class CodeModelBuilder {
   }
 
   private processConstantSchemaForEnumMember(type: EnumMember, name: string): ConstantSchema {
-    const valueType = this.processChoiceSchema(type.enum, this.getName(type.enum), isFixed(this.program, type.enum));
+    const valueType = this.processSchema(type.enum, this.getName(type.enum));
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1796,9 +1854,20 @@ export class CodeModelBuilder {
   }
 
   private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+    // variants is Literal
+
+    variants = variants.filter(
+      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
+    );
     const kind = variants[0].type.kind;
     const valueType =
-      kind === "String" ? this.stringSchema : kind === "Boolean" ? this.booleanSchema : this.integerSchema;
+      kind === "String"
+        ? this.stringSchema
+        : kind === "Boolean"
+        ? this.booleanSchema
+        : isAllValueInteger(variants.map((it) => (it.type as any).value))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
     variants.forEach((it) =>
@@ -2128,13 +2197,17 @@ export class CodeModelBuilder {
 
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
-    const unionSchema = new OrSchema(pascalCase(name) + "Base", this.getDoc(type), {
+    const baseName = pascalCase(name) + "Model";
+    this.logWarning(
+      `Convert TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to Class '${baseName}'`,
+    );
+    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
       summary: this.getSummary(type),
     });
     unionSchema.anyOf = [];
     nonNullVariants.forEach((it) => {
       const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + pascalCase(name);
+      const modelName = variantName + baseName;
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
@@ -2208,6 +2281,12 @@ export class CodeModelBuilder {
         } else {
           return pascalCase(type.name);
         }
+      case "String":
+        return pascalCase(type.value);
+      case "Number":
+        return pascalCase(type.valueAsString);
+      case "Boolean":
+        return pascalCase(type.value ? "True" : "False");
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
@@ -2238,7 +2317,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
@@ -2266,16 +2345,16 @@ export class CodeModelBuilder {
     ) {
       const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
+      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
       return newName;
     }
 
-    if (!target.name && nameHint && this.options["namer"]) {
+    if (!target.name && nameHint) {
       const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec model to '${newName}'`);
+      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
-    return target.name;
+    return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {
@@ -2352,6 +2431,16 @@ export class CodeModelBuilder {
     );
   }
 
+  private _doubleSchema?: NumberSchema;
+  get doubleSchema(): NumberSchema {
+    return (
+      this._doubleSchema ||
+      (this._doubleSchema = this.codeModel.schemas.add(
+        new NumberSchema("double", "simple float", SchemaType.Number, 64),
+      ))
+    );
+  }
+
   private _booleanSchema?: BooleanSchema;
   get booleanSchema(): BooleanSchema {
     return (
@@ -2369,7 +2458,7 @@ export class CodeModelBuilder {
   get pollResultSchema(): ObjectSchema {
     return (
       this._pollResultSchema ??
-      (this._pollResultSchema = createPollResultSchema(this.codeModel.schemas, this.stringSchema))
+      (this._pollResultSchema = createPollOperationDetailsSchema(this.codeModel.schemas, this.stringSchema))
     );
   }
 
@@ -2496,6 +2585,10 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
+  }
+
+  private isArmLongRunningOperation(program: Program, op: Operation) {
+    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

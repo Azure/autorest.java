@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.autorest.fluent.checker.JavaFormatter;
 import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -22,30 +21,34 @@ import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.examplemodel.FluentMethodMockUnitTest;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluent.model.projectmodel.FluentProject;
-import com.azure.autorest.fluent.util.FluentUtils;
-import com.azure.autorest.model.clientmodel.ClientBuilder;
-import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.UnionModels;
-import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentUtils;
+import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
+import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -57,10 +60,6 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,10 +68,6 @@ public class FluentGen extends Javagen {
 
     private final Logger logger = new PluginLogger(this, FluentGen.class);
     static FluentGen instance;
-
-    static {
-        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
-    }
 
     private FluentJavaSettings fluentJavaSettings;
     private FluentMapper fluentMapper;
@@ -83,6 +78,7 @@ public class FluentGen extends Javagen {
         super(connection, plugin, sessionId);
         instance = this;
         Javagen.instance = this;
+        ClientModelUtil.setGetClientModelFunction(FluentUtils::getClientModel);
     }
 
     public static FluentGen getPluginInstance() {
@@ -96,17 +92,10 @@ public class FluentGen extends Javagen {
         try {
             JavaSettings settings = JavaSettings.getInstance();
 
-            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-            if (files.size() != 1) {
-                throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-            }
-
             logger.info("Read YAML");
-            String fileContent = readFile(files.get(0));
-            createInputCodeModelFile(fileContent);
-
             // Parse yaml to code model
-            CodeModel codeModel = this.handleYaml(fileContent);
+            CodeModel codeModel = new FluentNamer(this, connection, pluginName, sessionId)
+                .processCodeModel();
 
             // Map code model to client model
             Client client = this.handleMap(codeModel);
@@ -119,18 +108,9 @@ public class FluentGen extends Javagen {
 
             // Print to files
             logger.info("Write Java");
-            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-                String content = javaFile.getContents().toString();
-                String path = javaFile.getFilePath();
+            Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), this, logger);
 
-                if (!settings.isSkipFormatting()) {
-                    // formatter
-                    boolean isSampleOrTestJavaFile = path.contains("src/samples/java/") || path.contains("src/test/java/");
-                    content = new JavaFormatter(content, path).format();
-                }
-
-                writeFile(path, content, null);
-            }
             logger.info("Write Xml");
             for (XmlFile xmlFile : javaPackage.getXmlFiles()) {
                 writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null);
@@ -145,14 +125,6 @@ public class FluentGen extends Javagen {
             //connection.sendError(1, 500, "Error occurred while running fluentgen plugin: " + e.getMessage());
             return false;
         }
-    }
-
-    private void createInputCodeModelFile(String file) throws IOException {
-        File tempFile = new File("code-model.yaml");
-        if (!tempFile.exists()) {
-            tempFile.createNewFile();
-        }
-        new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
     }
 
     CodeModel handleYaml(String yamlContent) {
@@ -174,11 +146,10 @@ public class FluentGen extends Javagen {
         loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
         loaderOptions.setTagInspector(new TrustedTagInspector());
         Yaml newYaml = new Yaml(new Constructor(loaderOptions), representer, new DumperOptions(), loaderOptions);
-        CodeModel codeModel = newYaml.loadAs(yamlContent, CodeModel.class);
-        return codeModel;
+        return newYaml.loadAs(yamlContent, CodeModel.class);
     }
 
-    Client handleMap(CodeModel codeModel) {
+    protected Client handleMap(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
         FluentStatic.setFluentJavaSettings(getFluentJavaSettings());
 
@@ -201,7 +172,7 @@ public class FluentGen extends Javagen {
         return client;
     }
 
-    FluentJavaPackage handleTemplate(Client client) {
+    protected FluentJavaPackage handleTemplate(Client client) {
         JavaSettings javaSettings = JavaSettings.getInstance();
 
         logger.info("Java template for client model");
@@ -209,12 +180,11 @@ public class FluentGen extends Javagen {
 
         // Service client
         String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-        javaPackage
-                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
-                        client.getServiceClient());
-        if (javaSettings.isGenerateClientInterfaces()) {
-            javaPackage
-                    .addServiceClientInterface(interfacePackage, client.getServiceClient().getInterfaceName(), client.getServiceClient());
+        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            ServiceClient serviceClient = client.getServiceClient();
+            addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
+        } else {
+            addServiceClient(javaSettings, javaPackage, interfacePackage, client.getServiceClients().iterator().next());
         }
 
         // Async/sync service clients
@@ -300,7 +270,17 @@ public class FluentGen extends Javagen {
         return javaPackage;
     }
 
-    FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
+    private void addServiceClient(JavaSettings javaSettings, FluentJavaPackage javaPackage, String interfacePackage, ServiceClient serviceClient) {
+        javaPackage
+                .addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(),
+                        serviceClient);
+        if (javaSettings.isGenerateClientInterfaces()) {
+            javaPackage
+                    .addServiceClientInterface(interfacePackage, serviceClient.getInterfaceName(), serviceClient);
+        }
+    }
+
+    protected FluentClient handleFluentLite(CodeModel codeModel, Client client, FluentJavaPackage javaPackage) {
         FluentJavaSettings fluentJavaSettings = this.getFluentJavaSettings();
         JavaSettings javaSettings = JavaSettings.getInstance();
 
@@ -395,7 +375,7 @@ public class FluentGen extends Javagen {
         fluentPremiumExamples = null;
     }
 
-    private FluentJavaSettings getFluentJavaSettings() {
+    protected FluentJavaSettings getFluentJavaSettings() {
         if (fluentJavaSettings == null) {
             fluentJavaSettings = new FluentJavaSettings(this);
         }
