@@ -10,6 +10,13 @@ $ExitCode = 0
 $PARALLELIZATION = [Environment]::ProcessorCount - 1
 if ($PARALLELIZATION -lt 1) {
   $PARALLELIZATION = 1
+} elseif ($PARALLELIZATION -gt 8) {
+  $PARALLELIZATION = 8
+}
+
+# Running in CI, limit parallelization to 1 as there are still some deadlocks to be found.
+if ($null -ne $env:TF_BUILD -or $null -ne $env:CI) {
+    $PARALLELIZATION = 1
 }
 
 Write-Host "Parallelization: $PARALLELIZATION"
