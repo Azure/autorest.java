@@ -470,7 +470,7 @@ export class CodeModelBuilder {
         // at present, use global security definition
         security: this.codeModel.security,
       });
-      codeModelClient.setCrossLanguageDefinitionId(client.crossLanguageDefinitionId);
+      codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
 
       // versioning
       const versioning = getVersion(this.program, client.service);
@@ -607,7 +607,7 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.setCrossLanguageDefinitionId(getCrossLanguageDefinitionId(operation));
+    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -1890,7 +1890,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    objectSchema.setCrossLanguageDefinitionId(getCrossLanguageDefinitionId(type));
+    objectSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
     this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.

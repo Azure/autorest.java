@@ -141,7 +141,8 @@ public class Main {
                     "name=${project.artifactId}\nversion=${project" + ".version}\n", null);
         }
 
-        if (!CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
+        boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
+        if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
             StringBuilder sb = new StringBuilder("{\n  \"CrossLanguageDefinitionId\": {\n");
             AtomicBoolean first = new AtomicBoolean(true);
             typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {

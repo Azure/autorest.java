@@ -52,6 +52,9 @@ public class EmitterOptions {
     @JsonProperty(value="customization-class")
     private String customizationClass;
 
+    @JsonProperty(value="include-api-view-properties")
+    private Boolean includeApiViewProperties;
+
     public String getNamespace() {
         return namespace;
     }
@@ -108,6 +111,10 @@ public class EmitterOptions {
 
     public String getCustomizationClass() {
         return customizationClass;
+    }
+
+    public Boolean includeApiViewProperties() {
+        return includeApiViewProperties;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

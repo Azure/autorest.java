@@ -31,10 +31,6 @@ export class Client extends Aspect implements Client {
   addGlobalParameters(parameters: Parameter[]) {
     this.globals.push(...parameters);
   }
-
-  setCrossLanguageDefinitionId(id: string) {
-    this.crossLanguageDefinitionId = id;
-  }
 }
 
 export class ServiceVersion extends Metadata {
@@ -58,9 +54,5 @@ export class ObjectScheme extends ObjectSchema {
     crossLanguageDefinitionId?: string;
     constructor(name: string, description: string, objectInitializer?: DeepPartial<ObjectSchema>) {
         super(name, description, objectInitializer);
-    }
-
-    setCrossLanguageDefinitionId(id: string) {
-        this.crossLanguageDefinitionId = id;
     }
 }

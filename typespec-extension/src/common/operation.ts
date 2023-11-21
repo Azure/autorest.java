@@ -156,9 +156,6 @@ export class Operation extends Aspect implements Operation {
     return this;
   }
 
-  setCrossLanguageDefinitionId(id: string) {
-    this.crossLanguageDefinitionId = id;
-  }
 }
 
 /** an operation group represents a container around set of operations */
