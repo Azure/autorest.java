@@ -9,6 +9,10 @@
 # This script can only be ran from the root of the repository.
 
 # Invokes the given expression and only writes the output of the expression if it failed.
+param (
+  [int] $Parallelization = [Environment]::ProcessorCount - 1
+)
+
 function invokeExpressionAndCaptureOutput([string]$expression) {
     $output = Invoke-Expression $expression
     if ($LASTEXITCODE -ne 0) {
@@ -52,7 +56,7 @@ try {
   Push-Location ./typespec-tests
 
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
-  invokeExpressionAndCaptureOutput("./Generate.ps1")
+  invokeExpressionAndCaptureOutput("./Generate.ps1 -Parallelization $Parallelization")
 
   Write-Host "Checking format of generated code ('npm run check-format')"
   invokeExpressionAndCaptureOutput("npm run check-format")
