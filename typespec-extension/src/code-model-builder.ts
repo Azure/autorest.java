@@ -68,7 +68,7 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
-  getCrossLanguageDefinitionId
+  getCrossLanguageDefinitionId,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -114,7 +114,7 @@ import {
   Language,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
-import {Client as CodeModelClient, ObjectScheme} from "./common/client.js";
+import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";

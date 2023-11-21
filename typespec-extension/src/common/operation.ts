@@ -155,7 +155,6 @@ export class Operation extends Aspect implements Operation {
     (this.profile = this.profile || {})[profileName] = apiVersion;
     return this;
   }
-
 }
 
 /** an operation group represents a container around set of operations */

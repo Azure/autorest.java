@@ -22,7 +22,6 @@ export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
     super(name, description, SchemaType.Choice);
     this.apply(objectInitializer);
   }
-
 }
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
@@ -39,7 +38,6 @@ export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringS
   choices: Array<ChoiceValue>;
 
   crossLanguageDefinitionId?: string;
-
 }
 
 export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>

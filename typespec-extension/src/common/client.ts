@@ -1,5 +1,5 @@
 import { DeepPartial } from "@azure-tools/codegen";
-import {Aspect, Metadata, ObjectSchema, OperationGroup, Parameter, Security} from "@autorest/codemodel";
+import { Aspect, Metadata, ObjectSchema, OperationGroup, Parameter, Security } from "@autorest/codemodel";
 
 export interface Client extends Aspect {
   /** All operations  */
@@ -51,8 +51,8 @@ export class ServiceVersion extends Metadata {
 }
 
 export class ObjectScheme extends ObjectSchema {
-    crossLanguageDefinitionId?: string;
-    constructor(name: string, description: string, objectInitializer?: DeepPartial<ObjectSchema>) {
-        super(name, description, objectInitializer);
-    }
+  crossLanguageDefinitionId?: string;
+  constructor(name: string, description: string, objectInitializer?: DeepPartial<ObjectSchema>) {
+    super(name, description, objectInitializer);
+  }
 }
