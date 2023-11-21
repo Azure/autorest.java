@@ -5,7 +5,8 @@
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 
 param (
-    [switch]$notimeout = $false
+    [switch]$notimeout = $false,
+    [int] $Parallelization = [Environment]::ProcessorCount - 1
 )
 
 $AUTOREST_CORE_VERSION = "3.9.7"
@@ -17,19 +18,12 @@ $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 $AZURE_DATAPLANE_ARGUMENTS = "--use=./ --output-folder=./azure-dataplane-tests"
 $AZURE_DATAPLANE_PATH = "azure-dataplane-tests/swagger"
 $AZURE_SDK_FOR_JAVA = "https://github.com/Azure/azure-sdk-for-java/blob/main/sdk"
-$PARALLELIZATION = [Environment]::ProcessorCount - 1
-if ($PARALLELIZATION -lt 1) {
-  $PARALLELIZATION = 1
-} elseif ($PARALLELIZATION -gt 8) {
-    $PARALLELIZATION = 8
+
+if ($Parallelization -lt 1) {
+  $Parallelization = 1
 }
 
-# Running in CI, limit parallelization to 1 as there are still some deadlocks to be found.
-if ($null -ne $env:TF_BUILD -or $null -ne $env:CI) {
-    $PARALLELIZATION = 1
-}
-
-Write-Host "Parallelization: $PARALLELIZATION"
+Write-Host "Parallelization: $Parallelization"
 
 $ExitCode = 0
 
@@ -128,7 +122,7 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/constants.json --namespace=fixtures.constants",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 360
 $job | Receive-Job
@@ -152,7 +146,7 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo --use-key-credential",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable --null-byte-array-maps-to-empty-array"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 120
 $job | Receive-Job
@@ -169,7 +163,7 @@ $job = @(
     # to generate polling methods.
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer.md",
     "$AZURE_DATAPLANE_ARGUMENTS $AZURE_DATAPLANE_PATH/form-recognizer-dpg.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 120
 $job | Receive-Job
@@ -184,7 +178,7 @@ $job = @(
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-parameter-grouping.json --namespace=fixtures.azureparametergrouping --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/subscriptionId-apiVersion.json --namespace=fixtures.subscriptionidapiversion --payload-flattening-threshold=1",
     "$AZURE_ARGUMENTS --input-file=$SWAGGER_PATH/azure-report.json --namespace=fixtures.azurereport --payload-flattening-threshold=1"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 120
 $job | Receive-Job
@@ -227,7 +221,7 @@ $job = @(
     "$PROTOCOL_ARGUMENTS --input-file=protocol-tests/swagger/endpoint-lro.json --namespace=fixtures.endpointlro --service-name=LroEndpoint",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/dpg-customization.md",
     "--version=$AUTOREST_CORE_VERSION --use=./ protocol-tests/swagger/custom-http-exception-mapping.md"
-) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 240
 $job | Receive-Job

@@ -5,21 +5,17 @@
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 #
 # Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
+param (
+  [int] $Parallelization = [Environment]::ProcessorCount - 1
+)
+
 $ExitCode = 0
 
-$PARALLELIZATION = [Environment]::ProcessorCount - 1
-if ($PARALLELIZATION -lt 1) {
-  $PARALLELIZATION = 1
-} elseif ($PARALLELIZATION -gt 8) {
-  $PARALLELIZATION = 8
+if ($Parallelization -lt 1) {
+  $Parallelization = 1
 }
 
-# Running in CI, limit parallelization to 1 as there are still some deadlocks to be found.
-if ($null -ne $env:TF_BUILD -or $null -ne $env:CI) {
-    $PARALLELIZATION = 1
-}
-
-Write-Host "Parallelization: $PARALLELIZATION"
+Write-Host "Parallelization: $Parallelization"
 
 $generateScript = {
   $tspFile = $_
@@ -104,7 +100,7 @@ if (Test-Path ./tsp-output) {
 }
 
 # run other local tests except partial update
-$job = (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*") | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+$job = (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*") | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 600
 $job | Receive-Job
@@ -117,7 +113,7 @@ Remove-Item ./existingcode -Recurse -Force
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
-$job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $PARALLELIZATION -AsJob
+$job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 600
 $job | Receive-Job
