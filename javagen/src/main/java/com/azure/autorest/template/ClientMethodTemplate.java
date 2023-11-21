@@ -390,19 +390,28 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                             // If the parameter is null, the converted value is null.
                             // Otherwise, convert the parameter to a string, mapping each element to the toString
                             // value, finally joining with the collection format.
+                            EnumType enumType = (EnumType) elementType;
+                            // Not enums will be backed by Strings. Get the backing value before stringifying it, this
+                            // will prevent using the enum name rather than the enum value when it isn't a String-based
+                            // enum. Ex, a long-based enum with value 100 called HIGH will return "100" rather than
+                            // "HIGH".
+                            String enumToString = enumType.getElementType() == ClassType.String
+                                ? "paramItemValue"
+                                : "paramItemValue == null ? null : paramItemValue." + enumType.getToMethodName() + "()";
                             if (alreadyNullChecked) {
                                 expression =
                                     parameterName + ".stream()\n" +
-                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             } else {
                                 expression =
                                     "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
-                                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
+                                        "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             }
                         } else {
-                            if (elementType == ClassType.String) {
+                            if (elementType == ClassType.String
+                                || (elementType instanceof ClassType && ((ClassType) elementType).isBoxedType())) {
                                 if (alreadyNullChecked) {
                                     expression = parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
@@ -425,14 +434,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 if (elementWireType != elementType) {
                                     // convert List<ClientType> to List<WireType>, if necessary
                                     serializeIterableInput = String.format(
-                                            "%1$s.stream().map(paramItemValue -> %2$s).collect(Collectors.toList())",
-                                            parameterName,
-                                            elementWireType.convertFromClientType("paramItemValue"));
+                                        "%s.stream().map(paramItemValue -> %s).collect(Collectors.toList())",
+                                        parameterName, elementWireType.convertFromClientType("paramItemValue"));
                                 }
+
                                 // convert List<WireType> to String
                                 expression = String.format(
-                                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
-                                        serializeIterableInput, collectionFormat.toString().toUpperCase(Locale.ROOT));
+                                    "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
+                                    serializeIterableInput, collectionFormat.toString().toUpperCase(Locale.ROOT));
                             }
                         }
                     } else {
