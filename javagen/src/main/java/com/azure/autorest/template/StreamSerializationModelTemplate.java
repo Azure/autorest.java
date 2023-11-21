@@ -78,7 +78,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClassType.JsonWriter.addImportsTo(imports, false);
             ClassType.JsonReader.addImportsTo(imports, false);
             ClassType.JsonToken.addImportsTo(imports, false);
-            imports.add(settings.getPackage(settings.getImplementationSubpackage()) + ".ResponseErrorUtils");
+            imports.add(settings.getPackage(settings.getImplementationSubpackage()) + ".CoreToCodegenBridgeUtils");
         }
 
         ClassType.CoreUtils.addImportsTo(imports, false);
@@ -285,7 +285,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (wireType == ClassType.ResponseError) {
             // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
             methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
-            methodBlock.line("ResponseErrorUtils.toJson(jsonWriter, " + propertyValueGetter + ");");
+            methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
         } else if (fieldSerializationMethod != null) {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -359,7 +359,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (elementType == ClassType.ResponseError) {
                 // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
-                methodBlock.line("ResponseErrorUtils.toJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
+                methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
                 methodBlock.line(valueSerializationMethod);
             } else if (elementType == ClassType.Object) {
@@ -937,9 +937,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
-                    "ResponseErrorUtils.fromJson(reader)", fromSuper);
+                    "CoreToCodegenBridgeUtils.responseErrorFromJson(reader)", fromSuper);
             } else {
-                deserializationBlock.line(property.getName() + " = ResponseErrorUtils.fromJson(reader);");
+                deserializationBlock.line(property.getName() + " = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);");
             }
         } else if (simpleDeserialization != null) {
             // Need to convert the wire type to the client type for constructors.
@@ -1070,7 +1070,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (elementWireType == ClassType.ResponseError) {
                 // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-                methodBlock.line("ResponseErrorUtils.fromJson(" + lambdaReaderName + ")");
+                methodBlock.line("CoreToCodegenBridgeUtils.responseErrorFromJson(" + lambdaReaderName + ")");
             } else if (valueDeserializationMethod != null) {
                 if (convertToClientType) {
                     // If the wire type is nullable don't attempt to call the convert to client type until it's known that

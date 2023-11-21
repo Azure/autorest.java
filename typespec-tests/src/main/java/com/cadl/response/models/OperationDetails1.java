@@ -11,7 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.response.implementation.ResponseErrorUtils;
+import com.cadl.response.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 
 /**
@@ -101,7 +101,7 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
         jsonWriter.writeStringField("operationId", this.operationId);
         jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
         jsonWriter.writeFieldName("error");
-        ResponseErrorUtils.toJson(jsonWriter, this.error);
+        CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, this.error);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -130,7 +130,7 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
                 } else if ("status".equals(fieldName)) {
                     status = OperationState.fromString(reader.getString());
                 } else if ("error".equals(fieldName)) {
-                    error = ResponseErrorUtils.fromJson(reader);
+                    error = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);
                 } else if ("result".equals(fieldName)) {
                     result = Resource.fromJson(reader);
                 } else {

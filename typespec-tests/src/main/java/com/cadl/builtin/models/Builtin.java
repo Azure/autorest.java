@@ -11,6 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.builtin.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -353,7 +354,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
         jsonWriter.writeLongField("long", this.longProperty);
         jsonWriter.writeDoubleField("float", this.floatProperty);
         jsonWriter.writeDoubleField("double", this.doubleProperty);
-        jsonWriter.writeStringField("duration", Objects.toString(this.duration, null));
+        jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("date", Objects.toString(this.date, null));
         jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));

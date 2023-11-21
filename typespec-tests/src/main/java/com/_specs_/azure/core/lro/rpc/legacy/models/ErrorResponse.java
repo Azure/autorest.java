@@ -4,7 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.legacy.models;
 
-import com._specs_.azure.core.lro.rpc.legacy.implementation.ResponseErrorUtils;
+import com._specs_.azure.core.lro.rpc.legacy.implementation.CoreToCodegenBridgeUtils;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
@@ -49,7 +49,7 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFieldName("error");
-        ResponseErrorUtils.toJson(jsonWriter, this.error);
+        CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, this.error);
         return jsonWriter.writeEndObject();
     }
 
@@ -70,7 +70,7 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
                 reader.nextToken();
 
                 if ("error".equals(fieldName)) {
-                    error = ResponseErrorUtils.fromJson(reader);
+                    error = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);
                 } else {
                     reader.skipChildren();
                 }

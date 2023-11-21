@@ -171,22 +171,22 @@ public class JavaPackage {
 
         // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
         // will serialize and deserialize ResponseError.
-        if (ClientModelUtil.isUsingResponseError(model, settings)) {
+        if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
             javaFile = javaFileFactory.createSourceFile(settings.getPackage(settings.getImplementationSubpackage()),
-                "ResponseErrorUtils");
+                "CoreToCodegenBridgeUtils");
             if (filePaths.contains(javaFile.getFilePath())) {
                 // Already generated the utility method.
                 return;
             }
 
-            try (InputStream inputStream = Javagen.class.getClassLoader().getResourceAsStream("ResponseErrorUtils.java");
+            try (InputStream inputStream = Javagen.class.getClassLoader().getResourceAsStream("CoreToCodegenBridgeUtils.java");
                  BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
                 Iterator<String> linesIterator = bufferedReader.lines().iterator();
                 while (linesIterator.hasNext()) {
                     javaFile.line(linesIterator.next());
                 }
             } catch (Exception e) {
-                throw new RuntimeException("Failed to read ResponseErrorUtils.java", e);
+                throw new RuntimeException("Failed to read CoreToCodegenBridgeUtils.java", e);
             }
 
             addJavaFile(javaFile);

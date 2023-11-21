@@ -28,6 +28,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -540,22 +541,29 @@ public class ClientModelUtil {
     }
 
     /**
-     * Checks whether any types used in the model are ResponseError to generate a utility class to handle its
-     * serialization and deserialization.
+     * Checks where {@code CoreToCodegenBridgeUtils} should be generated.
+     * <p>
+     * At this time it is required if {@link JavaSettings#isStreamStyleSerialization()} is true and the model uses
+     * either {@code ResponseError} or {@link Duration} as both types have special serialization requirements that
+     * aren't exposed by azure-core.
      *
      * @param model the model
      * @param settings Java settings
-     * @return Whether to generate the ResponseError utility class.
+     * @return Whether to generate the {@code CoreToCodegenBridgeUtils} utility class.
      */
-    public static boolean isUsingResponseError(ClientModel model, JavaSettings settings) {
-        boolean ret;
-        ret = model.getProperties().stream().anyMatch(property -> property.getClientType() == ClassType.ResponseError);
+    public static boolean generateCoreToCodegenBridgeUtils(ClientModel model, JavaSettings settings) {
+        if (!settings.isStreamStyleSerialization()) {
+            return false;
+        }
+
+        boolean ret = model.getProperties().stream()
+            .anyMatch(p -> p.getClientType() == ClassType.ResponseError || p.getClientType() == ClassType.Duration);
 
         // flatten properties
         if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             ret = model.getPropertyReferences().stream()
                 .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                .anyMatch(p -> p.getClientType() == ClassType.ResponseError);
+                .anyMatch(p -> p.getClientType() == ClassType.ResponseError || p.getClientType() == ClassType.Duration);
         }
 
         return ret;

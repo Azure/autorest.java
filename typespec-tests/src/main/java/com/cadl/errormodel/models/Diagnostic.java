@@ -11,7 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.errormodel.implementation.ResponseErrorUtils;
+import com.cadl.errormodel.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 
 /**
@@ -68,7 +68,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeFieldName("error");
-        ResponseErrorUtils.toJson(jsonWriter, this.error);
+        CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, this.error);
         return jsonWriter.writeEndObject();
     }
 
@@ -92,7 +92,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("error".equals(fieldName)) {
-                    error = ResponseErrorUtils.fromJson(reader);
+                    error = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);
                 } else {
                     reader.skipChildren();
                 }

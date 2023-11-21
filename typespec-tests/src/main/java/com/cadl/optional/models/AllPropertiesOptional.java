@@ -11,6 +11,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.optional.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -334,7 +335,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
         jsonWriter.writeNumberField("long", this.longProperty);
         jsonWriter.writeNumberField("float", this.floatProperty);
         jsonWriter.writeNumberField("double", this.doubleProperty);
-        jsonWriter.writeStringField("duration", Objects.toString(this.duration, null));
+        jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
