@@ -4,8 +4,8 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.models.Position;
-import com.azure.autorest.customization.models.Range;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 
 import java.io.BufferedWriter;
 import java.io.File;

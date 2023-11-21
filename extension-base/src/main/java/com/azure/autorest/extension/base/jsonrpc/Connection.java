@@ -253,17 +253,35 @@ public class Connection {
                         if (field.getKey().equals("result")) {
                             int id = jobject.get("id").asInt(-1);
                             if (id != -1) {
-                                CallerResponse<?> f;
-                                synchronized (tasks) {
-                                    f = tasks.get(id);
-                                    tasks.remove(id);
+                                CallerResponse<?> f = tasks.remove(id);
+
+                                try {
+                                    if (f.type.getRawClass().equals(Boolean.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                        f.complete(Boolean.TRUE);
+                                    } else if (f.type.getRawClass().equals(String.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                        f.complete("");
+                                    } else {
+                                        f.complete(MAPPER.convertValue(jobject.get("result"), f.type));
+                                    }
+                                } catch (Exception e) {
+                                    f.completeExceptionally(e);
                                 }
-                                if (f.type.getRawClass().equals(Boolean.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
-                                    f.complete(Boolean.TRUE);
-                                } else if (f.type.getRawClass().equals(String.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
-                                    f.complete("");
-                                } else {
-                                    f.complete(MAPPER.convertValue(jobject.get("result"), f.type));
+                            }
+                        }
+
+                        if (field.getKey().equals("error")) {
+                            int id = jobject.get("id").asInt(-1);
+                            if (id != -1) {
+                                CallerResponse<?> f = tasks.remove(id);
+
+                                try {
+                                    String message = field.getValue().get("message").asText();
+                                    if (field.getValue().has("data")) {
+                                        message += " (" + field.getValue().get("data").asText() + ")";
+                                    }
+                                    f.completeExceptionally(new RuntimeException(message));
+                                } catch (Exception e) {
+                                    f.completeExceptionally(e);
                                 }
                             }
                         }
@@ -310,6 +328,7 @@ public class Connection {
         try {
             write(("Content-Length: " + buffer.length + "\r\n\r\n").getBytes(StandardCharsets.US_ASCII));
             write(buffer);
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -369,6 +388,14 @@ public class Connection {
         send(node.toString());
     }
 
+    public void notifyWithSerializedObject(String methodName, String serializedObject) {
+        String json = (serializedObject == null)
+            ? "{\"jsonrpc\":\"2.0\",\"method\":\"" + methodName + "\"}"
+            : "{\"jsonrpc\":\"2.0\",\"method\":\"" + methodName + "\",\"params\":" + serializedObject + "}";
+
+        send(json);
+    }
+
     public <T> T request(JavaType type, String methodName, Object... values) {
         int id = requestId.getAndIncrement();
         CallerResponse<T> response = new CallerResponse<T>(id, type);
@@ -401,6 +428,23 @@ public class Connection {
             node = ((ObjectNode) node).set("params", MAPPER.convertValue(parameter, JsonNode.class));
         }
         send(node.toString());
+        try {
+            return response.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <T> T requestWithSerializedObject(JavaType type, String method, String serializedObject) {
+        int id = requestId.getAndIncrement();
+        CallerResponse<T> response = new CallerResponse<>(id, type);
+        tasks.put(id, response);
+
+        String json = (serializedObject == null)
+            ? "{\"jsonrpc\":\"2.0\",\"method\":\"" + method + "\",\"id\":" + id + "}"
+            : "{\"jsonrpc\":\"2.0\",\"method\":\"" + method + "\",\"id\":" + id + ",\"params\":" + serializedObject + "}";
+
+        send(json);
         try {
             return response.get();
         } catch (InterruptedException | ExecutionException e) {
