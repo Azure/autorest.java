@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -356,7 +357,8 @@ public final class Builtin implements JsonSerializable<Builtin> {
         jsonWriter.writeDoubleField("double", this.doubleProperty);
         jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("date", Objects.toString(this.date, null));
-        jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         jsonWriter.writeStringField("url", this.url);
@@ -421,7 +423,8 @@ public final class Builtin implements JsonSerializable<Builtin> {
                 } else if ("date".equals(fieldName)) {
                     date = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                 } else if ("dateTime".equals(fieldName)) {
-                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("stringList".equals(fieldName)) {
                     stringList = reader.readArray(reader1 -> reader1.getString());
                 } else if ("bytesDict".equals(fieldName)) {

@@ -12,6 +12,7 @@ import com.azure.core.http.HttpHeaderName;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -217,12 +218,12 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType DateTime = new Builder(false).knownClass(OffsetDateTime.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
-        .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
-        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\", DateTimeFormatter.ISO_OFFSET_DATE_TIME)", defaultValueExpression))
+        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(" + valueGetter + ")")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
         .serializationMethodBase("writeString")
-        .xmlElementDeserializationMethod("getNullableElement(OffsetDateTime::parse)")
-        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, OffsetDateTime::parse)")
+        .xmlElementDeserializationMethod("getNullableElement(dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
         .build();
 
     public static final ClassType Duration = new Builder(false).knownClass(java.time.Duration.class)
@@ -616,6 +617,10 @@ public class ClassType implements IType {
         if (this == ClassType.UnixTimeLong) {
             imports.add(Instant.class.getName());
             imports.add(ZoneOffset.class.getName());
+        }
+
+        if (this == ClassType.DateTime) {
+            imports.add(DateTimeFormatter.class.getName());
         }
 
         if (includeImplementationImports && getImplementationImports() != null) {

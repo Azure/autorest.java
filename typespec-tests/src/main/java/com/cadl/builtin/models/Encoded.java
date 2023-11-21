@@ -18,6 +18,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -268,7 +269,8 @@ public final class Encoded implements JsonSerializable<Encoded> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("timeInSeconds", this.timeInSeconds);
         jsonWriter.writeNumberField("timeInSecondsFraction", this.timeInSecondsFraction);
-        jsonWriter.writeStringField("dateTime", Objects.toString(this.dateTime, null));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
         jsonWriter.writeNumberField("unixTimestamp", this.unixTimestamp);
         jsonWriter.writeBinaryField("base64", this.base64);
@@ -296,8 +298,8 @@ public final class Encoded implements JsonSerializable<Encoded> {
                 } else if ("timeInSecondsFraction".equals(fieldName)) {
                     deserializedEncoded.timeInSecondsFraction = reader.getNullable(JsonReader::getDouble);
                 } else if ("dateTime".equals(fieldName)) {
-                    deserializedEncoded.dateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedEncoded.dateTime = reader.getNullable(nonNullReader -> OffsetDateTime
+                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("dateTimeRfc7231".equals(fieldName)) {
                     deserializedEncoded.dateTimeRfc7231
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));

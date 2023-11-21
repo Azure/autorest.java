@@ -12,6 +12,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -53,7 +54,8 @@ public final class SubClassMismatch extends SuperClass {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("dateTime", Objects.toString(getDateTime(), null));
+        jsonWriter.writeStringField("dateTime",
+            getDateTime() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getDateTime()));
         jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
         return jsonWriter.writeEndObject();
     }
@@ -76,7 +78,8 @@ public final class SubClassMismatch extends SuperClass {
                 reader.nextToken();
 
                 if ("dateTime".equals(fieldName)) {
-                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("dateTimeRfc7231".equals(fieldName)) {
                     DateTimeRfc1123 dateTimeRfc7231Holder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));

@@ -12,7 +12,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Rfc3339DatetimeProperty model.
@@ -48,7 +48,8 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("value", Objects.toString(this.value, null));
+        jsonWriter.writeStringField("value",
+            this.value == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.value));
         return jsonWriter.writeEndObject();
     }
 
@@ -69,7 +70,8 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else {
                     reader.skipChildren();
                 }

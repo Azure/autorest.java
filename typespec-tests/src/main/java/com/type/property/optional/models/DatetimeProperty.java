@@ -12,7 +12,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Model with a datetime property.
@@ -57,7 +57,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("property", Objects.toString(this.property, null));
+        jsonWriter.writeStringField("property",
+            this.property == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.property));
         return jsonWriter.writeEndObject();
     }
 
@@ -77,8 +78,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedDatetimeProperty.property
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedDatetimeProperty.property = reader.getNullable(nonNullReader -> OffsetDateTime
+                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else {
                     reader.skipChildren();
                 }
