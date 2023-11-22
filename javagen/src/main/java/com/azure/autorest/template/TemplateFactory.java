@@ -56,4 +56,6 @@ public interface TemplateFactory {
     UnionModelTemplate getUnionModelTemplate();
 
     ClientMethodSampleTemplate getClientMethodSampleTemplate();
+
+    JsonMergePatchHelperTemplate getJsonMergePatchHelperTemplate();
 }

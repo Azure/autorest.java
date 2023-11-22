@@ -7,11 +7,12 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
+import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
-import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GraalVmConfig;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -320,5 +321,12 @@ public class JavaPackage {
 //            throw new IllegalStateException(String.format("Name conflict for output file '%1$s'.", filePath));
             logger.warn(String.format("Name conflict for output file '%1$s'.", filePath));
         }
+    }
+
+    public void addJsonMergePatchHelper(Client client) {
+        JavaFile javaFile = javaFileFactory.createEmptySourceFile(settings.getPackage("implementation"), "JsonMergePatchHelper");
+        Templates.getJsonMergePatchHelperTemplate().write(client, javaFile);
+        this.checkDuplicateFile(javaFile.getFilePath());
+        javaFiles.add(javaFile);
     }
 }
