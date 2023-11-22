@@ -1236,6 +1236,5 @@ public class JavaSettings {
     public String getJsonMergePatchHelperClassName() {
         return jsonMergePatchHelperClassName;
     }
-
-
+    
 }
