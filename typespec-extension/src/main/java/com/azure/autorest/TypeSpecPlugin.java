@@ -13,6 +13,7 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
@@ -56,6 +57,15 @@ public class TypeSpecPlugin extends Javagen {
         client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
+
+        // JsonMergePatchHelper
+        boolean hasJsonMergePatchModelToGenerate = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .filter(ClientModelUtil::isJsonMergePatchModel)
+                .findFirst().isPresent();
+        if (hasJsonMergePatchModelToGenerate) {
+            javaPackage.addJsonMergePatchHelper(client);
+        }
 
         // Enum
         client.getEnums().stream()

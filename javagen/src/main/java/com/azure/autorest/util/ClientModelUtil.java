@@ -422,6 +422,14 @@ public class ClientModelUtil {
     }
 
     /**
+     * Check if the model is used in json-merge-patch operation
+     */
+    public static boolean isJsonMergePatchModel(ClientModel model) {
+        return model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
+                && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.JSON_MERGE_PATCH);
+    }
+
+    /**
      * Gets all parent properties.
      *
      * @param model The client model.
