@@ -34,7 +34,7 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaF
         javaFile.declareImport(imports);
 
 
-        javaFile.publicClass(null, "JsonMergePatchHelper", javaClass -> {
+        javaFile.publicClass(null, settings.getJsonMergePatchHelperClassName(), javaClass -> {
             addAccessorProperties(client, javaClass);
             addAccessorInterfaces(client, javaClass);
             addGettersAndSetters(client, javaClass);

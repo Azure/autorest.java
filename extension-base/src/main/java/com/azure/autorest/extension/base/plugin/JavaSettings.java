@@ -1230,4 +1230,12 @@ public class JavaSettings {
             action.accept(settingValues);
         }
     }
+
+    private final String jsonMergePatchHelperClassName = "JsonMergePatchHelper";
+
+    public String getJsonMergePatchHelperClassName() {
+        return jsonMergePatchHelperClassName;
+    }
+
+
 }

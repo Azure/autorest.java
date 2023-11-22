@@ -324,7 +324,7 @@ public class JavaPackage {
     }
 
     public void addJsonMergePatchHelper(Client client) {
-        JavaFile javaFile = javaFileFactory.createEmptySourceFile(settings.getPackage("implementation"), "JsonMergePatchHelper");
+        JavaFile javaFile = javaFileFactory.createEmptySourceFile(settings.getPackage("implementation"), settings.getJsonMergePatchHelperClassName());
         Templates.getJsonMergePatchHelperTemplate().write(client, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
