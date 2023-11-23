@@ -59,6 +59,8 @@ public class TemplateUtil {
 
     public static final String DATE_UTC = "date-utc";
 
+    public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
+
     private static final String[] ESCAPE_REPLACEMENT;
 
     static {

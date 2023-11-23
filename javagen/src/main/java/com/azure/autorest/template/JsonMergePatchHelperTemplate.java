@@ -4,17 +4,19 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaFile>{
+public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientModel>, JavaFile>{
 
     private static final JsonMergePatchHelperTemplate INSTANCE = new JsonMergePatchHelperTemplate();
 
@@ -26,30 +28,30 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaF
     }
 
     @Override
-    public void write(Client client, JavaFile javaFile) {
+    public void write(List<ClientModel> models, JavaFile javaFile) {
         // imports
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<>();
-        addImports(imports, client, settings);
+        addImports(imports, models, settings);
         javaFile.declareImport(imports);
 
 
-        javaFile.publicClass(null, settings.getJsonMergePatchHelperClassName(), javaClass -> {
-            addAccessorProperties(client, javaClass);
-            addAccessorInterfaces(client, javaClass);
-            addGettersAndSetters(client, javaClass);
+        javaFile.publicClass(null, TemplateUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME, javaClass -> {
+            addAccessorProperties(models, javaClass);
+            addAccessorInterfaces(models, javaClass);
+            addGettersAndSetters(models, javaClass);
         });
     }
 
     /**
      * Add imports for JsonMergePatchHelper.
      * @param imports
-     * @param client
+     * @param models
      * @param settings
      */
-    private void addImports(Set<String> imports, Client client, JavaSettings settings) {
-        if (client.getModels() != null && !client.getModels().isEmpty()) {
-            client.getModels().forEach(model -> {
+    private void addImports(Set<String> imports, List<ClientModel> models, JavaSettings settings) {
+        if (models != null && !models.isEmpty()) {
+            models.forEach(model -> {
                 model.addImportsTo(imports, settings);
             });
         }
@@ -57,12 +59,13 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaF
 
     /**
      * Add accessor properties for each model that is used in json-merge-patch.
-     * @param client
+     *
+     * @param models
      * @param javaClass
      */
-    private void addAccessorProperties(Client client, JavaClass javaClass) {
-        if (client.getModels() != null && !client.getModels().isEmpty()) {
-            client.getModels().forEach(model -> {
+    private void addAccessorProperties(List<ClientModel> models, JavaClass javaClass) {
+        if (models != null && !models.isEmpty()) {
+            models.forEach(model -> {
                 if (ClientModelUtil.isJsonMergePatchModel(model)) {
                     javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", model.getName(), CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
                 }
@@ -73,12 +76,12 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaF
     /**
      * Add accessor interfaces for each model that is used in json-merge-patch.
      *
-     * @param client
+     * @param models
      * @param javaClass
      */
-    private void addAccessorInterfaces(Client client, JavaClass javaClass) {
-        if (client.getModels() != null && !client.getModels().isEmpty()) {
-            client.getModels().forEach(model -> {
+    private void addAccessorInterfaces(List<ClientModel> models, JavaClass javaClass) {
+        if (models != null && !models.isEmpty()) {
+            models.forEach(model -> {
                 if (ClientModelUtil.isJsonMergePatchModel(model)) {
                     javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", model.getName()), interfaceBlock -> {
                         interfaceBlock.publicMethod(String.format("%s prepareModelForJsonMergePatch(%s %s, boolean jsonMergePatchEnabled)", model.getName(), model.getName(), CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
@@ -91,12 +94,13 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<Client, JavaF
 
     /**
      * Add getter and setter for each model that is used in json-merge-patch.
-     * @param client
+     *
+     * @param models
      * @param javaClass
      */
-    private void addGettersAndSetters(Client client, JavaClass javaClass) {
-        if (client.getModels() != null && !client.getModels().isEmpty()) {
-            client.getModels().forEach(model -> {
+    private void addGettersAndSetters(List<ClientModel> models, JavaClass javaClass) {
+        if (models != null && !models.isEmpty()) {
+            models.forEach(model -> {
                 if (ClientModelUtil.isJsonMergePatchModel(model)) {
                     // setters
                     javaClass.publicStaticMethod(String.format("void set%sAccessor(%sAccessor accessor)", model.getName(), model.getName()),methodBlock -> {

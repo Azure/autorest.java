@@ -1231,10 +1231,4 @@ public class JavaSettings {
         }
     }
 
-    private final String jsonMergePatchHelperClassName = "JsonMergePatchHelper";
-
-    public String getJsonMergePatchHelperClassName() {
-        return jsonMergePatchHelperClassName;
-    }
-    
 }

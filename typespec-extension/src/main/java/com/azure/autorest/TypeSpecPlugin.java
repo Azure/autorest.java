@@ -63,9 +63,9 @@ public class TypeSpecPlugin extends Javagen {
                 .filter(ModelUtil::isGeneratingModel)
                 .filter(ClientModelUtil::isJsonMergePatchModel)
                 .findFirst().isPresent();
-        if (hasJsonMergePatchModelToGenerate) {
-            javaPackage.addJsonMergePatchHelper(client);
-        }
+//        if (hasJsonMergePatchModelToGenerate) {
+//            javaPackage.addJsonMergePatchHelper(client.getModels());
+//        }
 
         // Enum
         client.getEnums().stream()

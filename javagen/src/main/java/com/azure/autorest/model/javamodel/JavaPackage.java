@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
-import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
@@ -40,6 +39,7 @@ import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.template.TestProxyAssetsTemplate;
 import com.azure.autorest.util.PossibleCredentialException;
+import com.azure.autorest.util.TemplateUtil;
 import org.slf4j.Logger;
 
 import java.nio.file.Paths;
@@ -323,9 +323,9 @@ public class JavaPackage {
         }
     }
 
-    public void addJsonMergePatchHelper(Client client) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage("implementation"), settings.getJsonMergePatchHelperClassName());
-        Templates.getJsonMergePatchHelperTemplate().write(client, javaFile);
+    public void addJsonMergePatchHelper(List<ClientModel> models) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage("implementation"), TemplateUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
+        Templates.getJsonMergePatchHelperTemplate().write(models, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
     }
