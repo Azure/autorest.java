@@ -10,10 +10,14 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -36,11 +40,13 @@ import com.azure.core.util.serializer.TypeReference;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -299,6 +305,9 @@ abstract class ConvenienceMethodTemplateBase {
         imports.add(Map.class.getName());
         imports.add(HashMap.class.getName());
 
+        // MultipartFormDataHelper class
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+
         // versioning
         imports.add(Arrays.class.getName());
     }
@@ -480,6 +489,14 @@ abstract class ConvenienceMethodTemplateBase {
 
     private static String expressionConvertToType(String name, MethodParameter convenienceParameter) {
         if (convenienceParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
+            IType bodyType = convenienceParameter.getProxyMethodParameter().getRawType();
+            if (bodyType instanceof ClassType) {
+                ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
+                // serialize model for multipart/form-data
+                if (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
+                    return expressionMultipartFormDataToBinaryData(name, model);
+                }
+            }
             return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getWireType());
         } else {
             IType type = convenienceParameter.getClientMethodParameter().getWireType();
@@ -501,6 +518,51 @@ abstract class ConvenienceMethodTemplateBase {
                 return name;
             }
         }
+    }
+
+    private static String expressionMultipartFormDataToBinaryData(String name, ClientModel model) {
+        // serialize model for multipart/form-data
+        StringBuilder builder = new StringBuilder().append("new MultipartFormDataHelper(requestOptions)");
+        Set<String> filePropertySerializedNames = new HashSet<>();
+        for (ClientModelProperty property : model.getProperties()) {
+            if (property.getWireType() == ClassType.BinaryData) {
+                // application/octet-stream
+                String serializedName = property.getSerializedName();
+                filePropertySerializedNames.add(serializedName);
+
+                // find corresponding filename property
+                String filenameExpression;
+                Optional<ClientModelProperty> filenameProperty = model.getProperties().stream()
+                        .filter(p -> p.getWireType() == ClassType.String && Objects.equals(serializedName, p.getSerializedName()))
+                        .findFirst();
+                if (filenameProperty.isPresent()) {
+                    filenameExpression = name + "." + filenameProperty.get().getGetterName() + "()";
+                } else {
+                    filenameExpression = ClassType.String.defaultValueExpression(property.getSerializedName());
+                }
+
+                builder.append(String.format(
+                        ".serializeField(%1$s, %2$s.%3$s(), %4$s)",
+                        ClassType.String.defaultValueExpression(property.getSerializedName()),
+                        name,
+                        property.getGetterName(),
+                        filenameExpression
+                ));
+            } else if (filePropertySerializedNames.contains(property.getSerializedName())) {
+                // skip filename property
+            } else {
+                // text/plain
+                builder.append(String.format(
+                        ".serializeField(%1$s, %2$s.%3$s())",
+                        ClassType.String.defaultValueExpression(property.getSerializedName()),
+                        name,
+                        property.getGetterName()
+                ));
+            }
+            // TODO application/json
+        }
+        builder.append(".end().getRequestBody()");
+        return builder.toString();
     }
 
     private static Map<MethodParameter, MethodParameter> findParametersForConvenienceMethod(
