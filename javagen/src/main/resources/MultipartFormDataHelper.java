@@ -107,7 +107,7 @@ public final class MultipartFormDataHelper {
         byte[] data = endMarker.getBytes(encoderCharset);
         appendBytes(data);
 
-        requestBody = BinaryData.fromStream(requestDataStream, requestLength).toReplayableBinaryData();
+        requestBody = BinaryData.fromStream(requestDataStream, requestLength);
 
         requestOptions
                 .setHeader(HttpHeaderName.CONTENT_TYPE, "multipart/form-data; boundary=" + this.boundary)
