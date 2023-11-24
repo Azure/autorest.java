@@ -1230,5 +1230,4 @@ public class JavaSettings {
             action.accept(settingValues);
         }
     }
-
 }
