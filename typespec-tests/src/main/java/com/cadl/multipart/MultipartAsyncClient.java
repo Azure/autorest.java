@@ -15,7 +15,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.multipart.implementation.MultipartClientImpl;
+import com.cadl.multipart.implementation.MultipartFormDataHelper;
+import com.cadl.multipart.models.FormData;
 import reactor.core.publisher.Mono;
 
 /**
@@ -39,18 +42,37 @@ public final class MultipartAsyncClient {
     /**
      * request is binary.
      * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>compress</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
      * {
-     *     data (Required): {
-     *         name: String (Required)
-     *         image: byte[] (Required)
-     *     }
+     *     name: String (Required)
+     *     image: BinaryData (Required)
+     *     image: String (Optional)
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param name A sequence of textual characters.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,9 +82,61 @@ public final class MultipartAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<Void>> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
+    Mono<Response<Void>> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
         // 'multipart/form-data'
-        return this.serviceClient.uploadWithResponseAsync(request, requestOptions);
+        return this.serviceClient.uploadWithResponseAsync(name, data, requestOptions);
+    }
+
+    /**
+     * request is binary.
+     * 
+     * @param name A sequence of textual characters.
+     * @param data The data parameter.
+     * @param compress Boolean with `true` and `false` values.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> upload(String name, FormData data, Boolean compress) {
+        // Generated convenience method for uploadWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (compress != null) {
+            requestOptions.addQueryParam("compress", String.valueOf(compress), false);
+        }
+        return uploadWithResponse(name,
+            new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+            requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * request is binary.
+     * 
+     * @param name A sequence of textual characters.
+     * @param data The data parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> upload(String name, FormData data) {
+        // Generated convenience method for uploadWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return uploadWithResponse(name,
+            new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 }
