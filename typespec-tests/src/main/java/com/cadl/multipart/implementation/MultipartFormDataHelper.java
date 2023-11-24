@@ -118,6 +118,4 @@ public final class MultipartFormDataHelper {
         requestDataStream
             = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
     }
-
-    // TODO application/json
 }
