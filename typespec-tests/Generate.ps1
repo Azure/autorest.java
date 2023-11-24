@@ -52,6 +52,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
   } elseif ($tspFile -match "tsp[\\/]union.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
+  } elseif ($tspFile -match "tsp[\\/]multipart.tsp") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"

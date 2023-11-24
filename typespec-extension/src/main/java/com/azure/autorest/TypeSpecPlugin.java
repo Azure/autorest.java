@@ -9,10 +9,12 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
@@ -71,6 +73,16 @@ public class TypeSpecPlugin extends Javagen {
         client.getUnionModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addUnionModel(model));
+    }
+
+    @Override
+    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        final boolean generateMultipartFormDataHelper = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .anyMatch(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA));
+        if (generateMultipartFormDataHelper) {
+            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+        }
     }
 
     @Override

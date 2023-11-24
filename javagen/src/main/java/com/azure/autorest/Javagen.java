@@ -253,6 +253,8 @@ public class Javagen extends NewPlugin {
 
         writeClientModels(client, javaPackage, settings);
 
+        writeHelperClasses(client, javaPackage, settings);
+
         // Unit tests on client model
         if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
             for (ClientModel model : client.getModels()) {
@@ -331,6 +333,9 @@ public class Javagen extends NewPlugin {
                         xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
             }
         }
+    }
+
+    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
     }
 
     private void clear() {

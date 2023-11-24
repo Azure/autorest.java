@@ -12,7 +12,6 @@ import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -365,7 +364,7 @@ abstract class ConvenienceMethodTemplateBase {
             Set<GenericType> typeReferenceStaticClasses);
 
     protected boolean isModelOrBuiltin(IType type) {
-        // TODO: other built-in types
+        // TODO (weidxu): other built-in types
         boolean ret =
                 // string
                 type == ClassType.String
@@ -493,7 +492,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (bodyType instanceof ClassType) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
                 // serialize model for multipart/form-data
-                if (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
+                if (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
@@ -559,7 +558,7 @@ abstract class ConvenienceMethodTemplateBase {
                         property.getGetterName()
                 ));
             }
-            // TODO application/json
+            // TODO (weidxu): application/json
         }
         builder.append(".end().getRequestBody()");
         return builder.toString();
