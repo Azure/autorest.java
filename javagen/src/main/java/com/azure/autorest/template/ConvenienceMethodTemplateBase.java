@@ -552,11 +552,17 @@ abstract class ConvenienceMethodTemplateBase {
                 // skip filename property
             } else {
                 // text/plain
+                String stringExpression = name + "." + property.getGetterName() + "()";
+                // convert to String
+                if (property.getWireType() instanceof PrimitiveType) {
+                    stringExpression = String.format("String.valueOf(%s)", stringExpression);
+                } else if (property.getWireType() != ClassType.String) {
+                    stringExpression = String.format("Objects.toString(%s)", stringExpression);
+                }
                 builder.append(String.format(
-                        ".serializeField(%1$s, %2$s.%3$s())",
+                        ".serializeField(%1$s, %2$s)",
                         ClassType.String.defaultValueExpression(property.getSerializedName()),
-                        name,
-                        property.getGetterName()
+                        stringExpression
                 ));
             }
             // TODO (weidxu): application/json

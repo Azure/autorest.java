@@ -8,8 +8,15 @@ using TypeSpec.Http;
 })
 namespace Cadl.Multipart;
 
+enum ImageType {
+  JPEG,
+  PNG,
+}
+
 model FormData {
   name: string;
+  resolution: int32;
+  type: ImageType;
   image: bytes;
 }
 

@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
 import com.cadl.multipart.models.FormData;
+import java.util.Objects;
 
 /**
  * Initializes a new instance of the synchronous MultipartClient type.
@@ -64,6 +65,8 @@ public final class MultipartClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
@@ -109,6 +112,8 @@ public final class MultipartClient {
         }
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("resolution", String.valueOf(data.getResolution()))
+                .serializeField("type", Objects.toString(data.getType()))
                 .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).getValue();
     }
@@ -132,6 +137,8 @@ public final class MultipartClient {
         RequestOptions requestOptions = new RequestOptions();
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("resolution", String.valueOf(data.getResolution()))
+                .serializeField("type", Objects.toString(data.getType()))
                 .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).getValue();
     }

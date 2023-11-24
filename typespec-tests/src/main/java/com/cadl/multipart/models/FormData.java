@@ -14,6 +14,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The FormData model.
@@ -25,6 +26,18 @@ public final class FormData implements JsonSerializable<FormData> {
      */
     @Generated
     private final String name;
+
+    /*
+     * The resolution property.
+     */
+    @Generated
+    private final int resolution;
+
+    /*
+     * The type property.
+     */
+    @Generated
+    private final ImageType type;
 
     /*
      * The image property.
@@ -42,11 +55,15 @@ public final class FormData implements JsonSerializable<FormData> {
      * Creates an instance of FormData class.
      * 
      * @param name the name value to set.
+     * @param resolution the resolution value to set.
+     * @param type the type value to set.
      * @param image the image value to set.
      */
     @Generated
-    public FormData(String name, BinaryData image) {
+    public FormData(String name, int resolution, ImageType type, BinaryData image) {
         this.name = name;
+        this.resolution = resolution;
+        this.type = type;
         this.image = image;
     }
 
@@ -58,6 +75,26 @@ public final class FormData implements JsonSerializable<FormData> {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Get the resolution property: The resolution property.
+     * 
+     * @return the resolution value.
+     */
+    @Generated
+    public int getResolution() {
+        return this.resolution;
+    }
+
+    /**
+     * Get the type property: The type property.
+     * 
+     * @return the type value.
+     */
+    @Generated
+    public ImageType getType() {
+        return this.type;
     }
 
     /**
@@ -96,6 +133,8 @@ public final class FormData implements JsonSerializable<FormData> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeIntField("resolution", this.resolution);
+        jsonWriter.writeStringField("type", Objects.toString(this.type, null));
         jsonWriter.writeUntypedField("image", this.image.toObject(Object.class));
         jsonWriter.writeStringField("image", this.imageFilename);
         return jsonWriter.writeEndObject();
@@ -114,6 +153,10 @@ public final class FormData implements JsonSerializable<FormData> {
         return jsonReader.readObject(reader -> {
             boolean nameFound = false;
             String name = null;
+            boolean resolutionFound = false;
+            int resolution = 0;
+            boolean typeFound = false;
+            ImageType type = null;
             boolean imageFound = false;
             BinaryData image = null;
             String imageFilename = null;
@@ -124,6 +167,12 @@ public final class FormData implements JsonSerializable<FormData> {
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
                     nameFound = true;
+                } else if ("resolution".equals(fieldName)) {
+                    resolution = reader.getInt();
+                    resolutionFound = true;
+                } else if ("type".equals(fieldName)) {
+                    type = ImageType.fromString(reader.getString());
+                    typeFound = true;
                 } else if ("image".equals(fieldName)) {
                     image = BinaryData.fromObject(reader.readUntyped());
                     imageFound = true;
@@ -133,8 +182,8 @@ public final class FormData implements JsonSerializable<FormData> {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && imageFound) {
-                FormData deserializedFormData = new FormData(name, image);
+            if (nameFound && resolutionFound && typeFound && imageFound) {
+                FormData deserializedFormData = new FormData(name, resolution, type, image);
                 deserializedFormData.imageFilename = imageFilename;
 
                 return deserializedFormData;
@@ -142,6 +191,12 @@ public final class FormData implements JsonSerializable<FormData> {
             List<String> missingProperties = new ArrayList<>();
             if (!nameFound) {
                 missingProperties.add("name");
+            }
+            if (!resolutionFound) {
+                missingProperties.add("resolution");
+            }
+            if (!typeFound) {
+                missingProperties.add("type");
             }
             if (!imageFound) {
                 missingProperties.add("image");

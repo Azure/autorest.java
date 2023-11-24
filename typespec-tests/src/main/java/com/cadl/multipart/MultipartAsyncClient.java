@@ -19,6 +19,7 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
 import com.cadl.multipart.models.FormData;
+import java.util.Objects;
 import reactor.core.publisher.Mono;
 
 /**
@@ -66,6 +67,8 @@ public final class MultipartAsyncClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
@@ -112,6 +115,8 @@ public final class MultipartAsyncClient {
         }
         return uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("resolution", String.valueOf(data.getResolution()))
+                .serializeField("type", Objects.toString(data.getType()))
                 .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -136,6 +141,8 @@ public final class MultipartAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
+                .serializeField("resolution", String.valueOf(data.getResolution()))
+                .serializeField("type", Objects.toString(data.getType()))
                 .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }

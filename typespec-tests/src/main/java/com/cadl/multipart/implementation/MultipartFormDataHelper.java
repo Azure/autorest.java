@@ -74,30 +74,32 @@ public final class MultipartFormDataHelper {
      * @param value the value of the text/plain field
      */
     public MultipartFormDataHelper serializeField(String fieldName, String value) {
-        String serialized = partSeparator + CRLF + "Content-Disposition: form-data; name=\"" + fieldName + "\"" + CRLF
-            + CRLF + value + CRLF;
-        byte[] data = serialized.getBytes(encoderCharset);
-        appendBytes(data);
-
+        if (value != null) {
+            String serialized = partSeparator + CRLF + "Content-Disposition: form-data; name=\"" + fieldName + "\""
+                + CRLF + CRLF + value + CRLF;
+            byte[] data = serialized.getBytes(encoderCharset);
+            appendBytes(data);
+        }
         return this;
     }
 
     // application/octet-stream
     public MultipartFormDataHelper serializeField(String fieldName, BinaryData file, String filename) {
-        // Multipart preamble
-        String fileFieldPreamble = partSeparator + CRLF + "Content-Disposition: form-data; name=\"" + fieldName
-            + "\"; filename=\"" + filename + "\"" + CRLF + "Content-Type: application/octet-stream" + CRLF + CRLF;
-        byte[] data = fileFieldPreamble.getBytes(encoderCharset);
-        appendBytes(data);
+        if (file != null) {
+            // Multipart preamble
+            String fileFieldPreamble = partSeparator + CRLF + "Content-Disposition: form-data; name=\"" + fieldName
+                + "\"; filename=\"" + filename + "\"" + CRLF + "Content-Type: application/octet-stream" + CRLF + CRLF;
+            byte[] data = fileFieldPreamble.getBytes(encoderCharset);
+            appendBytes(data);
 
-        // Writing the file into the request as a byte stream
-        requestLength += file.getLength();
-        requestDataStream = new SequenceInputStream(requestDataStream, file.toStream());
+            // Writing the file into the request as a byte stream
+            requestLength += file.getLength();
+            requestDataStream = new SequenceInputStream(requestDataStream, file.toStream());
 
-        // CRLF
-        data = CRLF.getBytes(encoderCharset);
-        appendBytes(data);
-
+            // CRLF
+            data = CRLF.getBytes(encoderCharset);
+            appendBytes(data);
+        }
         return this;
     }
 
@@ -115,7 +117,6 @@ public final class MultipartFormDataHelper {
 
     private void appendBytes(byte[] bytes) {
         requestLength += bytes.length;
-        requestDataStream
-            = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
+        requestDataStream = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
     }
 }

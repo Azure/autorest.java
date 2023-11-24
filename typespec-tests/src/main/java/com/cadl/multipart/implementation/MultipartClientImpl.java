@@ -175,6 +175,8 @@ public final class MultipartClientImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
@@ -224,6 +226,8 @@ public final class MultipartClientImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
