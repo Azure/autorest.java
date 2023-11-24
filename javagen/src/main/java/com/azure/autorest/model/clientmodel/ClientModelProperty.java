@@ -344,6 +344,40 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         imports.add("com.azure.core.annotation.JsonFlatten");
     }
 
+    /**
+     * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     * @return A new builder instance initialized with properties values of this instance.
+     */
+    public Builder toNewBuilder() {
+        return new Builder()
+                .name(this.getName())
+                .description(this.getDescription())
+                .annotationArguments(this.getAnnotationArguments())
+                .xmlAttribute(this.isXmlAttribute())
+                .xmlName(this.getXmlName())
+                .serializedName(this.serializedName)
+                .xmlWrapper(this.isXmlWrapper())
+                .xmlListElementName(this.getXmlListElementName())
+                .xmlListElementNamespace(this.getXmlListElementNamespace())
+                .xmlListElementPrefix(this.getXmlListElementPrefix())
+                .xmlPrefix(this.getXmlPrefix())
+                .wireType(this.getWireType())
+                .clientType(this.getClientType())
+                .constant(this.isConstant())
+                .defaultValue(this.getDefaultValue())
+                .readOnly(this.isReadOnly)
+                .required(this.isRequired)
+                .headerCollectionPrefix(this.getHeaderCollectionPrefix())
+                .additionalProperties(this.isAdditionalProperties())
+                .xmlNamespace(this.getXmlNamespace())
+                .mutabilities(this.getMutabilities())
+                .needsFlatten(this.getNeedsFlatten())
+                .clientFlatten(this.getClientFlatten())
+                .polymorphicDiscriminator(this.isPolymorphicDiscriminator())
+                .xmlText(this.isXmlText)
+                .xmlPrefix(this.getXmlPrefix());
+    }
+
     public enum Mutability {
         CREATE, UPDATE, READ
     }
