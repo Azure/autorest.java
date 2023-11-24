@@ -532,6 +532,7 @@ abstract class ConvenienceMethodTemplateBase {
                 // find corresponding filename property
                 String filenameExpression;
                 Optional<ClientModelProperty> filenameProperty = model.getProperties().stream()
+                        // here is a hack to find matching filename property by finding property of type String and of same serializedName
                         .filter(p -> p.getWireType() == ClassType.String && Objects.equals(serializedName, p.getSerializedName()))
                         .findFirst();
                 if (filenameProperty.isPresent()) {
