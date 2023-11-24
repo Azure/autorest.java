@@ -324,7 +324,7 @@ public class JavaPackage {
     }
 
     public void addJsonMergePatchHelper(List<ClientModel> models) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage("implementation"), ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
         Templates.getJsonMergePatchHelperTemplate().write(models, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
