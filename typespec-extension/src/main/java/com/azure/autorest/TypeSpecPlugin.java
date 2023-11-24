@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
@@ -32,6 +33,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TypeSpecPlugin extends Javagen {
 
@@ -77,6 +79,15 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        // JsonMergePatchHelper
+        List<ClientModel> jsonMergePatchModels = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
+//        if (!jsonMergePatchModels.isEmpty()) {
+//            javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
+//        }
+
+        // MultipartFormDataHelper
         final boolean generateMultipartFormDataHelper = client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .anyMatch(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA));
