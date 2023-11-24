@@ -40,7 +40,6 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.template.TestProxyAssetsTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.PossibleCredentialException;
-import com.azure.autorest.util.TemplateUtil;
 import org.slf4j.Logger;
 
 import java.nio.file.Paths;
