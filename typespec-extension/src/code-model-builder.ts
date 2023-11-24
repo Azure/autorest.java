@@ -652,9 +652,6 @@ export class CodeModelBuilder {
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipart(op)) {
-        // generateConvenienceApi = false;
-        // codeModelOperation.internalApi = true;
-
         // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
         generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
