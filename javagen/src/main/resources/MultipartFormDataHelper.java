@@ -9,9 +9,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 // DO NOT modify this helper class
 
 public final class MultipartFormDataHelper {
@@ -43,35 +40,21 @@ public final class MultipartFormDataHelper {
     private InputStream requestDataStream = new ByteArrayInputStream(new byte[0]);
     private long requestLength = 0;
 
+    private RequestOptions requestOptions;
     private BinaryData requestBody;
 
     /**
      * Default constructor used in the code. The boundary is a random value.
      */
-    public MultipartFormDataHelper() {
-        this(UUID.randomUUID().toString().substring(0, 16));
+    public MultipartFormDataHelper(RequestOptions requestOptions) {
+        this(requestOptions, UUID.randomUUID().toString().substring(0, 16));
     }
 
-    private MultipartFormDataHelper(String boundary) {
+    private MultipartFormDataHelper(RequestOptions requestOptions, String boundary) {
+        this.requestOptions = requestOptions;
         this.boundary = boundary;
         this.partSeparator = "--" + boundary;
         this.endMarker = this.partSeparator + "--";
-    }
-
-    /**
-     * Get the request options for multipart form data.
-     *
-     * @param requestOptions The request options.
-     * @return The request options.
-     */
-    public RequestOptions getRequestOptions(RequestOptions requestOptions) {
-        if (requestOptions == null) {
-            requestOptions = new RequestOptions();
-        }
-        requestOptions
-                .setHeader(HttpHeaderName.CONTENT_TYPE, "multipart/form-data; boundary=" + this.boundary)
-                .setHeader(HttpHeaderName.CONTENT_LENGTH, String.valueOf(requestLength));
-        return requestOptions;
     }
 
     public BinaryData getRequestBody() {
@@ -85,7 +68,7 @@ public final class MultipartFormDataHelper {
      * @param fieldName the field name
      * @param value the value of the text/plain field
      */
-    public void serializeField(String fieldName, String value) {
+    public MultipartFormDataHelper serializeField(String fieldName, String value) {
         String serialized = partSeparator
                 + CRLF + "Content-Disposition: form-data; name=\""
                 + fieldName + "\"" + CRLF + CRLF
@@ -93,10 +76,12 @@ public final class MultipartFormDataHelper {
                 + CRLF;
         byte[] data = serialized.getBytes(encoderCharset);
         appendBytes(data);
+
+        return this;
     }
 
     // application/octet-stream
-    public void serializeField(String fieldName, BinaryData file, String filename) {
+    public MultipartFormDataHelper serializeField(String fieldName, BinaryData file, String filename) {
         // Multipart preamble
         String fileFieldPreamble = partSeparator
                 + CRLF + "Content-Disposition: form-data; name=\"" + fieldName
@@ -112,13 +97,21 @@ public final class MultipartFormDataHelper {
         // CRLF
         data = CRLF.getBytes(encoderCharset);
         appendBytes(data);
+
+        return this;
     }
 
-    public void end() {
+    public MultipartFormDataHelper end() {
         byte[] data = endMarker.getBytes(encoderCharset);
         appendBytes(data);
 
-        requestBody = BinaryData.fromStream(requestDataStream, requestLength);
+        requestBody = BinaryData.fromStream(requestDataStream, requestLength).toReplayableBinaryData();
+
+        requestOptions
+                .setHeader(HttpHeaderName.CONTENT_TYPE, "multipart/form-data; boundary=" + this.boundary)
+                .setHeader(HttpHeaderName.CONTENT_LENGTH, String.valueOf(requestLength));
+
+        return this;
     }
 
     private void appendBytes(byte[] bytes) {
