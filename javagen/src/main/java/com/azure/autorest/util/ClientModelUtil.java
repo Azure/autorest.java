@@ -44,6 +44,10 @@ import java.util.stream.Stream;
  */
 public class ClientModelUtil {
 
+    // used for filename property of multipart/form-data
+    // e.g. if property for file is "BinaryData audio", a "String audioFilename" will be added to the ClientModel.
+    public static final String FILENAME_SUFFIX = "Filename";
+
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
