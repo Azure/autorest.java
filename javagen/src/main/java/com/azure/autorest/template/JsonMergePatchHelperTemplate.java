@@ -10,7 +10,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.TemplateUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +35,7 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
         javaFile.declareImport(imports);
 
 
-        javaFile.publicClass(null, TemplateUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME, javaClass -> {
+        javaFile.publicClass(null, ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME, javaClass -> {
             addAccessorProperties(models, javaClass);
             addAccessorInterfaces(models, javaClass);
             addGettersAndSetters(models, javaClass);
@@ -49,7 +48,7 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
      * @param models
      * @param settings
      */
-    private void addImports(Set<String> imports, List<ClientModel> models, JavaSettings settings) {
+    private static void addImports(Set<String> imports, List<ClientModel> models, JavaSettings settings) {
         if (models != null && !models.isEmpty()) {
             models.forEach(model -> {
                 model.addImportsTo(imports, settings);
@@ -63,12 +62,10 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
      * @param models
      * @param javaClass
      */
-    private void addAccessorProperties(List<ClientModel> models, JavaClass javaClass) {
+    private static void addAccessorProperties(List<ClientModel> models, JavaClass javaClass) {
         if (models != null && !models.isEmpty()) {
             models.forEach(model -> {
-                if (ClientModelUtil.isJsonMergePatchModel(model)) {
-                    javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", model.getName(), CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
-                }
+                javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", model.getName(), CodeNamer.toCamelCase(model.getName())));
             });
         }
     }
@@ -79,14 +76,12 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
      * @param models
      * @param javaClass
      */
-    private void addAccessorInterfaces(List<ClientModel> models, JavaClass javaClass) {
+    private static void addAccessorInterfaces(List<ClientModel> models, JavaClass javaClass) {
         if (models != null && !models.isEmpty()) {
             models.forEach(model -> {
-                if (ClientModelUtil.isJsonMergePatchModel(model)) {
-                    javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", model.getName()), interfaceBlock -> {
-                        interfaceBlock.publicMethod(String.format("%s prepareModelForJsonMergePatch(%s %s, boolean jsonMergePatchEnabled)", model.getName(), model.getName(), CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
-                    });
-                }
+                javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", model.getName()), interfaceBlock -> {
+                    interfaceBlock.publicMethod(String.format("%1$s prepareModelForJsonMergePatch(%1$s %2$s, boolean jsonMergePatchEnabled)", model.getName(), CodeNamer.toCamelCase(model.getName())));
+                });
             });
         }
     }
@@ -98,20 +93,17 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
      * @param models
      * @param javaClass
      */
-    private void addGettersAndSetters(List<ClientModel> models, JavaClass javaClass) {
+    private static void addGettersAndSetters(List<ClientModel> models, JavaClass javaClass) {
         if (models != null && !models.isEmpty()) {
             models.forEach(model -> {
-                if (ClientModelUtil.isJsonMergePatchModel(model)) {
-                    // setters
-                    javaClass.publicStaticMethod(String.format("void set%sAccessor(%sAccessor accessor)", model.getName(), model.getName()),methodBlock -> {
-                        methodBlock.line(String.format("%sAccessor = accessor;", CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
-                    });
-                    // getters
-                    javaClass.publicStaticMethod(String.format("%sAccessor get%sAccessor()", model.getName(), model.getName()), methodBlock -> {
-                        methodBlock.line(String.format("return %sAccessor;",CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
-                    });
-
-                }
+                // setters
+                javaClass.publicStaticMethod(String.format("void set%1$sAccessor(%1$sAccessor accessor)", model.getName()),methodBlock -> {
+                    methodBlock.line(String.format("%sAccessor = accessor;", CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
+                });
+                // getters
+                javaClass.publicStaticMethod(String.format("%1$sAccessor get%1$sAccessor()", model.getName()), methodBlock -> {
+                    methodBlock.methodReturn(String.format("%sAccessor",CodeNamer.toCamelCase(model.getName())));
+                });
             });
         }
     }

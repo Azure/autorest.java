@@ -38,6 +38,7 @@ import com.azure.autorest.template.ServiceSyncClientTemplate;
 import com.azure.autorest.template.SwaggerReadmeTemplate;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.template.TestProxyAssetsTemplate;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.PossibleCredentialException;
 import com.azure.autorest.util.TemplateUtil;
 import org.slf4j.Logger;
@@ -324,7 +325,7 @@ public class JavaPackage {
     }
 
     public void addJsonMergePatchHelper(List<ClientModel> models) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage("implementation"), TemplateUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage("implementation"), ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
         Templates.getJsonMergePatchHelperTemplate().write(models, javaFile);
         this.checkDuplicateFile(javaFile.getFilePath());
         javaFiles.add(javaFile);
