@@ -1824,10 +1824,10 @@ export class CodeModelBuilder {
       type.kind === "String"
         ? this.stringSchema
         : type.kind === "Boolean"
-        ? this.booleanSchema
-        : isAllValueInteger([type.value])
-        ? this.integerSchema
-        : this.doubleSchema;
+          ? this.booleanSchema
+          : isAllValueInteger([type.value])
+            ? this.integerSchema
+            : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type), {
@@ -1861,10 +1861,10 @@ export class CodeModelBuilder {
       kind === "String"
         ? this.stringSchema
         : kind === "Boolean"
-        ? this.booleanSchema
-        : isAllValueInteger(variants.map((it) => (it.type as any).value))
-        ? this.integerSchema
-        : this.doubleSchema;
+          ? this.booleanSchema
+          : isAllValueInteger(variants.map((it) => (it.type as any).value))
+            ? this.integerSchema
+            : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
     variants.forEach((it) =>
