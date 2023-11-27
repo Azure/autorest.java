@@ -36,9 +36,6 @@ extends:
     EmitterPackageJsonPath: typespec-extension/package.json
     PublishInternal: true
     Packages:
-    - name: generator
-      file: autorest-java-*.tgz
-      type: npm
     - name: emitter
       file: azure-tools-typespec-java-*.tgz
       type: npm
