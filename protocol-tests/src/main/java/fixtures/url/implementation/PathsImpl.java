@@ -26,6 +26,7 @@ import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -1374,7 +1375,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final OffsetDateTime dateTimePath
+            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         final String accept = "application/json";
         return FluxUtil.withContext(
             context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
@@ -1392,7 +1394,8 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
+        final OffsetDateTime dateTimePath
+            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         final String accept = "application/json";
         return service.dateTimeValidSync(this.client.getHost(), dateTimePath, accept, requestOptions, Context.NONE);
     }

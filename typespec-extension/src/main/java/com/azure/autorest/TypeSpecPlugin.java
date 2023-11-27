@@ -9,10 +9,12 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
@@ -30,6 +32,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TypeSpecPlugin extends Javagen {
 
@@ -56,6 +59,14 @@ public class TypeSpecPlugin extends Javagen {
         client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
+
+        // JsonMergePatchHelper
+        List<ClientModel> jsonMergePatchModels = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
+//        if (!jsonMergePatchModels.isEmpty()) {
+//            javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
+//        }
 
         // Enum
         client.getEnums().stream()

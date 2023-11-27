@@ -11,7 +11,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -127,8 +127,10 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
         rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeStringElement("Start", Objects.toString(this.start, null));
-        xmlWriter.writeStringElement("Expiry", Objects.toString(this.expiry, null));
+        xmlWriter.writeStringElement("Start",
+            this.start == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.start));
+        xmlWriter.writeStringElement("Expiry",
+            this.expiry == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expiry));
         xmlWriter.writeStringElement("Permission", this.permission);
         return xmlWriter.writeEndElement();
     }
@@ -165,9 +167,11 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
                 QName elementName = reader.getElementName();
 
                 if ("Start".equals(elementName.getLocalPart())) {
-                    deserializedAccessPolicy.start = reader.getNullableElement(OffsetDateTime::parse);
+                    deserializedAccessPolicy.start = reader.getNullableElement(
+                        dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("Expiry".equals(elementName.getLocalPart())) {
-                    deserializedAccessPolicy.expiry = reader.getNullableElement(OffsetDateTime::parse);
+                    deserializedAccessPolicy.expiry = reader.getNullableElement(
+                        dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("Permission".equals(elementName.getLocalPart())) {
                     deserializedAccessPolicy.permission = reader.getStringElement();
                 } else {

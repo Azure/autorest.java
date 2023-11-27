@@ -141,19 +141,13 @@ public class Salmon extends Fish {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if (discriminatorValue == null || "salmon".equals(discriminatorValue)) {
                 return fromJsonKnownDiscriminator(readerToUse);
             } else if ("smart_salmon".equals(discriminatorValue)) {
-                return SmartSalmon.fromJson(readerToUse);
+                return SmartSalmon.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'fishtype' didn't match one of the expected values 'salmon' or 'smart_salmon'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
         });
     }
@@ -170,14 +164,7 @@ public class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"salmon".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'salmon'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("species".equals(fieldName)) {

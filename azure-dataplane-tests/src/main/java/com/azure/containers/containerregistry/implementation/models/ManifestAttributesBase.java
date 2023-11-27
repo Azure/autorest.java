@@ -14,8 +14,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Manifest details.
@@ -335,8 +335,10 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("digest", this.digest);
-        jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
-        jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
+        jsonWriter.writeStringField("createdTime",
+            this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+        jsonWriter.writeStringField("lastUpdateTime",
+            this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
         jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
         jsonWriter.writeStringField("architecture", this.architecture == null ? null : this.architecture.toString());
         jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());
@@ -372,11 +374,12 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
                 if ("digest".equals(fieldName)) {
                     deserializedManifestAttributesBase.digest = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedManifestAttributesBase.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedManifestAttributesBase.createdOn = reader.getNullable(nonNullReader -> OffsetDateTime
+                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("lastUpdateTime".equals(fieldName)) {
                     deserializedManifestAttributesBase.lastUpdatedOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                            DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("imageSize".equals(fieldName)) {
                     deserializedManifestAttributesBase.sizeInBytes = reader.getNullable(JsonReader::getLong);
                 } else if ("architecture".equals(fieldName)) {

@@ -49,6 +49,8 @@ public class ClientModelUtil {
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
+    public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
+
     /**
      * Prepare async/sync clients for service client.
      *
@@ -421,6 +423,14 @@ public class ClientModelUtil {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Check if the model is used in json-merge-patch operation
+     */
+    public static boolean isJsonMergePatchModel(ClientModel model) {
+        return model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
+                && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.JSON_MERGE_PATCH);
     }
 
     /**

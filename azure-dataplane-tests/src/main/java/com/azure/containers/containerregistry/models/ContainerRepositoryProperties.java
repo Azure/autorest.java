@@ -11,6 +11,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Properties of this repository.
@@ -245,10 +246,12 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
                     deserializedContainerRepositoryProperties.name = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                            DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("lastUpdateTime".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.lastUpdatedOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                            DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("manifestCount".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.manifestCount = reader.getInt();
                 } else if ("tagCount".equals(fieldName)) {

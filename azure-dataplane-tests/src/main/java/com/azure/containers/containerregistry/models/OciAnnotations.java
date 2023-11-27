@@ -11,9 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Additional information provided through arbitrary metadata.
@@ -362,7 +362,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("org.opencontainers.image.created", Objects.toString(this.createdOn, null));
+        jsonWriter.writeStringField("org.opencontainers.image.created",
+            this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
         jsonWriter.writeStringField("org.opencontainers.image.authors", this.authors);
         jsonWriter.writeStringField("org.opencontainers.image.url", this.url);
         jsonWriter.writeStringField("org.opencontainers.image.documentation", this.documentation);
@@ -399,8 +400,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
                 reader.nextToken();
 
                 if ("org.opencontainers.image.created".equals(fieldName)) {
-                    deserializedOciAnnotations.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedOciAnnotations.createdOn = reader.getNullable(nonNullReader -> OffsetDateTime
+                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                 } else if ("org.opencontainers.image.authors".equals(fieldName)) {
                     deserializedOciAnnotations.authors = reader.getString();
                 } else if ("org.opencontainers.image.url".equals(fieldName)) {

@@ -11,9 +11,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The Shark model.
@@ -111,7 +111,8 @@ public class Shark extends Fish {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("birthday", Objects.toString(this.birthday, null));
+        jsonWriter.writeStringField("birthday",
+            this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
         jsonWriter.writeNumberField("age", this.age);
         return jsonWriter.writeEndObject();
     }
@@ -142,23 +143,17 @@ public class Shark extends Fish {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
                 return fromJsonKnownDiscriminator(readerToUse);
             } else if ("sawshark".equals(discriminatorValue)) {
-                return Sawshark.fromJson(readerToUse);
+                return Sawshark.fromJson(readerToUse.reset());
             } else if ("goblin".equals(discriminatorValue)) {
-                return Goblinshark.fromJson(readerToUse);
+                return Goblinshark.fromJson(readerToUse.reset());
             } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                return Cookiecuttershark.fromJson(readerToUse);
+                return Cookiecuttershark.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'fishtype' didn't match one of the expected values 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
         });
     }
@@ -176,14 +171,7 @@ public class Shark extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"shark".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'shark'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("species".equals(fieldName)) {
@@ -191,7 +179,8 @@ public class Shark extends Fish {
                 } else if ("siblings".equals(fieldName)) {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("birthday".equals(fieldName)) {
-                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                     birthdayFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);

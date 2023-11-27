@@ -10,8 +10,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The Goblinshark model.
@@ -134,7 +134,8 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", "goblin");
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
+        jsonWriter.writeStringField("birthday",
+            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
@@ -170,8 +171,8 @@ public final class Goblinshark extends Shark {
                 } else if ("length".equals(fieldName)) {
                     deserializedGoblinshark.setLength(reader.getFloat());
                 } else if ("birthday".equals(fieldName)) {
-                    deserializedGoblinshark.setBirthday(
-                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                    deserializedGoblinshark.setBirthday(reader.getNullable(nonNullReader -> OffsetDateTime
+                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME)));
                 } else if ("species".equals(fieldName)) {
                     deserializedGoblinshark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {

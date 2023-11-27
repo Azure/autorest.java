@@ -133,4 +133,10 @@ public class DefaultTemplateFactory implements TemplateFactory {
     public ClientMethodSampleTemplate getClientMethodSampleTemplate() {
         return ClientMethodSampleTemplate.getInstance();
     }
+
+    @Override
+    public JsonMergePatchHelperTemplate getJsonMergePatchHelperTemplate() {
+        return JsonMergePatchHelperTemplate.getInstance();
+    }
+
 }

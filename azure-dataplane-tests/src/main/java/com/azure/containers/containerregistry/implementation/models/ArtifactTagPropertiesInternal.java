@@ -11,7 +11,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Tag attributes.
@@ -286,8 +286,10 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
             jsonWriter.writeStartObject("tag");
             jsonWriter.writeStringField("name", this.name);
             jsonWriter.writeStringField("digest", this.digest);
-            jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
-            jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
+            jsonWriter.writeStringField("createdTime",
+                this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+            jsonWriter.writeStringField("lastUpdateTime",
+                this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
             if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
                 jsonWriter.writeStartObject("changeableAttributes");
                 jsonWriter.writeBooleanField("deleteEnabled", this.deleteEnabled);
@@ -333,10 +335,12 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
                             deserializedArtifactTagPropertiesInternal.digest = reader.getString();
                         } else if ("createdTime".equals(fieldName)) {
                             deserializedArtifactTagPropertiesInternal.createdOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                         } else if ("lastUpdateTime".equals(fieldName)) {
                             deserializedArtifactTagPropertiesInternal.lastUpdatedOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
+                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
                         } else if ("changeableAttributes".equals(fieldName)
                             && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {

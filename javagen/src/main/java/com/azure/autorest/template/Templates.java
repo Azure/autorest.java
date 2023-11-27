@@ -117,4 +117,8 @@ public class Templates {
     public static ClientMethodSampleTemplate getClientMethodSampleTemplate() {
         return factory.getClientMethodSampleTemplate();
     }
+
+    public static JsonMergePatchHelperTemplate getJsonMergePatchHelperTemplate() {
+        return factory.getJsonMergePatchHelperTemplate();
+    }
 }

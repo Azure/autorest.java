@@ -87,17 +87,30 @@ public class DotFish implements JsonSerializable<DotFish> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("DotSalmon".equals(discriminatorValue)) {
-                return DotSalmon.fromJson(readerToUse);
+                return DotSalmon.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'fish\\.type' didn't match one of the expected values 'DotSalmon'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static DotFish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DotFish deserializedDotFish = new DotFish();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("species".equals(fieldName)) {
+                    deserializedDotFish.species = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDotFish;
         });
     }
 }

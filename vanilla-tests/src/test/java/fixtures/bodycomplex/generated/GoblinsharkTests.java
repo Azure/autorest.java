@@ -9,6 +9,7 @@ import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.GoblinSharkColor;
 import fixtures.bodycomplex.models.Goblinshark;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 
@@ -27,15 +28,17 @@ public final class GoblinsharkTests {
         Assertions.assertEquals(54.53775f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(726085925, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-02-01T09:39:18Z"), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-02-01T09:39:18Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+            model.getBirthday());
         Assertions.assertEquals(61317803, model.getJawsize());
         Assertions.assertEquals(GoblinSharkColor.LOWER_RED, model.getColor());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Goblinshark model
-            = new Goblinshark(74.31171f, OffsetDateTime.parse("2021-02-01T09:39:18Z")).setSpecies("vkmijcmmxdcuf")
+        Goblinshark model = new Goblinshark(74.31171f,
+            OffsetDateTime.parse("2021-02-01T09:39:18Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME))
+                .setSpecies("vkmijcmmxdcuf")
                 .setSiblings(Arrays.asList(
                     new Fish(95.387184f).setSpecies("ymzidn")
                         .setSiblings(Arrays.asList(
@@ -69,7 +72,8 @@ public final class GoblinsharkTests {
         Assertions.assertEquals(54.53775f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(726085925, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-02-01T09:39:18Z"), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-02-01T09:39:18Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+            model.getBirthday());
         Assertions.assertEquals(61317803, model.getJawsize());
         Assertions.assertEquals(GoblinSharkColor.LOWER_RED, model.getColor());
     }
