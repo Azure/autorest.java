@@ -4,11 +4,14 @@
 
 package com._specs_.azure.core.basic.models;
 
+import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Details about a user.
@@ -42,6 +45,24 @@ public final class User {
     @Generated
     @JsonProperty(value = "etag", access = JsonProperty.Access.WRITE_ONLY)
     private String etag;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJmp(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setUserAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJmp(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of User class.
@@ -93,6 +114,7 @@ public final class User {
     @Generated
     public User setOrders(List<UserOrder> orders) {
         this.orders = orders;
+        this.updatedProperties.add("orders");
         return this;
     }
 

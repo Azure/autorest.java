@@ -4,10 +4,13 @@
 
 package com._specs_.azure.core.basic.models;
 
+import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * UserOrder for testing list with expand.
@@ -34,6 +37,24 @@ public final class UserOrder {
     @Generated
     @JsonProperty(value = "detail")
     private String detail;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJmp(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setUserOrderAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJmp(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of UserOrder class.
