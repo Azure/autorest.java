@@ -20,6 +20,8 @@ import java.util.List;
  */
 @Fluent
 public class Shark extends Fish {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * The age property.
      */
@@ -111,8 +113,7 @@ public class Shark extends Fish {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("birthday",
-            this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeStringField("birthday", this.birthday == null ? null : ISO_8601.format(this.birthday));
         jsonWriter.writeNumberField("age", this.age);
         return jsonWriter.writeEndObject();
     }
@@ -179,8 +180,8 @@ public class Shark extends Fish {
                 } else if ("siblings".equals(fieldName)) {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("birthday".equals(fieldName)) {
-                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    birthday = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                     birthdayFound = true;
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);

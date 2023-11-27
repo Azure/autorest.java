@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
  */
 @Fluent
 public class ContainerRepositoryProperties implements JsonSerializable<ContainerRepositoryProperties> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */
@@ -245,13 +247,11 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
                 } else if ("imageName".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.name = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                            DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedContainerRepositoryProperties.createdOn = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.lastUpdatedOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                            DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedContainerRepositoryProperties.lastUpdatedOn = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else if ("manifestCount".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.manifestCount = reader.getInt();
                 } else if ("tagCount".equals(fieldName)) {

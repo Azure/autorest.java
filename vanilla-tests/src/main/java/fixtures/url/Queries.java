@@ -23,7 +23,6 @@ import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -2995,8 +2994,7 @@ public final class Queries {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimeQuery
-            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context));
@@ -3017,8 +3015,7 @@ public final class Queries {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimeQuery
-            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
         final String accept = "application/json";
         return service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context);
     }

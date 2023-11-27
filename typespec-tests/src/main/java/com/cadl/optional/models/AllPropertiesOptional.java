@@ -24,6 +24,8 @@ import java.util.Map;
  */
 @Immutable
 public final class AllPropertiesOptional implements JsonSerializable<AllPropertiesOptional> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * The boolean property.
      */
@@ -336,8 +338,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
         jsonWriter.writeNumberField("float", this.floatProperty);
         jsonWriter.writeNumberField("double", this.doubleProperty);
         jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
-        jsonWriter.writeStringField("dateTime",
-            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
+        jsonWriter.writeStringField("dateTime", this.dateTime == null ? null : ISO_8601.format(this.dateTime));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         jsonWriter.writeJsonField("immutable", this.immutable);
@@ -390,8 +391,8 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
                     deserializedAllPropertiesOptional.duration
                         = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                 } else if ("dateTime".equals(fieldName)) {
-                    deserializedAllPropertiesOptional.dateTime = reader.getNullable(nonNullReader -> OffsetDateTime
-                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedAllPropertiesOptional.dateTime = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else if ("stringList".equals(fieldName)) {
                     List<String> stringList = reader.readArray(reader1 -> reader1.getString());
                     deserializedAllPropertiesOptional.stringList = stringList;

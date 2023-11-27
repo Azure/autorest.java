@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
  */
 @Fluent
 public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactTagPropertiesInternal> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */
@@ -286,10 +288,9 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
             jsonWriter.writeStartObject("tag");
             jsonWriter.writeStringField("name", this.name);
             jsonWriter.writeStringField("digest", this.digest);
-            jsonWriter.writeStringField("createdTime",
-                this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+            jsonWriter.writeStringField("createdTime", this.createdOn == null ? null : ISO_8601.format(this.createdOn));
             jsonWriter.writeStringField("lastUpdateTime",
-                this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
+                this.lastUpdatedOn == null ? null : ISO_8601.format(this.lastUpdatedOn));
             if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
                 jsonWriter.writeStartObject("changeableAttributes");
                 jsonWriter.writeBooleanField("deleteEnabled", this.deleteEnabled);
@@ -334,13 +335,11 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
                         } else if ("digest".equals(fieldName)) {
                             deserializedArtifactTagPropertiesInternal.digest = reader.getString();
                         } else if ("createdTime".equals(fieldName)) {
-                            deserializedArtifactTagPropertiesInternal.createdOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                            deserializedArtifactTagPropertiesInternal.createdOn = reader.getNullable(
+                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                         } else if ("lastUpdateTime".equals(fieldName)) {
-                            deserializedArtifactTagPropertiesInternal.lastUpdatedOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                            deserializedArtifactTagPropertiesInternal.lastUpdatedOn = reader.getNullable(
+                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                         } else if ("changeableAttributes".equals(fieldName)
                             && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -22,6 +22,8 @@ import java.util.List;
  */
 @Fluent
 public class ArtifactManifestPropertiesInternal implements JsonSerializable<ArtifactManifestPropertiesInternal> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */
@@ -394,10 +396,9 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
             jsonWriter.writeStartObject("manifest");
             jsonWriter.writeStringField("digest", this.digest);
             jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
-            jsonWriter.writeStringField("createdTime",
-                this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+            jsonWriter.writeStringField("createdTime", this.createdOn == null ? null : ISO_8601.format(this.createdOn));
             jsonWriter.writeStringField("lastUpdateTime",
-                this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
+                this.lastUpdatedOn == null ? null : ISO_8601.format(this.lastUpdatedOn));
             jsonWriter.writeStringField("architecture",
                 this.architecture == null ? null : this.architecture.toString());
             jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());
@@ -449,13 +450,11 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
                             deserializedArtifactManifestPropertiesInternal.sizeInBytes
                                 = reader.getNullable(JsonReader::getLong);
                         } else if ("createdTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.createdOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                            deserializedArtifactManifestPropertiesInternal.createdOn = reader.getNullable(
+                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                         } else if ("lastUpdateTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                                    DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn = reader.getNullable(
+                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                         } else if ("architecture".equals(fieldName)) {
                             deserializedArtifactManifestPropertiesInternal.architecture
                                 = ArtifactArchitecture.fromString(reader.getString());

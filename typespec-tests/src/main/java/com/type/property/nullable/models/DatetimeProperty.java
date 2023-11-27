@@ -19,6 +19,8 @@ import java.time.format.DateTimeFormatter;
  */
 @Immutable
 public final class DatetimeProperty implements JsonSerializable<DatetimeProperty> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Required property
      */
@@ -67,8 +69,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        jsonWriter.writeStringField("nullableProperty", this.nullableProperty == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
+        jsonWriter.writeStringField("nullableProperty",
+            this.nullableProperty == null ? null : ISO_8601.format(this.nullableProperty));
         return jsonWriter.writeEndObject();
     }
 
@@ -92,8 +94,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 if ("requiredProperty".equals(fieldName)) {
                     requiredProperty = reader.getString();
                 } else if ("nullableProperty".equals(fieldName)) {
-                    nullableProperty = reader.getNullable(nonNullReader -> OffsetDateTime
-                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    nullableProperty = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else {
                     reader.skipChildren();
                 }

@@ -19,6 +19,8 @@ import java.util.List;
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /**
      * Creates an instance of Cookiecuttershark class.
      * 
@@ -71,8 +73,7 @@ public final class Cookiecuttershark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", "cookiecuttershark");
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday",
-            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : ISO_8601.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
@@ -113,8 +114,8 @@ public final class Cookiecuttershark extends Shark {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("birthday".equals(fieldName)) {
-                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(),
-                        DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    birthday = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                     birthdayFound = true;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();

@@ -218,12 +218,12 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType DateTime = new Builder(false).knownClass(OffsetDateTime.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\", DateTimeFormatter.ISO_OFFSET_DATE_TIME)", defaultValueExpression))
-        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(" + valueGetter + ")")
-        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
+        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\", ISO_8601)", defaultValueExpression))
+        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : ISO_8601.format(" + valueGetter + ")")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601))")
         .serializationMethodBase("writeString")
-        .xmlElementDeserializationMethod("getNullableElement(dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
-        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> OffsetDateTime.parse(dateString, DateTimeFormatter.ISO_OFFSET_DATE_TIME))")
+        .xmlElementDeserializationMethod("getNullableElement(dateString -> OffsetDateTime.parse(dateString, ISO_8601))")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> OffsetDateTime.parse(dateString, ISO_8601))")
         .build();
 
     public static final ClassType Duration = new Builder(false).knownClass(java.time.Duration.class)

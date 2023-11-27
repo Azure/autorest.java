@@ -7,7 +7,6 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.DatetimeWrapper;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Assertions;
 
 public final class DatetimeWrapperTests {
@@ -16,21 +15,16 @@ public final class DatetimeWrapperTests {
         DatetimeWrapper model
             = BinaryData.fromString("{\"field\":\"2021-06-29T08:49:50Z\",\"now\":\"2021-06-25T01:54:31Z\"}")
                 .toObject(DatetimeWrapper.class);
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-            model.getField());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-            model.getNow());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601), model.getNow());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        DatetimeWrapper model = new DatetimeWrapper()
-            .setField(OffsetDateTime.parse("2021-06-29T08:49:50Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME))
-            .setNow(OffsetDateTime.parse("2021-06-25T01:54:31Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        DatetimeWrapper model = new DatetimeWrapper().setField(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601))
+            .setNow(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601));
         model = BinaryData.fromObject(model).toObject(DatetimeWrapper.class);
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-            model.getField());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-            model.getNow());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601), model.getNow());
     }
 }

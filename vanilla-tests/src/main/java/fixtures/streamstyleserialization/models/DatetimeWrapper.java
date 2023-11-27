@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
  */
 @Fluent
 public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * The field property.
      */
@@ -85,10 +87,8 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field",
-            this.field == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.field));
-        jsonWriter.writeStringField("now",
-            this.now == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.now));
+        jsonWriter.writeStringField("field", this.field == null ? null : ISO_8601.format(this.field));
+        jsonWriter.writeStringField("now", this.now == null ? null : ISO_8601.format(this.now));
         return jsonWriter.writeEndObject();
     }
 
@@ -108,11 +108,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                 reader.nextToken();
 
                 if ("field".equals(fieldName)) {
-                    deserializedDatetimeWrapper.field = reader.getNullable(nonNullReader -> OffsetDateTime
-                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedDatetimeWrapper.field = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else if ("now".equals(fieldName)) {
-                    deserializedDatetimeWrapper.now = reader.getNullable(nonNullReader -> OffsetDateTime
-                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedDatetimeWrapper.now = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else {
                     reader.skipChildren();
                 }

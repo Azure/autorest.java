@@ -20,6 +20,8 @@ import java.util.Map;
  */
 @Fluent
 public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Date and time on which the image was built (string, date-time as defined by
      * https://tools.ietf.org/html/rfc3339#section-5.6)
@@ -363,7 +365,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("org.opencontainers.image.created",
-            this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+            this.createdOn == null ? null : ISO_8601.format(this.createdOn));
         jsonWriter.writeStringField("org.opencontainers.image.authors", this.authors);
         jsonWriter.writeStringField("org.opencontainers.image.url", this.url);
         jsonWriter.writeStringField("org.opencontainers.image.documentation", this.documentation);
@@ -400,8 +402,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
                 reader.nextToken();
 
                 if ("org.opencontainers.image.created".equals(fieldName)) {
-                    deserializedOciAnnotations.createdOn = reader.getNullable(nonNullReader -> OffsetDateTime
-                        .parse(nonNullReader.getString(), DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+                    deserializedOciAnnotations.createdOn = reader
+                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
                 } else if ("org.opencontainers.image.authors".equals(fieldName)) {
                     deserializedOciAnnotations.authors = reader.getString();
                 } else if ("org.opencontainers.image.url".equals(fieldName)) {

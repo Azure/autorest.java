@@ -25,7 +25,6 @@ import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import reactor.core.publisher.Mono;
 
 /**
@@ -2044,8 +2043,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimeQuery
-            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
         final String accept = "application/json";
         return FluxUtil.withContext(
             context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
@@ -2063,8 +2061,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimeQuery
-            = OffsetDateTime.parse("2012-01-01T01:01:01Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
         final String accept = "application/json";
         return service.dateTimeValidSync(this.client.getHost(), dateTimeQuery, accept, requestOptions, Context.NONE);
     }

@@ -12,6 +12,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -21,6 +22,8 @@ import javax.xml.stream.XMLStreamException;
  */
 @Fluent
 public final class ContainerProperties implements XmlSerializable<ContainerProperties> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * The Last-Modified property.
      */
