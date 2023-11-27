@@ -19,6 +19,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -193,46 +194,76 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeToXml(classBlock, propertiesManager);
             writeFromXml(classBlock, model, propertiesManager, settings);
         } else {
+            if (ClientModelUtil.isJsonMergePatchModel(model)) {
+                writeToJsonMergePatch(classBlock, propertiesManager);
+            }
             writeToJson(classBlock, propertiesManager);
             writeFromJson(classBlock, model, propertiesManager, settings);
         }
     }
 
+    /**
+     * write ToJson() method
+     * @param classBlock
+     * @param propertiesManager
+     */
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
         classBlock.annotation("Override");
         classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException", methodBlock -> {
-            methodBlock.line("jsonWriter.writeStartObject();");
-
-            // If the model has a discriminator property serialize it first.
-            if (propertiesManager.getDiscriminatorProperty() != null
-                && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())) {
-                ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-                serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(),
-                        false, true);
-            }
-
-            BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), fromSuper, true);
-
-            propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
-            propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
-            propertiesManager.forEachRequiredProperty(property -> serializeJsonProperty.accept(property, false));
-            propertiesManager.forEachSetterProperty(property -> serializeJsonProperty.accept(property, false));
-
-            handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree());
-
-            ClientModelProperty additionalProperties = propertiesManager.getAdditionalProperties();
-            if (additionalProperties != null) {
-                methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
-                    ifAction.line("for (Map.Entry<String, Object> additionalProperty : %s.entrySet()) {", additionalProperties.getName());
-                    ifAction.indent(() ->
-                        ifAction.line("jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());"));
-                    ifAction.line("}");
-                });
-            }
-
-            methodBlock.methodReturn("jsonWriter.writeEndObject()");
+            serializeJsonProperties(methodBlock, propertiesManager, false);
         });
+    }
+
+    /**
+     * write ToJsonMergePatch() method
+     * @param classBlock
+     * @param propertiesManager
+     */
+    private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
+        classBlock.annotation("Override");
+        classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException", methodBlock -> {
+            serializeJsonProperties(methodBlock, propertiesManager, true);
+        });
+    }
+
+    /**
+     * Serializes the properties of a model to JSON.
+     * @param methodBlock The method block to write the serialization method to.
+     * @param propertiesManager The properties manager for the model.
+     * @param isJsonMergePatch Whether or not the serialization is for a JSON merge patch.
+     */
+    private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager, boolean isJsonMergePatch) {
+        methodBlock.line("jsonWriter.writeStartObject();");
+
+        // If the model has a discriminator property serialize it first.
+        if (propertiesManager.getDiscriminatorProperty() != null
+                && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())) {
+            ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
+            serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(),
+                    false, true, isJsonMergePatch);
+        }
+
+        BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) ->
+                serializeJsonProperty(methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
+
+        propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
+        propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
+        propertiesManager.forEachRequiredProperty(property -> serializeJsonProperty.accept(property, false));
+        propertiesManager.forEachSetterProperty(property -> serializeJsonProperty.accept(property, false));
+
+        handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree(), isJsonMergePatch);
+
+        ClientModelProperty additionalProperties = propertiesManager.getAdditionalProperties();
+        if (additionalProperties != null) {
+            methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
+                ifAction.line("for (Map.Entry<String, Object> additionalProperty : %s.entrySet()) {", additionalProperties.getName());
+                ifAction.indent(() ->
+                        ifAction.line("jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());"));
+                ifAction.line("}");
+            });
+        }
+
+        methodBlock.methodReturn("jsonWriter.writeEndObject()");
     }
 
     /**
@@ -250,9 +281,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * a super type a getter method will be used to retrieve the value instead of accessing the field directly.
      * @param ignoreFlattening Whether flattened properties should be skipped. Will only be false when handling the
      * terminal location of a flattened structure.
+     * @param isJsonMergePatch Whether the serialization is for a JSON Merge Patch model.
      */
     private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
-        String serializedName, boolean fromSuperType, boolean ignoreFlattening) {
+        String serializedName, boolean fromSuperType, boolean ignoreFlattening, boolean isJsonMergePatch) {
         if ((ignoreFlattening && property.getNeedsFlatten()) || property.isAdditionalProperties()) {
             // Property will be handled later by flattened or additional properties serialization.
             return;
@@ -263,13 +295,41 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
+        if (isJsonMergePatch) {
+            methodBlock.ifBlock(String.format("%s !=null", property.getName()), codeBlock -> {
+                serializeJsonProperty(codeBlock, property, serializedName,
+                        false);
+            }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
+                codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
+            });
+        } else {
+            serializeJsonProperty(methodBlock, property, serializedName, fromSuperType);
+        }
+    }
+
+    /**
+     * Serializes a non-flattened, non-additional properties JSON property.
+     * <p>
+     * If the JSON property needs to be flattened or is additional properties this is a no-op as those require special
+     * handling that will occur later.
+     *
+     * @param methodBlock    The method handling serialization.
+     * @param property       The property being serialized.
+     * @param serializedName The serialized JSON property name. Generally, this is just the {@code property property's}
+     *                       serialized name but if a flattened property is being serialized it'll be the last segment of the flattened JSON
+     *                       name.
+     * @param fromSuperType  Whether the property is defined by a super type of the model. If the property is declared by
+     *                       a super type a getter method will be used to retrieve the value instead of accessing the field directly.
+     */
+    private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
+                                              String serializedName, boolean fromSuperType) {
         IType clientType = property.getClientType();
         IType wireType = property.getWireType();
         String propertyValueGetter;
         if (fromSuperType) {
             propertyValueGetter = (clientType != wireType)
-                ? wireType.convertFromClientType(property.getGetterName() + "()")
-                : property.getGetterName() + "()";
+                    ? wireType.convertFromClientType(property.getGetterName() + "()")
+                    : property.getGetterName() + "()";
         } else if (property.isPolymorphicDiscriminator()) {
             propertyValueGetter = property.getDefaultValue();
         } else {
@@ -279,7 +339,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
-            propertyValueGetter);
+                propertyValueGetter);
         if (fieldSerializationMethod != null) {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -303,12 +363,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
-                serializedName, propertyValueGetter, 0);
+                    serializedName, propertyValueGetter, 0);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
             serializeJsonContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
-                serializedName, propertyValueGetter, 0);
+                    serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
             throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
@@ -399,22 +459,23 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      *
      * @param methodBlock The method handling serialization.
      * @param flattenedProperties The flattened properties structure.
+     * @param isJsonMergePatch Whether or not the serialization is for a JSON merge patch model.
      */
     private static void handleFlattenedPropertiesSerialization(JavaBlock methodBlock,
-        JsonFlattenedPropertiesTree flattenedProperties) {
+        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch) {
         // The initial call to handle flattened properties is using the base node which is just a holder.
         for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-            handleFlattenedPropertiesSerializationHelper(methodBlock, flattened);
+            handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch);
         }
     }
 
     private static void handleFlattenedPropertiesSerializationHelper(JavaBlock methodBlock,
-        JsonFlattenedPropertiesTree flattenedProperties) {
+        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch) {
         ClientModelPropertyWithMetadata flattenedProperty = flattenedProperties.getProperty();
         if (flattenedProperty != null) {
             // This is a terminal location, only need to add property serialization.
             serializeJsonProperty(methodBlock, flattenedProperty.getProperty(), flattenedProperties.getNodeName(),
-                flattenedProperty.isFromSuperClass(), false);
+                flattenedProperty.isFromSuperClass(), false, isJsonMergePatch);
         } else {
             // Otherwise this is an intermediate location.
             // Check for either any of the properties in this subtree being primitives or add an if block checking that
@@ -430,7 +491,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 // to be done.
                 methodBlock.line("jsonWriter.writeStartObject(\"" + flattenedProperties.getNodeName() + "\");");
                 for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-                    handleFlattenedPropertiesSerializationHelper(methodBlock, flattened);
+                    handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch);
                 }
                 methodBlock.line("jsonWriter.writeEndObject();");
             } else {
@@ -445,7 +506,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.ifBlock(condition, ifAction -> {
                     ifAction.line("jsonWriter.writeStartObject(\"" + flattenedProperties.getNodeName() + "\");");
                     for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-                        handleFlattenedPropertiesSerializationHelper(ifAction, flattened);
+                        handleFlattenedPropertiesSerializationHelper(ifAction, flattened, isJsonMergePatch);
                     }
                     ifAction.line("jsonWriter.writeEndObject();");
                 });
