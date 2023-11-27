@@ -554,7 +554,12 @@ export class CodeModelBuilder {
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
         if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+          if (this.codeModel.arm && Boolean(operation.interface?.name)) {
+            codeModelGroup = new OperationGroup(operation.interface.name);
+            codeModelGroup.addOperation(this.processOperation(operation.interface.name, operation, clientContext));
+          } else {
+            codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+          }
         }
       }
       if (codeModelGroup.operations?.length > 0) {
