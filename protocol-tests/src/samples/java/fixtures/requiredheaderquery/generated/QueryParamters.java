@@ -22,7 +22,7 @@ public class QueryParamters {
             .addQueryParam("parameter_optional_multi_int_array", "10");
         Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredQueryParamWithResponse(17, true,
             Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), Arrays.asList("four", "five"),
-            Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z", ISO_8601),
+            Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z"),
             requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
     }

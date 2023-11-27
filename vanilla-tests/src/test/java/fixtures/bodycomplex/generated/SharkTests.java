@@ -26,12 +26,12 @@ public final class SharkTests {
         Assertions.assertEquals(45.296448f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(732372528, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-05-16T15:44:09Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-05-16T15:44:09Z"), model.getBirthday());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Shark model = new Shark(63.108402f, OffsetDateTime.parse("2021-05-16T15:44:09Z", ISO_8601)).setSpecies("kao")
+        Shark model = new Shark(63.108402f, OffsetDateTime.parse("2021-05-16T15:44:09Z")).setSpecies("kao")
             .setSiblings(Arrays.asList(new Fish(81.88607f).setSpecies("tyhxhurokft")
                 .setSiblings(Arrays.asList(
                     new Fish(48.25244f).setSpecies("iwpwcuk")
@@ -53,6 +53,6 @@ public final class SharkTests {
         Assertions.assertEquals(45.296448f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(732372528, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-05-16T15:44:09Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-05-16T15:44:09Z"), model.getBirthday());
     }
 }

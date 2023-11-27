@@ -13,7 +13,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -21,8 +20,6 @@ import java.util.Objects;
  */
 @Immutable
 public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The dateTimeRfc7231 property.
      */

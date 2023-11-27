@@ -1374,7 +1374,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
             context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, requestOptions, context));
@@ -1392,7 +1392,7 @@ public final class PathsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValidSync(this.client.getHost(), dateTimePath, accept, requestOptions, Context.NONE);
     }

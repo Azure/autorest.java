@@ -20,8 +20,8 @@ public class HeaderParamters {
         // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = dpgRequiredHeaderQueryClient.getRequiredHeaderWithResponse(31, false,
-            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3),
-            OffsetDateTime.parse("2019-03-01T15:00Z", ISO_8601), Duration.parse("P1DT30H4S"), requestOptions);
+            Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), OffsetDateTime.parse("2019-03-01T15:00Z"),
+            Duration.parse("P1DT30H4S"), requestOptions);
         // END:fixtures.requiredheaderquery.generated.paramsgetrequiredheader.headerparamters
     }
 }

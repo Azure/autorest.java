@@ -2994,7 +2994,7 @@ public final class Queries {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context));
@@ -3015,7 +3015,7 @@ public final class Queries {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, context);
     }

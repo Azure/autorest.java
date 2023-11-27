@@ -26,14 +26,13 @@ public final class CookiecuttersharkTests {
         Assertions.assertEquals(53.090946f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(1085002799, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-07-24T18:44:29Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-24T18:44:29Z"), model.getBirthday());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Cookiecuttershark model
-            = new Cookiecuttershark(5.423278f, OffsetDateTime.parse("2021-07-24T18:44:29Z", ISO_8601))
-                .setSpecies("pbtoqcjmkl")
+            = new Cookiecuttershark(5.423278f, OffsetDateTime.parse("2021-07-24T18:44:29Z")).setSpecies("pbtoqcjmkl")
                 .setSiblings(Arrays.asList(
                     new Fish(17.32046f).setSpecies("idtqajzyu")
                         .setSiblings(Arrays.asList(new Fish(58.94148f).setSpecies("jkrlkhbzhfepg")
@@ -53,6 +52,6 @@ public final class CookiecuttersharkTests {
         Assertions.assertEquals(53.090946f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(1085002799, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-07-24T18:44:29Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-07-24T18:44:29Z"), model.getBirthday());
     }
 }

@@ -2323,7 +2323,7 @@ public final class Paths {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimePath, accept, context));
@@ -2344,7 +2344,7 @@ public final class Paths {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValid(this.client.getHost(), dateTimePath, accept, context);
     }

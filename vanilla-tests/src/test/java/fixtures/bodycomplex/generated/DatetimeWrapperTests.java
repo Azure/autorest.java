@@ -15,16 +15,16 @@ public final class DatetimeWrapperTests {
         DatetimeWrapper model
             = BinaryData.fromString("{\"field\":\"2021-06-29T08:49:50Z\",\"now\":\"2021-06-25T01:54:31Z\"}")
                 .toObject(DatetimeWrapper.class);
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601), model.getField());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601), model.getNow());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z"), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z"), model.getNow());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        DatetimeWrapper model = new DatetimeWrapper().setField(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601))
-            .setNow(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601));
+        DatetimeWrapper model = new DatetimeWrapper().setField(OffsetDateTime.parse("2021-06-29T08:49:50Z"))
+            .setNow(OffsetDateTime.parse("2021-06-25T01:54:31Z"));
         model = BinaryData.fromObject(model).toObject(DatetimeWrapper.class);
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z", ISO_8601), model.getField());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z", ISO_8601), model.getNow());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-29T08:49:50Z"), model.getField());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-06-25T01:54:31Z"), model.getNow());
     }
 }

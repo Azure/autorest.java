@@ -1100,8 +1100,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return false;
         }
 
-        return model.getProperties().stream().anyMatch(property -> property.getClientType() == ClassType.DateTime)
-            || ClientModelUtil.getParentProperties(model).stream().anyMatch(p -> p.getClientType() == ClassType.DateTime);
+        return model.getProperties().stream().anyMatch(property -> property.getWireType() == ClassType.DateTime)
+            || ClientModelUtil.getParentProperties(model).stream().anyMatch(p -> p.getWireType() == ClassType.DateTime);
     }
 
     /**

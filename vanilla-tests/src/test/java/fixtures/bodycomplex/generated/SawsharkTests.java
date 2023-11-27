@@ -26,13 +26,13 @@ public final class SawsharkTests {
         Assertions.assertEquals(56.270576f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(835826608, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-09-01T01:28:54Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-09-01T01:28:54Z"), model.getBirthday());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         Sawshark model
-            = new Sawshark(41.75237f, OffsetDateTime.parse("2021-09-01T01:28:54Z", ISO_8601))
+            = new Sawshark(41.75237f, OffsetDateTime.parse("2021-09-01T01:28:54Z"))
                 .setSpecies(
                     "gibma")
                 .setSiblings(
@@ -62,7 +62,8 @@ public final class SawsharkTests {
                                     new Fish(15.329713f).setSpecies("qawrlyxwj")
                                         .setSiblings(Arrays.asList(new Fish(99.249115f), new Fish(89.70539f),
                                             new Fish(40.196205f), new Fish(4.2197704f))),
-                                    new Fish(77.91465f).setSpecies("gjvtbv")
+                                    new Fish(77.91465f).setSpecies(
+                                        "gjvtbv")
                                         .setSiblings(Arrays.asList(new Fish(15.425348f), new Fish(97.266785f))),
                                     new Fish(84.77632f).setSpecies("rujqg")
                                         .setSiblings(Arrays.asList(new Fish(44.637882f))),
@@ -86,6 +87,6 @@ public final class SawsharkTests {
         Assertions.assertEquals(56.270576f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals(835826608, model.getAge());
-        Assertions.assertEquals(OffsetDateTime.parse("2021-09-01T01:28:54Z", ISO_8601), model.getBirthday());
+        Assertions.assertEquals(OffsetDateTime.parse("2021-09-01T01:28:54Z"), model.getBirthday());
     }
 }

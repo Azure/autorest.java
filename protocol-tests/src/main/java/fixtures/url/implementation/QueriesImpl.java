@@ -2043,7 +2043,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return FluxUtil.withContext(
             context -> service.dateTimeValid(this.client.getHost(), dateTimeQuery, accept, requestOptions, context));
@@ -2061,7 +2061,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeValidWithResponse(RequestOptions requestOptions) {
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z", ISO_8601);
+        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         final String accept = "application/json";
         return service.dateTimeValidSync(this.client.getHost(), dateTimeQuery, accept, requestOptions, Context.NONE);
     }
