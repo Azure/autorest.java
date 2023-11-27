@@ -220,7 +220,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager
      */
     private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
-        classBlock.annotation("Override");
         classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException", methodBlock -> {
             serializeJsonProperties(methodBlock, propertiesManager, true);
         });
