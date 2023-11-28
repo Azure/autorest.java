@@ -47,7 +47,7 @@ jobs:
           mavenPomFile: pom.xml
           goals: 'clean install'
           options: '-P local --no-transfer-progress -T 1C'
-          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+          mavenOptions: '$(DefaultOptions) $(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -83,7 +83,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestVanilla -pl vanilla-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestVanilla -pl vanilla-tests -DtrimStackTrace=false --no-transfer-progress'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -100,7 +101,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestAzure -pl azure-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestAzure -pl azure-tests -DtrimStackTrace=false --no-transfer-progress'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -117,7 +119,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -148,7 +151,8 @@ jobs:
         displayName: 'Verify Javadoc of Protocol Tests'
         inputs:
           mavenPomFile: protocol-tests/pom.xml
-          goals: 'javadoc:javadoc'
+          goals: '$(DefaultOptions) javadoc:javadoc'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -159,7 +163,8 @@ jobs:
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml
           goals: 'package revapi:check'
-          options: '--no-transfer-progress'
+          options: '$(DefaultOptions) --no-transfer-progress'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'

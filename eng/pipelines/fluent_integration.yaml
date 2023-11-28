@@ -49,7 +49,7 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       goals: 'clean install'
-      options: '-P local,testFluent --no-transfer-progress -T 1C'
+      options: '$(DefaultOptions) -P local,testFluent --no-transfer-progress -T 1C'
 
   - task: PublishCodeCoverageResults@1
     inputs:
