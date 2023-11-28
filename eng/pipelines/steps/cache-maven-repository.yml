@@ -4,9 +4,8 @@ parameters:
     default: autorest
 
 steps:
-
   - task: Cache@2
     inputs:
-      key: 'maven | "$(CacheSalt)" | "$(Agent.OS)" | $(MAVEN_CACHE_FOLDER) | "${{ parameters.JobType }}"'
+      key: 'maven | "$(CacheSalt)" | "$(Agent.OS)" | "${{ parameters.JobType }}"'
       path: $(MAVEN_CACHE_FOLDER)
     displayName: Cache Maven local repo
