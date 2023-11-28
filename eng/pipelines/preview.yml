@@ -20,7 +20,7 @@ resources:
       type: github
       endpoint: Azure
       name: Azure/azure-sdk-for-java
-      ref: refs/heads/users/pahallis/cookiecutter
+      ref: refs/heads/main
     - repository: azure-sdk-tools
       type: github
       endpoint: Azure
