@@ -4,7 +4,7 @@ steps:
     displayName: Clean up maven local cache
     inputs:
       pwsh: true
-      filePath: $(Build.SourcesDirectory)/eng/scripts/Remove-Azure-Artifacts-From-Cache.ps1
+      filePath: $(Build.SourcesDirectory)/eng/scripts/Remove-AzureArtifactsFromCache.ps1
       arguments: >
         -MavenCacheFolder $(MAVEN_CACHE_FOLDER)
     continueOnError: true
