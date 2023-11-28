@@ -76,7 +76,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
 
     /**
      * Reads a GoblinSharkColor from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.

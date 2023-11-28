@@ -129,7 +129,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
                 classBlock.javadocComment(javadoc -> {
                     javadoc.description("Reads a " + enumName + " from the JSON stream.");
-                    javadoc.description("<p>");
+                    javadoc.line("<p>");
                     javadoc.description("The passed JsonReader must be positioned at a JsonToken.STRING value.");
                     javadoc.param("jsonReader", "The JsonReader being read.");
                     javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");
@@ -230,7 +230,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 String deserializationCall = enumType.getElementType().jsonDeserializationMethod("jsonReader");
                 enumBlock.javadocComment(javadoc -> {
                     javadoc.description("Reads a " + enumName + " from the JSON stream.");
-                    javadoc.description("<p>");
+                    javadoc.line("<p>");
                     javadoc.description("The passed JsonReader must be positioned at a " + enumType.getElementType().jsonToken() + " value.");
                     javadoc.param("jsonReader", "The JsonReader being read.");
                     javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");

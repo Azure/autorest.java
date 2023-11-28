@@ -69,7 +69,7 @@ public enum Unit implements JsonSerializable<Unit> {
 
     /**
      * Reads a Unit from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.

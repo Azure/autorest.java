@@ -90,7 +90,7 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> implements 
 
     /**
      * Reads a JobStatus from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.

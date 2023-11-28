@@ -55,7 +55,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> implements JsonSe
 
     /**
      * Reads a MyKind from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.

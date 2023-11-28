@@ -67,7 +67,7 @@ public final class PostContentSchemaGrantType extends ExpandableStringEnum<PostC
 
     /**
      * Reads a PostContentSchemaGrantType from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.

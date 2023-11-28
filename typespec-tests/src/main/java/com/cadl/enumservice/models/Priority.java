@@ -64,7 +64,7 @@ public enum Priority implements JsonSerializable<Priority> {
 
     /**
      * Reads a Priority from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.

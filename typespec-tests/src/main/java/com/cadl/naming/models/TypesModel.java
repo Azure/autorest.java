@@ -68,7 +68,7 @@ public enum TypesModel implements JsonSerializable<TypesModel> {
 
     /**
      * Reads a TypesModel from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.

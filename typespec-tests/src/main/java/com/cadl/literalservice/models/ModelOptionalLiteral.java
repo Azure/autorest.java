@@ -61,7 +61,7 @@ public enum ModelOptionalLiteral implements JsonSerializable<ModelOptionalLitera
 
     /**
      * Reads a ModelOptionalLiteral from the JSON stream.
-     * &lt;p&gt;.
+     * <p>
      * The passed JsonReader must be positioned at a JsonToken.STRING value.
      * 
      * @param jsonReader The JsonReader being read.
