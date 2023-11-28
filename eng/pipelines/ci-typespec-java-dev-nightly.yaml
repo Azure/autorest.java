@@ -52,6 +52,7 @@ jobs:
         inputs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
+          arguments: '-Parallelization 1'
 
       - script: |
           echo "Dependencies of typespec-java"

@@ -11,10 +11,12 @@ import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
@@ -33,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class TypeSpecPlugin extends Javagen {
 
@@ -107,6 +110,14 @@ public class TypeSpecPlugin extends Javagen {
                     crossLanguageDefinitionsMap.put(model.getPackage() + "." + model.getName(), model.getCrossLanguageDefinitionId());
                     javaPackage.addModel(model.getPackage(), model.getName(), model);
                 });
+
+        // JsonMergePatchHelper
+        List<ClientModel> jsonMergePatchModels = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
+//        if (!jsonMergePatchModels.isEmpty()) {
+//            javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
+//        }
 
         // Enum
         client.getEnums().stream()
