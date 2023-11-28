@@ -9,9 +9,6 @@ import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
@@ -31,24 +28,6 @@ public final class BytesProperty {
     @Generated
     @JsonProperty(value = "nullableProperty")
     private byte[] nullableProperty;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJmp(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setBytesPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJmp(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of BytesProperty class.

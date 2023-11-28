@@ -6,11 +6,8 @@ package com.cadl.specialheaders.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The Resource model.
@@ -44,24 +41,6 @@ public final class Resource {
     @Generated
     @JsonProperty(value = "type")
     private String type;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJmp(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setResourceAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJmp(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of Resource class.
@@ -113,7 +92,6 @@ public final class Resource {
     @Generated
     public Resource setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
         return this;
     }
 
