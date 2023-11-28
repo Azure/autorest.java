@@ -6,12 +6,16 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Enum that will be used as a property for model EnumProperty. Non-extensible.
  */
-public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
+public final class InnerEnum extends ExpandableStringEnum<InnerEnum> implements JsonSerializable<InnerEnum> {
     /**
      * First value.
      */
@@ -53,5 +57,23 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
     @Generated
     public static Collection<InnerEnum> values() {
         return values(InnerEnum.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a InnerEnum from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The InnerEnum that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a InnerEnum fails to be read from the JsonReader.
+     */
+    public static InnerEnum fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), InnerEnum.class);
     }
 }

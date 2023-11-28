@@ -4,10 +4,15 @@
 
 package com.type.property.valuetypes.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * Enum that will be used as a property for model EnumProperty. Non-extensible.
  */
-public enum FixedInnerEnum {
+public enum FixedInnerEnum implements JsonSerializable<FixedInnerEnum> {
     /**
      * First value.
      */
@@ -52,5 +57,23 @@ public enum FixedInnerEnum {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a FixedInnerEnum from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The FixedInnerEnum that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a FixedInnerEnum fails to be read from the JsonReader.
+     */
+    public static FixedInnerEnum fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

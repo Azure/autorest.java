@@ -4,12 +4,17 @@
 
 package com.cadl.naming.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * summary of Types
  * 
  * description of Types.
  */
-public enum TypesModel {
+public enum TypesModel implements JsonSerializable<TypesModel> {
     /**
      * Enum value Blob.
      */
@@ -54,5 +59,23 @@ public enum TypesModel {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a TypesModel from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The TypesModel that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a TypesModel fails to be read from the JsonReader.
+     */
+    public static TypesModel fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

@@ -4,10 +4,15 @@
 
 package com.cadl.literalservice.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * Defines values for ModelOptionalLiteral.
  */
-public enum ModelOptionalLiteral {
+public enum ModelOptionalLiteral implements JsonSerializable<ModelOptionalLiteral> {
     /**
      * Enum value optionalLiteral.
      */
@@ -47,5 +52,23 @@ public enum ModelOptionalLiteral {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a ModelOptionalLiteral from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The ModelOptionalLiteral that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a ModelOptionalLiteral fails to be read from the JsonReader.
+     */
+    public static ModelOptionalLiteral fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

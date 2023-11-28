@@ -12,11 +12,11 @@ public class IterableType extends GenericType {
      * @param elementType The type of elements that are stored in this sequence.
      */
     public IterableType(IType elementType) {
-        super("java.lang", "Iterable", elementType);
+        super("java.lang", "Iterable", "JsonToken.START_ARRAY", elementType);
     }
 
     IterableType(String packageName, String className, IType elementType) {
-        super(packageName, className, elementType);
+        super(packageName, className, "JsonToken.START_ARRAY", elementType);
     }
 
     /**

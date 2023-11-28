@@ -28,12 +28,18 @@ public class GenericType implements IType {
      */
     private final IType[] typeArguments;
 
+    private final String jsonToken;
+
     /**
      * Create a new GenericType from the provided properties.
      * @param name The main non-generic type of this generic type.
      * @param typeArguments The type arguments of this generic type.
      */
     public GenericType(String packageKeyword, String name, IType... typeArguments) {
+        this(packageKeyword, name, null, typeArguments);
+    }
+
+    public GenericType(String packageKeyword, String name, String jsonToken, IType... typeArguments) {
         if (!JavaSettings.getInstance().isBranded()) {
             if (Objects.equals(packageKeyword + "." + name, com.azure.core.http.rest.Response.class.getName())) {
                 packageKeyword = "com.generic.core.http";
@@ -46,6 +52,7 @@ public class GenericType implements IType {
         this.name = name;
         this.packageName = packageKeyword;
         this.typeArguments = typeArguments;
+        this.jsonToken = jsonToken;
     }
 
     public static GenericType Flux(IType typeArgument) {
@@ -211,7 +218,7 @@ public class GenericType implements IType {
                 } else if (this instanceof MapType) {
                     clientType = new MapType(clientTypeArguments[1]);
                 } else {
-                    clientType = new GenericType(getPackage(), getName(), clientTypeArguments);
+                    clientType = new GenericType(getPackage(), getName(), jsonToken(), clientTypeArguments);
                 }
                 break;
             }
@@ -280,6 +287,11 @@ public class GenericType implements IType {
         }
 
         return expression;
+    }
+
+    @Override
+    public String jsonToken() {
+        return jsonToken;
     }
 
     @Override

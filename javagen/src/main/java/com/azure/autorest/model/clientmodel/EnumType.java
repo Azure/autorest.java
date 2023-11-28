@@ -164,6 +164,11 @@ public class EnumType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return null;
+    }
+
+    @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
         return name + "." + getFromMethodName() + "(" + elementType.jsonDeserializationMethod(jsonReaderName) + ")";
     }

@@ -6,12 +6,17 @@ package com.type.enums.extensible.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Days of the week.
  */
-public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum> {
+public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum>
+    implements JsonSerializable<DaysOfWeekExtensibleEnum> {
     /**
      * Monday.
      */
@@ -83,5 +88,23 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
     @Generated
     public static Collection<DaysOfWeekExtensibleEnum> values() {
         return values(DaysOfWeekExtensibleEnum.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a DaysOfWeekExtensibleEnum from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The DaysOfWeekExtensibleEnum that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a DaysOfWeekExtensibleEnum fails to be read from the JsonReader.
+     */
+    public static DaysOfWeekExtensibleEnum fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), DaysOfWeekExtensibleEnum.class);
     }
 }

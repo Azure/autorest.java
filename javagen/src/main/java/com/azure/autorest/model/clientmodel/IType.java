@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.azure.xml.XmlWriter;
 
@@ -95,6 +96,24 @@ public interface IType {
      * @return The Java code used to validate the type.
      */
     String validate(String expression);
+
+    /**
+     * Gets the {@link JsonToken} associated to the type.
+     * <p>
+     * The following table shows what will be returned:
+     * <ul>
+     *     <li>String, String-based object - JsonToken.STRING</li>
+     *     <li>Primitive number, boxed number - JsonToken.NUMBER</li>
+     *     <li>Complex object, Map - JsonToken.START_OBJECT</li>
+     *     <li>Array, Collection - JsonToken.START_ARRAY</li>
+     * </ul>
+     *
+     * All other types will return null, such as Enums which don't have a specific type. In the case of Enums the value
+     * type should be inspected.
+     *
+     * @return The {@link JsonToken} associated to the type.
+     */
+    String jsonToken();
 
     /**
      * Gets the method that handles JSON deserialization for the type.

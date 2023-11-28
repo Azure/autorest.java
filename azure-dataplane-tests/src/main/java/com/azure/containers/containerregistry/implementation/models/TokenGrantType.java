@@ -4,10 +4,15 @@
 
 package com.azure.containers.containerregistry.implementation.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * Grant type is expected to be refresh_token.
  */
-public enum TokenGrantType {
+public enum TokenGrantType implements JsonSerializable<TokenGrantType> {
     /**
      * Enum value refresh_token.
      */
@@ -52,5 +57,23 @@ public enum TokenGrantType {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a TokenGrantType from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The TokenGrantType that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a TokenGrantType fails to be read from the JsonReader.
+     */
+    public static TokenGrantType fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

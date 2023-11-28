@@ -5,12 +5,16 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for AccessTier.
  */
-public final class AccessTier extends ExpandableStringEnum<AccessTier> {
+public final class AccessTier extends ExpandableStringEnum<AccessTier> implements JsonSerializable<AccessTier> {
     /**
      * Static value P4 for AccessTier.
      */
@@ -87,5 +91,23 @@ public final class AccessTier extends ExpandableStringEnum<AccessTier> {
      */
     public static Collection<AccessTier> values() {
         return values(AccessTier.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a AccessTier from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The AccessTier that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a AccessTier fails to be read from the JsonReader.
+     */
+    public static AccessTier fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), AccessTier.class);
     }
 }

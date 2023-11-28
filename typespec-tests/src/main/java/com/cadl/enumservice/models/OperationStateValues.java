@@ -4,10 +4,15 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * Defines values for OperationStateValues.
  */
-public enum OperationStateValues {
+public enum OperationStateValues implements JsonSerializable<OperationStateValues> {
     /**
      * Enum value Running.
      */
@@ -57,5 +62,23 @@ public enum OperationStateValues {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a OperationStateValues from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The OperationStateValues that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a OperationStateValues fails to be read from the JsonReader.
+     */
+    public static OperationStateValues fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

@@ -5,12 +5,17 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * The artifact platform's architecture.
  */
-public final class ArtifactArchitecture extends ExpandableStringEnum<ArtifactArchitecture> {
+public final class ArtifactArchitecture extends ExpandableStringEnum<ArtifactArchitecture>
+    implements JsonSerializable<ArtifactArchitecture> {
     /**
      * i386.
      */
@@ -102,5 +107,23 @@ public final class ArtifactArchitecture extends ExpandableStringEnum<ArtifactArc
      */
     public static Collection<ArtifactArchitecture> values() {
         return values(ArtifactArchitecture.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a ArtifactArchitecture from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The ArtifactArchitecture that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a ArtifactArchitecture fails to be read from the JsonReader.
+     */
+    public static ArtifactArchitecture fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), ArtifactArchitecture.class);
     }
 }

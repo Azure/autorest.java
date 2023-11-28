@@ -98,6 +98,11 @@ public class ArrayType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return "JsonToken.START_ARRAY";
+    }
+
+    @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
         return jsonReaderName + ".getBinary()";
     }

@@ -6,12 +6,16 @@ package com._specs_.azure.core.lro.rpc.legacy.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * The status of the processing job.
  */
-public final class JobStatus extends ExpandableStringEnum<JobStatus> {
+public final class JobStatus extends ExpandableStringEnum<JobStatus> implements JsonSerializable<JobStatus> {
     /**
      * The operation is not started.
      */
@@ -77,5 +81,23 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> {
     @Generated
     public static Collection<JobStatus> values() {
         return values(JobStatus.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a JobStatus from the JSON stream.
+     * &lt;p&gt;.
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The JobStatus that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a JobStatus fails to be read from the JsonReader.
+     */
+    public static JobStatus fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), JobStatus.class);
     }
 }
