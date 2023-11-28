@@ -27,9 +27,9 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      JavaVersion: 1.11
-      NodeVersion: '18.x'
-      isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+      - template: /eng/pipelines/variables/globals.yml
+      - name: isMain
+        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -41,12 +41,17 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
+      - template: /eng/pipelines/steps/cache-maven-repository.yml
+        parameters:
+          JobType: 'TypeSpec'
+
       - task: Maven@3
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '-P local,tsp --no-transfer-progress'
+          options: '-P local,tsp --no-transfer-progress -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -107,3 +112,5 @@ jobs:
           scriptType: "bash"
           scriptLocation: "inlineScript"
           inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
+
+      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

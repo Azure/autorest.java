@@ -11,8 +11,7 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      JavaVersion: 1.11
-      NodeVersion: '18.x'
+      - template: /eng/pipelines/variables/globals.yml
 
     steps:
       - task: NodeTool@0
@@ -20,12 +19,17 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
+      - template: /eng/pipelines/steps/cache-maven-repository.yml
+        parameters:
+          JobType: 'Publish Autorest'
+
       - task: Maven@3
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '-P local --no-transfer-progress'
+          options: '-P local --no-transfer-progress -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -47,3 +51,5 @@ jobs:
           ls *.tgz | npm publish -0 --access public
           npm config delete //registry.npmjs.org/:_authToken
         displayName: 'Publish AutoRest Java to NPM'
+
+      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

@@ -14,8 +14,7 @@ jobs:
     timeoutInMinutes: 30
 
     variables:
-      JavaVersion: 1.11
-      NodeVersion: '18.x'
+      - template: /eng/pipelines/variables/globals.yml
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -27,12 +26,17 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
+      - template: /eng/pipelines/steps/cache-maven-repository.yml
+        parameters:
+          JobType: 'TypeSpec Nightly'
+
       - task: Maven@3
         displayName: 'Build JAR'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '-P local,tsp --no-transfer-progress'
+          options: '-P local,tsp --no-transfer-progress -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -97,3 +101,5 @@ jobs:
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
         displayName: 'Stop Cadl Ranch Test Server'
         workingDirectory: ./typespec-tests
+
+      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
