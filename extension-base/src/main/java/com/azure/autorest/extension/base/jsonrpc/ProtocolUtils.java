@@ -3,25 +3,18 @@
 
 package com.azure.autorest.extension.base.jsonrpc;
 
-
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class ProtocolUtils {
-    private static final List<Class<?>> PRIMITIVES = Arrays.asList(
-            Boolean.class,
-            Integer.class,
-            Float.class,
-            Double.class,
-            Short.class,
-            Long.class,
-            Byte.class,
-            Character.class);
+    private static final Set<Class<?>> PRIMITIVES = new HashSet<>(Arrays.asList(Boolean.class, Integer.class,
+        Float.class, Double.class, Short.class, Long.class, Byte.class, Character.class));
 
     public static boolean isPrimitive(Object value) {
         Objects.requireNonNull(value);
-        return PRIMITIVES.stream().anyMatch(type -> type.isAssignableFrom(value.getClass()));
+        return PRIMITIVES.contains(value.getClass());
     }
 
     public static String quote(Object value) {
@@ -29,15 +22,63 @@ public class ProtocolUtils {
             return "null";
         }
         String input = value.toString();
-        return input.
-                        replace( "\\","\\\\" ). // backslashes
-                        replace( "\"","\\\"" ). // quotes
-                        replace( "\0","\\0" ).  // nulls
-                        replace( "\b","\\b" ).  // backspace
-                        replace( "\f","\\f" ).  // formfeed
-                        replace( "\n","\\n" ).  // newline
-                        replace( "\r","\\r" ).  // return
-                        replace( "\t","\\t" );  // tab
+        StringBuilder builder = null;
+
+        int inputLength = input.length();
+        int prevStart = 0;
+
+        for (int i = 0; i < inputLength; i++) {
+            char c = input.charAt(i);
+            String replacement = null;
+
+            switch (c) {
+                case '\\': // backslashes
+                    replacement = "\\\\";
+                    break;
+                case '"': // quotes
+                    replacement = "\\\"";
+                    break;
+                case '\0': // nulls
+                    replacement = "\\0";
+                    break;
+                case '\b': // backspace
+                    replacement = "\\b";
+                    break;
+                case '\f': // formfeed
+                    replacement = "\\f";
+                    break;
+                case '\n': // newline
+                    replacement = "\\n";
+                    break;
+                case '\r': // return
+                    replacement = "\\r";
+                    break;
+                case '\t': // tab
+                    replacement = "\\t";
+                    break;
+                default:
+                    break;
+            }
+
+            if (replacement != null) {
+                if (builder == null) {
+                    builder = new StringBuilder(inputLength * 2);
+                }
+
+                if (prevStart != i) {
+                    builder.append(input, prevStart, i);
+                }
+                builder.append(replacement);
+                prevStart = i + 1;
+            }
+        }
+
+        if (builder == null) {
+            return input;
+        }
+
+        builder.append(input, prevStart, inputLength);
+        return builder.toString();
     }
 
     /**

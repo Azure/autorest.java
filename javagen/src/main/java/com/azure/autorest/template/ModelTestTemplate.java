@@ -42,7 +42,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports, JavaSettings.getInstance());
-        ClassType.BinaryData.addImportsTo(imports, false);
+        ClassType.BINARY_DATA.addImportsTo(imports, false);
 
         String jsonStr;
         ExampleNode exampleNode;
@@ -65,7 +65,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             classBlock.annotation("org.junit.jupiter.api.Test");
             classBlock.publicMethod("void testDeserialize() throws Exception", methodBlock -> {
                 methodBlock.line(String.format("%1$s model = BinaryData.fromString(%2$s).toObject(%1$s.class);",
-                        model.getName(), ClassType.String.defaultValueExpression(jsonStr)));
+                        model.getName(), ClassType.STRING.defaultValueExpression(jsonStr)));
                 writer.writeAssertion(methodBlock);
             });
 

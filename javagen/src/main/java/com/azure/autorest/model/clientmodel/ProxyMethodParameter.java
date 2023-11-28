@@ -17,8 +17,8 @@ public class ProxyMethodParameter extends MethodParameter {
 
     public static final ProxyMethodParameter REQUEST_OPTIONS_PARAMETER = new ProxyMethodParameter.Builder()
             .description("The options to configure the HTTP request before HTTP client sends it.")
-            .wireType(ClassType.RequestOptions)
-            .clientType(ClassType.RequestOptions)
+            .wireType(ClassType.REQUEST_OPTIONS)
+            .clientType(ClassType.REQUEST_OPTIONS)
             .name("requestOptions")
             .requestParameterLocation(RequestParameterLocation.NONE)
             .requestParameterName("requestOptions")

@@ -21,7 +21,7 @@ public class MapType extends GenericType {
     }
 
     public MapType(IType valueType, boolean valueNullable) {
-        super("java.util", "Map", ClassType.String, valueType);
+        super("java.util", "Map", ClassType.STRING, valueType);
         this.valueNullable = valueNullable;
     }
 

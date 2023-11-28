@@ -129,7 +129,7 @@ public class ModelExampleWriter {
                 if (!node.getChildNodes().isEmpty()) {
                     String key = ((MapNode) node).getKeys().get(0);
                     node = node.getChildNodes().get(0);
-                    getterCode += String.format(".get(%s)", ClassType.String.defaultValueExpression(key));
+                    getterCode += String.format(".get(%s)", ClassType.STRING.defaultValueExpression(key));
                     accept(node, getterCode);
                 }
             } else if (node instanceof ClientModelNode) {
@@ -170,7 +170,7 @@ public class ModelExampleWriter {
             imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
 
             return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
-                    ClassType.String.defaultValueExpression(jsonStr));
+                    ClassType.STRING.defaultValueExpression(jsonStr));
         }
 
         public Set<String> getImports() {
@@ -186,7 +186,7 @@ public class ModelExampleWriter {
 
         public String accept(ExampleNode node) {
             if (node instanceof LiteralNode) {
-                if (node.getClientType() != ClassType.Context) {
+                if (node.getClientType() != ClassType.CONTEXT) {
                     node.getClientType().addImportsTo(imports, false);
                 }
 
@@ -198,17 +198,17 @@ public class ModelExampleWriter {
             } else if (node instanceof ObjectNode) {
                 IType simpleType = null;
                 if (node.getObjectValue() instanceof Integer) {
-                    simpleType = PrimitiveType.Int;
+                    simpleType = PrimitiveType.INT;
                 } else if (node.getObjectValue() instanceof Long) {
-                    simpleType = PrimitiveType.Long;
+                    simpleType = PrimitiveType.LONG;
                 } else if (node.getObjectValue() instanceof Float) {
-                    simpleType = PrimitiveType.Float;
+                    simpleType = PrimitiveType.FLOAT;
                 } else if (node.getObjectValue() instanceof Double) {
-                    simpleType = PrimitiveType.Double;
+                    simpleType = PrimitiveType.DOUBLE;
                 } else if (node.getObjectValue() instanceof Boolean) {
-                    simpleType = PrimitiveType.Boolean;
+                    simpleType = PrimitiveType.BOOLEAN;
                 } else if (node.getObjectValue() instanceof String) {
-                    simpleType = ClassType.String;
+                    simpleType = ClassType.STRING;
                 }
 
                 if (simpleType != null) {
@@ -253,7 +253,7 @@ public class ModelExampleWriter {
                     }
                     String key = keys.get(i);
                     ExampleNode elementNode = node.getChildNodes().get(i);
-                    builder.append(ClassType.String.defaultValueExpression(key))
+                    builder.append(ClassType.STRING.defaultValueExpression(key))
                             .append(", ")
                             .append(this.accept(elementNode));
                 }

@@ -38,7 +38,7 @@ public class FluentExceptionMapper extends ExceptionMapper {
                 .packageName(settings.getPackage(settings.getModelsSubpackage()))
                 .name(methodOperationExceptionTypeName)
                 .errorName(errorName)
-                .parentType(isManagementException ? FluentType.ManagementException : ClassType.HttpResponseException)
+                .parentType(isManagementException ? FluentType.MANAGEMENT_EXCEPTION : ClassType.HTTP_RESPONSE_EXCEPTION)
                 .build();
         return exception;
     }

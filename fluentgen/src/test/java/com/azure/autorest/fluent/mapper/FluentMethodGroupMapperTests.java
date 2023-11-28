@@ -48,8 +48,8 @@ public class FluentMethodGroupMapperTests {
 
         List<IType> supportedInterfaces = FluentMethodGroupMapper.getInstance().findSupportedInterfaces(operationGroup, clientOpt.get().getClientMethods());
         Assertions.assertEquals(3, supportedInterfaces.size());
-        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsGet(ClassType.Object).getName())));
-        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsList(ClassType.Object).getName())));
-        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsDelete(ClassType.Object).getName())));
+        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsGet(ClassType.OBJECT).getName())));
+        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsList(ClassType.OBJECT).getName())));
+        Assertions.assertTrue(supportedInterfaces.stream().anyMatch(t -> t.toString().contains(FluentType.InnerSupportsDelete(ClassType.OBJECT).getName())));
     }
 }

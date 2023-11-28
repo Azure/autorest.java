@@ -93,31 +93,31 @@ public class ModelTestCaseUtil {
      * @return the JSON object as Map
      */
     public static Object jsonFromType(int depth, IType type) {
-        if (type.asNullable() == ClassType.Integer) {
+        if (type.asNullable() == ClassType.INTEGER) {
             return RANDOM.nextInt() & Integer.MAX_VALUE;
-        } else if (type.asNullable() == ClassType.Long) {
+        } else if (type.asNullable() == ClassType.LONG) {
             return RANDOM.nextLong() & Long.MAX_VALUE;
-        } else if (type.asNullable() == ClassType.Float) {
+        } else if (type.asNullable() == ClassType.FLOAT) {
             return RANDOM.nextFloat() * 100;
-        } else if (type.asNullable() == ClassType.Double) {
+        } else if (type.asNullable() == ClassType.DOUBLE) {
             return RANDOM.nextDouble() * 100;
-        } else if (type.asNullable() == ClassType.Boolean) {
+        } else if (type.asNullable() == ClassType.BOOLEAN) {
             return RANDOM.nextBoolean();
-        } else if (type == ClassType.String) {
+        } else if (type == ClassType.STRING) {
             return randomString();
-        } else if (type.asNullable() == ClassType.UnixTimeLong) {
+        } else if (type.asNullable() == ClassType.UNIX_TIME_LONG) {
             return RANDOM.nextLong() & Long.MAX_VALUE;
-        } else if (type == ClassType.DateTime) {
+        } else if (type == ClassType.DATE_TIME) {
             return randomDateTime().toString();
-        } else if (type == ClassType.DateTimeRfc1123) {
+        } else if (type == ClassType.DATE_TIME_RFC_1123) {
             return DateTimeRfc1123.toRfc1123String(randomDateTime());
-        } else if (type == ClassType.Duration) {
+        } else if (type == ClassType.DURATION) {
             Duration duration = Duration.ZERO;
             duration = duration.plusSeconds(RANDOM.nextInt(10 * 24 * 60 * 60));
             return duration.toString();
-        } else if (type.asNullable() == ClassType.DurationLong) {
+        } else if (type.asNullable() == ClassType.DURATION_LONG) {
             return RANDOM.nextLong() & Long.MAX_VALUE;
-        } else if (type.asNullable() == ClassType.DurationDouble) {
+        } else if (type.asNullable() == ClassType.DURATION_DOUBLE) {
             return Math.abs(RANDOM.nextDouble() * 10);
         } else if (type == ClassType.UUID) {
             return UUID.randomUUID().toString();
@@ -129,7 +129,7 @@ public class ModelTestCaseUtil {
                 // NOOP
             }
             return url;
-        } else if (type == ClassType.Object) {
+        } else if (type == ClassType.OBJECT) {
             // unknown type, use a simple string
             return "data" + randomString();
         } else if (type instanceof EnumType) {
@@ -141,17 +141,17 @@ public class ModelTestCaseUtil {
             }
             int index = RANDOM.nextInt(values.size());
             String value = values.get(index);
-            if (elementType.asNullable() == ClassType.Integer) {
+            if (elementType.asNullable() == ClassType.INTEGER) {
                 return Integer.valueOf(value);
-            } else if (elementType.asNullable() == ClassType.Long) {
+            } else if (elementType.asNullable() == ClassType.LONG) {
                 return Long.valueOf(value);
-            } else if (elementType.asNullable() == ClassType.Float) {
+            } else if (elementType.asNullable() == ClassType.FLOAT) {
                 return Float.valueOf(value);
-            } else if (elementType.asNullable() == ClassType.Double) {
+            } else if (elementType.asNullable() == ClassType.DOUBLE) {
                 return Double.valueOf(value);
-            } else if (elementType.asNullable() == ClassType.Boolean) {
+            } else if (elementType.asNullable() == ClassType.BOOLEAN) {
                 return Boolean.valueOf(value);
-            } else if (elementType == ClassType.String) {
+            } else if (elementType == ClassType.STRING) {
                 return value;
             }
         } else if (type instanceof ListType) {
@@ -180,7 +180,7 @@ public class ModelTestCaseUtil {
                 }
             } // else abort
             return map;
-        } else if (type instanceof ClassType && type != ClassType.Context) {
+        } else if (type instanceof ClassType && type != ClassType.CONTEXT) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (model != null) {
                 return jsonFromModel(depth + 1, model);

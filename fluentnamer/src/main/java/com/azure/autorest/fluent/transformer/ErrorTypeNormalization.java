@@ -59,7 +59,7 @@ public class ErrorTypeNormalization {
         ObjectSchema schema = new ObjectSchema();
         schema.setLanguage(new Languages());
         schema.getLanguage().setJava(new Language());
-        schema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+        schema.getLanguage().getJava().setName(FluentType.MANAGEMENT_ERROR.getName());
         schema.setProperties(new ArrayList<>());
         schema.getProperties().add(new Property());
         schema.getProperties().get(0).setSerializedName("code");
@@ -92,10 +92,10 @@ public class ErrorTypeNormalization {
 
                 LOGGER.info("Rename error from '{}' to 'ManagementError'", Utils.getJavaName(error));
 
-                error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                error.getLanguage().getJava().setName(FluentType.MANAGEMENT_ERROR.getName());
 
                 if (errorSchema != error) {
-                    errorSchema.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                    errorSchema.getLanguage().getJava().setName(FluentType.MANAGEMENT_ERROR.getName());
                 }
 
                 if (updateChildrenParent) {
@@ -224,7 +224,7 @@ public class ErrorTypeNormalization {
 
                 switch (getErrorType(error)) {
                     case MANAGEMENT_ERROR:
-                        error.getLanguage().getJava().setName(FluentType.ManagementError.getName());
+                        error.getLanguage().getJava().setName(FluentType.MANAGEMENT_ERROR.getName());
                         break;
 
                     case SUBCLASS_MANAGEMENT_ERROR:

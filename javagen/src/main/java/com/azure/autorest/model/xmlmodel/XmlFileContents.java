@@ -239,15 +239,5 @@ public class XmlFileContents {
         Empty,
         AfterIf,
         Text;
-
-        public static final int SIZE = Integer.SIZE;
-
-        public static CurrentLineType forValue(int value) {
-            return values()[value];
-        }
-
-        public int getValue() {
-            return this.ordinal();
-        }
     }
 }

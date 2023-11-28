@@ -108,7 +108,7 @@ public final class ModelTemplateHeaderHelper {
             // known name
             return String.format("HttpHeaderName.%s", HEADER_TO_KNOWN_HTTPHEADERNAME.get(caseInsensitiveName));
         } else {
-            return String.format("HttpHeaderName.fromString(%s)", ClassType.String.defaultValueExpression(headerName));
+            return String.format("HttpHeaderName.fromString(%s)", ClassType.STRING.defaultValueExpression(headerName));
         }
     }
 
@@ -141,7 +141,7 @@ public final class ModelTemplateHeaderHelper {
 
     private static void generateHeaderDeserializationFunction(ClientModelProperty property, JavaBlock javaBlock) {
         IType wireType = property.getWireType();
-        boolean needsNullGuarding = wireType != ClassType.String &&
+        boolean needsNullGuarding = wireType != ClassType.STRING &&
             (wireType instanceof ArrayType || wireType instanceof ClassType
                 || wireType instanceof EnumType || wireType instanceof GenericType);
 
@@ -158,27 +158,27 @@ public final class ModelTemplateHeaderHelper {
 
         boolean needsTryCatch = false;
         String setter;
-        if (wireType == PrimitiveType.Boolean || wireType == ClassType.Boolean) {
+        if (wireType == PrimitiveType.BOOLEAN || wireType == ClassType.BOOLEAN) {
             setter = String.format("Boolean.parseBoolean(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Double || wireType == ClassType.Double) {
+        } else if (wireType == PrimitiveType.DOUBLE || wireType == ClassType.DOUBLE) {
             setter = String.format("Double.parseDouble(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Float || wireType == ClassType.Float) {
+        } else if (wireType == PrimitiveType.FLOAT || wireType == ClassType.FLOAT) {
             setter = String.format("Float.parseFloat(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Int || wireType == ClassType.Integer) {
+        } else if (wireType == PrimitiveType.INT || wireType == ClassType.INTEGER) {
             setter = String.format("Integer.parseInt(%s)", rawHeaderAccess);
-        } else if (wireType == PrimitiveType.Long || wireType == ClassType.Long) {
+        } else if (wireType == PrimitiveType.LONG || wireType == ClassType.LONG) {
             setter = String.format("Long.parseLong(%s)", rawHeaderAccess);
         } else if (wireType == ArrayType.BYTE_ARRAY) {
             setter = String.format("Base64.getDecoder().decode(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.String) {
+        } else if (wireType == ClassType.STRING) {
             setter = rawHeaderAccess;
-        } else if (wireType == ClassType.DateTimeRfc1123) {
+        } else if (wireType == ClassType.DATE_TIME_RFC_1123) {
             setter = String.format("new DateTimeRfc1123(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.DateTime) {
+        } else if (wireType == ClassType.DATE_TIME) {
             setter = String.format("OffsetDateTime.parse(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.LocalDate) {
+        } else if (wireType == ClassType.LOCAL_DATE) {
             setter = String.format("LocalDate.parse(%s)", rawHeaderAccess);
-        } else if (wireType == ClassType.Duration) {
+        } else if (wireType == ClassType.DURATION) {
             setter = String.format("Duration.parse(%s)", rawHeaderAccess);
         } else if (wireType == ClassType.UUID) {
             setter = "UUID.fromString(" + rawHeaderAccess + ")";

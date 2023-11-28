@@ -94,7 +94,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
             classBlock.publicStaticMethod(String.format("%1$s from%2$s(%3$s name)", enumName, pascalTypeName, typeName),
                 function -> {
-                    String stringValue = (ClassType.String.equals(elementType)) ? "name" : "String.valueOf(name)";
+                    String stringValue = (ClassType.STRING.equals(elementType)) ? "name" : "String.valueOf(name)";
                     function.methodReturn("fromString(" + stringValue + ", " + enumName + ".class)");
                 });
 
@@ -157,7 +157,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 function.methodReturn("null");
             });
 
-            if (elementType == ClassType.String) {
+            if (elementType == ClassType.STRING) {
                 enumBlock.javadocComment(JavaJavadocComment::inheritDoc);
                 if (!settings.isStreamStyleSerialization()) {
                     enumBlock.annotation("JsonValue");
@@ -179,7 +179,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     }
 
     protected String getStringEnumImport() {
-        return ClassType.ExpandableStringEnum.getFullName();
+        return ClassType.EXPANDABLE_STRING_ENUM.getFullName();
     }
 
     /**
@@ -192,13 +192,13 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         IType enumElementType = enumType.getElementType();
         String toJsonMethodName = enumType.getToJsonMethodName();
 
-        if (enumElementType == PrimitiveType.Float) {
+        if (enumElementType == PrimitiveType.FLOAT) {
             return String.format("Float.floatToIntBits(item.%s()) == Float.floatToIntBits(value)", toJsonMethodName);
-        } else if (enumElementType == PrimitiveType.Double) {
+        } else if (enumElementType == PrimitiveType.DOUBLE) {
             return String.format("Double.doubleToLongBits(item.%s()) == Double.doubleToLongBits(value)", toJsonMethodName);
         } else if (enumElementType instanceof PrimitiveType) {
             return String.format("item.%s() == value", toJsonMethodName);
-        } else if (enumElementType == ClassType.String) {
+        } else if (enumElementType == ClassType.STRING) {
             return String.format("item.%s().equalsIgnoreCase(value)", toJsonMethodName);
         } else {
             return String.format("item.%s().equals(value)", toJsonMethodName);

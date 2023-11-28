@@ -61,7 +61,7 @@ public class ClientException {
         protected String name;
         protected String errorName;
         protected String packageName;
-        protected IType parentType = ClassType.HttpResponseException;
+        protected IType parentType = ClassType.HTTP_RESPONSE_EXCEPTION;
 
         /**
          * Sets exception name.

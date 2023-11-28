@@ -3,9 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * The different types of ClientMethod overloads that can exist in a client.
  */
@@ -33,12 +30,12 @@ public enum ClientMethodType {
     SendRequestAsync(15),
     PagingSyncSinglePage(16);
 
-    private static final Map<Integer, ClientMethodType> MAPPINGS;
+    private static final ClientMethodType[] MAPPINGS;
 
     static {
-        MAPPINGS = new HashMap<>();
+        MAPPINGS = new ClientMethodType[17];
         for (ClientMethodType methodType : ClientMethodType.values()) {
-            MAPPINGS.put(methodType.intValue, methodType);
+            MAPPINGS[methodType.intValue] = methodType;
         }
     }
 
@@ -49,7 +46,7 @@ public enum ClientMethodType {
     }
 
     public static ClientMethodType forValue(int value) {
-        return MAPPINGS.get(value);
+        return (value < 0 || value >= MAPPINGS.length) ? null : MAPPINGS[value];
     }
 
     public int getValue() {

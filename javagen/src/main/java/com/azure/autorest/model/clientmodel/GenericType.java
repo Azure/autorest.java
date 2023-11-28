@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * A generic type that is used by the client.
  */
 public class GenericType implements IType {
-    public static final GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
+    public static final GenericType FLUX_BYTE_BUFFER = Flux(ClassType.BYTE_BUFFER);
     /**
      * The main non-generic type of this generic type.
      */
@@ -69,7 +69,7 @@ public class GenericType implements IType {
     }
 
     public static GenericType Response(IType bodyType) {
-        return new GenericType(ClassType.Response.getPackage(), ClassType.Response.getName(), bodyType);
+        return new GenericType(ClassType.RESPONSE.getPackage(), ClassType.RESPONSE.getName(), bodyType);
     }
 
     public static GenericType RestResponse(IType headersType, IType bodyType) {

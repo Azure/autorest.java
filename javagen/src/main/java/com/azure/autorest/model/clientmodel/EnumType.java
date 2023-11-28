@@ -212,7 +212,7 @@ public class EnumType implements IType {
         private String packageName;
         private boolean expandable;
         private List<ClientEnumValue> values;
-        private IType elementType = ClassType.String;
+        private IType elementType = ClassType.STRING;
 
         private ImplementationDetails implementationDetails;
 

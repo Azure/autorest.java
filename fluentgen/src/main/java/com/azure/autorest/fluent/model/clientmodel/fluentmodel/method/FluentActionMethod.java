@@ -47,7 +47,7 @@ public class FluentActionMethod extends FluentMethod {
         this.description = collectionMethod.getDescription();
 
         IType returnType = collectionMethod.getFluentReturnType();
-        boolean returnTypeIsVoid = returnType == PrimitiveType.Void;
+        boolean returnTypeIsVoid = returnType == PrimitiveType.VOID;
         ReturnValue returnValue = new ReturnValue(returnTypeIsVoid ? "" : collectionMethod.getInnerClientMethod().getReturnValue().getDescription(), returnType);
         this.interfaceReturnValue = returnValue;
         this.implementationReturnValue = interfaceReturnValue;

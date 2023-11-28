@@ -299,15 +299,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.isClientSideValidations() && settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
 
         addSerializationImports(imports, model, settings);
 
         // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
         if (model.isStronglyTypedHeader()) {
-            ClassType.HttpHeaders.addImportsTo(imports, false);
-            ClassType.HttpHeaderName.addImportsTo(imports, false);
+            ClassType.HTTP_HEADERS.addImportsTo(imports, false);
+            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.

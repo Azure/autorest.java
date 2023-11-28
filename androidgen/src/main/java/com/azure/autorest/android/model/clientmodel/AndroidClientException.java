@@ -19,8 +19,8 @@ public class AndroidClientException extends ClientException {
 
         @Override
         public ClientException build() {
-            if (parentType.equals(ClassType.HttpResponseException)) {
-                parentType = ClassType.AndroidHttpResponseException;
+            if (parentType.equals(ClassType.HTTP_RESPONSE_EXCEPTION)) {
+                parentType = ClassType.ANDROID_HTTP_RESPONSE_EXCEPTION;
             }
             return new AndroidClientException(packageName,
                     name,

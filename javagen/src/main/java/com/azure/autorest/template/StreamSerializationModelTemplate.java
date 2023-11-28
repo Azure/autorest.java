@@ -73,13 +73,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else {
             imports.add(IOException.class.getName());
 
-            ClassType.JsonSerializable.addImportsTo(imports, false);
-            ClassType.JsonWriter.addImportsTo(imports, false);
-            ClassType.JsonReader.addImportsTo(imports, false);
-            ClassType.JsonToken.addImportsTo(imports, false);
+            ClassType.JSON_SERIALIZABLE.addImportsTo(imports, false);
+            ClassType.JSON_WRITER.addImportsTo(imports, false);
+            ClassType.JSON_READER.addImportsTo(imports, false);
+            ClassType.JSON_TOKEN.addImportsTo(imports, false);
         }
 
-        ClassType.CoreUtils.addImportsTo(imports, false);
+        ClassType.CORE_UTILS.addImportsTo(imports, false);
 
         imports.add(ArrayList.class.getName());
         imports.add(Base64.class.getName());
@@ -107,7 +107,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         String interfaceName = (model.getXmlName() != null)
             ? XmlSerializable.class.getSimpleName()
-            : ClassType.JsonSerializable.getName();
+            : ClassType.JSON_SERIALIZABLE.getName();
 
         return classSignature + " implements " + interfaceName + "<" + model.getName() + ">";
     }
@@ -290,9 +290,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else {
                 methodBlock.line(fieldSerializationMethod + ";");
             }
-        } else if (wireType == ClassType.Object) {
+        } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
-        } else if (wireType == ClassType.BinaryData) {
+        } else if (wireType == ClassType.BINARY_DATA) {
             String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
             if (!property.isRequired()) {
                 methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
@@ -352,7 +352,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (valueSerializationMethod != null) {
                 methodBlock.line(valueSerializationMethod);
-            } else if (elementType == ClassType.Object) {
+            } else if (elementType == ClassType.OBJECT) {
                 methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
             } else if (elementType instanceof IterableType) {
                 serializeJsonContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
@@ -937,14 +937,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else {
                 simpleDeserializationConsumer.accept(simpleDeserialization, deserializationBlock);
             }
-        } else if (wireType == ClassType.Object) {
+        } else if (wireType == ClassType.OBJECT) {
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
                     "reader.readUntyped()", fromSuper);
             } else {
                 deserializationBlock.line(property.getName() + " = reader.readUntyped();");
             }
-        } else if (wireType == ClassType.BinaryData) {
+        } else if (wireType == ClassType.BINARY_DATA) {
             BiConsumer<String, JavaBlock> binaryDataDeserializationConsumer = (logic, block) -> {
                 if (!hasConstructorArguments) {
                     handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
@@ -1023,7 +1023,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (valueDeserializationMethod != null) {
                 methodBlock.line(valueDeserializationMethod);
-            } else if (elementType == ClassType.Object) {
+            } else if (elementType == ClassType.OBJECT) {
                 methodBlock.line(lambdaReaderName + ".readUntyped()");
             } else if (elementType instanceof IterableType) {
                 deserializeJsonContainerProperty(methodBlock, "readArray", elementType,
@@ -1062,7 +1062,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 // Assumption, additional properties is a Map of String-Object
                 IType valueType = ((MapType) additionalProperties.getWireType()).getValueType();
-                if (valueType == ClassType.Object) {
+                if (valueType == ClassType.OBJECT) {
                     // String fieldName should be a local variable accessible in this spot of code.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
                 } else {
@@ -1783,7 +1783,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 // Assumption, additional properties is a Map of String-Object
                 IType valueType = ((MapType) additionalProperties.getWireType()).getValueType();
-                if (valueType == ClassType.Object) {
+                if (valueType == ClassType.OBJECT) {
                     // String fieldName should be a local variable accessible in this spot of code.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
                 } else {

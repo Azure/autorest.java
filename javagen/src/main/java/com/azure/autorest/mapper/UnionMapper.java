@@ -26,7 +26,7 @@ public class UnionMapper implements IMapper<OrSchema, IType> {
 
     @Override
     public ClassType map(OrSchema compositeType) {
-        return ClassType.BinaryData;
+        return ClassType.BINARY_DATA;
 //        if (compositeType == null) {
 //            return null;
 //        }

@@ -16,7 +16,7 @@ public class ArrayType implements IType {
     /**
      * The {@code byte[]} type.
      */
-    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.Byte,
+    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.BYTE,
         defaultValueExpression -> {
             if (defaultValueExpression != null) {
                 return String.format("\"%1$s\".getBytes()", defaultValueExpression);

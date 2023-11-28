@@ -65,7 +65,7 @@ public class ClientMethodExampleWriter {
 
         StringBuilder methodInvocation = new StringBuilder();
 
-        if (method.getReturnValue().getType().asNullable() != ClassType.Void) {
+        if (method.getReturnValue().getType().asNullable() != ClassType.VOID) {
             String assignment = String.format("%s %s = ", method.getReturnValue().getType(), "response");
             methodInvocation.append(assignment);
         }
@@ -105,8 +105,8 @@ public class ClientMethodExampleWriter {
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
                         // assert headers
                         response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0
@@ -132,7 +132,7 @@ public class ClientMethodExampleWriter {
                             }
                         }
                     }
-                } else if (ClassType.Boolean.equals(returnType.asNullable()) && HttpMethod.HEAD.equals(method.getProxyMethod().getHttpMethod())) {
+                } else if (ClassType.BOOLEAN.equals(returnType.asNullable()) && HttpMethod.HEAD.equals(method.getProxyMethod().getHttpMethod())) {
                     methodBlock.line();
                     methodBlock.line("// response assertion");
                     if (response.getStatusCode() == 200) {
@@ -140,7 +140,7 @@ public class ClientMethodExampleWriter {
                     } else if (response.getStatusCode() == 404) {
                         methodBlock.line("Assertions.assertFalse(response)");
                     }
-                } else if (!ClassType.Void.equals(returnType.asNullable())){
+                } else if (!ClassType.VOID.equals(returnType.asNullable())){
                     methodBlock.line();
                     methodBlock.line("// response assertion");
                     writeModelAssertion(methodBlock, nodeVisitor, returnType, returnType, response.getBody(), "response", true);
@@ -224,7 +224,7 @@ public class ClientMethodExampleWriter {
                     methodBlock.line("Assertions.assertEquals(0, %s);", String.format("%s.size()", modelReference));
                 }
             } else if (modelClientType instanceof PrimitiveType || modelClientType instanceof EnumType
-                    || ClassType.String.equals(modelClientType) || ClassType.URL.equals(modelClientType)
+                    || ClassType.STRING.equals(modelClientType) || ClassType.URL.equals(modelClientType)
                     || (modelClientType instanceof ClassType && ((ClassType) modelClientType).isBoxedType())) {
                 // simple models that can be compared by "Assertions.assertEquals()"
                 methodBlock.line(String.format(

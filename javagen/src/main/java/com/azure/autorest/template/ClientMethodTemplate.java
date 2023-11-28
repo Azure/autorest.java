@@ -174,11 +174,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             // TODO (alzimmer): There are a few similar transforms like this but they all have slight nuances on output.
             // This always turns ArrayType and ListType into String, the case further down this file may not.
-            if (parameterWireType != ClassType.Base64Url
+            if (parameterWireType != ClassType.BASE_64_URL
                 && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY
                 //&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData
                 && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                parameterWireType = ClassType.String;
+                parameterWireType = ClassType.STRING;
             }
 
             // If the parameter isn't required and the client method only uses required parameters optional
@@ -341,11 +341,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             // TODO (alzimmer): Reconcile the logic here with that earlier in the file.
             // This check parameter explosion but earlier in the file it doesn't.
-            if (parameterWireType != ClassType.Base64Url
+            if (parameterWireType != ClassType.BASE_64_URL
                 && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY
                 //&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                 && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                parameterWireType = (parameter.getExplode()) ? new ListType(ClassType.String) : ClassType.String;
+                parameterWireType = (parameter.getExplode()) ? new ListType(ClassType.STRING) : ClassType.STRING;
             }
 
             // If the wire type and client type are the same there is no conversion needed.
@@ -368,7 +368,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     String expression = "null";
                     if (!alwaysNull) {
                         expression = String.format("%s(%s)",
-                            parameterWireType == ClassType.String ? "Base64Util.encodeToString" : "Base64Url.encode",
+                            parameterWireType == ClassType.STRING ? "Base64Util.encodeToString" : "Base64Url.encode",
                             parameterName);
                     }
 
@@ -402,7 +402,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                         "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
                             }
                         } else {
-                            if (elementType == ClassType.String) {
+                            if (elementType == ClassType.STRING) {
                                 if (alreadyNullChecked) {
                                     expression = parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
@@ -686,7 +686,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 if (clientMethod.getParameters()
                         .stream()
-                        .noneMatch(p -> p.getClientType() == ClassType.Context)) {
+                        .noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                 }
                 addOptionalVariables(function, clientMethod);
                 function.line("return new PagedIterable<>(");
@@ -788,7 +788,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                     .stream()
-                    .noneMatch(p -> p.getClientType() == ClassType.Context)) {
+                    .noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                     nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
                     if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
@@ -818,7 +818,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 String firstPageArgs = clientMethod.getArgumentList();
                 if (clientMethod.getParameters()
                     .stream()
-                    .noneMatch(p -> p.getClientType() == ClassType.Context)) {
+                    .noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                     if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
                     } else {
@@ -893,13 +893,13 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             function.indent(() -> {
-                if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
+                if (GenericType.Flux(ClassType.BYTE_BUFFER).equals(clientMethod.getReturnValue().getType())) {
                     // Previously this used StreamResponse::getValue, but it isn't guaranteed that the return is
                     // StreamResponse, instead use Response::getValue as StreamResponse is just a fancier
                     // Response<Flux<ByteBuffer>>.
                     function.text(".flatMapMany(fluxByteBufferResponse -> fluxByteBufferResponse.getValue());");
-                } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
-                    !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
+                } else if (!GenericType.Mono(ClassType.VOID).equals(clientMethod.getReturnValue().getType()) &&
+                    !GenericType.Flux(ClassType.VOID).equals(clientMethod.getReturnValue().getType())) {
                     function.text(".flatMap(res -> Mono.justOrEmpty(res.getValue()));");
                 } else {
                     function.text(".flatMap(ignored -> Mono.empty());");
@@ -917,15 +917,15 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (CoreUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
-            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
+            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                 // If the arguments don't contain Context append Context.NONE
                 argumentList += ", Context.NONE";
             }
 
-            if (ClassType.StreamResponse.equals(clientMethod.getReturnValue().getType())) {
+            if (ClassType.STREAM_RESPONSE.equals(clientMethod.getReturnValue().getType())) {
                 function.text(".flatMapMany(StreamResponse::getValue);");
             }
-            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.VOID)) {
                 function.line("%s(%s);",
                     clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
@@ -947,12 +947,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             if (CoreUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
-            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
+            } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                 // If the arguments don't contain Context append Context.NONE
                 argumentList += ", Context.NONE";
             }
 
-            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.Void)) {
+            if (clientMethod.getReturnValue().getType().equals(PrimitiveType.VOID)) {
                 function.line("%s(%s);",
                     clientMethod.getProxyMethod().getSimpleRestResponseMethodName(),
                     argumentList);
@@ -974,7 +974,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
-            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+            if (clientMethod.getReturnValue().getType() == ClassType.INPUT_STREAM) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                     effectiveAsyncMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
@@ -984,7 +984,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
                 });
                 function.methodReturn("new SequenceInputStream(enumeration)");
-            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.VOID) {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s).block();", returnType.asNullable(),
@@ -1000,7 +1000,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     });
                 } else if (returnType instanceof GenericType && !settings.isDataPlaneClient()) {
                     GenericType genericType = (GenericType) returnType;
-                    if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.InputStream)) {
+                    if ("Response".equals(genericType.getName()) && genericType.getTypeArguments()[0].equals(ClassType.INPUT_STREAM)) {
                         function.line("return %s(%s).map(response -> {", effectiveAsyncMethodName, clientMethod.getArgumentList());
                         function.indent(() -> {
                             function.line("Iterator<ByteBufferBackedInputStream> iterator = response.getValue().map(ByteBufferBackedInputStream::new).toStream().iterator();");
@@ -1052,7 +1052,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), requestOptionsLocal,
                 settings);
-            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+            if (clientMethod.getReturnValue().getType() == ClassType.INPUT_STREAM) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
                     effectiveProxyMethodName, clientMethod.getArgumentList());
                 function.anonymousClass("Enumeration<InputStream>", "enumeration", javaBlock -> {
@@ -1062,7 +1062,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     javaBlock.publicMethod("InputStream nextElement()", methodBlock -> methodBlock.methodReturn("iterator.next()"));
                 });
                 function.methodReturn("new SequenceInputStream(enumeration)");
-            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+            } else if (clientMethod.getReturnValue().getType() != PrimitiveType.VOID) {
                 IType returnType = clientMethod.getReturnValue().getType();
                 if (returnType instanceof PrimitiveType) {
                     function.line("%s value = %s(%s);", returnType.asNullable(),
@@ -1301,7 +1301,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected IType getContextType() {
-        return ClassType.Context;
+        return ClassType.CONTEXT;
     }
 
     /**
@@ -1338,7 +1338,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      */
     protected void generateLongRunningBeginAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         String contextParam;
-        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.CONTEXT))) {
             contextParam = "context";
         } else {
             contextParam = "Context.NONE";
@@ -1385,7 +1385,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generateLongRunningBeginSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
         String contextParam;
-        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.Context))) {
+        if (clientMethod.getParameters().stream().anyMatch(p -> p.getClientType().equals(ClassType.CONTEXT))) {
             contextParam = "context";
         } else {
             contextParam = "Context.NONE";
@@ -1396,7 +1396,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         if (CoreUtils.isNullOrEmpty(argumentList)) {
             // If there are no arguments the argument is Context.NONE
             argumentList = "Context.NONE";
-        } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.Context)) {
+        } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
             // If the arguments don't contain Context append Context.NONE
             argumentList += ", Context.NONE";
         }
@@ -1515,11 +1515,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
                         .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
                         .map(p -> String.format(".replace(%1$s, %2$s)",
-                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                                ClassType.STRING.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
                                 p.getParameterReference()
                         )).collect(Collectors.joining());
                 if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
-                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+                    endpoint = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
                 }
             }
         }
@@ -1547,11 +1547,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
                         .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
                         .map(p -> String.format(".replace(%1$s, %2$s)",
-                                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                                ClassType.STRING.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
                                 p.getParameterReference()
                         )).collect(Collectors.joining());
                 if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
-                    endpoint = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+                    endpoint = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
                 }
             }
         }

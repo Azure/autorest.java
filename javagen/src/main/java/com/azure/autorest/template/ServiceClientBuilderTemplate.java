@@ -84,11 +84,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add("java.util.Map");
         imports.add("java.util.HashMap");
         imports.add("java.util.ArrayList");
-        ClassType.HttpHeaders.addImportsTo(imports, false);
-        ClassType.HttpHeaderName.addImportsTo(imports, false);
+        ClassType.HTTP_HEADERS.addImportsTo(imports, false);
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
         imports.add("java.util.Objects");
         if (settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
         addServiceClientBuilderAnnotationImport(imports);
         addHttpPolicyImports(imports);
@@ -469,7 +469,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addImportForCoreUtils(Set<String> imports) {
-        ClassType.CoreUtils.addImportsTo(imports, false);
+        ClassType.CORE_UTILS.addImportsTo(imports, false);
         imports.add("com.azure.core.util.builder.ClientBuilderUtil");
     }
 
@@ -479,10 +479,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
         imports.add(AzureKeyCredentialPolicy.class.getName());
-        ClassType.KeyCredentialPolicy.addImportsTo(imports, false);
+        ClassType.KEY_CREDENTIAL_POLICY.addImportsTo(imports, false);
 
         imports.add(HttpPolicyProviders.class.getName());
-        ClassType.HttpPipelinePolicy.addImportsTo(imports, false);
+        ClassType.HTTP_PIPELINE_POLICY.addImportsTo(imports, false);
         imports.add(HttpLoggingPolicy.class.getName());
         imports.add(AddHeadersPolicy.class.getName());
         imports.add(RequestIdPolicy.class.getName());
@@ -512,24 +512,24 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     protected ArrayList<ServiceClientProperty> addCommonClientProperties(JavaSettings settings, SecurityInfo securityInfo) {
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
-            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false,
+            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AZURE_ENVIRONMENT, "environment", false, "AzureEnvironment.AZURE"));
+            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HTTP_PIPELINE, "pipeline", false,
                             "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"));
         }
         if (settings.isFluent()) {
-            commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.Duration, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
+            commonProperties.add(new ServiceClientProperty("The default poll interval for long-running operation", ClassType.DURATION, "defaultPollInterval", false, "Duration.ofSeconds(30)"));
         }
 
         // Low-level client does not need serializer. It returns BinaryData.
         if (!settings.isDataPlaneClient()) {
             commonProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string",
-                    ClassType.SerializerAdapter, getSerializerMemberName(), false,
+                    ClassType.SERIALIZER_ADAPTER, getSerializerMemberName(), false,
                     settings.isFluent() ? "SerializerFactory.createDefaultManagementSerializerAdapter()" : JACKSON_SERIALIZER));
         }
 
         if (!settings.isAzureOrFluent() && settings.isBranded()) {
             commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
-                    + "requests, if applicable.", ClassType.RetryPolicy, "retryPolicy", false, null));
+                    + "requests, if applicable.", ClassType.RETRY_POLICY, "retryPolicy", false, null));
         }
         return commonProperties;
     }
