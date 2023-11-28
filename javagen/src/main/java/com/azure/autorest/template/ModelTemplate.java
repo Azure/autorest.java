@@ -143,7 +143,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addProperties(model, classBlock, settings);
 
             // add jsonMergePatch related properties and accessors
-            if (ClientModelUtil.isJsonMergePatchModel(model)) {
+            if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
                 addJsonMergePatchRelatedPropertyAndAccessors(classBlock, model);
             }
 
@@ -190,7 +190,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model)));
+                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
                 } else if (settings.isStreamStyleSerialization() && property.isReadOnly()
                     && !CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
                     // If stream-style serialization is being generated, the model has derived types, and the property
@@ -202,7 +202,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.method(JavaVisibility.PackagePrivate, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model)));
+                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
@@ -344,8 +344,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         model.addImportsTo(imports, settings);
 
         // add Json merge patch related imports
-        if (ClientModelUtil.isJsonMergePatchModel(model)) {
-            imports.add(model.getPackage().replace(settings.getModelsSubpackage(), settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
+        if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
+            imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
             imports.add(Set.class.getName());
             imports.add(HashSet.class.getName());
         }
@@ -1176,14 +1176,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         // setter
         addGeneratedAnnotation(classBlock);
-        classBlock.packagePrivateMethod("void serializeAsJmp(boolean jsonMergePatch)", method -> {
+        classBlock.packagePrivateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)", method -> {
             method.line("this.jsonMergePatch = jsonMergePatch;");
         });
 
         // static code block to access jsonMergePatch setter
         classBlock.staticBlock(staticBlock -> {
             staticBlock.text(String.format("JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n" +
-                    "            model.serializeAsJmp(jsonMergePatchEnabled);\n" +
+                    "            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
                     "            return model;\n" +
                     "        });", model.getName()));
         });

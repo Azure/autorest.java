@@ -195,22 +195,31 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeFromXml(classBlock, model, propertiesManager, settings);
         } else {
             if (ClientModelUtil.isJsonMergePatchModel(model)) {
+                writeToJson(classBlock, propertiesManager, true);
                 writeToJsonMergePatch(classBlock, propertiesManager);
+            } else {
+                writeToJson(classBlock, propertiesManager, false);
             }
-            writeToJson(classBlock, propertiesManager);
             writeFromJson(classBlock, model, propertiesManager, settings);
         }
     }
 
     /**
-     * write ToJson() method
+     * write ToJson() method.
+     * If it is a JsonMergePatch model, toJson() should first check jsonMergePatch flag value and then do serialization accordingly.
      * @param classBlock
      * @param propertiesManager
+     * @param isJsonMergePatch
      */
-    private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
+    private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager, boolean isJsonMergePatch) {
         classBlock.annotation("Override");
         classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException", methodBlock -> {
-            serializeJsonProperties(methodBlock, propertiesManager, false);
+            if (isJsonMergePatch) {
+                methodBlock.ifBlock("jsonMergePatch", ifBlock -> ifBlock.methodReturn("toJsonMergePatch(jsonWriter)"))
+                        .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false));
+            } else {
+                serializeJsonProperties(methodBlock, propertiesManager, false);
+            }
         });
     }
 
@@ -295,12 +304,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         if (isJsonMergePatch) {
-            methodBlock.ifBlock(String.format("%s !=null", property.getName()), codeBlock -> {
-                serializeJsonProperty(codeBlock, property, serializedName,
-                        false);
-            }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
-                codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
-            });
+            if (property.getClientType().isNullable()) {
+                methodBlock.ifBlock(String.format("%s !=null", property.getName()), codeBlock -> {
+                    serializeJsonProperty(codeBlock, property, serializedName,
+                            false);
+                }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
+                    codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
+                });
+            } else {
+                serializeJsonProperty(methodBlock, property, serializedName,
+                        fromSuperType);
+            }
         } else {
             serializeJsonProperty(methodBlock, property, serializedName, fromSuperType);
         }
