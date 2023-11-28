@@ -335,11 +335,11 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
                         } else if ("digest".equals(fieldName)) {
                             deserializedArtifactTagPropertiesInternal.digest = reader.getString();
                         } else if ("createdTime".equals(fieldName)) {
-                            deserializedArtifactTagPropertiesInternal.createdOn = reader.getNullable(
-                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                            deserializedArtifactTagPropertiesInternal.createdOn
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("lastUpdateTime".equals(fieldName)) {
-                            deserializedArtifactTagPropertiesInternal.lastUpdatedOn = reader.getNullable(
-                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                            deserializedArtifactTagPropertiesInternal.lastUpdatedOn
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("changeableAttributes".equals(fieldName)
                             && reader.currentToken() == JsonToken.START_OBJECT) {
                             while (reader.nextToken() != JsonToken.END_OBJECT) {

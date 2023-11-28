@@ -71,8 +71,7 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

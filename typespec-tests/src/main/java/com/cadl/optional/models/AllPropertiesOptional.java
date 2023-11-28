@@ -391,8 +391,8 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
                     deserializedAllPropertiesOptional.duration
                         = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                 } else if ("dateTime".equals(fieldName)) {
-                    deserializedAllPropertiesOptional.dateTime = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedAllPropertiesOptional.dateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("stringList".equals(fieldName)) {
                     List<String> stringList = reader.readArray(reader1 -> reader1.getString());
                     deserializedAllPropertiesOptional.stringList = stringList;

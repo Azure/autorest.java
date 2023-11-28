@@ -424,8 +424,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
                 } else if ("date".equals(fieldName)) {
                     date = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                 } else if ("dateTime".equals(fieldName)) {
-                    dateTime = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("stringList".equals(fieldName)) {
                     stringList = reader.readArray(reader1 -> reader1.getString());
                 } else if ("bytesDict".equals(fieldName)) {

@@ -375,11 +375,11 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
                 if ("digest".equals(fieldName)) {
                     deserializedManifestAttributesBase.digest = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedManifestAttributesBase.createdOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedManifestAttributesBase.createdOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedManifestAttributesBase.lastUpdatedOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedManifestAttributesBase.lastUpdatedOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("imageSize".equals(fieldName)) {
                     deserializedManifestAttributesBase.sizeInBytes = reader.getNullable(JsonReader::getLong);
                 } else if ("architecture".equals(fieldName)) {

@@ -71,8 +71,7 @@ public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDa
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

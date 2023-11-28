@@ -266,11 +266,11 @@ public class TagAttributesBase implements JsonSerializable<TagAttributesBase> {
                 } else if ("digest".equals(fieldName)) {
                     deserializedTagAttributesBase.digest = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedTagAttributesBase.createdOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedTagAttributesBase.createdOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedTagAttributesBase.lastUpdatedOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedTagAttributesBase.lastUpdatedOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("changeableAttributes".equals(fieldName)
                     && reader.currentToken() == JsonToken.START_OBJECT) {
                     while (reader.nextToken() != JsonToken.END_OBJECT) {

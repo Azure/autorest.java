@@ -148,7 +148,7 @@ public final class Sawshark extends Shark {
                     deserializedSawshark.setLength(reader.getFloat());
                 } else if ("birthday".equals(fieldName)) {
                     deserializedSawshark.setBirthday(
-                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601)));
+                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
                 } else if ("species".equals(fieldName)) {
                     deserializedSawshark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {

@@ -121,7 +121,7 @@ public final class Cookiecuttershark extends Shark {
                     deserializedCookiecuttershark.setLength(reader.getFloat());
                 } else if ("birthday".equals(fieldName)) {
                     deserializedCookiecuttershark.setBirthday(
-                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601)));
+                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
                 } else if ("species".equals(fieldName)) {
                     deserializedCookiecuttershark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {

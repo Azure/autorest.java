@@ -402,8 +402,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
                 reader.nextToken();
 
                 if ("org.opencontainers.image.created".equals(fieldName)) {
-                    deserializedOciAnnotations.createdOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedOciAnnotations.createdOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("org.opencontainers.image.authors".equals(fieldName)) {
                     deserializedOciAnnotations.authors = reader.getString();
                 } else if ("org.opencontainers.image.url".equals(fieldName)) {

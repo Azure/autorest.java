@@ -108,11 +108,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                 reader.nextToken();
 
                 if ("field".equals(fieldName)) {
-                    deserializedDatetimeWrapper.field = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedDatetimeWrapper.field
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("now".equals(fieldName)) {
-                    deserializedDatetimeWrapper.now = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedDatetimeWrapper.now
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

@@ -85,8 +85,7 @@ public final class SubClass extends SuperClassMismatch {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
                 } else if ("dateTime".equals(fieldName)) {
-                    dateTime = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

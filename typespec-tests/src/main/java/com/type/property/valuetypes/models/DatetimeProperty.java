@@ -71,8 +71,7 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    property = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

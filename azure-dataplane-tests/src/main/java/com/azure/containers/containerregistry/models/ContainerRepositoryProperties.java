@@ -247,11 +247,11 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
                 } else if ("imageName".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.name = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.createdOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedContainerRepositoryProperties.createdOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.lastUpdatedOn = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedContainerRepositoryProperties.lastUpdatedOn
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("manifestCount".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.manifestCount = reader.getInt();
                 } else if ("tagCount".equals(fieldName)) {

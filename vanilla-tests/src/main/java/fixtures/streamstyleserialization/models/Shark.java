@@ -188,8 +188,8 @@ public class Shark extends Fish {
                     List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                     deserializedShark.setSiblings(siblings);
                 } else if ("birthday".equals(fieldName)) {
-                    deserializedShark.birthday = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    deserializedShark.birthday
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("age".equals(fieldName)) {
                     deserializedShark.age = reader.getNullable(JsonReader::getInt);
                 } else {

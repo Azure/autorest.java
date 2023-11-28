@@ -71,8 +71,7 @@ public class SuperClass implements JsonSerializable<SuperClass> {
                 reader.nextToken();
 
                 if ("dateTime".equals(fieldName)) {
-                    dateTime = reader
-                        .getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

@@ -450,11 +450,11 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
                             deserializedArtifactManifestPropertiesInternal.sizeInBytes
                                 = reader.getNullable(JsonReader::getLong);
                         } else if ("createdTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.createdOn = reader.getNullable(
-                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                            deserializedArtifactManifestPropertiesInternal.createdOn
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("lastUpdateTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn = reader.getNullable(
-                                nonNullReader -> OffsetDateTime.parse(nonNullReader.getString(), ISO_8601));
+                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn
+                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                         } else if ("architecture".equals(fieldName)) {
                             deserializedArtifactManifestPropertiesInternal.architecture
                                 = ArtifactArchitecture.fromString(reader.getString());
