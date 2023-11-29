@@ -23,6 +23,19 @@ import com.cadl.partialupdate.models.PartialUpdateModel;
 @ServiceClient(builder = PartialUpdateClientBuilder.class)
 public final class PartialUpdateClient {
 
+    @Generated
+    private final PartialUpdateClientImpl serviceClient;
+
+    /**
+     * Initializes an instance of PartialUpdateClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    PartialUpdateClient(PartialUpdateClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
+
     /**
      * The read operation.
      * <p>
@@ -68,16 +81,10 @@ public final class PartialUpdateClient {
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
     }
 
-    @Generated
-    private final PartialUpdateClientImpl serviceClient;
-
     /**
-     * Initializes an instance of PartialUpdateClient class.
-     *
-     * @param serviceClient the service client implementation.
+     * customized method to test partial-update
      */
-    @Generated
-    PartialUpdateClient(PartialUpdateClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
+    public void testMethod() {
+        System.out.println("testMethod");
     }
 }

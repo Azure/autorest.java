@@ -11,8 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The User model.
@@ -63,7 +61,6 @@ public final class User implements JsonSerializable<User> {
      */
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean userFound = false;
             String user = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -71,23 +68,11 @@ public final class User implements JsonSerializable<User> {
 
                 if ("user".equals(fieldName)) {
                     user = reader.getString();
-                    userFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (userFound) {
-                User deserializedUser = new User(user);
-
-                return deserializedUser;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!userFound) {
-                missingProperties.add("user");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new User(user);
         });
     }
 }

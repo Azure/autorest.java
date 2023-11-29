@@ -9,9 +9,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import fixtures.streamstyleserializationctorargs.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Objects;
 
 /**
  * The DurationWrapper model.
@@ -60,7 +60,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("field", CoreToCodegenBridgeUtils.durationToStringWithDays(this.field));
         return jsonWriter.writeEndObject();
     }
 

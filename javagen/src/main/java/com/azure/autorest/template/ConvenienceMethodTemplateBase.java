@@ -135,9 +135,7 @@ abstract class ConvenienceMethodTemplateBase {
                                 String.format("requestOptions.setBody(%s);",
                                         expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType())));
                         if (!parameter.getClientMethodParameter().isRequired()) {
-                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                                writeLine.accept(ifBlock);
-                            });
+                            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
                         } else {
                             writeLine.accept(methodBlock);
                         }
@@ -357,16 +355,10 @@ abstract class ConvenienceMethodTemplateBase {
 
     protected boolean isModelOrBuiltin(IType type) {
         // TODO: other built-in types
-        boolean ret =
-                // string
-                type == ClassType.String
-                // unknown
-                || type == ClassType.Object
-                // boolean, int, float, etc.
-                || (type instanceof PrimitiveType && type.asNullable() != ClassType.Void)
-                // client model
-                || ClientModelUtil.isClientModel(type);
-        return ret;
+        return type == ClassType.String // string
+            || type == ClassType.Object // unknown
+            || (type instanceof PrimitiveType && type.asNullable() != ClassType.Void) // boolean, int, float, etc.
+            || ClientModelUtil.isClientModel(type); // client model
     }
 
     private static String expressionConvertToBinaryData(String name, IType type) {
@@ -387,9 +379,7 @@ abstract class ConvenienceMethodTemplateBase {
                         ModelTemplateHeaderHelper.getHttpHeaderNameInstanceExpression(parameter.getSerializedName()),
                         expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         if (!parameter.getClientMethodParameter().isRequired()) {
-            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                writeLine.accept(ifBlock);
-            });
+            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
         } else {
             writeLine.accept(methodBlock);
         }
@@ -419,11 +409,8 @@ abstract class ConvenienceMethodTemplateBase {
                     getAddQueryParamExpression(parameter,
                             expressionConvertToString(parameter.getName(), parameter.getClientMethodParameter().getWireType(), parameter.getProxyMethodParameter())));
         }
-        Consumer<JavaBlock> writeLineFinal = writeLine;
         if (!parameter.getClientMethodParameter().isRequired()) {
-            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), ifBlock -> {
-                writeLineFinal.accept(ifBlock);
-            });
+            methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
         } else {
             writeLine.accept(methodBlock);
         }
@@ -450,9 +437,9 @@ abstract class ConvenienceMethodTemplateBase {
             // enum
             EnumType enumType = (EnumType) type;
             if (enumType.getElementType() == ClassType.String) {
-                return String.format("%s.toString()", name);
+                return name + ".toString()";
             } else {
-                return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToJsonMethodName());
+                return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToMethodName());
             }
         } else if (type instanceof IterableType) {
             if (parameter.getCollectionFormat() == CollectionFormat.MULTI && parameter.getExplode()) {
@@ -461,14 +448,46 @@ abstract class ConvenienceMethodTemplateBase {
             } else {
                 String delimiter = parameter.getCollectionFormat().getDelimiter();
                 IType elementType = ((IterableType) type).getElementType();
-                if (elementType == ClassType.String) {
-                    return String.format(
-                            "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.joining(\"%2$s\"))",
-                            name, delimiter);
+                if (elementType instanceof EnumType) {
+                    // EnumTypes should provide a toString implementation that represents the wire value.
+                    // Circumvent the use of JacksonAdapter and handle this manually.
+                    EnumType enumType = (EnumType) elementType;
+                    // Not enums will be backed by Strings. Get the backing value before stringifying it, this
+                    // will prevent using the enum name rather than the enum value when it isn't a String-based
+                    // enum. Ex, a long-based enum with value 100 called HIGH will return "100" rather than
+                    // "HIGH".
+                    String enumToString = enumType.getElementType() == ClassType.String
+                        ? "paramItemValue"
+                        : "paramItemValue == null ? null : paramItemValue." + enumType.getToMethodName() + "()";
+                    return name + ".stream()\n" +
+                        "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
+                        "    .collect(Collectors.joining(\"" + delimiter + "\"))";
+                } else if (elementType == ClassType.String
+                    || (elementType instanceof ClassType && ((ClassType) elementType).isBoxedType())) {
+                    return name + ".stream()\n" +
+                        "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
+                        "    .collect(Collectors.joining(\"" + delimiter + "\"))";
                 } else {
+                    // Always use serializeIterable as Iterable supports both Iterable and List.
+
+                    // this logic depends on rawType of proxy method parameter be List<WireType>
+                    // alternative would be check wireType of client method parameter
+                    IType elementWireType = parameter.getRawType() instanceof IterableType
+                        ? ((IterableType) parameter.getRawType()).getElementType()
+                        : elementType;
+
+                    String serializeIterableInput = name;
+                    if (elementWireType != elementType) {
+                        // convert List<ClientType> to List<WireType>, if necessary
+                        serializeIterableInput = String.format(
+                            "%s.stream().map(paramItemValue -> %s).collect(Collectors.toList())",
+                            name, elementWireType.convertFromClientType("paramItemValue"));
+                    }
+
+                    // convert List<WireType> to String
                     return String.format(
-                            "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%1$s, CollectionFormat.%2$s)",
-                            name, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
+                        "JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(%s, CollectionFormat.%s)",
+                        serializeIterableInput, parameter.getCollectionFormat().toString().toUpperCase(Locale.ROOT));
                 }
             }
         } else {

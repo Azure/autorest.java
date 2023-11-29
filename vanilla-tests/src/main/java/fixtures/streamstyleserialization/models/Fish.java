@@ -144,28 +144,45 @@ public class Fish implements JsonSerializable<Fish> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("salmon".equals(discriminatorValue)) {
-                return Salmon.fromJsonKnownDiscriminator(readerToUse);
+                return Salmon.fromJsonKnownDiscriminator(readerToUse.reset());
             } else if ("smart_salmon".equals(discriminatorValue)) {
-                return SmartSalmon.fromJson(readerToUse);
+                return SmartSalmon.fromJson(readerToUse.reset());
             } else if ("shark".equals(discriminatorValue)) {
-                return Shark.fromJsonKnownDiscriminator(readerToUse);
+                return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
             } else if ("sawshark".equals(discriminatorValue)) {
-                return Sawshark.fromJson(readerToUse);
+                return Sawshark.fromJson(readerToUse.reset());
             } else if ("goblin".equals(discriminatorValue)) {
-                return Goblinshark.fromJson(readerToUse);
+                return Goblinshark.fromJson(readerToUse.reset());
             } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                return Cookiecuttershark.fromJson(readerToUse);
+                return Cookiecuttershark.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'fishtype' didn't match one of the expected values 'salmon', 'smart_salmon', 'shark', 'sawshark', 'goblin', or 'cookiecuttershark'. It was: '"
-                        + discriminatorValue + "'.");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Fish deserializedFish = new Fish();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("length".equals(fieldName)) {
+                    deserializedFish.length = reader.getFloat();
+                } else if ("species".equals(fieldName)) {
+                    deserializedFish.species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedFish.siblings = siblings;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedFish;
         });
     }
 }

@@ -10,14 +10,16 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The Cookiecuttershark model.
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /**
      * Creates an instance of Cookiecuttershark class.
      */
@@ -84,7 +86,7 @@ public final class Cookiecuttershark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", "cookiecuttershark");
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday", Objects.toString(getBirthday(), null));
+        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : ISO_8601.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());

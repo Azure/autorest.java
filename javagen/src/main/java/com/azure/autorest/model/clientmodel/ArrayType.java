@@ -98,6 +98,11 @@ public class ArrayType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return "JsonToken.START_ARRAY";
+    }
+
+    @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
         return jsonReaderName + ".getBinary()";
     }
@@ -110,13 +115,13 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
         if (attributeName == null) {
-            return "getBinaryElement()";
+            return xmlReaderName + ".getBinaryElement()";
         } else {
             return (attributeNamespace == null)
-                ? "getBinaryAttribute(null, \"" + attributeName + "\")"
-                : "getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
+                ? xmlReaderName + ".getBinaryAttribute(null, \"" + attributeName + "\")"
+                : xmlReaderName + ".getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
         }
     }
 

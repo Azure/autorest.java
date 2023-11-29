@@ -4,10 +4,15 @@
 
 package fixtures.streamstylexmlserialization.models;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+
 /**
  * Defines values for LeaseDurationType.
  */
-public enum LeaseDurationType {
+public enum LeaseDurationType implements JsonSerializable<LeaseDurationType> {
     /**
      * Enum value infinite.
      */
@@ -52,5 +57,23 @@ public enum LeaseDurationType {
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a LeaseDurationType from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The LeaseDurationType that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a LeaseDurationType fails to be read from the JsonReader.
+     */
+    public static LeaseDurationType fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

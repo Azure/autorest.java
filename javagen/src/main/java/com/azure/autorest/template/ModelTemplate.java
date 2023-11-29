@@ -139,6 +139,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
+            if (isStreamStyleWithIso8601DateTime(model, settings)) {
+                classBlock.privateStaticFinalVariable("DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern(\"yyyy-MM-dd'T'HH:mm:ss.SSSX\")");
+            }
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -1072,21 +1076,32 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @return Whether to generate the constant.
      */
     private static boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
-        boolean ret = false;
-        if (settings.isNullByteArrayMapsToEmptyArray()) {
-            ret = model.getProperties().stream()
-                    .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
-                            && property.getWireType() != property.getClientType());
-
-            // flatten properties
-            if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
-                ret = model.getPropertyReferences().stream()
-                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                        .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
-            }
+        if (!settings.isNullByteArrayMapsToEmptyArray()) {
+            return false;
         }
+
+        boolean ret = model.getProperties().stream()
+            .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                && property.getWireType() != property.getClientType());
+
+        // flatten properties
+        if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
+            ret = model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
+        }
+
         return ret;
+    }
+
+    private static boolean isStreamStyleWithIso8601DateTime(ClientModel model, JavaSettings settings) {
+        if (!settings.isStreamStyleSerialization()) {
+            return false;
+        }
+
+        return model.getProperties().stream().anyMatch(property -> property.getWireType() == ClassType.DateTime)
+            || ClientModelUtil.getParentProperties(model).stream().anyMatch(p -> p.getWireType() == ClassType.DateTime);
     }
 
     /**

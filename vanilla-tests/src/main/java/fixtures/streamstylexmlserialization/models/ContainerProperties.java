@@ -209,10 +209,11 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
-        xmlWriter.writeStringElement("LeaseStatus", Objects.toString(this.leaseStatus, null));
-        xmlWriter.writeStringElement("LeaseState", Objects.toString(this.leaseState, null));
-        xmlWriter.writeStringElement("LeaseDuration", Objects.toString(this.leaseDuration, null));
-        xmlWriter.writeStringElement("PublicAccess", Objects.toString(this.publicAccess, null));
+        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
+        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
+        xmlWriter.writeStringElement("LeaseDuration",
+            this.leaseDuration == null ? null : this.leaseDuration.toString());
+        xmlWriter.writeStringElement("PublicAccess", this.publicAccess == null ? null : this.publicAccess.toString());
         return xmlWriter.writeEndElement();
     }
 
@@ -253,16 +254,15 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
                 } else if ("Etag".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.etag = reader.getStringElement();
                 } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
-                    deserializedContainerProperties.leaseStatus
-                        = reader.getNullableElement(LeaseStatusType::fromString);
+                    deserializedContainerProperties.leaseStatus = LeaseStatusType.fromString(reader.getStringElement());
                 } else if ("LeaseState".equals(elementName.getLocalPart())) {
-                    deserializedContainerProperties.leaseState = reader.getNullableElement(LeaseStateType::fromString);
+                    deserializedContainerProperties.leaseState = LeaseStateType.fromString(reader.getStringElement());
                 } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.leaseDuration
-                        = reader.getNullableElement(LeaseDurationType::fromString);
+                        = LeaseDurationType.fromString(reader.getStringElement());
                 } else if ("PublicAccess".equals(elementName.getLocalPart())) {
                     deserializedContainerProperties.publicAccess
-                        = reader.getNullableElement(PublicAccessType::fromString);
+                        = PublicAccessType.fromString(reader.getStringElement());
                 } else {
                     reader.skipElement();
                 }

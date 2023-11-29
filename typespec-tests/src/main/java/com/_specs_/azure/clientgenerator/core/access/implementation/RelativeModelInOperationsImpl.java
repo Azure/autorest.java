@@ -185,6 +185,7 @@ public final class RelativeModelInOperationsImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     name: String (Required)
      * }
      * }</pre>
@@ -218,6 +219,7 @@ public final class RelativeModelInOperationsImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     name: String (Required)
      * }
      * }</pre>

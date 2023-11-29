@@ -5,12 +5,17 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Sort options for ordering manifests in a collection.
  */
-public final class ArtifactManifestOrder extends ExpandableStringEnum<ArtifactManifestOrder> {
+public final class ArtifactManifestOrder extends ExpandableStringEnum<ArtifactManifestOrder>
+    implements JsonSerializable<ArtifactManifestOrder> {
     /**
      * Do not provide an orderby value in the request.
      */
@@ -52,5 +57,23 @@ public final class ArtifactManifestOrder extends ExpandableStringEnum<ArtifactMa
      */
     public static Collection<ArtifactManifestOrder> values() {
         return values(ArtifactManifestOrder.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a ArtifactManifestOrder from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The ArtifactManifestOrder that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a ArtifactManifestOrder fails to be read from the JsonReader.
+     */
+    public static ArtifactManifestOrder fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), ArtifactManifestOrder.class);
     }
 }
