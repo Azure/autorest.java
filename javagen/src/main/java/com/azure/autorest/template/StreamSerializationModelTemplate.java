@@ -341,8 +341,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String propertyValueGetter;
         if (fromSuperType) {
             propertyValueGetter = (clientType != wireType)
-                    ? wireType.convertFromClientType(property.getGetterName() + "()")
-                    : property.getGetterName() + "()";
+                ? wireType.convertFromClientType(property.getGetterName() + "()")
+                : property.getGetterName() + "()";
         } else if (property.isPolymorphicDiscriminator()) {
             propertyValueGetter = property.getDefaultValue();
         } else {
@@ -376,12 +376,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
-                    serializedName, propertyValueGetter, 0);
+                serializedName, propertyValueGetter, 0);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
             serializeJsonContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
-                    serializedName, propertyValueGetter, 0);
+                serializedName, propertyValueGetter, 0);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
             throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
