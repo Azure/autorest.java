@@ -352,7 +352,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
-                propertyValueGetter);
+            propertyValueGetter);
         if (fieldSerializationMethod != null) {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
