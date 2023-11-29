@@ -32,23 +32,23 @@ public class AndroidPrimitiveMapper extends PrimitiveMapper {
             case BYTE_ARRAY:
                 ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
                 if (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL) {
-                    return ClassType.AndroidBase64Url;
+                    return ClassType.ANDROID_BASE_64_URL;
                 } else {
                     return ArrayType.BYTE_ARRAY;
                 }
             case DATE_TIME:
                 DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
                 if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
-                    return ClassType.AndroidDateTimeRfc1123;
+                    return ClassType.ANDROID_DATE_TIME_RFC_1123;
                 } else {
-                    return ClassType.AndroidDateTime;
+                    return ClassType.ANDROID_DATE_TIME;
                 }
             case DURATION:
-                return ClassType.AndroidDuration;
+                return ClassType.ANDROID_DURATION;
             case DATE:
-                return ClassType.AndroidLocalDate;
+                return ClassType.ANDROID_LOCAL_DATE;
             case UNIXTIME:
-                return ClassType.AndroidDateTime;
+                return ClassType.ANDROID_DATE_TIME;
             default:
                return baseResolved;
         }

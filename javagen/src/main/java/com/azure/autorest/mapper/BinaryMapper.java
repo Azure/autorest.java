@@ -8,7 +8,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 
 /**
- * A mapper that maps a {@link BinarySchema} to {@link GenericType#FluxByteBuffer} when the schema isn't null.
+ * A mapper that maps a {@link BinarySchema} to {@link GenericType#FLUX_BYTE_BUFFER} when the schema isn't null.
  */
 public class BinaryMapper implements IMapper<BinarySchema, IType> {
 
@@ -28,6 +28,6 @@ public class BinaryMapper implements IMapper<BinarySchema, IType> {
     if (binarySchema == null) {
       return null;
     }
-    return GenericType.FluxByteBuffer;
+    return GenericType.FLUX_BYTE_BUFFER;
   }
 }

@@ -303,8 +303,8 @@ public class ClientMethod {
             }
             IType parameterClientType = parameter.getClientType();
 
-            if (parameterClientType != ClassType.Base64Url && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY /*&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData*/ && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                parameterWireType = ClassType.String;
+            if (parameterClientType != ClassType.BASE_64_URL && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY /*&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData*/ && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+                parameterWireType = ClassType.STRING;
             }
 
             String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer
@@ -353,12 +353,12 @@ public class ClientMethod {
 
         imports.add("java.util.Objects");
         imports.add("java.util.stream.Collectors");
-        ClassType.Response.addImportsTo(imports, includeImplementationImports);
-        ClassType.SimpleResponse.addImportsTo(imports, includeImplementationImports);
+        ClassType.RESPONSE.addImportsTo(imports, includeImplementationImports);
+        ClassType.SIMPLE_RESPONSE.addImportsTo(imports, includeImplementationImports);
 
         if (settings.isDataPlaneClient()) {
             // for some processing on RequestOptions (get/set header)
-            ClassType.HttpHeaderName.addImportsTo(imports, false);
+            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
             // for query parameter modification in RequestOptions (UrlBuilder.parse)
             imports.add(UrlBuilder.class.getName());
@@ -371,7 +371,7 @@ public class ClientMethod {
         }
 
         if (includeImplementationImports) {
-            ClassType.Context.addImportsTo(imports, false);
+            ClassType.CONTEXT.addImportsTo(imports, false);
 
             if (proxyMethod != null) {
                 proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
@@ -387,7 +387,7 @@ public class ClientMethod {
                 }
             }
 
-            if (getReturnValue().getType() == ClassType.InputStream) {
+            if (getReturnValue().getType() == ClassType.INPUT_STREAM) {
                 imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
                 imports.add("java.io.SequenceInputStream");
                 imports.add("java.util.Enumeration");
@@ -408,7 +408,7 @@ public class ClientMethod {
                 if (settings.isDataPlaneClient()) {
                     imports.add("java.util.List");
                     imports.add("java.util.Map");
-                    ClassType.BinaryData.addImportsTo(imports, includeImplementationImports);
+                    ClassType.BINARY_DATA.addImportsTo(imports, includeImplementationImports);
                 }
             }
 
@@ -443,14 +443,14 @@ public class ClientMethod {
             if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
                 // Repeatable Requests
                 ClassType.UUID.addImportsTo(imports, false);
-                ClassType.DateTime.addImportsTo(imports, false);
-                ClassType.DateTimeRfc1123.addImportsTo(imports, false);
+                ClassType.DATE_TIME.addImportsTo(imports, false);
+                ClassType.DATE_TIME_RFC_1123.addImportsTo(imports, false);
             }
 
             if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
                 imports.add(SimpleResponse.class.getName());
-                ClassType.BinaryData.addImportsTo(imports, false);
-                ClassType.HttpRequest.addImportsTo(imports, false);
+                ClassType.BINARY_DATA.addImportsTo(imports, false);
+                ClassType.HTTP_REQUEST.addImportsTo(imports, false);
             }
         }
     }
@@ -465,7 +465,7 @@ public class ClientMethod {
                 .type(ClientMethodType.SendRequestAsync)
                 .parameters(Collections.singletonList(ClientMethodParameter.HTTP_REQUEST_PARAMETER))
                 .returnValue(new ReturnValue("the response body on successful completion of {@link Mono}",
-                        GenericType.Mono(GenericType.Response(ClassType.BinaryData))))
+                        GenericType.Mono(GenericType.Response(ClassType.BINARY_DATA))))
                 .build();
     }
 
@@ -479,7 +479,7 @@ public class ClientMethod {
                 .type(ClientMethodType.SendRequestSync)
                 .parameters(Arrays.asList(ClientMethodParameter.HTTP_REQUEST_PARAMETER, ClientMethodParameter.CONTEXT_PARAMETER))
                 .returnValue(new ReturnValue("the response body along with {@link Response}",
-                        GenericType.Response(ClassType.BinaryData)))
+                        GenericType.Response(ClassType.BINARY_DATA)))
                 .build();
     }
 

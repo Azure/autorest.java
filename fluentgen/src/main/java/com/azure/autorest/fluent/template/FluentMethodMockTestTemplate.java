@@ -59,11 +59,11 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
     public void write(ClientMethodInfo info, JavaFile javaFile) {
         Set<String> imports = new HashSet<>(Arrays.asList(
                 AccessToken.class.getName(),
-                ClassType.HttpClient.getFullName(),
-                ClassType.HttpHeaders.getFullName(),
-                ClassType.HttpRequest.getFullName(),
+                ClassType.HTTP_CLIENT.getFullName(),
+                ClassType.HTTP_HEADERS.getFullName(),
+                ClassType.HTTP_REQUEST.getFullName(),
                 HttpResponse.class.getName(),
-                ClassType.AzureEnvironment.getFullName(),
+                ClassType.AZURE_ENVIRONMENT.getFullName(),
                 AzureProfile.class.getName(),
                 "org.junit.jupiter.api.Test",
                 "org.mockito.ArgumentCaptor",
@@ -83,7 +83,7 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
         if (isResponseType) {
             fluentReturnType = FluentUtils.getValueTypeFromResponseType(fluentReturnType);
         }
-        final boolean hasReturnValue = fluentReturnType.asNullable() != ClassType.Void;
+        final boolean hasReturnValue = fluentReturnType.asNullable() != ClassType.VOID;
 
         // method invocation
         String clientMethodInvocationWithResponse;
@@ -138,7 +138,7 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
                 methodBlock.line("ArgumentCaptor<HttpRequest> httpRequest = ArgumentCaptor.forClass(HttpRequest.class);");
                 methodBlock.line();
                 // response
-                methodBlock.line("String responseStr = " + ClassType.String.defaultValueExpression(jsonStr) + ";");
+                methodBlock.line("String responseStr = " + ClassType.STRING.defaultValueExpression(jsonStr) + ";");
                 methodBlock.line();
                 // mock class
                 methodBlock.line("Mockito.when(httpResponse.getStatusCode()).thenReturn(" + statusCode + ");");

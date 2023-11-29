@@ -92,7 +92,7 @@ public class ProtocolTestWriter {
                     String expr;
                     if (defaultValueExpression == null) {
                         expr = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\", %2$s)",
-                                serviceClientProperty.getName().toUpperCase(Locale.ROOT), ClassType.String.defaultValueExpression(serviceClientProperty.getName().toLowerCase(Locale.ROOT)));
+                                serviceClientProperty.getName().toUpperCase(Locale.ROOT), ClassType.STRING.defaultValueExpression(serviceClientProperty.getName().toLowerCase(Locale.ROOT)));
                     } else {
                         expr = String.format("Configuration.getGlobalConfiguration().get(\"%1$s\", %2$s)",
                                 serviceClientProperty.getName().toUpperCase(Locale.ROOT), defaultValueExpression);

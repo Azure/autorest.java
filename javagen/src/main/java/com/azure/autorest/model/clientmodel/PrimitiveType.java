@@ -12,14 +12,14 @@ import java.util.function.Function;
  * A basic type used by a client.
  */
 public class PrimitiveType implements IType {
-    public static final PrimitiveType Void = new Builder()
+    public static final PrimitiveType VOID = new Builder()
         .name("void")
-        .nullableType(ClassType.Void)
+        .nullableType(ClassType.VOID)
         .build();
 
-    public static final PrimitiveType Boolean = new Builder()
+    public static final PrimitiveType BOOLEAN = new Builder()
         .name("boolean")
-        .nullableType(ClassType.Boolean)
+        .nullableType(ClassType.BOOLEAN)
         .defaultValueExpressionConverter(String::toLowerCase)
         .defaultValue("false")
         .jsonToken("JsonToken.BOOLEAN")
@@ -29,9 +29,9 @@ public class PrimitiveType implements IType {
         .xmlElementDeserializationMethod("getBooleanElement()")
         .build();
 
-    public static final PrimitiveType Byte = new Builder()
+    public static final PrimitiveType BYTE = new Builder()
         .name("byte")
-        .nullableType(ClassType.Byte)
+        .nullableType(ClassType.BYTE)
         .defaultValueExpressionConverter(Function.identity())
         .defaultValue("0")
         .jsonToken("JsonToken.NUMBER")
@@ -41,9 +41,9 @@ public class PrimitiveType implements IType {
         .xmlElementDeserializationMethod("getIntElement()")
         .build();
 
-    public static final PrimitiveType Int = new Builder()
+    public static final PrimitiveType INT = new Builder()
         .name("int")
-        .nullableType(ClassType.Integer)
+        .nullableType(ClassType.INTEGER)
         .defaultValueExpressionConverter(Function.identity())
         .defaultValue("0")
         .jsonToken("JsonToken.NUMBER")
@@ -53,13 +53,13 @@ public class PrimitiveType implements IType {
         .xmlElementDeserializationMethod("getIntElement()")
         .build();
 
-    public static final PrimitiveType Long = new Builder()
+    public static final PrimitiveType LONG = new Builder()
         .prototypeAsLong()
         .build();
 
-    public static final PrimitiveType Float = new Builder()
+    public static final PrimitiveType FLOAT = new Builder()
         .name("float")
-        .nullableType(ClassType.Float)
+        .nullableType(ClassType.FLOAT)
         .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + "f")
         .defaultValue("0.0")
         .jsonToken("JsonToken.NUMBER")
@@ -69,13 +69,13 @@ public class PrimitiveType implements IType {
         .xmlElementDeserializationMethod("getFloatElement()")
         .build();
 
-    public static final PrimitiveType Double = new Builder()
+    public static final PrimitiveType DOUBLE = new Builder()
         .prototypeAsDouble()
         .build();
 
-    public static final PrimitiveType Char = new Builder()
+    public static final PrimitiveType CHAR = new Builder()
         .name("char")
-        .nullableType(ClassType.Character)
+        .nullableType(ClassType.CHARACTER)
         .defaultValueExpressionConverter(defaultValueExpression -> Integer.toString(defaultValueExpression.charAt(0)))
         .defaultValue("\u0000")
         .jsonToken("JsonToken.STRING")
@@ -86,19 +86,19 @@ public class PrimitiveType implements IType {
         .xmlElementDeserializationMethod("getStringElement().charAt(0)")
         .build();
 
-    public static final PrimitiveType UnixTimeLong = new Builder()
+    public static final PrimitiveType UNIX_TIME_LONG = new Builder()
         .prototypeAsLong()
-        .nullableType(ClassType.UnixTimeLong)
+        .nullableType(ClassType.UNIX_TIME_LONG)
         .build();
 
-    public static final PrimitiveType DurationLong = new Builder()
+    public static final PrimitiveType DURATION_LONG = new Builder()
         .prototypeAsLong()
-        .nullableType(ClassType.DurationLong)
+        .nullableType(ClassType.DURATION_LONG)
         .build();
 
-    public static final PrimitiveType DurationDouble = new Builder()
+    public static final PrimitiveType DURATION_DOUBLE = new Builder()
         .prototypeAsDouble()
-        .nullableType(ClassType.DurationDouble)
+        .nullableType(ClassType.DURATION_DOUBLE)
         .build();
 
     /**
@@ -164,7 +164,7 @@ public class PrimitiveType implements IType {
 
     @Override
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
-        if (this == PrimitiveType.UnixTimeLong) {
+        if (this == PrimitiveType.UNIX_TIME_LONG) {
             imports.add(Instant.class.getName());
             imports.add(ZoneOffset.class.getName());
         }
@@ -206,12 +206,12 @@ public class PrimitiveType implements IType {
     @Override
     public final IType getClientType() {
         IType clientType = this;
-        if (this == PrimitiveType.UnixTimeLong) {
-            clientType = ClassType.UnixTimeDateTime;
-        } else if (this == PrimitiveType.DurationLong) {
-            clientType = ClassType.Duration;
-        } else if (this == PrimitiveType.DurationDouble) {
-            clientType = ClassType.Duration;
+        if (this == PrimitiveType.UNIX_TIME_LONG) {
+            clientType = ClassType.UNIX_TIME_DATE_TIME;
+        } else if (this == PrimitiveType.DURATION_LONG) {
+            clientType = ClassType.DURATION;
+        } else if (this == PrimitiveType.DURATION_DOUBLE) {
+            clientType = ClassType.DURATION;
         }
         return clientType;
     }
@@ -222,11 +222,11 @@ public class PrimitiveType implements IType {
             return expression;
         }
 
-        if (this == PrimitiveType.UnixTimeLong) {
+        if (this == PrimitiveType.UNIX_TIME_LONG) {
             expression = String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
-        } else if (this == PrimitiveType.DurationLong) {
+        } else if (this == PrimitiveType.DURATION_LONG) {
             expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
-        } else if (this == PrimitiveType.DurationDouble) {
+        } else if (this == PrimitiveType.DURATION_DOUBLE) {
             expression = java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
         }
         return expression;
@@ -238,11 +238,11 @@ public class PrimitiveType implements IType {
             return expression;
         }
 
-        if (this == PrimitiveType.UnixTimeLong) {
+        if (this == PrimitiveType.UNIX_TIME_LONG) {
             expression = String.format("%1$s.toEpochSecond()", expression);
-        } else if (this == PrimitiveType.DurationLong) {
+        } else if (this == PrimitiveType.DURATION_LONG) {
             expression = java.lang.String.format("%s.getSeconds()", expression);
-        } else if (this == PrimitiveType.DurationDouble) {
+        } else if (this == PrimitiveType.DURATION_DOUBLE) {
             expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }
         return expression;
@@ -336,7 +336,7 @@ public class PrimitiveType implements IType {
 
         public Builder prototypeAsLong() {
             return this.name("long")
-                .nullableType(ClassType.Long)
+                .nullableType(ClassType.LONG)
                 .defaultValueExpressionConverter(defaultValueExpression -> defaultValueExpression + 'L')
                 .defaultValue("0")
                 .jsonToken("JsonToken.NUMBER")
@@ -349,7 +349,7 @@ public class PrimitiveType implements IType {
 
         public Builder prototypeAsDouble() {
             return this.name("double")
-                .nullableType(ClassType.Double)
+                .nullableType(ClassType.DOUBLE)
                 .defaultValueExpressionConverter(defaultValueExpression -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)))
                 .defaultValue("0.0")
                 .jsonToken("JsonToken.NUMBER")

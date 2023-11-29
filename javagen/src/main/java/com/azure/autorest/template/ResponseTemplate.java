@@ -35,7 +35,7 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
         IType restResponseType = getRestResponseType(response);
         restResponseType.addImportsTo(imports, true);
 
-        boolean isStreamResponse = response.getBodyType().equals(GenericType.FluxByteBuffer);
+        boolean isStreamResponse = response.getBodyType().equals(GenericType.FLUX_BYTE_BUFFER);
 
         // Stream responses implement Closeable to offer a way for the Flux<ByteBuffer> response to be drained
         // if it isn't consumed.
@@ -71,8 +71,8 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
                 response.getName(), response.getBodyType().asNullable(), response.getHeadersType()),
                 ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
 
-            if (!response.getBodyType().asNullable().equals(ClassType.Void)) {
-                if (response.getBodyType().equals(GenericType.FluxByteBuffer)) {
+            if (!response.getBodyType().asNullable().equals(ClassType.VOID)) {
+                if (response.getBodyType().equals(GenericType.FLUX_BYTE_BUFFER)) {
                     classBlock.javadocComment(javadoc -> {
                         javadoc.description("Gets the response content stream.");
                         javadoc.methodReturns("the response content stream");

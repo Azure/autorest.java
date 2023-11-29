@@ -204,7 +204,7 @@ public class FluentExampleTemplate {
             imports.add(java.io.IOException.class.getName());
 
             return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
-                    ClassType.String.defaultValueExpression(jsonStr));
+                    ClassType.STRING.defaultValueExpression(jsonStr));
         }
     }
 

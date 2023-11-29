@@ -37,7 +37,7 @@ public class CollectionMethodTemplate implements ImmutableMethod {
                 .methodSignature(fluentMethod.getMethodSignature())
                 .method(block -> {
                     String expression = String.format("this.%1$s().%2$s", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation());
-                    if (innerType == PrimitiveType.Void || innerType == PrimitiveType.Void.asNullable()) {
+                    if (innerType == PrimitiveType.VOID || innerType == PrimitiveType.VOID.asNullable()) {
                         block.line(String.format("this.%1$s().%2$s;", ModelNaming.METHOD_SERVICE_CLIENT, fluentMethod.getMethodInvocation()));
                     } else {
                         if (innerType instanceof ListType || innerType instanceof MapType) {

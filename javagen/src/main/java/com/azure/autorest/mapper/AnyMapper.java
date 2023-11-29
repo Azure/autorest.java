@@ -8,7 +8,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 
 /**
- * A mapper that maps an {@link AnySchema} to {@link ClassType#Object}, always.
+ * A mapper that maps an {@link AnySchema} to {@link ClassType#OBJECT}, always.
  */
 public class AnyMapper implements IMapper<AnySchema, IType> {
 
@@ -29,6 +29,6 @@ public class AnyMapper implements IMapper<AnySchema, IType> {
 
   @Override
   public IType map(AnySchema anySchema) {
-    return ClassType.Object;
+    return ClassType.OBJECT;
   }
 }

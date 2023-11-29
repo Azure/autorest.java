@@ -226,9 +226,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     && request.getProtocol().getHttp().getMediaTypes().contains("application/json-patch+json");
 
                 boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
-                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BinaryData);
+                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BINARY_DATA);
                 boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
-                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
+                    .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FLUX_BYTE_BUFFER);
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {
@@ -241,7 +241,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     // If the codemodel parameter and proxy method parameter types don't match, update the client
                     // method param to use proxy method parameter type.
-                    if (proxyMethodUsesBinaryData && clientMethodParameter.getClientType() == GenericType.FluxByteBuffer) {
+                    if (proxyMethodUsesBinaryData && clientMethodParameter.getClientType() == GenericType.FLUX_BYTE_BUFFER) {
                         clientMethodParameter = updateClientMethodParameter(clientMethodParameter);
                     }
 
@@ -336,7 +336,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()
                     && (settings.isFluent() || settings.getPollingConfig("default") != null)
-                    && !returnTypeHolder.syncReturnType.equals(ClassType.InputStream)) {
+                    && !returnTypeHolder.syncReturnType.equals(ClassType.INPUT_STREAM)) {
                     // temporary skip InputStream, no idea how to do this in PollerFlux
                     // Skip sync ProxyMethods for polling as sync polling isn't ready yet.
                     if (proxyMethod.isSync()) {
@@ -430,8 +430,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                     if (methodPollingDetails != null && isProtocolMethod
                         // models of LRO configured
-                        && !(ClassType.BinaryData.equals(methodPollingDetails.getIntermediateType())
-                        && (ClassType.BinaryData.equals(methodPollingDetails.getFinalType()) || ClassType.Void.equals(methodPollingDetails.getFinalType().asNullable())))) {
+                        && !(ClassType.BINARY_DATA.equals(methodPollingDetails.getIntermediateType())
+                        && (ClassType.BINARY_DATA.equals(methodPollingDetails.getFinalType()) || ClassType.VOID.equals(methodPollingDetails.getFinalType().asNullable())))) {
 
                         // a new method to be added as implementation only (not exposed to client) for developer
                         dpgMethodPollingDetailsWithModel = methodPollingDetails;
@@ -440,9 +440,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         methodPollingDetails = new MethodPollingDetails(
                             dpgMethodPollingDetailsWithModel.getPollingStrategy(),
                             dpgMethodPollingDetailsWithModel.getSyncPollingStrategy(),
-                            ClassType.BinaryData,
+                            ClassType.BINARY_DATA,
                             // if model says final type is Void, then it is Void
-                            (dpgMethodPollingDetailsWithModel.getFinalType().asNullable() == ClassType.Void) ? PrimitiveType.Void : ClassType.BinaryData,
+                            (dpgMethodPollingDetailsWithModel.getFinalType().asNullable() == ClassType.VOID) ? PrimitiveType.VOID
+                                : ClassType.BINARY_DATA,
                             dpgMethodPollingDetailsWithModel.getPollIntervalInSeconds());
                     }
 
@@ -595,18 +596,18 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .getClientType();
 
         IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
-        if (responseBodyType.equals(ClassType.InputStream)) {
+        if (responseBodyType.equals(ClassType.INPUT_STREAM)) {
             returnTypeHolder.asyncReturnType = createAsyncBinaryReturnType();
             returnTypeHolder.syncReturnType = responseBodyType.getClientType();
         } else {
-            if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+            if (restAPIMethodReturnBodyClientType != PrimitiveType.VOID) {
                 returnTypeHolder.asyncReturnType = createAsyncBodyReturnType(restAPIMethodReturnBodyClientType);
             } else {
                 returnTypeHolder.asyncReturnType = createAsyncVoidReturnType();
             }
             returnTypeHolder.syncReturnType = responseBodyType.getClientType();
-            if (responseBodyType == GenericType.FluxByteBuffer && !settings.isFluent()) {
-                returnTypeHolder.syncReturnType = ClassType.BinaryData;
+            if (responseBodyType == GenericType.FLUX_BYTE_BUFFER && !settings.isFluent()) {
+                returnTypeHolder.syncReturnType = ClassType.BINARY_DATA;
             }
         }
 
@@ -929,8 +930,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
         return clientMethodParameter.toNewBuilder()
-            .rawType(ClassType.BinaryData)
-            .wireType(ClassType.BinaryData)
+            .rawType(ClassType.BINARY_DATA)
+            .wireType(ClassType.BINARY_DATA)
             .build();
     }
 
@@ -953,7 +954,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         ProxyMethod proxyMethod) {
 
         boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
-                .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FluxByteBuffer);
+                .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FLUX_BYTE_BUFFER);
 
         builder.methodPollingDetails(methodPollingDetails);
         if (JavaSettings.getInstance().isGenerateAsyncMethods()) {
@@ -1030,7 +1031,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The Context type.
      */
     protected IType getContextType() {
-        return ClassType.Context;
+        return ClassType.CONTEXT;
     }
 
     /**
@@ -1248,7 +1249,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The asynchronous void return type.
      */
     protected IType createAsyncVoidReturnType() {
-        return GenericType.Mono(ClassType.Void);
+        return GenericType.Mono(ClassType.VOID);
     }
 
     /**
@@ -1267,7 +1268,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The asynchronous binary return type.
      */
     protected IType createAsyncBinaryReturnType() {
-        return GenericType.Flux(ClassType.ByteBuffer);
+        return GenericType.Flux(ClassType.BYTE_BUFFER);
     }
 
     /**
@@ -1316,7 +1317,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The synchronous paged protocol return type.
      */
     protected IType createProtocolPagedSyncReturnType() {
-        return GenericType.PagedIterable(ClassType.BinaryData);
+        return GenericType.PagedIterable(ClassType.BINARY_DATA);
     }
 
     /**
@@ -1325,7 +1326,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The asynchronous paged protocol return type.
      */
     protected IType createProtocolPagedAsyncReturnType() {
-        return GenericType.PagedFlux(ClassType.BinaryData);
+        return GenericType.PagedFlux(ClassType.BINARY_DATA);
     }
 
     /**
@@ -1334,7 +1335,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The asynchronous paged protocol REST response return type.
      */
     protected IType createProtocolPagedRestResponseReturnType() {
-        return GenericType.Mono(GenericType.PagedResponse(ClassType.BinaryData));
+        return GenericType.Mono(GenericType.PagedResponse(ClassType.BINARY_DATA));
     }
 
     /**
@@ -1343,7 +1344,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The synchronous paged protocol REST response return type.
      */
     protected IType createProtocolPagedRestResponseReturnTypeSync() {
-        return GenericType.PagedResponse(ClassType.BinaryData);
+        return GenericType.PagedResponse(ClassType.BINARY_DATA);
     }
 
     /**
@@ -1537,8 +1538,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             pollResponseType = createTypeFromModelName(details.getIntermediateType(), JavaSettings.getInstance());
         }
         // azure-core wants poll response to be non-null
-        if (pollResponseType.asNullable() == ClassType.Void) {
-            pollResponseType = ClassType.BinaryData;
+        if (pollResponseType.asNullable() == ClassType.VOID) {
+            pollResponseType = ClassType.BINARY_DATA;
         }
 
         return pollResponseType;
@@ -1553,12 +1554,12 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             resultType = createTypeFromModelName(details.getFinalType(), JavaSettings.getInstance());
         }
         // azure-core wants poll response to be non-null
-        if (resultType.asNullable() == ClassType.Void) {
-            resultType = ClassType.BinaryData;
+        if (resultType.asNullable() == ClassType.VOID) {
+            resultType = ClassType.BINARY_DATA;
         }
         // DELETE would not have final response as resource is deleted
         if (httpMethod == HttpMethod.DELETE) {
-            resultType = PrimitiveType.Void;
+            resultType = PrimitiveType.VOID;
         }
 
         return resultType;
@@ -1577,7 +1578,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @return The return type Javadoc description.
      */
     protected static String returnTypeDescription(Operation operation, IType returnType, IType baseType) {
-        if (returnType == PrimitiveType.Void) {
+        if (returnType == PrimitiveType.VOID) {
             // void methods don't have a return value, therefore no return Javadoc.
             return null;
         }
@@ -1608,7 +1609,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // Mono<Boolean> of HEAD method
         if (description == null
-            && baseType == PrimitiveType.Boolean
+            && baseType == PrimitiveType.BOOLEAN
             && HttpMethod.HEAD == MethodUtil.getHttpMethod(operation)) {
             description = "whether resource exists";
         }
@@ -1649,7 +1650,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             ObjectMapper objectMapper = Mappers.getObjectMapper();
             IType intermediateType = objectMapper.map(metadata.getPollResultType());
             IType finalType = metadata.getFinalResultType() == null
-                    ? PrimitiveType.Void
+                    ? PrimitiveType.VOID
                     : objectMapper.map(metadata.getFinalResultType());
 
             // PollingDetails would override LongRunningMetadata

@@ -173,7 +173,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (parameter.getClientMethodParameter().getVersioning() != null && parameter.getClientMethodParameter().getVersioning().getAdded() != null) {
                 String condition = String.format(
                         "!Arrays.asList(%1$s).contains(serviceClient.getServiceVersion().getVersion())",
-                        parameter.getClientMethodParameter().getVersioning().getAdded().stream().map(ClassType.String::defaultValueExpression).collect(Collectors.joining(", ")));
+                        parameter.getClientMethodParameter().getVersioning().getAdded().stream().map(ClassType.STRING::defaultValueExpression).collect(Collectors.joining(", ")));
                 methodBlock.ifBlock(condition, ifBlock -> {
                     String exceptionExpression = String.format(
                             "new IllegalArgumentException(\"Parameter %1$s is only available in api-version %2$s.\")",
@@ -241,7 +241,7 @@ abstract class ConvenienceMethodTemplateBase {
             // flatten (possible with grouping)
 
             ClientMethodParameter targetParameter = detail.getOutParameter();
-            if (targetParameter.getWireType() == ClassType.BinaryData) {
+            if (targetParameter.getWireType() == ClassType.BINARY_DATA) {
                 String targetParameterName = targetParameter.getName();
                 String targetParameterObjectName = targetParameterName + "Obj";
                 methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
@@ -278,9 +278,9 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 });
 
-        ClassType.HttpHeaderName.addImportsTo(imports, false);
-        ClassType.BinaryData.addImportsTo(imports, false);
-        ClassType.RequestOptions.addImportsTo(imports, false);
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+        ClassType.BINARY_DATA.addImportsTo(imports, false);
+        ClassType.REQUEST_OPTIONS.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
         imports.add(Objects.class.getName());
         imports.add(FluxUtil.class.getName());
@@ -291,7 +291,7 @@ abstract class ConvenienceMethodTemplateBase {
         imports.add(TypeReference.class.getName());
 
         // byte[]
-        ClassType.Base64Url.addImportsTo(imports, false);
+        ClassType.BASE_64_URL.addImportsTo(imports, false);
 
         // flatten payload
         imports.add(Map.class.getName());
@@ -355,17 +355,17 @@ abstract class ConvenienceMethodTemplateBase {
 
     protected boolean isModelOrBuiltin(IType type) {
         // TODO: other built-in types
-        return type == ClassType.String // string
-            || type == ClassType.Object // unknown
-            || (type instanceof PrimitiveType && type.asNullable() != ClassType.Void) // boolean, int, float, etc.
+        return type == ClassType.STRING // string
+            || type == ClassType.OBJECT // unknown
+            || (type instanceof PrimitiveType && type.asNullable() != ClassType.VOID) // boolean, int, float, etc.
             || ClientModelUtil.isClientModel(type); // client model
     }
 
     private static String expressionConvertToBinaryData(String name, IType type) {
-        if (type == ClassType.BinaryData) {
+        if (type == ClassType.BINARY_DATA) {
             return name;
         } else {
-            if (type == ClassType.Base64Url) {
+            if (type == ClassType.BASE_64_URL) {
                 return String.format("BinaryData.fromObject(Base64Url.encode(%s))", name);
             } else {
                 return String.format("BinaryData.fromObject(%s)", name);
@@ -420,23 +420,23 @@ abstract class ConvenienceMethodTemplateBase {
         // TODO: generic not having 3rd parameter "encoded"
         if (JavaSettings.getInstance().isBranded()) {
             return String.format("requestOptions.addQueryParam(%1$s, %2$s, %3$s);",
-                    ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                    ClassType.STRING.defaultValueExpression(parameter.getSerializedName()),
                     variable,
                     parameter.getProxyMethodParameter().getAlreadyEncoded());
         } else {
             return String.format("requestOptions.addQueryParam(%1$s, %2$s);",
-                    ClassType.String.defaultValueExpression(parameter.getSerializedName()),
+                    ClassType.STRING.defaultValueExpression(parameter.getSerializedName()),
                     variable);
         }
     }
 
     private static String expressionConvertToString(String name, IType type, ProxyMethodParameter parameter) {
-        if (type == ClassType.String) {
+        if (type == ClassType.STRING) {
             return name;
         } else if (type instanceof EnumType) {
             // enum
             EnumType enumType = (EnumType) type;
-            if (enumType.getElementType() == ClassType.String) {
+            if (enumType.getElementType() == ClassType.STRING) {
                 return name + ".toString()";
             } else {
                 return String.format("String.valueOf(%1$s.%2$s())", name, enumType.getToMethodName());
@@ -456,13 +456,13 @@ abstract class ConvenienceMethodTemplateBase {
                     // will prevent using the enum name rather than the enum value when it isn't a String-based
                     // enum. Ex, a long-based enum with value 100 called HIGH will return "100" rather than
                     // "HIGH".
-                    String enumToString = enumType.getElementType() == ClassType.String
+                    String enumToString = enumType.getElementType() == ClassType.STRING
                         ? "paramItemValue"
                         : "paramItemValue == null ? null : paramItemValue." + enumType.getToMethodName() + "()";
                     return name + ".stream()\n" +
                         "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
                         "    .collect(Collectors.joining(\"" + delimiter + "\"))";
-                } else if (elementType == ClassType.String
+                } else if (elementType == ClassType.STRING
                     || (elementType instanceof ClassType && ((ClassType) elementType).isBoxedType())) {
                     return name + ".stream()\n" +
                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
@@ -507,7 +507,7 @@ abstract class ConvenienceMethodTemplateBase {
             } else if (type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
                 IType enumType = ((IterableType) type).getElementType();
                 IType enumValueType = ((EnumType) enumType).getElementType().asNullable();
-                if (enumValueType == ClassType.String) {
+                if (enumValueType == ClassType.STRING) {
                     return String.format(
                             "%1$s.stream().map(paramItemValue -> Objects.toString(paramItemValue, \"\")).collect(Collectors.toList())",
                             name);

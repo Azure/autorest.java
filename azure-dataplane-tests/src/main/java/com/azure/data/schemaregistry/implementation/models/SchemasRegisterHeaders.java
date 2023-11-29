@@ -7,7 +7,6 @@ package com.azure.data.schemaregistry.implementation.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The SchemasRegisterHeaders model.
@@ -17,37 +16,31 @@ public final class SchemasRegisterHeaders {
     /*
      * The Schema-Version property.
      */
-    @JsonProperty(value = "Schema-Version")
     private Integer schemaVersion;
 
     /*
      * The Schema-Id property.
      */
-    @JsonProperty(value = "Schema-Id")
     private String schemaId;
 
     /*
      * The Schema-Group-Name property.
      */
-    @JsonProperty(value = "Schema-Group-Name")
     private String schemaGroupName;
 
     /*
      * The Schema-Name property.
      */
-    @JsonProperty(value = "Schema-Name")
     private String schemaName;
 
     /*
      * The Schema-Id-Location property.
      */
-    @JsonProperty(value = "Schema-Id-Location")
     private String schemaIdLocation;
 
     /*
      * The Location property.
      */
-    @JsonProperty(value = "Location")
     private String location;
 
     private static final HttpHeaderName SCHEMA_VERSION = HttpHeaderName.fromString("Schema-Version");

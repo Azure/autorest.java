@@ -110,15 +110,15 @@ public class SchemaUtil {
         if (responseBodyType == null) {
             if (operationIsHeadAsBoolean(operation)) {
                 // Azure core would internally convert the response status code to boolean.
-                responseBodyType = PrimitiveType.Boolean;
+                responseBodyType = PrimitiveType.BOOLEAN;
             } else if (containsBinaryResponse(operation)) {
                 if (settings.isDataPlaneClient() || !settings.isInputStreamForBinary()) {
-                    responseBodyType = ClassType.BinaryData;
+                    responseBodyType = ClassType.BINARY_DATA;
                 } else {
-                    responseBodyType = ClassType.InputStream;
+                    responseBodyType = ClassType.INPUT_STREAM;
                 }
             } else {
-                responseBodyType = PrimitiveType.Void;
+                responseBodyType = PrimitiveType.VOID;
             }
         }
 
@@ -208,25 +208,25 @@ public class SchemaUtil {
     public static IType removeModelFromParameter(RequestParameterLocation parameterRequestLocation, IType type) {
         IType returnType = type;
         if (parameterRequestLocation == RequestParameterLocation.BODY) {
-            returnType = ClassType.BinaryData;
+            returnType = ClassType.BINARY_DATA;
         } else if (!(returnType instanceof PrimitiveType)) {
             if (type instanceof EnumType) {
-                returnType = ClassType.String;
+                returnType = ClassType.STRING;
             }
             if (type instanceof IterableType && ((IterableType) type).getElementType() instanceof EnumType) {
-                returnType = new IterableType(ClassType.String);
+                returnType = new IterableType(ClassType.STRING);
             }
             if (type instanceof ListType && ((ListType) type).getElementType() instanceof EnumType) {
-                returnType = new ListType(ClassType.String);
+                returnType = new ListType(ClassType.STRING);
             }
         }
         return returnType;
     }
 
     public static IType removeModelFromResponse(IType type, Operation operation) {
-        if (type.asNullable() != ClassType.Void) {
+        if (type.asNullable() != ClassType.VOID) {
             if (!operationIsHeadAsBoolean(operation)) {
-                type = ClassType.BinaryData;
+                type = ClassType.BINARY_DATA;
             }
         }
         return type;
@@ -255,10 +255,10 @@ public class SchemaUtil {
                 if (Objects.equals(namespace, "Azure.Core.Foundations")) {
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core/src/main/java/com/azure/core/models/ResponseError.java
                     if (Objects.equals(name, "Error")) {
-                        classType = ClassType.ResponseError;
+                        classType = ClassType.RESPONSE_ERROR;
                     } else if (Objects.equals(name, "InnerError")) {
                         // InnerError is not public, but usually it is only referenced from Error
-                        classType = ClassType.ResponseInnerError;
+                        classType = ClassType.RESPONSE_INNER_ERROR;
                     }
                     // ErrorResponse is not available, but that should only be used in Exception
                 }
@@ -267,15 +267,15 @@ public class SchemaUtil {
                         && compositeType.getLanguage().getJava().getNamespace() != null) {
 
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core-experimental/src/main/java/com/azure/core/experimental/models/PollResult.java
-                    if (Objects.equals(name, ClassType.PollOperationDetails.getName())
-                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.PollOperationDetails.getPackage())) {
-                        classType = ClassType.PollOperationDetails;
-                    } else if (Objects.equals(name, ClassType.RequestConditions.getName())
-                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.RequestConditions.getPackage())) {
-                        classType = ClassType.RequestConditions;
-                    } else if (Objects.equals(name, ClassType.MatchConditions.getName())
-                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.RequestConditions.getPackage())) {
-                        classType = ClassType.MatchConditions;
+                    if (Objects.equals(name, ClassType.POLL_OPERATION_DETAILS.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.POLL_OPERATION_DETAILS.getPackage())) {
+                        classType = ClassType.POLL_OPERATION_DETAILS;
+                    } else if (Objects.equals(name, ClassType.REQUEST_CONDITIONS.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.REQUEST_CONDITIONS.getPackage())) {
+                        classType = ClassType.REQUEST_CONDITIONS;
+                    } else if (Objects.equals(name, ClassType.MATCH_CONDITIONS.getName())
+                        && Objects.equals(compositeType.getLanguage().getJava().getNamespace(), ClassType.REQUEST_CONDITIONS.getPackage())) {
+                        classType = ClassType.MATCH_CONDITIONS;
                     }
                 }
             }

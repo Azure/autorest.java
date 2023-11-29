@@ -3,14 +3,61 @@
 
 package com.azure.autorest.model.clientmodel;
 
-
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.client.traits.KeyCredentialTrait;
+import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.credential.KeyCredential;
+import com.azure.core.credential.TokenCredential;
+import com.azure.core.exception.ClientAuthenticationException;
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.exception.ResourceExistsException;
+import com.azure.core.exception.ResourceModifiedException;
+import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.exception.TooManyRedirectsException;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
+import com.azure.core.http.HttpHeaders;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.HttpRequest;
+import com.azure.core.http.MatchConditions;
+import com.azure.core.http.RequestConditions;
+import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.http.policy.HttpPipelinePolicy;
+import com.azure.core.http.policy.KeyCredentialPolicy;
+import com.azure.core.http.policy.RetryOptions;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.http.rest.StreamResponse;
+import com.azure.core.models.JsonPatchDocument;
+import com.azure.core.models.ResponseError;
+import com.azure.core.util.Base64Url;
+import com.azure.core.util.BinaryData;
+import com.azure.core.util.ClientOptions;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
+import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.ExpandableStringEnum;
+import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.util.polling.PollOperationDetails;
+import com.azure.core.util.serializer.JsonSerializer;
+import com.azure.core.util.serializer.SerializerAdapter;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import reactor.util.annotation.NonNull;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.nio.ByteBuffer;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -92,54 +139,50 @@ public class ClassType implements IType {
     }
 
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
-        put(com.azure.core.http.rest.RestProxy.class, new ClassDetails(com.azure.core.http.rest.RestProxy.class, "com.generic.core.http.RestProxy"));
-        put(com.azure.core.http.HttpPipeline.class, new ClassDetails(com.azure.core.http.HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
-        put(com.azure.core.http.HttpPipelineBuilder.class, new ClassDetails(com.azure.core.http.HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
-        put(com.azure.core.util.Context.class, new ClassDetails(com.azure.core.util.Context.class, "com.generic.core.models.Context"));
-        put(com.azure.core.http.HttpClient.class, new ClassDetails(com.azure.core.http.HttpClient.class, "com.generic.core.http.client.HttpClient"));
-        put(com.azure.core.http.policy.HttpLogOptions.class, new ClassDetails(com.azure.core.http.policy.HttpLogOptions.class, "com.generic.core.http.policy.logging.HttpLogOptions"));
-        put(com.azure.core.http.policy.HttpPipelinePolicy.class, new ClassDetails(com.azure.core.http.policy.HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
-        put(com.azure.core.http.policy.KeyCredentialPolicy.class, new ClassDetails(com.azure.core.http.policy.KeyCredentialPolicy.class, "com.generic.core.http.policy.credential.KeyCredentialPolicy"));
-        put(com.azure.core.util.Configuration.class, new ClassDetails(com.azure.core.util.Configuration.class, "com.generic.core.util.configuration.Configuration"));
-        put(com.azure.core.http.HttpHeaders.class, new ClassDetails(com.azure.core.http.HttpHeaders.class, "com.generic.core.models.Headers"));
-        put(com.azure.core.http.HttpHeaderName.class, new ClassDetails(com.azure.core.http.HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
-        put(com.azure.core.http.HttpRequest.class, new ClassDetails(com.azure.core.http.HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
-        put(com.azure.core.http.rest.RequestOptions.class, new ClassDetails(com.azure.core.http.rest.RequestOptions.class, "com.generic.core.models.RequestOptions"));
-        put(com.azure.core.util.BinaryData.class, new ClassDetails(com.azure.core.util.BinaryData.class, "com.generic.core.models.BinaryData"));
-        put(com.azure.core.http.policy.RetryOptions.class, new ClassDetails(com.azure.core.http.policy.RetryOptions.class, "com.generic.core.http.policy.retry.RetryOptions"));
-        put(com.azure.core.http.rest.Response.class, new ClassDetails(com.azure.core.http.rest.Response.class, "com.generic.core.http.Response"));
-        put(com.azure.core.http.rest.SimpleResponse.class, new ClassDetails(com.azure.core.http.rest.SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
-        put(com.azure.core.util.ExpandableStringEnum.class, new ClassDetails(com.azure.core.util.ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
+        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.http.RestProxy"));
+        put(HttpPipeline.class, new ClassDetails(HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
+        put(HttpPipelineBuilder.class, new ClassDetails(HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
+        put(Context.class, new ClassDetails(Context.class, "com.generic.core.models.Context"));
+        put(HttpClient.class, new ClassDetails(HttpClient.class, "com.generic.core.http.client.HttpClient"));
+        put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "com.generic.core.http.policy.logging.HttpLogOptions"));
+        put(HttpPipelinePolicy.class, new ClassDetails(HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
+        put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "com.generic.core.http.policy.credential.KeyCredentialPolicy"));
+        put(Configuration.class, new ClassDetails(Configuration.class, "com.generic.core.util.configuration.Configuration"));
+        put(HttpHeaders.class, new ClassDetails(HttpHeaders.class, "com.generic.core.models.Headers"));
+        put(HttpHeaderName.class, new ClassDetails(HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
+        put(HttpRequest.class, new ClassDetails(HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
+        put(RequestOptions.class, new ClassDetails(RequestOptions.class, "com.generic.core.models.RequestOptions"));
+        put(BinaryData.class, new ClassDetails(BinaryData.class, "com.generic.core.models.BinaryData"));
+        put(RetryOptions.class, new ClassDetails(RetryOptions.class, "com.generic.core.http.policy.retry.RetryOptions"));
+        put(Response.class, new ClassDetails(Response.class, "com.generic.core.http.Response"));
+        put(SimpleResponse.class, new ClassDetails(SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
+        put(ExpandableStringEnum.class, new ClassDetails(ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
         if (!JavaSettings.getInstance().isBranded()) {
             if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
-                return new ClassType.Builder(false)
-                        .knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());
+                return new ClassType.Builder(false).knownClass(CLASS_TYPE_MAPPING.get(classKey).getGenericClass());
             } else {
-                return new Builder(false)
-                        .packageName(classKey.getPackage().getName()
-                                .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
-                                .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME))
+                return new Builder(false).packageName(classKey.getPackage().getName()
+                        .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME)
+                        .replace(ExternalPackage.AZURE_JSON_PACKAGE_NAME, ExternalPackage.GENERIC_JSON_PACKAGE_NAME))
                         .name(classKey.getSimpleName());
             }
         } else {
             if (CLASS_TYPE_MAPPING.containsKey(classKey)) {
-                return new ClassType.Builder(false)
-                        .knownClass(CLASS_TYPE_MAPPING.get(classKey).getAzureClass());
+                return new ClassType.Builder(false).knownClass(CLASS_TYPE_MAPPING.get(classKey).getAzureClass());
             } else {
-                return new Builder(false)
-                        .packageName(classKey.getPackage().getName()).name(classKey.getSimpleName());
+                return new Builder(false).packageName(classKey.getPackage().getName()).name(classKey.getSimpleName());
             }
         }
     }
 
 
-    public static final ClassType Void = new ClassType.Builder(false).knownClass(Void.class).build();
+    public static final ClassType VOID = new ClassType.Builder(false).knownClass(Void.class).build();
 
-    public static final ClassType Boolean = new Builder(false).knownClass(Boolean.class)
-        .defaultValueExpressionConverter(java.lang.String::toLowerCase)
+    public static final ClassType BOOLEAN = new Builder(false).knownClass(Boolean.class)
+        .defaultValueExpressionConverter(String::toLowerCase)
         .jsonToken("JsonToken.BOOLEAN")
         .jsonDeserializationMethod("getNullable(JsonReader::getBoolean)")
         .serializationMethodBase("writeBoolean")
@@ -147,7 +190,7 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Boolean::parseBoolean)")
         .build();
 
-    public static final ClassType Byte = new Builder(false).knownClass(Byte.class)
+    public static final ClassType BYTE = new Builder(false).knownClass(Byte.class)
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
         .jsonToken("JsonToken.NUMBER")
         .serializationMethodBase("writeNumber")
@@ -155,8 +198,8 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Byte::parseByte)")
         .build();
 
-    public static final ClassType Integer = new Builder(false).knownClass(Integer.class)
-        .defaultValueExpressionConverter(java.util.function.Function.identity())
+    public static final ClassType INTEGER = new Builder(false).knownClass(Integer.class)
+        .defaultValueExpressionConverter(Function.identity())
         .jsonToken("JsonToken.NUMBER")
         .jsonDeserializationMethod("getNullable(JsonReader::getInt)")
         .serializationMethodBase("writeNumber")
@@ -164,12 +207,12 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
-    public static final ClassType Long = new Builder(false)
+    public static final ClassType LONG = new Builder(false)
         .prototypeAsLong()
         .build();
 
-    public static final ClassType Float = new Builder(false).knownClass(Float.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)) + 'F')
+    public static final ClassType FLOAT = new Builder(false).knownClass(Float.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> Float.parseFloat(defaultValueExpression) + "F")
         .jsonToken("JsonToken.NUMBER")
         .jsonDeserializationMethod("getNullable(JsonReader::getFloat)")
         .serializationMethodBase("writeNumber")
@@ -177,12 +220,12 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Float::parseFloat)")
         .build();
 
-    public static final ClassType Double = new Builder(false).knownClass(Double.class)
+    public static final ClassType DOUBLE = new Builder(false).knownClass(Double.class)
         .prototypeAsDouble()
         .build();
 
-    public static final ClassType Character = new Builder(false).knownClass(Character.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.valueOf((defaultValueExpression.charAt(0))))
+    public static final ClassType CHARACTER = new Builder(false).knownClass(Character.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> String.valueOf((defaultValueExpression.charAt(0))))
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> nonNullReader.getString().charAt(0))")
@@ -191,7 +234,7 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, nonNullString -> nonNullString.charAt(0))")
         .build();
 
-    public static final ClassType String = new Builder(false).knownClass(String.class)
+    public static final ClassType STRING = new Builder(false).knownClass(String.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "\"" + TemplateUtil.escapeString(defaultValueExpression) + "\"")
         .jsonToken("JsonToken.STRING")
         .jsonDeserializationMethod("getString()")
@@ -200,7 +243,7 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getStringAttribute(%s, %s)")
         .build();
 
-    public static final ClassType Base64Url = getClassTypeBuilder(com.azure.core.util.Base64Url.class)
+    public static final ClassType BASE_64_URL = getClassTypeBuilder(Base64Url.class)
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonToken("JsonToken.STRING")
         .jsonDeserializationMethod("getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()))")
@@ -209,12 +252,12 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Base64Url::new)")
         .build();
 
-    public static final ClassType AndroidBase64Url = new ClassType.Builder(false)
+    public static final ClassType ANDROID_BASE_64_URL = new ClassType.Builder(false)
         .packageName("com.azure.android.core.util").name("Base64Url")
         .build();
 
-    public static final ClassType LocalDate = new Builder(false).knownClass(java.time.LocalDate.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression))
+    public static final ClassType LOCAL_DATE = new Builder(false).knownClass(java.time.LocalDate.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "LocalDate.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()))")
@@ -223,12 +266,12 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, LocalDate::parse)")
         .build();
 
-    public static final ClassType AndroidLocalDate = new ClassType.Builder(false)
+    public static final ClassType ANDROID_LOCAL_DATE = new ClassType.Builder(false)
         .packageName("org.threeten.bp").name("LocalDate")
         .build();
 
-    public static final ClassType DateTime = new Builder(false).knownClass(OffsetDateTime.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
+    public static final ClassType DATE_TIME = new Builder(false).knownClass(OffsetDateTime.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "OffsetDateTime.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : ISO_8601.format(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
@@ -237,8 +280,8 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> OffsetDateTime.parse(dateString))")
         .build();
 
-    public static final ClassType Duration = new Builder(false).knownClass(java.time.Duration.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression))
+    public static final ClassType DURATION = new Builder(false).knownClass(Duration.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "Duration.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "CoreToCodegenBridgeUtils.durationToStringWithDays(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
@@ -247,12 +290,12 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Duration::parse)")
         .build();
 
-    public static final ClassType AndroidDuration = new ClassType.Builder(false)
+    public static final ClassType ANDROID_DURATION = new ClassType.Builder(false)
         .packageName("org.threeten.bp").name("Duration")
         .build();
 
-    public static final ClassType DateTimeRfc1123 = getClassTypeBuilder(com.azure.core.util.DateTimeRfc1123.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression))
+    public static final ClassType DATE_TIME_RFC_1123 = getClassTypeBuilder(DateTimeRfc1123.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "new DateTimeRfc1123(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()))")
@@ -261,17 +304,17 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, DateTimeRfc1123::new)")
         .build();
 
-    public static final ClassType AndroidDateTimeRfc1123 = new ClassType.Builder(false)
+    public static final ClassType ANDROID_DATE_TIME_RFC_1123 = new ClassType.Builder(false)
         .packageName("com.azure.android.core.util").name("DateTimeRfc1123")
         .build();
 
-    public static final ClassType BigDecimal = new Builder(false).knownClass(java.math.BigDecimal.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression))
+    public static final ClassType BIG_DECIMAL = new Builder(false).knownClass(BigDecimal.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "new BigDecimal(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.NUMBER")
         .build();
 
     public static final ClassType UUID = new Builder(false).knownClass(java.util.UUID.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("UUID.fromString(\"%1$s\")", defaultValueExpression))
+        .defaultValueExpressionConverter(defaultValueExpression -> "UUID.fromString(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> UUID.fromString(nonNullReader.getString()))")
@@ -280,22 +323,21 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, UUID::fromString)")
         .build();
 
-    public static final ClassType Object = new ClassType.Builder(false)
-        .knownClass(java.lang.Object.class)
+    public static final ClassType OBJECT = new ClassType.Builder(false)
+        .knownClass(Object.class)
         .build();
 
-    public static final ClassType TokenCredential = new ClassType.Builder(false)
-        .knownClass(com.azure.core.credential.TokenCredential.class)
+    public static final ClassType TOKEN_CREDENTIAL = new ClassType.Builder(false).knownClass(TokenCredential.class)
         .build();
 
-    public static final ClassType AndroidHttpResponseException = new ClassType.Builder(false)
+    public static final ClassType ANDROID_HTTP_RESPONSE_EXCEPTION = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http.exception").name("HttpResponseException")
         .build();
 
-    public static final ClassType UnixTimeDateTime = new ClassType.Builder(false)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression))
+    public static final ClassType UNIX_TIME_DATE_TIME = new ClassType.Builder(false)
+        .defaultValueExpressionConverter(defaultValueExpression -> "OffsetDateTime.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
-        .knownClass(java.time.OffsetDateTime.class)
+        .knownClass(OffsetDateTime.class)
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
@@ -303,57 +345,49 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, OffsetDateTime::parse)")
         .build();
 
-    public static final ClassType AndroidDateTime = new ClassType.Builder(false)
+    public static final ClassType ANDROID_DATE_TIME = new ClassType.Builder(false)
         .packageName("org.threeten.bp").name("OffsetDateTime")
         .build();
 
-    public static final ClassType UnixTimeLong = new ClassType.Builder(false)
+    public static final ClassType UNIX_TIME_LONG = new ClassType.Builder(false)
         .prototypeAsLong()
         .build();
 
-    public static final ClassType DurationLong = new ClassType.Builder(false)
+    public static final ClassType DURATION_LONG = new ClassType.Builder(false)
         .prototypeAsLong()
         .build();
 
-    public static final ClassType DurationDouble = new ClassType.Builder(false)
+    public static final ClassType DURATION_DOUBLE = new ClassType.Builder(false)
         .prototypeAsDouble()
         .build();
 
-    public static final ClassType HttpPipeline = getClassTypeBuilder(com.azure.core.http.HttpPipeline.class)
-        .build();
+    public static final ClassType HTTP_PIPELINE = getClassTypeBuilder(HttpPipeline.class).build();
 
-    public static final ClassType AndroidHttpPipeline = new ClassType.Builder(false)
+    public static final ClassType ANDROID_HTTP_PIPELINE = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http").name("HttpPipeline")
         .build();
 
-    public static final ClassType RestProxy = getClassTypeBuilder(com.azure.core.http.rest.RestProxy.class)
-        .build();
+    public static final ClassType REST_PROXY = getClassTypeBuilder(RestProxy.class).build();
 
-    public static final ClassType AndroidRestProxy = new ClassType.Builder(false)
+    public static final ClassType ANDROID_REST_PROXY = new ClassType.Builder(false)
         .packageName("com.azure.android.core.rest").name("RestProxy")
         .build();
 
-    public static final ClassType SerializerAdapter = new ClassType.Builder(false)
-        .knownClass(com.azure.core.util.serializer.SerializerAdapter.class)
+    public static final ClassType SERIALIZER_ADAPTER = new ClassType.Builder(false).knownClass(SerializerAdapter.class)
+        .build();
+    public static final ClassType JSON_SERIALIZER = getClassTypeBuilder(JsonSerializer.class)
         .build();
 
-    public static final ClassType JsonSerializer = getClassTypeBuilder(com.azure.core.util.serializer.JsonSerializer.class)
-        .build();
-
-    public static final ClassType AndroidJacksonSerder = new ClassType.Builder(false)
+    public static final ClassType ANDROID_JACKSON_SERDER = new ClassType.Builder(false)
         .packageName("com.azure.android.core.serde.jackson").name("JacksonSerder")
         .build();
 
-    public static final ClassType Function = new ClassType.Builder(false)
-        .knownClass(java.util.function.Function.class)
-        .build();
+    public static final ClassType FUNCTION = new ClassType.Builder(false).knownClass(Function.class).build();
 
-    public static final ClassType ByteBuffer = new ClassType.Builder(false)
-        .knownClass(java.nio.ByteBuffer.class)
-        .build();
+    public static final ClassType BYTE_BUFFER = new ClassType.Builder(false).knownClass(ByteBuffer.class).build();
 
     public static final ClassType URL = new Builder(false)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("new URL(\"%1$s\")", defaultValueExpression))
+        .defaultValueExpressionConverter(defaultValueExpression -> "new URL(\"" + defaultValueExpression + "\")")
         .knownClass(java.net.URL.class)
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
@@ -363,182 +397,123 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, URL::new)")
         .build();
 
-    public static final ClassType NonNull = new ClassType.Builder(false)
-        .knownClass(reactor.util.annotation.NonNull.class)
+    public static final ClassType NON_NULL = new ClassType.Builder(false).knownClass(NonNull.class).build();
+
+    public static final ClassType STREAM_RESPONSE = new ClassType.Builder(false).knownClass(StreamResponse.class)
         .build();
 
-    public static final ClassType StreamResponse = new ClassType.Builder(false)
-        .knownClass(com.azure.core.http.rest.StreamResponse.class)
+    public static final ClassType INPUT_STREAM = new ClassType.Builder(false).knownClass(InputStream.class)
         .build();
 
-    public static final ClassType InputStream = new ClassType.Builder(false)
-        .knownClass(java.io.InputStream.class)
-        .build();
-
-    public static final ClassType Context = ClassType.getClassTypeBuilder(com.azure.core.util.Context.class)
+    public static final ClassType CONTEXT = ClassType.getClassTypeBuilder(Context.class)
         .defaultValueExpressionConverter(epr -> "com.azure.core.util.Context.NONE")
         .build();
 
-    public static final ClassType AndroidContext = new ClassType.Builder(false)
+    public static final ClassType ANDROID_CONTEXT = new ClassType.Builder(false)
         .packageName("com.azure.android.core.util").name("Context")
         .build();
 
-    public static final ClassType ClientLogger = ClassType.getClassTypeBuilder(com.azure.core.util.logging.ClientLogger.class)
-        .build();
+    public static final ClassType CLIENT_LOGGER = ClassType.getClassTypeBuilder(ClientLogger.class).build();
 
-    public static final ClassType AzureEnvironment = new ClassType.Builder(false)
+    public static final ClassType AZURE_ENVIRONMENT = new ClassType.Builder(false)
         .packageName("com.azure.core.management").name("AzureEnvironment")
         .build();
 
-    public static final ClassType HttpClient = getClassTypeBuilder(com.azure.core.http.HttpClient.class)
-        .build();
+    public static final ClassType HTTP_CLIENT = getClassTypeBuilder(HttpClient.class).build();
 
-    public static final ClassType AndroidHttpClient = new ClassType.Builder(false)
+    public static final ClassType ANDROID_HTTP_CLIENT = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http").name("HttpClient")
         .build();
 
-    public static final ClassType HttpPipelinePolicy = getClassTypeBuilder(com.azure.core.http.policy.HttpPipelinePolicy.class)
-        .build();
+    public static final ClassType HTTP_PIPELINE_POLICY = getClassTypeBuilder(HttpPipelinePolicy.class).build();
 
-    public static final ClassType AndroidHttpPipelinePolicy = new ClassType.Builder(false)
+    public static final ClassType ANDROID_HTTP_PIPELINE_POLICY = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http").name("HttpPipelinePolicy")
         .build();
 
-    public static final ClassType HttpLogOptions = getClassTypeBuilder(com.azure.core.http.policy.HttpLogOptions.class)
-        .build();
+    public static final ClassType HTTP_LOG_OPTIONS = getClassTypeBuilder(HttpLogOptions.class).build();
 
-    public static final ClassType AndroidHttpLogOptions = new ClassType.Builder(false)
+    public static final ClassType ANDROID_HTTP_LOG_OPTIONS = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http.policy").name("HttpLogOptions")
         .build();
 
-    public static final ClassType Configuration = getClassTypeBuilder(com.azure.core.util.Configuration.class)
+    public static final ClassType CONFIGURATION = getClassTypeBuilder(Configuration.class).build();
+
+    public static final ClassType SERVICE_VERSION = new ClassType.Builder(false).knownClass(ServiceVersion.class)
         .build();
 
-    public static final ClassType ServiceVersion = new ClassType.Builder(false)
-        .knownClass(com.azure.core.util.ServiceVersion.class)
+    public static final ClassType AZURE_KEY_CREDENTIAL = new ClassType.Builder(false)
+        .knownClass(AzureKeyCredential.class)
         .build();
 
-    public static final ClassType AzureKeyCredential = new ClassType.Builder(false)
-        .knownClass(com.azure.core.credential.AzureKeyCredential.class)
-        .build();
+    public static final ClassType KEY_CREDENTIAL = getClassTypeBuilder(KeyCredential.class).build();
 
-    public static final ClassType KeyCredential = getClassTypeBuilder(com.azure.core.credential.KeyCredential.class)
-        .build();
+    public static final ClassType RETRY_POLICY = new ClassType.Builder(false).knownClass(RetryPolicy.class).build();
 
-    public static final ClassType RetryPolicy = new ClassType.Builder(false)
-        .knownClass(com.azure.core.http.policy.RetryPolicy.class)
-        .build();
+    public static final ClassType RETRY_OPTIONS = getClassTypeBuilder(RetryOptions.class).build();
 
-    public static final ClassType RetryOptions = getClassTypeBuilder(com.azure.core.http.policy.RetryOptions.class)
-        .build();
-
-    public static final ClassType AndroidRetryPolicy = new ClassType.Builder(false)
+    public static final ClassType ANDROID_RETRY_POLICY = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http.policy").name("RetryPolicy")
         .build();
 
-    public static final ClassType JsonPatchDocument = new ClassType.Builder(false)
-        .knownClass(com.azure.core.models.JsonPatchDocument.class)
+    public static final ClassType JSON_PATCH_DOCUMENT = new ClassType.Builder(false).knownClass(JsonPatchDocument.class)
         .jsonToken("JsonToken.START_OBJECT")
         .build();
 
-    public static final ClassType BinaryData = getClassTypeBuilder(com.azure.core.util.BinaryData.class)
-        .defaultValueExpressionConverter(defaultValueExpression -> java.lang.String.format("BinaryData.fromObject(\"%s\")", defaultValueExpression))
+    public static final ClassType BINARY_DATA = getClassTypeBuilder(BinaryData.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "BinaryData.fromObject(\"" + defaultValueExpression + "\")")
         .build();
 
-    public static final ClassType RequestOptions = getClassTypeBuilder(com.azure.core.http.rest.RequestOptions.class)
-        .build();
-
-    public static final ClassType ClientOptions = getClassTypeBuilder(com.azure.core.util.ClientOptions.class)
-        .build();
-
-    public static final ClassType HttpRequest = getClassTypeBuilder(com.azure.core.http.HttpRequest.class)
-        .build();
-
-    public static final ClassType HttpHeaders = getClassTypeBuilder(com.azure.core.http.HttpHeaders.class)
-        .build();
-
-    public static final ClassType HttpHeaderName = getClassTypeBuilder(HttpHeaderName.class).build();
+    public static final ClassType REQUEST_OPTIONS = getClassTypeBuilder(RequestOptions.class).build();
+    public static final ClassType CLIENT_OPTIONS = getClassTypeBuilder(ClientOptions.class).build();
+    public static final ClassType HTTP_REQUEST = getClassTypeBuilder(HttpRequest.class).build();
+    public static final ClassType HTTP_HEADERS = getClassTypeBuilder(HttpHeaders.class).build();
+    public static final ClassType HTTP_HEADER_NAME = getClassTypeBuilder(HttpHeaderName.class).build();
 
     // Java exception types
-    public static final ClassType HttpResponseException = getClassTypeBuilder(com.azure.core.exception.HttpResponseException.class)
+    public static final ClassType HTTP_RESPONSE_EXCEPTION = getClassTypeBuilder(HttpResponseException.class).build();
+    public static final ClassType CLIENT_AUTHENTICATION_EXCEPTION = getClassTypeBuilder(ClientAuthenticationException.class)
         .build();
-
-    public static final ClassType ClientAuthenticationException = getClassTypeBuilder(com.azure.core.exception.ClientAuthenticationException.class)
+    public static final ClassType RESOURCE_EXISTS_EXCEPTION = getClassTypeBuilder(ResourceExistsException.class)
         .build();
-
-    public static final ClassType ResourceExistsException = getClassTypeBuilder(com.azure.core.exception.ResourceExistsException.class)
+    public static final ClassType RESOURCE_MODIFIED_EXCEPTION = getClassTypeBuilder(ResourceModifiedException.class)
         .build();
-
-    public static final ClassType ResourceModifiedException = getClassTypeBuilder(com.azure.core.exception.ResourceModifiedException.class)
+    public static final ClassType RESOURCE_NOT_FOUND_EXCEPTION = getClassTypeBuilder(ResourceNotFoundException.class)
         .build();
-
-    public static final ClassType ResourceNotFoundException = getClassTypeBuilder(com.azure.core.exception.ResourceNotFoundException.class)
+    public static final ClassType TOO_MANY_REDIRECTS_EXCEPTION = getClassTypeBuilder(TooManyRedirectsException.class)
         .build();
-
-    public static final ClassType TooManyRedirectsException = getClassTypeBuilder(com.azure.core.exception.TooManyRedirectsException.class)
-        .build();
-
-    public static final ClassType ResponseError = new Builder()
-        .knownClass(com.azure.core.models.ResponseError.class)
+    public static final ClassType RESPONSE_ERROR = new Builder()
+        .knownClass(ResponseError.class)
         .jsonToken("JsonToken.START_OBJECT")
         .build();
-    public static final ClassType ResponseInnerError = new Builder()
+    public static final ClassType RESPONSE_INNER_ERROR = new Builder()
         .packageName("com.azure.core.models").name("ResponseInnerError")
         .jsonToken("JsonToken.START_OBJECT")
         .build();
 
-    public static final ClassType RequestConditions = new Builder()
-        .knownClass(com.azure.core.http.RequestConditions.class)
-        .build();
-
-    public static final ClassType MatchConditions = new Builder()
-        .knownClass(com.azure.core.http.MatchConditions.class)
-        .build();
-
-    public static final ClassType CoreUtils = getClassTypeBuilder(com.azure.core.util.CoreUtils.class)
-        .build();
-
-    public static final ClassType Response = getClassTypeBuilder(com.azure.core.http.rest.Response.class)
-        .build();
-
-    public static final ClassType SimpleResponse = getClassTypeBuilder(com.azure.core.http.rest.SimpleResponse.class)
-        .build();
-
-    public static final ClassType ExpandableStringEnum = getClassTypeBuilder(com.azure.core.util.ExpandableStringEnum.class)
-        .build();
-
-    public static final ClassType HttpPipelineBuilder = getClassTypeBuilder(com.azure.core.http.HttpPipelineBuilder.class)
-        .build();
-
-    public static final ClassType KeyCredentialPolicy = getClassTypeBuilder(com.azure.core.http.policy.KeyCredentialPolicy.class)
-        .build();
-
-    public static final ClassType KeyCredentialTrait = getClassTypeBuilder(com.azure.core.client.traits.KeyCredentialTrait.class)
-        .build();
-
-    public static final ClassType PollOperationDetails = getClassTypeBuilder(com.azure.core.util.polling.PollOperationDetails.class)
-        .build();
-
-    public static final ClassType JsonSerializable = getClassTypeBuilder(com.azure.json.JsonSerializable.class)
-        .build();
-
-    public static final ClassType JsonWriter = getClassTypeBuilder(com.azure.json.JsonWriter.class)
-        .build();
-
-    public static final ClassType JsonReader = getClassTypeBuilder(com.azure.json.JsonReader.class)
-        .build();
-
-    public static final ClassType JsonToken = getClassTypeBuilder(com.azure.json.JsonToken.class)
-        .build();
+    public static final ClassType REQUEST_CONDITIONS = new Builder().knownClass(RequestConditions.class).build();
+    public static final ClassType MATCH_CONDITIONS = new Builder().knownClass(MatchConditions.class).build();
+    public static final ClassType CORE_UTILS = getClassTypeBuilder(CoreUtils.class).build();
+    public static final ClassType RESPONSE = getClassTypeBuilder(Response.class).build();
+    public static final ClassType SIMPLE_RESPONSE = getClassTypeBuilder(SimpleResponse.class).build();
+    public static final ClassType EXPANDABLE_STRING_ENUM = getClassTypeBuilder(ExpandableStringEnum.class).build();
+    public static final ClassType HTTP_PIPELINE_BUILDER = getClassTypeBuilder(HttpPipelineBuilder.class).build();
+    public static final ClassType KEY_CREDENTIAL_POLICY = getClassTypeBuilder(KeyCredentialPolicy.class).build();
+    public static final ClassType KEY_CREDENTIAL_TRAIT = getClassTypeBuilder(KeyCredentialTrait.class).build();
+    public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder(PollOperationDetails.class).build();
+    public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder(JsonSerializable.class).build();
+    public static final ClassType JSON_WRITER = getClassTypeBuilder(JsonWriter.class).build();
+    public static final ClassType JSON_READER = getClassTypeBuilder(JsonReader.class).build();
+    public static final ClassType JSON_TOKEN = getClassTypeBuilder(JsonToken.class).build();
 
     private final String fullName;
     private final String packageName;
     private final String name;
     private final List<String> implementationImports;
     private final XmsExtensions extensions;
-    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
+    private final Function<String, String> defaultValueExpressionConverter;
     private final boolean isSwaggerType;
-    private final java.util.function.Function<String, String> serializationValueGetterModifier;
+    private final Function<String, String> serializationValueGetterModifier;
     private final String jsonToken;
     private final String serializationMethodBase;
     private final String jsonDeserializationMethod;
@@ -583,19 +558,19 @@ public class ClassType implements IType {
         return extensions;
     }
 
-    private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
+    private Function<String, String> getDefaultValueExpressionConverter() {
         return defaultValueExpressionConverter;
     }
 
     public final boolean isBoxedType() {
         // TODO (alzimmer): This should be a property on the ClassType
-        return this.equals(ClassType.Void)
-            || this.equals(ClassType.Boolean)
-            || this.equals(ClassType.Byte)
-            || this.equals(ClassType.Integer)
-            || this.equals(ClassType.Long)
-            || this.equals(ClassType.Float)
-            || this.equals(ClassType.Double);
+        return this.equals(ClassType.VOID)
+            || this.equals(ClassType.BOOLEAN)
+            || this.equals(ClassType.BYTE)
+            || this.equals(ClassType.INTEGER)
+            || this.equals(ClassType.LONG)
+            || this.equals(ClassType.FLOAT)
+            || this.equals(ClassType.DOUBLE);
     }
 
     @Override
@@ -637,12 +612,12 @@ public class ClassType implements IType {
             imports.add(fullName);
         }
 
-        if (this == ClassType.UnixTimeLong) {
+        if (this == ClassType.UNIX_TIME_LONG) {
             imports.add(Instant.class.getName());
             imports.add(ZoneOffset.class.getName());
         }
 
-        if (this == ClassType.DateTime) {
+        if (this == ClassType.DATE_TIME) {
             imports.add(DateTimeFormatter.class.getName());
         }
 
@@ -657,7 +632,7 @@ public class ClassType implements IType {
             if (getDefaultValueExpressionConverter() != null) {
                 result = defaultValueExpressionConverter.apply(sourceExpression);
             } else {
-                result = java.lang.String.format("new %1$s()", this);
+                result = "new " + this + "()";
             }
         }
         return result;
@@ -670,32 +645,32 @@ public class ClassType implements IType {
 
     public final IType getClientType() {
         IType clientType = this;
-        if (this == ClassType.DateTimeRfc1123) {
-            clientType = ClassType.DateTime;
-        } else if (this == ClassType.UnixTimeLong) {
-            clientType = ClassType.DateTime;
-        } else if (this == ClassType.Base64Url) {
+        if (this == ClassType.DATE_TIME_RFC_1123) {
+            clientType = ClassType.DATE_TIME;
+        } else if (this == ClassType.UNIX_TIME_LONG) {
+            clientType = ClassType.DATE_TIME;
+        } else if (this == ClassType.BASE_64_URL) {
             clientType = ArrayType.BYTE_ARRAY;
-        } else if (this == ClassType.DurationLong) {
-            clientType = ClassType.Duration;
-        } else if (this == ClassType.DurationDouble) {
-            clientType = ClassType.Duration;
+        } else if (this == ClassType.DURATION_LONG) {
+            clientType = ClassType.DURATION;
+        } else if (this == ClassType.DURATION_DOUBLE) {
+            clientType = ClassType.DURATION;
         }
         return clientType;
     }
 
     public String convertToClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123 || this == ClassType.AndroidDateTimeRfc1123) {
+        if (this == ClassType.DATE_TIME_RFC_1123 || this == ClassType.ANDROID_DATE_TIME_RFC_1123) {
             expression = expression + ".getDateTime()";
-        } else if (this == ClassType.UnixTimeLong) {
+        } else if (this == ClassType.UNIX_TIME_LONG) {
             expression = "OffsetDateTime.ofInstant(Instant.ofEpochSecond(" + expression + "), ZoneOffset.UTC)";
-        } else if (this == ClassType.Base64Url) {
+        } else if (this == ClassType.BASE_64_URL) {
             expression = expression + ".decodedBytes()";
         } else if (this == ClassType.URL) {
             expression = "new URL(" + expression + ")";
-        } else if (this == ClassType.DurationLong) {
+        } else if (this == ClassType.DURATION_LONG) {
             expression = "Duration.ofSeconds(" + expression + ")";
-        } else if (this == ClassType.DurationDouble) {
+        } else if (this == ClassType.DURATION_DOUBLE) {
             expression = "Duration.ofNanos((long) (" + expression + " * 1000_000_000L))";
         }
 
@@ -703,17 +678,17 @@ public class ClassType implements IType {
     }
 
     public String convertFromClientType(String expression) {
-        if (this == ClassType.DateTimeRfc1123 || this == ClassType.AndroidDateTimeRfc1123) {
+        if (this == ClassType.DATE_TIME_RFC_1123 || this == ClassType.ANDROID_DATE_TIME_RFC_1123) {
             expression = "new DateTimeRfc1123(" + expression + ")";
-        } else if (this == ClassType.UnixTimeLong) {
+        } else if (this == ClassType.UNIX_TIME_LONG) {
             expression = expression + ".toEpochSecond()";
-        } else if (this == ClassType.Base64Url) {
+        } else if (this == ClassType.BASE_64_URL) {
             expression = "Base64Url.encode(" + expression + ")";
         } else if (this == ClassType.URL) {
             expression = expression + ".toString()";
-        } else if (this == ClassType.DurationLong) {
+        } else if (this == ClassType.DURATION_LONG) {
             expression = expression + ".getSeconds()";
-        } else if (this == ClassType.DurationDouble) {
+        } else if (this == ClassType.DURATION_DOUBLE) {
             expression = "(double) " + expression + ".toNanos() / 1000_000_000L";
         }
 
@@ -733,12 +708,12 @@ public class ClassType implements IType {
     }
 
     @Override
-    public java.lang.String jsonToken() {
+    public String jsonToken() {
         return jsonToken;
     }
 
     @Override
-    public java.lang.String jsonDeserializationMethod(String jsonReaderName) {
+    public String jsonDeserializationMethod(String jsonReaderName) {
         if (jsonDeserializationMethod == null) {
             return null;
         }
@@ -747,9 +722,8 @@ public class ClassType implements IType {
     }
 
     @Override
-    public java.lang.String jsonSerializationMethodCall(java.lang.String jsonWriterName, java.lang.String fieldName,
-        java.lang.String valueGetter) {
-        if (!isSwaggerType && com.azure.core.util.CoreUtils.isNullOrEmpty(serializationMethodBase)) {
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+        if (!isSwaggerType && CoreUtils.isNullOrEmpty(serializationMethodBase)) {
             return null;
         }
 
@@ -758,26 +732,24 @@ public class ClassType implements IType {
             ? serializationValueGetterModifier.apply(valueGetter) : valueGetter;
 
         return fieldName == null
-            ? java.lang.String.format("%s.%s(%s)", jsonWriterName, methodBase, value)
-            : java.lang.String.format("%s.%sField(\"%s\", %s)", jsonWriterName, methodBase, fieldName, value);
+            ? jsonWriterName + "." + methodBase + "(" + value + ")"
+            : jsonWriterName + "." + methodBase + "Field(\"" + fieldName + "\", " + value + ")";
     }
 
     @Override
-    public java.lang.String xmlDeserializationMethod(String xmlReaderName, java.lang.String attributeName,
-        java.lang.String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
         if (attributeName == null) {
             return xmlReaderName + "." + xmlElementDeserializationMethod;
         } else {
-            java.lang.String namespace = (attributeNamespace == null) ? "null" : "\"" + attributeNamespace + "\"";
-            return java.lang.String.format(xmlAttributeDeserializationTemplate, xmlReaderName, namespace,
+            String namespace = (attributeNamespace == null) ? "null" : "\"" + attributeNamespace + "\"";
+            return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, namespace,
                 "\"" + attributeName + "\"");
         }
     }
 
     @Override
-    public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
-        java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
-        boolean isAttribute, boolean nameIsVariable) {
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
         if (isSwaggerType) {
             if (isAttribute) {
                 throw new RuntimeException("Swagger types cannot be written as attributes.");
@@ -931,33 +903,26 @@ public class ClassType implements IType {
         }
     }
 
-    static String xmlSerializationCallHelper(String xmlWriterName, String serializationMethodName,
-        String attributeOrElementName, String namespaceUri, String valueGetter, boolean isAttribute,
-        boolean nameIsVariable) {
-        String name = null;
-        if (attributeOrElementName != null) {
-            name = nameIsVariable ? attributeOrElementName : "\"" + attributeOrElementName + "\"";
-        }
+    static String xmlSerializationCallHelper(String writer, String method, String xmlName, String namespace,
+        String value, boolean isAttribute, boolean nameIsVariable) {
+        String name = (xmlName == null) ? null
+            : nameIsVariable ? xmlName : "\"" + xmlName + "\"";
+        namespace = (namespace == null) ? null : "\"" + namespace + "\"";
+
         if (isAttribute) {
-            if (namespaceUri == null) {
-                return java.lang.String.format("%s.%sAttribute(%s, %s)", xmlWriterName, serializationMethodName,
-                    name, valueGetter);
-            } else {
-                return java.lang.String.format("%s.%sAttribute(\"%s\", %s, %s)", xmlWriterName,
-                    serializationMethodName, namespaceUri, name, valueGetter);
-            }
+            method = method + "Attribute";
+            return (namespace == null)
+                ? writer + "." + method + "(" + name + ", " + value + ")"
+                : writer + "." + method + "(" + namespace + ", " + name + ", " + value + ")";
+        }
+
+        if (name == null) {
+            return writer + "." + method + "(" + value + ")";
         } else {
-            if (name == null) {
-                return java.lang.String.format("%s.%s(%s)", xmlWriterName, serializationMethodName, valueGetter);
-            } else {
-                if (namespaceUri == null) {
-                    return java.lang.String.format("%s.%sElement(%s, %s)", xmlWriterName, serializationMethodName,
-                        name, valueGetter);
-                } else {
-                    return java.lang.String.format("%s.%sElement(\"%s\", %s, %s)", xmlWriterName,
-                        serializationMethodName, namespaceUri, name, valueGetter);
-                }
-            }
+            method = method + "Element";
+            return (namespace == null)
+                ? writer + "." + method + "(" + name + ", " + value + ")"
+                : writer + "." + method + "(" + namespace + ", " + name + ", " + value + ")";
         }
     }
 }

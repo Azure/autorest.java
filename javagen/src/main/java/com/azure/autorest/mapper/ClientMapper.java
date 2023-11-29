@@ -91,7 +91,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
+            if (iType != ClassType.STRING) {
                 EnumType enumType = (EnumType) iType;
                 if (!enumNames.contains(enumType.getName())) {
                     enumTypes.add(enumType);
@@ -101,7 +101,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
+            if (iType != ClassType.STRING) {
                 EnumType enumType = (EnumType) iType;
                 if (!enumNames.contains(enumType.getName())) {
                     enumTypes.add(enumType);
