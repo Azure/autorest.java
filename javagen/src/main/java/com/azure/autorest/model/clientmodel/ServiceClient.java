@@ -264,7 +264,7 @@ public class ServiceClient {
     }
 
     protected void addRestProxyImport(Set<String> imports) {
-        ClassType.RestProxy.addImportsTo(imports, false);
+        ClassType.REST_PROXY.addImportsTo(imports, false);
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
@@ -275,7 +275,7 @@ public class ServiceClient {
     }
 
     protected void addPipelineBuilderImport(Set<String> imports) {
-        ClassType.HttpPipelineBuilder.addImportsTo(imports, false);
+        ClassType.HTTP_PIPELINE_BUILDER.addImportsTo(imports, false);
     }
 
     public static class Builder {

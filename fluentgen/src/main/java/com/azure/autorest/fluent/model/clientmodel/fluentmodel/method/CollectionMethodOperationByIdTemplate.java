@@ -48,14 +48,14 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         final ResourceLocalVariables localVariables = resourceLocalVariables.getDeduplicatedLocalVariables(new HashSet<>(Collections.singleton(ModelNaming.METHOD_PARAMETER_NAME_ID)));
         final boolean removeResponseInReturnType = !includeContextParameter;
         final IType returnType = getReturnType(collectionMethod.getFluentReturnType(), removeResponseInReturnType);
-        final boolean responseInReturnTypeRemoved = returnType != collectionMethod.getFluentReturnType() && returnType != PrimitiveType.Void;
+        final boolean responseInReturnTypeRemoved = returnType != collectionMethod.getFluentReturnType() && returnType != PrimitiveType.VOID;
 
         final List<ClientMethodParameter> parameters = new ArrayList<>();
         // id parameter
         parameters.add(new ClientMethodParameter.Builder()
                 .name(ModelNaming.METHOD_PARAMETER_NAME_ID)
                 .description("the resource ID.")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .annotations(new ArrayList<>())
                 .constant(false)
                 .defaultValue(null)
@@ -92,7 +92,8 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         ClientMethod dummyClientMethodForJavadoc = new ClientMethod.Builder()
                 .proxyMethod(collectionMethod.getInnerProxyMethod())
                 .name(name)
-                .returnValue(new ReturnValue(returnType == PrimitiveType.Void ? "" : collectionMethod.getInnerClientMethod().getReturnValue().getDescription(), returnType))
+                .returnValue(new ReturnValue(returnType == PrimitiveType.VOID
+                    ? "" : collectionMethod.getInnerClientMethod().getReturnValue().getDescription(), returnType))
                 .parameters(parameters)
                 .description(collectionMethod.getInnerClientMethod().getDescription())
                 .build();
@@ -113,9 +114,9 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                         }
                         LocalVariable var = localVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
                         // need additional conversion from String to LocalVariable.variableType
-                        boolean needsLocalVar = var.getVariableType() != ClassType.String;
+                        boolean needsLocalVar = var.getVariableType() != ClassType.STRING;
                         String varName = needsLocalVar ? var.getName() + "Local" : var.getName();
-                        block.line(String.format("%1$s %2$s = %3$s;", ClassType.String.getName(), varName, valueFromIdText));
+                        block.line(String.format("%1$s %2$s = %3$s;", ClassType.STRING.getName(), varName, valueFromIdText));
 
                         String segmentNameForErrorPrompt = urlSegmentName.isEmpty() ? p.getSerializedName() : urlSegmentName;
                         block.ifBlock(String.format("%1$s == null", varName), ifBlock -> {
@@ -144,7 +145,7 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                         }
                     }
 
-                    if (returnType == PrimitiveType.Void) {
+                    if (returnType == PrimitiveType.VOID) {
                         block.line(String.format("this.%1$s%2$s;",
                                 methodInvocation,
                                 afterInvocationCode));
@@ -167,8 +168,8 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
         if (removeResponse) {
             if (FluentUtils.isResponseType(collectionMethodReturnType)) {
                 returnType = FluentUtils.getValueTypeFromResponseType(collectionMethodReturnType);
-                if (returnType == ClassType.Void) {
-                    returnType = PrimitiveType.Void;
+                if (returnType == ClassType.VOID) {
+                    returnType = PrimitiveType.VOID;
                 }
             } else {
                 // LRO would not have Response<T> for method takes Context, usually happens to delete method

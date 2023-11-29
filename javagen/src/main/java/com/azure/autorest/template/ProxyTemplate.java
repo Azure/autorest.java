@@ -54,7 +54,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
             {
                 for (ProxyMethod restAPIMethod : restAPI.getMethods()) {
                     if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded")) {
-                        interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
+                        interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.REST_PROXY.getName()));
                     }
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
@@ -134,7 +134,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 break;
 
                             default:
-                                if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.Context) {
+                                if (!restAPIMethod.isResumable() && parameter.getWireType() != ClassType.CONTEXT) {
                                     throw new IllegalArgumentException("Unrecognized RequestParameterLocation value: " + location);
                                 }
 

@@ -43,7 +43,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         if (parameter.getSchema() instanceof ArraySchema) {
             ArraySchema arraySchema = (ArraySchema) parameter.getSchema();
             if (arraySchema.getElementType() instanceof AnySchema) {
-                wireType = ClassType.JsonPatchDocument;
+                wireType = ClassType.JSON_PATCH_DOCUMENT;
             }
         }
 
@@ -53,7 +53,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         builder.wireType(wireType);
 
         builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
-            Collections.singletonList(ClassType.NonNull) : new ArrayList<>());
+            Collections.singletonList(ClassType.NON_NULL) : new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;

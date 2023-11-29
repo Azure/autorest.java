@@ -92,9 +92,9 @@ public class AndroidClientMethod extends ClientMethod {
             }
         }
 
-        if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
-            imports.remove(ClassType.UnixTimeDateTime.getFullName());
-            imports.add(ClassType.AndroidDateTime.getFullName());
+        if (imports.contains(ClassType.UNIX_TIME_DATE_TIME.getFullName())) {
+            imports.remove(ClassType.UNIX_TIME_DATE_TIME.getFullName());
+            imports.add(ClassType.ANDROID_DATE_TIME.getFullName());
         }
     }
 

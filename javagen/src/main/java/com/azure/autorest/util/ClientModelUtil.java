@@ -568,8 +568,8 @@ public class ClientModelUtil {
 
         // If any of the properties are ResponseError generate the bridge utils.
         // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
-        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.ResponseError
-            || p.getClientType() == ClassType.Duration || p.getClientType().contains(ClassType.Duration))) {
+        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR
+            || p.getClientType() == ClassType.DURATION || p.getClientType().contains(ClassType.DURATION))) {
             return true;
         }
 
@@ -577,7 +577,7 @@ public class ClientModelUtil {
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             return model.getPropertyReferences().stream()
                 .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                .anyMatch(p -> p.getClientType() == ClassType.ResponseError || p.getClientType() == ClassType.Duration);
+                .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
         }
 
         return false;

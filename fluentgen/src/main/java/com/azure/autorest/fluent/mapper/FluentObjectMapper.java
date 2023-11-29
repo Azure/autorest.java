@@ -33,16 +33,16 @@ public class FluentObjectMapper extends ObjectMapper {
     @Override
     protected ClassType mapPredefinedModel(ObjectSchema compositeType) {
         ClassType result = null;
-        if (compositeType.getLanguage().getJava().getName().equals(FluentType.Resource.getName())) {
-            result = FluentType.Resource;
-        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ProxyResource.getName())) {
-            result = FluentType.ProxyResource;
-        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SubResource.getName())) {
-            result = FluentType.SubResource;
-        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.ManagementError.getName())) {
-            result = FluentType.ManagementError;
-        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SystemData.getName())) {
-            result = FluentType.SystemData;
+        if (compositeType.getLanguage().getJava().getName().equals(FluentType.RESOURCE.getName())) {
+            result = FluentType.RESOURCE;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.PROXY_RESOURCE.getName())) {
+            result = FluentType.PROXY_RESOURCE;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SUB_RESOURCE.getName())) {
+            result = FluentType.SUB_RESOURCE;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.MANAGEMENT_ERROR.getName())) {
+            result = FluentType.MANAGEMENT_ERROR;
+        } else if (compositeType.getLanguage().getJava().getName().equals(FluentType.SYSTEM_DATA.getName())) {
+            result = FluentType.SYSTEM_DATA;
         }
         return result;
     }

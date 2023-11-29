@@ -8,37 +8,50 @@ import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.core.management.ProxyResource;
+import com.azure.core.management.Region;
+import com.azure.core.management.Resource;
+import com.azure.core.management.SubResource;
+import com.azure.core.management.SystemData;
+import com.azure.core.management.exception.ManagementError;
+import com.azure.core.management.exception.ManagementException;
+import com.azure.core.management.profile.AzureProfile;
 
 public class FluentType {
 
-    public static final ClassType Resource = new ClassType.Builder().knownClass(com.azure.core.management.Resource.class).build();
-    public static final ClassType ProxyResource = new ClassType.Builder().knownClass(com.azure.core.management.ProxyResource.class).build();
-    public static final ClassType SubResource = new ClassType.Builder().knownClass(com.azure.core.management.SubResource.class).build();
+    public static final ClassType RESOURCE = new ClassType.Builder().knownClass(Resource.class).build();
+    public static final ClassType PROXY_RESOURCE = new ClassType.Builder().knownClass(ProxyResource.class).build();
+    public static final ClassType SUB_RESOURCE = new ClassType.Builder().knownClass(SubResource.class).build();
 
-    public static final ClassType ManagementException = new ClassType.Builder().knownClass(com.azure.core.management.exception.ManagementException.class).build();
-    public static final ClassType ManagementError = new ClassType.Builder().knownClass(com.azure.core.management.exception.ManagementError.class).build();
+    public static final ClassType MANAGEMENT_EXCEPTION = new ClassType.Builder().knownClass(ManagementException.class)
+        .build();
+    public static final ClassType MANAGEMENT_ERROR = new ClassType.Builder().knownClass(ManagementError.class).build();
 
-    public static final ClassType AzureProfile = new ClassType.Builder().knownClass(com.azure.core.management.profile.AzureProfile.class).build();
+    public static final ClassType AZURE_PROFILE = new ClassType.Builder().knownClass(AzureProfile.class).build();
 
-    public static final ClassType Region = new ClassType.Builder().knownClass(com.azure.core.management.Region.class).build();
+    public static final ClassType REGION = new ClassType.Builder().knownClass(Region.class).build();
 
-    public static final ClassType SystemData = new ClassType.Builder().knownClass(com.azure.core.management.SystemData.class).build();
+    public static final ClassType SYSTEM_DATA = new ClassType.Builder().knownClass(SystemData.class).build();
 
-    public static final ClassType AzureResourceManager = new ClassType.Builder().packageName("com.azure.resourcemanager").name("AzureResourceManager").build();
+    public static final ClassType AZURE_RESOURCE_MANAGER = new ClassType.Builder()
+        .packageName("com.azure.resourcemanager").name("AzureResourceManager").build();
 
     private FluentType() {
     }
 
     public static GenericType InnerSupportsGet(IType typeArgument) {
-        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsGet", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsGet",
+            typeArgument);
     }
 
     public static GenericType InnerSupportsList(IType typeArgument) {
-        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsListing", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsListing",
+            typeArgument);
     }
 
     public static GenericType InnerSupportsDelete(IType typeArgument) {
-        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsDelete", typeArgument);
+        return new GenericType("com.azure.resourcemanager.resources.fluentcore.collection", "InnerSupportsDelete",
+            typeArgument);
     }
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
@@ -46,15 +59,15 @@ public class FluentType {
     }
 
     public static boolean nonResourceType(ClassType modelType) {
-        return !(Resource.equals(modelType)
-                || ProxyResource.equals(modelType)
-                || SubResource.equals(modelType));
+        return !(RESOURCE.equals(modelType)
+                || PROXY_RESOURCE.equals(modelType)
+                || SUB_RESOURCE.equals(modelType));
     }
 
     public static boolean nonResourceType(String modelName) {
-        return !(Resource.getName().equals(modelName)
-                || ProxyResource.getName().equals(modelName)
-                || SubResource.getName().equals(modelName));
+        return !(RESOURCE.getName().equals(modelName)
+                || PROXY_RESOURCE.getName().equals(modelName)
+                || SUB_RESOURCE.getName().equals(modelName));
     }
 
     public static boolean nonSystemData(ClassType modelType) {
@@ -62,7 +75,7 @@ public class FluentType {
     }
 
     public static boolean nonSystemData(String modelName) {
-        return !SystemData.getName().equals(modelName);
+        return !SYSTEM_DATA.getName().equals(modelName);
     }
 
     public static boolean nonManagementError(ClassType modelType) {
@@ -70,6 +83,6 @@ public class FluentType {
     }
 
     public static boolean nonManagementError(String modelName) {
-        return !ManagementError.getName().equals(modelName);
+        return !MANAGEMENT_ERROR.getName().equals(modelName);
     }
 }

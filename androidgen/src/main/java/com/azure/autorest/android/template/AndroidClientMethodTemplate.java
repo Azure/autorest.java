@@ -28,7 +28,7 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
 
     @Override
     protected IType getContextType() {
-        return ClassType.AndroidContext;
+        return ClassType.ANDROID_CONTEXT;
     }
 
     @Override
@@ -115,18 +115,18 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         GenericType clientReturnGenericType = (GenericType) clientMethod.getReturnValue().getType().getClientType();
         GenericType responseType = (GenericType) clientReturnGenericType.getTypeArguments()[0];
         IType modelType = responseType.getTypeArguments()[0];
-        if (modelType.equals(PrimitiveType.Void)) {
-            modelType = ClassType.Void;
-        } else if (modelType.equals(PrimitiveType.Boolean)) {
-            modelType = ClassType.Boolean;
-        } else if (modelType.equals(PrimitiveType.Double)) {
-            modelType = ClassType.Double;
-        } else if (modelType.equals(PrimitiveType.Float)) {
-            modelType = ClassType.Float;
-        } else if (modelType.equals(PrimitiveType.Int)) {
-            modelType = ClassType.Integer;
-        } else if (modelType.equals(PrimitiveType.Long)) {
-            modelType = ClassType.Long;
+        if (modelType.equals(PrimitiveType.VOID)) {
+            modelType = ClassType.VOID;
+        } else if (modelType.equals(PrimitiveType.BOOLEAN)) {
+            modelType = ClassType.BOOLEAN;
+        } else if (modelType.equals(PrimitiveType.DOUBLE)) {
+            modelType = ClassType.DOUBLE;
+        } else if (modelType.equals(PrimitiveType.FLOAT)) {
+            modelType = ClassType.FLOAT;
+        } else if (modelType.equals(PrimitiveType.INT)) {
+            modelType = ClassType.INTEGER;
+        } else if (modelType.equals(PrimitiveType.LONG)) {
+            modelType = ClassType.LONG;
         }
 
         return String.format("ResponseCompletableFuture<%1$s> %2$s = new ResponseCompletableFuture<>(); ", modelType, completeFutureVariableName);
@@ -175,14 +175,14 @@ public class AndroidClientMethodTemplate extends ClientMethodTemplate {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
-            if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+            if (clientMethod.getReturnValue().getType() == ClassType.INPUT_STREAM) {
                 throw new UnsupportedOperationException("Return type 'ClassType.InputStream' not implemented for android");
             } else {
                 IType returnType = clientMethod.getReturnValue().getType();
                 String proxyMethodCall = String.format("%s(%s).get()", effectiveAsyncMethodName, clientMethod.getArgumentList());
 
                 function.line("try {");
-                if (returnType != PrimitiveType.Void) {
+                if (returnType != PrimitiveType.VOID) {
                     function.methodReturn(proxyMethodCall);
                 } else {
                     function.line("\t" + proxyMethodCall + ";");

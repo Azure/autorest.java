@@ -70,7 +70,7 @@ class ResourceTypeNormalization {
                 getSchemaResourceType(parentType.get())
                         .ifPresent(type -> adaptForParentSchema(compositeType, parentType.get(), type));
 
-                if (FluentType.SystemData.getName().equals(Utils.getJavaName(parentType.get()))) {
+                if (FluentType.SYSTEM_DATA.getName().equals(Utils.getJavaName(parentType.get()))) {
                     adaptAsSystemData(compositeType);
                 }
             } else {
@@ -211,7 +211,7 @@ class ResourceTypeNormalization {
 
     private static void adaptAsSystemData(ObjectSchema compositeType) {
         String previousName = Utils.getJavaName(compositeType);
-        compositeType.getLanguage().getJava().setName(FluentType.SystemData.getName());
+        compositeType.getLanguage().getJava().setName(FluentType.SYSTEM_DATA.getName());
 
         LOGGER.info("Rename system data from '{}' to 'SystemData'", previousName);
 

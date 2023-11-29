@@ -119,19 +119,19 @@ public class AndroidProxyMethod extends ProxyMethod {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
 
-            if (imports.contains(ClassType.UnixTimeDateTime.getFullName())) {
-                imports.remove(ClassType.UnixTimeDateTime.getFullName());
-                imports.add(ClassType.AndroidDateTime.getFullName());
+            if (imports.contains(ClassType.UNIX_TIME_DATE_TIME.getFullName())) {
+                imports.remove(ClassType.UNIX_TIME_DATE_TIME.getFullName());
+                imports.add(ClassType.ANDROID_DATE_TIME.getFullName());
             }
 
-            if (imports.contains(ClassType.Base64Url.getFullName())) {
-                imports.remove(ClassType.Base64Url.getFullName());
-                imports.add(ClassType.AndroidBase64Url.getFullName());
+            if (imports.contains(ClassType.BASE_64_URL.getFullName())) {
+                imports.remove(ClassType.BASE_64_URL.getFullName());
+                imports.add(ClassType.ANDROID_BASE_64_URL.getFullName());
             }
 
-            if (imports.contains(ClassType.DateTimeRfc1123.getFullName())) {
-                imports.remove(ClassType.DateTimeRfc1123.getFullName());
-                imports.add(ClassType.AndroidDateTimeRfc1123.getFullName());
+            if (imports.contains(ClassType.DATE_TIME_RFC_1123.getFullName())) {
+                imports.remove(ClassType.DATE_TIME_RFC_1123.getFullName());
+                imports.add(ClassType.ANDROID_DATE_TIME_RFC_1123.getFullName());
             }
         }
     }

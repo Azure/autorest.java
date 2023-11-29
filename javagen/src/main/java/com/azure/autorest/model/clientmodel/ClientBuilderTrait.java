@@ -99,7 +99,7 @@ public class ClientBuilderTrait {
 
         // pipeline
         ServiceClientProperty pipelineProperty = new ServiceClientProperty("The HTTP pipeline to send requests " +
-                "through.", ClassType.HttpPipeline, "pipeline", false,
+                "through.", ClassType.HTTP_PIPELINE, "pipeline", false,
                 JavaSettings.getInstance().isAzureOrFluent()
                         ? "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build()"
                         : "createHttpPipeline()");
@@ -113,49 +113,49 @@ public class ClientBuilderTrait {
             function.line(String.format("this.%1$s = %2$s;", pipelineVarName, pipelineVarName));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod pipelineMethod = createTraitMethod("pipeline", "pipeline", ClassType.HttpPipeline ,
+        ClientBuilderTraitMethod pipelineMethod = createTraitMethod("pipeline", "pipeline", ClassType.HTTP_PIPELINE,
                 pipelineProperty, "{@inheritDoc}", pipelineMethodImpl);
-        importPackages.add(ClassType.HttpPipeline.getFullName());
+        importPackages.add(ClassType.HTTP_PIPELINE.getFullName());
 
         httpClientBuilderTraitMethods.add(pipelineMethod);
 
         // httpClient
         ServiceClientProperty httpClientProperty = new ServiceClientProperty("The HTTP client used to send the request.",
-                ClassType.HttpClient, "httpClient", false, null);
+                ClassType.HTTP_CLIENT, "httpClient", false, null);
         Consumer<JavaBlock> httpClientMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "httpClient", "httpClient"));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod httpClientMethod = createTraitMethod("httpClient", "httpClient", ClassType.HttpClient,
+        ClientBuilderTraitMethod httpClientMethod = createTraitMethod("httpClient", "httpClient", ClassType.HTTP_CLIENT,
                 httpClientProperty, "{@inheritDoc}", httpClientMethodImpl);
-        importPackages.add(ClassType.HttpClient.getFullName());
+        importPackages.add(ClassType.HTTP_CLIENT.getFullName());
 
         httpClientBuilderTraitMethods.add(httpClientMethod);
 
         // httpLogOptions
         ServiceClientProperty httpLogOptionsProperty = new ServiceClientProperty("The logging configuration for HTTP " +
                 "requests and responses.",
-                ClassType.HttpLogOptions, "httpLogOptions", false, null);
+                ClassType.HTTP_LOG_OPTIONS, "httpLogOptions", false, null);
         Consumer<JavaBlock> httpLogOptionsMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "httpLogOptions", "httpLogOptions"));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod httpLogOptionsMethod = createTraitMethod("httpLogOptions", "httpLogOptions", ClassType.HttpLogOptions,
+        ClientBuilderTraitMethod httpLogOptionsMethod = createTraitMethod("httpLogOptions", "httpLogOptions", ClassType.HTTP_LOG_OPTIONS,
                 httpLogOptionsProperty, "{@inheritDoc}", httpLogOptionsMethodImpl);
-        importPackages.add(ClassType.HttpLogOptions.getFullName());
+        importPackages.add(ClassType.HTTP_LOG_OPTIONS.getFullName());
 
         httpClientBuilderTraitMethods.add(httpLogOptionsMethod);
 
         // clientOptions
         ServiceClientProperty clientOptionsProperty = new ServiceClientProperty("The client options such as application ID and custom headers to set on a request.",
-                ClassType.ClientOptions, "clientOptions", false, null);
+                ClassType.CLIENT_OPTIONS, "clientOptions", false, null);
         Consumer<JavaBlock> clientOptionsMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "clientOptions", "clientOptions"));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod clientOptionsMethod = createTraitMethod("clientOptions", "clientOptions", ClassType.ClientOptions,
+        ClientBuilderTraitMethod clientOptionsMethod = createTraitMethod("clientOptions", "clientOptions", ClassType.CLIENT_OPTIONS,
                 clientOptionsProperty, "{@inheritDoc}", clientOptionsMethodImpl);
-        importPackages.add(ClassType.ClientOptions.getFullName());
+        importPackages.add(ClassType.CLIENT_OPTIONS.getFullName());
 
         httpClientBuilderTraitMethods.add(clientOptionsMethod);
 
@@ -163,14 +163,14 @@ public class ClientBuilderTrait {
         ServiceClientProperty retryOptionsProperty =
                 new ServiceClientProperty("The retry options to configure retry policy for failed "
                 + "requests.",
-                ClassType.RetryOptions, "retryOptions", false, null);
+                ClassType.RETRY_OPTIONS, "retryOptions", false, null);
         Consumer<JavaBlock> retryOptionsMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", "retryOptions", "retryOptions"));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod retryOptionsMethod = createTraitMethod("retryOptions", "retryOptions", ClassType.RetryOptions,
+        ClientBuilderTraitMethod retryOptionsMethod = createTraitMethod("retryOptions", "retryOptions", ClassType.RETRY_OPTIONS,
                 retryOptionsProperty, "{@inheritDoc}", retryOptionsMethodImpl);
-        importPackages.add(ClassType.RetryOptions.getFullName());
+        importPackages.add(ClassType.RETRY_OPTIONS.getFullName());
         httpClientBuilderTraitMethods.add(retryOptionsMethod);
 
         // addPolicy
@@ -179,9 +179,9 @@ public class ClientBuilderTrait {
             function.line("pipelinePolicies.add(customPolicy);");
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod addPolicyMethod = createTraitMethod("addPolicy", "customPolicy", ClassType.HttpPipelinePolicy,
+        ClientBuilderTraitMethod addPolicyMethod = createTraitMethod("addPolicy", "customPolicy", ClassType.HTTP_PIPELINE_POLICY,
                 null, "{@inheritDoc}", addPolicyMethodImpl);
-        importPackages.add(ClassType.HttpPipelinePolicy.getFullName());
+        importPackages.add(ClassType.HTTP_PIPELINE_POLICY.getFullName());
         httpClientBuilderTraitMethods.add(addPolicyMethod);
         return httpTrait;
     }
@@ -199,15 +199,15 @@ public class ClientBuilderTrait {
         String propertyName = "configuration";
         ServiceClientProperty configurationProperty = new ServiceClientProperty("The configuration store that is used" +
                 " during construction of the service client.",
-                ClassType.Configuration, propertyName, false, null);
+                ClassType.CONFIGURATION, propertyName, false, null);
 
         Consumer<JavaBlock> configurationMethodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod configurationMethod = createTraitMethod(propertyName, propertyName, ClassType.Configuration,
+        ClientBuilderTraitMethod configurationMethod = createTraitMethod(propertyName, propertyName, ClassType.CONFIGURATION,
                 configurationProperty, "{@inheritDoc}", configurationMethodImpl);
-        importPackages.add(ClassType.Configuration.getFullName());
+        importPackages.add(ClassType.CONFIGURATION.getFullName());
 
         configurationClientBuilderTraitMethods.add(configurationMethod);
         return configurationTrait;
@@ -229,7 +229,7 @@ public class ClientBuilderTrait {
             String propertyName = "endpoint";
             ServiceClientProperty endpointProperty = new ServiceClientProperty.Builder()
                     .name(propertyName)
-                    .type(ClassType.String)
+                    .type(ClassType.STRING)
                     .description("The service endpoint")
                     .readOnly(false)
                     .required(property.isRequired())
@@ -241,7 +241,7 @@ public class ClientBuilderTrait {
                 function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
                 function.methodReturn("this");
             };
-            ClientBuilderTraitMethod endpointMethod = createTraitMethod(propertyName, propertyName, ClassType.String,
+            ClientBuilderTraitMethod endpointMethod = createTraitMethod(propertyName, propertyName, ClassType.STRING,
                     endpointProperty, "{@inheritDoc}", endpointMethodImpl);
 
             endpointClientBuilderTraitMethods.add(endpointMethod);
@@ -262,13 +262,13 @@ public class ClientBuilderTrait {
 
         String propertyName = "tokenCredential";
         ServiceClientProperty property = new ServiceClientProperty("The TokenCredential used for authentication.",
-                ClassType.TokenCredential, propertyName, false, null);
+                ClassType.TOKEN_CREDENTIAL, propertyName, false, null);
 
         Consumer<JavaBlock> methodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.TokenCredential,
+        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.TOKEN_CREDENTIAL,
                 property, "{@inheritDoc}", methodImpl);
         importPackages.add(TokenCredential.class.getName());
 
@@ -288,13 +288,13 @@ public class ClientBuilderTrait {
 
         String propertyName = "azureKeyCredential";
         ServiceClientProperty property = new ServiceClientProperty("The AzureKeyCredential used for authentication.",
-                ClassType.AzureKeyCredential, propertyName, false, null);
+                ClassType.AZURE_KEY_CREDENTIAL, propertyName, false, null);
 
         Consumer<JavaBlock> methodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.AzureKeyCredential,
+        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.AZURE_KEY_CREDENTIAL,
                 property, "{@inheritDoc}", methodImpl);
         importPackages.add(AzureKeyCredential.class.getName());
 
@@ -307,22 +307,22 @@ public class ClientBuilderTrait {
         keyCredentialTrait.setTraitInterfaceName(KeyCredentialTrait.class.getSimpleName());
         List<String> importPackages = new ArrayList<>();
         keyCredentialTrait.setImportPackages(importPackages);
-        importPackages.add(ClassType.KeyCredentialTrait.getFullName());
+        importPackages.add(ClassType.KEY_CREDENTIAL_TRAIT.getFullName());
 
         List<ClientBuilderTraitMethod> clientBuilderTraitMethods = new ArrayList<>();
         keyCredentialTrait.setTraitMethods(clientBuilderTraitMethods);
 
         String propertyName = "keyCredential";
         ServiceClientProperty property = new ServiceClientProperty("The KeyCredential used for authentication.",
-                ClassType.KeyCredential, propertyName, false, null);
+                ClassType.KEY_CREDENTIAL, propertyName, false, null);
 
         Consumer<JavaBlock> methodImpl = function -> {
             function.line(String.format("this.%1$s = %2$s;", propertyName, propertyName));
             function.methodReturn("this");
         };
-        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.KeyCredential,
+        ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.KEY_CREDENTIAL,
                 property, "{@inheritDoc}", methodImpl);
-        importPackages.add(ClassType.KeyCredential.getFullName());
+        importPackages.add(ClassType.KEY_CREDENTIAL.getFullName());
 
         clientBuilderTraitMethods.add(clientMethod);
         return keyCredentialTrait;

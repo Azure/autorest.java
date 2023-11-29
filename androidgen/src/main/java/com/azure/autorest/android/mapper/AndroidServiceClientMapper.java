@@ -39,19 +39,19 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
     @Override
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.AndroidHttpPipeline, "httpPipeline", true, null));
+                ClassType.ANDROID_HTTP_PIPELINE, "httpPipeline", true, null));
     }
 
     @Override
     protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, JavaSettings settings) {
         serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                ClassType.AndroidJacksonSerder, "jacksonSerder", true, null,
+                ClassType.ANDROID_JACKSON_SERDER, "jacksonSerder", true, null,
                 settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
     }
 
     @Override
     protected com.azure.autorest.model.clientmodel.IType getHttpPipelineClassType() {
-        return ClassType.AndroidHttpPipeline;
+        return ClassType.ANDROID_HTTP_PIPELINE;
     }
 
     @Override
@@ -59,14 +59,14 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
         return  new com.azure.autorest.model.clientmodel.ClientMethodParameter.Builder()
                 .description("The serializer to serialize an object into a string")
                 .finalParameter(false)
-                .wireType(com.azure.autorest.model.clientmodel.ClassType.AndroidJacksonSerder)
+                .wireType(com.azure.autorest.model.clientmodel.ClassType.ANDROID_JACKSON_SERDER)
                 .name("jacksonSerder")
                 .required(true)
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? java.util.Arrays.asList(ClassType.NonNull)
+                        ? java.util.Arrays.asList(ClassType.NON_NULL)
                         : new java.util.ArrayList<>())
                 .build();
     }

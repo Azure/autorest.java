@@ -161,7 +161,7 @@ public class MethodGroupClient {
     }
 
     protected ClassType getProxyClassType() {
-        return ClassType.RestProxy;
+        return ClassType.REST_PROXY;
     }
 
     public static class Builder {

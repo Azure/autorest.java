@@ -34,7 +34,7 @@ final class MapperUtils {
         String enumTypeName = enumType.getLanguage().getJava().getName();
 
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum")) {
-            return ClassType.String;
+            return ClassType.STRING;
         } else {
             String enumPackage = settings.getPackage(settings.getModelsSubpackage());
             if (settings.isCustomType(enumTypeName)) {
