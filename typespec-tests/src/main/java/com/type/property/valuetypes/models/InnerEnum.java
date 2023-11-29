@@ -59,6 +59,7 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> implements 
         return values(InnerEnum.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -73,6 +74,7 @@ public final class InnerEnum extends ExpandableStringEnum<InnerEnum> implements 
      * @return The InnerEnum that the JSON stream represented, may return null.
      * @throws java.io.IOException If a InnerEnum fails to be read from the JsonReader.
      */
+    @Generated
     public static InnerEnum fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), InnerEnum.class);
     }

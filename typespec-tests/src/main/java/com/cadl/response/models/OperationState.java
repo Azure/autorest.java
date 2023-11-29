@@ -78,6 +78,7 @@ public final class OperationState extends ExpandableStringEnum<OperationState>
         return values(OperationState.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -92,6 +93,7 @@ public final class OperationState extends ExpandableStringEnum<OperationState>
      * @return The OperationState that the JSON stream represented, may return null.
      * @throws java.io.IOException If a OperationState fails to be read from the JsonReader.
      */
+    @Generated
     public static OperationState fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), OperationState.class);
     }

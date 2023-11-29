@@ -83,6 +83,7 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> implements 
         return values(JobStatus.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -97,6 +98,7 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> implements 
      * @return The JobStatus that the JSON stream represented, may return null.
      * @throws java.io.IOException If a JobStatus fails to be read from the JsonReader.
      */
+    @Generated
     public static JobStatus fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), JobStatus.class);
     }

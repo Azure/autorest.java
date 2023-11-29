@@ -60,6 +60,7 @@ public final class OperationName extends ExpandableStringEnum<OperationName>
         return values(OperationName.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -74,6 +75,7 @@ public final class OperationName extends ExpandableStringEnum<OperationName>
      * @return The OperationName that the JSON stream represented, may return null.
      * @throws java.io.IOException If a OperationName fails to be read from the JsonReader.
      */
+    @Generated
     public static OperationName fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), OperationName.class);
     }

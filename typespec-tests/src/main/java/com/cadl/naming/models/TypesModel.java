@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
@@ -61,6 +62,7 @@ public enum TypesModel implements JsonSerializable<TypesModel> {
         return this.value;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(value);
@@ -75,6 +77,7 @@ public enum TypesModel implements JsonSerializable<TypesModel> {
      * @return The TypesModel that the JSON stream represented, may return null.
      * @throws java.io.IOException If a TypesModel fails to be read from the JsonReader.
      */
+    @Generated
     public static TypesModel fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString());
     }

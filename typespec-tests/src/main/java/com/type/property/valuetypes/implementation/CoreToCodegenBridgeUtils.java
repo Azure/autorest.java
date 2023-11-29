@@ -111,7 +111,14 @@ public final class CoreToCodegenBridgeUtils {
             return "PT0S";
         }
 
-        StringBuilder builder = new StringBuilder().append('P');
+        StringBuilder builder = new StringBuilder();
+
+        if (duration.isNegative()) {
+            builder.append("-P");
+            duration = duration.negated();
+        } else {
+            builder.append('P');
+        }
 
         long days = duration.toDays();
         if (days > 0) {

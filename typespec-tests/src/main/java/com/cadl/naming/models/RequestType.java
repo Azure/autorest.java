@@ -59,6 +59,7 @@ public final class RequestType extends ExpandableStringEnum<RequestType> impleme
         return values(RequestType.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -73,6 +74,7 @@ public final class RequestType extends ExpandableStringEnum<RequestType> impleme
      * @return The RequestType that the JSON stream represented, may return null.
      * @throws java.io.IOException If a RequestType fails to be read from the JsonReader.
      */
+    @Generated
     public static RequestType fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), RequestType.class);
     }

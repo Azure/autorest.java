@@ -65,6 +65,7 @@ public final class ColorModel extends ExpandableStringEnum<ColorModel> implement
         return values(ColorModel.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -79,6 +80,7 @@ public final class ColorModel extends ExpandableStringEnum<ColorModel> implement
      * @return The ColorModel that the JSON stream represented, may return null.
      * @throws java.io.IOException If a ColorModel fails to be read from the JsonReader.
      */
+    @Generated
     public static ColorModel fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), ColorModel.class);
     }

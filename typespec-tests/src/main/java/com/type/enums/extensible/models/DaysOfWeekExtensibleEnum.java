@@ -90,6 +90,7 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
         return values(DaysOfWeekExtensibleEnum.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -104,6 +105,7 @@ public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfW
      * @return The DaysOfWeekExtensibleEnum that the JSON stream represented, may return null.
      * @throws java.io.IOException If a DaysOfWeekExtensibleEnum fails to be read from the JsonReader.
      */
+    @Generated
     public static DaysOfWeekExtensibleEnum fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), DaysOfWeekExtensibleEnum.class);
     }

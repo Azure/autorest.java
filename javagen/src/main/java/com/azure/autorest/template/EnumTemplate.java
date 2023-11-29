@@ -123,6 +123,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                 function -> function.methodReturn("values(" + enumName + ".class)"));
 
             if (settings.isStreamStyleSerialization()) {
+                addGeneratedAnnotation(classBlock);
                 classBlock.annotation("Override");
                 classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException",
                     function -> function.methodReturn("jsonWriter.writeString(toString())"));
@@ -135,6 +136,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");
                     javadoc.methodThrows(IOException.class.getName(), "If a " + enumName + " fails to be read from the JsonReader.");
                 });
+                addGeneratedAnnotation(classBlock);
                 classBlock.publicStaticMethod(enumName + " fromJson(JsonReader jsonReader) throws IOException",
                     function -> function.methodReturn("fromString(jsonReader.getString(), " + enumName + ".class)"));
             }
@@ -223,6 +225,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
             if (settings.isStreamStyleSerialization()) {
                 String serializationCall = enumType.getElementType().jsonSerializationMethodCall("jsonWriter", null, "value");
+                addGeneratedAnnotation(enumBlock);
                 enumBlock.annotation("Override");
                 enumBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException",
                     function -> function.methodReturn(serializationCall));
@@ -236,6 +239,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                     javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");
                     javadoc.methodThrows(IOException.class.getName(), "If a " + enumName + " fails to be read from the JsonReader.");
                 });
+                addGeneratedAnnotation(enumBlock);
                 enumBlock.publicStaticMethod(enumName + " fromJson(JsonReader jsonReader) throws IOException",
                     function -> function.methodReturn(converterName + "(" + deserializationCall + ")"));
             }
@@ -286,5 +290,4 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             enumBlock.annotation(Annotation.GENERATED.getName());
         }
     }
-
 }

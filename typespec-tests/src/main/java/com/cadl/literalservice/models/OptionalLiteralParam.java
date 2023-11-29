@@ -4,6 +4,7 @@
 
 package com.cadl.literalservice.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
@@ -54,6 +55,7 @@ public enum OptionalLiteralParam implements JsonSerializable<OptionalLiteralPara
         return this.value;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(value);
@@ -68,6 +70,7 @@ public enum OptionalLiteralParam implements JsonSerializable<OptionalLiteralPara
      * @return The OptionalLiteralParam that the JSON stream represented, may return null.
      * @throws java.io.IOException If a OptionalLiteralParam fails to be read from the JsonReader.
      */
+    @Generated
     public static OptionalLiteralParam fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString());
     }

@@ -76,7 +76,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "examples-directory": { type: "string", nullable: true },
 
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
-    "stream-style-serialization": { type: "boolean", nullable: true, default: true },
+    "stream-style-serialization": { type: "boolean", nullable: true, default: false },
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },

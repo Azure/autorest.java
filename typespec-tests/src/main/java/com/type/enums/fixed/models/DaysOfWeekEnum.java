@@ -4,6 +4,7 @@
 
 package com.type.enums.fixed.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
@@ -84,6 +85,7 @@ public enum DaysOfWeekEnum implements JsonSerializable<DaysOfWeekEnum> {
         return this.value;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(value);
@@ -98,6 +100,7 @@ public enum DaysOfWeekEnum implements JsonSerializable<DaysOfWeekEnum> {
      * @return The DaysOfWeekEnum that the JSON stream represented, may return null.
      * @throws java.io.IOException If a DaysOfWeekEnum fails to be read from the JsonReader.
      */
+    @Generated
     public static DaysOfWeekEnum fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString());
     }

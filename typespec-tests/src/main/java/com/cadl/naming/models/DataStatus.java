@@ -67,6 +67,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> implement
         return values(DataStatus.class);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeString(toString());
@@ -81,6 +82,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> implement
      * @return The DataStatus that the JSON stream represented, may return null.
      * @throws java.io.IOException If a DataStatus fails to be read from the JsonReader.
      */
+    @Generated
     public static DataStatus fromJson(JsonReader jsonReader) throws IOException {
         return fromString(jsonReader.getString(), DataStatus.class);
     }

@@ -566,16 +566,20 @@ public class ClientModelUtil {
             return false;
         }
 
-        boolean ret = model.getProperties().stream()
-            .anyMatch(p -> p.getClientType() == ClassType.ResponseError || p.getClientType() == ClassType.Duration);
+        // If any of the properties are ResponseError generate the bridge utils.
+        // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
+        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.ResponseError
+            || p.getClientType() == ClassType.Duration || p.getClientType().contains(ClassType.Duration))) {
+            return true;
+        }
 
         // flatten properties
-        if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-            ret = model.getPropertyReferences().stream()
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            return model.getPropertyReferences().stream()
                 .filter(ClientModelPropertyReference::isFromFlattenedProperty)
                 .anyMatch(p -> p.getClientType() == ClassType.ResponseError || p.getClientType() == ClassType.Duration);
         }
 
-        return ret;
+        return false;
     }
 }
