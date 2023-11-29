@@ -8,9 +8,6 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Inner model used in collections model property.
@@ -23,24 +20,6 @@ public final class InnerModel {
     @Generated
     @JsonProperty(value = "property")
     private String property;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJmp(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setInnerModelAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJmp(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of InnerModel class.
