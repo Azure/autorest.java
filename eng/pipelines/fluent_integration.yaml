@@ -25,24 +25,31 @@ jobs:
     name: azsdk-pool-mms-win-2022-general
     vmImage: windows-2022
 
+  variables:
+    - template: /eng/pipelines/variables/globals.yml
+
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '18.x'
+      versionSpec: '$(NodeVersion)'
 
   - script: npm install autorest -g
+
+  - template: /eng/pipelines/steps/cache-maven-repository.yml
+    parameters:
+      JobType: 'Fluent Integration'
 
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
+      jdkVersionOption: $(JavaVersion)
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       goals: 'clean install'
-      options: '-P local,testFluent --no-transfer-progress'
+      options: '$(DefaultOptions) -P local,testFluent -T 1C'
 
   - task: PublishCodeCoverageResults@1
     inputs:
@@ -50,3 +57,5 @@ jobs:
       summaryFileLocation: fluentgen/target/site/test-coverage/jacoco.xml
       reportDirectory: fluentgen/target/site/test-coverage/
       failIfCoverageEmpty: false
+
+  - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

@@ -6,20 +6,22 @@ package com.cadl.internal.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The ApiResponse model.
  */
 @Immutable
-public final class ApiResponse {
+public final class ApiResponse implements JsonSerializable<ApiResponse> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of ApiResponse class.
@@ -27,8 +29,7 @@ public final class ApiResponse {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    private ApiResponse(@JsonProperty(value = "name") String name) {
+    private ApiResponse(String name) {
         this.name = name;
     }
 
@@ -40,5 +41,38 @@ public final class ApiResponse {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ApiResponse from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ApiResponse if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ApiResponse.
+     */
+    public static ApiResponse fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new ApiResponse(name);
+        });
     }
 }

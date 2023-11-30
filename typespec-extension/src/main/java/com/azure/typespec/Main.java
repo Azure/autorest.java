@@ -39,6 +39,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -147,6 +148,23 @@ public class Main {
                 typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
+        }
+
+        boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
+        if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
+            StringBuilder sb = new StringBuilder("{\n  \"CrossLanguageDefinitionId\": {\n");
+            AtomicBoolean first = new AtomicBoolean(true);
+            typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {
+                if(first.get()) {
+                    first.set(false);
+                } else {
+                    sb.append(",\n");
+                }
+                sb.append("    \"").append(key).append("\": \"").append(value).append("\"");
+            });
+            sb.append("\n  }\n}");
+
+            typeSpecPlugin.writeFile("src/main/resources/META-INF/apiview_properties.json", sb.toString(), null);
         }
         System.exit(0);
     }

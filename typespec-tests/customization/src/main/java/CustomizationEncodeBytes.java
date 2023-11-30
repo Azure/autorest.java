@@ -8,7 +8,7 @@ import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
 import org.slf4j.Logger;
 
-import java.util.Arrays;
+import java.lang.reflect.Modifier;
 
 /**
  * This class contains the customization code to customize the AutoRest generated code for App Configuration.
@@ -21,6 +21,8 @@ public class CustomizationEncodeBytes extends Customization {
 
         PackageCustomization packageCustomization = customization.getPackage("com.encode.bytes.models");
         ClassCustomization classCustomization = packageCustomization.getClass("Base64UrlArrayBytesProperty");
+
+        classCustomization.getProperty("value").setModifier(Modifier.PRIVATE);
 
         ConstructorCustomization constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
         constructorCustomization.removeAnnotation("JsonCreator");

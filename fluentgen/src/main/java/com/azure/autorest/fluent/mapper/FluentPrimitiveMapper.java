@@ -27,7 +27,7 @@ public class FluentPrimitiveMapper extends PrimitiveMapper {
         }
         if (primaryType.getType() == Schema.AllSchemaTypes.CREDENTIAL) {
             // swagger is "format": "password", which mostly serve as a hint
-            IType type = ClassType.String;
+            IType type = ClassType.STRING;
             parsed.put(primaryType, type);
             return type;
         } else {

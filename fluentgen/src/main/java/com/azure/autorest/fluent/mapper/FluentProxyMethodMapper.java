@@ -30,7 +30,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
                                                          JavaSettings settings) {
         if (CoreUtils.isNullOrEmpty(operation.getExceptions())) {
             // use ManagementException
-            builder.unexpectedResponseExceptionType(FluentType.ManagementException);
+            builder.unexpectedResponseExceptionType(FluentType.MANAGEMENT_EXCEPTION);
         } else {
             super.buildUnexpectedResponseExceptionTypes(builder, operation, expectedStatusCodes, settings);
         }
@@ -69,7 +69,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     @Override
     protected ClassType processExceptionClassType(ClassType errorType, JavaSettings settings) {
         if (!FluentType.nonManagementError(errorType)) {
-            return FluentType.ManagementException;
+            return FluentType.MANAGEMENT_EXCEPTION;
         } else {
             return super.processExceptionClassType(errorType, settings);
         }
@@ -77,7 +77,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
 
     @Override
     protected ClassType getHttpResponseExceptionType() {
-        return FluentType.ManagementException;
+        return FluentType.MANAGEMENT_EXCEPTION;
     }
 
     @Override

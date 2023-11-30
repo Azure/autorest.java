@@ -6,13 +6,16 @@ package com.cadl.naming.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for RequestType.
  */
-public final class RequestType extends ExpandableStringEnum<RequestType> {
+public final class RequestType extends ExpandableStringEnum<RequestType> implements JsonSerializable<RequestType> {
     /**
      * Static value Type1 for RequestType.
      */
@@ -42,7 +45,6 @@ public final class RequestType extends ExpandableStringEnum<RequestType> {
      * @return the corresponding RequestType.
      */
     @Generated
-    @JsonCreator
     public static RequestType fromString(String name) {
         return fromString(name, RequestType.class);
     }
@@ -55,5 +57,25 @@ public final class RequestType extends ExpandableStringEnum<RequestType> {
     @Generated
     public static Collection<RequestType> values() {
         return values(RequestType.class);
+    }
+
+    @Generated
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a RequestType from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The RequestType that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a RequestType fails to be read from the JsonReader.
+     */
+    @Generated
+    public static RequestType fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), RequestType.class);
     }
 }

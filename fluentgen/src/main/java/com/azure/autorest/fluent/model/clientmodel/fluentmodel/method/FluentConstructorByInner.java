@@ -57,7 +57,7 @@ public class FluentConstructorByInner extends FluentMethod {
                             valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s.id(), \"%2$s\")",
                                     ModelNaming.MODEL_PROPERTY_INNER, urlSegmentNameByParameterName.get(p.getSerializedName()));
                         }
-                        if (p.getClientMethodParameter().getClientType() != ClassType.String) {
+                        if (p.getClientMethodParameter().getClientType() != ClassType.STRING) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
                         }
                         block.line(String.format("this.%1$s = %2$s;", resourceLocalVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter()).getName(), valueFromIdText));

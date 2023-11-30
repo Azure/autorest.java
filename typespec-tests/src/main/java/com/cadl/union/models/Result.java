@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Result model.
@@ -112,9 +110,7 @@ public class Result implements JsonSerializable<Result> {
      */
     public static Result fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean dataFound = false;
             BinaryData data = null;
             Result result = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -123,32 +119,18 @@ public class Result implements JsonSerializable<Result> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("data".equals(fieldName)) {
                     data = BinaryData.fromObject(reader.readUntyped());
-                    dataFound = true;
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && dataFound) {
-                Result deserializedResult = new Result(name, data);
-                deserializedResult.result = result;
+            Result deserializedResult = new Result(name, data);
+            deserializedResult.result = result;
 
-                return deserializedResult;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedResult;
         });
     }
 }

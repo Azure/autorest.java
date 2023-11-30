@@ -5,24 +5,26 @@
 package com.azure.data.schemaregistry.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Object received from the registry containing the list of schema groups and link to next batch page.
  */
 @Fluent
-public final class SchemaGroups {
+public final class SchemaGroups implements JsonSerializable<SchemaGroups> {
     /*
      * Array of schema groups.
      */
-    @JsonProperty(value = "schemaGroups")
     private List<String> groups;
 
     /*
      * URl to next batch of schema groups
      */
-    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -69,5 +71,42 @@ public final class SchemaGroups {
     public SchemaGroups setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeArrayField("schemaGroups", this.groups, (writer, element) -> writer.writeString(element));
+        jsonWriter.writeStringField("nextLink", this.nextLink);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of SchemaGroups from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of SchemaGroups if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the SchemaGroups.
+     */
+    public static SchemaGroups fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            SchemaGroups deserializedSchemaGroups = new SchemaGroups();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("schemaGroups".equals(fieldName)) {
+                    List<String> groups = reader.readArray(reader1 -> reader1.getString());
+                    deserializedSchemaGroups.groups = groups;
+                } else if ("nextLink".equals(fieldName)) {
+                    deserializedSchemaGroups.nextLink = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSchemaGroups;
+        });
     }
 }

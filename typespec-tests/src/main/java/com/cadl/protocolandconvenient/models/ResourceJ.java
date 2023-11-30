@@ -6,34 +6,34 @@ package com.cadl.protocolandconvenient.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The ResourceJ model.
  */
 @Immutable
-public final class ResourceJ {
+public final class ResourceJ implements JsonSerializable<ResourceJ> {
     /*
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
      * The type property.
      */
     @Generated
-    @JsonProperty(value = "type")
-    private String type;
+    private final String type;
 
     /**
      * Creates an instance of ResourceJ class.
@@ -41,8 +41,7 @@ public final class ResourceJ {
      * @param type the type value to set.
      */
     @Generated
-    @JsonCreator
-    private ResourceJ(@JsonProperty(value = "type") String type) {
+    private ResourceJ(String type) {
         this.type = type;
     }
 
@@ -74,5 +73,48 @@ public final class ResourceJ {
     @Generated
     public String getType() {
         return this.type;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("type", this.type);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ResourceJ from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ResourceJ if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ResourceJ.
+     */
+    public static ResourceJ fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String id = null;
+            String name = null;
+            String type = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    id = reader.getString();
+                } else if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else if ("type".equals(fieldName)) {
+                    type = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            ResourceJ deserializedResourceJ = new ResourceJ(type);
+            deserializedResourceJ.id = id;
+            deserializedResourceJ.name = name;
+
+            return deserializedResourceJ;
+        });
     }
 }

@@ -6,20 +6,22 @@ package com._specs_.azure.clientgenerator.core.access.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Used in an internal operation but with public decorator, should be generated and exported.
  */
 @Immutable
-public final class PublicDecoratorModelInInternal {
+public final class PublicDecoratorModelInInternal implements JsonSerializable<PublicDecoratorModelInInternal> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of PublicDecoratorModelInInternal class.
@@ -27,8 +29,7 @@ public final class PublicDecoratorModelInInternal {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    private PublicDecoratorModelInInternal(@JsonProperty(value = "name") String name) {
+    private PublicDecoratorModelInInternal(String name) {
         this.name = name;
     }
 
@@ -40,5 +41,38 @@ public final class PublicDecoratorModelInInternal {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of PublicDecoratorModelInInternal from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of PublicDecoratorModelInInternal if the JsonReader was pointing to an instance of it, or
+     * null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the PublicDecoratorModelInInternal.
+     */
+    public static PublicDecoratorModelInInternal fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new PublicDecoratorModelInInternal(name);
+        });
     }
 }

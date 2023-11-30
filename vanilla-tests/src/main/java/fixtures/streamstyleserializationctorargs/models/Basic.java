@@ -10,7 +10,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * The Basic model.
@@ -113,7 +112,7 @@ public final class Basic implements JsonSerializable<Basic> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("id", this.id);
         jsonWriter.writeStringField("name", this.name);
-        jsonWriter.writeStringField("color", Objects.toString(this.color, null));
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
     }
 

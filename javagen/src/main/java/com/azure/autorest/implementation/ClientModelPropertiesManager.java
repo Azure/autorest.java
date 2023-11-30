@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -43,6 +44,9 @@ public final class ClientModelPropertiesManager {
     private final String deserializedModelName;
     private final boolean hasRequiredProperties;
     private final boolean hasConstructorArguments;
+    private final int requiredPropertiesCount;
+    private final int setterPropertiesCount;
+    private final int readOnlyPropertiesCount;
     private final List<ClientModelProperty> superConstructorProperties;
     private final List<ClientModelProperty> superRequiredProperties;
     private final List<ClientModelProperty> superSetterProperties;
@@ -54,6 +58,7 @@ public final class ClientModelPropertiesManager {
     private final ClientModelProperty additionalProperties;
     private final ClientModelProperty discriminatorProperty;
     private final String expectedDiscriminator;
+    private final boolean discriminatorIsRequired;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
 
@@ -84,6 +89,8 @@ public final class ClientModelPropertiesManager {
         this.model = model;
         this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
+        String polymorphicDiscriminator = model.getPolymorphicDiscriminator();
+        boolean discriminatorIsRequired = false;
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
         boolean hasRequiredProperties = false;
@@ -117,19 +124,26 @@ public final class ClientModelPropertiesManager {
         }
 
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
-            // Ignore additional and discriminator properties.
+            // Ignore additional properties and polymorphic discriminators from parent types as they will be handled
+            // specifically in the subtype.
             if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
                 continue;
             }
 
             if (property.isRequired()) {
                 hasRequiredProperties = true;
+                if (Objects.equals(property.getSerializedName(), polymorphicDiscriminator)) {
+                    discriminatorIsRequired = true;
+                }
+
                 superRequiredProperties.add(property);
 
-                if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                    superConstructorProperties.add(property);
-                } else {
-                    superReadOnlyProperties.add(property);
+                if (!property.isConstant()) {
+                    if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
+                        superConstructorProperties.add(property);
+                    } else {
+                        superReadOnlyProperties.add(property);
+                    }
                 }
             } else {
                 superSetterProperties.add(property);
@@ -166,6 +180,10 @@ public final class ClientModelPropertiesManager {
         for (ClientModelProperty property : model.getProperties()) {
             if (property.isRequired()) {
                 hasRequiredProperties = true;
+                if (Objects.equals(property.getSerializedName(), polymorphicDiscriminator)) {
+                    discriminatorIsRequired = true;
+                }
+
                 requiredProperties.add(property);
 
                 if (!property.isConstant()) {
@@ -213,10 +231,15 @@ public final class ClientModelPropertiesManager {
             && (!CoreUtils.isNullOrEmpty(readOnlyProperties) || !CoreUtils.isNullOrEmpty(superReadOnlyProperties));
 
         this.hasRequiredProperties = hasRequiredProperties;
+        this.requiredPropertiesCount = requiredProperties.size() + superRequiredProperties.size()
+            + (discriminatorIsRequired ? 1 : 0);
+        this.setterPropertiesCount = setterProperties.size() + superSetterProperties.size();
+        this.readOnlyPropertiesCount = readOnlyProperties.size() + superReadOnlyProperties.size();
         this.hasConstructorArguments = requiredConstructorProperties || readOnlyConstructorProperties;
         this.hasXmlElements = hasXmlElements;
         this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;
+        this.discriminatorIsRequired = discriminatorIsRequired;
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
             flattenedProperties);
@@ -262,6 +285,33 @@ public final class ClientModelPropertiesManager {
      */
     public boolean hasRequiredProperties() {
         return hasRequiredProperties;
+    }
+
+    /**
+     * Gets the number of required properties in the {@link #getModel() model}.
+     *
+     * @return The number of required properties in the {@link #getModel() model}.
+     */
+    public int getRequiredPropertiesCount() {
+        return requiredPropertiesCount;
+    }
+
+    /**
+     * Gets the number of setter properties in the {@link #getModel() model}.
+     *
+     * @return The number of setter properties in the {@link #getModel() model}.
+     */
+    public int getSetterPropertiesCount() {
+        return setterPropertiesCount;
+    }
+
+    /**
+     * Gets the number of read-only properties in the {@link #getModel() model}.
+     *
+     * @return The number of read-only properties in the {@link #getModel() model}.
+     */
+    public int getReadOnlyPropertiesCount() {
+        return readOnlyPropertiesCount;
     }
 
     /**
@@ -384,6 +434,17 @@ public final class ClientModelPropertiesManager {
      */
     public String getExpectedDiscriminator() {
         return expectedDiscriminator;
+    }
+
+    /**
+     * Whether the discriminator property is required for the polymorphic model.
+     * <p>
+     * If the model isn't polymorphic this will return false.
+     *
+     * @return Whether the discriminator property is required for the polymorphic model.
+     */
+    public boolean isDiscriminatorRequired() {
+        return discriminatorIsRequired;
     }
 
     /**

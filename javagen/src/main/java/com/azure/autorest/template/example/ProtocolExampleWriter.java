@@ -75,7 +75,7 @@ public class ProtocolExampleWriter {
 
         imports.addAll(this.clientInitializationExampleWriter.getImports());
 
-        ClassType.BinaryData.addImportsTo(imports, false);
+        ClassType.BINARY_DATA.addImportsTo(imports, false);
         imports.add(java.util.Arrays.class.getName());
         method.addImportsTo(imports, false, settings);
 
@@ -121,7 +121,7 @@ public class ProtocolExampleWriter {
                                         elements.stream().map(value -> elementType.defaultValueExpression(value.toString())).collect(Collectors.joining(", ")));
                                 params.set(parameterIndex, exampleValue);
                             }
-                        } else if (proxyMethodParameter.getClientType() != ClassType.BinaryData) {
+                        } else if (proxyMethodParameter.getClientType() != ClassType.BINARY_DATA) {
                             // type like String, int, boolean, date-time
 
                             String exampleValue = proxyMethodParameter.getRequestParameterLocation() == RequestParameterLocation.QUERY
@@ -131,7 +131,7 @@ public class ProtocolExampleWriter {
                             params.set(parameterIndex, proxyMethodParameter.getClientType().defaultValueExpression(exampleValue));
                         } else {
                             // BinaryData
-                            String binaryDataValue = ClassType.String.defaultValueExpression(parameterValue.getJsonString());
+                            String binaryDataValue = ClassType.STRING.defaultValueExpression(parameterValue.getJsonString());
                             binaryDataStmt.append(
                                     String.format("BinaryData %s = BinaryData.fromString(%s);",
                                             parameterName, binaryDataValue));
@@ -159,7 +159,7 @@ public class ProtocolExampleWriter {
                                             requestOptionsStmts.add(
                                                     String.format(".addQueryParam(\"%s\", %s)",
                                                             parameterName,
-                                                            ClassType.String.defaultValueExpression(element.toString())));
+                                                            ClassType.STRING.defaultValueExpression(element.toString())));
                                         }
                                     } else {
                                         // collectionFormat: csv, ssv, tsv, pipes
@@ -170,14 +170,14 @@ public class ProtocolExampleWriter {
                                         requestOptionsStmts.add(
                                                 String.format(".addQueryParam(\"%s\", %s)",
                                                         parameterName,
-                                                        ClassType.String.defaultValueExpression(exampleValue)));
+                                                        ClassType.STRING.defaultValueExpression(exampleValue)));
                                     }
                                 }
                             } else {
                                 requestOptionsStmts.add(
                                         String.format(".addQueryParam(\"%s\", %s)",
                                                 parameterName,
-                                                ClassType.String.defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
+                                                ClassType.STRING.defaultValueExpression(parameterValue.getUnescapedQueryValue().toString())));
                             }
                             break;
 
@@ -187,13 +187,13 @@ public class ProtocolExampleWriter {
                             requestOptionsStmts.add(
                                     String.format(".addHeader(\"%s\", %s)",
                                             parameterName,
-                                            ClassType.String.defaultValueExpression(parameterValue.getObjectValue().toString())));
+                                            ClassType.STRING.defaultValueExpression(parameterValue.getObjectValue().toString())));
                             break;
 
                         case BODY:
                             requestOptionsStmts.add(
                                     String.format(".setBody(BinaryData.fromString(%s))",
-                                            ClassType.String.defaultValueExpression(parameterValue.getJsonString())));
+                                            ClassType.STRING.defaultValueExpression(parameterValue.getJsonString())));
                             break;
 
                         // Path cannot be optional
@@ -218,9 +218,9 @@ public class ProtocolExampleWriter {
             }
             for (int i = 0; i < numParam; i++) {
                 ClientMethodParameter parameter = method.getParameters().get(i);
-                if (parameter.getClientType() == ClassType.RequestOptions) {
+                if (parameter.getClientType() == ClassType.REQUEST_OPTIONS) {
                     params.set(i, "requestOptions");
-                } else if (parameter.getClientType() == ClassType.Context) {
+                } else if (parameter.getClientType() == ClassType.CONTEXT) {
                     params.set(i, "Context.NONE");
                 }
             }
@@ -246,16 +246,16 @@ public class ProtocolExampleWriter {
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getStatusCode());", response.getStatusCode()));
                         // assert headers
                         response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON body
                         if (method.getProxyMethod().getResponseContentTypes() != null
                                 && method.getProxyMethod().getResponseContentTypes().contains(ContentType.APPLICATION_JSON)
                                 && responseType.getTypeArguments().length > 0
-                                && responseType.getTypeArguments()[0] == ClassType.BinaryData) {
-                            String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJsonBody());
+                                && responseType.getTypeArguments()[0] == ClassType.BINARY_DATA) {
+                            String expectedJsonStr = ClassType.STRING.defaultValueExpression(response.getJsonBody());
                             methodBlock.line(String.format("Assertions.assertEquals(BinaryData.fromString(%1$s).toObject(Object.class), response.getValue().toObject(Object.class));", expectedJsonStr));
                         }
                     } else if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
@@ -273,15 +273,15 @@ public class ProtocolExampleWriter {
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
                         // assert headers
                         response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.String.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.String.defaultValueExpression(header.getName());
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
+                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0
                         if (method.getProxyMethod().getResponseContentTypes() != null
                                 && method.getProxyMethod().getResponseContentTypes().contains(ContentType.APPLICATION_JSON)
                                 && responseType.getTypeArguments().length > 0
-                                && responseType.getTypeArguments()[0] == ClassType.BinaryData
+                                && responseType.getTypeArguments()[0] == ClassType.BINARY_DATA
                                 && method.getMethodPageDetails() != null
                                 && response.getBody() instanceof Map) {
                             Map<String, Object> bodyMap = (Map<String, Object>) response.getBody();
@@ -293,7 +293,7 @@ public class ProtocolExampleWriter {
                                         methodBlock.line("Assertions.assertEquals(0, response.stream().count());");
                                     } else {
                                         Object firstItem = itemArray.iterator().next();
-                                        String expectedJsonStr = ClassType.String.defaultValueExpression(response.getJson(firstItem));
+                                        String expectedJsonStr = ClassType.STRING.defaultValueExpression(response.getJson(firstItem));
                                         methodBlock.line(String.format("Assertions.assertEquals(BinaryData.fromString(%1$s).toObject(Object.class), response.iterator().next().toObject(Object.class));", expectedJsonStr));
                                     }
                                 }

@@ -11,7 +11,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -20,6 +20,8 @@ import javax.xml.stream.XMLStreamException;
  */
 @Fluent
 public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * the date-time the policy is active
      */
@@ -127,8 +129,8 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
         rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeStringElement("Start", Objects.toString(this.start, null));
-        xmlWriter.writeStringElement("Expiry", Objects.toString(this.expiry, null));
+        xmlWriter.writeStringElement("Start", this.start == null ? null : ISO_8601.format(this.start));
+        xmlWriter.writeStringElement("Expiry", this.expiry == null ? null : ISO_8601.format(this.expiry));
         xmlWriter.writeStringElement("Permission", this.permission);
         return xmlWriter.writeEndElement();
     }
@@ -165,9 +167,11 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
                 QName elementName = reader.getElementName();
 
                 if ("Start".equals(elementName.getLocalPart())) {
-                    deserializedAccessPolicy.start = reader.getNullableElement(OffsetDateTime::parse);
+                    deserializedAccessPolicy.start
+                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
                 } else if ("Expiry".equals(elementName.getLocalPart())) {
-                    deserializedAccessPolicy.expiry = reader.getNullableElement(OffsetDateTime::parse);
+                    deserializedAccessPolicy.expiry
+                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
                 } else if ("Permission".equals(elementName.getLocalPart())) {
                     deserializedAccessPolicy.permission = reader.getStringElement();
                 } else {

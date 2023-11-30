@@ -4,13 +4,16 @@
 
 package com.cadl.enumservice.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.azure.core.annotation.Generated;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Defines values for OperationStateValues.
  */
-public enum OperationStateValues {
+public enum OperationStateValues implements JsonSerializable<OperationStateValues> {
     /**
      * Enum value Running.
      */
@@ -41,7 +44,6 @@ public enum OperationStateValues {
      * @param value the serialized value to parse.
      * @return the parsed OperationStateValues object, or null if unable to parse.
      */
-    @JsonCreator
     public static OperationStateValues fromString(String value) {
         if (value == null) {
             return null;
@@ -58,9 +60,28 @@ public enum OperationStateValues {
     /**
      * {@inheritDoc}
      */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;
+    }
+
+    @Generated
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(value);
+    }
+
+    /**
+     * Reads a OperationStateValues from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The OperationStateValues that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a OperationStateValues fails to be read from the JsonReader.
+     */
+    @Generated
+    public static OperationStateValues fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString());
     }
 }

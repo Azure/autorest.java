@@ -295,7 +295,7 @@ public class TemplateUtil {
                 || content.contains("LOGGER.info")) {
             // hack to add LOGGER class variable only if LOGGER is used in code
             classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
-                    ClassType.ClientLogger.toString(), className));
+                    ClassType.CLIENT_LOGGER.toString(), className));
         }
     }
 

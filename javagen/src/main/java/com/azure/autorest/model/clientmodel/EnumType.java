@@ -34,6 +34,8 @@ public class EnumType implements IType {
 
     private final ImplementationDetails implementationDetails;
 
+    private String crossLanguageDefinitionId;
+
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
@@ -44,7 +46,8 @@ public class EnumType implements IType {
     private EnumType(String packageKeyword, String name, String description,
                      boolean expandable, List<ClientEnumValue> values,
                      IType elementType,
-                     ImplementationDetails implementationDetails) {
+                     ImplementationDetails implementationDetails,
+                     String crossLanguageDefinitionId) {
         this.name = name;
         this.packageName = packageKeyword;
         this.description = description;
@@ -52,6 +55,11 @@ public class EnumType implements IType {
         this.values = values;
         this.elementType = elementType;
         this.implementationDetails = implementationDetails;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getName() {
@@ -125,7 +133,7 @@ public class EnumType implements IType {
      *
      * @return The method name used to convert JSON to the enum type.
      */
-    public final String getFromJsonMethodName() {
+    public final String getFromMethodName() {
         return "from" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
@@ -134,7 +142,7 @@ public class EnumType implements IType {
      *
      * @return The method name used to convert the enum type to JSON.
      */
-    public final String getToJsonMethodName() {
+    public final String getToMethodName() {
         return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
@@ -164,36 +172,34 @@ public class EnumType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return null;
+    }
+
+    @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
-        return String.format("%s.%s(%s.getString())", name, getFromJsonMethodName(), jsonReaderName);
+        return name + "." + getFromMethodName() + "(" + elementType.jsonDeserializationMethod(jsonReaderName) + ")";
     }
 
     @Override
     public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
-        return fieldName == null
-            ? String.format("%s.writeString(Objects.toString(%s, null))", jsonWriterName, valueGetter)
-            : String.format("%s.writeStringField(\"%s\", Objects.toString(%s, null))",
-                jsonWriterName, fieldName, valueGetter);
+        String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
+        return elementType.jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter);
     }
 
     @Override
-    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
-        String createCall = name + "::" + getFromJsonMethodName();
-        if (attributeName == null) {
-            return String.format("getNullableElement(%s)", createCall);
-        } else {
-            return (attributeNamespace == null)
-                ? String.format("getNullableAttribute(null, \"%s\", %s)", attributeName, createCall)
-                : String.format("getNullableAttribute(\"%s\", \"%s\", %s)", attributeNamespace, attributeName, createCall);
-        }
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+        String elementTypeXmlDeserialization = elementType.xmlDeserializationMethod(xmlReaderName, attributeName,
+            attributeNamespace);
+        return name + "." + getFromMethodName() + "(" + elementTypeXmlDeserialization + ")";
     }
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
         String valueGetter, boolean isAttribute, boolean nameIsVariable) {
-        String value = "Objects.toString(" + valueGetter + ", null)";
-        return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeString", attributeOrElementName, namespaceUri,
-            value, isAttribute, nameIsVariable);
+        String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
+        return elementType.xmlSerializationMethodCall(xmlWriterName, attributeOrElementName, namespaceUri,
+            actualValueGetter, isAttribute, nameIsVariable);
     }
 
     @Override
@@ -212,9 +218,11 @@ public class EnumType implements IType {
         private String packageName;
         private boolean expandable;
         private List<ClientEnumValue> values;
-        private IType elementType = ClassType.String;
+        private IType elementType = ClassType.STRING;
 
         private ImplementationDetails implementationDetails;
+
+        private String crossLanguageDefinitionId;
 
         /**
          * Sets the name of the Enum.
@@ -288,6 +296,11 @@ public class EnumType implements IType {
             return this;
         }
 
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
         /**
          * @return an immutable EnumType instance with the configurations on this builder.
          */
@@ -299,7 +312,8 @@ public class EnumType implements IType {
                     expandable,
                     values,
                     elementType,
-                    implementationDetails
+                    implementationDetails,
+                    crossLanguageDefinitionId
             );
         }
     }

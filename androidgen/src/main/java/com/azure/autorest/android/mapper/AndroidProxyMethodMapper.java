@@ -34,27 +34,27 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
 
     @Override
     protected IType createBinaryContentAsyncReturnType() {
-        return PrimitiveType.Void;
+        return PrimitiveType.VOID;
     }
 
     @Override
     protected IType createStreamContentAsyncReturnType() {
-        return PrimitiveType.Void;
+        return PrimitiveType.VOID;
     }
 
     @Override
     protected IType createClientResponseAsyncReturnType(ClassType clientResponseClassType) {
-        return PrimitiveType.Void; // return GenericType.CompletableFuture(clientResponseClassType);
+        return PrimitiveType.VOID; // return GenericType.CompletableFuture(clientResponseClassType);
     }
 
     @Override
     protected IType createSingleValueAsyncReturnType(IType singleValueType) {
-        return PrimitiveType.Void; // return GenericType.CompletableFuture(singleValueType);
+        return PrimitiveType.VOID; // return GenericType.CompletableFuture(singleValueType);
     }
 
     @Override
     protected ClassType getContextClass() {
-        return ClassType.AndroidContext;
+        return ClassType.ANDROID_CONTEXT;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AndroidProxyMethodMapper extends ProxyMethodMapper {
 
     @Override
     protected ClassType getHttpResponseExceptionType() {
-        return ClassType.AndroidHttpResponseException;
+        return ClassType.ANDROID_HTTP_RESPONSE_EXCEPTION;
     }
 
     @Override

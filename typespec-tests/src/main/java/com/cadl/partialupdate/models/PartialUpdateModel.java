@@ -6,32 +6,49 @@ package com.cadl.partialupdate.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The PartialUpdateModel model.
  */
 @Immutable
-public final class PartialUpdateModel {
+public final class PartialUpdateModel implements JsonSerializable<PartialUpdateModel> {
 
     /*
      * The boolean property.
      */
-    @JsonProperty(value = "boolean", required = true)
-    private boolean booleanProperty;
+    @Generated
+    private final boolean booleanProperty;
 
     /*
      * The string property.
      */
-    @JsonProperty(value = "string", required = true)
-    private String string;
+    @Generated
+    private final String string;
 
     /*
      * The bytes property.
      */
-    @JsonProperty(value = "bytes", required = true)
-    private byte[] bytes;
+    @Generated
+    private final byte[] bytes;
+
+    /*
+     * The aggregation function to be applied on the client metric. Allowed functions
+     * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+     * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+     * ‘count’ - for requests
+     */
+    @Generated
+    private String aggregate;
+
+    /**
+     * customized property
+     */
+    private String testProperty;
 
     /**
      * Creates an instance of PartialUpdateModel class.
@@ -40,10 +57,8 @@ public final class PartialUpdateModel {
      * @param string the string value to set.
      * @param bytes the bytes value to set.
      */
-    @JsonCreator
-    private PartialUpdateModel(@JsonProperty(value = "boolean", required = true) boolean booleanProperty,
-        @JsonProperty(value = "string", required = true) String string,
-        @JsonProperty(value = "bytes", required = true) byte[] bytes) {
+    @Generated
+    private PartialUpdateModel(boolean booleanProperty, String string, byte[] bytes) {
         this.booleanProperty = booleanProperty;
         this.string = string;
         this.bytes = bytes;
@@ -54,6 +69,7 @@ public final class PartialUpdateModel {
      *
      * @return the booleanProperty value.
      */
+    @Generated
     public boolean isBooleanProperty() {
         return this.booleanProperty;
     }
@@ -63,6 +79,7 @@ public final class PartialUpdateModel {
      *
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -72,19 +89,10 @@ public final class PartialUpdateModel {
      *
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
-
-    /*
-     * The aggregation function to be applied on the client metric. Allowed functions
-     * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
-     * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-     * ‘count’ - for requests
-     */
-    @Generated
-    @JsonProperty(value = "aggregate")
-    private String aggregate;
 
     /**
      * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
@@ -97,5 +105,63 @@ public final class PartialUpdateModel {
     @Generated
     public String getAggregate() {
         return this.aggregate;
+    }
+
+    public void setAggregate(String aggregate) {
+        this.aggregate = aggregate;
+    }
+
+    public String getTestProperty() {
+        return testProperty;
+    }
+
+    public void setTestProperty(String testProperty) {
+        this.testProperty = testProperty;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("boolean", this.booleanProperty);
+        jsonWriter.writeStringField("string", this.string);
+        jsonWriter.writeBinaryField("bytes", this.bytes);
+        jsonWriter.writeStringField("aggregate", this.aggregate);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of PartialUpdateModel from the JsonReader.
+     *
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of PartialUpdateModel if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the PartialUpdateModel.
+     */
+    public static PartialUpdateModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean booleanProperty = false;
+            String string = null;
+            byte[] bytes = null;
+            String aggregate = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+                if ("boolean".equals(fieldName)) {
+                    booleanProperty = reader.getBoolean();
+                } else if ("string".equals(fieldName)) {
+                    string = reader.getString();
+                } else if ("bytes".equals(fieldName)) {
+                    bytes = reader.getBinary();
+                } else if ("aggregate".equals(fieldName)) {
+                    aggregate = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            PartialUpdateModel deserializedPartialUpdateModel = new PartialUpdateModel(booleanProperty, string, bytes);
+            deserializedPartialUpdateModel.aggregate = aggregate;
+            return deserializedPartialUpdateModel;
+        });
     }
 }

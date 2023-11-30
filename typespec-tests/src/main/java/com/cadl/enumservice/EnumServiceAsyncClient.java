@@ -751,9 +751,8 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setStringEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
-            requestOptions.addQueryParam("colorArrayOpt",
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(colorArrayOpt, CollectionFormat.CSV),
-                false);
+            requestOptions.addQueryParam("colorArrayOpt", colorArrayOpt.stream()
+                .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(",")), false);
         }
         return setStringEnumArrayWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
@@ -801,8 +800,12 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (priorityArrayOpt != null) {
-            requestOptions.addQueryParam("priorityArrayOpt", JacksonAdapter.createDefaultSerializerAdapter()
-                .serializeIterable(priorityArrayOpt, CollectionFormat.CSV), false);
+            requestOptions.addQueryParam("priorityArrayOpt",
+                priorityArrayOpt.stream()
+                    .map(
+                        paramItemValue -> Objects.toString(paramItemValue == null ? null : paramItemValue.toLong(), ""))
+                    .collect(Collectors.joining(",")),
+                false);
         }
         return setIntEnumArrayWithResponse(priorityArray.stream()
             .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
@@ -1151,8 +1154,8 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setStringEnumArrayHeaderWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (colorArrayOpt != null) {
-            requestOptions.setHeader(HttpHeaderName.fromString("color-array-opt"),
-                JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(colorArrayOpt, CollectionFormat.CSV));
+            requestOptions.setHeader(HttpHeaderName.fromString("color-array-opt"), colorArrayOpt.stream()
+                .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(",")));
         }
         return setStringEnumArrayHeaderWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)

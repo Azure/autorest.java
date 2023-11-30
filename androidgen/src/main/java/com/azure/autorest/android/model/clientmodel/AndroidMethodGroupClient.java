@@ -40,7 +40,7 @@ public class AndroidMethodGroupClient extends MethodGroupClient {
 
     @Override
     protected ClassType getProxyClassType() {
-        return ClassType.AndroidRestProxy;
+        return ClassType.ANDROID_REST_PROXY;
     }
 
     public static class Builder extends MethodGroupClient.Builder {

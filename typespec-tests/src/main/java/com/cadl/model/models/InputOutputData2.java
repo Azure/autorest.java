@@ -6,20 +6,22 @@ package com.cadl.model.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The InputOutputData2 model.
  */
 @Immutable
-public final class InputOutputData2 {
+public final class InputOutputData2 implements JsonSerializable<InputOutputData2> {
     /*
      * The data property.
      */
     @Generated
-    @JsonProperty(value = "data")
-    private String data;
+    private final String data;
 
     /**
      * Creates an instance of InputOutputData2 class.
@@ -27,8 +29,7 @@ public final class InputOutputData2 {
      * @param data the data value to set.
      */
     @Generated
-    @JsonCreator
-    public InputOutputData2(@JsonProperty(value = "data") String data) {
+    public InputOutputData2(String data) {
         this.data = data;
     }
 
@@ -40,5 +41,38 @@ public final class InputOutputData2 {
     @Generated
     public String getData() {
         return this.data;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("data", this.data);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of InputOutputData2 from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of InputOutputData2 if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the InputOutputData2.
+     */
+    public static InputOutputData2 fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String data = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("data".equals(fieldName)) {
+                    data = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new InputOutputData2(data);
+        });
     }
 }

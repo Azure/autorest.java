@@ -72,7 +72,7 @@ public class ReturnTypeDescriptionAssembler {
             );
         } else {
             if (description == null) {
-                if (ClassType.Void == baseType.asNullable()) { // Mono<Void>
+                if (ClassType.VOID == baseType.asNullable()) { // Mono<Void>
                     assembledDesc = String.format("A {@link %s} that completes when a successful response is received", returnType.getName());
                 } else { // Mono<OtherType>
                     assembledDesc = String.format("the response body on successful completion of {@link %s}", returnType.getName());
@@ -92,7 +92,7 @@ public class ReturnTypeDescriptionAssembler {
     private String assembleForResponse(String description, GenericType returnType, IType baseType) {
         String assembledDesc;
         if (description == null) {
-            if (ClassType.Void == baseType.asNullable()) { // Response<Void>
+            if (ClassType.VOID == baseType.asNullable()) { // Response<Void>
                 assembledDesc = String.format("the {@link %s}", returnType.getName());
             } else { // Response<OtherType>
                 assembledDesc = String.format("the response body along with {@link %s}", returnType.getName());

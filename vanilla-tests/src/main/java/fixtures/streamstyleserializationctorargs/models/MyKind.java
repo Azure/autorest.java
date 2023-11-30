@@ -5,12 +5,16 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for MyKind.
  */
-public final class MyKind extends ExpandableStringEnum<MyKind> {
+public final class MyKind extends ExpandableStringEnum<MyKind> implements JsonSerializable<MyKind> {
     /**
      * Static value Kind1 for MyKind.
      */
@@ -42,5 +46,23 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      */
     public static Collection<MyKind> values() {
         return values(MyKind.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a MyKind from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The MyKind that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a MyKind fails to be read from the JsonReader.
+     */
+    public static MyKind fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), MyKind.class);
     }
 }

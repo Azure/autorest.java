@@ -139,6 +139,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
+            if (isStreamStyleWithIso8601DateTime(model, settings)) {
+                classBlock.privateStaticFinalVariable("DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern(\"yyyy-MM-dd'T'HH:mm:ss.SSSX\")");
+            }
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -304,15 +308,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.isClientSideValidations() && settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
 
         addSerializationImports(imports, model, settings);
 
         // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
         if (model.isStronglyTypedHeader()) {
-            ClassType.HttpHeaders.addImportsTo(imports, false);
-            ClassType.HttpHeaderName.addImportsTo(imports, false);
+            ClassType.HTTP_HEADERS.addImportsTo(imports, false);
+            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.
@@ -1089,21 +1093,32 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @return Whether to generate the constant.
      */
     private static boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
-        boolean ret = false;
-        if (settings.isNullByteArrayMapsToEmptyArray()) {
-            ret = model.getProperties().stream()
-                    .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
-                            && property.getWireType() != property.getClientType());
-
-            // flatten properties
-            if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
-                ret = model.getPropertyReferences().stream()
-                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                        .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
-            }
+        if (!settings.isNullByteArrayMapsToEmptyArray()) {
+            return false;
         }
+
+        boolean ret = model.getProperties().stream()
+            .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                && property.getWireType() != property.getClientType());
+
+        // flatten properties
+        if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
+            ret = model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
+        }
+
         return ret;
+    }
+
+    private static boolean isStreamStyleWithIso8601DateTime(ClientModel model, JavaSettings settings) {
+        if (!settings.isStreamStyleSerialization()) {
+            return false;
+        }
+
+        return model.getProperties().stream().anyMatch(property -> property.getWireType() == ClassType.DATE_TIME)
+            || ClientModelUtil.getParentProperties(model).stream().anyMatch(p -> p.getWireType() == ClassType.DATE_TIME);
     }
 
     /**

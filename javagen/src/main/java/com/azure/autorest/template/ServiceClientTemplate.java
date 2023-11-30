@@ -67,7 +67,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
         Set<String> imports = new HashSet<String>();
         if (settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
 
         if (settings.isFluent() && !settings.isGenerateSyncAsyncClients()) {
@@ -237,7 +237,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, %3$s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), getSerializerPhrase()));
+                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, %3$s);", ClassType.REST_PROXY.getName(), serviceClient.getProxy().getName(), getSerializerPhrase()));
                             }
                         }
                     } else {
