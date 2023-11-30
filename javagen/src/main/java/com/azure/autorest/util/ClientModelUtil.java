@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -27,6 +28,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,7 +73,8 @@ public class ClientModelUtil {
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
                     .packageName(packageName)
-                    .serviceClient(serviceClient);
+                    .serviceClient(serviceClient)
+                    .crossLanguageDefinitionId(client.getCrossLanguageDefinitionId());
 
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
@@ -552,5 +555,38 @@ public class ClientModelUtil {
                 return true;
             }
         }
+    }
+
+    /**
+     * Checks where {@code CoreToCodegenBridgeUtils} should be generated.
+     * <p>
+     * At this time it is required if {@link JavaSettings#isStreamStyleSerialization()} is true and the model uses
+     * either {@code ResponseError} or {@link Duration} as both types have special serialization requirements that
+     * aren't exposed by azure-core.
+     *
+     * @param model the model
+     * @param settings Java settings
+     * @return Whether to generate the {@code CoreToCodegenBridgeUtils} utility class.
+     */
+    public static boolean generateCoreToCodegenBridgeUtils(ClientModel model, JavaSettings settings) {
+        if (!settings.isStreamStyleSerialization()) {
+            return false;
+        }
+
+        // If any of the properties are ResponseError generate the bridge utils.
+        // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
+        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR
+            || p.getClientType() == ClassType.DURATION || p.getClientType().contains(ClassType.DURATION))) {
+            return true;
+        }
+
+        // flatten properties
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            return model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
+        }
+
+        return false;
     }
 }

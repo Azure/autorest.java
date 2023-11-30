@@ -33,7 +33,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
 
         Set<String> imports = new HashSet<>();
         // ClientLogger
-        ClassType.ClientLogger.addImportsTo(imports, false);
+        ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         /* use full name for FooManager, to avoid naming conflict
         // manager
         imports.add(managerType.getFullName());
@@ -52,7 +52,7 @@ public class FluentResourceCollectionImplementationTemplate implements IJavaTemp
         javaFile.publicFinalClass(String.format("%1$s implements %2$s", collection.getImplementationType().getName(), collection.getInterfaceType().getName()), classBlock -> {
             // logger
             classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
-                    ClassType.ClientLogger, collection.getImplementationType().getName()));
+                    ClassType.CLIENT_LOGGER, collection.getImplementationType().getName()));
 
             // variable for inner model
             classBlock.privateFinalMemberVariable(collection.getInnerClientType().getName(), ModelNaming.COLLECTION_PROPERTY_INNER);

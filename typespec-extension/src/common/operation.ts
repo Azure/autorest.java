@@ -112,6 +112,8 @@ export class Request extends Metadata implements Request {
   }
 }
 export class Operation extends Aspect implements Operation {
+  crossLanguageDefinitionId?: string;
+
   constructor($key: string, description: string, initializer?: DeepPartial<Operation>) {
     super($key, description);
     this.apply(initializer);

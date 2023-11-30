@@ -11,8 +11,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The SubResult model.
@@ -120,9 +118,7 @@ public final class SubResult extends Result {
      */
     public static SubResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean dataFound = false;
             BinaryData data = null;
             Result result = null;
             String text = null;
@@ -133,10 +129,8 @@ public final class SubResult extends Result {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("data".equals(fieldName)) {
                     data = BinaryData.fromObject(reader.readUntyped());
-                    dataFound = true;
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);
                 } else if ("text".equals(fieldName)) {
@@ -150,24 +144,12 @@ public final class SubResult extends Result {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && dataFound) {
-                SubResult deserializedSubResult = new SubResult(name, data);
-                deserializedSubResult.setResult(result);
-                deserializedSubResult.text = text;
-                deserializedSubResult.arrayData = arrayData;
+            SubResult deserializedSubResult = new SubResult(name, data);
+            deserializedSubResult.setResult(result);
+            deserializedSubResult.text = text;
+            deserializedSubResult.arrayData = arrayData;
 
-                return deserializedSubResult;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!dataFound) {
-                missingProperties.add("data");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedSubResult;
         });
     }
 }

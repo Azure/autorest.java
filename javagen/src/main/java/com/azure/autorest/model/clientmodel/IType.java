@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.azure.xml.XmlWriter;
 
@@ -97,6 +98,24 @@ public interface IType {
     String validate(String expression);
 
     /**
+     * Gets the {@link JsonToken} associated to the type.
+     * <p>
+     * The following table shows what will be returned:
+     * <ul>
+     *     <li>String, String-based object - JsonToken.STRING</li>
+     *     <li>Primitive number, boxed number - JsonToken.NUMBER</li>
+     *     <li>Complex object, Map - JsonToken.START_OBJECT</li>
+     *     <li>Array, Collection - JsonToken.START_ARRAY</li>
+     * </ul>
+     *
+     * All other types will return null, such as Enums which don't have a specific type. In the case of Enums the value
+     * type should be inspected.
+     *
+     * @return The {@link JsonToken} associated to the type.
+     */
+    String jsonToken();
+
+    /**
      * Gets the method that handles JSON deserialization for the type.
      * <p>
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
@@ -131,11 +150,12 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an XML
      * deserialization method and support needs to be added.
      *
+     * @param xmlReaderName The name of the {@link com.azure.xml.XmlReader} performing deserialization.
      * @param attributeName The attribute name, if null this is considered to be an element call.
      * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
      * @return The XML deserialization method, or null i it isn't supported directly.
      */
-    String xmlDeserializationMethod(String attributeName, String attributeNamespace);
+    String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace);
 
     /**
      * Gets the method call that will handle XML serialization.

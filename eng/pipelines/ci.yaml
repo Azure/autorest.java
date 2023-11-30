@@ -25,8 +25,7 @@ jobs:
     timeoutInMinutes: 60
 
     variables:
-      JavaVersion: 1.11
-      NodeVersion: '18.x'
+      - template: /eng/pipelines/variables/globals.yml
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -38,12 +37,17 @@ jobs:
         inputs:
           versionSpec: '$(NodeVersion)'
 
+      - template: /eng/pipelines/steps/cache-maven-repository.yml
+        parameters:
+          JobType: 'Autorest'
+
       - task: Maven@3
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '-P local --no-transfer-progress'
+          options: '$(DefaultOptions) -P local -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -79,7 +83,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestVanilla -pl vanilla-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestVanilla -pl vanilla-tests -DtrimStackTrace=false'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -96,7 +101,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestAzure -pl azure-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestAzure -pl azure-tests -DtrimStackTrace=false'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -113,7 +119,8 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
-          options: '-DtestProtocol -pl protocol-tests -DtrimStackTrace=false --no-transfer-progress'
+          options: '$(DefaultOptions) -DtestProtocol -pl protocol-tests -DtrimStackTrace=false'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -145,6 +152,8 @@ jobs:
         inputs:
           mavenPomFile: protocol-tests/pom.xml
           goals: 'javadoc:javadoc'
+          options: '$(DefaultOptions)'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -155,7 +164,8 @@ jobs:
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml
           goals: 'package revapi:check'
-          options: '--no-transfer-progress'
+          options: '$(DefaultOptions)'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)
           jdkArchitectureOption: 'x64'
@@ -164,3 +174,5 @@ jobs:
       - script: |
           ./protocol-sdk-integration-tests/test.py
         displayName: 'Run Protocol Test on SDK Integration'
+
+      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

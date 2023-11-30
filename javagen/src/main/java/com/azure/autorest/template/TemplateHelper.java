@@ -174,9 +174,9 @@ public final class TemplateHelper {
 
     public static void createRestProxyInstance(ServiceClientTemplate template, ServiceClient serviceClient, JavaBlock constructorBlock) {
         if (!JavaSettings.getInstance().isBranded()) {
-            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
+            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.REST_PROXY.getName(), serviceClient.getProxy().getName());
         } else {
-            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName(), template.getSerializerPhrase());
+            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline, %s);", ClassType.REST_PROXY.getName(), serviceClient.getProxy().getName(), template.getSerializerPhrase());
         }
     }
 }

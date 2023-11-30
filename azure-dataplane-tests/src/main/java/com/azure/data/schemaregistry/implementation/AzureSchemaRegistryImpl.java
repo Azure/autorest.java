@@ -105,7 +105,7 @@ public final class AzureSchemaRegistryImpl {
      * @param endpoint The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.
      * @param apiVersion Api Version.
      */
-    AzureSchemaRegistryImpl(String endpoint, String apiVersion) {
+    public AzureSchemaRegistryImpl(String endpoint, String apiVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
             JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion);
     }
@@ -117,7 +117,7 @@ public final class AzureSchemaRegistryImpl {
      * @param endpoint The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.
      * @param apiVersion Api Version.
      */
-    AzureSchemaRegistryImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion) {
+    public AzureSchemaRegistryImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion);
     }
 
@@ -129,7 +129,7 @@ public final class AzureSchemaRegistryImpl {
      * @param endpoint The Schema Registry service endpoint, for example my-namespace.servicebus.windows.net.
      * @param apiVersion Api Version.
      */
-    AzureSchemaRegistryImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+    public AzureSchemaRegistryImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         String apiVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;

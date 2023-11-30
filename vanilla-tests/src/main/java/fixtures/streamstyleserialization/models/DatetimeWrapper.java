@@ -11,13 +11,15 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The DatetimeWrapper model.
  */
 @Fluent
 public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * The field property.
      */
@@ -85,8 +87,8 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
-        jsonWriter.writeStringField("now", Objects.toString(this.now, null));
+        jsonWriter.writeStringField("field", this.field == null ? null : ISO_8601.format(this.field));
+        jsonWriter.writeStringField("now", this.now == null ? null : ISO_8601.format(this.now));
         return jsonWriter.writeEndObject();
     }
 

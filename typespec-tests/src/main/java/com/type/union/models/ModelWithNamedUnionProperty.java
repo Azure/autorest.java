@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ModelWithNamedUnionProperty model.
@@ -64,7 +62,6 @@ public final class ModelWithNamedUnionProperty implements JsonSerializable<Model
      */
     public static ModelWithNamedUnionProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean namedUnionFound = false;
             BinaryData namedUnion = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -72,24 +69,11 @@ public final class ModelWithNamedUnionProperty implements JsonSerializable<Model
 
                 if ("namedUnion".equals(fieldName)) {
                     namedUnion = BinaryData.fromObject(reader.readUntyped());
-                    namedUnionFound = true;
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (namedUnionFound) {
-                ModelWithNamedUnionProperty deserializedModelWithNamedUnionProperty
-                    = new ModelWithNamedUnionProperty(namedUnion);
-
-                return deserializedModelWithNamedUnionProperty;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!namedUnionFound) {
-                missingProperties.add("namedUnion");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return new ModelWithNamedUnionProperty(namedUnion);
         });
     }
 }

@@ -202,7 +202,7 @@ public class FluentUtils {
     }
 
     public static boolean isContextParameter(ClientMethodParameter parameter) {
-        return ClassType.Context.getName().equals(parameter.getClientType().toString());
+        return ClassType.CONTEXT.getName().equals(parameter.getClientType().toString());
     }
 
     public static ClientModel getClientModel(String name) {
@@ -265,7 +265,7 @@ public class FluentUtils {
         } else if (resourceModel.getInnerModel().getName().equals(parameter.getClientType().toString())) {
             // body payload, use innerModel
             return String.format("this.%1$s()", ModelNaming.METHOD_INNER_MODEL);
-        } else if (ClassType.Context == parameter.getClientType()) {
+        } else if (ClassType.CONTEXT == parameter.getClientType()) {
             // context not in input, use NONE
             return "Context.NONE";
         } else {
@@ -287,9 +287,9 @@ public class FluentUtils {
                     .filter(var -> localVariable.getName().equals(var.getName())).findFirst().orElse(null);
             if (localVariableDefinedInClass != null
                     && !Objects.equals(localVariableDefinedInClass.getVariableType().toString(), localVariable.getVariableType().toString())) {
-                if (localVariableDefinedInClass.getVariableType() == ClassType.String) {
+                if (localVariableDefinedInClass.getVariableType() == ClassType.STRING) {
                     name = String.format("%1$s.fromString(%2$s)", localVariable.getVariableType().toString(), name);
-                } else if (localVariable.getVariableType() == ClassType.String) {
+                } else if (localVariable.getVariableType() == ClassType.STRING) {
                     name = String.format("%1$s.toString()", name);
                 }
             }
@@ -299,12 +299,12 @@ public class FluentUtils {
 
     public static boolean modelHasLocationProperty(FluentResourceModel resourceModel) {
         return resourceModel.hasProperty(ResourceTypeName.FIELD_LOCATION)
-                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.String;
+                && resourceModel.getProperty(ResourceTypeName.FIELD_LOCATION).getFluentType() == ClassType.STRING;
     }
 
     public static boolean modelHasLocationProperty(List<ModelProperty> properties) {
         return properties.stream()
-                .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.String);
+                .anyMatch(p -> ResourceTypeName.FIELD_LOCATION.equals(p.getName()) && p.getClientType() == ClassType.STRING);
     }
 
     public static boolean isResponseType(IType clientType) {
@@ -368,7 +368,7 @@ public class FluentUtils {
         // for now, avoid binary as response body
 
         IType responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
-        return !(responseBodyType == ClassType.BinaryData || responseBodyType == GenericType.FluxByteBuffer);
+        return !(responseBodyType == ClassType.BINARY_DATA || responseBodyType == GenericType.FLUX_BYTE_BUFFER);
     }
 
     public static boolean requiresExample(ClientMethod clientMethod) {
@@ -377,7 +377,7 @@ public class FluentUtils {
                 || clientMethod.getType() == ClientMethodType.PagingSync
                 || clientMethod.getType() == ClientMethodType.LongRunningSync) {
             // generate example for the method with full parameters
-            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
+            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.CONTEXT.equals(p.getClientType()));
         }
         return false;
     }

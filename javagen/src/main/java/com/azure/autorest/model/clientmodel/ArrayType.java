@@ -16,7 +16,7 @@ public class ArrayType implements IType {
     /**
      * The {@code byte[]} type.
      */
-    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.Byte,
+    public static final ArrayType BYTE_ARRAY = new ArrayType(PrimitiveType.BYTE,
         defaultValueExpression -> {
             if (defaultValueExpression != null) {
                 return String.format("\"%1$s\".getBytes()", defaultValueExpression);
@@ -98,6 +98,11 @@ public class ArrayType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return "JsonToken.START_ARRAY";
+    }
+
+    @Override
     public String jsonDeserializationMethod(String jsonReaderName) {
         return jsonReaderName + ".getBinary()";
     }
@@ -110,13 +115,13 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
         if (attributeName == null) {
-            return "getBinaryElement()";
+            return xmlReaderName + ".getBinaryElement()";
         } else {
             return (attributeNamespace == null)
-                ? "getBinaryAttribute(null, \"" + attributeName + "\")"
-                : "getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
+                ? xmlReaderName + ".getBinaryAttribute(null, \"" + attributeName + "\")"
+                : xmlReaderName + ".getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
         }
     }
 

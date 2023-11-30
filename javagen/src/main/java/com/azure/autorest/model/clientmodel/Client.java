@@ -10,6 +10,8 @@ import java.util.List;
  * A container for the types associated for accessing a specific service.
  */
 public class Client {
+    private final String crossLanguageDefinitionId;
+
     /**
      * The name of this service client.
      */
@@ -55,8 +57,8 @@ public class Client {
      * Get the module info.
      */
     private ModuleInfo moduleInfo;
-
     private final List<AsyncSyncClient> syncClients;
+
     private final List<AsyncSyncClient> asyncClients;
     private final List<ClientBuilder> clientBuilders;
     private final List<ProtocolExample> protocolExamples;
@@ -89,7 +91,7 @@ public class Client {
                    ServiceClient serviceClient, List<ServiceClient> serviceClients, ModuleInfo moduleInfo,
                    List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients,
                    List<ClientBuilder> clientBuilders, List<ProtocolExample> protocolExamples,
-                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples,
+                   List<LiveTests> liveTests, List<UnionModel> unionModels, List<ClientMethodExample> clientMethodExamples, String crossLanguageDefinitionId,
                    GraalVmConfig graalVmConfig
     ) {
         this.clientName = clientName;
@@ -111,7 +113,12 @@ public class Client {
         this.liveTests = liveTests;
         this.unionModels = unionModels;
         this.clientMethodExamples = clientMethodExamples;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
         this.graalVmConfig = graalVmConfig;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getClientName() {
@@ -222,6 +229,13 @@ public class Client {
         private List<UnionModel> unionModels = Collections.emptyList();
         private List<ClientMethodExample> clientMethodExamples = Collections.emptyList();
         private GraalVmConfig graalVmConfig;
+        private String crossLanguageDefinitionId;
+
+
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
 
         /**
          * Sets the name of this service client.
@@ -431,6 +445,7 @@ public class Client {
                     liveTests,
                     unionModels,
                     clientMethodExamples,
+                    crossLanguageDefinitionId,
                     graalVmConfig
                 );
         }

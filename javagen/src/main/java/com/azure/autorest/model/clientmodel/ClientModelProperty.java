@@ -312,7 +312,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.BYTE_ARRAY)) {
-            imports.add(ClassType.CoreUtils.getFullName());
+            imports.add(ClassType.CORE_UTILS.getFullName());
         }
 
         if (shouldGenerateXmlSerialization) {

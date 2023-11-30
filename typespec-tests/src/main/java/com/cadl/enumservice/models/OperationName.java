@@ -6,13 +6,17 @@ package com.cadl.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for OperationName.
  */
-public final class OperationName extends ExpandableStringEnum<OperationName> {
+public final class OperationName extends ExpandableStringEnum<OperationName>
+    implements JsonSerializable<OperationName> {
     /**
      * Static value Read for OperationName.
      */
@@ -42,7 +46,6 @@ public final class OperationName extends ExpandableStringEnum<OperationName> {
      * @return the corresponding OperationName.
      */
     @Generated
-    @JsonCreator
     public static OperationName fromString(String name) {
         return fromString(name, OperationName.class);
     }
@@ -55,5 +58,25 @@ public final class OperationName extends ExpandableStringEnum<OperationName> {
     @Generated
     public static Collection<OperationName> values() {
         return values(OperationName.class);
+    }
+
+    @Generated
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a OperationName from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The OperationName that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a OperationName fails to be read from the JsonReader.
+     */
+    @Generated
+    public static OperationName fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), OperationName.class);
     }
 }

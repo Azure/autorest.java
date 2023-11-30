@@ -6,27 +6,28 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
  */
 @Immutable
-public final class StringProperty {
+public final class StringProperty implements JsonSerializable<StringProperty> {
     /*
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty")
-    private String requiredProperty;
+    private final String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty")
-    private String nullableProperty;
+    private final String nullableProperty;
 
     /**
      * Creates an instance of StringProperty class.
@@ -35,9 +36,7 @@ public final class StringProperty {
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    @JsonCreator
-    public StringProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
-        @JsonProperty(value = "nullableProperty") String nullableProperty) {
+    public StringProperty(String requiredProperty, String nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -60,5 +59,42 @@ public final class StringProperty {
     @Generated
     public String getNullableProperty() {
         return this.nullableProperty;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeStringField("nullableProperty", this.nullableProperty);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of StringProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of StringProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the StringProperty.
+     */
+    public static StringProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String requiredProperty = null;
+            String nullableProperty = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("requiredProperty".equals(fieldName)) {
+                    requiredProperty = reader.getString();
+                } else if ("nullableProperty".equals(fieldName)) {
+                    nullableProperty = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new StringProperty(requiredProperty, nullableProperty);
+        });
     }
 }

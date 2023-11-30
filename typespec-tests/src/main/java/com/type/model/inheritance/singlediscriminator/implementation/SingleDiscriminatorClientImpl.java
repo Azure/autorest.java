@@ -240,6 +240,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -265,6 +266,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -290,6 +292,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -315,6 +318,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -340,6 +344,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -365,6 +370,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -390,6 +396,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -415,6 +422,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -440,6 +448,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -465,6 +474,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -490,6 +500,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -515,6 +526,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -540,6 +552,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     size: int (Required)
      * }
      * }</pre>
@@ -565,6 +578,7 @@ public final class SingleDiscriminatorClientImpl {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     size: int (Required)
      * }
      * }</pre>

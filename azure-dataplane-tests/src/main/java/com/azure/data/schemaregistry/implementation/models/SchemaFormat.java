@@ -5,13 +5,16 @@
 package com.azure.data.schemaregistry.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for SchemaFormat.
  */
-public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
+public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> implements JsonSerializable<SchemaFormat> {
     /**
      * Static value application/json; serialization=Avro for SchemaFormat.
      */
@@ -44,7 +47,6 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
      * @param name a name to look for.
      * @return the corresponding SchemaFormat.
      */
-    @JsonCreator
     public static SchemaFormat fromString(String name) {
         return fromString(name, SchemaFormat.class);
     }
@@ -56,5 +58,23 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
      */
     public static Collection<SchemaFormat> values() {
         return values(SchemaFormat.class);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeString(toString());
+    }
+
+    /**
+     * Reads a SchemaFormat from the JSON stream.
+     * <p>
+     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return The SchemaFormat that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a SchemaFormat fails to be read from the JsonReader.
+     */
+    public static SchemaFormat fromJson(JsonReader jsonReader) throws IOException {
+        return fromString(jsonReader.getString(), SchemaFormat.class);
     }
 }

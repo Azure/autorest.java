@@ -44,32 +44,32 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
 
 
         commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through",
-                ClassType.AndroidHttpPipeline,
+                ClassType.ANDROID_HTTP_PIPELINE,
                 "pipeline",
                 false,
                 "createHttpPipeline()"));
 
         commonProperties.add(new ServiceClientProperty("The HTTP client used to send the request.",
-                ClassType.AndroidHttpClient,
+                ClassType.ANDROID_HTTP_CLIENT,
                 "httpClient",
                 false,
                 null));
 
         commonProperties.add(new ServiceClientProperty("The logging configuration for HTTP requests and "
                 + "responses.",
-                ClassType.AndroidHttpLogOptions,
+                ClassType.ANDROID_HTTP_LOG_OPTIONS,
                 "httpLogOptions",
                 false,
                 null));
         commonProperties.add(new ServiceClientProperty("The retry policy that will attempt to retry failed "
                 + "requests, if applicable.",
-                ClassType.AndroidRetryPolicy,
+                ClassType.ANDROID_RETRY_POLICY,
                 "retryPolicy",
                 false,
                 null));
 
         commonProperties.add(new ServiceClientProperty("The list of Http pipeline policies to add.",
-                new ListType(ClassType.AndroidHttpPipelinePolicy),
+                new ListType(ClassType.ANDROID_HTTP_PIPELINE_POLICY),
                 "pipelinePolicies",
                 true,
                 null));

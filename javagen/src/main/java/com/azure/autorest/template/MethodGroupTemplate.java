@@ -36,7 +36,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
         if (settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
 
         methodGroupClient.addImportsTo(imports, true, settings);
@@ -97,7 +97,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     }
 
     protected void writeServiceProxyConstruction(JavaBlock constructor, MethodGroupClient methodGroupClient) {
-        ClassType proxyType = ClassType.RestProxy;
+        ClassType proxyType = ClassType.REST_PROXY;
         constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());",
                 proxyType.getName(), methodGroupClient.getProxy().getName()));
     }

@@ -19,7 +19,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
     private static final ClientMethodParameter ANDROID_CONTEXT_PARAM = new ClientMethodParameter.Builder()
             .description("The context to associate with this operation.")
-            .wireType(ClassType.AndroidContext)
+            .wireType(ClassType.ANDROID_CONTEXT)
             .name("context")
             .annotations(new java.util.ArrayList<>())
             .constant(false)
@@ -48,7 +48,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
     @Override
     protected IType getContextType() {
-        return ClassType.AndroidContext;
+        return ClassType.ANDROID_CONTEXT;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class AndroidClientMethodMapper extends ClientMethodMapper {
 
     @Override
     protected IType createAsyncVoidReturnType() {
-        return GenericType.AndroidCompletableFuture(ClassType.Void);
+        return GenericType.AndroidCompletableFuture(ClassType.VOID);
     }
 
     @Override

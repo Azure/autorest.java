@@ -385,7 +385,7 @@ public class ExampleParser {
         FluentCollectionMethod resourceGetMethod = null;
         if (resourceUpdate.getResourceModel().getResourceRefresh() != null) {
             resourceGetMethod = resourceUpdate.getResourceModel().getResourceRefresh().getMethodReferences().stream()
-                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType())))
+                    .filter(m -> m.getInnerClientMethod().getParameters().stream().anyMatch(p -> ClassType.CONTEXT.equals(p.getClientType())))
                     .findFirst().orElse(null);
         }
         return resourceGetMethod;

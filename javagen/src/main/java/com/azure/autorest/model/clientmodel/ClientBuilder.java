@@ -21,15 +21,17 @@ public class ClientBuilder {
     private final List<AsyncSyncClient> syncClients;
     private final List<AsyncSyncClient> asyncClients;
     private final List<ClientBuilderTrait> builderTraits = new ArrayList<>();
+    private String crossLanguageDefinitionId;
 
     public ClientBuilder(String packageName, String className,
                          ServiceClient serviceClient,
-                         List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients) {
+                         List<AsyncSyncClient> syncClients, List<AsyncSyncClient> asyncClients, String crossLanguageDefinitionId) {
         this.packageName = Objects.requireNonNull(packageName);
         this.className = Objects.requireNonNull(className);
         this.serviceClient = Objects.requireNonNull(serviceClient);
         this.syncClients = Objects.requireNonNull(syncClients);
         this.asyncClients = Objects.requireNonNull(asyncClients);
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     public String getPackageName() {
@@ -80,5 +82,9 @@ public class ClientBuilder {
 
     public List<ClientBuilderTrait> getBuilderTraits() {
         return this.builderTraits;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return this.crossLanguageDefinitionId;
     }
 }

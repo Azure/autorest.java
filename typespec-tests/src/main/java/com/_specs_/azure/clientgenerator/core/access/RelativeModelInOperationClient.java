@@ -89,6 +89,7 @@ public final class RelativeModelInOperationClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     name: String (Required)
      * }
      * }</pre>

@@ -51,6 +51,7 @@ public class AndroidServiceClient extends ServiceClient {
                 builderDisabled,
                 securityInfo,
                 baseUrl,
+                null,
                 null);
     }
 

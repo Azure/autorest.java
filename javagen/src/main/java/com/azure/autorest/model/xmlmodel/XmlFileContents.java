@@ -238,16 +238,6 @@ public class XmlFileContents {
     private enum CurrentLineType {
         Empty,
         AfterIf,
-        Text;
-
-        public static final int SIZE = Integer.SIZE;
-
-        public static CurrentLineType forValue(int value) {
-            return values()[value];
-        }
-
-        public int getValue() {
-            return this.ordinal();
-        }
+        Text
     }
 }

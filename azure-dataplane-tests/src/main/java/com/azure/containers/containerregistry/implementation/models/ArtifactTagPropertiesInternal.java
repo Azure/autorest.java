@@ -11,13 +11,15 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Tag attributes.
  */
 @Fluent
 public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactTagPropertiesInternal> {
+    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */
@@ -286,8 +288,9 @@ public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactT
             jsonWriter.writeStartObject("tag");
             jsonWriter.writeStringField("name", this.name);
             jsonWriter.writeStringField("digest", this.digest);
-            jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
-            jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
+            jsonWriter.writeStringField("createdTime", this.createdOn == null ? null : ISO_8601.format(this.createdOn));
+            jsonWriter.writeStringField("lastUpdateTime",
+                this.lastUpdatedOn == null ? null : ISO_8601.format(this.lastUpdatedOn));
             if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
                 jsonWriter.writeStartObject("changeableAttributes");
                 jsonWriter.writeBooleanField("deleteEnabled", this.deleteEnabled);

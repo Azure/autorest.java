@@ -7,20 +7,22 @@ package com.encode.bytes.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Base64BytesProperty model.
  */
 @Immutable
-public final class Base64BytesProperty {
+public final class Base64BytesProperty implements JsonSerializable<Base64BytesProperty> {
     /*
      * The value property.
      */
     @Generated
-    @JsonProperty(value = "value")
-    private byte[] value;
+    private final byte[] value;
 
     /**
      * Creates an instance of Base64BytesProperty class.
@@ -28,8 +30,7 @@ public final class Base64BytesProperty {
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator
-    public Base64BytesProperty(@JsonProperty(value = "value") byte[] value) {
+    public Base64BytesProperty(byte[] value) {
         this.value = value;
     }
 
@@ -41,5 +42,38 @@ public final class Base64BytesProperty {
     @Generated
     public byte[] getValue() {
         return CoreUtils.clone(this.value);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBinaryField("value", this.value);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Base64BytesProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Base64BytesProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Base64BytesProperty.
+     */
+    public static Base64BytesProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            byte[] value = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("value".equals(fieldName)) {
+                    value = reader.getBinary();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Base64BytesProperty(value);
+        });
     }
 }

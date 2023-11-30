@@ -306,6 +306,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             builder.properties(properties);
             builder.propertyReferences(propertyReferences);
+            builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
 
             result = builder.build();
             serviceModels.addModel(result);
@@ -588,17 +589,17 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 // replace byte[] with BinaryData
                 iterator.remove();
                 iterator.add(property.toNewBuilder()
-                        .wireType(ClassType.BinaryData)
-                        .clientType(ClassType.BinaryData)
+                        .wireType(ClassType.BINARY_DATA)
+                        .clientType(ClassType.BINARY_DATA)
                         .build());
 
                 // add (optional) filename property
                 iterator.add(property.toNewBuilder()
                         .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
-                        .defaultValue(ClassType.String.defaultValueExpression(property.getSerializedName()))
+                        .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
                         .description("The filename for " + property.getName())
-                        .wireType(ClassType.String)
-                        .clientType(ClassType.String)
+                        .wireType(ClassType.STRING)
+                        .clientType(ClassType.STRING)
                         .required(false)
                         .build());
             }

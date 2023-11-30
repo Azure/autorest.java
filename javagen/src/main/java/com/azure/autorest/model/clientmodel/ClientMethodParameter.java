@@ -17,7 +17,7 @@ public class ClientMethodParameter extends MethodParameter {
 
     public static final ClientMethodParameter CONTEXT_PARAMETER = new ClientMethodParameter.Builder()
             .description("The context to associate with this operation.")
-            .wireType(ClassType.Context)
+            .wireType(ClassType.CONTEXT)
             .name("context")
             .location(RequestParameterLocation.NONE)
             .annotations(Collections.emptyList())
@@ -30,7 +30,7 @@ public class ClientMethodParameter extends MethodParameter {
 
     public static final ClientMethodParameter HTTP_REQUEST_PARAMETER = new ClientMethodParameter.Builder()
             .description("The HTTP request to send.")
-            .wireType(ClassType.HttpRequest)
+            .wireType(ClassType.HTTP_REQUEST)
             .name("httpRequest")
             .location(RequestParameterLocation.NONE)
             .annotations(Collections.emptyList())
@@ -43,7 +43,7 @@ public class ClientMethodParameter extends MethodParameter {
 
     public static final ClientMethodParameter REQUEST_OPTIONS_PARAMETER = new ClientMethodParameter.Builder()
             .description("The options to configure the HTTP request before HTTP client sends it.")
-            .wireType(ClassType.RequestOptions)
+            .wireType(ClassType.REQUEST_OPTIONS)
             .name("requestOptions")
             .location(RequestParameterLocation.NONE)
             .constant(false)

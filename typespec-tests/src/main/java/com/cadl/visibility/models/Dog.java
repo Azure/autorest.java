@@ -6,34 +6,34 @@ package com.cadl.visibility.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Dog model.
  */
 @Immutable
-public final class Dog {
+public final class Dog implements JsonSerializable<Dog> {
     /*
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     /*
      * The secretName property.
      */
     @Generated
-    @JsonProperty(value = "secretName")
-    private String secretName;
+    private final String secretName;
 
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of Dog class.
@@ -42,8 +42,7 @@ public final class Dog {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    private Dog(@JsonProperty(value = "secretName") String secretName, @JsonProperty(value = "name") String name) {
+    private Dog(String secretName, String name) {
         this.secretName = secretName;
         this.name = name;
     }
@@ -76,5 +75,48 @@ public final class Dog {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("secretName", this.secretName);
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Dog from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Dog.
+     */
+    public static Dog fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int id = 0;
+            String secretName = null;
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    id = reader.getInt();
+                } else if ("secretName".equals(fieldName)) {
+                    secretName = reader.getString();
+                } else if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            Dog deserializedDog = new Dog(secretName, name);
+            deserializedDog.id = id;
+
+            return deserializedDog;
+        });
     }
 }

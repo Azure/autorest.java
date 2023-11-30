@@ -12,13 +12,15 @@ public final class ClientResponse {
     private String description;
     private IType headersType;
     private IType bodyType;
+    private String crossLanguageDefinitionId;
 
-    private ClientResponse(String name, String packageKeyword, String description, IType headersType, IType bodyType) {
+    private ClientResponse(String name, String packageKeyword, String description, IType headersType, IType bodyType, String crossLanguageDefinitionId) {
         this.name = name;
         packageName = packageKeyword;
         this.description = description;
         this.headersType = headersType;
         this.bodyType = bodyType;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     public String getName() {
@@ -41,12 +43,18 @@ public final class ClientResponse {
         return bodyType;
     }
 
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
     public static class Builder {
         private String name;
         private String packageName;
         private String description;
         private IType headersType;
         private IType bodyType;
+
+        private String crossLanguageDefinitionId;
 
 
         public Builder name(String name) {
@@ -74,8 +82,13 @@ public final class ClientResponse {
             return this;
         }
 
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
         public ClientResponse build() {
-            return new ClientResponse(name, packageName, description, headersType, bodyType);
+            return new ClientResponse(name, packageName, description, headersType, bodyType, crossLanguageDefinitionId);
         }
     }
 }

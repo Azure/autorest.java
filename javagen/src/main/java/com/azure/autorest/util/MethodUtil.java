@@ -245,7 +245,7 @@ public class MethodUtil {
         List<ClientEnumValue> choices = enumType.getValues();
         if (choices != null && !choices.isEmpty()) {
             res += choices.stream().map(choice -> {
-                if (enumType.getElementType() == ClassType.String) {
+                if (enumType.getElementType() == ClassType.STRING) {
                     return "\"" + choice.getValue() + "\"";
                 } else {
                     return choice.getValue();
