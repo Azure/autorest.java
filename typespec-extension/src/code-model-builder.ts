@@ -255,6 +255,8 @@ export class CodeModelBuilder {
       this.codeModel = new PreNamer(this.codeModel).init().process();
     }
 
+    this.deduplicateSchemaName();
+
     return this.codeModel;
   }
 
@@ -447,13 +449,15 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+  }
 
+  private deduplicateSchemaName() {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
-      if (schema.language.default.name && schema.language.default.namespace?.startsWith("com.azure.core.")) {
+      if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
         if (!nameCount.has(name)) {
           nameCount.set(name, 1);
         } else {
@@ -464,10 +468,11 @@ export class CodeModelBuilder {
       }
     };
     this.codeModel.schemas.objects?.forEach((it) => deduplicateName(it));
-    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it has RequestConditions
+    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it may contain RequestConditions under "com.azure.core."
     this.codeModel.schemas.choices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.sealedChoices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.ors?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.constants?.forEach((it) => deduplicateName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {

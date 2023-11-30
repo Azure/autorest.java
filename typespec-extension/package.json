@@ -58,6 +58,7 @@
     "js-yaml": "~4.1.0"
   },
   "devDependencies": {
+    "prettier": "~3.1.0",
     "@types/lodash": "~4.14.202",
     "@types/js-yaml": "~4.0.9",
     "@types/mocha": "~10.0.6",
