@@ -8,4 +8,4 @@
  * Test for multipart.
  * <!-- end generated doc -->
  */
-package com.payload.multipart.implementation.models;
+package com.payload.multipart.models;

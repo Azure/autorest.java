@@ -134,7 +134,8 @@ public final class MultiPartClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     profileImage: byte[] (Required)
+     *     profileImage: BinaryData (Required)
+     *     profileImage: String (Optional)
      * }
      * }</pre>
      * 
@@ -161,7 +162,8 @@ public final class MultiPartClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     profileImage: byte[] (Required)
+     *     profileImage: BinaryData (Required)
+     *     profileImage: String (Optional)
      * }
      * }</pre>
      * 
