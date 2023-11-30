@@ -650,9 +650,9 @@ export class CodeModelBuilder {
       // check if the convenience API need to be disabled for some special cases
       if (operationIsJsonMergePatch(op)) {
         // do not generate convenience method for JSON Merge Patch
-        generateConvenienceApi = false;
-        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
-        this.logWarning(apiComment);
+        // generateConvenienceApi = false;
+        // apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
+        // this.logWarning(apiComment);
       } else if (operationIsMultipart(op)) {
         // do not generate convenience method for multipart/form-data
         generateConvenienceApi = false;
