@@ -255,6 +255,8 @@ export class CodeModelBuilder {
       this.codeModel = new PreNamer(this.codeModel).init().process();
     }
 
+    this.deduplicateSchemaName();
+
     return this.codeModel;
   }
 
@@ -447,13 +449,15 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+  }
 
+  private deduplicateSchemaName() {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
-      if (schema.language.default.name && schema.language.default.namespace?.startsWith("com.azure.core.")) {
+      if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
         if (!nameCount.has(name)) {
           nameCount.set(name, 1);
         } else {
@@ -464,10 +468,11 @@ export class CodeModelBuilder {
       }
     };
     this.codeModel.schemas.objects?.forEach((it) => deduplicateName(it));
-    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it has RequestConditions
+    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it may contain RequestConditions under "com.azure.core."
     this.codeModel.schemas.choices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.sealedChoices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.ors?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.constants?.forEach((it) => deduplicateName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {
@@ -1785,39 +1790,23 @@ export class CodeModelBuilder {
     const choices: ChoiceValue[] = [];
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
-    if (sealed) {
-      const sealedChoiceSchema = new SealedChoiceSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        choiceType: valueType as any,
-        choices: choices,
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
+
+    const schema = new schemaType(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      choiceType: valueType as any,
+      choices: choices,
+      language: {
+        default: {
+          namespace: namespace,
         },
-      });
-      sealedChoiceSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
-      return this.codeModel.schemas.add(sealedChoiceSchema);
-    } else {
-      const choiceSchema = new ChoiceSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        choiceType: valueType as any,
-        choices: choices,
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+        java: {
+          namespace: getJavaNamespace(namespace),
         },
-      });
-      choiceSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
-      return this.codeModel.schemas.add(choiceSchema);
-    }
+      },
+    });
+    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    return this.codeModel.schemas.add(schema);
   }
 
   private processConstantSchemaForLiteral(
@@ -1854,8 +1843,17 @@ export class CodeModelBuilder {
     );
   }
 
-  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+  private processChoiceSchemaForUnion(
+    type: Union,
+    variants: UnionVariant[],
+    name: string,
+  ): ChoiceSchema | SealedChoiceSchema {
     // variants is Literal
+
+    const kindSet = new Set(variants.map((it) => it.type.kind));
+    // "choice1" | "choice2" is sealed
+    // "choice1" | "choice2" | string is extensible
+    const sealed = kindSet.size === 1;
 
     variants = variants.filter(
       (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
@@ -1876,21 +1874,23 @@ export class CodeModelBuilder {
     );
 
     const namespace = getNamespace(type);
-    return this.codeModel.schemas.add(
-      new ChoiceSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        choiceType: valueType as any,
-        choices: choices,
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+
+    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
+    const schema = new schemaType(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      choiceType: valueType as any,
+      choices: choices,
+      language: {
+        default: {
+          namespace: namespace,
         },
-      }),
-    );
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+    // schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    return this.codeModel.schemas.add(schema);
   }
 
   private processUnixTimeSchema(type: Scalar, name: string): UnixTimeSchema {

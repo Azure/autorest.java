@@ -14,6 +14,10 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.type.scalar.BooleanOperationClient;
+import com.type.scalar.Decimal128TypeClient;
+import com.type.scalar.Decimal128VerifyClient;
+import com.type.scalar.DecimalTypeClient;
+import com.type.scalar.DecimalVerifyClient;
 import com.type.scalar.ScalarClientBuilder;
 import com.type.scalar.StringOperationClient;
 import com.type.scalar.UnknownClient;
@@ -24,6 +28,14 @@ class ScalarClientTestBase extends TestProxyTestBase {
     protected BooleanOperationClient booleanOperationClient;
 
     protected UnknownClient unknownClient;
+
+    protected DecimalTypeClient decimalTypeClient;
+
+    protected Decimal128TypeClient decimal128TypeClient;
+
+    protected DecimalVerifyClient decimalVerifyClient;
+
+    protected Decimal128VerifyClient decimal128VerifyClient;
 
     @Override
     protected void beforeTest() {
@@ -55,6 +67,45 @@ class ScalarClientTestBase extends TestProxyTestBase {
             unknownClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         unknownClient = unknownClientbuilder.buildUnknownClient();
+
+        ScalarClientBuilder decimalTypeClientbuilder = new ScalarClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            decimalTypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            decimalTypeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        decimalTypeClient = decimalTypeClientbuilder.buildDecimalTypeClient();
+
+        ScalarClientBuilder decimal128TypeClientbuilder
+            = new ScalarClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            decimal128TypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            decimal128TypeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        decimal128TypeClient = decimal128TypeClientbuilder.buildDecimal128TypeClient();
+
+        ScalarClientBuilder decimalVerifyClientbuilder
+            = new ScalarClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            decimalVerifyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            decimalVerifyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        decimalVerifyClient = decimalVerifyClientbuilder.buildDecimalVerifyClient();
+
+        ScalarClientBuilder decimal128VerifyClientbuilder
+            = new ScalarClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            decimal128VerifyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            decimal128VerifyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        decimal128VerifyClient = decimal128VerifyClientbuilder.buildDecimal128VerifyClient();
 
     }
 }
