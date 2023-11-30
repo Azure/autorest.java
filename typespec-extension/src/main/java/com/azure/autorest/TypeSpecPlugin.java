@@ -133,6 +133,8 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        super.writeHelperClasses(client, javaPackage, settings);
+
         // JsonMergePatchHelper
         List<ClientModel> jsonMergePatchModels = client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)

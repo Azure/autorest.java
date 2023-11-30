@@ -52,6 +52,8 @@ public class ClientModelUtil {
 
     public static final String MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "MultipartFormDataHelper";
 
+    public static final String CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME = "CoreToCodegenBridgeUtils";
+
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 

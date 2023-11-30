@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -169,29 +168,6 @@ public class JavaPackage {
         }
 
         addJavaFile(javaFile);
-
-        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
-        // will serialize and deserialize ResponseError.
-        if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
-            javaFile = javaFileFactory.createSourceFile(settings.getPackage(settings.getImplementationSubpackage()),
-                "CoreToCodegenBridgeUtils");
-            if (filePaths.contains(javaFile.getFilePath())) {
-                // Already generated the utility method.
-                return;
-            }
-
-            try (InputStream inputStream = Javagen.class.getClassLoader().getResourceAsStream("CoreToCodegenBridgeUtils.java");
-                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-                Iterator<String> linesIterator = bufferedReader.lines().iterator();
-                while (linesIterator.hasNext()) {
-                    javaFile.line(linesIterator.next());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to read CoreToCodegenBridgeUtils.java", e);
-            }
-
-            addJavaFile(javaFile);
-        }
     }
 
     public final void addException(String packageKeyword, String name, ClientException model) {
