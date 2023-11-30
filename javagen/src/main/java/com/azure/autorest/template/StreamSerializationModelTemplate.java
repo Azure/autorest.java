@@ -226,7 +226,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             ClientModelProperty additionalProperties = propertiesManager.getAdditionalProperties();
             if (additionalProperties != null) {
                 methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
-                    IType valueType = ((MapType) additionalProperties.getWireType()).getValueType();
+                    IType valueType = ((MapType) additionalProperties.getWireType()).getValueType().asNullable();
                     ifAction.line("for (Map.Entry<String, %s> additionalProperty : %s.entrySet()) {", valueType, additionalProperties.getName());
                     ifAction.indent(() ->
                         ifAction.line("jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());"));
