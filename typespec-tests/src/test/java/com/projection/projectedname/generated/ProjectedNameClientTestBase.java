@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.projection.projectedname.ModelClient;
 import com.projection.projectedname.ProjectedNameClient;
 import com.projection.projectedname.ProjectedNameClientBuilder;
 import com.projection.projectedname.PropertyClient;
@@ -21,6 +22,8 @@ class ProjectedNameClientTestBase extends TestProxyTestBase {
     protected ProjectedNameClient projectedNameClient;
 
     protected PropertyClient propertyClient;
+
+    protected ModelClient modelClient;
 
     @Override
     protected void beforeTest() {
@@ -43,6 +46,16 @@ class ProjectedNameClientTestBase extends TestProxyTestBase {
             propertyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
+
+        ProjectedNameClientBuilder modelClientbuilder
+            = new ProjectedNameClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            modelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        modelClient = modelClientbuilder.buildModelClient();
 
     }
 }

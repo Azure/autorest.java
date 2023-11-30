@@ -5,7 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the classes for Union.
- * Test for type of union.
+ * Describe scenarios for various combinations of unions.
  * <!-- end generated doc -->
  */
 package com.type.union;

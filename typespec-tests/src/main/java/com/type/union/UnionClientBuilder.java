@@ -40,7 +40,28 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the UnionClient type.
  */
-@ServiceClientBuilder(serviceClients = { UnionClient.class, UnionAsyncClient.class })
+@ServiceClientBuilder(
+    serviceClients = {
+        StringsOnlyClient.class,
+        StringExtensibleClient.class,
+        StringExtensibleNamedClient.class,
+        IntsOnlyClient.class,
+        FloatsOnlyClient.class,
+        ModelsOnlyClient.class,
+        EnumsOnlyClient.class,
+        StringAndArrayClient.class,
+        MixedLiteralsClient.class,
+        MixedTypesClient.class,
+        StringsOnlyAsyncClient.class,
+        StringExtensibleAsyncClient.class,
+        StringExtensibleNamedAsyncClient.class,
+        IntsOnlyAsyncClient.class,
+        FloatsOnlyAsyncClient.class,
+        ModelsOnlyAsyncClient.class,
+        EnumsOnlyAsyncClient.class,
+        StringAndArrayAsyncClient.class,
+        MixedLiteralsAsyncClient.class,
+        MixedTypesAsyncClient.class })
 public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
@@ -236,23 +257,203 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     }
 
     /**
-     * Builds an instance of UnionAsyncClient class.
+     * Builds an instance of StringsOnlyAsyncClient class.
      * 
-     * @return an instance of UnionAsyncClient.
+     * @return an instance of StringsOnlyAsyncClient.
      */
     @Generated
-    public UnionAsyncClient buildAsyncClient() {
-        return new UnionAsyncClient(buildInnerClient());
+    public StringsOnlyAsyncClient buildStringsOnlyAsyncClient() {
+        return new StringsOnlyAsyncClient(buildInnerClient().getStringsOnlies());
     }
 
     /**
-     * Builds an instance of UnionClient class.
+     * Builds an instance of StringExtensibleAsyncClient class.
      * 
-     * @return an instance of UnionClient.
+     * @return an instance of StringExtensibleAsyncClient.
      */
     @Generated
-    public UnionClient buildClient() {
-        return new UnionClient(buildInnerClient());
+    public StringExtensibleAsyncClient buildStringExtensibleAsyncClient() {
+        return new StringExtensibleAsyncClient(buildInnerClient().getStringExtensibles());
+    }
+
+    /**
+     * Builds an instance of StringExtensibleNamedAsyncClient class.
+     * 
+     * @return an instance of StringExtensibleNamedAsyncClient.
+     */
+    @Generated
+    public StringExtensibleNamedAsyncClient buildStringExtensibleNamedAsyncClient() {
+        return new StringExtensibleNamedAsyncClient(buildInnerClient().getStringExtensibleNameds());
+    }
+
+    /**
+     * Builds an instance of IntsOnlyAsyncClient class.
+     * 
+     * @return an instance of IntsOnlyAsyncClient.
+     */
+    @Generated
+    public IntsOnlyAsyncClient buildIntsOnlyAsyncClient() {
+        return new IntsOnlyAsyncClient(buildInnerClient().getIntsOnlies());
+    }
+
+    /**
+     * Builds an instance of FloatsOnlyAsyncClient class.
+     * 
+     * @return an instance of FloatsOnlyAsyncClient.
+     */
+    @Generated
+    public FloatsOnlyAsyncClient buildFloatsOnlyAsyncClient() {
+        return new FloatsOnlyAsyncClient(buildInnerClient().getFloatsOnlies());
+    }
+
+    /**
+     * Builds an instance of ModelsOnlyAsyncClient class.
+     * 
+     * @return an instance of ModelsOnlyAsyncClient.
+     */
+    @Generated
+    public ModelsOnlyAsyncClient buildModelsOnlyAsyncClient() {
+        return new ModelsOnlyAsyncClient(buildInnerClient().getModelsOnlies());
+    }
+
+    /**
+     * Builds an instance of EnumsOnlyAsyncClient class.
+     * 
+     * @return an instance of EnumsOnlyAsyncClient.
+     */
+    @Generated
+    public EnumsOnlyAsyncClient buildEnumsOnlyAsyncClient() {
+        return new EnumsOnlyAsyncClient(buildInnerClient().getEnumsOnlies());
+    }
+
+    /**
+     * Builds an instance of StringAndArrayAsyncClient class.
+     * 
+     * @return an instance of StringAndArrayAsyncClient.
+     */
+    @Generated
+    public StringAndArrayAsyncClient buildStringAndArrayAsyncClient() {
+        return new StringAndArrayAsyncClient(buildInnerClient().getStringAndArrays());
+    }
+
+    /**
+     * Builds an instance of MixedLiteralsAsyncClient class.
+     * 
+     * @return an instance of MixedLiteralsAsyncClient.
+     */
+    @Generated
+    public MixedLiteralsAsyncClient buildMixedLiteralsAsyncClient() {
+        return new MixedLiteralsAsyncClient(buildInnerClient().getMixedLiterals());
+    }
+
+    /**
+     * Builds an instance of MixedTypesAsyncClient class.
+     * 
+     * @return an instance of MixedTypesAsyncClient.
+     */
+    @Generated
+    public MixedTypesAsyncClient buildMixedTypesAsyncClient() {
+        return new MixedTypesAsyncClient(buildInnerClient().getMixedTypes());
+    }
+
+    /**
+     * Builds an instance of StringsOnlyClient class.
+     * 
+     * @return an instance of StringsOnlyClient.
+     */
+    @Generated
+    public StringsOnlyClient buildStringsOnlyClient() {
+        return new StringsOnlyClient(buildInnerClient().getStringsOnlies());
+    }
+
+    /**
+     * Builds an instance of StringExtensibleClient class.
+     * 
+     * @return an instance of StringExtensibleClient.
+     */
+    @Generated
+    public StringExtensibleClient buildStringExtensibleClient() {
+        return new StringExtensibleClient(buildInnerClient().getStringExtensibles());
+    }
+
+    /**
+     * Builds an instance of StringExtensibleNamedClient class.
+     * 
+     * @return an instance of StringExtensibleNamedClient.
+     */
+    @Generated
+    public StringExtensibleNamedClient buildStringExtensibleNamedClient() {
+        return new StringExtensibleNamedClient(buildInnerClient().getStringExtensibleNameds());
+    }
+
+    /**
+     * Builds an instance of IntsOnlyClient class.
+     * 
+     * @return an instance of IntsOnlyClient.
+     */
+    @Generated
+    public IntsOnlyClient buildIntsOnlyClient() {
+        return new IntsOnlyClient(buildInnerClient().getIntsOnlies());
+    }
+
+    /**
+     * Builds an instance of FloatsOnlyClient class.
+     * 
+     * @return an instance of FloatsOnlyClient.
+     */
+    @Generated
+    public FloatsOnlyClient buildFloatsOnlyClient() {
+        return new FloatsOnlyClient(buildInnerClient().getFloatsOnlies());
+    }
+
+    /**
+     * Builds an instance of ModelsOnlyClient class.
+     * 
+     * @return an instance of ModelsOnlyClient.
+     */
+    @Generated
+    public ModelsOnlyClient buildModelsOnlyClient() {
+        return new ModelsOnlyClient(buildInnerClient().getModelsOnlies());
+    }
+
+    /**
+     * Builds an instance of EnumsOnlyClient class.
+     * 
+     * @return an instance of EnumsOnlyClient.
+     */
+    @Generated
+    public EnumsOnlyClient buildEnumsOnlyClient() {
+        return new EnumsOnlyClient(buildInnerClient().getEnumsOnlies());
+    }
+
+    /**
+     * Builds an instance of StringAndArrayClient class.
+     * 
+     * @return an instance of StringAndArrayClient.
+     */
+    @Generated
+    public StringAndArrayClient buildStringAndArrayClient() {
+        return new StringAndArrayClient(buildInnerClient().getStringAndArrays());
+    }
+
+    /**
+     * Builds an instance of MixedLiteralsClient class.
+     * 
+     * @return an instance of MixedLiteralsClient.
+     */
+    @Generated
+    public MixedLiteralsClient buildMixedLiteralsClient() {
+        return new MixedLiteralsClient(buildInnerClient().getMixedLiterals());
+    }
+
+    /**
+     * Builds an instance of MixedTypesClient class.
+     * 
+     * @return an instance of MixedTypesClient.
+     */
+    @Generated
+    public MixedTypesClient buildMixedTypesClient() {
+        return new MixedTypesClient(buildInnerClient().getMixedTypes());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(UnionClientBuilder.class);

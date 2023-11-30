@@ -50,7 +50,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.33</version>
+      <version>3.4.34</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
