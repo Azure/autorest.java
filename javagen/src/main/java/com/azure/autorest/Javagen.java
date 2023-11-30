@@ -338,15 +338,17 @@ public class Javagen extends NewPlugin {
     protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
         // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
         // will serialize and deserialize ResponseError.
-        boolean generateCoreToCodegenBridgeUtils = false;
-        for (ClientModel model : client.getModels()) {
-            if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
-                generateCoreToCodegenBridgeUtils = true;
-                break;
+        if (settings.isStreamStyleSerialization()) {
+            boolean generateCoreToCodegenBridgeUtils = false;
+            for (ClientModel model : client.getModels()) {
+                if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
+                    generateCoreToCodegenBridgeUtils = true;
+                    break;
+                }
             }
-        }
-        if (generateCoreToCodegenBridgeUtils) {
-            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
+            if (generateCoreToCodegenBridgeUtils) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
+            }
         }
     }
 

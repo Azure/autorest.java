@@ -133,7 +133,20 @@ public class TypeSpecPlugin extends Javagen {
 
     @Override
     protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
-        super.writeHelperClasses(client, javaPackage, settings);
+        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
+        // will serialize and deserialize ResponseError.
+        if (settings.isStreamStyleSerialization()) {
+            boolean generateCoreToCodegenBridgeUtils = false;
+            for (ClientModel model : client.getModels()) {
+                if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings) && ModelUtil.isGeneratingModel(model)) {
+                    generateCoreToCodegenBridgeUtils = true;
+                    break;
+                }
+            }
+            if (generateCoreToCodegenBridgeUtils) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
+            }
+        }
 
         // JsonMergePatchHelper
         List<ClientModel> jsonMergePatchModels = client.getModels().stream()

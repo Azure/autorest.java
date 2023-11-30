@@ -12,9 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * The FormData model.
@@ -134,7 +131,7 @@ public final class FormData implements JsonSerializable<FormData> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeIntField("resolution", this.resolution);
-        jsonWriter.writeStringField("type", Objects.toString(this.type, null));
+        jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
         jsonWriter.writeUntypedField("image", this.image.toObject(Object.class));
         jsonWriter.writeStringField("image", this.imageFilename);
         return jsonWriter.writeEndObject();
@@ -151,13 +148,9 @@ public final class FormData implements JsonSerializable<FormData> {
      */
     public static FormData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean nameFound = false;
             String name = null;
-            boolean resolutionFound = false;
             int resolution = 0;
-            boolean typeFound = false;
             ImageType type = null;
-            boolean imageFound = false;
             BinaryData image = null;
             String imageFilename = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -166,44 +159,22 @@ public final class FormData implements JsonSerializable<FormData> {
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                    nameFound = true;
                 } else if ("resolution".equals(fieldName)) {
                     resolution = reader.getInt();
-                    resolutionFound = true;
                 } else if ("type".equals(fieldName)) {
                     type = ImageType.fromString(reader.getString());
-                    typeFound = true;
                 } else if ("image".equals(fieldName)) {
                     image = BinaryData.fromObject(reader.readUntyped());
-                    imageFound = true;
                 } else if ("image".equals(fieldName)) {
                     imageFilename = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            if (nameFound && resolutionFound && typeFound && imageFound) {
-                FormData deserializedFormData = new FormData(name, resolution, type, image);
-                deserializedFormData.imageFilename = imageFilename;
+            FormData deserializedFormData = new FormData(name, resolution, type, image);
+            deserializedFormData.imageFilename = imageFilename;
 
-                return deserializedFormData;
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!nameFound) {
-                missingProperties.add("name");
-            }
-            if (!resolutionFound) {
-                missingProperties.add("resolution");
-            }
-            if (!typeFound) {
-                missingProperties.add("type");
-            }
-            if (!imageFound) {
-                missingProperties.add("image");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
+            return deserializedFormData;
         });
     }
 }
