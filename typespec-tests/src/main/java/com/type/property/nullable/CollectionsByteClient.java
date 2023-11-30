@@ -115,7 +115,6 @@ public final class CollectionsByteClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'patchNonNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNonNullWithResponse(body, requestOptions);
     }
 
@@ -144,7 +143,6 @@ public final class CollectionsByteClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'patchNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNullWithResponse(body, requestOptions);
     }
 
@@ -182,5 +180,43 @@ public final class CollectionsByteClient {
         // Generated convenience method for getNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getNullWithResponse(requestOptions).getValue().toObject(CollectionsByteProperty.class);
+    }
+
+    /**
+     * Put a body with all properties present.
+     * 
+     * @param body Model with collection bytes properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void patchNonNull(CollectionsByteProperty body) {
+        // Generated convenience method for patchNonNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        patchNonNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+    }
+
+    /**
+     * Put a body with default properties.
+     * 
+     * @param body Model with collection bytes properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void patchNull(CollectionsByteProperty body) {
+        // Generated convenience method for patchNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        patchNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }
