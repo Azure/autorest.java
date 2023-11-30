@@ -45,9 +45,17 @@ import java.util.Objects;
         StringOperationClient.class,
         BooleanOperationClient.class,
         UnknownClient.class,
+        DecimalTypeClient.class,
+        Decimal128TypeClient.class,
+        DecimalVerifyClient.class,
+        Decimal128VerifyClient.class,
         StringOperationAsyncClient.class,
         BooleanOperationAsyncClient.class,
-        UnknownAsyncClient.class })
+        UnknownAsyncClient.class,
+        DecimalTypeAsyncClient.class,
+        Decimal128TypeAsyncClient.class,
+        DecimalVerifyAsyncClient.class,
+        Decimal128VerifyAsyncClient.class })
 public final class ScalarClientBuilder
     implements HttpTrait<ScalarClientBuilder>, ConfigurationTrait<ScalarClientBuilder> {
     @Generated
@@ -274,6 +282,46 @@ public final class ScalarClientBuilder
     }
 
     /**
+     * Builds an instance of DecimalTypeAsyncClient class.
+     * 
+     * @return an instance of DecimalTypeAsyncClient.
+     */
+    @Generated
+    public DecimalTypeAsyncClient buildDecimalTypeAsyncClient() {
+        return new DecimalTypeAsyncClient(buildInnerClient().getDecimalTypes());
+    }
+
+    /**
+     * Builds an instance of Decimal128TypeAsyncClient class.
+     * 
+     * @return an instance of Decimal128TypeAsyncClient.
+     */
+    @Generated
+    public Decimal128TypeAsyncClient buildDecimal128TypeAsyncClient() {
+        return new Decimal128TypeAsyncClient(buildInnerClient().getDecimal128Types());
+    }
+
+    /**
+     * Builds an instance of DecimalVerifyAsyncClient class.
+     * 
+     * @return an instance of DecimalVerifyAsyncClient.
+     */
+    @Generated
+    public DecimalVerifyAsyncClient buildDecimalVerifyAsyncClient() {
+        return new DecimalVerifyAsyncClient(buildInnerClient().getDecimalVerifies());
+    }
+
+    /**
+     * Builds an instance of Decimal128VerifyAsyncClient class.
+     * 
+     * @return an instance of Decimal128VerifyAsyncClient.
+     */
+    @Generated
+    public Decimal128VerifyAsyncClient buildDecimal128VerifyAsyncClient() {
+        return new Decimal128VerifyAsyncClient(buildInnerClient().getDecimal128Verifies());
+    }
+
+    /**
      * Builds an instance of StringOperationClient class.
      * 
      * @return an instance of StringOperationClient.
@@ -301,6 +349,46 @@ public final class ScalarClientBuilder
     @Generated
     public UnknownClient buildUnknownClient() {
         return new UnknownClient(buildInnerClient().getUnknowns());
+    }
+
+    /**
+     * Builds an instance of DecimalTypeClient class.
+     * 
+     * @return an instance of DecimalTypeClient.
+     */
+    @Generated
+    public DecimalTypeClient buildDecimalTypeClient() {
+        return new DecimalTypeClient(buildInnerClient().getDecimalTypes());
+    }
+
+    /**
+     * Builds an instance of Decimal128TypeClient class.
+     * 
+     * @return an instance of Decimal128TypeClient.
+     */
+    @Generated
+    public Decimal128TypeClient buildDecimal128TypeClient() {
+        return new Decimal128TypeClient(buildInnerClient().getDecimal128Types());
+    }
+
+    /**
+     * Builds an instance of DecimalVerifyClient class.
+     * 
+     * @return an instance of DecimalVerifyClient.
+     */
+    @Generated
+    public DecimalVerifyClient buildDecimalVerifyClient() {
+        return new DecimalVerifyClient(buildInnerClient().getDecimalVerifies());
+    }
+
+    /**
+     * Builds an instance of Decimal128VerifyClient class.
+     * 
+     * @return an instance of Decimal128VerifyClient.
+     */
+    @Generated
+    public Decimal128VerifyClient buildDecimal128VerifyClient() {
+        return new Decimal128VerifyClient(buildInnerClient().getDecimal128Verifies());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ScalarClientBuilder.class);

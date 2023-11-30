@@ -5,6 +5,10 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
+import com._specs_.azure.core.basic.models.FirstItem;
+import com._specs_.azure.core.basic.models.ListItemInputBody;
+import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
+import com._specs_.azure.core.basic.models.SecondItem;
 import com._specs_.azure.core.basic.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -311,6 +315,67 @@ public final class BasicClient {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listWithParameters(BinaryData bodyInput, RequestOptions requestOptions) {
+        return this.serviceClient.listWithParameters(bodyInput, requestOptions);
+    }
+
+    /**
      * List with custom page model.
      * <p>
      * <strong>Response Body Schema</strong>
@@ -397,6 +462,56 @@ public final class BasicClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> exportWithResponse(int id, String format, RequestOptions requestOptions) {
         return this.serviceClient.exportWithResponse(id, format, requestOptions);
+    }
+
+    /**
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * FirstItem.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of FirstItem items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listFirstItem(RequestOptions requestOptions) {
+        return this.serviceClient.listFirstItem(requestOptions);
+    }
+
+    /**
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * SecondItem.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of SecondItem items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listSecondItem(RequestOptions requestOptions) {
+        return this.serviceClient.listSecondItem(requestOptions);
     }
 
     /**
@@ -542,6 +657,52 @@ public final class BasicClient {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
+     * @param bodyInput The body of the input.
+     * @param another Another query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<User> listWithParameters(ListItemInputBody bodyInput, ListItemInputExtensibleEnum another) {
+        // Generated convenience method for listWithParameters
+        RequestOptions requestOptions = new RequestOptions();
+        if (another != null) {
+            requestOptions.addQueryParam("another", another.toString(), false);
+        }
+        return serviceClient.listWithParameters(BinaryData.fromObject(bodyInput), requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
+     * @param bodyInput The body of the input.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<User> listWithParameters(ListItemInputBody bodyInput) {
+        // Generated convenience method for listWithParameters
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listWithParameters(BinaryData.fromObject(bodyInput), requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
+    }
+
+    /**
      * List with custom page model.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -602,5 +763,45 @@ public final class BasicClient {
         // Generated convenience method for exportWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return exportWithResponse(id, format, requestOptions).getValue().toObject(User.class);
+    }
+
+    /**
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * FirstItem.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of FirstItem items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<FirstItem> listFirstItem() {
+        // Generated convenience method for listFirstItem
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listFirstItem(requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(FirstItem.class));
+    }
+
+    /**
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * SecondItem.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of SecondItem items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<SecondItem> listSecondItem() {
+        // Generated convenience method for listSecondItem
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listSecondItem(requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(SecondItem.class));
     }
 }
