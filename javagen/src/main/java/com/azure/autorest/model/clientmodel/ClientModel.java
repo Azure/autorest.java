@@ -81,6 +81,8 @@ public class ClientModel {
     private final ImplementationDetails implementationDetails;
     private final boolean usedInXml;
 
+    private final String crossLanguageDefinitionId;
+
     /**
      * Create a new ServiceModel with the provided properties.
      *
@@ -104,7 +106,7 @@ public class ClientModel {
         boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
         String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
         List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-        IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml) {
+        IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml, String crossLanguageDefinitionId) {
         packageName = packageKeyword;
         this.name = name;
         this.imports = imports;
@@ -123,6 +125,11 @@ public class ClientModel {
         this.stronglyTypedHeader = stronglyTypedHeader;
         this.implementationDetails = implementationDetails;
         this.usedInXml = usedInXml;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getPackage() {
@@ -306,6 +313,7 @@ public class ClientModel {
         protected boolean stronglyTypedHeader;
         protected ImplementationDetails implementationDetails;
         protected boolean usedInXml;
+        protected String crossLanguageDefinitionId;
 
         /**
          * Sets the package that this model class belongs to.
@@ -506,6 +514,11 @@ public class ClientModel {
             return this;
         }
 
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
         public ClientModel build() {
             return new ClientModel(packageName,
                 name,
@@ -524,7 +537,8 @@ public class ClientModel {
                 modelType,
                 stronglyTypedHeader,
                 implementationDetails,
-                usedInXml);
+                usedInXml,
+                crossLanguageDefinitionId);
         }
     }
 }

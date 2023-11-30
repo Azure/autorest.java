@@ -59,6 +59,8 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
 
         processPipelinePolicyDetails(builder, client);
 
+        builder.crossLanguageDefinitionId(client.getCrossLanguageDefinitionId());
+
         return builder.build();
     }
 

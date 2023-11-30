@@ -10,6 +10,8 @@ export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   choiceType: ChoiceType;
   /** the possible choices for in the set */
   choices: Array<ChoiceValue>;
+
+  crossLanguageDefinitionId?: string;
 }
 
 export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
@@ -34,12 +36,16 @@ export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringS
 
   /** the possible choices for in the set */
   choices: Array<ChoiceValue>;
+
+  crossLanguageDefinitionId?: string;
 }
 
 export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   extends Schema
   implements SealedChoiceSchema<ChoiceType>
 {
+  // crossLanguageDefinitionId?: string;
+
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.SealedChoice);
     this.apply(objectInitializer);

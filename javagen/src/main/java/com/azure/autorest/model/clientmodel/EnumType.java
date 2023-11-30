@@ -34,6 +34,8 @@ public class EnumType implements IType {
 
     private final ImplementationDetails implementationDetails;
 
+    private String crossLanguageDefinitionId;
+
     /**
      * Create a new Enum with the provided properties.
      * @param name The name of the new Enum.
@@ -44,7 +46,8 @@ public class EnumType implements IType {
     private EnumType(String packageKeyword, String name, String description,
                      boolean expandable, List<ClientEnumValue> values,
                      IType elementType,
-                     ImplementationDetails implementationDetails) {
+                     ImplementationDetails implementationDetails,
+                     String crossLanguageDefinitionId) {
         this.name = name;
         this.packageName = packageKeyword;
         this.description = description;
@@ -52,6 +55,11 @@ public class EnumType implements IType {
         this.values = values;
         this.elementType = elementType;
         this.implementationDetails = implementationDetails;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getName() {
@@ -214,6 +222,8 @@ public class EnumType implements IType {
 
         private ImplementationDetails implementationDetails;
 
+        private String crossLanguageDefinitionId;
+
         /**
          * Sets the name of the Enum.
          * @param name the name of the Enum
@@ -286,6 +296,11 @@ public class EnumType implements IType {
             return this;
         }
 
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
         /**
          * @return an immutable EnumType instance with the configurations on this builder.
          */
@@ -297,7 +312,8 @@ public class EnumType implements IType {
                     expandable,
                     values,
                     elementType,
-                    implementationDetails
+                    implementationDetails,
+                    crossLanguageDefinitionId
             );
         }
     }

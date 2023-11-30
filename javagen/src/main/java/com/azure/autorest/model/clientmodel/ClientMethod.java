@@ -44,6 +44,7 @@ public class ClientMethod {
             "SyncOperationResourcePollingStrategy",
             "SyncLocationPollingStrategy",
             "SyncStatusCheckPollingStrategy");
+    private final String crossLanguageDefinitionId;
     /**
      * The description of this ClientMethod.
      */
@@ -137,7 +138,7 @@ public class ClientMethod {
                            MethodPageDetails methodPageDetails,
                            List<MethodTransformationDetail> methodTransformationDetails,
                            JavaVisibility methodVisibility, JavaVisibility methodVisibilityInWrapperClient, ImplementationDetails implementationDetails,
-                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
+                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation, String crossLanguageDefinitionId) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -157,6 +158,7 @@ public class ClientMethod {
         this.methodPollingDetails = methodPollingDetails;
         this.externalDocumentation = externalDocumentation;
         this.methodVisibilityInWrapperClient = methodVisibilityInWrapperClient;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     @Override
@@ -181,6 +183,10 @@ public class ClientMethod {
         return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
                 requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
                 methodTransformationDetails, methodVisibility);
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     public final String getDescription() {
@@ -503,6 +509,12 @@ public class ClientMethod {
         protected ImplementationDetails implementationDetails;
         protected MethodPollingDetails methodPollingDetails;
         protected ExternalDocumentation externalDocumentation;
+        protected String crossLanguageDefinitionId;
+
+        public Builder setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
 
         /**
          * Sets the description of this ClientMethod.
@@ -717,7 +729,8 @@ public class ClientMethod {
                     methodVisibilityInWrapperClient,
                     implementationDetails,
                     methodPollingDetails,
-                    externalDocumentation);
+                    externalDocumentation,
+                    crossLanguageDefinitionId);
         }
     }
 }

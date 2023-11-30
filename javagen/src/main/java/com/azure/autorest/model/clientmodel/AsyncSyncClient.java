@@ -20,6 +20,7 @@ public class AsyncSyncClient {
     private final ServiceClient serviceClient;
 
     private final List<ConvenienceMethod> convenienceMethods;
+    private final String crossLanguageDefinitionId;
 
     // There is also reference from Client to ClientBuilder via "@ServiceClient(builder = ClientBuilder.class)"
     // clientBuilder can be null, if builder is disabled via "disable-client-builder"
@@ -27,12 +28,17 @@ public class AsyncSyncClient {
 
     private AsyncSyncClient(String packageName, String className,
         MethodGroupClient methodGroupClient, ServiceClient serviceClient,
-        List<ConvenienceMethod> convenienceMethods) {
+        List<ConvenienceMethod> convenienceMethods, String crossLanguageDefinitionId) {
         this.packageName = packageName;
         this.className = className;
         this.methodGroupClient = methodGroupClient;
         this.serviceClient = serviceClient;
         this.convenienceMethods = convenienceMethods;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
     }
 
     /**
@@ -121,6 +127,7 @@ public class AsyncSyncClient {
         private ServiceClient serviceClient;
 
         private List<ConvenienceMethod> convenienceMethods = Collections.emptyList();
+        private String crossLanguageDefinitionId;
 
         /**
          * Sets the class name.
@@ -177,13 +184,18 @@ public class AsyncSyncClient {
             return this;
         }
 
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
+        }
+
         /**
          * Builds an instance of {@link AsyncSyncClient}.
          *
          * @return The instance of {@link AsyncSyncClient}.
          */
         public AsyncSyncClient build() {
-            return new AsyncSyncClient(packageName, className, methodGroupClient, serviceClient, convenienceMethods);
+            return new AsyncSyncClient(packageName, className, methodGroupClient, serviceClient, convenienceMethods, crossLanguageDefinitionId);
         }
     }
 }

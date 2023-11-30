@@ -20,6 +20,16 @@ public class Client extends Metadata {
 
     private ServiceVersion serviceVersion;
 
+    private String crossLanguageDefinitionId;
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
+    public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
     public String getSummary() {
         return summary;
     }

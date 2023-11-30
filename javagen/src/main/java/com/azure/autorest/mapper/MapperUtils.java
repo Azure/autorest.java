@@ -76,16 +76,17 @@ final class MapperUtils {
             }
 
             return new EnumType.Builder()
-                .packageName(enumPackage)
-                .name(enumTypeName)
-                .description(description)
-                .expandable(expandable)
-                .values(enumValues)
-                .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
-                .implementationDetails(new ImplementationDetails.Builder()
-                    .usages(SchemaUtil.mapSchemaContext(enumType.getUsage()))
-                    .build())
-                .build();
+                    .packageName(enumPackage)
+                    .name(enumTypeName)
+                    .description(description)
+                    .expandable(expandable)
+                    .values(enumValues)
+                    .elementType(Mappers.getSchemaMapper().map(enumType.getChoiceType()))
+                    .implementationDetails(new ImplementationDetails.Builder()
+                            .usages(SchemaUtil.mapSchemaContext(enumType.getUsage()))
+                            .build())
+                    .crossLanguageDefinitionId(enumType.getCrossLanguageDefinitionId())
+                    .build();
         }
     }
 

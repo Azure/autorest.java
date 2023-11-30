@@ -8,7 +8,9 @@ import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
@@ -32,6 +34,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class TypeSpecPlugin extends Javagen {
@@ -40,13 +43,58 @@ public class TypeSpecPlugin extends Javagen {
 
     private final EmitterOptions emitterOptions;
 
+    private final Map<String, String> crossLanguageDefinitionsMap = new TreeMap<>();
+
     public Client processClient(CodeModel codeModel) {
         // transform code model
         codeModel = Preprocessor.convertOptionalConstantsToEnum(codeModel);
         codeModel = new Transformer().transform(codeModel);
 
         // map to client model
-        return Mappers.getClientMapper().map(codeModel);
+        Client client = Mappers.getClientMapper().map(codeModel);
+
+        client.getAsyncClients()
+                .forEach(asyncClient -> crossLanguageDefinitionsMap
+                        .put(asyncClient.getPackageName() + "." + asyncClient.getClassName(), asyncClient.getCrossLanguageDefinitionId()));
+
+        client.getSyncClients()
+                .forEach(syncClient -> crossLanguageDefinitionsMap
+                        .put(syncClient.getPackageName() + "." + syncClient.getClassName(), syncClient.getCrossLanguageDefinitionId()));
+
+        client.getClientBuilders()
+                .forEach(clientBuilder -> crossLanguageDefinitionsMap
+                        .put(clientBuilder.getPackageName() + "." + clientBuilder.getClassName(), clientBuilder.getCrossLanguageDefinitionId()));
+
+        for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
+            List<ConvenienceMethod> convenienceMethods = asyncClient.getConvenienceMethods();
+            for (ConvenienceMethod convenienceMethod : convenienceMethods) {
+                convenienceMethod.getConvenienceMethods()
+                        .stream()
+                        .filter(method -> !method.getName().endsWith("Async"))
+                        .forEach(method -> crossLanguageDefinitionsMap.put(asyncClient.getPackageName() + "." + asyncClient.getClassName() + "." + method.getName(), method.getCrossLanguageDefinitionId()));
+                if (!convenienceMethod.getProtocolMethod().getName().endsWith("Async")) {
+                    crossLanguageDefinitionsMap.put(asyncClient.getPackageName() + "." + asyncClient.getClassName() + "." + convenienceMethod.getProtocolMethod().getName(),
+                            convenienceMethod.getProtocolMethod().getCrossLanguageDefinitionId());
+                }
+            }
+        }
+
+        for (AsyncSyncClient syncClient : client.getSyncClients()) {
+            List<ConvenienceMethod> convenienceMethods = syncClient.getConvenienceMethods();
+            for (ConvenienceMethod convenienceMethod : convenienceMethods) {
+                convenienceMethod.getConvenienceMethods()
+                        .stream()
+                        .filter(method -> !method.getName().endsWith("Async"))
+                        .forEach(method -> crossLanguageDefinitionsMap.put(syncClient.getPackageName() + "." + syncClient.getClassName() + "." + method.getName(), method.getCrossLanguageDefinitionId()));
+
+                if (!convenienceMethod.getProtocolMethod().getName().endsWith("Async")) {
+                    crossLanguageDefinitionsMap.put(syncClient.getPackageName() + "." + syncClient.getClassName() + "." + convenienceMethod.getProtocolMethod().getName(),
+                            convenienceMethod.getProtocolMethod().getCrossLanguageDefinitionId());
+                }
+
+            }
+        }
+        return client;
     }
 
     public JavaPackage processTemplates(CodeModel codeModel, Client client, JavaSettings settings) {
@@ -58,7 +106,10 @@ public class TypeSpecPlugin extends Javagen {
         // Client model
         client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .forEach(model -> javaPackage.addModel(model.getPackage(), model.getName(), model));
+                .forEach(model -> {
+                    crossLanguageDefinitionsMap.put(model.getPackage() + "." + model.getName(), model.getCrossLanguageDefinitionId());
+                    javaPackage.addModel(model.getPackage(), model.getName(), model);
+                });
 
         // JsonMergePatchHelper
         List<ClientModel> jsonMergePatchModels = client.getModels().stream()
@@ -71,7 +122,10 @@ public class TypeSpecPlugin extends Javagen {
         // Enum
         client.getEnums().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .forEach(model -> javaPackage.addEnum(model.getPackage(), model.getName(), model));
+                .forEach(model -> {
+                    crossLanguageDefinitionsMap.put(model.getPackage() + "." + model.getName(), model.getCrossLanguageDefinitionId());
+                    javaPackage.addEnum(model.getPackage(), model.getName(), model);
+                });
 
         // Response
         client.getResponseModels().stream()
@@ -135,6 +189,10 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("disable-required-property-annotation", true);
         // Defaulting to KeyCredential and not providing TypeSpec services to generate with AzureKeyCredential.
         SETTINGS_MAP.put("use-key-credential", true);
+    }
+
+    public Map<String, String> getCrossLanguageDefinitionMap() {
+        return this.crossLanguageDefinitionsMap;
     }
 
     public static class MockConnection extends Connection {
