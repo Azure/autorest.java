@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringAndArraysImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse7;
 import com.type.union.models.StringAndArrayCases;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +48,10 @@ public final class StringAndArrayAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -72,7 +75,10 @@ public final class StringAndArrayAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -102,11 +108,11 @@ public final class StringAndArrayAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse7> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse7.class));
     }
 
     /**

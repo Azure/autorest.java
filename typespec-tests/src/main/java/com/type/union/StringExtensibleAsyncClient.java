@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringExtensiblesImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse1;
 import com.type.union.models.Prop;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +48,7 @@ public final class StringExtensibleAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -72,7 +72,7 @@ public final class StringExtensibleAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -102,11 +102,11 @@ public final class StringExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse1> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse1.class));
     }
 
     /**

@@ -102,7 +102,7 @@ public final class FloatsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class FloatsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class FloatsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class FloatsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 

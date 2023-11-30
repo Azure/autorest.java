@@ -5,71 +5,69 @@
 package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Defines values for UnionIntLiteralPropertyProperty.
  */
-public final class UnionIntLiteralPropertyProperty extends ExpandableStringEnum<UnionIntLiteralPropertyProperty>
-    implements JsonSerializable<UnionIntLiteralPropertyProperty> {
+public enum UnionIntLiteralPropertyProperty implements JsonSerializable<UnionIntLiteralPropertyProperty> {
     /**
-     * Static value 42 for UnionIntLiteralPropertyProperty.
+     * Enum value 42.
      */
-    @Generated
-    public static final UnionIntLiteralPropertyProperty FORTY_TWO = fromLong(42L);
+    FORTY_TWO(42L),
 
     /**
-     * Static value 43 for UnionIntLiteralPropertyProperty.
+     * Enum value 43.
      */
-    @Generated
-    public static final UnionIntLiteralPropertyProperty FORTY_THREE = fromLong(43L);
+    FORTY_THREE(43L);
 
     /**
-     * Creates a new instance of UnionIntLiteralPropertyProperty value.
-     * 
-     * @deprecated Use the {@link #fromLong(long)} factory method.
+     * The actual serialized value for a UnionIntLiteralPropertyProperty instance.
      */
-    @Generated
-    @Deprecated
-    public UnionIntLiteralPropertyProperty() {
+    private final long value;
+
+    UnionIntLiteralPropertyProperty(long value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a UnionIntLiteralPropertyProperty from its string representation.
+     * Parses a serialized value to a UnionIntLiteralPropertyProperty instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding UnionIntLiteralPropertyProperty.
+     * @param value the serialized value to parse.
+     * @return the parsed UnionIntLiteralPropertyProperty object, or null if unable to parse.
      */
-    @Generated
-    public static UnionIntLiteralPropertyProperty fromLong(long name) {
-        return fromString(String.valueOf(name), UnionIntLiteralPropertyProperty.class);
+    public static UnionIntLiteralPropertyProperty fromLong(long value) {
+        UnionIntLiteralPropertyProperty[] items = UnionIntLiteralPropertyProperty.values();
+        for (UnionIntLiteralPropertyProperty item : items) {
+            if (item.toLong() == value) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known UnionIntLiteralPropertyProperty values.
+     * De-serializes the instance to long value.
      * 
-     * @return known UnionIntLiteralPropertyProperty values.
+     * @return the long value.
      */
-    @Generated
-    public static Collection<UnionIntLiteralPropertyProperty> values() {
-        return values(UnionIntLiteralPropertyProperty.class);
+    public long toLong() {
+        return this.value;
     }
 
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
+        return jsonWriter.writeLong(value);
     }
 
     /**
      * Reads a UnionIntLiteralPropertyProperty from the JSON stream.
      * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.
      * @return The UnionIntLiteralPropertyProperty that the JSON stream represented, may return null.
@@ -77,6 +75,6 @@ public final class UnionIntLiteralPropertyProperty extends ExpandableStringEnum<
      */
     @Generated
     public static UnionIntLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), UnionIntLiteralPropertyProperty.class);
+        return fromLong(jsonReader.getLong());
     }
 }

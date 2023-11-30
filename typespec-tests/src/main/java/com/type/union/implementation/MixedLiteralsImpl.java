@@ -102,7 +102,12 @@ public final class MixedLiteralsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -126,7 +131,12 @@ public final class MixedLiteralsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -150,7 +160,12 @@ public final class MixedLiteralsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -175,7 +190,12 @@ public final class MixedLiteralsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 

@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringAndArraysImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse7;
 import com.type.union.models.StringAndArrayCases;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +46,10 @@ public final class StringAndArrayClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -70,7 +73,10 @@ public final class StringAndArrayClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -100,10 +106,10 @@ public final class StringAndArrayClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse get() {
+    public GetResponse7 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse7.class);
     }
 
     /**

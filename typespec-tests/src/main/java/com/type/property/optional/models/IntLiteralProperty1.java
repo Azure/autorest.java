@@ -11,37 +11,32 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Defines values for UnionIntLiteralPropertyProperty.
+ * Defines values for IntLiteralProperty1.
  */
-public enum UnionIntLiteralPropertyProperty implements JsonSerializable<UnionIntLiteralPropertyProperty> {
+public enum IntLiteralProperty1 implements JsonSerializable<IntLiteralProperty1> {
     /**
      * Enum value 1.
      */
-    ONE(1L),
+    ONE(1L);
 
     /**
-     * Enum value 2.
-     */
-    TWO(2L);
-
-    /**
-     * The actual serialized value for a UnionIntLiteralPropertyProperty instance.
+     * The actual serialized value for a IntLiteralProperty1 instance.
      */
     private final long value;
 
-    UnionIntLiteralPropertyProperty(long value) {
+    IntLiteralProperty1(long value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a UnionIntLiteralPropertyProperty instance.
+     * Parses a serialized value to a IntLiteralProperty1 instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed UnionIntLiteralPropertyProperty object, or null if unable to parse.
+     * @return the parsed IntLiteralProperty1 object, or null if unable to parse.
      */
-    public static UnionIntLiteralPropertyProperty fromLong(long value) {
-        UnionIntLiteralPropertyProperty[] items = UnionIntLiteralPropertyProperty.values();
-        for (UnionIntLiteralPropertyProperty item : items) {
+    public static IntLiteralProperty1 fromLong(long value) {
+        IntLiteralProperty1[] items = IntLiteralProperty1.values();
+        for (IntLiteralProperty1 item : items) {
             if (item.toLong() == value) {
                 return item;
             }
@@ -65,16 +60,16 @@ public enum UnionIntLiteralPropertyProperty implements JsonSerializable<UnionInt
     }
 
     /**
-     * Reads a UnionIntLiteralPropertyProperty from the JSON stream.
+     * Reads a IntLiteralProperty1 from the JSON stream.
      * <p>
      * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return The UnionIntLiteralPropertyProperty that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a UnionIntLiteralPropertyProperty fails to be read from the JsonReader.
+     * @return The IntLiteralProperty1 that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a IntLiteralProperty1 fails to be read from the JsonReader.
      */
     @Generated
-    public static UnionIntLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
+    public static IntLiteralProperty1 fromJson(JsonReader jsonReader) throws IOException {
         return fromLong(jsonReader.getLong());
     }
 }

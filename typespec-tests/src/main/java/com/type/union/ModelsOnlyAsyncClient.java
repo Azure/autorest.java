@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.ModelsOnliesImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse5;
 import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -47,7 +47,7 @@ public final class ModelsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -71,7 +71,7 @@ public final class ModelsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -101,11 +101,11 @@ public final class ModelsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse5> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse5.class));
     }
 
     /**

@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.MixedLiteralsImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse8;
 import com.type.union.models.MixedLiteralsCases;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +46,12 @@ public final class MixedLiteralsClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -70,7 +75,12 @@ public final class MixedLiteralsClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -100,10 +110,10 @@ public final class MixedLiteralsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse get() {
+    public GetResponse8 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse8.class);
     }
 
     /**

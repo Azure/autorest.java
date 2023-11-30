@@ -102,7 +102,7 @@ public final class StringExtensibleNamedsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class StringExtensibleNamedsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class StringExtensibleNamedsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class StringExtensibleNamedsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 

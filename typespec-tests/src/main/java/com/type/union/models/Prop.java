@@ -17,12 +17,6 @@ import java.util.Collection;
  */
 public final class Prop extends ExpandableStringEnum<Prop> implements JsonSerializable<Prop> {
     /**
-     * Static value a for Prop.
-     */
-    @Generated
-    public static final Prop A = fromString("a");
-
-    /**
      * Static value b for Prop.
      */
     @Generated

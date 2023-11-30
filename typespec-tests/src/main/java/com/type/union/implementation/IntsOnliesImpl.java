@@ -102,7 +102,7 @@ public final class IntsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class IntsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class IntsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class IntsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 

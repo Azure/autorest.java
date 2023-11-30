@@ -5,65 +5,65 @@
 package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Defines values for UnionStringLiteralPropertyProperty.
  */
-public final class UnionStringLiteralPropertyProperty extends ExpandableStringEnum<UnionStringLiteralPropertyProperty>
-    implements JsonSerializable<UnionStringLiteralPropertyProperty> {
+public enum UnionStringLiteralPropertyProperty implements JsonSerializable<UnionStringLiteralPropertyProperty> {
     /**
-     * Static value hello for UnionStringLiteralPropertyProperty.
+     * Enum value hello.
      */
-    @Generated
-    public static final UnionStringLiteralPropertyProperty HELLO = fromString("hello");
+    HELLO("hello"),
 
     /**
-     * Static value world for UnionStringLiteralPropertyProperty.
+     * Enum value world.
      */
-    @Generated
-    public static final UnionStringLiteralPropertyProperty WORLD = fromString("world");
+    WORLD("world");
 
     /**
-     * Creates a new instance of UnionStringLiteralPropertyProperty value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a UnionStringLiteralPropertyProperty instance.
      */
-    @Generated
-    @Deprecated
-    public UnionStringLiteralPropertyProperty() {
+    private final String value;
+
+    UnionStringLiteralPropertyProperty(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a UnionStringLiteralPropertyProperty from its string representation.
+     * Parses a serialized value to a UnionStringLiteralPropertyProperty instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding UnionStringLiteralPropertyProperty.
+     * @param value the serialized value to parse.
+     * @return the parsed UnionStringLiteralPropertyProperty object, or null if unable to parse.
      */
-    @Generated
-    public static UnionStringLiteralPropertyProperty fromString(String name) {
-        return fromString(name, UnionStringLiteralPropertyProperty.class);
+    public static UnionStringLiteralPropertyProperty fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        UnionStringLiteralPropertyProperty[] items = UnionStringLiteralPropertyProperty.values();
+        for (UnionStringLiteralPropertyProperty item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known UnionStringLiteralPropertyProperty values.
-     * 
-     * @return known UnionStringLiteralPropertyProperty values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<UnionStringLiteralPropertyProperty> values() {
-        return values(UnionStringLiteralPropertyProperty.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
+        return jsonWriter.writeString(value);
     }
 
     /**
@@ -77,6 +77,6 @@ public final class UnionStringLiteralPropertyProperty extends ExpandableStringEn
      */
     @Generated
     public static UnionStringLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), UnionStringLiteralPropertyProperty.class);
+        return fromString(jsonReader.getString());
     }
 }

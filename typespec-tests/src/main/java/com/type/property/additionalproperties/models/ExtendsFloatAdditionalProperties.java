@@ -78,7 +78,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
         jsonWriter.writeStartObject();
         jsonWriter.writeDoubleField("id", this.id);
         if (additionalProperties != null) {
-            for (Map.Entry<String, double> additionalProperty : additionalProperties.entrySet()) {
+            for (Map.Entry<String, Double> additionalProperty : additionalProperties.entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }

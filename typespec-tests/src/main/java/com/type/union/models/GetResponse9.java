@@ -13,23 +13,23 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The GetResponse model.
+ * The GetResponse9 model.
  */
 @Immutable
-public final class GetResponse implements JsonSerializable<GetResponse> {
+public final class GetResponse9 implements JsonSerializable<GetResponse9> {
     /*
      * The prop property.
      */
     @Generated
-    private final Prop1 prop;
+    private final MixedTypesCases prop;
 
     /**
-     * Creates an instance of GetResponse class.
+     * Creates an instance of GetResponse9 class.
      * 
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse(Prop1 prop) {
+    private GetResponse9(MixedTypesCases prop) {
         this.prop = prop;
     }
 
@@ -39,40 +39,40 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * @return the prop value.
      */
     @Generated
-    public Prop1 getProp() {
+    public MixedTypesCases getProp() {
         return this.prop;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("prop", this.prop == null ? null : this.prop.toString());
+        jsonWriter.writeJsonField("prop", this.prop);
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of GetResponse from the JsonReader.
+     * Reads an instance of GetResponse9 from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GetResponse if the JsonReader was pointing to an instance of it, or null if it was
+     * @return An instance of GetResponse9 if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the GetResponse.
+     * @throws IOException If an error occurs while reading the GetResponse9.
      */
-    public static GetResponse fromJson(JsonReader jsonReader) throws IOException {
+    public static GetResponse9 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop1 prop = null;
+            MixedTypesCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop1.fromString(reader.getString());
+                    prop = MixedTypesCases.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new GetResponse(prop);
+            return new GetResponse9(prop);
         });
     }
 }

@@ -5,71 +5,69 @@
 package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Defines values for UnionFloatLiteralPropertyProperty.
  */
-public final class UnionFloatLiteralPropertyProperty extends ExpandableStringEnum<UnionFloatLiteralPropertyProperty>
-    implements JsonSerializable<UnionFloatLiteralPropertyProperty> {
+public enum UnionFloatLiteralPropertyProperty implements JsonSerializable<UnionFloatLiteralPropertyProperty> {
     /**
-     * Static value 42.42 for UnionFloatLiteralPropertyProperty.
+     * Enum value 42.42.
      */
-    @Generated
-    public static final UnionFloatLiteralPropertyProperty FORTY_TWO42 = fromDouble(42.42);
+    FORTY_TWO42(42.42),
 
     /**
-     * Static value 43.43 for UnionFloatLiteralPropertyProperty.
+     * Enum value 43.43.
      */
-    @Generated
-    public static final UnionFloatLiteralPropertyProperty FORTY_THREE43 = fromDouble(43.43);
+    FORTY_THREE43(43.43);
 
     /**
-     * Creates a new instance of UnionFloatLiteralPropertyProperty value.
-     * 
-     * @deprecated Use the {@link #fromDouble(double)} factory method.
+     * The actual serialized value for a UnionFloatLiteralPropertyProperty instance.
      */
-    @Generated
-    @Deprecated
-    public UnionFloatLiteralPropertyProperty() {
+    private final double value;
+
+    UnionFloatLiteralPropertyProperty(double value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a UnionFloatLiteralPropertyProperty from its string representation.
+     * Parses a serialized value to a UnionFloatLiteralPropertyProperty instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding UnionFloatLiteralPropertyProperty.
+     * @param value the serialized value to parse.
+     * @return the parsed UnionFloatLiteralPropertyProperty object, or null if unable to parse.
      */
-    @Generated
-    public static UnionFloatLiteralPropertyProperty fromDouble(double name) {
-        return fromString(String.valueOf(name), UnionFloatLiteralPropertyProperty.class);
+    public static UnionFloatLiteralPropertyProperty fromDouble(double value) {
+        UnionFloatLiteralPropertyProperty[] items = UnionFloatLiteralPropertyProperty.values();
+        for (UnionFloatLiteralPropertyProperty item : items) {
+            if (Double.doubleToLongBits(item.toDouble()) == Double.doubleToLongBits(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known UnionFloatLiteralPropertyProperty values.
+     * De-serializes the instance to double value.
      * 
-     * @return known UnionFloatLiteralPropertyProperty values.
+     * @return the double value.
      */
-    @Generated
-    public static Collection<UnionFloatLiteralPropertyProperty> values() {
-        return values(UnionFloatLiteralPropertyProperty.class);
+    public double toDouble() {
+        return this.value;
     }
 
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
+        return jsonWriter.writeDouble(value);
     }
 
     /**
      * Reads a UnionFloatLiteralPropertyProperty from the JSON stream.
      * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.
      * @return The UnionFloatLiteralPropertyProperty that the JSON stream represented, may return null.
@@ -77,6 +75,6 @@ public final class UnionFloatLiteralPropertyProperty extends ExpandableStringEnu
      */
     @Generated
     public static UnionFloatLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), UnionFloatLiteralPropertyProperty.class);
+        return fromDouble(jsonReader.getDouble());
     }
 }

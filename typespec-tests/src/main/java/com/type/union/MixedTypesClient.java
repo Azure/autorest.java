@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.MixedTypesImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse9;
 import com.type.union.models.MixedTypesCases;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +46,12 @@ public final class MixedTypesClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -70,7 +75,12 @@ public final class MixedTypesClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -100,10 +110,10 @@ public final class MixedTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse get() {
+    public GetResponse9 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse9.class);
     }
 
     /**

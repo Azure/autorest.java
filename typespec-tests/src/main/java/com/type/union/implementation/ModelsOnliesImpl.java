@@ -102,7 +102,7 @@ public final class ModelsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class ModelsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class ModelsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class ModelsOnliesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 

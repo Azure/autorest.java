@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedLiteralsImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse8;
 import com.type.union.models.MixedLiteralsCases;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +48,12 @@ public final class MixedLiteralsAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -72,7 +77,12 @@ public final class MixedLiteralsAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         stringLiteral: BinaryData (Required)
+     *         intLiteral: BinaryData (Required)
+     *         floatLiteral: BinaryData (Required)
+     *         booleanLiteral: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -102,11 +112,11 @@ public final class MixedLiteralsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse8> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse8.class));
     }
 
     /**

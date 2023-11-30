@@ -4,74 +4,84 @@
 
 package com.type.property.optional.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Defines values for StringLiteralProperty.
+ * Model with string literal property.
  */
-public enum StringLiteralProperty implements JsonSerializable<StringLiteralProperty> {
-    /**
-     * Enum value hello.
+@Fluent
+public final class StringLiteralProperty implements JsonSerializable<StringLiteralProperty> {
+    /*
+     * Property
      */
-    HELLO("hello");
-
-    /**
-     * The actual serialized value for a StringLiteralProperty instance.
-     */
-    private final String value;
-
-    StringLiteralProperty(String value) {
-        this.value = value;
-    }
-
-    /**
-     * Parses a serialized value to a StringLiteralProperty instance.
-     * 
-     * @param value the serialized value to parse.
-     * @return the parsed StringLiteralProperty object, or null if unable to parse.
-     */
-    public static StringLiteralProperty fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        StringLiteralProperty[] items = StringLiteralProperty.values();
-        for (StringLiteralProperty item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return this.value;
-    }
-
     @Generated
+    private StringLiteralProperty1 property;
+
+    /**
+     * Creates an instance of StringLiteralProperty class.
+     */
+    @Generated
+    public StringLiteralProperty() {
+    }
+
+    /**
+     * Get the property property: Property.
+     * 
+     * @return the property value.
+     */
+    @Generated
+    public StringLiteralProperty1 getProperty() {
+        return this.property;
+    }
+
+    /**
+     * Set the property property: Property.
+     * 
+     * @param property the property value to set.
+     * @return the StringLiteralProperty object itself.
+     */
+    @Generated
+    public StringLiteralProperty setProperty(StringLiteralProperty1 property) {
+        this.property = property;
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(value);
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("property", this.property == null ? null : this.property.toString());
+        return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads a StringLiteralProperty from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
+     * Reads an instance of StringLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return The StringLiteralProperty that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a StringLiteralProperty fails to be read from the JsonReader.
+     * @return An instance of StringLiteralProperty if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the StringLiteralProperty.
      */
-    @Generated
     public static StringLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString());
+        return jsonReader.readObject(reader -> {
+            StringLiteralProperty deserializedStringLiteralProperty = new StringLiteralProperty();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    deserializedStringLiteralProperty.property = StringLiteralProperty1.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedStringLiteralProperty;
+        });
     }
 }

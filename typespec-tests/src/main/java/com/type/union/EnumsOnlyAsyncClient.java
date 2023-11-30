@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.EnumsOnliesImpl;
 import com.type.union.models.EnumsOnlyCases;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse6;
 import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -48,7 +48,10 @@ public final class EnumsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         lr: BinaryData (Required)
+     *         ud: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -72,7 +75,10 @@ public final class EnumsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         lr: BinaryData (Required)
+     *         ud: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -102,11 +108,11 @@ public final class EnumsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse6> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse6.class));
     }
 
     /**

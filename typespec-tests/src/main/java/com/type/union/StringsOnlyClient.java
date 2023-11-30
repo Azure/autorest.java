@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.models.GetResponse;
-import com.type.union.models.Prop;
+import com.type.union.models.Prop1;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -119,7 +119,7 @@ public final class StringsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(Prop prop) {
+    public void send(Prop1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();

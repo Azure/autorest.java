@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringExtensiblesImpl;
-import com.type.union.models.GetResponse;
+import com.type.union.models.GetResponse1;
 import com.type.union.models.Prop;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +46,7 @@ public final class StringExtensibleClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -70,7 +70,7 @@ public final class StringExtensibleClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -100,10 +100,10 @@ public final class StringExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse get() {
+    public GetResponse1 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse1.class);
     }
 
     /**

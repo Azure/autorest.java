@@ -4,72 +4,84 @@
 
 package com.type.property.optional.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Defines values for IntLiteralProperty.
+ * Model with int literal property.
  */
-public enum IntLiteralProperty implements JsonSerializable<IntLiteralProperty> {
-    /**
-     * Enum value 1.
+@Fluent
+public final class IntLiteralProperty implements JsonSerializable<IntLiteralProperty> {
+    /*
+     * Property
      */
-    ONE(1L);
-
-    /**
-     * The actual serialized value for a IntLiteralProperty instance.
-     */
-    private final long value;
-
-    IntLiteralProperty(long value) {
-        this.value = value;
-    }
-
-    /**
-     * Parses a serialized value to a IntLiteralProperty instance.
-     * 
-     * @param value the serialized value to parse.
-     * @return the parsed IntLiteralProperty object, or null if unable to parse.
-     */
-    public static IntLiteralProperty fromLong(long value) {
-        IntLiteralProperty[] items = IntLiteralProperty.values();
-        for (IntLiteralProperty item : items) {
-            if (item.toLong() == value) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * De-serializes the instance to long value.
-     * 
-     * @return the long value.
-     */
-    public long toLong() {
-        return this.value;
-    }
-
     @Generated
+    private IntLiteralProperty1 property;
+
+    /**
+     * Creates an instance of IntLiteralProperty class.
+     */
+    @Generated
+    public IntLiteralProperty() {
+    }
+
+    /**
+     * Get the property property: Property.
+     * 
+     * @return the property value.
+     */
+    @Generated
+    public IntLiteralProperty1 getProperty() {
+        return this.property;
+    }
+
+    /**
+     * Set the property property: Property.
+     * 
+     * @param property the property value to set.
+     * @return the IntLiteralProperty object itself.
+     */
+    @Generated
+    public IntLiteralProperty setProperty(IntLiteralProperty1 property) {
+        this.property = property;
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeLong(value);
+        jsonWriter.writeStartObject();
+        jsonWriter.writeLongField("property", this.property == null ? null : this.property.toLong());
+        return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads a IntLiteralProperty from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
+     * Reads an instance of IntLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return The IntLiteralProperty that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a IntLiteralProperty fails to be read from the JsonReader.
+     * @return An instance of IntLiteralProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the IntLiteralProperty.
      */
-    @Generated
     public static IntLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromLong(jsonReader.getLong());
+        return jsonReader.readObject(reader -> {
+            IntLiteralProperty deserializedIntLiteralProperty = new IntLiteralProperty();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    deserializedIntLiteralProperty.property = IntLiteralProperty1.fromLong(reader.getLong());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedIntLiteralProperty;
+        });
     }
 }

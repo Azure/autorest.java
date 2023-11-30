@@ -102,7 +102,10 @@ public final class StringAndArraysImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -126,7 +129,10 @@ public final class StringAndArraysImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -150,7 +156,10 @@ public final class StringAndArraysImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -175,7 +184,10 @@ public final class StringAndArraysImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 

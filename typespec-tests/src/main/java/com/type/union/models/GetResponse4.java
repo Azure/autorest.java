@@ -13,23 +13,23 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The GetResponse model.
+ * The GetResponse4 model.
  */
 @Immutable
-public final class GetResponse implements JsonSerializable<GetResponse> {
+public final class GetResponse4 implements JsonSerializable<GetResponse4> {
     /*
      * The prop property.
      */
     @Generated
-    private final Prop1 prop;
+    private final Prop3 prop;
 
     /**
-     * Creates an instance of GetResponse class.
+     * Creates an instance of GetResponse4 class.
      * 
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse(Prop1 prop) {
+    private GetResponse4(Prop3 prop) {
         this.prop = prop;
     }
 
@@ -39,40 +39,40 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * @return the prop value.
      */
     @Generated
-    public Prop1 getProp() {
+    public Prop3 getProp() {
         return this.prop;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("prop", this.prop == null ? null : this.prop.toString());
+        jsonWriter.writeDoubleField("prop", this.prop == null ? null : this.prop.toDouble());
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of GetResponse from the JsonReader.
+     * Reads an instance of GetResponse4 from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GetResponse if the JsonReader was pointing to an instance of it, or null if it was
+     * @return An instance of GetResponse4 if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the GetResponse.
+     * @throws IOException If an error occurs while reading the GetResponse4.
      */
-    public static GetResponse fromJson(JsonReader jsonReader) throws IOException {
+    public static GetResponse4 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop1 prop = null;
+            Prop3 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop1.fromString(reader.getString());
+                    prop = Prop3.fromDouble(reader.getDouble());
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new GetResponse(prop);
+            return new GetResponse4(prop);
         });
     }
 }

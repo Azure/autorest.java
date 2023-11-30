@@ -102,7 +102,12 @@ public final class MixedTypesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -126,7 +131,12 @@ public final class MixedTypesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -150,7 +160,12 @@ public final class MixedTypesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -175,7 +190,12 @@ public final class MixedTypesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop (Required): {
+     *         model: BinaryData (Required)
+     *         literal: BinaryData (Required)
+     *         int: BinaryData (Required)
+     *         boolean: BinaryData (Required)
+     *     }
      * }
      * }</pre>
      * 

@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.models.GetResponse;
-import com.type.union.models.Prop;
+import com.type.union.models.Prop1;
 import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -123,7 +123,7 @@ public final class StringsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(Prop prop) {
+    public Mono<Void> send(Prop1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();

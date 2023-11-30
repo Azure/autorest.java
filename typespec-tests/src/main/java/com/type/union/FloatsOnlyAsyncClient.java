@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.FloatsOnliesImpl;
-import com.type.union.models.GetResponse;
-import com.type.union.models.Prop;
+import com.type.union.models.GetResponse4;
+import com.type.union.models.Prop3;
 import java.util.HashMap;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -48,7 +48,7 @@ public final class FloatsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -72,7 +72,7 @@ public final class FloatsOnlyAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -102,11 +102,11 @@ public final class FloatsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse4> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse4.class));
     }
 
     /**
@@ -123,7 +123,7 @@ public final class FloatsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(Prop prop) {
+    public Mono<Void> send(Prop3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();

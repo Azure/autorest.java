@@ -21,7 +21,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * Property
      */
     @Generated
-    private FloatLiteralProperty property;
+    private FloatLiteralProperty1 property;
 
     /**
      * Creates an instance of FloatLiteralProperty class.
@@ -36,7 +36,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * @return the property value.
      */
     @Generated
-    public FloatLiteralProperty getProperty() {
+    public FloatLiteralProperty1 getProperty() {
         return this.property;
     }
 
@@ -47,7 +47,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * @return the FloatLiteralProperty object itself.
      */
     @Generated
-    public FloatLiteralProperty setProperty(FloatLiteralProperty property) {
+    public FloatLiteralProperty setProperty(FloatLiteralProperty1 property) {
         this.property = property;
         return this;
     }
@@ -75,7 +75,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedFloatLiteralProperty.property = FloatLiteralProperty.fromDouble(reader.getDouble());
+                    deserializedFloatLiteralProperty.property = FloatLiteralProperty1.fromDouble(reader.getDouble());
                 } else {
                     reader.skipChildren();
                 }

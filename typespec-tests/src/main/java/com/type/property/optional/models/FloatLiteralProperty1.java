@@ -11,37 +11,32 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Defines values for UnionFloatLiteralPropertyProperty.
+ * Defines values for FloatLiteralProperty1.
  */
-public enum UnionFloatLiteralPropertyProperty implements JsonSerializable<UnionFloatLiteralPropertyProperty> {
+public enum FloatLiteralProperty1 implements JsonSerializable<FloatLiteralProperty1> {
     /**
      * Enum value 1.2.
      */
-    ONE2(1.2),
+    ONE_TWO(1.2);
 
     /**
-     * Enum value 2.3.
-     */
-    TWO3(2.3);
-
-    /**
-     * The actual serialized value for a UnionFloatLiteralPropertyProperty instance.
+     * The actual serialized value for a FloatLiteralProperty1 instance.
      */
     private final double value;
 
-    UnionFloatLiteralPropertyProperty(double value) {
+    FloatLiteralProperty1(double value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a UnionFloatLiteralPropertyProperty instance.
+     * Parses a serialized value to a FloatLiteralProperty1 instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed UnionFloatLiteralPropertyProperty object, or null if unable to parse.
+     * @return the parsed FloatLiteralProperty1 object, or null if unable to parse.
      */
-    public static UnionFloatLiteralPropertyProperty fromDouble(double value) {
-        UnionFloatLiteralPropertyProperty[] items = UnionFloatLiteralPropertyProperty.values();
-        for (UnionFloatLiteralPropertyProperty item : items) {
+    public static FloatLiteralProperty1 fromDouble(double value) {
+        FloatLiteralProperty1[] items = FloatLiteralProperty1.values();
+        for (FloatLiteralProperty1 item : items) {
             if (Double.doubleToLongBits(item.toDouble()) == Double.doubleToLongBits(value)) {
                 return item;
             }
@@ -65,16 +60,16 @@ public enum UnionFloatLiteralPropertyProperty implements JsonSerializable<UnionF
     }
 
     /**
-     * Reads a UnionFloatLiteralPropertyProperty from the JSON stream.
+     * Reads a FloatLiteralProperty1 from the JSON stream.
      * <p>
      * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return The UnionFloatLiteralPropertyProperty that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a UnionFloatLiteralPropertyProperty fails to be read from the JsonReader.
+     * @return The FloatLiteralProperty1 that the JSON stream represented, may return null.
+     * @throws java.io.IOException If a FloatLiteralProperty1 fails to be read from the JsonReader.
      */
     @Generated
-    public static UnionFloatLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
+    public static FloatLiteralProperty1 fromJson(JsonReader jsonReader) throws IOException {
         return fromDouble(jsonReader.getDouble());
     }
 }

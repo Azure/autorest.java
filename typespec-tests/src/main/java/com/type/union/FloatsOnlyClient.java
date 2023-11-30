@@ -16,8 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.FloatsOnliesImpl;
-import com.type.union.models.GetResponse;
-import com.type.union.models.Prop;
+import com.type.union.models.GetResponse4;
+import com.type.union.models.Prop3;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +46,7 @@ public final class FloatsOnlyClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -70,7 +70,7 @@ public final class FloatsOnlyClient {
      * </p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -100,10 +100,10 @@ public final class FloatsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse get() {
+    public GetResponse4 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse4.class);
     }
 
     /**
@@ -119,7 +119,7 @@ public final class FloatsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(Prop prop) {
+    public void send(Prop3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
