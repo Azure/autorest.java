@@ -27,13 +27,20 @@ model Resource {
 
   description?: string;
 
-  map: Record<string>;
+  map: Record<A>;
 
   longValue: int64;
 
   intValue: int32;
 
   enumValue?: "a" | "b" | "c";
+
+  @projectedName("json", "wireNameForA")
+  a: A;
+}
+
+model A {
+  name: string;
 }
 
 @doc("This is base model for polymorphic multiple levels inheritance with a discriminator.")

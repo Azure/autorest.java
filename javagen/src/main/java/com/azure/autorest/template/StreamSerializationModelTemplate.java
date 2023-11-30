@@ -309,16 +309,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (property.getClientType().isNullable()) {
                 methodBlock.ifBlock(String.format("%s !=null", property.getName()), codeBlock -> {
                     serializeJsonProperty(codeBlock, property, serializedName,
-                            false);
+                            false, isJsonMergePatch);
                 }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
                     codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
                 });
             } else {
                 serializeJsonProperty(methodBlock, property, serializedName,
-                        fromSuperType);
+                        fromSuperType, isJsonMergePatch);
             }
         } else {
-            serializeJsonProperty(methodBlock, property, serializedName, fromSuperType);
+            serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);
         }
     }
 
@@ -328,16 +328,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * If the JSON property needs to be flattened or is additional properties this is a no-op as those require special
      * handling that will occur later.
      *
-     * @param methodBlock    The method handling serialization.
-     * @param property       The property being serialized.
-     * @param serializedName The serialized JSON property name. Generally, this is just the {@code property property's}
-     *                       serialized name but if a flattened property is being serialized it'll be the last segment of the flattened JSON
-     *                       name.
-     * @param fromSuperType  Whether the property is defined by a super type of the model. If the property is declared by
-     *                       a super type a getter method will be used to retrieve the value instead of accessing the field directly.
+     * @param methodBlock      The method handling serialization.
+     * @param property         The property being serialized.
+     * @param serializedName   The serialized JSON property name. Generally, this is just the {@code property property's}
+     *                         serialized name but if a flattened property is being serialized it'll be the last segment of the flattened JSON
+     *                         name.
+     * @param fromSuperType    Whether the property is defined by a super type of the model. If the property is declared by
+     *                         a super type a getter method will be used to retrieve the value instead of accessing the field directly.
+     * @param isJsonMergePatch Whether the serialization is for a JSON Merge Patch model.
      */
     private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
-                                              String serializedName, boolean fromSuperType) {
+                                              String serializedName, boolean fromSuperType, boolean isJsonMergePatch) {
         IType clientType = property.getClientType();
         IType wireType = property.getWireType();
         String propertyValueGetter;
@@ -360,6 +361,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
             methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
         } else if (fieldSerializationMethod != null) {
+            if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
+                methodBlock.line(serializedName + ".serializeAsJsonMergePatch(true);");
+            }
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
                 // check is required to prevent a NullPointerException when converting the value.
@@ -382,12 +386,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
-                serializedName, propertyValueGetter, 0);
+                serializedName, propertyValueGetter, 0, isJsonMergePatch);
         } else if (wireType instanceof MapType) {
             // Assumption is that the key type for the Map is a String. This may not always hold true and when that
             // becomes reality this will need to be reworked to handle that case.
             serializeJsonContainerProperty(methodBlock, "writeMapField", wireType, ((MapType) wireType).getValueType(),
-                serializedName, propertyValueGetter, 0);
+                serializedName, propertyValueGetter, 0, isJsonMergePatch);
         } else {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
             throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
@@ -397,18 +401,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /**
      * Helper method to serialize a JSON container property (such as {@link List} and {@link Map}).
      *
-     * @param methodBlock The method handling serialization.
-     * @param utilityMethod The method aiding in the serialization of the container.
-     * @param containerType The container type.
-     * @param elementType The element type for the container, for a {@link List} this is the element type and for a
-     * {@link Map} this is the value type.
-     * @param serializedName The serialized property name.
+     * @param methodBlock         The method handling serialization.
+     * @param utilityMethod       The method aiding in the serialization of the container.
+     * @param containerType       The container type.
+     * @param elementType         The element type for the container, for a {@link List} this is the element type and for a
+     *                            {@link Map} this is the value type.
+     * @param serializedName      The serialized property name.
      * @param propertyValueGetter The property or property getter for the field being serialized.
-     * @param depth Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
-     * {@code Map} is being handled and then 1 when {@code List} is being handled.
+     * @param depth               Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
+     *                            {@code Map} is being handled and then 1 when {@code List} is being handled.
+     * @param isJsonMergePatch
      */
     private static void serializeJsonContainerProperty(JavaBlock methodBlock, String utilityMethod,
-        IType containerType, IType elementType, String serializedName, String propertyValueGetter, int depth) {
+                                                       IType containerType, IType elementType, String serializedName, String propertyValueGetter, int depth, boolean isJsonMergePatch) {
         String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
         String elementName = depth == 0 ? "element" : "element" + depth;
@@ -434,17 +439,24 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
                 methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
-                methodBlock.line(valueSerializationMethod);
+                if (isJsonMergePatch && elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                    methodBlock.block("", codeBlock -> {
+                        codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                        codeBlock.line(valueSerializationMethod + ";");
+                    });
+                } else {
+                    methodBlock.line(valueSerializationMethod);
+                }
             } else if (elementType == ClassType.OBJECT) {
                 methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
             } else if (elementType instanceof IterableType) {
                 serializeJsonContainerProperty(methodBlock, "writeArray", elementType, ((IterableType) elementType).getElementType(),
-                    serializedName, propertyValueGetter, depth + 1);
+                    serializedName, propertyValueGetter, depth + 1, isJsonMergePatch);
             } else if (elementType instanceof MapType) {
                 // Assumption is that the key type for the Map is a String. This may not always hold true and when that
                 // becomes reality this will need to be reworked to handle that case.
                 serializeJsonContainerProperty(methodBlock, "writeMap", elementType, ((MapType) elementType).getValueType(),
-                    serializedName, propertyValueGetter, depth + 1);
+                    serializedName, propertyValueGetter, depth + 1, isJsonMergePatch);
             } else {
                 throw new RuntimeException("Unknown value type " + elementType + " in " + containerType
                     + " serialization. Need to add support for it.");

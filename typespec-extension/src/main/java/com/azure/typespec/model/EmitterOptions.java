@@ -44,7 +44,7 @@ public class EmitterOptions {
     private Boolean enableSyncStack = true;
 
     @JsonProperty(value = "stream-style-serialization")
-    private Boolean streamStyleSerialization = false;
+    private Boolean streamStyleSerialization = true;
 
     @JsonProperty(value="partial-update")
     private Boolean partialUpdate;
