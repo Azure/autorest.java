@@ -45,33 +45,34 @@ public final class MultipartFormDataHelper {
     private InputStream requestDataStream = new ByteArrayInputStream(new byte[0]);
     private long requestLength = 0;
 
-    private RequestOptions requestOptions;
+    private final RequestOptions requestOptions;
     private BinaryData requestBody;
 
     /**
-     * Default constructor used in the code. The boundary is a random value.
+     * Creates a new instance of MultipartFormDataHelper.
      */
     public MultipartFormDataHelper(RequestOptions requestOptions) {
-        this(requestOptions, UUID.randomUUID().toString().substring(0, 16));
-    }
-
-    private MultipartFormDataHelper(RequestOptions requestOptions, String boundary) {
         this.requestOptions = requestOptions;
-        this.boundary = boundary;
+        this.boundary = UUID.randomUUID().toString().substring(0, 16);
         this.partSeparator = "--" + boundary;
         this.endMarker = this.partSeparator + "--";
     }
 
+    /**
+     * Gets the request body.
+     *
+     * @return the request body as BinaryData
+     */
     public BinaryData getRequestBody() {
         return requestBody;
     }
 
-    // text/plain
     /**
-     * This method formats a text/plain field for a multipart HTTP request and returns its byte[] representation.
+     * This method formats a text/plain field for a multipart HTTP request.
      *
      * @param fieldName the field name
      * @param value the value of the text/plain field
+     * @return the MultipartFormDataHelper instance
      */
     public MultipartFormDataHelper serializeField(String fieldName, String value) {
         if (value != null) {
@@ -83,7 +84,14 @@ public final class MultipartFormDataHelper {
         return this;
     }
 
-    // application/octet-stream
+    /**
+     * This method formats a application/octet-stream field for a multipart HTTP request.
+     *
+     * @param fieldName the field name
+     * @param file the data for the application/octet-stream field
+     * @param filename the filename of the field
+     * @return the MultipartFormDataHelper instance
+     */
     public MultipartFormDataHelper serializeField(String fieldName, BinaryData file, String filename) {
         if (file != null) {
             // Multipart preamble
@@ -103,6 +111,11 @@ public final class MultipartFormDataHelper {
         return this;
     }
 
+    /**
+     * Signals the end of serialization of the multipart fields.
+     *
+     * @return the MultipartFormDataHelper instance
+     */
     public MultipartFormDataHelper end() {
         byte[] data = endMarker.getBytes(encoderCharset);
         appendBytes(data);
