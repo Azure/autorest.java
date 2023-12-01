@@ -11,44 +11,44 @@ import com.projection.projectedname.models.LanguageProjectedNameModel;
 import com.projection.projectedname.models.JavaModel;
 import org.junit.jupiter.api.Test;
 
-class ProjectedNameClientTest {
+public class ProjectedNameClientTest {
 
     private final PropertyClient propertyClient = new ProjectedNameClientBuilder().buildPropertyClient();
     private final ProjectedNameClient client = new ProjectedNameClientBuilder().buildClient();
     private final ModelClient modelClient = new ProjectedNameClientBuilder().buildModelClient();
 
     @Test
-    void jsonProjection() {
+    public void jsonProjection() {
         JsonProjectedNameModel project = new JsonProjectedNameModel(true);
         propertyClient.json(project);
     }
 
     @Test
-    void clientProjection() {
+    public void clientProjection() {
         ClientProjectedNameModel project = new ClientProjectedNameModel(true);
         propertyClient.client(project);
     }
 
     @Test
-    void jsonAndClientProjection() {
+    public void jsonAndClientProjection() {
         JsonAndClientProjectedNameModel project = new JsonAndClientProjectedNameModel(true);
         propertyClient.jsonAndClient(project);
     }
 
     @Test
-    void languageProjection() {
+    public void languageProjection() {
         LanguageProjectedNameModel project = new LanguageProjectedNameModel(true);
         propertyClient.language(project);
     }
 
     @Test
-    void clientModel() {
+    public void clientModel() {
         ClientModel clientModel = new ClientModel(true);
         modelClient.client(clientModel);
     }
 
     @Test
-    void languageModel() {
+    public void languageModel() {
         JavaModel javaModel = new JavaModel(true);
         modelClient.language(javaModel);
     }
