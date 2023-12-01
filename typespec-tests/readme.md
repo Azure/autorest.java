@@ -30,7 +30,7 @@ Start Cadl-Ranch
 
 Then, run the tests in `typespec-tests` module as usual Java Tests.
 
-## Generate Code for some TypeSpec Source
+## Generate Code for TypeSpec Source
 
 `tsp compile <target.tsp>` in `./typespec-tests` folder.
 
