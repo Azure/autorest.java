@@ -4,16 +4,10 @@
 
 package com.type.property.optional.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for StringLiteralProperty1.
  */
-public enum StringLiteralProperty1 implements JsonSerializable<StringLiteralProperty1> {
+public enum StringLiteralProperty1 {
     /**
      * Enum value hello.
      */
@@ -53,25 +47,5 @@ public enum StringLiteralProperty1 implements JsonSerializable<StringLiteralProp
     @Override
     public String toString() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(value);
-    }
-
-    /**
-     * Reads a StringLiteralProperty1 from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The StringLiteralProperty1 that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a StringLiteralProperty1 fails to be read from the JsonReader.
-     */
-    @Generated
-    public static StringLiteralProperty1 fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString());
     }
 }

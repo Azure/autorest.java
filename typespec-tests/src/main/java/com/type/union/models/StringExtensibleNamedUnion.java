@@ -6,17 +6,12 @@ package com.type.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for StringExtensibleNamedUnion.
  */
-public final class StringExtensibleNamedUnion extends ExpandableStringEnum<StringExtensibleNamedUnion>
-    implements JsonSerializable<StringExtensibleNamedUnion> {
+public final class StringExtensibleNamedUnion extends ExpandableStringEnum<StringExtensibleNamedUnion> {
     /**
      * Static value b for StringExtensibleNamedUnion.
      */
@@ -58,25 +53,5 @@ public final class StringExtensibleNamedUnion extends ExpandableStringEnum<Strin
     @Generated
     public static Collection<StringExtensibleNamedUnion> values() {
         return values(StringExtensibleNamedUnion.class);
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a StringExtensibleNamedUnion from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The StringExtensibleNamedUnion that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a StringExtensibleNamedUnion fails to be read from the JsonReader.
-     */
-    @Generated
-    public static StringExtensibleNamedUnion fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), StringExtensibleNamedUnion.class);
     }
 }

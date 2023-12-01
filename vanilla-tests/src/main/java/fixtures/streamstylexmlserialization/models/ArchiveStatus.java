@@ -5,17 +5,12 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for ArchiveStatus.
  */
-public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus>
-    implements JsonSerializable<ArchiveStatus> {
+public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
     /**
      * Static value rehydrate-pending-to-hot for ArchiveStatus.
      */
@@ -52,23 +47,5 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus>
      */
     public static Collection<ArchiveStatus> values() {
         return values(ArchiveStatus.class);
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a ArchiveStatus from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The ArchiveStatus that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a ArchiveStatus fails to be read from the JsonReader.
-     */
-    public static ArchiveStatus fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), ArchiveStatus.class);
     }
 }

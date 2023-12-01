@@ -6,17 +6,12 @@ package com._specs_.azure.core.basic.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * An extensible enum input parameter.
  */
-public final class ListItemInputExtensibleEnum extends ExpandableStringEnum<ListItemInputExtensibleEnum>
-    implements JsonSerializable<ListItemInputExtensibleEnum> {
+public final class ListItemInputExtensibleEnum extends ExpandableStringEnum<ListItemInputExtensibleEnum> {
     /**
      * The first enum value.
      */
@@ -58,25 +53,5 @@ public final class ListItemInputExtensibleEnum extends ExpandableStringEnum<List
     @Generated
     public static Collection<ListItemInputExtensibleEnum> values() {
         return values(ListItemInputExtensibleEnum.class);
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a ListItemInputExtensibleEnum from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The ListItemInputExtensibleEnum that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a ListItemInputExtensibleEnum fails to be read from the JsonReader.
-     */
-    @Generated
-    public static ListItemInputExtensibleEnum fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), ListItemInputExtensibleEnum.class);
     }
 }
