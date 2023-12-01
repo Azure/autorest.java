@@ -17,6 +17,7 @@ org.junit.jupiter:junit-jupiter-api
 org.junit.jupiter:junit-jupiter-engine
 org.junit.jupiter:junit-jupiter-params
 io.projectreactor:reactor-test
+ch.qos.logback:logback-classic
 
 org.apache.maven.plugins:maven-antrun-plugin
 org.apache.maven.plugins:maven-assembly-plugin
