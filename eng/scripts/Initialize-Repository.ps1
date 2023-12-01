@@ -1,8 +1,8 @@
 #Requires -Version 7.0
 
 param(
-    [string] $BuildArtifactsPath,
-    [switch] $UseTypeSpecNext
+  [string] $BuildArtifactsPath,
+  [switch] $UseTypeSpecNext
 )
 
 $ErrorActionPreference = 'Stop'
@@ -31,5 +31,5 @@ try {
   $env:path = $env:path = "$RepoRoot/node_modules/.bin;$env:path"
 }
 finally {
-    Pop-Location
+  Pop-Location
 }

@@ -1,10 +1,10 @@
 #Requires -Version 7.0
 
 param(
-    [string] $BuildNumber,
-    [string] $Output,
-    [switch] $Prerelease,
-    [switch] $PublishInternal
+  [string] $BuildNumber,
+  [string] $Output,
+  [switch] $Prerelease,
+  [switch] $PublishInternal
 )
 
 $ErrorActionPreference = 'Stop'
@@ -26,44 +26,44 @@ $packagesPath = New-Item -ItemType Directory -Force -Path $packagesPath | Select
 
 Push-Location $RepoRoot
 try {
-    invoke "mvn -f pom.xml -P local,tsp -T 1C --no-transfer-progress clean verify package install"
+  invoke "mvn -f pom.xml -P local,tsp -T 1C --no-transfer-progress clean verify package install"
 
-    Push-Location "./typespec-extension"
-    try {
-      if ($Prerelease) {
-        $emitterVersion = (npm pkg get version).Trim('"')
-        $emitterVersion = "$emitterVersion-alpha.$BuildNumber"
+  Push-Location "./typespec-extension"
+  try {
+    if ($Prerelease) {
+      $emitterVersion = (npm pkg get version).Trim('"')
+      $emitterVersion = "$emitterVersion-alpha.$BuildNumber"
 
-        Write-Host "Updating emitter to preview version $emitterVersion"
-        invoke "npm version $emitterVersion --no-git-tag-version"
-      }
-    
-      Write-Host "Building TypeSpec Java"
-      invoke "npm run build"
-    
-      # TODO: Move linting and format check to Test-Packages.ps1
-      # Write-Host "Linting TypeSpec Java"
-      # invoke "npm run lint"
-    
-      # Write-Host "Checking TypeSpec Java format"
-      # invoke "npm run check-format"
-    
-      Write-Host "Packing TypeSpec Java"
-      $file = invoke "npm pack -q"
-      Copy-Item $file -Destination $packagesPath
-    } finally {
-        Pop-Location
+      Write-Host "Updating emitter to preview version $emitterVersion"
+      invoke "npm version $emitterVersion --no-git-tag-version"
     }
+  
+    Write-Host "Building TypeSpec Java"
+    invoke "npm run build"
+  
+    # TODO: Move linting and format check to Test-Packages.ps1
+    # Write-Host "Linting TypeSpec Java"
+    # invoke "npm run lint"
+  
+    # Write-Host "Checking TypeSpec Java format"
+    # invoke "npm run check-format"
+  
+    Write-Host "Packing TypeSpec Java"
+    $file = invoke "npm pack -q"
+    Copy-Item $file -Destination $packagesPath
+  } finally {
+      Pop-Location
+  }
 
-    Write-Host "`n`n====================================="
-    Write-Host "Print Package Dependencies"
-    Write-Host "====================================="
-    
-    Write-Host "Dependencies of typespec-java"
-    invoke "npm ls --all" -ExecutePath "$RepoRoot/typespec-extension"
+  Write-Host "`n`n====================================="
+  Write-Host "Print Package Dependencies"
+  Write-Host "====================================="
+  
+  Write-Host "Dependencies of typespec-java"
+  invoke "npm ls --all" -ExecutePath "$RepoRoot/typespec-extension"
 }
 finally {
-    Pop-Location
+  Pop-Location
 }
 
 if ($PublishInternal) {
