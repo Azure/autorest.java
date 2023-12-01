@@ -672,7 +672,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             this.needsFlatten = property.getNeedsFlatten();
             this.clientFlatten = property.getClientFlatten();
             this.polymorphicDiscriminator = property.isPolymorphicDiscriminator();
-            this.isXmlText = property.isXmlText;
+            this.isXmlText = property.isXmlText();
             this.xmlPrefix = property.getXmlPrefix();
         }
 

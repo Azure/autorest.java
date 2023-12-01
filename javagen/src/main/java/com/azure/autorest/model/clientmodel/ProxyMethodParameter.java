@@ -200,7 +200,7 @@ public class ProxyMethodParameter extends MethodParameter {
      * @return A new builder instance initialized with properties values of this instance.
      */
     public ProxyMethodParameter.Builder newBuilder() {
-        return new ProxyMethodParameter.Builder(this);
+        return new Builder(this);
     }
 
     public static class Builder {
@@ -444,7 +444,7 @@ public class ProxyMethodParameter extends MethodParameter {
             this.fromClient = parameter.isFromClient();
             this.headerCollectionPrefix = parameter.getHeaderCollectionPrefix();
             this.parameterReference = parameter.getParameterReference();
-            this.defaultValue = parameter.getDescription();
+            this.defaultValue = parameter.getDefaultValue();
             this.collectionFormat = parameter.getCollectionFormat();
             this.explode = parameter.getExplode();
             this.origin = parameter.getOrigin();
