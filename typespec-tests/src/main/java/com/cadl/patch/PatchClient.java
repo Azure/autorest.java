@@ -16,6 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.patch.implementation.PatchClientImpl;
+import com.cadl.patch.models.Fish;
+import com.cadl.patch.models.Resource;
 
 /**
  * Initializes a new instance of the synchronous PatchClient type.
@@ -36,7 +38,7 @@ public final class PatchClient {
     }
 
     /**
-     * The createOrUpdate operation.
+     * Create or update operation template.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -45,7 +47,12 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String: String (Required)
+     *     }
+     *     longValue: long (Required)
+     *     intValue: int (Required)
+     *     enumValue: String(a/b/c) (Optional)
      * }
      * }</pre>
      * <p>
@@ -56,12 +63,17 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String: String (Required)
+     *     }
+     *     longValue: long (Required)
+     *     intValue: int (Required)
+     *     enumValue: String(a/b/c) (Optional)
      * }
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -71,9 +83,94 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateWithResponse(String name, BinaryData body,
+    public Response<BinaryData> createOrUpdateResourceWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
-        return this.serviceClient.createOrUpdateWithResponse(name, body, requestOptions);
+        return this.serviceClient.createOrUpdateResourceWithResponse(name, resource, requestOptions);
+    }
+
+    /**
+     * Create or update operation template.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrUpdateFishWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateFishWithResponse(name, resource, requestOptions);
+    }
+
+    /**
+     * Create or update operation template.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource createOrUpdateResource(String name, Resource resource) {
+        // Generated convenience method for createOrUpdateResourceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateResourceWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+            .toObject(Resource.class);
+    }
+
+    /**
+     * Create or update operation template.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish createOrUpdateFish(String name, Fish resource) {
+        // Generated convenience method for createOrUpdateFishWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateFishWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+            .toObject(Fish.class);
     }
 }

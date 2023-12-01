@@ -10,7 +10,10 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Inner model used in collections model property.
@@ -22,6 +25,24 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      */
     @Generated
     private final String property;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setInnerModelAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of InnerModel class.
@@ -45,8 +66,22 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("property", this.property);
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("property", this.property);
+        if (property != null) {
+            jsonWriter.writeStringField("property", this.property);
+        } else if (updatedProperties.contains("property")) {
+            jsonWriter.writeNullField("property");
+        }
         return jsonWriter.writeEndObject();
     }
 

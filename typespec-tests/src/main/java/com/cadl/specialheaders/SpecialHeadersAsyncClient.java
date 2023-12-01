@@ -20,6 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.specialheaders.implementation.SpecialHeadersClientImpl;
 import com.cadl.specialheaders.models.Resource;
@@ -253,7 +254,6 @@ public final class SpecialHeadersAsyncClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateLro(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createLro' is 'application/merge-patch+json'
         return this.serviceClient.beginCreateLroAsync(name, resource, requestOptions);
     }
 
@@ -583,6 +583,27 @@ public final class SpecialHeadersAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+    }
+
+    /**
+     * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<PollOperationDetails, Resource> beginCreateLro(String name, Resource resource) {
+        // Generated convenience method for beginCreateLroWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.beginCreateLroWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
     }
 
     /**
