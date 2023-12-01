@@ -1,7 +1,6 @@
 $RepoRoot = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
 
-function Invoke-LoggedCommand($Command, $ExecutePath)
-{
+function Invoke-LoggedCommand($Command, $ExecutePath) {
   $startTime = Get-Date
 
   Push-Location $ExecutePath
@@ -18,8 +17,7 @@ function Invoke-LoggedCommand($Command, $ExecutePath)
 
     Write-Host "------------------------------------------------------------"
 
-    if($LastExitCode -ne 0)
-    {
+    if ($LastExitCode -ne 0) {
       Write-Host "##[error]Command failed: $command"
     }
     else {
@@ -29,7 +27,7 @@ function Invoke-LoggedCommand($Command, $ExecutePath)
     Write-Host "Exit code $LastExitCode, Duration: $($Duration.TotalSeconds.ToString("f3"))s"
     Write-Host "------------------------------------------------------------`n"
 
-    if($LastExitCode) {
+    if ($LastExitCode) {
       exit $LastExitCode
     }
   }
@@ -38,17 +36,16 @@ function Invoke-LoggedCommand($Command, $ExecutePath)
   }
 }
 
-function Set-ConsoleEncoding
-{
-    [CmdletBinding()]
-    param
-    (
-        [string] $Encoding = 'utf-8'
-    )
+function Set-ConsoleEncoding {
+  [CmdletBinding()]
+  param
+  (
+    [string] $Encoding = 'utf-8'
+  )
 
-    $outputEncoding = [System.Text.Encoding]::GetEncoding($Encoding)
-    [Console]::OutputEncoding = $outputEncoding
-    [Console]::InputEncoding = $outputEncoding
+  $outputEncoding = [System.Text.Encoding]::GetEncoding($Encoding)
+  [Console]::OutputEncoding = $outputEncoding
+  [Console]::InputEncoding = $outputEncoding
 }
 
 Set-Alias -Name invoke -Value Invoke-LoggedCommand
