@@ -26,13 +26,9 @@ model Resource {
   name: string;
 
   description?: string;
-
   map: Record<A>;
-
   longValue: int64;
-
   intValue: int32;
-
   enumValue?: "a" | "b" | "c";
 
   @projectedName("json", "wireNameForA")
@@ -84,12 +80,11 @@ model GoblinShark extends Shark {
 
 @route("/patch")
 interface Patch {
-
   @patch
   @route("/resource")
-  op createOrUpdateResource is ResourceOperations.ResourceCreateOrUpdate<Resource>;
+  createOrUpdateResource is ResourceOperations.ResourceCreateOrUpdate<Resource>;
 
   @patch
   @route("/fish")
-  op createOrUpdateFish is ResourceOperations.ResourceCreateOrUpdate<Fish>;
+  createOrUpdateFish is ResourceOperations.ResourceCreateOrUpdate<Fish>;
 }
