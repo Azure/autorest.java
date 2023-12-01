@@ -29,13 +29,13 @@
             <version>1.6.0</version>
             <executions>
               <execution>
-                <id>prepare-tests</id>
+                <id>initialize-tests</id>
                 <phase>generate-sources</phase>
                 <goals>
                   <goal>exec</goal>
                 </goals>
                 <configuration>
-                  <executable>${basedir}/prepare-tests.bat</executable>
+                  <executable>${basedir}/Initialize-Tests.ps1</executable>
                 </configuration>
               </execution>
             </executions>

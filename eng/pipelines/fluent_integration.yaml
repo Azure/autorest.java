@@ -22,8 +22,8 @@ jobs:
 - job: 'Build'
   timeoutInMinutes: 60
   pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: windows-2022
+    name: "azsdk-pool-mms-ubuntu-2004-general"
+    vmImage: "MMSUbuntu20.04"
 
   variables:
     - template: /eng/pipelines/variables/globals.yml
