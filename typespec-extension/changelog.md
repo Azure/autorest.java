@@ -1,5 +1,16 @@
 # Release History
 
+## 0.11.3 (2023-12-01)
+
+Compatible with compiler 0.50.
+
+- Supported `crossLanguageDefinitionId`.
+- Operation referred in `@pollingOperation` is no longer skipped.
+
+## 0.11.2 (2023-11-16)
+
+Compatible with compiler 0.50.
+
 ## 0.11.1 (2023-11-14)
 
 Compatible with compiler 0.50.
