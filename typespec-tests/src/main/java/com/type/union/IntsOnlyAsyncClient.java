@@ -127,7 +127,7 @@ public final class IntsOnlyAsyncClient {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        requestObj.put("prop", (prop == null ? null : prop.toLong()));
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }
