@@ -335,7 +335,7 @@ public class ProxyMethod {
     }
 
     private ProxyMethodParameter mapToSyncParam(ProxyMethodParameter param) {
-        return param.toNewBuilder()
+        return param.newBuilder()
             .clientType(mapToSyncType(param.getClientType()))
             .rawType(mapToSyncType(param.getRawType()))
             .wireType(mapToSyncType(param.getWireType()))

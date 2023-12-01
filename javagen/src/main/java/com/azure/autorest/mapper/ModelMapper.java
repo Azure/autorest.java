@@ -420,7 +420,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()
             .map(SchemaUtil.getDiscriminatorProperty(compositeType));
 
-        return discriminatorProperty.toNewBuilder()
+        return discriminatorProperty.newBuilder()
             .annotationArguments(annotationArgumentsMapper.apply(discriminatorProperty.getAnnotationArguments()))
             .serializedName(serializedName)
             .defaultValue(discriminatorProperty.getClientType().defaultValueExpression(compositeType.getDiscriminatorValue()))
@@ -588,13 +588,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (property.getWireType() == ArrayType.BYTE_ARRAY) {
                 // replace byte[] with BinaryData
                 iterator.remove();
-                iterator.add(property.toNewBuilder()
+                iterator.add(property.newBuilder()
                         .wireType(ClassType.BINARY_DATA)
                         .clientType(ClassType.BINARY_DATA)
                         .build());
 
                 // add (optional) filename property
-                iterator.add(property.toNewBuilder()
+                iterator.add(property.newBuilder()
                         .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
                         .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
                         .description("The filename for " + property.getName())

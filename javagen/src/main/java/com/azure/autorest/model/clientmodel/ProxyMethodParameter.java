@@ -199,26 +199,8 @@ public class ProxyMethodParameter extends MethodParameter {
      *
      * @return A new builder instance initialized with properties values of this instance.
      */
-    public ProxyMethodParameter.Builder toNewBuilder() {
-        return new ProxyMethodParameter.Builder()
-            .clientType(this.getClientType())
-            .alreadyEncoded(this.getAlreadyEncoded())
-            .collectionFormat(this.getCollectionFormat())
-            .defaultValue(this.getDefaultValue())
-            .description(this.getDescription())
-            .explode(this.getExplode())
-            .fromClient(this.isFromClient())
-            .headerCollectionPrefix(this.getHeaderCollectionPrefix())
-            .constant(this.isConstant())
-            .nullable(this.isNullable())
-            .name(this.getName())
-            .required(this.isRequired())
-            .origin(this.getOrigin())
-            .parameterReference(this.getParameterReference())
-            .rawType(this.getRawType())
-            .requestParameterLocation(this.getRequestParameterLocation())
-            .requestParameterName(this.getRequestParameterName())
-            .wireType(this.getWireType());
+    public ProxyMethodParameter.Builder newBuilder() {
+        return new ProxyMethodParameter.Builder(this);
     }
 
     public static class Builder {
@@ -439,6 +421,33 @@ public class ProxyMethodParameter extends MethodParameter {
         public Builder origin(ParameterSynthesizedOrigin origin) {
             this.origin = origin;
             return this;
+        }
+
+        /**
+         * Creates a new instance of Builder.
+         */
+        public Builder() {
+        }
+
+        private Builder(ProxyMethodParameter parameter) {
+            this.description = parameter.getDescription();
+            this.rawType = parameter.getRawType();
+            this.wireType = parameter.getWireType();
+            this.clientType = parameter.getClientType();
+            this.name = parameter.getName();
+            this.requestParameterLocation = parameter.getRequestParameterLocation();
+            this.requestParameterName = parameter.getRequestParameterName();
+            this.alreadyEncoded = parameter.getAlreadyEncoded();
+            this.isConstant = parameter.isConstant();
+            this.isRequired = parameter.isRequired();
+            this.isNullable = parameter.isNullable();
+            this.fromClient = parameter.isFromClient();
+            this.headerCollectionPrefix = parameter.getHeaderCollectionPrefix();
+            this.parameterReference = parameter.getParameterReference();
+            this.defaultValue = parameter.getDescription();
+            this.collectionFormat = parameter.getCollectionFormat();
+            this.explode = parameter.getExplode();
+            this.origin = parameter.getOrigin();
         }
 
         public ProxyMethodParameter build() {

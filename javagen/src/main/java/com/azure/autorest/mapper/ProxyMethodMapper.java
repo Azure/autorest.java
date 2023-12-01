@@ -249,7 +249,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 int i = parameters.indexOf(fluxByteBufferParam);
                 proxyMethodParameters.remove(i);
 
-                ProxyMethodParameter binaryDataParam = fluxByteBufferParam.toNewBuilder()
+                ProxyMethodParameter binaryDataParam = fluxByteBufferParam.newBuilder()
                         .wireType(ClassType.BINARY_DATA)
                         .rawType(ClassType.BINARY_DATA)
                         .clientType(ClassType.BINARY_DATA)
