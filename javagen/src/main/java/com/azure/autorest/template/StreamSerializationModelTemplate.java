@@ -306,10 +306,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         if (isJsonMergePatch) {
-            if (property.getClientType().isNullable()) {
-                methodBlock.ifBlock(String.format("%s !=null", property.getName()), codeBlock -> {
+            if (!property.isReadOnly() && property.getClientType().isNullable()) { // if it's readonly, then there is not setter, no need to serialize for null patch
+                // reuse getter logic
+                methodBlock.ifBlock(String.format("%s !=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
                     serializeJsonProperty(codeBlock, property, serializedName,
-                            false, isJsonMergePatch);
+                            fromSuperType, isJsonMergePatch);
                 }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
                     codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
                 });
@@ -341,16 +342,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                                               String serializedName, boolean fromSuperType, boolean isJsonMergePatch) {
         IType clientType = property.getClientType();
         IType wireType = property.getWireType();
-        String propertyValueGetter;
-        if (fromSuperType) {
-            propertyValueGetter = (clientType != wireType)
-                ? wireType.convertFromClientType(property.getGetterName() + "()")
-                : property.getGetterName() + "()";
-        } else if (property.isPolymorphicDiscriminator()) {
-            propertyValueGetter = property.getDefaultValue();
-        } else {
-            propertyValueGetter = "this." + property.getName();
-        }
+        String propertyValueGetter = getPropertyGetterStatement(property, fromSuperType);
 
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
@@ -361,8 +353,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
             methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
         } else if (fieldSerializationMethod != null) {
-            if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-                methodBlock.line(serializedName + ".serializeAsJsonMergePatch(true);");
+            if (isJsonMergePatch) {
+                if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
+                    methodBlock.line(propertyValueGetter + ".serializeAsJsonMergePatch(true);");
+                }
             }
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -396,6 +390,29 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // TODO (alzimmer): Resolve this as deserialization logic generation needs to handle all cases.
             throw new RuntimeException("Unknown wire type " + wireType + " in serialization. Need to add support for it.");
         }
+    }
+
+    /**
+     * Helper function to get property getter statement.
+     * If the value is from super type, then we will return "getProperty()", otherwise, return "this.property"
+     * @param property
+     * @param fromSuperType
+     * @return
+     */
+    private static String getPropertyGetterStatement(ClientModelProperty property, boolean fromSuperType) {
+        IType clientType = property.getClientType();
+        IType wireType = property.getWireType();
+        String propertyValueGetter;
+        if (fromSuperType) {
+            propertyValueGetter = (clientType != wireType)
+                    ? wireType.convertFromClientType(property.getGetterName() + "()")
+                    : property.getGetterName() + "()";
+        } else if (property.isPolymorphicDiscriminator()) {
+            propertyValueGetter = property.getDefaultValue();
+        } else {
+            propertyValueGetter = "this." + property.getName();
+        }
+        return propertyValueGetter;
     }
 
     /**
@@ -441,8 +458,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             } else if (valueSerializationMethod != null) {
                 if (isJsonMergePatch && elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
                     methodBlock.block("", codeBlock -> {
-                        codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
-                        codeBlock.line(valueSerializationMethod + ";");
+                        codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
+                            codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                            ifBlock.line(valueSerializationMethod + ";");
+                        }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNullField(\"" + serializedName + "\");")
+                        );
                     });
                 } else {
                     methodBlock.line(valueSerializationMethod);

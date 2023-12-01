@@ -32,7 +32,7 @@ model Resource {
   enumValue?: "a" | "b" | "c";
 
   @projectedName("json", "wireNameForA")
-  a: A;
+  a?: A;
 }
 
 model A {
@@ -51,6 +51,8 @@ model Fish {
   name: string;
 
   age: int32;
+
+  color?: string;
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
