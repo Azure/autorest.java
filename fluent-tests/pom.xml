@@ -29,19 +29,13 @@
             <version>3.1.0</version>
             <executions>
               <execution>
-                <id>initialize-tests</id>
+                <id>prepare-tests</id>
                 <phase>generate-sources</phase>
                 <goals>
                   <goal>exec</goal>
                 </goals>
                 <configuration>
-                  <executable>powershell</executable>
-                  <arguments>
-                    <argument>-InputFormat</argument>
-                    <argument>None</argument>
-                    <argument>-File</argument>
-                    <argument>${basedir}/Initialize-Tests.ps1</argument>
-                  </arguments>
+                  <executable>${basedir}/prepare-tests.bat</executable>
                 </configuration>
               </execution>
             </executions>
