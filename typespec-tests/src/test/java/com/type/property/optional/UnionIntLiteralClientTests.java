@@ -9,23 +9,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class UnionIntLiteralClientTests {
-    UnionIntLiteralClient client = new OptionalClientBuilder().buildUnionIntLiteralClient();
+public class UnionIntLiteralClientTests {
+    private final UnionIntLiteralClient client = new OptionalClientBuilder().buildUnionIntLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         UnionIntLiteralProperty unionIntLiteralProperty = client.getAll();
         Assertions.assertEquals(UnionIntLiteralPropertyProperty.TWO, unionIntLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         UnionIntLiteralProperty unionIntLiteralProperty = client.getDefault();
         Assertions.assertNull(unionIntLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         UnionIntLiteralProperty unionIntLiteralProperty = new UnionIntLiteralProperty();
         unionIntLiteralProperty.setProperty(UnionIntLiteralPropertyProperty.TWO);
         client.putAll(unionIntLiteralProperty);
@@ -33,7 +33,7 @@ class UnionIntLiteralClientTests {
 
     @Test
     @Disabled("NullPointer Cannot invoke \"java.lang.Long.longValue()\"")
-    void putDefault() {
+    public void putDefault() {
         UnionIntLiteralProperty unionIntLiteralProperty = new UnionIntLiteralProperty();
         client.putDefault(unionIntLiteralProperty);
     }

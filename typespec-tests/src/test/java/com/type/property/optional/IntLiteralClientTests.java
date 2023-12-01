@@ -9,23 +9,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class IntLiteralClientTests {
-    IntLiteralClient client = new OptionalClientBuilder().buildIntLiteralClient();
+public class IntLiteralClientTests {
+    private final IntLiteralClient client = new OptionalClientBuilder().buildIntLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         IntLiteralProperty intLiteralProperty = client.getAll();
         Assertions.assertEquals(IntLiteralProperty1.ONE, intLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         IntLiteralProperty intLiteralProperty = client.getDefault();
         Assertions.assertNull(intLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         IntLiteralProperty intLiteralProperty = new IntLiteralProperty();
         intLiteralProperty.setProperty(IntLiteralProperty1.ONE);
         client.putAll(intLiteralProperty);
@@ -33,7 +33,7 @@ class IntLiteralClientTests {
 
     @Test
     @Disabled("NullPointer Cannot invoke \"java.lang.Long.longValue()\"")
-    void putDefault() {
+    public void putDefault() {
         IntLiteralProperty intLiteralProperty = new IntLiteralProperty();
         client.putDefault(intLiteralProperty);
     }

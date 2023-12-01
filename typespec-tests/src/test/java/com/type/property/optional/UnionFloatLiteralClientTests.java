@@ -9,23 +9,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class UnionFloatLiteralClientTests {
-    UnionFloatLiteralClient client = new OptionalClientBuilder().buildUnionFloatLiteralClient();
+public class UnionFloatLiteralClientTests {
+    private final UnionFloatLiteralClient client = new OptionalClientBuilder().buildUnionFloatLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         UnionFloatLiteralProperty unionFloatLiteralProperty = client.getAll();
         Assertions.assertEquals(UnionFloatLiteralPropertyProperty.TWO3, unionFloatLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         UnionFloatLiteralProperty unionFloatLiteralProperty = client.getDefault();
         Assertions.assertNull(unionFloatLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         UnionFloatLiteralProperty unionFloatLiteralProperty = new UnionFloatLiteralProperty();
         unionFloatLiteralProperty.setProperty(UnionFloatLiteralPropertyProperty.TWO3);
         client.putAll(unionFloatLiteralProperty);
@@ -33,7 +33,7 @@ class UnionFloatLiteralClientTests {
 
     @Test
     @Disabled("NullPointer Cannot invoke \"java.lang.Double.doubleValue()\"")
-    void putDefault() {
+    public void putDefault() {
         UnionFloatLiteralProperty unionFloatLiteralProperty = new UnionFloatLiteralProperty();
         client.putDefault(unionFloatLiteralProperty);
     }

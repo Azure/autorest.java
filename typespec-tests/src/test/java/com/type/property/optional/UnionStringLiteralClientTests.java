@@ -8,30 +8,30 @@ import com.type.property.optional.models.UnionStringLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class UnionStringLiteralClientTests {
-    UnionStringLiteralClient client = new OptionalClientBuilder().buildUnionStringLiteralClient();
+public class UnionStringLiteralClientTests {
+    private final UnionStringLiteralClient client = new OptionalClientBuilder().buildUnionStringLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         UnionStringLiteralProperty unionStringLiteralProperty = client.getAll();
         Assertions.assertEquals(UnionStringLiteralPropertyProperty.WORLD, unionStringLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         UnionStringLiteralProperty unionStringLiteralProperty = client.getDefault();
         Assertions.assertNull(unionStringLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         UnionStringLiteralProperty unionStringLiteralProperty = new UnionStringLiteralProperty();
         unionStringLiteralProperty.setProperty(UnionStringLiteralPropertyProperty.WORLD);
         client.putAll(unionStringLiteralProperty);
     }
 
     @Test
-    void putDefault() {
+    public void putDefault() {
         UnionStringLiteralProperty unionStringLiteralProperty = new UnionStringLiteralProperty();
         client.putDefault(unionStringLiteralProperty);
     }

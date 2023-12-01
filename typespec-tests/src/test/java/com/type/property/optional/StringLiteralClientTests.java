@@ -8,30 +8,30 @@ import com.type.property.optional.models.StringLiteralProperty1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class StringLiteralClientTests {
-    StringLiteralClient client = new OptionalClientBuilder().buildStringLiteralClient();
+public class StringLiteralClientTests {
+    private final StringLiteralClient client = new OptionalClientBuilder().buildStringLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         StringLiteralProperty stringLiteralProperty = client.getAll();
         Assertions.assertEquals(StringLiteralProperty1.HELLO, stringLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         StringLiteralProperty stringLiteralProperty = client.getDefault();
         Assertions.assertNull(stringLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         StringLiteralProperty stringLiteralProperty = new StringLiteralProperty();
         stringLiteralProperty.setProperty(StringLiteralProperty1.HELLO);
         client.putAll(stringLiteralProperty);
     }
 
     @Test
-    void putDefault() {
+    public void putDefault() {
         StringLiteralProperty stringLiteralProperty = new StringLiteralProperty();
         client.putDefault(stringLiteralProperty);
     }

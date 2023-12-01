@@ -9,23 +9,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class FloatLiteralClientTests {
-    FloatLiteralClient client = new OptionalClientBuilder().buildFloatLiteralClient();
+public class FloatLiteralClientTests {
+    private final FloatLiteralClient client = new OptionalClientBuilder().buildFloatLiteralClient();
 
     @Test
-    void getAll() {
+    public void getAll() {
         FloatLiteralProperty floatLiteralProperty = client.getAll();
         Assertions.assertEquals(FloatLiteralProperty1.ONE_TWO, floatLiteralProperty.getProperty());
     }
 
     @Test
-    void getDefault() {
+    public void getDefault() {
         FloatLiteralProperty floatLiteralProperty = client.getDefault();
         Assertions.assertNull(floatLiteralProperty.getProperty());
     }
 
     @Test
-    void putAll() {
+    public void putAll() {
         FloatLiteralProperty floatLiteralProperty = new FloatLiteralProperty();
         floatLiteralProperty.setProperty(FloatLiteralProperty1.ONE_TWO);
         client.putAll(floatLiteralProperty);
@@ -33,7 +33,7 @@ class FloatLiteralClientTests {
 
     @Test
     @Disabled("NullPointer Cannot invoke \"java.lang.Double.doubleValue()\"")
-    void putDefault() {
+    public void putDefault() {
         FloatLiteralProperty floatLiteralProperty = new FloatLiteralProperty();
         client.putDefault(floatLiteralProperty);
     }
