@@ -46,7 +46,7 @@ public final class UnionFloatLiteralProperty implements JsonSerializable<UnionFl
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeDoubleField("property", this.property == null ? null : this.property.toDouble());
+        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toDouble());
         return jsonWriter.writeEndObject();
     }
 

@@ -184,7 +184,7 @@ public class EnumType implements IType {
     @Override
     public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
         String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
-        return elementType.jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter);
+        return elementType.asNullable().jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter);
     }
 
     @Override
