@@ -260,6 +260,7 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
 
             SETTINGS_MAP.put("sync-methods", "sync-only");
+            SETTINGS_MAP.put("stream-style-serialization", true);
             SETTINGS_MAP.put("generate-samples", false);
             SETTINGS_MAP.put("generate-tests", false);
         }
