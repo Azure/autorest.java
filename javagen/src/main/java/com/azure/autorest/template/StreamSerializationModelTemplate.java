@@ -206,8 +206,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeStartObject();");
 
             // If the model has a discriminator property serialize it first.
+            // Unless the polymorphic discriminator is also a property on the model, in which case it'll be handled
+            // later.
             if (propertiesManager.getDiscriminatorProperty() != null
-                && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())) {
+                && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())
+                && !propertiesManager.isDiscriminatorRequired()) {
                 ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
                 serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(),
                         false, true);

@@ -230,27 +230,32 @@ New-Item ./protocol-tests/src/main/java/fixtures/headexceptions/models -ItemType
 Copy-Item -Path ./protocol-tests/swagger/CustomizedException.java -Destination ./protocol-tests/src/main/java/fixtures/headexceptions/models/CustomizedException.java -Force | Out-Null
 Remove-Item ./protocol-tests/src/main/java/module-info.java -Force | Out-Null
 
+# Prepare for jobs that require file/folder deletion
 # Protocol resilience
 Remove-Item ./protocol-resilience-test/llcinitial/src/main -Recurse -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main -Recurse -Force | Out-Null
 
-singleThreadGenerate("$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial")
-singleThreadGenerate("$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1")
+# customization
+Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
 
+$job = @(
+    "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-initial.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcinitial",
+    "$PROTOCOL_RESILIENCE_ARGUMENTS --input-file=$SWAGGER_PATH/dpg-update1.json --namespace=fixtures.llcresi --output-folder=protocol-resilience-test/llcupdate1",
+    "--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger",
+    "--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md",
+    "--use:. docs/samples/specification/azure_key_credential/readme.md",
+    "--use:. docs/samples/specification/basic/readme.md",
+    "--use:. docs/samples/specification/management/readme.md"
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+
+$job | Wait-Job -Timeout 240
+$job | Receive-Job
+
+# Cleanup for jobs that require file/folder deletion
 Remove-Item ./protocol-resilience-test/llcinitial/src/main/java/module-info.java -Force | Out-Null
 Remove-Item ./protocol-resilience-test/llcupdate1/src/main/java/module-info.java -Force | Out-Null
 
-# customization
-Remove-Item ./customization-tests/src -Recurse -Force | Out-Null
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. customization-tests/swagger")
-
 # partial update tests
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION --use:. partial-update-tests/existing/swagger/README.md")
 Remove-Item ./partial-update-tests/generated/src/main/java/module-info.java -Force | Out-Null
-
-# docs
-singleThreadGenerate("--use:. docs/samples/specification/azure_key_credential/readme.md")
-singleThreadGenerate("--use:. docs/samples/specification/basic/readme.md")
-singleThreadGenerate("--use:. docs/samples/specification/management/readme.md")
 
 exit $ExitCode
