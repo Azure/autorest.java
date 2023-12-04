@@ -4,16 +4,10 @@
 
 package com.cadl.naming.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for RequestType.
  */
-public enum RequestType implements JsonSerializable<RequestType> {
+public enum RequestType {
     /**
      * Enum value Type1.
      */
@@ -58,25 +52,5 @@ public enum RequestType implements JsonSerializable<RequestType> {
     @Override
     public String toString() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(value);
-    }
-
-    /**
-     * Reads a RequestType from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The RequestType that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a RequestType fails to be read from the JsonReader.
-     */
-    @Generated
-    public static RequestType fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString());
     }
 }

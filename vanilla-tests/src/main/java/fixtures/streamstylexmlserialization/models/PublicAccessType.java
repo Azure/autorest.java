@@ -5,17 +5,12 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for PublicAccessType.
  */
-public final class PublicAccessType extends ExpandableStringEnum<PublicAccessType>
-    implements JsonSerializable<PublicAccessType> {
+public final class PublicAccessType extends ExpandableStringEnum<PublicAccessType> {
     /**
      * Static value container for PublicAccessType.
      */
@@ -52,23 +47,5 @@ public final class PublicAccessType extends ExpandableStringEnum<PublicAccessTyp
      */
     public static Collection<PublicAccessType> values() {
         return values(PublicAccessType.class);
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a PublicAccessType from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The PublicAccessType that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a PublicAccessType fails to be read from the JsonReader.
-     */
-    public static PublicAccessType fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), PublicAccessType.class);
     }
 }

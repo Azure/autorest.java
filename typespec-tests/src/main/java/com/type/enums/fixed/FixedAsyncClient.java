@@ -142,7 +142,8 @@ public final class FixedAsyncClient {
     public Mono<Void> putKnownValue(DaysOfWeekEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+        return putKnownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -162,6 +163,7 @@ public final class FixedAsyncClient {
     public Mono<Void> putUnknownValue(DaysOfWeekEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+        return putUnknownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 }
