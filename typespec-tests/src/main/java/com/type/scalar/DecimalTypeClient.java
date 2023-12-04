@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.scalar.implementation.DecimalTypesImpl;
+import java.math.BigDecimal;
 
 /**
  * Initializes a new instance of the synchronous ScalarClient type.
@@ -41,7 +42,7 @@ public final class DecimalTypeClient {
      * <strong>Response Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -63,7 +64,7 @@ public final class DecimalTypeClient {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -95,7 +96,7 @@ public final class DecimalTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> requestParameterWithResponse(double value, RequestOptions requestOptions) {
+    public Response<Void> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {
         return this.serviceClient.requestParameterWithResponse(value, requestOptions);
     }
 
@@ -111,10 +112,10 @@ public final class DecimalTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public double responseBody() {
+    public BigDecimal responseBody() {
         // Generated convenience method for responseBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return responseBodyWithResponse(requestOptions).getValue().toObject(Double.class);
+        return responseBodyWithResponse(requestOptions).getValue().toObject(BigDecimal.class);
     }
 
     /**
@@ -131,7 +132,7 @@ public final class DecimalTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void requestBody(double body) {
+    public void requestBody(BigDecimal body) {
         // Generated convenience method for requestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestBodyWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
@@ -151,7 +152,7 @@ public final class DecimalTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void requestParameter(double value) {
+    public void requestParameter(BigDecimal value) {
         // Generated convenience method for requestParameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requestParameterWithResponse(value, requestOptions).getValue();
