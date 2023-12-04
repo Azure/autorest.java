@@ -30,7 +30,6 @@ public final class GoblinShark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("sharktype", "goblin");
         jsonWriter.writeIntField("age", getAge());
         jsonWriter.writeStringField("sharktype", getSharktype());
         return jsonWriter.writeEndObject();
