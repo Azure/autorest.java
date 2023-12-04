@@ -6,7 +6,6 @@ package com.type.property.optional;
 import com.type.property.optional.models.UnionFloatLiteralProperty;
 import com.type.property.optional.models.UnionFloatLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class UnionFloatLiteralClientTests {
@@ -32,7 +31,6 @@ public class UnionFloatLiteralClientTests {
     }
 
     @Test
-    @Disabled("NullPointer Cannot invoke \"java.lang.Double.doubleValue()\"")
     public void putDefault() {
         UnionFloatLiteralProperty unionFloatLiteralProperty = new UnionFloatLiteralProperty();
         client.putDefault(unionFloatLiteralProperty);

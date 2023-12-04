@@ -46,7 +46,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("prop", this.prop == null ? null : this.prop.toLong());
+        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toLong());
         return jsonWriter.writeEndObject();
     }
 

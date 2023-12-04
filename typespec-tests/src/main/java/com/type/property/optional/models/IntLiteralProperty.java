@@ -55,7 +55,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("property", this.property == null ? null : this.property.toLong());
+        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toLong());
         return jsonWriter.writeEndObject();
     }
 

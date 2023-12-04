@@ -17,7 +17,6 @@ org.junit.jupiter:junit-jupiter-api
 org.junit.jupiter:junit-jupiter-engine
 org.junit.jupiter:junit-jupiter-params
 io.projectreactor:reactor-test
-ch.qos.logback:logback-classic
 
 org.apache.maven.plugins:maven-antrun-plugin
 org.apache.maven.plugins:maven-assembly-plugin
@@ -40,6 +39,7 @@ org.apache.maven.plugins:maven-shade-plugin
 org.apache.maven.plugins:maven-site-plugin
 org.apache.maven.plugins:maven-source-plugin
 org.apache.maven.plugins:maven-surefire-plugin
+org.codehaus.mojo:exec-maven-plugin
 
 org.mockito:mockito-core;4.11.0
 
