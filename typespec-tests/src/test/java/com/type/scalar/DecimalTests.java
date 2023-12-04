@@ -8,22 +8,28 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 public class DecimalTests {
 
-    public static class DecimalProperty implements JsonSerializable<DecimalProperty> {
+    public interface Getter {
+        BigDecimal getProperty();
+    }
+
+    public static class DecimalStream implements JsonSerializable<DecimalStream>, Getter {
         private BigDecimal property;
 
         public BigDecimal getProperty() {
             return property;
         }
 
-        public DecimalProperty setProperty(BigDecimal property) {
+        public DecimalStream setProperty(BigDecimal property) {
             this.property = property;
             return this;
         }
@@ -35,9 +41,9 @@ public class DecimalTests {
             return jsonWriter.writeEndObject();
         }
 
-        public static DecimalProperty fromJson(JsonReader jsonReader) throws IOException {
+        public static DecimalStream fromJson(JsonReader jsonReader) throws IOException {
             return jsonReader.readObject(reader -> {
-                DecimalProperty decimalProperty = new DecimalProperty();
+                DecimalStream decimalProperty = new DecimalStream();
                 while (reader.nextToken() != JsonToken.END_OBJECT) {
                     String fieldName = reader.getFieldName();
                     reader.nextToken();
@@ -54,12 +60,27 @@ public class DecimalTests {
         }
     }
 
-    @Test
-    public void testBigDecimal() {
+    public static class DecimalJackson implements Getter {
+        @JsonProperty("property")
+        private BigDecimal property;
+
+        @Override
+        public BigDecimal getProperty() {
+            return property;
+        }
+
+        public void setProperty(BigDecimal property) {
+            this.property = property;
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(classes = {DecimalStream.class, DecimalJackson.class})
+    public <T extends Getter> void testBigDecimal(Class<T> clazz) {
         // precision larger than double
         BigDecimal value = new BigDecimal("12345678901234567890.1234567890");
-        String json = BinaryData.fromObject(new DecimalProperty().setProperty(value)).toString();
-        DecimalProperty test = BinaryData.fromString(json).toObject(DecimalProperty.class);
+        String json = BinaryData.fromObject(new DecimalStream().setProperty(value)).toString();
+        var test = BinaryData.fromString(json).toObject(clazz);
         Assertions.assertEquals(value, test.getProperty());
 
         // make sure precision difference would cause NotEquals
@@ -67,13 +88,13 @@ public class DecimalTests {
 
         // scientific
         value = new BigDecimal("1.2345678901234567890E23");
-        json = BinaryData.fromObject(new DecimalProperty().setProperty(value)).toString();
-        test = BinaryData.fromString(json).toObject(DecimalProperty.class);
+        json = BinaryData.fromObject(new DecimalStream().setProperty(value)).toString();
+        test = BinaryData.fromString(json).toObject(clazz);
         Assertions.assertEquals(value, test.getProperty());
 
         value = new BigDecimal("-1.2345678901234567890e-105");
-        json = BinaryData.fromObject(new DecimalProperty().setProperty(value)).toString();
-        test = BinaryData.fromString(json).toObject(DecimalProperty.class);
+        json = BinaryData.fromObject(new DecimalStream().setProperty(value)).toString();
+        test = BinaryData.fromString(json).toObject(clazz);
         Assertions.assertEquals(value, test.getProperty());
     }
 }
