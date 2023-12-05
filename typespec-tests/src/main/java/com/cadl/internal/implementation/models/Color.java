@@ -4,16 +4,10 @@
 
 package com.cadl.internal.implementation.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for Color.
  */
-public enum Color implements JsonSerializable<Color> {
+public enum Color {
     /**
      * Enum value Red.
      */
@@ -63,25 +57,5 @@ public enum Color implements JsonSerializable<Color> {
     @Override
     public String toString() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(value);
-    }
-
-    /**
-     * Reads a Color from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Color that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Color fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Color fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString());
     }
 }

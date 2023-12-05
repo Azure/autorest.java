@@ -127,7 +127,7 @@ public final class StringsOnlyAsyncClient {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        requestObj.put("prop", (prop == null ? null : prop.toString()));
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

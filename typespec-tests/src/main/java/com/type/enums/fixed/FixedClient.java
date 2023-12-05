@@ -138,7 +138,8 @@ public final class FixedClient {
     public void putKnownValue(DaysOfWeekEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putKnownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 
     /**
@@ -157,6 +158,7 @@ public final class FixedClient {
     public void putUnknownValue(DaysOfWeekEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putUnknownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 }

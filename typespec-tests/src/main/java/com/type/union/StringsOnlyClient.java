@@ -123,7 +123,7 @@ public final class StringsOnlyClient {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        requestObj.put("prop", (prop == null ? null : prop.toString()));
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

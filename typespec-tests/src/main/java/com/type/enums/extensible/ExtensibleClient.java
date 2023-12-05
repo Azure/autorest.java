@@ -180,7 +180,8 @@ public final class ExtensibleClient {
     public void putKnownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putKnownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 
     /**
@@ -199,6 +200,7 @@ public final class ExtensibleClient {
     public void putUnknownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putUnknownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 }

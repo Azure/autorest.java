@@ -169,8 +169,6 @@ public class GenericType implements IType {
     public boolean equals(Object rhs) {
         boolean tempVar = rhs instanceof GenericType;
         GenericType genericTypeRhs = tempVar ? (GenericType) rhs : null;
-//C# TO JAVA CONVERTER WARNING: Java Arrays.equals is not always identical to LINQ 'SequenceEqual':
-//ORIGINAL LINE: return rhs is GenericType genericTypeRhs && Package == genericTypeRhs.Package && Name == genericTypeRhs.Name && TypeArguments.SequenceEqual(genericTypeRhs.TypeArguments);
         return tempVar && getPackage().equals(genericTypeRhs.packageName) && getName().equals(genericTypeRhs.name) && Arrays.equals(getTypeArguments(), genericTypeRhs.typeArguments);
     }
 

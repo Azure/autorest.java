@@ -4,16 +4,10 @@
 
 package com.type.union.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for Prop3.
  */
-public enum Prop3 implements JsonSerializable<Prop3> {
+public enum Prop3 {
     /**
      * Enum value 1.1.
      */
@@ -61,25 +55,5 @@ public enum Prop3 implements JsonSerializable<Prop3> {
      */
     public double toDouble() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeDouble(value);
-    }
-
-    /**
-     * Reads a Prop3 from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Prop3 that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Prop3 fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Prop3 fromJson(JsonReader jsonReader) throws IOException {
-        return fromDouble(jsonReader.getDouble());
     }
 }

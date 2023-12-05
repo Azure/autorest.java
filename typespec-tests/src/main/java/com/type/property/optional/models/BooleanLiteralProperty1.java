@@ -4,16 +4,10 @@
 
 package com.type.property.optional.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for BooleanLiteralProperty1.
  */
-public enum BooleanLiteralProperty1 implements JsonSerializable<BooleanLiteralProperty1> {
+public enum BooleanLiteralProperty1 {
     /**
      * Enum value true.
      */
@@ -51,25 +45,5 @@ public enum BooleanLiteralProperty1 implements JsonSerializable<BooleanLiteralPr
      */
     public boolean toBoolean() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeBoolean(value);
-    }
-
-    /**
-     * Reads a BooleanLiteralProperty1 from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.BOOLEAN value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The BooleanLiteralProperty1 that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a BooleanLiteralProperty1 fails to be read from the JsonReader.
-     */
-    @Generated
-    public static BooleanLiteralProperty1 fromJson(JsonReader jsonReader) throws IOException {
-        return fromBoolean(jsonReader.getBoolean());
     }
 }
