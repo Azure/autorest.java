@@ -4,16 +4,10 @@
 
 package com.type.property.valuetypes.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for UnionIntLiteralPropertyProperty.
  */
-public enum UnionIntLiteralPropertyProperty implements JsonSerializable<UnionIntLiteralPropertyProperty> {
+public enum UnionIntLiteralPropertyProperty {
     /**
      * Enum value 42.
      */
@@ -56,25 +50,5 @@ public enum UnionIntLiteralPropertyProperty implements JsonSerializable<UnionInt
      */
     public long toLong() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeLong(value);
-    }
-
-    /**
-     * Reads a UnionIntLiteralPropertyProperty from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The UnionIntLiteralPropertyProperty that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a UnionIntLiteralPropertyProperty fails to be read from the JsonReader.
-     */
-    @Generated
-    public static UnionIntLiteralPropertyProperty fromJson(JsonReader jsonReader) throws IOException {
-        return fromLong(jsonReader.getLong());
     }
 }

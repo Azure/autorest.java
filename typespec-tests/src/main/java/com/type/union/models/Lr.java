@@ -6,16 +6,12 @@ package com.type.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for Lr.
  */
-public final class Lr extends ExpandableStringEnum<Lr> implements JsonSerializable<Lr> {
+public final class Lr extends ExpandableStringEnum<Lr> {
     /**
      * Static value left for Lr.
      */
@@ -57,25 +53,5 @@ public final class Lr extends ExpandableStringEnum<Lr> implements JsonSerializab
     @Generated
     public static Collection<Lr> values() {
         return values(Lr.class);
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a Lr from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Lr that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Lr fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Lr fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), Lr.class);
     }
 }

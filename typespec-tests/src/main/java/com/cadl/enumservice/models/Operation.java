@@ -199,14 +199,14 @@ public final class Operation implements JsonSerializable<Operation> {
         jsonWriter.writeStringField("name", this.name == null ? null : this.name.toString());
         jsonWriter.writeBooleanField("best", this.best);
         jsonWriter.writeLongField("age", this.age);
-        jsonWriter.writeLongField("priority", this.priority == null ? null : this.priority.toLong());
+        jsonWriter.writeNumberField("priority", this.priority == null ? null : this.priority.toLong());
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
-        jsonWriter.writeDoubleField("unit", this.unit == null ? null : this.unit.toDouble());
-        jsonWriter.writeLongField("priorityValue", this.priorityValue == null ? null : this.priorityValue.toLong());
+        jsonWriter.writeNumberField("unit", this.unit == null ? null : this.unit.toDouble());
+        jsonWriter.writeNumberField("priorityValue", this.priorityValue == null ? null : this.priorityValue.toLong());
         jsonWriter.writeStringField("colorValue", this.colorValue == null ? null : this.colorValue.toString());
         jsonWriter.writeStringField("colorModelValue",
             this.colorModelValue == null ? null : this.colorModelValue.toString());
-        jsonWriter.writeDoubleField("unitValue", this.unitValue == null ? null : this.unitValue.toDouble());
+        jsonWriter.writeNumberField("unitValue", this.unitValue == null ? null : this.unitValue.toDouble());
         return jsonWriter.writeEndObject();
     }
 

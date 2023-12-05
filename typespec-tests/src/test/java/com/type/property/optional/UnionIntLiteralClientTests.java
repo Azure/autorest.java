@@ -6,7 +6,6 @@ package com.type.property.optional;
 import com.type.property.optional.models.UnionIntLiteralProperty;
 import com.type.property.optional.models.UnionIntLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class UnionIntLiteralClientTests {
@@ -32,7 +31,6 @@ public class UnionIntLiteralClientTests {
     }
 
     @Test
-    @Disabled("NullPointer Cannot invoke \"java.lang.Long.longValue()\"")
     public void putDefault() {
         UnionIntLiteralProperty unionIntLiteralProperty = new UnionIntLiteralProperty();
         client.putDefault(unionIntLiteralProperty);

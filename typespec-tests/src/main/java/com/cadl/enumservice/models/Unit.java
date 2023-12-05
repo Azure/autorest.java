@@ -4,16 +4,10 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for Unit.
  */
-public enum Unit implements JsonSerializable<Unit> {
+public enum Unit {
     /**
      * Enum value 1.
      */
@@ -61,25 +55,5 @@ public enum Unit implements JsonSerializable<Unit> {
      */
     public double toDouble() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeDouble(value);
-    }
-
-    /**
-     * Reads a Unit from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Unit that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Unit fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Unit fromJson(JsonReader jsonReader) throws IOException {
-        return fromDouble(jsonReader.getDouble());
     }
 }

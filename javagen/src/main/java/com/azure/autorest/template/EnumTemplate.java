@@ -17,7 +17,6 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,13 +49,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         imports.add(getStringEnumImport());
         if (!settings.isStreamStyleSerialization()) {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
-        } else {
-            imports.add(IOException.class.getName());
-
-            ClassType.JSON_SERIALIZABLE.addImportsTo(imports, false);
-            ClassType.JSON_WRITER.addImportsTo(imports, false);
-            ClassType.JSON_READER.addImportsTo(imports, false);
-            ClassType.JSON_TOKEN.addImportsTo(imports, false);
         }
 
         addGeneratedImport(imports);
@@ -66,9 +58,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
         String enumName = enumType.getName();
         String declaration = enumName + " extends ExpandableStringEnum<" + enumName + ">";
-        if (settings.isStreamStyleSerialization()) {
-            declaration += " implements JsonSerializable<" + enumName + ">";
-        }
 
         javaFile.publicFinalClass(declaration, classBlock -> {
             IType elementType = enumType.getElementType();
@@ -121,25 +110,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             addGeneratedAnnotation(classBlock);
             classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
                 function -> function.methodReturn("values(" + enumName + ".class)"));
-
-            if (settings.isStreamStyleSerialization()) {
-                addGeneratedAnnotation(classBlock);
-                classBlock.annotation("Override");
-                classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException",
-                    function -> function.methodReturn("jsonWriter.writeString(toString())"));
-
-                classBlock.javadocComment(javadoc -> {
-                    javadoc.description("Reads a " + enumName + " from the JSON stream.");
-                    javadoc.line("<p>");
-                    javadoc.description("The passed JsonReader must be positioned at a JsonToken.STRING value.");
-                    javadoc.param("jsonReader", "The JsonReader being read.");
-                    javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");
-                    javadoc.methodThrows(IOException.class.getName(), "If a " + enumName + " fails to be read from the JsonReader.");
-                });
-                addGeneratedAnnotation(classBlock);
-                classBlock.publicStaticMethod(enumName + " fromJson(JsonReader jsonReader) throws IOException",
-                    function -> function.methodReturn("fromString(jsonReader.getString(), " + enumName + ".class)"));
-            }
         });
     }
 
@@ -148,13 +118,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         if (!settings.isStreamStyleSerialization()) {
             imports.add("com.fasterxml.jackson.annotation.JsonCreator");
             imports.add("com.fasterxml.jackson.annotation.JsonValue");
-        } else {
-            imports.add(IOException.class.getName());
-
-            ClassType.JSON_SERIALIZABLE.addImportsTo(imports, false);
-            ClassType.JSON_WRITER.addImportsTo(imports, false);
-            ClassType.JSON_READER.addImportsTo(imports, false);
-            ClassType.JSON_TOKEN.addImportsTo(imports, false);
         }
 
         addGeneratedImport(imports);
@@ -164,9 +127,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         javaFile.declareImport(imports);
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
         String declaration = enumType.getName();
-        if (settings.isStreamStyleSerialization()) {
-            declaration += " implements JsonSerializable<" + declaration + ">";
-        }
 
         javaFile.publicEnum(declaration, enumBlock -> {
             for (ClientEnumValue value : enumType.getValues()) {
@@ -222,27 +182,6 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             }
             enumBlock.publicMethod(typeName + " " + enumType.getToMethodName() + "()",
                 function -> function.methodReturn("this.value"));
-
-            if (settings.isStreamStyleSerialization()) {
-                String serializationCall = enumType.getElementType().jsonSerializationMethodCall("jsonWriter", null, "value");
-                addGeneratedAnnotation(enumBlock);
-                enumBlock.annotation("Override");
-                enumBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException",
-                    function -> function.methodReturn(serializationCall));
-
-                String deserializationCall = enumType.getElementType().jsonDeserializationMethod("jsonReader");
-                enumBlock.javadocComment(javadoc -> {
-                    javadoc.description("Reads a " + enumName + " from the JSON stream.");
-                    javadoc.line("<p>");
-                    javadoc.description("The passed JsonReader must be positioned at a " + enumType.getElementType().jsonToken() + " value.");
-                    javadoc.param("jsonReader", "The JsonReader being read.");
-                    javadoc.methodReturns("The " + enumName + " that the JSON stream represented, may return null.");
-                    javadoc.methodThrows(IOException.class.getName(), "If a " + enumName + " fails to be read from the JsonReader.");
-                });
-                addGeneratedAnnotation(enumBlock);
-                enumBlock.publicStaticMethod(enumName + " fromJson(JsonReader jsonReader) throws IOException",
-                    function -> function.methodReturn(converterName + "(" + deserializationCall + ")"));
-            }
         });
     }
 
