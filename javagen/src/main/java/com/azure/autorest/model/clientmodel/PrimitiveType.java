@@ -225,9 +225,9 @@ public class PrimitiveType implements IType {
         if (this == PrimitiveType.UNIX_TIME_LONG) {
             expression = String.format("OffsetDateTime.ofInstant(Instant.ofEpochSecond(%1$s), ZoneOffset.UTC)", expression);
         } else if (this == PrimitiveType.DURATION_LONG) {
-            expression = java.lang.String.format("Duration.ofSeconds(%s)", expression);
+            expression = String.format("Duration.ofSeconds(%s)", expression);
         } else if (this == PrimitiveType.DURATION_DOUBLE) {
-            expression = java.lang.String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
+            expression = String.format("Duration.ofNanos((long) (%s * 1000_000_000L))", expression);
         }
         return expression;
     }
@@ -241,9 +241,9 @@ public class PrimitiveType implements IType {
         if (this == PrimitiveType.UNIX_TIME_LONG) {
             expression = String.format("%1$s.toEpochSecond()", expression);
         } else if (this == PrimitiveType.DURATION_LONG) {
-            expression = java.lang.String.format("%s.getSeconds()", expression);
+            expression = String.format("%s.getSeconds()", expression);
         } else if (this == PrimitiveType.DURATION_DOUBLE) {
-            expression = java.lang.String.format("(double) %s.toNanos() / 1000_000_000L", expression);
+            expression = String.format("(double) %s.toNanos() / 1000_000_000L", expression);
         }
         return expression;
     }
@@ -268,42 +268,42 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public java.lang.String jsonSerializationMethodCall(java.lang.String jsonWriterName, java.lang.String fieldName,
-        java.lang.String valueGetter) {
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
         if (wrapSerializationWithObjectsToString) {
             return fieldName == null
-                ? java.lang.String.format("%s.%s(Objects.toString(%s, null))", jsonWriterName,
-                serializationMethodBase, valueGetter)
-                : java.lang.String.format("%s.%sField(\"%s\", Objects.toString(%s, null))", jsonWriterName,
-                serializationMethodBase, fieldName, valueGetter);
+                ? String.format("%s.%s(Objects.toString(%s, null))", jsonWriterName, serializationMethodBase, valueGetter)
+                : String.format("%s.%sField(\"%s\", Objects.toString(%s, null))", jsonWriterName,
+                    serializationMethodBase, fieldName, valueGetter);
         }
 
         return fieldName == null
-            ? java.lang.String.format("%s.%s(%s)", jsonWriterName, serializationMethodBase, valueGetter)
-            : java.lang.String.format("%s.%sField(\"%s\", %s)", jsonWriterName, serializationMethodBase, fieldName,
-            valueGetter);
+            ? String.format("%s.%s(%s)", jsonWriterName, serializationMethodBase, valueGetter)
+            : String.format("%s.%sField(\"%s\", %s)", jsonWriterName, serializationMethodBase, fieldName, valueGetter);
     }
 
     @Override
-    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         if (attributeName == null) {
             return xmlReaderName + "." + xmlElementDeserializationMethod;
+        } else if (attributeNamespace == null) {
+            return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, "null",
+                "\"" + attributeName + "\"");
         } else {
-            String namespace = attributeNamespace == null ? "null" : "\"" + attributeNamespace + "\"";
+            String namespace = namespaceIsConstant ? attributeNamespace : "\"" + attributeNamespace + "\"";
             return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, namespace,
                 "\"" + attributeName + "\"");
         }
     }
 
     @Override
-    public java.lang.String xmlSerializationMethodCall(java.lang.String xmlWriterName,
-        java.lang.String attributeOrElementName, java.lang.String namespaceUri, java.lang.String valueGetter,
-        boolean isAttribute, boolean nameIsVariable) {
+    public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
+        String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         String value = wrapSerializationWithObjectsToString
             ? "Objects.toString(" + valueGetter + ", null)" : valueGetter;
 
         return ClassType.xmlSerializationCallHelper(xmlWriterName, serializationMethodBase, attributeOrElementName,
-            namespaceUri, value, isAttribute, nameIsVariable);
+            namespaceUri, value, isAttribute, nameIsVariable, namespaceIsConstant);
     }
 
     @Override

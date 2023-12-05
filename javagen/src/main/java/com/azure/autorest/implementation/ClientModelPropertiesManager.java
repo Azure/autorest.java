@@ -15,6 +15,7 @@ import com.azure.xml.XmlSerializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -73,7 +74,8 @@ public final class ClientModelPropertiesManager {
     private final List<ClientModelProperty> xmlTexts;
     private final List<ClientModelProperty> superXmlElements;
     private final List<ClientModelProperty> xmlElements;
-    private final Map<String, String> xmlNameSpaceWithPrefix;
+    private final Map<String, String> xmlNamespaceWithPrefix;
+    private final Map<String, String> xmlNamespaceToConstantMapping;
 
     /**
      * Creates a new instance of {@link ClientModelPropertiesManager}.
@@ -100,7 +102,7 @@ public final class ClientModelPropertiesManager {
         superReadOnlyProperties = new ArrayList<>();
         boolean hasXmlElements = false;
         boolean hasXmlTexts = false;
-        xmlNameSpaceWithPrefix = new LinkedHashMap<>();
+        xmlNamespaceWithPrefix = new LinkedHashMap<>();
         superXmlAttributes = new ArrayList<>();
         xmlAttributes = new ArrayList<>();
         superXmlTexts = new ArrayList<>();
@@ -167,7 +169,7 @@ public final class ClientModelPropertiesManager {
             }
 
             if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
-                xmlNameSpaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
+                xmlNamespaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
 
@@ -221,7 +223,7 @@ public final class ClientModelPropertiesManager {
             }
 
             if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
-                xmlNameSpaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
+                xmlNamespaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
 
@@ -258,6 +260,9 @@ public final class ClientModelPropertiesManager {
             throw new IllegalStateException("Model properties exhausted all possible XmlReader name variables. "
                 + "Add additional possible XmlReader name variables to resolve this issue.");
         }
+
+        this.xmlNamespaceToConstantMapping = model.getXmlName() == null
+            ? Collections.emptyMap() : ClientModelUtil.xmlNamespaceToConstantMapping(model);
     }
 
     /**
@@ -539,7 +544,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer XML namespace with prefix consumer.
      */
     public void forEachXmlNamespaceWithPrefix(BiConsumer<String, String> consumer) {
-        xmlNameSpaceWithPrefix.forEach(consumer);
+        xmlNamespaceWithPrefix.forEach(consumer);
     }
 
     /**
@@ -597,6 +602,16 @@ public final class ClientModelPropertiesManager {
      */
     public void forEachXmlElement(Consumer<ClientModelProperty> consumer) {
         xmlElements.forEach(consumer);
+    }
+
+    /**
+     * Gets the XML namespace constant for the given XML namespace.
+     *
+     * @param xmlNamespace The XML namespace.
+     * @return The XML namespace constant.
+     */
+    public String getXmlNamespaceConstant(String xmlNamespace) {
+        return xmlNamespaceToConstantMapping.get(xmlNamespace);
     }
 
     /**

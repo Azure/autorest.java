@@ -303,13 +303,14 @@ public class GenericType implements IType {
     }
 
     @Override
-    public final String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+    public final String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         return null;
     }
 
     @Override
     public final String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName,
-        String namespaceUri, String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String namespaceUri, String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         return null;
     }
 

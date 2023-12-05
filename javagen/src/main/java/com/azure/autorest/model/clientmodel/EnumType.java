@@ -188,18 +188,19 @@ public class EnumType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         String elementTypeXmlDeserialization = elementType.xmlDeserializationMethod(xmlReaderName, attributeName,
-            attributeNamespace);
+            attributeNamespace, namespaceIsConstant);
         return name + "." + getFromMethodName() + "(" + elementTypeXmlDeserialization + ")";
     }
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
         return elementType.xmlSerializationMethodCall(xmlWriterName, attributeOrElementName, namespaceUri,
-            actualValueGetter, isAttribute, nameIsVariable);
+            actualValueGetter, isAttribute, nameIsVariable, namespaceIsConstant);
     }
 
     @Override

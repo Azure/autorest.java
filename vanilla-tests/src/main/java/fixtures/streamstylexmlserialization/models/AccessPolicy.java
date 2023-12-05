@@ -20,8 +20,6 @@ import javax.xml.stream.XMLStreamException;
  */
 @Fluent
 public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * the date-time the policy is active
      */
@@ -129,8 +127,10 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
         rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeStringElement("Start", this.start == null ? null : ISO_8601.format(this.start));
-        xmlWriter.writeStringElement("Expiry", this.expiry == null ? null : ISO_8601.format(this.expiry));
+        xmlWriter.writeStringElement("Start",
+            this.start == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.start));
+        xmlWriter.writeStringElement("Expiry",
+            this.expiry == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expiry));
         xmlWriter.writeStringElement("Permission", this.permission);
         return xmlWriter.writeEndElement();
     }

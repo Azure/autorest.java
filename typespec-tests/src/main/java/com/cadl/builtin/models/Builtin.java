@@ -26,8 +26,6 @@ import java.util.Objects;
  */
 @Immutable
 public final class Builtin implements JsonSerializable<Builtin> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The boolean property.
      */
@@ -359,7 +357,8 @@ public final class Builtin implements JsonSerializable<Builtin> {
         jsonWriter.writeDoubleField("double", this.doubleProperty);
         jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("date", Objects.toString(this.date, null));
-        jsonWriter.writeStringField("dateTime", this.dateTime == null ? null : ISO_8601.format(this.dateTime));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         jsonWriter.writeStringField("url", this.url);

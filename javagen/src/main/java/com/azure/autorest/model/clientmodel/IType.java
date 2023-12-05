@@ -153,9 +153,11 @@ public interface IType {
      * @param xmlReaderName The name of the {@link com.azure.xml.XmlReader} performing deserialization.
      * @param attributeName The attribute name, if null this is considered to be an element call.
      * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
+     * @param namespaceIsConstant Whether the {@code attributeNamespace} is a constant instead of a string.
      * @return The XML deserialization method, or null i it isn't supported directly.
      */
-    String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace);
+    String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant);
 
     /**
      * Gets the method call that will handle XML serialization.
@@ -171,10 +173,11 @@ public interface IType {
      * @param valueGetter The value getter.
      * @param isAttribute Whether an attribute is being written, if true {@code attributeOrElementName} must be set.
      * @param nameIsVariable Whether the {@code attributeOrElementName} is a variable instead of a string.
+     * @param namespaceIsConstant Whether the {@code namespaceUri} is a constant instead of a string.
      * @return The method call that will handle XML serialization, or null if it isn't supported directly.
      */
     String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute, boolean nameIsVariable);
+        String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant);
 
     /**
      * Whether the type is used with XML serialization.
