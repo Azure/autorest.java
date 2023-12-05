@@ -168,6 +168,8 @@ import {
 } from "./operation-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
+import { getArmResourceKind } from "@azure-tools/typespec-azure-resource-manager";
+import { type } from "os";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -2039,7 +2041,14 @@ export class CodeModelBuilder {
 
     // parent
     if (type.baseModel) {
-      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
+      let parentName = this.getName(type.baseModel);
+      if (this.isArm()) {
+          const resourceType = this.getModelResourceType(type);
+          if (resourceType) {
+            parentName = resourceType;
+          }
+      }
+      const parentSchema = this.processSchema(type.baseModel, parentName);
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
 
@@ -2649,7 +2658,26 @@ export class CodeModelBuilder {
   }
 
   private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
+    return this.isArm() && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
+  }
+
+  private isArm() {
+    return this.codeModel.arm;
+  }
+
+  private getModelResourceType(model: Model): string | null {
+    const resourceKind = getArmResourceKind(model);
+    if (!resourceKind) {
+      return null;
+    }
+    switch (resourceKind) {
+      case "Tracked":
+        return "TrackedResource";
+      case "Proxy":
+        return "ProxyResource";
+      case "Extension":
+        return "ProxyResource";
+    }
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {
