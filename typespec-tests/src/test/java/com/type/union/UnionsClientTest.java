@@ -84,8 +84,8 @@ public class UnionsClientTest {
     @Test
     public void testEnumsOnlyClient() {
         EnumsOnlyCases prop = client7.get().getProp();
-        Assertions.assertEquals(Lr.RIGHT, prop.getLr().toObject(Lr.class));
-        Assertions.assertEquals(Ud.UP, prop.getUd().toObject(Ud.class));
+        Assertions.assertEquals(Lr.RIGHT, Lr.fromString(prop.getLr().toObject(String.class)));
+        Assertions.assertEquals(Ud.UP, Ud.fromString(prop.getUd().toObject(String.class)));
         client7.send(prop);
     }
 
