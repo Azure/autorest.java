@@ -81,7 +81,6 @@ public class UnionsClientTest {
         client6.send(BinaryData.fromObject(new Cat("test")));
     }
 
-    @Disabled("bug on prop.getLr().toObject(Lr.class)")
     @Test
     public void testEnumsOnlyClient() {
         EnumsOnlyCases prop = client7.get().getProp();
