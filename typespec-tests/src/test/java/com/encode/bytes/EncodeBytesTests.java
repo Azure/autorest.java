@@ -62,8 +62,8 @@ public class EncodeBytesTests {
     @Test
     public void testRequestBody() {
         requestClient.defaultMethod(DATA);
-//        requestClient.octetStream(BinaryData.fromBytes(PNG));
-//        requestClient.customContentType(BinaryData.fromBytes(PNG));
+        requestClient.octetStream(BinaryData.fromBytes(PNG));
+        requestClient.customContentType(BinaryData.fromBytes(PNG));
         requestClient.base64(DATA);
         requestClient.base64Url(DATA);
     }
