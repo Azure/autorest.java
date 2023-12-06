@@ -1645,7 +1645,7 @@ export class CodeModelBuilder {
 
       if (scalarName.startsWith("decimal")) {
         // decimal
-        return this.processNumberSchema(type, nameHint);
+        return this.processDecimalSchema(type, nameHint);
       } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
         // integer
         const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
@@ -1732,6 +1732,15 @@ export class CodeModelBuilder {
   private processNumberSchema(type: Scalar, name: string): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
+        summary: this.getSummary(type),
+      }),
+    );
+  }
+
+  private processDecimalSchema(type: Scalar, name: string): NumberSchema {
+    // "Infinity" maps to "BigDecimal" in Java
+    return this.codeModel.schemas.add(
+      new NumberSchema(name, this.getDoc(type), SchemaType.Number, Infinity, {
         summary: this.getSummary(type),
       }),
     );

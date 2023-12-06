@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.TypeReference;
 import com.type.scalar.implementation.DecimalVerifiesImpl;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public final class DecimalVerifyClient {
      * </p>
      * <pre>{@code
      * [
-     *     double (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 
@@ -67,7 +68,7 @@ public final class DecimalVerifyClient {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -97,10 +98,10 @@ public final class DecimalVerifyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public List<Double> prepareVerify() {
+    public List<BigDecimal> prepareVerify() {
         // Generated convenience method for prepareVerifyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return prepareVerifyWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_DOUBLE);
+        return prepareVerifyWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_BIG_DECIMAL);
     }
 
     /**
@@ -117,13 +118,14 @@ public final class DecimalVerifyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void verify(double body) {
+    public void verify(BigDecimal body) {
         // Generated convenience method for verifyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         verifyWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     @Generated
-    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {
-    };
+    private static final TypeReference<List<BigDecimal>> TYPE_REFERENCE_LIST_BIG_DECIMAL
+        = new TypeReference<List<BigDecimal>>() {
+        };
 }

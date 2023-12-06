@@ -101,7 +101,7 @@ public final class DecimalsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -125,7 +125,7 @@ public final class DecimalsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -149,7 +149,7 @@ public final class DecimalsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -174,7 +174,7 @@ public final class DecimalsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 

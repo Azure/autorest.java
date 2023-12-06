@@ -13,6 +13,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.builtin.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -62,7 +63,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
      * The decimal property.
      */
     @Generated
-    private final double decimal;
+    private final BigDecimal decimal;
 
     /*
      * The long property.
@@ -152,9 +153,9 @@ public final class Builtin implements JsonSerializable<Builtin> {
      * @param encoded the encoded value to set.
      */
     @Generated
-    public Builtin(boolean booleanProperty, String string, byte[] bytes, int intProperty, long safeint, double decimal,
-        long longProperty, double floatProperty, double doubleProperty, Duration duration, LocalDate date,
-        OffsetDateTime dateTime, List<String> stringList, Map<String, byte[]> bytesDict, String url,
+    public Builtin(boolean booleanProperty, String string, byte[] bytes, int intProperty, long safeint,
+        BigDecimal decimal, long longProperty, double floatProperty, double doubleProperty, Duration duration,
+        LocalDate date, OffsetDateTime dateTime, List<String> stringList, Map<String, byte[]> bytesDict, String url,
         Map<String, Double> nullableFloatDict, Encoded encoded) {
         this.booleanProperty = booleanProperty;
         this.string = string;
@@ -231,7 +232,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
      * @return the decimal value.
      */
     @Generated
-    public double getDecimal() {
+    public BigDecimal getDecimal() {
         return this.decimal;
     }
 
@@ -353,7 +354,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
         jsonWriter.writeBinaryField("bytes", this.bytes);
         jsonWriter.writeIntField("int", this.intProperty);
         jsonWriter.writeLongField("safeint", this.safeint);
-        jsonWriter.writeDoubleField("decimal", this.decimal);
+        jsonWriter.writeNumberField("decimal", this.decimal);
         jsonWriter.writeLongField("long", this.longProperty);
         jsonWriter.writeDoubleField("float", this.floatProperty);
         jsonWriter.writeDoubleField("double", this.doubleProperty);
@@ -385,7 +386,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
             byte[] bytes = null;
             int intProperty = 0;
             long safeint = 0L;
-            double decimal = 0.0;
+            BigDecimal decimal = null;
             long longProperty = 0L;
             double floatProperty = 0.0;
             double doubleProperty = 0.0;
@@ -412,7 +413,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
                 } else if ("safeint".equals(fieldName)) {
                     safeint = reader.getLong();
                 } else if ("decimal".equals(fieldName)) {
-                    decimal = reader.getDouble();
+                    decimal = reader.getNullable(nonNullReader -> new BigDecimal(nonNullReader.getString()));
                 } else if ("long".equals(fieldName)) {
                     longProperty = reader.getLong();
                 } else if ("float".equals(fieldName)) {
