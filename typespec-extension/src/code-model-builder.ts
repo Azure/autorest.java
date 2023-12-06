@@ -649,6 +649,7 @@ export class CodeModelBuilder {
 
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
+    let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -659,10 +660,8 @@ export class CodeModelBuilder {
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipart(op)) {
-        // do not generate convenience method for multipart/form-data
-        generateConvenienceApi = false;
-        // make it internal
-        codeModelOperation.internalApi = true;
+        // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
+        generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
@@ -693,8 +692,7 @@ export class CodeModelBuilder {
     }
 
     // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi =
-      shouldGenerateProtocol(this.sdkContext, operation) && !codeModelOperation.internalApi;
+    codeModelOperation.generateProtocolApi = generateProtocolApi && !codeModelOperation.internalApi;
 
     codeModelOperation.addRequest(
       new Request({
@@ -1246,6 +1244,9 @@ export class CodeModelBuilder {
     if (operationIsJsonMergePatch(httpOperation)) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
+    if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.MultipartFormData] });
+    }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
       // anonymous model
@@ -1645,7 +1646,7 @@ export class CodeModelBuilder {
 
       if (scalarName.startsWith("decimal")) {
         // decimal
-        return this.processNumberSchema(type, nameHint);
+        return this.processDecimalSchema(type, nameHint);
       } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
         // integer
         const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
@@ -1732,6 +1733,15 @@ export class CodeModelBuilder {
   private processNumberSchema(type: Scalar, name: string): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
+        summary: this.getSummary(type),
+      }),
+    );
+  }
+
+  private processDecimalSchema(type: Scalar, name: string): NumberSchema {
+    // "Infinity" maps to "BigDecimal" in Java
+    return this.codeModel.schemas.add(
+      new NumberSchema(name, this.getDoc(type), SchemaType.Number, Infinity, {
         summary: this.getSummary(type),
       }),
     );
@@ -2560,7 +2570,7 @@ export class CodeModelBuilder {
     // Exclude context that not to be propagated
     const schemaUsage = {
       usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous && it !== SchemaContext.MultipartFormData,
       ),
       serializationFormats: (schema as SchemaUsage).serializationFormats,
     };

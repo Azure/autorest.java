@@ -18,7 +18,7 @@ public class FluentLiveTestCase {
     private String methodName;
     private String description;
 
-    public static Builder newBuilder(){
+    public static Builder newBuilder() {
         return new Builder();
     }
 

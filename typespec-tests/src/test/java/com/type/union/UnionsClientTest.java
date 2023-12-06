@@ -18,7 +18,6 @@ import com.type.union.models.StringAndArrayCases;
 import com.type.union.models.StringExtensibleNamedUnion;
 import com.type.union.models.Ud;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -44,7 +43,6 @@ public class UnionsClientTest {
         client1.send(prop);
     }
 
-    @Disabled("cadl-ranch bug")
     @Test
     public void testStringExtensibleClient() {
         Prop prop = client2.get().getProp();
@@ -52,7 +50,6 @@ public class UnionsClientTest {
         client2.send(prop);
     }
 
-    @Disabled("cadl-ranch bug")
     @Test
     public void testStringExtensibleNamedClient() {
         StringExtensibleNamedUnion prop = client3.get().getProp();
@@ -81,12 +78,11 @@ public class UnionsClientTest {
         client6.send(BinaryData.fromObject(new Cat("test")));
     }
 
-    @Disabled("bug on prop.getLr().toObject(Lr.class)")
     @Test
     public void testEnumsOnlyClient() {
         EnumsOnlyCases prop = client7.get().getProp();
-        Assertions.assertEquals(Lr.RIGHT, prop.getLr().toObject(Lr.class));
-        Assertions.assertEquals(Ud.UP, prop.getUd().toObject(Ud.class));
+        Assertions.assertEquals(Lr.RIGHT, Lr.fromString(prop.getLr().toObject(String.class)));
+        Assertions.assertEquals(Ud.UP, Ud.fromString(prop.getUd().toObject(String.class)));
         client7.send(prop);
     }
 

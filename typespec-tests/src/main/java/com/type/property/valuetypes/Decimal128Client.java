@@ -43,7 +43,7 @@ public final class Decimal128Client {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class Decimal128Client {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 

@@ -11,6 +11,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * Model with a decimal128 property.
@@ -21,7 +22,7 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
      * Property
      */
     @Generated
-    private final double property;
+    private final BigDecimal property;
 
     /**
      * Creates an instance of Decimal128Property class.
@@ -29,7 +30,7 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
      * @param property the property value to set.
      */
     @Generated
-    public Decimal128Property(double property) {
+    public Decimal128Property(BigDecimal property) {
         this.property = property;
     }
 
@@ -39,14 +40,14 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
      * @return the property value.
      */
     @Generated
-    public double getProperty() {
+    public BigDecimal getProperty() {
         return this.property;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeDoubleField("property", this.property);
+        jsonWriter.writeNumberField("property", this.property);
         return jsonWriter.writeEndObject();
     }
 
@@ -61,13 +62,13 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
      */
     public static Decimal128Property fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            double property = 0.0;
+            BigDecimal property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = reader.getDouble();
+                    property = reader.getNullable(nonNullReader -> new BigDecimal(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

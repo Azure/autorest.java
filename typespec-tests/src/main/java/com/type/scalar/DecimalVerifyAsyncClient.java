@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.TypeReference;
 import com.type.scalar.implementation.DecimalVerifiesImpl;
+import java.math.BigDecimal;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -46,7 +47,7 @@ public final class DecimalVerifyAsyncClient {
      * </p>
      * <pre>{@code
      * [
-     *     double (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 
@@ -69,7 +70,7 @@ public final class DecimalVerifyAsyncClient {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -99,11 +100,11 @@ public final class DecimalVerifyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<List<Double>> prepareVerify() {
+    public Mono<List<BigDecimal>> prepareVerify() {
         // Generated convenience method for prepareVerifyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return prepareVerifyWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_DOUBLE));
+            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_LIST_BIG_DECIMAL));
     }
 
     /**
@@ -121,13 +122,14 @@ public final class DecimalVerifyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> verify(double body) {
+    public Mono<Void> verify(BigDecimal body) {
         // Generated convenience method for verifyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return verifyWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     @Generated
-    private static final TypeReference<List<Double>> TYPE_REFERENCE_LIST_DOUBLE = new TypeReference<List<Double>>() {
-    };
+    private static final TypeReference<List<BigDecimal>> TYPE_REFERENCE_LIST_BIG_DECIMAL
+        = new TypeReference<List<BigDecimal>>() {
+        };
 }

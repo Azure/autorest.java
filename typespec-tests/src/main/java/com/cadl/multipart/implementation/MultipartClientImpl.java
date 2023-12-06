@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -125,43 +126,64 @@ public final class MultipartClientImpl {
     @ServiceInterface(name = "MultipartClient")
     public interface MultipartClientService {
         // @Multipart not supported by RestProxy
-        @Post("/upload/image")
+        @Post("/upload/images/{name}")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> upload(@HostParam("endpoint") String endpoint,
+        Mono<Response<Void>> upload(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
             @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
-        @Post("/upload/image")
+        @Post("/upload/images/{name}")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> uploadSync(@HostParam("endpoint") String endpoint,
+        Response<Void> uploadSync(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
             @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
     }
 
     /**
      * request is binary.
      * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>compress</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
      * {
-     *     data (Required): {
-     *         name: String (Required)
-     *         image: byte[] (Required)
-     *     }
+     *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
+     *     image: BinaryData (Required)
+     *     image: String (Optional)
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param name A sequence of textual characters.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -170,28 +192,49 @@ public final class MultipartClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadWithResponseAsync(String name, BinaryData data, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.upload(this.getEndpoint(), contentType, accept, request, requestOptions, context));
+            context -> service.upload(this.getEndpoint(), name, contentType, accept, data, requestOptions, context));
     }
 
     /**
      * request is binary.
      * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>compress</td>
+     * <td>Boolean</td>
+     * <td>No</td>
+     * <td>Boolean with `true` and `false` values.</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
      * {
-     *     data (Required): {
-     *         name: String (Required)
-     *         image: byte[] (Required)
-     *     }
+     *     name: String (Required)
+     *     resolution: int (Required)
+     *     type: String(JPEG/PNG) (Required)
+     *     image: BinaryData (Required)
+     *     image: String (Optional)
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param name A sequence of textual characters.
+     * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -200,9 +243,9 @@ public final class MultipartClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadWithResponse(BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
-        return service.uploadSync(this.getEndpoint(), contentType, accept, request, requestOptions, Context.NONE);
+        return service.uploadSync(this.getEndpoint(), name, contentType, accept, data, requestOptions, Context.NONE);
     }
 }

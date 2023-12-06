@@ -3,7 +3,7 @@
 
 package com.encode.bytes;
 
-import com.Utils;
+import com.payload.FileUtils;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.models.Base64BytesProperty;
 import com.encode.bytes.models.Base64UrlArrayBytesProperty;
@@ -24,7 +24,7 @@ public class EncodeBytesTests {
     private final ResponseBodyClient responseClient = new BytesClientBuilder().buildResponseBodyClient();
 
     private final static byte[] DATA = "test".getBytes(StandardCharsets.UTF_8);
-    private final static byte[] PNG = Utils.getPngBytes();
+    private final static byte[] PNG = FileUtils.getPngBytes();
 
     @Test
     public void testQuery() {
@@ -62,8 +62,8 @@ public class EncodeBytesTests {
     @Test
     public void testRequestBody() {
         requestClient.defaultMethod(DATA);
-//        requestClient.octetStream(BinaryData.fromBytes(PNG));
-//        requestClient.customContentType(BinaryData.fromBytes(PNG));
+        requestClient.octetStream(BinaryData.fromBytes(PNG));
+        requestClient.customContentType(BinaryData.fromBytes(PNG));
         requestClient.base64(DATA);
         requestClient.base64Url(DATA);
     }

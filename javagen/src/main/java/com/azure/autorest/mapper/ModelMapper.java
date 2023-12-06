@@ -10,8 +10,10 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -20,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -32,6 +35,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -294,6 +298,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
             }
+
+            // handle multipart/form-data
+            if (!CoreUtils.isNullOrEmpty(compositeType.getUsage()) && compositeType.getUsage().contains(SchemaContext.MULTIPART_FORM_DATA)) {
+                processMultipartFormDataProperties(properties);
+            }
+
             builder.properties(properties);
             builder.propertyReferences(propertyReferences);
             builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
@@ -410,30 +420,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()
             .map(SchemaUtil.getDiscriminatorProperty(compositeType));
 
-        return new ClientModelProperty.Builder()
-            .name(discriminatorProperty.getName())
-            .description(discriminatorProperty.getDescription())
+        return discriminatorProperty.newBuilder()
             .annotationArguments(annotationArgumentsMapper.apply(discriminatorProperty.getAnnotationArguments()))
-            .xmlAttribute(discriminatorProperty.isXmlAttribute())
-            .xmlName(discriminatorProperty.getXmlName())
             .serializedName(serializedName)
-            .xmlWrapper(discriminatorProperty.isXmlWrapper())
-            .xmlListElementName(discriminatorProperty.getXmlListElementName())
-            .xmlListElementNamespace(discriminatorProperty.getXmlListElementNamespace())
-            .xmlListElementPrefix(discriminatorProperty.getXmlListElementPrefix())
-            .xmlPrefix(discriminatorProperty.getXmlPrefix())
-            .wireType(discriminatorProperty.getWireType())
-            .clientType(discriminatorProperty.getClientType())
-            .constant(discriminatorProperty.isConstant())
             .defaultValue(discriminatorProperty.getClientType().defaultValueExpression(compositeType.getDiscriminatorValue()))
             .readOnly(true)
             .required(false)
-            .headerCollectionPrefix(discriminatorProperty.getHeaderCollectionPrefix())
-            .additionalProperties(discriminatorProperty.isAdditionalProperties())
-            .xmlNamespace(discriminatorProperty.getXmlNamespace())
-            .mutabilities(discriminatorProperty.getMutabilities())
-            .needsFlatten(discriminatorProperty.getNeedsFlatten())
-            .clientFlatten(discriminatorProperty.getClientFlatten())
             .polymorphicDiscriminator(true)
             .build();
     }
@@ -586,5 +578,31 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ret = propertyName + CodeNamer.toPascalCase(originalFlattenedPropertyName) + CodeNamer.toPascalCase(propertyName);
         }
         return ret;
+    }
+
+    private static void processMultipartFormDataProperties(List<ClientModelProperty> properties) {
+        ListIterator<ClientModelProperty> iterator = properties.listIterator();
+        while (iterator.hasNext()) {
+            ClientModelProperty property = iterator.next();
+
+            if (property.getWireType() == ArrayType.BYTE_ARRAY) {
+                // replace byte[] with BinaryData
+                iterator.remove();
+                iterator.add(property.newBuilder()
+                        .wireType(ClassType.BINARY_DATA)
+                        .clientType(ClassType.BINARY_DATA)
+                        .build());
+
+                // add (optional) filename property
+                iterator.add(property.newBuilder()
+                        .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
+                        .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
+                        .description("The filename for " + property.getName())
+                        .wireType(ClassType.STRING)
+                        .clientType(ClassType.STRING)
+                        .required(false)
+                        .build());
+            }
+        }
     }
 }

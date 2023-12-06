@@ -88,7 +88,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(LinkedHashMap.class.getName());
         imports.add(List.class.getName());
         imports.add(Objects.class.getName());
-        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + ".CoreToCodegenBridgeUtils");
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
     }
 
     @Override
@@ -302,7 +302,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (wireType == ClassType.RESPONSE_ERROR) {
             // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
             methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
-            methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
+            methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
         } else if (fieldSerializationMethod != null) {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -376,7 +376,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (elementType == ClassType.RESPONSE_ERROR) {
                 // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
-                methodBlock.line("CoreToCodegenBridgeUtils.responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
+                methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
                 methodBlock.line(valueSerializationMethod);
             } else if (elementType == ClassType.OBJECT) {
@@ -954,9 +954,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
             if (!hasConstructorArguments) {
                 handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
-                    "CoreToCodegenBridgeUtils.responseErrorFromJson(reader)", fromSuper);
+                    ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(reader)", fromSuper);
             } else {
-                deserializationBlock.line(property.getName() + " = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);");
+                deserializationBlock.line(property.getName() + " = " + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(reader);");
             }
         } else if (simpleDeserialization != null) {
             // Need to convert the wire type to the client type for constructors.
@@ -1087,7 +1087,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.indent(() -> {
             if (elementWireType == ClassType.RESPONSE_ERROR) {
                 // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-                methodBlock.line("CoreToCodegenBridgeUtils.responseErrorFromJson(" + lambdaReaderName + ")");
+                methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(" + lambdaReaderName + ")");
             } else if (valueDeserializationMethod != null) {
                 if (convertToClientType) {
                     // If the wire type is nullable don't attempt to call the convert to client type until it's known that

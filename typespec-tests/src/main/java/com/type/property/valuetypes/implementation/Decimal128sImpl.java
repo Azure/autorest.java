@@ -102,7 +102,7 @@ public final class Decimal128sImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class Decimal128sImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class Decimal128sImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class Decimal128sImpl {
      * </p>
      * <pre>{@code
      * {
-     *     property: double (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
