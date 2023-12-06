@@ -373,6 +373,7 @@ abstract class ConvenienceMethodTemplateBase {
         // TODO: other built-in types
         return type == ClassType.STRING // string
             || type == ClassType.OBJECT // unknown
+            || type == ClassType.BIG_DECIMAL // decimal
             || (type instanceof PrimitiveType && type.asNullable() != ClassType.VOID) // boolean, int, float, etc.
             || ClientModelUtil.isClientModel(type); // client model
     }

@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.scalar.implementation.DecimalTypesImpl;
+import java.math.BigDecimal;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,7 +44,7 @@ public final class DecimalTypeAsyncClient {
      * <strong>Response Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -66,7 +67,7 @@ public final class DecimalTypeAsyncClient {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -98,7 +99,7 @@ public final class DecimalTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> requestParameterWithResponse(double value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {
         return this.serviceClient.requestParameterWithResponseAsync(value, requestOptions);
     }
 
@@ -114,11 +115,11 @@ public final class DecimalTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Double> responseBody() {
+    public Mono<BigDecimal> responseBody() {
         // Generated convenience method for responseBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return responseBodyWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Double.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(BigDecimal.class));
     }
 
     /**
@@ -136,7 +137,7 @@ public final class DecimalTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> requestBody(double body) {
+    public Mono<Void> requestBody(BigDecimal body) {
         // Generated convenience method for requestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return requestBodyWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
@@ -157,7 +158,7 @@ public final class DecimalTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> requestParameter(double value) {
+    public Mono<Void> requestParameter(BigDecimal value) {
         // Generated convenience method for requestParameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return requestParameterWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);

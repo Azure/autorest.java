@@ -312,6 +312,10 @@ public class ClassType implements IType {
     public static final ClassType BIG_DECIMAL = new Builder(false).knownClass(BigDecimal.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "new BigDecimal(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.NUMBER")
+        .serializationMethodBase("writeNumber")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> new BigDecimal(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(BigDecimal::new)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, BigDecimal::new)")
         .build();
 
     public static final ClassType UUID = new Builder(false).knownClass(java.util.UUID.class)
