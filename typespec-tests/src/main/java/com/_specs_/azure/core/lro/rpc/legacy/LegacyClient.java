@@ -16,7 +16,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 
@@ -36,52 +35,6 @@ public final class LegacyClient {
     @Generated
     LegacyClient(LegacyClientImpl serviceClient) {
         this.serviceClient = serviceClient;
-    }
-
-    /**
-     * Poll a Job.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
-     * 
-     * @param jobId A processing job identifier.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return result of the job along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
-        return this.serviceClient.getJobWithResponse(jobId, requestOptions);
     }
 
     /**
@@ -136,26 +89,6 @@ public final class LegacyClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
         return this.serviceClient.beginCreateJob(jobData, requestOptions);
-    }
-
-    /**
-     * Poll a Job.
-     * 
-     * @param jobId A processing job identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return result of the job.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public JobResult getJob(String jobId) {
-        // Generated convenience method for getJobWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getJobWithResponse(jobId, requestOptions).getValue().toObject(JobResult.class);
     }
 
     /**
