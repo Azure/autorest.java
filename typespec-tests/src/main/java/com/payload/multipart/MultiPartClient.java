@@ -16,6 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.payload.multipart.implementation.MultiPartClientImpl;
+import com.payload.multipart.implementation.MultipartFormDataHelper;
+import com.payload.multipart.models.MultiPartRequest;
 
 /**
  * Initializes a new instance of the synchronous MultiPartClient type.
@@ -43,7 +45,8 @@ public final class MultiPartClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     profileImage: byte[] (Required)
+     *     profileImage: BinaryData (Required)
+     *     profileImage: String (Optional)
      * }
      * }</pre>
      * 
@@ -61,5 +64,26 @@ public final class MultiPartClient {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'basic' is
         // 'multipart/form-data'
         return this.serviceClient.basicWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void basic(MultiPartRequest body) {
+        // Generated convenience method for basicWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeField("id", body.getId())
+            .serializeField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
+            .getRequestBody(), requestOptions).getValue();
     }
 }

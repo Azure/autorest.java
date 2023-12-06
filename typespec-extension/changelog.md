@@ -1,5 +1,9 @@
 # Release History
 
+## 0.12.0 (Unreleased)
+
+- Supported convenience API for "multipart/form-data".
+
 ## 0.11.3 (2023-12-06)
 
 Compatible with compiler 0.50.

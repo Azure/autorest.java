@@ -4,7 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the data models for Multipart.
+ * Package containing the data models for MultiPart.
+ * Test for multipart.
  * <!-- end generated doc -->
  */
-package com.cadl.multipart.implementation.models;
+package com.payload.multipart.models;

@@ -19,7 +19,7 @@ public class ClientMethodParameter extends MethodParameter {
             .description("The context to associate with this operation.")
             .wireType(ClassType.CONTEXT)
             .name("context")
-            .location(RequestParameterLocation.NONE)
+            .requestParameterLocation(RequestParameterLocation.NONE)
             .annotations(Collections.emptyList())
             .constant(false)
             .defaultValue(null)
@@ -32,7 +32,7 @@ public class ClientMethodParameter extends MethodParameter {
             .description("The HTTP request to send.")
             .wireType(ClassType.HTTP_REQUEST)
             .name("httpRequest")
-            .location(RequestParameterLocation.NONE)
+            .requestParameterLocation(RequestParameterLocation.NONE)
             .annotations(Collections.emptyList())
             .constant(false)
             .defaultValue(null)
@@ -45,7 +45,7 @@ public class ClientMethodParameter extends MethodParameter {
             .description("The options to configure the HTTP request before HTTP client sends it.")
             .wireType(ClassType.REQUEST_OPTIONS)
             .name("requestOptions")
-            .location(RequestParameterLocation.NONE)
+            .requestParameterLocation(RequestParameterLocation.NONE)
             .constant(false)
             .required(false)
             .fromClient(false)
@@ -101,22 +101,9 @@ public class ClientMethodParameter extends MethodParameter {
      * Creates a builder that is initialized with all the builder properties set to current values of this instance.
      * @return A new builder instance initialized with properties values of this instance.
      */
-    public ClientMethodParameter.Builder toNewBuilder() {
-        return new Builder()
-                .fromClient(this.isFromClient())
-                .annotations(this.getAnnotations())
-                .defaultValue(this.getDefaultValue())
-                .constant(this.isConstant())
-                .description(this.getDescription())
-                .name(this.getName())
-                .finalParameter(this.isFinal())
-                .required(this.isRequired())
-                .location(this.getRequestParameterLocation())
-                .rawType(this.getRawType())
-                .wireType(this.getWireType())
-                .versioning(this.getVersioning());
+    public ClientMethodParameter.Builder newBuilder() {
+        return new Builder(this);
     }
-
 
     /**
      * The full declaration of this parameter as it appears in a method signature.
@@ -149,7 +136,7 @@ public class ClientMethodParameter extends MethodParameter {
         private boolean fromClient;
         private String defaultValue;
         private List<ClassType> annotations;
-        private RequestParameterLocation location;
+        private RequestParameterLocation requestParameterLocation;
         private Versioning versioning;
 
         /**
@@ -254,17 +241,38 @@ public class ClientMethodParameter extends MethodParameter {
 
         /**
          * Sets the location of the parameter.
-         * @param location the location of the parameter
+         * @param requestParameterLocation the location of the parameter
          * @return the Builder itself
          */
-        public Builder location(RequestParameterLocation location) {
-            this.location = location;
+        public Builder requestParameterLocation(RequestParameterLocation requestParameterLocation) {
+            this.requestParameterLocation = requestParameterLocation;
             return this;
         }
 
         public Builder versioning(Versioning versioning) {
             this.versioning = versioning;
             return this;
+        }
+
+        /**
+         * Creates a new instance of Builder.
+         */
+        public Builder() {
+        }
+
+        private Builder(ClientMethodParameter parameter) {
+            this.description = parameter.getDescription();
+            this.isFinal = parameter.isFinal();
+            this.wireType = parameter.getWireType();
+            this.rawType = parameter.getRawType();
+            this.name = parameter.getName();
+            this.isRequired = parameter.isRequired();
+            this.isConstant = parameter.isConstant();
+            this.fromClient = parameter.isFromClient();
+            this.defaultValue = parameter.getDefaultValue();
+            this.annotations = parameter.getAnnotations();
+            this.requestParameterLocation = parameter.getRequestParameterLocation();
+            this.versioning = parameter.getVersioning();
         }
 
         public ClientMethodParameter build() {
@@ -278,7 +286,7 @@ public class ClientMethodParameter extends MethodParameter {
                     fromClient,
                     defaultValue,
                     annotations,
-                    location,
+                    requestParameterLocation,
                     versioning);
         }
     }

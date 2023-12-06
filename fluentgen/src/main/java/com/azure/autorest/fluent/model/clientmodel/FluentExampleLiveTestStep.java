@@ -9,7 +9,7 @@ public class FluentExampleLiveTestStep extends FluentLiveTestStep {
 
     private FluentExampleTemplate.ExampleMethod exampleMethod;
 
-    public static Builder newBuilder(){
+    public static Builder newBuilder() {
         return new Builder();
     }
 

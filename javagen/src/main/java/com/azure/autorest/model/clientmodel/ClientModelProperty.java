@@ -344,6 +344,14 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         imports.add("com.azure.core.annotation.JsonFlatten");
     }
 
+    /**
+     * Creates a builder that is initialized with all the builder properties set to current values of this instance.
+     * @return A new builder instance initialized with properties values of this instance.
+     */
+    public Builder newBuilder() {
+        return new Builder(this);
+    }
+
     public enum Mutability {
         CREATE, UPDATE, READ
     }
@@ -632,6 +640,40 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         public Builder xmlPrefix(String xmlPrefix) {
             this.xmlPrefix = xmlPrefix;
             return this;
+        }
+
+        /**
+         * Creates a new instance of Builder.
+         */
+        public Builder() {
+        }
+
+        private Builder(ClientModelProperty property) {
+            this.name = property.getName();
+            this.description = property.getDescription();
+            this.annotationArguments = property.getAnnotationArguments();
+            this.isXmlAttribute = property.isXmlAttribute();
+            this.xmlName = property.getXmlName();
+            this.xmlNamespace = property.getXmlNamespace();
+            this.serializedName = property.getSerializedName();
+            this.isXmlWrapper = property.isXmlWrapper();
+            this.xmlListElementName = property.getXmlListElementName();
+            this.xmlListElementNamespace = property.getXmlListElementNamespace();
+            this.xmlListElementPrefix = property.getXmlListElementPrefix();
+            this.wireType = property.getWireType();
+            this.clientType = property.getClientType();
+            this.isConstant = property.isConstant();
+            this.defaultValue = property.getDefaultValue();
+            this.isReadOnly = property.isReadOnly();
+            this.mutabilities = property.getMutabilities();
+            this.isRequired = property.isRequired();
+            this.headerCollectionPrefix = property.getHeaderCollectionPrefix();
+            this.isAdditionalProperties = property.isAdditionalProperties();
+            this.needsFlatten = property.getNeedsFlatten();
+            this.clientFlatten = property.getClientFlatten();
+            this.polymorphicDiscriminator = property.isPolymorphicDiscriminator();
+            this.isXmlText = property.isXmlText();
+            this.xmlPrefix = property.getXmlPrefix();
         }
 
         public ClientModelProperty build() {

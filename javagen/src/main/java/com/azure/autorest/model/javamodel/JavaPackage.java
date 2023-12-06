@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
@@ -44,6 +43,7 @@ import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
@@ -168,29 +168,6 @@ public class JavaPackage {
         }
 
         addJavaFile(javaFile);
-
-        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
-        // will serialize and deserialize ResponseError.
-        if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
-            javaFile = javaFileFactory.createSourceFile(settings.getPackage(settings.getImplementationSubpackage()),
-                "CoreToCodegenBridgeUtils");
-            if (filePaths.contains(javaFile.getFilePath())) {
-                // Already generated the utility method.
-                return;
-            }
-
-            try (InputStream inputStream = Javagen.class.getClassLoader().getResourceAsStream("CoreToCodegenBridgeUtils.java");
-                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-                Iterator<String> linesIterator = bufferedReader.lines().iterator();
-                while (linesIterator.hasNext()) {
-                    javaFile.line(linesIterator.next());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to read CoreToCodegenBridgeUtils.java", e);
-            }
-
-            addJavaFile(javaFile);
-        }
     }
 
     public final void addException(String packageKeyword, String name, ClientException model) {
@@ -240,6 +217,20 @@ public class JavaPackage {
         Templates.getPomTemplate().write(pom, xmlFile);
         this.checkDuplicateFile(xmlFile.getFilePath());
         xmlFiles.add(xmlFile);
+    }
+
+    public final void addJavaFromResources(String packageName, String name) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageName, name);
+        try (InputStream inputStream = JavaPackage.class.getClassLoader().getResourceAsStream(name + ".java");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            Iterator<String> linesIterator = bufferedReader.lines().iterator();
+            while (linesIterator.hasNext()) {
+                javaFile.line(linesIterator.next());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read " + name + ".java from resources.", e);
+        }
+        addJavaFile(javaFile);
     }
 
     protected void addJavaFile(JavaFile javaFile) {
