@@ -239,7 +239,6 @@ abstract class ConvenienceMethodTemplateBase {
             }
         } else {
             // flatten (possible with grouping)
-
             ClientMethodParameter targetParameter = detail.getOutParameter();
             if (targetParameter.getWireType() == ClassType.BINARY_DATA) {
                 String targetParameterName = targetParameter.getName();
@@ -247,12 +246,21 @@ abstract class ConvenienceMethodTemplateBase {
                 methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
                 for (ParameterMapping mapping : detail.getParameterMappings()) {
                     if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
+                        String parameterName = mapping.getInputParameter().getName();
+                        String mappingUsage;
+                        if (mapping.getInputParameter().getClientType() instanceof EnumType) {
+                            String enumConversion = ((EnumType) mapping.getInputParameter().getClientType()).getToMethodName() + "()";
+                            mappingUsage = "(" + parameterName + " == null ? null : " + parameterName + "." + enumConversion + ")";
+                        } else {
+                            mappingUsage = parameterName;
+                        }
+
                         String inputPath;
                         if (mapping.getInputParameterProperty() != null) {
                             inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
                                     CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
                         } else {
-                            inputPath = mapping.getInputParameter().getName();
+                            inputPath = mappingUsage;
                         }
 
                         methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
@@ -357,6 +365,7 @@ abstract class ConvenienceMethodTemplateBase {
         // TODO: other built-in types
         return type == ClassType.STRING // string
             || type == ClassType.OBJECT // unknown
+            || type == ClassType.BIG_DECIMAL // decimal
             || (type instanceof PrimitiveType && type.asNullable() != ClassType.VOID) // boolean, int, float, etc.
             || ClientModelUtil.isClientModel(type); // client model
     }
@@ -366,9 +375,11 @@ abstract class ConvenienceMethodTemplateBase {
             return name;
         } else {
             if (type == ClassType.BASE_64_URL) {
-                return String.format("BinaryData.fromObject(Base64Url.encode(%s))", name);
+                return "BinaryData.fromObject(Base64Url.encode(" + name + "))";
+            } else if (type instanceof EnumType) {
+                return "BinaryData.fromObject(" + name + " == null ? null : " + name + "." + ((EnumType) type).getToMethodName() + "())";
             } else {
-                return String.format("BinaryData.fromObject(%s)", name);
+                return "BinaryData.fromObject(" + name + ")";
             }
         }
     }

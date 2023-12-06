@@ -4,16 +4,10 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-
 /**
  * Defines values for Priority.
  */
-public enum Priority implements JsonSerializable<Priority> {
+public enum Priority {
     /**
      * Enum value 100.
      */
@@ -56,25 +50,5 @@ public enum Priority implements JsonSerializable<Priority> {
      */
     public long toLong() {
         return this.value;
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeLong(value);
-    }
-
-    /**
-     * Reads a Priority from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.NUMBER value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Priority that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Priority fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Priority fromJson(JsonReader jsonReader) throws IOException {
-        return fromLong(jsonReader.getLong());
     }
 }

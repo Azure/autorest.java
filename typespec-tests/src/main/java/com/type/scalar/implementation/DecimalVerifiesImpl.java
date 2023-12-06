@@ -102,7 +102,7 @@ public final class DecimalVerifiesImpl {
      * </p>
      * <pre>{@code
      * [
-     *     double (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class DecimalVerifiesImpl {
      * </p>
      * <pre>{@code
      * [
-     *     double (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 
@@ -149,7 +149,7 @@ public final class DecimalVerifiesImpl {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -173,7 +173,7 @@ public final class DecimalVerifiesImpl {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.

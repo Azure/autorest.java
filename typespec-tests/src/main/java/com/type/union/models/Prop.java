@@ -6,16 +6,12 @@ package com.type.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Defines values for Prop.
  */
-public final class Prop extends ExpandableStringEnum<Prop> implements JsonSerializable<Prop> {
+public final class Prop extends ExpandableStringEnum<Prop> {
     /**
      * Static value b for Prop.
      */
@@ -57,25 +53,5 @@ public final class Prop extends ExpandableStringEnum<Prop> implements JsonSerial
     @Generated
     public static Collection<Prop> values() {
         return values(Prop.class);
-    }
-
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a Prop from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The Prop that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a Prop fails to be read from the JsonReader.
-     */
-    @Generated
-    public static Prop fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), Prop.class);
     }
 }

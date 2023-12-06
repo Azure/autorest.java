@@ -25,6 +25,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.math.BigDecimal;
 import reactor.core.publisher.Mono;
 
 /**
@@ -101,8 +102,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requestParameter(@QueryParam("value") double value, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> requestParameter(@QueryParam("value") BigDecimal value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/request_parameter")
         @ExpectedResponses({ 204 })
@@ -110,7 +111,7 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestParameterSync(@QueryParam("value") double value, @HeaderParam("accept") String accept,
+        Response<Void> requestParameterSync(@QueryParam("value") BigDecimal value, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -120,7 +121,7 @@ public final class DecimalTypesImpl {
      * <strong>Response Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -143,7 +144,7 @@ public final class DecimalTypesImpl {
      * <strong>Response Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -165,7 +166,7 @@ public final class DecimalTypesImpl {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -189,7 +190,7 @@ public final class DecimalTypesImpl {
      * <strong>Request Body Schema</strong>
      * </p>
      * <pre>{@code
-     * double
+     * BigDecimal
      * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
@@ -220,7 +221,7 @@ public final class DecimalTypesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> requestParameterWithResponseAsync(double value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> requestParameterWithResponseAsync(BigDecimal value, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.requestParameter(value, accept, requestOptions, context));
     }
@@ -238,7 +239,7 @@ public final class DecimalTypesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> requestParameterWithResponse(double value, RequestOptions requestOptions) {
+    public Response<Void> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.requestParameterSync(value, accept, requestOptions, Context.NONE);
     }
