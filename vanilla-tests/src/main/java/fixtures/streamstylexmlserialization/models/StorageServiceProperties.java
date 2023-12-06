@@ -38,7 +38,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     /*
      * The set of CORS rules.
      */
-    private List<CorsRule> cors = new ArrayList<>();
+    private List<CorsRule> cors;
 
     /*
      * The default version to use for requests to the Blob service if an incoming request's version is not specified.
@@ -269,12 +269,12 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
                 } else if ("MinuteMetrics".equals(elementName.getLocalPart())) {
                     deserializedStorageServiceProperties.minuteMetrics = Metrics.fromXml(reader, "MinuteMetrics");
                 } else if ("Cors".equals(elementName.getLocalPart())) {
-                    if (deserializedStorageServiceProperties.cors == null) {
-                        deserializedStorageServiceProperties.cors = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("CorsRule".equals(elementName.getLocalPart())) {
+                            if (deserializedStorageServiceProperties.cors == null) {
+                                deserializedStorageServiceProperties.cors = new ArrayList<>();
+                            }
                             deserializedStorageServiceProperties.cors.add(CorsRule.fromXml(reader, "CorsRule"));
                         } else {
                             reader.skipElement();

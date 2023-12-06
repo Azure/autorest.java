@@ -142,14 +142,8 @@ public final class Blobs implements XmlSerializable<Blobs> {
                 QName elementName = reader.getElementName();
 
                 if ("BlobPrefix".equals(elementName.getLocalPart())) {
-                    if (deserializedBlobs.blobPrefix == null) {
-                        deserializedBlobs.blobPrefix = new ArrayList<>();
-                    }
                     deserializedBlobs.blobPrefix.add(BlobPrefix.fromXml(reader, "BlobPrefix"));
                 } else if ("Blob".equals(elementName.getLocalPart())) {
-                    if (deserializedBlobs.blob == null) {
-                        deserializedBlobs.blob = new ArrayList<>();
-                    }
                     deserializedBlobs.blob.add(Blob.fromXml(reader, "Blob"));
                 } else {
                     reader.skipElement();

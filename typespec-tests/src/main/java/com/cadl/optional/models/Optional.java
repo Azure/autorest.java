@@ -24,8 +24,6 @@ import java.util.Map;
  */
 @Fluent
 public final class Optional implements JsonSerializable<Optional> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The boolean property.
      */
@@ -488,7 +486,8 @@ public final class Optional implements JsonSerializable<Optional> {
         jsonWriter.writeNumberField("float", this.floatProperty);
         jsonWriter.writeNumberField("double", this.doubleProperty);
         jsonWriter.writeStringField("duration", CoreToCodegenBridgeUtils.durationToStringWithDays(this.duration));
-        jsonWriter.writeStringField("dateTime", this.dateTime == null ? null : ISO_8601.format(this.dateTime));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         return jsonWriter.writeEndObject();

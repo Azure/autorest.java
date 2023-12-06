@@ -26,8 +26,6 @@ import java.util.Objects;
  */
 @Fluent
 public final class Encoded implements JsonSerializable<Encoded> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The timeInSeconds property.
      */
@@ -271,7 +269,8 @@ public final class Encoded implements JsonSerializable<Encoded> {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("timeInSeconds", this.timeInSeconds);
         jsonWriter.writeNumberField("timeInSecondsFraction", this.timeInSecondsFraction);
-        jsonWriter.writeStringField("dateTime", this.dateTime == null ? null : ISO_8601.format(this.dateTime));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
         jsonWriter.writeNumberField("unixTimestamp", this.unixTimestamp);
         jsonWriter.writeBinaryField("base64", this.base64);

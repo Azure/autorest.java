@@ -174,10 +174,10 @@ public final class Container implements XmlSerializable<Container> {
                 } else if ("Properties".equals(elementName.getLocalPart())) {
                     deserializedContainer.properties = ContainerProperties.fromXml(reader, "Properties");
                 } else if ("Metadata".equals(elementName.getLocalPart())) {
-                    if (deserializedContainer.metadata == null) {
-                        deserializedContainer.metadata = new LinkedHashMap<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        if (deserializedContainer.metadata == null) {
+                            deserializedContainer.metadata = new LinkedHashMap<>();
+                        }
                         deserializedContainer.metadata.put(reader.getElementName().getLocalPart(),
                             reader.getStringElement());
                     }

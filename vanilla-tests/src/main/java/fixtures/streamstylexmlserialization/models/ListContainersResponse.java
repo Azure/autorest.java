@@ -43,7 +43,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
     /*
      * The Containers property.
      */
-    private List<Container> containers = new ArrayList<>();
+    private List<Container> containers;
 
     /*
      * The NextMarker property.
@@ -264,12 +264,12 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
                 } else if ("MaxResults".equals(elementName.getLocalPart())) {
                     deserializedListContainersResponse.maxResults = reader.getIntElement();
                 } else if ("Containers".equals(elementName.getLocalPart())) {
-                    if (deserializedListContainersResponse.containers == null) {
-                        deserializedListContainersResponse.containers = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("Container".equals(elementName.getLocalPart())) {
+                            if (deserializedListContainersResponse.containers == null) {
+                                deserializedListContainersResponse.containers = new ArrayList<>();
+                            }
                             deserializedListContainersResponse.containers.add(Container.fromXml(reader, "Container"));
                         } else {
                             reader.skipElement();

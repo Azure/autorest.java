@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Immutable
 public final class DatetimeProperty implements JsonSerializable<DatetimeProperty> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * Property
      */
@@ -50,7 +48,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("property", this.property == null ? null : ISO_8601.format(this.property));
+        jsonWriter.writeStringField("property",
+            this.property == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.property));
         return jsonWriter.writeEndObject();
     }
 

@@ -20,8 +20,6 @@ import javax.xml.stream.XMLStreamException;
  */
 @Fluent
 public final class Banana implements XmlSerializable<Banana> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The name property.
      */
@@ -122,7 +120,8 @@ public final class Banana implements XmlSerializable<Banana> {
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
-        xmlWriter.writeStringElement("expiration", this.expiration == null ? null : ISO_8601.format(this.expiration));
+        xmlWriter.writeStringElement("expiration",
+            this.expiration == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expiration));
         return xmlWriter.writeEndElement();
     }
 

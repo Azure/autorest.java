@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Fluent
 public class TagAttributesBase implements JsonSerializable<TagAttributesBase> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * Tag name
      */
@@ -231,9 +229,10 @@ public class TagAttributesBase implements JsonSerializable<TagAttributesBase> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("digest", this.digest);
-        jsonWriter.writeStringField("createdTime", this.createdOn == null ? null : ISO_8601.format(this.createdOn));
+        jsonWriter.writeStringField("createdTime",
+            this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
         jsonWriter.writeStringField("lastUpdateTime",
-            this.lastUpdatedOn == null ? null : ISO_8601.format(this.lastUpdatedOn));
+            this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
         if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
             jsonWriter.writeStartObject("changeableAttributes");
             jsonWriter.writeBooleanField("deleteEnabled", this.deleteEnabled);

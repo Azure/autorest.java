@@ -45,7 +45,7 @@ public class EncodeTests {
         double timeInSecondsFractionInJson = jsonNode.get("timeInSecondsFraction").asDouble();
         Assertions.assertEquals(5, timeInSecondsInJson);
         Assertions.assertEquals(1.5, timeInSecondsFractionInJson);
-        Assertions.assertEquals("2019-10-12T07:20:50.520Z", jsonNode.get("dateTime").asText());
+        Assertions.assertEquals(DATE, OffsetDateTime.parse(jsonNode.get("dateTime").asText()));
         Assertions.assertEquals("Sat, 12 Oct 2019 07:20:50 GMT", jsonNode.get("dateTimeRfc7231").asText());
         Assertions.assertEquals(1570864850L, jsonNode.get("unixTimestamp").asLong());
         Assertions.assertEquals("ZGF0YQ==", jsonNode.get("base64").asText());
