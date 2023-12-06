@@ -5,6 +5,7 @@
 Compatible with compiler 0.50.
 
 - Supported `crossLanguageDefinitionId`.
+- Supported `decmial` scalar.
 - Operation referred in `@pollingOperation` is no longer skipped.
 
 ## 0.11.2 (2023-11-16)
