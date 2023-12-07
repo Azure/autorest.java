@@ -68,7 +68,7 @@ autorest $arguments
     }
 }
 
-npm install
+npm ci
 
 java -version
 

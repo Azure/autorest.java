@@ -51,7 +51,7 @@ jobs:
 
       - script: |
           npm install -g autorest
-          npm install
+          npm ci
         displayName: 'Prepare Environment for Generation'
 
       - task: PowerShell@2
