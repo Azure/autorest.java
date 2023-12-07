@@ -2041,14 +2041,7 @@ export class CodeModelBuilder {
 
     // parent
     if (type.baseModel) {
-      let parentName = this.getName(type.baseModel);
-      if (this.isArm()) {
-          const resourceType = this.getModelResourceType(type);
-          if (resourceType) {
-            parentName = resourceType;
-          }
-      }
-      const parentSchema = this.processSchema(type.baseModel, parentName);
+      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
 
@@ -2068,6 +2061,13 @@ export class CodeModelBuilder {
             }
           });
         }
+        
+      if (this.isArm()) {
+        const resourceType = this.getModelResourceType(type);
+        if (resourceType) {
+          (parentSchema as ObjectScheme).armKind = resourceType;
+        }
+    }
       } else {
         // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
         pushDistinct(objectSchema.parents.all, parentSchema);
@@ -2674,7 +2674,6 @@ export class CodeModelBuilder {
       case "Tracked":
         return "TrackedResource";
       case "Proxy":
-        return "ProxyResource";
       case "Extension":
         return "ProxyResource";
     }

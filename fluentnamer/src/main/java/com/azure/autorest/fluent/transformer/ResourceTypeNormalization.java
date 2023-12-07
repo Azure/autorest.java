@@ -228,9 +228,12 @@ class ResourceTypeNormalization {
         String javaName = Utils.getJavaName(compositeType);
         if (javaName.equals(ResourceTypeName.SUB_RESOURCE) || javaName.startsWith(ResourceTypeName.SUB_RESOURCE_AUTO_GENERATED)) {
             type = ResourceType.SUB_RESOURCE;
-        } else if (javaName.equals(ResourceTypeName.PROXY_RESOURCE) || javaName.startsWith(ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED)) {
+        } else if (javaName.equals(ResourceTypeName.PROXY_RESOURCE) || javaName.startsWith(ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED)
+            || ResourceTypeName.PROXY_RESOURCE.equals(compositeType.getArmKind())) {
             type = ResourceType.PROXY_RESOURCE;
-        } else if (javaName.equals(ResourceTypeName.TRACKED_RESOURCE) || javaName.startsWith(ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED)) {
+        } else if (javaName.equals(ResourceTypeName.TRACKED_RESOURCE) || javaName.startsWith(ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED)
+            // TypeSpec check
+            || ResourceTypeName.TRACKED_RESOURCE.equals(compositeType.getArmKind())) {
             type = ResourceType.RESOURCE;
         } else if (javaName.equals(ResourceTypeName.RESOURCE) || javaName.startsWith(ResourceTypeName.RESOURCE_AUTO_GENERATED)
                 || javaName.equals(ResourceTypeName.AZURE_RESOURCE) || javaName.startsWith(ResourceTypeName.AZURE_RESOURCE_AUTO_GENERATED)) {
