@@ -14,7 +14,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.partialupdate.implementation.PartialUpdateOpsImpl;
+import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 
 /**
@@ -24,7 +24,17 @@ import com.cadl.partialupdate.models.PartialUpdateModel;
 public final class PartialUpdateClient {
 
     @Generated
-    private final PartialUpdateOpsImpl serviceClient;
+    private final PartialUpdateClientImpl serviceClient;
+
+    /**
+     * Initializes an instance of PartialUpdateClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    PartialUpdateClient(PartialUpdateClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
+    }
 
     /**
      * The read operation.
@@ -76,15 +86,5 @@ public final class PartialUpdateClient {
      */
     public void testMethod() {
         System.out.println("testMethod");
-    }
-
-    /**
-     * Initializes an instance of PartialUpdateClient class.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    PartialUpdateClient(PartialUpdateOpsImpl serviceClient) {
-        this.serviceClient = serviceClient;
     }
 }
