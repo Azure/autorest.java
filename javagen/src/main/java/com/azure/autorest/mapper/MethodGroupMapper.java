@@ -141,7 +141,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        if (!CoreUtils.isNullOrEmpty(parentClientProperties)) {
+        if (!CoreUtils.isNullOrEmpty(parentClientProperties) && settings.isGenerateClientAsImpl()) {
             // filter for serviceVersion
             builder.properties(parentClientProperties.stream()
                 .filter(p -> Objects.equals("serviceVersion", p.getName()))
