@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.flatten.implementation.FlattenOpsImpl;
+import com.cadl.flatten.implementation.FlattenClientImpl;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import java.util.Map;
 @ServiceClient(builder = FlattenClientBuilder.class)
 public final class FlattenClient {
     @Generated
-    private final FlattenOpsImpl serviceClient;
+    private final FlattenClientImpl serviceClient;
 
     /**
      * Initializes an instance of FlattenClient class.
@@ -35,7 +35,7 @@ public final class FlattenClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    FlattenClient(FlattenOpsImpl serviceClient) {
+    FlattenClient(FlattenClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

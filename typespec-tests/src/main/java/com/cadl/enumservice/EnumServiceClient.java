@@ -18,7 +18,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.cadl.enumservice.implementation.EnumOpsImpl;
+import com.cadl.enumservice.implementation.EnumServiceClientImpl;
 import com.cadl.enumservice.models.Color;
 import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {
     @Generated
-    private final EnumOpsImpl serviceClient;
+    private final EnumServiceClientImpl serviceClient;
 
     /**
      * Initializes an instance of EnumServiceClient class.
@@ -42,7 +42,7 @@ public final class EnumServiceClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    EnumServiceClient(EnumOpsImpl serviceClient) {
+    EnumServiceClient(EnumServiceClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

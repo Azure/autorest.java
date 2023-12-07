@@ -261,7 +261,7 @@ public final class EnumServiceClientBuilder implements HttpTrait<EnumServiceClie
      */
     @Generated
     public EnumServiceAsyncClient buildAsyncClient() {
-        return new EnumServiceAsyncClient(buildInnerClient().getEnumOps());
+        return new EnumServiceAsyncClient(buildInnerClient());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class EnumServiceClientBuilder implements HttpTrait<EnumServiceClie
      */
     @Generated
     public EnumServiceClient buildClient() {
-        return new EnumServiceClient(buildInnerClient().getEnumOps());
+        return new EnumServiceClient(buildInnerClient());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(EnumServiceClientBuilder.class);
