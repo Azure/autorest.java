@@ -96,7 +96,7 @@
         </property>
       </activation>
       <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>emitter</finalName>
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -108,6 +108,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
+                  <appendAssemblyId>false</appendAssemblyId>
                   <archive>
                     <manifest>
                       <mainClass>com.azure.typespec.Main</mainClass>

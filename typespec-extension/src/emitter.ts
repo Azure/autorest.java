@@ -130,7 +130,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const emitterOptions = JSON.stringify(options);
     program.trace("typespec-java", `Emitter options ${emitterOptions}`);
 
-    const jarFileName = resolvePath(moduleRoot, "target", "azure-typespec-extension-jar-with-dependencies.jar");
+    const jarFileName = resolvePath(moduleRoot, "target", "emitter.jar");
     program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
     const javaArgs: string[] = [];

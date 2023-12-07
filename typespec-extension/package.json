@@ -42,7 +42,7 @@
     "lib/*.tsp",
     "dist/**",
     "!dist/test/**",
-    "target/azure-typespec-extension-jar-with-dependencies.jar"
+    "target/emitter.jar"
   ],
   "peerDependencies": {
     "@typespec/compiler": ">=0.50.0 <1.0.0",

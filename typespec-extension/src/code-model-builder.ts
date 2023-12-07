@@ -548,7 +548,7 @@ export class CodeModelBuilder {
       );
       clientContext.preProcessOperations(this.sdkContext, client);
 
-      const operationGroups = listOperationGroups(this.sdkContext, client);
+      const operationGroups = listOperationGroups(this.sdkContext, client, true);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
@@ -563,13 +563,25 @@ export class CodeModelBuilder {
 
       for (const operationGroup of operationGroups) {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
-        codeModelGroup = new OperationGroup(operationGroup.type.name);
-        for (const operation of operations) {
-          if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+        // operation group with no operation is skipped
+        if (operations.length > 0) {
+          const groupPath = operationGroup.groupPath.split(".");
+          let oprationGroupName: string;
+          if (groupPath.length > 1) {
+            // groupPath should be in format of "OpenAIClient.Chat.Completions"
+            oprationGroupName = groupPath.slice(1).join("");
+          } else {
+            // protection
+            oprationGroupName = operationGroup.type.name;
           }
+          codeModelGroup = new OperationGroup(oprationGroupName);
+          for (const operation of operations) {
+            if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+              codeModelGroup.addOperation(this.processOperation(oprationGroupName, operation, clientContext));
+            }
+          }
+          codeModelClient.operationGroups.push(codeModelGroup);
         }
-        codeModelClient.operationGroups.push(codeModelGroup);
       }
 
       this.codeModel.clients.push(codeModelClient);
