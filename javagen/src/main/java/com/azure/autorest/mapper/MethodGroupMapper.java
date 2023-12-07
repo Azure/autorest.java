@@ -12,15 +12,18 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -37,18 +40,22 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
     @Override
     public MethodGroupClient map(OperationGroup methodGroup) {
+        return this.map(methodGroup, null);
+    }
+
+    public MethodGroupClient map(OperationGroup methodGroup, List<ServiceClientProperty> parentClientProperties) {
         MethodGroupClient methodGroupClient = parsed.get(methodGroup);
         if (methodGroupClient != null) {
             return methodGroupClient;
         }
 
-        methodGroupClient = createMethodGroupClient(methodGroup);
+        methodGroupClient = createMethodGroupClient(methodGroup, parentClientProperties);
         parsed.put(methodGroup, methodGroupClient);
 
         return methodGroupClient;
     }
 
-    private MethodGroupClient createMethodGroupClient(OperationGroup methodGroup) {
+    private MethodGroupClient createMethodGroupClient(OperationGroup methodGroup, List<ServiceClientProperty> parentClientProperties) {
         JavaSettings settings = JavaSettings.getInstance();
         MethodGroupClient.Builder builder = createMethodGroupClientBuilder();
 
@@ -133,6 +140,13 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
+
+        if (!CoreUtils.isNullOrEmpty(parentClientProperties)) {
+            // filter for serviceVersion
+            builder.properties(parentClientProperties.stream()
+                .filter(p -> Objects.equals("serviceVersion", p.getName()))
+                .collect(Collectors.toList()));
+        }
 
         return builder.build();
     }
