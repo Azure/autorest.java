@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.legacy.implementation;
 
+import com._specs_.azure.core.lro.rpc.legacy.LegacyServiceVersion;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobResult;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
@@ -57,6 +58,15 @@ public final class CreateResourcePollViaOperationLocationsImpl {
         this.service = RestProxy.create(CreateResourcePollViaOperationLocationsService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public LegacyServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

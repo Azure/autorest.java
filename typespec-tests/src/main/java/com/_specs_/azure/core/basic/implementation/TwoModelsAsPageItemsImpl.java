@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.basic.implementation;
 
+import com._specs_.azure.core.basic.BasicServiceVersion;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
@@ -56,6 +57,15 @@ public final class TwoModelsAsPageItemsImpl {
         this.service = RestProxy.create(TwoModelsAsPageItemsService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public BasicServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

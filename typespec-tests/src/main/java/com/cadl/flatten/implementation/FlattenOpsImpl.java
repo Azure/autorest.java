@@ -25,6 +25,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.cadl.flatten.FlattenServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,6 +51,15 @@ public final class FlattenOpsImpl {
         this.service
             = RestProxy.create(FlattenOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public FlattenServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

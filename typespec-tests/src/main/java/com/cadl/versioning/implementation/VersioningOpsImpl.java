@@ -35,6 +35,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import com.cadl.versioning.VersioningServiceVersion;
 import com.cadl.versioning.models.ExportedResource;
 import java.time.Duration;
 import java.util.List;
@@ -65,6 +66,15 @@ public final class VersioningOpsImpl {
         this.service
             = RestProxy.create(VersioningOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public VersioningServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

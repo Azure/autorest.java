@@ -38,6 +38,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
 import com.cadl.protocolandconvenient.models.ResourceI;
 import java.time.Duration;
 import java.util.List;
@@ -68,6 +69,15 @@ public final class ProtocolAndConvenienceOpsImpl {
         this.service = RestProxy.create(ProtocolAndConvenienceOpsService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public ProtocolAndConvenientServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

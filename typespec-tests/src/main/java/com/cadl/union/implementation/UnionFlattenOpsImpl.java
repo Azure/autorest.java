@@ -31,6 +31,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import com.cadl.union.UnionServiceVersion;
 import com.cadl.union.models.Result;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
@@ -58,6 +59,15 @@ public final class UnionFlattenOpsImpl {
         this.service
             = RestProxy.create(UnionFlattenOpsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public UnionServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

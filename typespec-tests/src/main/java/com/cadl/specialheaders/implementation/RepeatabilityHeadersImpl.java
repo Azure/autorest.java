@@ -37,6 +37,7 @@ import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import com.cadl.specialheaders.SpecialHeadersServiceVersion;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -65,6 +66,15 @@ public final class RepeatabilityHeadersImpl {
         this.service = RestProxy.create(RepeatabilityHeadersService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public SpecialHeadersServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**
