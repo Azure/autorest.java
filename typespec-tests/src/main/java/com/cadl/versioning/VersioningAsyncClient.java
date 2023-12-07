@@ -19,7 +19,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.versioning.implementation.VersioningClientImpl;
+import com.cadl.versioning.implementation.VersioningOpsImpl;
 import com.cadl.versioning.models.ExportedResource;
 import com.cadl.versioning.models.Resource;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ import reactor.core.publisher.Flux;
 @ServiceClient(builder = VersioningClientBuilder.class, isAsync = true)
 public final class VersioningAsyncClient {
     @Generated
-    private final VersioningClientImpl serviceClient;
+    private final VersioningOpsImpl serviceClient;
 
     /**
      * Initializes an instance of VersioningAsyncClient class.
@@ -41,7 +41,7 @@ public final class VersioningAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    VersioningAsyncClient(VersioningClientImpl serviceClient) {
+    VersioningAsyncClient(VersioningOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

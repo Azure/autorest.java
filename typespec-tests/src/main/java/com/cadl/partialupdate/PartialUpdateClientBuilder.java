@@ -261,7 +261,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
      */
     @Generated
     public PartialUpdateAsyncClient buildAsyncClient() {
-        return new PartialUpdateAsyncClient(buildInnerClient());
+        return new PartialUpdateAsyncClient(buildInnerClient().getPartialUpdateOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
      */
     @Generated
     public PartialUpdateClient buildClient() {
-        return new PartialUpdateClient(buildInnerClient());
+        return new PartialUpdateClient(buildInnerClient().getPartialUpdateOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);

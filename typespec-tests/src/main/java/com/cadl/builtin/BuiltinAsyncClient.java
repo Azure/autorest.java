@@ -18,7 +18,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
-import com.cadl.builtin.implementation.BuiltinClientImpl;
+import com.cadl.builtin.implementation.BuiltinOpsImpl;
 import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
@@ -29,7 +29,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = BuiltinClientBuilder.class, isAsync = true)
 public final class BuiltinAsyncClient {
     @Generated
-    private final BuiltinClientImpl serviceClient;
+    private final BuiltinOpsImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinAsyncClient class.
@@ -37,7 +37,7 @@ public final class BuiltinAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BuiltinAsyncClient(BuiltinClientImpl serviceClient) {
+    BuiltinAsyncClient(BuiltinOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

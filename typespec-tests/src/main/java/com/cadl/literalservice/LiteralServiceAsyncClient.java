@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
+import com.cadl.literalservice.implementation.LiteralOpsImpl;
 import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParam;
 import reactor.core.publisher.Mono;
@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = LiteralServiceClientBuilder.class, isAsync = true)
 public final class LiteralServiceAsyncClient {
     @Generated
-    private final LiteralServiceClientImpl serviceClient;
+    private final LiteralOpsImpl serviceClient;
 
     /**
      * Initializes an instance of LiteralServiceAsyncClient class.
@@ -35,7 +35,7 @@ public final class LiteralServiceAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LiteralServiceAsyncClient(LiteralServiceClientImpl serviceClient) {
+    LiteralServiceAsyncClient(LiteralOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

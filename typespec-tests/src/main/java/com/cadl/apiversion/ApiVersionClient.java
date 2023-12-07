@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.apiversion.implementation.ApiVersionClientImpl;
+import com.cadl.apiversion.implementation.ApiVersionOpsImpl;
 
 /**
  * Initializes a new instance of the synchronous ApiVersionClient type.
@@ -23,7 +23,7 @@ import com.cadl.apiversion.implementation.ApiVersionClientImpl;
 @ServiceClient(builder = ApiVersionClientBuilder.class)
 public final class ApiVersionClient {
     @Generated
-    private final ApiVersionClientImpl serviceClient;
+    private final ApiVersionOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ApiVersionClient class.
@@ -31,7 +31,7 @@ public final class ApiVersionClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ApiVersionClient(ApiVersionClientImpl serviceClient) {
+    ApiVersionClient(ApiVersionOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

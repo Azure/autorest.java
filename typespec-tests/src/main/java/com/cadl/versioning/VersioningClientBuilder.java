@@ -281,7 +281,7 @@ public final class VersioningClientBuilder implements HttpTrait<VersioningClient
      */
     @Generated
     public VersioningAsyncClient buildAsyncClient() {
-        return new VersioningAsyncClient(buildInnerClient());
+        return new VersioningAsyncClient(buildInnerClient().getVersioningOps());
     }
 
     /**
@@ -291,7 +291,7 @@ public final class VersioningClientBuilder implements HttpTrait<VersioningClient
      */
     @Generated
     public VersioningClient buildClient() {
-        return new VersioningClient(buildInnerClient());
+        return new VersioningClient(buildInnerClient().getVersioningOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(VersioningClientBuilder.class);

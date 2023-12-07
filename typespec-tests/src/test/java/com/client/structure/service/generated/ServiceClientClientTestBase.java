@@ -14,11 +14,17 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
+import com.client.structure.service.BarClient;
+import com.client.structure.service.FooClient;
 import com.client.structure.service.ServiceClientClient;
 import com.client.structure.service.ServiceClientClientBuilder;
 
 class ServiceClientClientTestBase extends TestProxyTestBase {
     protected ServiceClientClient serviceClientClient;
+
+    protected FooClient fooClient;
+
+    protected BarClient barClient;
 
     @Override
     protected void beforeTest() {
@@ -33,6 +39,30 @@ class ServiceClientClientTestBase extends TestProxyTestBase {
             serviceClientClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         serviceClientClient = serviceClientClientbuilder.buildClient();
+
+        ServiceClientClientBuilder fooClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            fooClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            fooClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        fooClient = fooClientbuilder.buildFooClient();
+
+        ServiceClientClientBuilder barClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            barClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            barClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        barClient = barClientbuilder.buildBarClient();
 
     }
 }

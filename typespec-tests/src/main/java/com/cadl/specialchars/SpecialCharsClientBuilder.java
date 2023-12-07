@@ -261,7 +261,7 @@ public final class SpecialCharsClientBuilder implements HttpTrait<SpecialCharsCl
      */
     @Generated
     public SpecialCharsAsyncClient buildAsyncClient() {
-        return new SpecialCharsAsyncClient(buildInnerClient());
+        return new SpecialCharsAsyncClient(buildInnerClient().getBuiltinOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class SpecialCharsClientBuilder implements HttpTrait<SpecialCharsCl
      */
     @Generated
     public SpecialCharsClient buildClient() {
-        return new SpecialCharsClient(buildInnerClient());
+        return new SpecialCharsClient(buildInnerClient().getBuiltinOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(SpecialCharsClientBuilder.class);

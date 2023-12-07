@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.payload.multipart.implementation.MultiPartClientImpl;
+import com.payload.multipart.implementation.FormDatasImpl;
 import com.payload.multipart.implementation.MultipartFormDataHelper;
 import com.payload.multipart.models.MultiPartRequest;
 
@@ -25,7 +25,7 @@ import com.payload.multipart.models.MultiPartRequest;
 @ServiceClient(builder = MultiPartClientBuilder.class)
 public final class MultiPartClient {
     @Generated
-    private final MultiPartClientImpl serviceClient;
+    private final FormDatasImpl serviceClient;
 
     /**
      * Initializes an instance of MultiPartClient class.
@@ -33,7 +33,7 @@ public final class MultiPartClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    MultiPartClient(MultiPartClientImpl serviceClient) {
+    MultiPartClient(FormDatasImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

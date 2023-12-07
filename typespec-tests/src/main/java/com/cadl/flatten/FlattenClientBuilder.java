@@ -281,7 +281,7 @@ public final class FlattenClientBuilder implements HttpTrait<FlattenClientBuilde
      */
     @Generated
     public FlattenAsyncClient buildAsyncClient() {
-        return new FlattenAsyncClient(buildInnerClient());
+        return new FlattenAsyncClient(buildInnerClient().getFlattenOps());
     }
 
     /**
@@ -291,7 +291,7 @@ public final class FlattenClientBuilder implements HttpTrait<FlattenClientBuilde
      */
     @Generated
     public FlattenClient buildClient() {
-        return new FlattenClient(buildInnerClient());
+        return new FlattenClient(buildInnerClient().getFlattenOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(FlattenClientBuilder.class);

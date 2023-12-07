@@ -4,7 +4,7 @@
 
 package com._specs_.azure.clientgenerator.core.usage;
 
-import com._specs_.azure.clientgenerator.core.usage.implementation.UsageClientImpl;
+import com._specs_.azure.clientgenerator.core.usage.implementation.ModelInOperationsImpl;
 import com._specs_.azure.clientgenerator.core.usage.models.InputModel;
 import com._specs_.azure.clientgenerator.core.usage.models.OutputModel;
 import com.azure.core.annotation.Generated;
@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = UsageClientBuilder.class, isAsync = true)
 public final class UsageAsyncClient {
     @Generated
-    private final UsageClientImpl serviceClient;
+    private final ModelInOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of UsageAsyncClient class.
@@ -35,7 +35,7 @@ public final class UsageAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    UsageAsyncClient(UsageClientImpl serviceClient) {
+    UsageAsyncClient(ModelInOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

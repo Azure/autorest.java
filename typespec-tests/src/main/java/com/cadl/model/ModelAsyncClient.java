@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.model.implementation.ModelClientImpl;
+import com.cadl.model.implementation.ModelOpsImpl;
 import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.Resource1;
 import com.cadl.model.models.Resource2;
@@ -29,7 +29,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ModelClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {
     @Generated
-    private final ModelClientImpl serviceClient;
+    private final ModelOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelAsyncClient class.
@@ -37,7 +37,7 @@ public final class ModelAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelAsyncClient(ModelClientImpl serviceClient) {
+    ModelAsyncClient(ModelOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

@@ -15,7 +15,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
+import com.cadl.partialupdate.implementation.PartialUpdateOpsImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 import reactor.core.publisher.Mono;
 
@@ -26,17 +26,7 @@ import reactor.core.publisher.Mono;
 public final class PartialUpdateAsyncClient {
 
     @Generated
-    private final PartialUpdateClientImpl serviceClient;
-
-    /**
-     * Initializes an instance of PartialUpdateAsyncClient class.
-     *
-     * @param serviceClient the service client implementation.
-     */
-    @Generated
-    PartialUpdateAsyncClient(PartialUpdateClientImpl serviceClient) {
-        this.serviceClient = serviceClient;
-    }
+    private final PartialUpdateOpsImpl serviceClient;
 
     /**
      * The read operation.
@@ -82,5 +72,15 @@ public final class PartialUpdateAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
+    }
+
+    /**
+     * Initializes an instance of PartialUpdateAsyncClient class.
+     *
+     * @param serviceClient the service client implementation.
+     */
+    @Generated
+    PartialUpdateAsyncClient(PartialUpdateOpsImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 }

@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.type.enums.fixed.implementation.FixedClientImpl;
+import com.type.enums.fixed.implementation.StringOperationsImpl;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 import reactor.core.publisher.Mono;
 
@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = FixedClientBuilder.class, isAsync = true)
 public final class FixedAsyncClient {
     @Generated
-    private final FixedClientImpl serviceClient;
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of FixedAsyncClient class.
@@ -34,7 +34,7 @@ public final class FixedAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    FixedAsyncClient(FixedClientImpl serviceClient) {
+    FixedAsyncClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

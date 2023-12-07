@@ -243,7 +243,7 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
      */
     @Generated
     public UsageAsyncClient buildAsyncClient() {
-        return new UsageAsyncClient(buildInnerClient());
+        return new UsageAsyncClient(buildInnerClient().getModelInOperations());
     }
 
     /**
@@ -253,7 +253,7 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
      */
     @Generated
     public UsageClient buildClient() {
-        return new UsageClient(buildInnerClient());
+        return new UsageClient(buildInnerClient().getModelInOperations());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(UsageClientBuilder.class);

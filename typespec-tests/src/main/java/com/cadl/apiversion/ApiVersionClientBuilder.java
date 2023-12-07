@@ -281,7 +281,7 @@ public final class ApiVersionClientBuilder implements HttpTrait<ApiVersionClient
      */
     @Generated
     public ApiVersionAsyncClient buildAsyncClient() {
-        return new ApiVersionAsyncClient(buildInnerClient());
+        return new ApiVersionAsyncClient(buildInnerClient().getApiVersionOps());
     }
 
     /**
@@ -291,7 +291,7 @@ public final class ApiVersionClientBuilder implements HttpTrait<ApiVersionClient
      */
     @Generated
     public ApiVersionClient buildClient() {
-        return new ApiVersionClient(buildInnerClient());
+        return new ApiVersionClient(buildInnerClient().getApiVersionOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ApiVersionClientBuilder.class);

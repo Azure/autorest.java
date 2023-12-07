@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.implementation.FlattenOpsImpl;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = FlattenClientBuilder.class, isAsync = true)
 public final class FlattenAsyncClient {
     @Generated
-    private final FlattenClientImpl serviceClient;
+    private final FlattenOpsImpl serviceClient;
 
     /**
      * Initializes an instance of FlattenAsyncClient class.
@@ -37,7 +37,7 @@ public final class FlattenAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    FlattenAsyncClient(FlattenClientImpl serviceClient) {
+    FlattenAsyncClient(FlattenOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

@@ -17,7 +17,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
-import com.cadl.builtin.implementation.BuiltinClientImpl;
+import com.cadl.builtin.implementation.BuiltinOpsImpl;
 import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
 
@@ -27,7 +27,7 @@ import java.time.OffsetDateTime;
 @ServiceClient(builder = BuiltinClientBuilder.class)
 public final class BuiltinClient {
     @Generated
-    private final BuiltinClientImpl serviceClient;
+    private final BuiltinOpsImpl serviceClient;
 
     /**
      * Initializes an instance of BuiltinClient class.
@@ -35,7 +35,7 @@ public final class BuiltinClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BuiltinClient(BuiltinClientImpl serviceClient) {
+    BuiltinClient(BuiltinOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

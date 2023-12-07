@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.union.implementation.UnionClientImpl;
+import com.cadl.union.implementation.UnionFlattenOpsImpl;
 import com.cadl.union.models.Result;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
@@ -30,7 +30,7 @@ import java.util.Map;
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {
     @Generated
-    private final UnionClientImpl serviceClient;
+    private final UnionFlattenOpsImpl serviceClient;
 
     /**
      * Initializes an instance of UnionClient class.
@@ -38,7 +38,7 @@ public final class UnionClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    UnionClient(UnionClientImpl serviceClient) {
+    UnionClient(UnionFlattenOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

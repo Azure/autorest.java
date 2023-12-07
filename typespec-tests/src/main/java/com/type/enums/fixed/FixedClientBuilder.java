@@ -242,7 +242,7 @@ public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, 
      */
     @Generated
     public FixedAsyncClient buildAsyncClient() {
-        return new FixedAsyncClient(buildInnerClient());
+        return new FixedAsyncClient(buildInnerClient().getStringOperations());
     }
 
     /**
@@ -252,7 +252,7 @@ public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, 
      */
     @Generated
     public FixedClient buildClient() {
-        return new FixedClient(buildInnerClient());
+        return new FixedClient(buildInnerClient().getStringOperations());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(FixedClientBuilder.class);

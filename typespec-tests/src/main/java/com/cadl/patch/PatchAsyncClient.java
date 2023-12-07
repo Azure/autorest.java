@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.patch.implementation.PatchClientImpl;
+import com.cadl.patch.implementation.PatchesImpl;
 import reactor.core.publisher.Mono;
 
 /**
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = PatchClientBuilder.class, isAsync = true)
 public final class PatchAsyncClient {
     @Generated
-    private final PatchClientImpl serviceClient;
+    private final PatchesImpl serviceClient;
 
     /**
      * Initializes an instance of PatchAsyncClient class.
@@ -32,7 +32,7 @@ public final class PatchAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PatchAsyncClient(PatchClientImpl serviceClient) {
+    PatchAsyncClient(PatchesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

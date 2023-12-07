@@ -282,7 +282,7 @@ public final class ProtocolAndConvenientClientBuilder implements HttpTrait<Proto
      */
     @Generated
     public ProtocolAndConvenientAsyncClient buildAsyncClient() {
-        return new ProtocolAndConvenientAsyncClient(buildInnerClient());
+        return new ProtocolAndConvenientAsyncClient(buildInnerClient().getProtocolAndConvenienceOps());
     }
 
     /**
@@ -292,7 +292,7 @@ public final class ProtocolAndConvenientClientBuilder implements HttpTrait<Proto
      */
     @Generated
     public ProtocolAndConvenientClient buildClient() {
-        return new ProtocolAndConvenientClient(buildInnerClient());
+        return new ProtocolAndConvenientClient(buildInnerClient().getProtocolAndConvenienceOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ProtocolAndConvenientClientBuilder.class);

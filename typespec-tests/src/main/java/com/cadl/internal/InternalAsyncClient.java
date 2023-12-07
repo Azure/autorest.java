@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.internal.implementation.InternalClientImpl;
+import com.cadl.internal.implementation.InternalOpsImpl;
 import com.cadl.internal.implementation.models.ResponseInternal;
 import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = InternalClientBuilder.class, isAsync = true)
 public final class InternalAsyncClient {
     @Generated
-    private final InternalClientImpl serviceClient;
+    private final InternalOpsImpl serviceClient;
 
     /**
      * Initializes an instance of InternalAsyncClient class.
@@ -36,7 +36,7 @@ public final class InternalAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    InternalAsyncClient(InternalClientImpl serviceClient) {
+    InternalAsyncClient(InternalOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

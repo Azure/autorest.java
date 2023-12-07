@@ -4,7 +4,7 @@
 
 package com._specs_.azure.core.lro.rpc.legacy;
 
-import com._specs_.azure.core.lro.rpc.legacy.implementation.LegacyClientImpl;
+import com._specs_.azure.core.lro.rpc.legacy.implementation.CreateResourcePollViaOperationLocationsImpl;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobData;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobResult;
 import com.azure.core.annotation.Generated;
@@ -25,7 +25,7 @@ import com.azure.core.util.polling.SyncPoller;
 @ServiceClient(builder = LegacyClientBuilder.class)
 public final class LegacyClient {
     @Generated
-    private final LegacyClientImpl serviceClient;
+    private final CreateResourcePollViaOperationLocationsImpl serviceClient;
 
     /**
      * Initializes an instance of LegacyClient class.
@@ -33,7 +33,7 @@ public final class LegacyClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LegacyClient(LegacyClientImpl serviceClient) {
+    LegacyClient(CreateResourcePollViaOperationLocationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

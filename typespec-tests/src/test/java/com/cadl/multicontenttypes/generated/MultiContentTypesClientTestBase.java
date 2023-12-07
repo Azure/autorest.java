@@ -16,9 +16,15 @@ import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
 import com.cadl.multicontenttypes.MultiContentTypesClient;
 import com.cadl.multicontenttypes.MultiContentTypesClientBuilder;
+import com.cadl.multicontenttypes.MultipleContentTypesOnRequestClient;
+import com.cadl.multicontenttypes.SingleContentTypeClient;
 
 class MultiContentTypesClientTestBase extends TestProxyTestBase {
     protected MultiContentTypesClient multiContentTypesClient;
+
+    protected SingleContentTypeClient singleContentTypeClient;
+
+    protected MultipleContentTypesOnRequestClient multipleContentTypesOnRequestClient;
 
     @Override
     protected void beforeTest() {
@@ -32,6 +38,29 @@ class MultiContentTypesClientTestBase extends TestProxyTestBase {
             multiContentTypesClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         multiContentTypesClient = multiContentTypesClientbuilder.buildClient();
+
+        MultiContentTypesClientBuilder singleContentTypeClientbuilder = new MultiContentTypesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            singleContentTypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            singleContentTypeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        singleContentTypeClient = singleContentTypeClientbuilder.buildSingleContentTypeClient();
+
+        MultiContentTypesClientBuilder multipleContentTypesOnRequestClientbuilder = new MultiContentTypesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            multipleContentTypesOnRequestClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            multipleContentTypesOnRequestClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        multipleContentTypesOnRequestClient
+            = multipleContentTypesOnRequestClientbuilder.buildMultipleContentTypesOnRequestClient();
 
     }
 }

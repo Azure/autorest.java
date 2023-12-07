@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.errormodel.implementation.ErrorModelClientImpl;
+import com.cadl.errormodel.implementation.ErrorOpsImpl;
 import com.cadl.errormodel.models.Diagnostic;
 import reactor.core.publisher.Mono;
 
@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ErrorModelClientBuilder.class, isAsync = true)
 public final class ErrorModelAsyncClient {
     @Generated
-    private final ErrorModelClientImpl serviceClient;
+    private final ErrorOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorModelAsyncClient class.
@@ -34,7 +34,7 @@ public final class ErrorModelAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ErrorModelAsyncClient(ErrorModelClientImpl serviceClient) {
+    ErrorModelAsyncClient(ErrorOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
