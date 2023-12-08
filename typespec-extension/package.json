@@ -72,12 +72,12 @@
     "@typescript-eslint/parser": "~6.13.2",
     "@typescript-eslint/eslint-plugin": "~6.13.2",
     "eslint-plugin-deprecation": "~2.0.0",
-    "@azure-tools/typespec-azure-core": "0.36.0",
-    "@azure-tools/typespec-client-generator-core": "0.36.1",
-    "@typespec/compiler": "0.50.0",
-    "@typespec/http": "0.50.0",
-    "@typespec/rest": "0.50.0",
-    "@typespec/openapi": "0.50.0",
-    "@typespec/versioning": "0.50.0"
+    "@typespec/compiler": "0.51.0",
+    "@typespec/http": "0.51.0",
+    "@typespec/rest": "0.51.0",
+    "@typespec/openapi": "0.51.0",
+    "@typespec/versioning": "0.51.0",
+    "@azure-tools/typespec-azure-core": "0.37.0",
+    "@azure-tools/typespec-client-generator-core": "0.37.0"
   }
 }
