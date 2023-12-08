@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.payload.multipart.implementation.MultiPartClientImpl;
+import com.payload.multipart.implementation.FormDatasImpl;
 import com.payload.multipart.implementation.MultipartFormDataHelper;
 import com.payload.multipart.models.MultiPartRequest;
 import reactor.core.publisher.Mono;
@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = MultiPartClientBuilder.class, isAsync = true)
 public final class MultiPartAsyncClient {
     @Generated
-    private final MultiPartClientImpl serviceClient;
+    private final FormDatasImpl serviceClient;
 
     /**
      * Initializes an instance of MultiPartAsyncClient class.
@@ -35,7 +35,7 @@ public final class MultiPartAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    MultiPartAsyncClient(MultiPartClientImpl serviceClient) {
+    MultiPartAsyncClient(FormDatasImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

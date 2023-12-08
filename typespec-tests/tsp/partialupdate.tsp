@@ -1,6 +1,8 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "PartialUpdate",
@@ -22,6 +24,10 @@ model PartialUpdateModel {
   aggregate?: string;
 }
 
+@client({
+  service: Cadl.PartialUpdate,
+  name: "PartialUpdateClient",
+})
 @route("/partialupdate")
 interface PartialUpdateOp {
   read(): {

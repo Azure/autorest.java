@@ -261,7 +261,7 @@ public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuil
      */
     @Generated
     public OptionalAsyncClient buildAsyncClient() {
-        return new OptionalAsyncClient(buildInnerClient());
+        return new OptionalAsyncClient(buildInnerClient().getOptionalOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuil
      */
     @Generated
     public OptionalClient buildClient() {
-        return new OptionalClient(buildInnerClient());
+        return new OptionalClient(buildInnerClient().getOptionalOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(OptionalClientBuilder.class);

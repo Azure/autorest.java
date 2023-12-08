@@ -288,6 +288,14 @@ abstract class ConvenienceMethodTemplateBase {
                     // hack, add wire type of parameters, as they are not added in ClientMethod, even when includeImplementationImports=true
                     for (ClientMethodParameter p : m.getParameters()) {
                         p.getWireType().addImportsTo(imports, false);
+
+                        // add imports from models, as some convenience API need to process model properties
+                        if (p.getWireType() instanceof ClassType) {
+                            ClientModel model = ClientModelUtil.getClientModel(p.getWireType().toString());
+                            if (model != null) {
+                                model.addImportsTo(imports, settings);
+                            }
+                        }
                     }
                 });
 

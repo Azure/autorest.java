@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.patch.implementation.PatchClientImpl;
+import com.cadl.patch.implementation.PatchesImpl;
 
 /**
  * Initializes a new instance of the synchronous PatchClient type.
@@ -23,7 +23,7 @@ import com.cadl.patch.implementation.PatchClientImpl;
 @ServiceClient(builder = PatchClientBuilder.class)
 public final class PatchClient {
     @Generated
-    private final PatchClientImpl serviceClient;
+    private final PatchesImpl serviceClient;
 
     /**
      * Initializes an instance of PatchClient class.
@@ -31,7 +31,7 @@ public final class PatchClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PatchClient(PatchClientImpl serviceClient) {
+    PatchClient(PatchesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

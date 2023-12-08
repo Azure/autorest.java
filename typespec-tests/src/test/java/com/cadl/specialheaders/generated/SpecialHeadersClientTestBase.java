@@ -14,24 +14,66 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-import com.cadl.specialheaders.SpecialHeadersClient;
+import com.cadl.specialheaders.EtagHeadersClient;
+import com.cadl.specialheaders.EtagHeadersOptionalBodyClient;
+import com.cadl.specialheaders.RepeatabilityHeadersClient;
+import com.cadl.specialheaders.SkipSpecialHeadersClient;
 import com.cadl.specialheaders.SpecialHeadersClientBuilder;
 
 class SpecialHeadersClientTestBase extends TestProxyTestBase {
-    protected SpecialHeadersClient specialHeadersClient;
+    protected RepeatabilityHeadersClient repeatabilityHeadersClient;
+
+    protected EtagHeadersClient etagHeadersClient;
+
+    protected EtagHeadersOptionalBodyClient etagHeadersOptionalBodyClient;
+
+    protected SkipSpecialHeadersClient skipSpecialHeadersClient;
 
     @Override
     protected void beforeTest() {
-        SpecialHeadersClientBuilder specialHeadersClientbuilder = new SpecialHeadersClientBuilder()
+        SpecialHeadersClientBuilder repeatabilityHeadersClientbuilder = new SpecialHeadersClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            specialHeadersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            repeatabilityHeadersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            specialHeadersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            repeatabilityHeadersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        specialHeadersClient = specialHeadersClientbuilder.buildClient();
+        repeatabilityHeadersClient = repeatabilityHeadersClientbuilder.buildRepeatabilityHeadersClient();
+
+        SpecialHeadersClientBuilder etagHeadersClientbuilder = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            etagHeadersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            etagHeadersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        etagHeadersClient = etagHeadersClientbuilder.buildEtagHeadersClient();
+
+        SpecialHeadersClientBuilder etagHeadersOptionalBodyClientbuilder = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            etagHeadersOptionalBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            etagHeadersOptionalBodyClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        etagHeadersOptionalBodyClient = etagHeadersOptionalBodyClientbuilder.buildEtagHeadersOptionalBodyClient();
+
+        SpecialHeadersClientBuilder skipSpecialHeadersClientbuilder = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            skipSpecialHeadersClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            skipSpecialHeadersClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        skipSpecialHeadersClient = skipSpecialHeadersClientbuilder.buildSkipSpecialHeadersClient();
 
     }
 }

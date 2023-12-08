@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.internal.implementation.InternalClientImpl;
+import com.cadl.internal.implementation.InternalOpsImpl;
 import com.cadl.internal.implementation.models.ResponseInternal;
 import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
@@ -26,7 +26,7 @@ import com.cadl.internal.models.ApiResponse;
 @ServiceClient(builder = InternalClientBuilder.class)
 public final class InternalClient {
     @Generated
-    private final InternalClientImpl serviceClient;
+    private final InternalOpsImpl serviceClient;
 
     /**
      * Initializes an instance of InternalClient class.
@@ -34,7 +34,7 @@ public final class InternalClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    InternalClient(InternalClientImpl serviceClient) {
+    InternalClient(InternalOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

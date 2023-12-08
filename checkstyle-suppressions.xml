@@ -23,7 +23,7 @@
   <!-- code model -->
   <suppress checks="[ParameterName|MemberName]" files="com[/\\]azure[/\\]autorest[/\\]extension[/\\]base[/\\]model[/\\]codemodel[/\\].*.java"/>
   <!-- class type -->
-  <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]model[/\\]clientmodel[/\\](ArrayType|ClassType|GenericType|PrimitiveType).java"/>
+  <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]model[/\\]clientmodel[/\\]GenericType.java"/>
   <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]fluent[/\\]model[/\\]FluentType.java"/>
   <!-- androidgen -->
   <suppress checks="[a-zA-Z0-9]*" files="com[/\\]azure[/\\]autorest[/\\]android[/\\].*"/>

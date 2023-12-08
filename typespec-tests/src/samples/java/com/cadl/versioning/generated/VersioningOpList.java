@@ -15,8 +15,8 @@ public class VersioningOpList {
     public static void main(String[] args) {
         VersioningClient versioningClient = new VersioningClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
-        // BEGIN:com.cadl.versioning.generated.list.versioningoplist
+        // BEGIN:com.cadl.versioning.generated.versioningoplist.versioningoplist
         PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), "age gt 18");
-        // END:com.cadl.versioning.generated.list.versioningoplist
+        // END:com.cadl.versioning.generated.versioningoplist.versioningoplist
     }
 }

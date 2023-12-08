@@ -21,7 +21,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenientClientImpl;
+import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenienceOpsImpl;
 import com.cadl.protocolandconvenient.models.ResourceA;
 import com.cadl.protocolandconvenient.models.ResourceB;
 import com.cadl.protocolandconvenient.models.ResourceE;
@@ -38,7 +38,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class, isAsync = true)
 public final class ProtocolAndConvenientAsyncClient {
     @Generated
-    private final ProtocolAndConvenientClientImpl serviceClient;
+    private final ProtocolAndConvenienceOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ProtocolAndConvenientAsyncClient class.
@@ -46,7 +46,7 @@ public final class ProtocolAndConvenientAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ProtocolAndConvenientAsyncClient(ProtocolAndConvenientClientImpl serviceClient) {
+    ProtocolAndConvenientAsyncClient(ProtocolAndConvenienceOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

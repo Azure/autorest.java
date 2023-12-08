@@ -244,7 +244,7 @@ public final class MultiPartClientBuilder
      */
     @Generated
     public MultiPartAsyncClient buildAsyncClient() {
-        return new MultiPartAsyncClient(buildInnerClient());
+        return new MultiPartAsyncClient(buildInnerClient().getFormDatas());
     }
 
     /**
@@ -254,7 +254,7 @@ public final class MultiPartClientBuilder
      */
     @Generated
     public MultiPartClient buildClient() {
-        return new MultiPartClient(buildInnerClient());
+        return new MultiPartClient(buildInnerClient().getFormDatas());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(MultiPartClientBuilder.class);

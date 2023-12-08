@@ -13,8 +13,8 @@ public class BuiltinOpRead {
     public static void main(String[] args) {
         BuiltinClient builtinClient
             = new BuiltinClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
-        // BEGIN:com.cadl.builtin.generated.read.builtinopread
+        // BEGIN:com.cadl.builtin.generated.builtinopread.builtinopread
         Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
-        // END:com.cadl.builtin.generated.read.builtinopread
+        // END:com.cadl.builtin.generated.builtinopread.builtinopread
     }
 }

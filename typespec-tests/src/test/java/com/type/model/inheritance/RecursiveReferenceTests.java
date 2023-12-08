@@ -15,7 +15,6 @@ public class RecursiveReferenceTests {
     @Test
     public void test() {
         Extension extension = client.get();
-        // bug
-//        client.put(extension);
+        client.put(extension);
     }
 }

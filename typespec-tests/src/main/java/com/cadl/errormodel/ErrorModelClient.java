@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.errormodel.implementation.ErrorModelClientImpl;
+import com.cadl.errormodel.implementation.ErrorOpsImpl;
 import com.cadl.errormodel.models.Diagnostic;
 
 /**
@@ -24,7 +24,7 @@ import com.cadl.errormodel.models.Diagnostic;
 @ServiceClient(builder = ErrorModelClientBuilder.class)
 public final class ErrorModelClient {
     @Generated
-    private final ErrorModelClientImpl serviceClient;
+    private final ErrorOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ErrorModelClient class.
@@ -32,7 +32,7 @@ public final class ErrorModelClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ErrorModelClient(ErrorModelClientImpl serviceClient) {
+    ErrorModelClient(ErrorOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

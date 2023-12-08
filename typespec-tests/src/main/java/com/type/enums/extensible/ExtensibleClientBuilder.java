@@ -244,7 +244,7 @@ public final class ExtensibleClientBuilder
      */
     @Generated
     public ExtensibleAsyncClient buildAsyncClient() {
-        return new ExtensibleAsyncClient(buildInnerClient());
+        return new ExtensibleAsyncClient(buildInnerClient().getStringOperations());
     }
 
     /**
@@ -254,7 +254,7 @@ public final class ExtensibleClientBuilder
      */
     @Generated
     public ExtensibleClient buildClient() {
-        return new ExtensibleClient(buildInnerClient());
+        return new ExtensibleClient(buildInnerClient().getStringOperations());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ExtensibleClientBuilder.class);
