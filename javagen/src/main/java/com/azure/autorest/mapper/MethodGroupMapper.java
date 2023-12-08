@@ -80,29 +80,31 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         builder.className(className);
 
-        Proxy.Builder proxyBuilder = createProxyBuilder();
+        if (!CoreUtils.isNullOrEmpty(methodGroup.getOperations())) {
+            Proxy.Builder proxyBuilder = createProxyBuilder();
 
-        String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
-        restAPIName += "Service";
-        String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
-        // TODO: Assume all operations share the same base url
-        proxyBuilder.name(restAPIName)
-            .clientTypeName(serviceClientName + interfaceName)
-            .baseURL(methodGroup.getOperations().get(0).getRequests().get(0).getProtocol().getHttp().getUri());
+            String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
+            restAPIName += "Service";
+            String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
+            // TODO: Assume all operations share the same base url
+            proxyBuilder.name(restAPIName)
+                    .clientTypeName(serviceClientName + interfaceName)
+                    .baseURL(methodGroup.getOperations().get(0).getRequests().get(0).getProtocol().getHttp().getUri());
 
-        List<ProxyMethod> restAPIMethods = new ArrayList<>();
-        for (Operation method : methodGroup.getOperations()) {
-            if (settings.isDataPlaneClient()) {
-                MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
+            List<ProxyMethod> restAPIMethods = new ArrayList<>();
+            for (Operation method : methodGroup.getOperations()) {
+                if (settings.isDataPlaneClient()) {
+                    MethodUtil.tryMergeBinaryRequestsAndUpdateOperation(method.getRequests(), method);
+                }
+                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
             }
-            restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values().stream().flatMap(Collection::stream).collect(Collectors.toList()));
+            proxyBuilder.methods(restAPIMethods);
+
+            builder.proxy(proxyBuilder.build());
         }
-        proxyBuilder.methods(restAPIMethods);
 
-        serviceClientName = ClientModelUtil.getClientImplementClassName(methodGroup.getCodeModel());
-
-        builder.proxy(proxyBuilder.build())
-            .serviceClientName(serviceClientName);
+        String serviceClientName = ClientModelUtil.getClientImplementClassName(methodGroup.getCodeModel());
+        builder.serviceClientName(serviceClientName);
 
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
 

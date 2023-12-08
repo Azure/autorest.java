@@ -65,8 +65,12 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         });
         javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
         {
-            classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
-            classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
+            final boolean hasProxy = methodGroupClient.getProxy() != null;
+
+            if (hasProxy) {
+                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
+            }
 
             classBlock.javadocComment("The service client containing this operation class.");
             classBlock.privateFinalMemberVariable(methodGroupClient.getServiceClientName(), "client");
@@ -99,7 +103,9 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 }
             }
 
-            Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
+            if (hasProxy) {
+                Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
+            }
 
             TemplateUtil.writeClientMethodsAndHelpers(classBlock, methodGroupClient.getClientMethods());
 

@@ -165,7 +165,10 @@ public class MethodGroupClient {
             }
         }
 
-        getProxy().addImportsTo(imports, includeImplementationImports, settings);
+        Proxy proxy = getProxy();
+        if (proxy != null) {
+            proxy.addImportsTo(imports, includeImplementationImports, settings);
+        }
 
         for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
