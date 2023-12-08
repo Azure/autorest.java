@@ -261,7 +261,7 @@ public final class BuiltinClientBuilder implements HttpTrait<BuiltinClientBuilde
      */
     @Generated
     public BuiltinAsyncClient buildAsyncClient() {
-        return new BuiltinAsyncClient(buildInnerClient());
+        return new BuiltinAsyncClient(buildInnerClient().getBuiltinOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class BuiltinClientBuilder implements HttpTrait<BuiltinClientBuilde
      */
     @Generated
     public BuiltinClient buildClient() {
-        return new BuiltinClient(buildInnerClient());
+        return new BuiltinClient(buildInnerClient().getBuiltinOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(BuiltinClientBuilder.class);

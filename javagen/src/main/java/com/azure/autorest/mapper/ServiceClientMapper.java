@@ -83,13 +83,15 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             builder.clientMethods(Collections.emptyList());
         }
 
+        List<ServiceClientProperty> properties = processClientProperties(codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName));
+
         List<MethodGroupClient> serviceClientMethodGroupClients = new ArrayList<>();
         List<OperationGroup> codeModelMethodGroups = codeModel.getOperationGroups().stream()
                 .filter(og -> og.getLanguage().getJava().getName() != null &&
                         !og.getLanguage().getJava().getName().isEmpty())
                 .collect(Collectors.toList());
         for (OperationGroup codeModelMethodGroup : codeModelMethodGroups) {
-            serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup));
+            serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup, properties));
         }
         builder.methodGroupClients(serviceClientMethodGroupClients);
 
@@ -97,7 +99,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             proxy = serviceClientMethodGroupClients.iterator().next().getProxy();
         }
 
-        processParametersAndConstructors(builder, codeModel, codeModel, ClientModelUtil.getServiceVersionClassName(serviceClientInterfaceName), proxy);
+        processParametersAndConstructors(builder, codeModel, codeModel, properties, proxy);
 
         return builder.build();
     }
@@ -187,7 +189,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         return proxy;
     }
 
-    protected void processParametersAndConstructors(ServiceClient.Builder builder, Client client, CodeModel codeModel, String serviceVersionClassName, Proxy proxy) {
+    protected List<ServiceClientProperty> processClientProperties(Client client, String serviceVersionClassName) {
         JavaSettings settings = JavaSettings.getInstance();
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
@@ -251,6 +253,22 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 }
             }
         }
+
+        return serviceClientProperties;
+    }
+
+    protected void processParametersAndConstructors(ServiceClient.Builder builder, Client client, CodeModel codeModel, List<ServiceClientProperty> serviceClientProperties, Proxy proxy) {
+        JavaSettings settings = JavaSettings.getInstance();
+
+        List<Parameter> clientParameters = Stream.concat(client.getGlobalParameters().stream(),
+                        client.getOperationGroups().stream()
+                                .flatMap(og -> og.getOperations().stream())
+                                .flatMap(o -> o.getRequests().stream())
+                                .flatMap(r -> r.getParameters().stream()))
+                .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
+                .distinct()
+                .collect(Collectors.toList());
+
         addHttpPipelineProperty(serviceClientProperties);
         addSerializerAdapterProperty(serviceClientProperties, settings);
         if (settings.isFluent()) {

@@ -10,6 +10,7 @@ package com._specs_.azure.core.basic.generated;
 
 import com._specs_.azure.core.basic.BasicClient;
 import com._specs_.azure.core.basic.BasicClientBuilder;
+import com._specs_.azure.core.basic.TwoModelsAsPageItemClient;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
@@ -18,6 +19,8 @@ import com.azure.core.test.TestProxyTestBase;
 
 class BasicClientTestBase extends TestProxyTestBase {
     protected BasicClient basicClient;
+
+    protected TwoModelsAsPageItemClient twoModelsAsPageItemClient;
 
     @Override
     protected void beforeTest() {
@@ -29,6 +32,16 @@ class BasicClientTestBase extends TestProxyTestBase {
             basicClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         basicClient = basicClientbuilder.buildClient();
+
+        BasicClientBuilder twoModelsAsPageItemClientbuilder
+            = new BasicClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            twoModelsAsPageItemClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            twoModelsAsPageItemClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        twoModelsAsPageItemClient = twoModelsAsPageItemClientbuilder.buildTwoModelsAsPageItemClient();
 
     }
 }

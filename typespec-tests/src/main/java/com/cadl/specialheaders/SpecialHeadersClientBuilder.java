@@ -41,7 +41,16 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the SpecialHeadersClient type.
  */
-@ServiceClientBuilder(serviceClients = { SpecialHeadersClient.class, SpecialHeadersAsyncClient.class })
+@ServiceClientBuilder(
+    serviceClients = {
+        RepeatabilityHeadersClient.class,
+        EtagHeadersClient.class,
+        EtagHeadersOptionalBodyClient.class,
+        SkipSpecialHeadersClient.class,
+        RepeatabilityHeadersAsyncClient.class,
+        EtagHeadersAsyncClient.class,
+        EtagHeadersOptionalBodyAsyncClient.class,
+        SkipSpecialHeadersAsyncClient.class })
 public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeadersClientBuilder>,
     ConfigurationTrait<SpecialHeadersClientBuilder>, EndpointTrait<SpecialHeadersClientBuilder> {
     @Generated
@@ -275,23 +284,83 @@ public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeade
     }
 
     /**
-     * Builds an instance of SpecialHeadersAsyncClient class.
+     * Builds an instance of RepeatabilityHeadersAsyncClient class.
      * 
-     * @return an instance of SpecialHeadersAsyncClient.
+     * @return an instance of RepeatabilityHeadersAsyncClient.
      */
     @Generated
-    public SpecialHeadersAsyncClient buildAsyncClient() {
-        return new SpecialHeadersAsyncClient(buildInnerClient());
+    public RepeatabilityHeadersAsyncClient buildRepeatabilityHeadersAsyncClient() {
+        return new RepeatabilityHeadersAsyncClient(buildInnerClient().getRepeatabilityHeaders());
     }
 
     /**
-     * Builds an instance of SpecialHeadersClient class.
+     * Builds an instance of EtagHeadersAsyncClient class.
      * 
-     * @return an instance of SpecialHeadersClient.
+     * @return an instance of EtagHeadersAsyncClient.
      */
     @Generated
-    public SpecialHeadersClient buildClient() {
-        return new SpecialHeadersClient(buildInnerClient());
+    public EtagHeadersAsyncClient buildEtagHeadersAsyncClient() {
+        return new EtagHeadersAsyncClient(buildInnerClient().getEtagHeaders());
+    }
+
+    /**
+     * Builds an instance of EtagHeadersOptionalBodyAsyncClient class.
+     * 
+     * @return an instance of EtagHeadersOptionalBodyAsyncClient.
+     */
+    @Generated
+    public EtagHeadersOptionalBodyAsyncClient buildEtagHeadersOptionalBodyAsyncClient() {
+        return new EtagHeadersOptionalBodyAsyncClient(buildInnerClient().getEtagHeadersOptionalBodies());
+    }
+
+    /**
+     * Builds an instance of SkipSpecialHeadersAsyncClient class.
+     * 
+     * @return an instance of SkipSpecialHeadersAsyncClient.
+     */
+    @Generated
+    public SkipSpecialHeadersAsyncClient buildSkipSpecialHeadersAsyncClient() {
+        return new SkipSpecialHeadersAsyncClient(buildInnerClient().getSkipSpecialHeaders());
+    }
+
+    /**
+     * Builds an instance of RepeatabilityHeadersClient class.
+     * 
+     * @return an instance of RepeatabilityHeadersClient.
+     */
+    @Generated
+    public RepeatabilityHeadersClient buildRepeatabilityHeadersClient() {
+        return new RepeatabilityHeadersClient(buildInnerClient().getRepeatabilityHeaders());
+    }
+
+    /**
+     * Builds an instance of EtagHeadersClient class.
+     * 
+     * @return an instance of EtagHeadersClient.
+     */
+    @Generated
+    public EtagHeadersClient buildEtagHeadersClient() {
+        return new EtagHeadersClient(buildInnerClient().getEtagHeaders());
+    }
+
+    /**
+     * Builds an instance of EtagHeadersOptionalBodyClient class.
+     * 
+     * @return an instance of EtagHeadersOptionalBodyClient.
+     */
+    @Generated
+    public EtagHeadersOptionalBodyClient buildEtagHeadersOptionalBodyClient() {
+        return new EtagHeadersOptionalBodyClient(buildInnerClient().getEtagHeadersOptionalBodies());
+    }
+
+    /**
+     * Builds an instance of SkipSpecialHeadersClient class.
+     * 
+     * @return an instance of SkipSpecialHeadersClient.
+     */
+    @Generated
+    public SkipSpecialHeadersClient buildSkipSpecialHeadersClient() {
+        return new SkipSpecialHeadersClient(buildInnerClient().getSkipSpecialHeaders());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(SpecialHeadersClientBuilder.class);

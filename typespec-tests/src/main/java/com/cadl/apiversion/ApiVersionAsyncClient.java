@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.apiversion.implementation.ApiVersionClientImpl;
+import com.cadl.apiversion.implementation.ApiVersionOpsImpl;
 import reactor.core.publisher.Mono;
 
 /**
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ApiVersionClientBuilder.class, isAsync = true)
 public final class ApiVersionAsyncClient {
     @Generated
-    private final ApiVersionClientImpl serviceClient;
+    private final ApiVersionOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ApiVersionAsyncClient class.
@@ -33,7 +33,7 @@ public final class ApiVersionAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ApiVersionAsyncClient(ApiVersionClientImpl serviceClient) {
+    ApiVersionAsyncClient(ApiVersionOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

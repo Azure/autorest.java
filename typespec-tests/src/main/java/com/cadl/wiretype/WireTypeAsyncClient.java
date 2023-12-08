@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.wiretype.implementation.WireTypeClientImpl;
+import com.cadl.wiretype.implementation.WireTypeOpsImpl;
 import com.cadl.wiretype.models.SubClass;
 import com.cadl.wiretype.models.SubClassBothMismatch;
 import com.cadl.wiretype.models.SubClassMismatch;
@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = WireTypeClientBuilder.class, isAsync = true)
 public final class WireTypeAsyncClient {
     @Generated
-    private final WireTypeClientImpl serviceClient;
+    private final WireTypeOpsImpl serviceClient;
 
     /**
      * Initializes an instance of WireTypeAsyncClient class.
@@ -36,7 +36,7 @@ public final class WireTypeAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    WireTypeAsyncClient(WireTypeClientImpl serviceClient) {
+    WireTypeAsyncClient(WireTypeOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

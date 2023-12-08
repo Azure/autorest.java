@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.type.enums.fixed.implementation.FixedClientImpl;
+import com.type.enums.fixed.implementation.StringOperationsImpl;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 
 /**
@@ -24,7 +24,7 @@ import com.type.enums.fixed.models.DaysOfWeekEnum;
 @ServiceClient(builder = FixedClientBuilder.class)
 public final class FixedClient {
     @Generated
-    private final FixedClientImpl serviceClient;
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of FixedClient class.
@@ -32,7 +32,7 @@ public final class FixedClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    FixedClient(FixedClientImpl serviceClient) {
+    FixedClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

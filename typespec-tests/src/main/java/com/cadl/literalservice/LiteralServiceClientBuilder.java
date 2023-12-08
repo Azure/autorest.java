@@ -261,7 +261,7 @@ public final class LiteralServiceClientBuilder implements HttpTrait<LiteralServi
      */
     @Generated
     public LiteralServiceAsyncClient buildAsyncClient() {
-        return new LiteralServiceAsyncClient(buildInnerClient());
+        return new LiteralServiceAsyncClient(buildInnerClient().getLiteralOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class LiteralServiceClientBuilder implements HttpTrait<LiteralServi
      */
     @Generated
     public LiteralServiceClient buildClient() {
-        return new LiteralServiceClient(buildInnerClient());
+        return new LiteralServiceClient(buildInnerClient().getLiteralOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(LiteralServiceClientBuilder.class);

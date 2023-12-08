@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.specialchars.implementation.SpecialCharsClientImpl;
+import com.cadl.specialchars.implementation.BuiltinOpsImpl;
 import com.cadl.specialchars.models.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = SpecialCharsClientBuilder.class, isAsync = true)
 public final class SpecialCharsAsyncClient {
     @Generated
-    private final SpecialCharsClientImpl serviceClient;
+    private final BuiltinOpsImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialCharsAsyncClient class.
@@ -36,7 +36,7 @@ public final class SpecialCharsAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    SpecialCharsAsyncClient(SpecialCharsClientImpl serviceClient) {
+    SpecialCharsAsyncClient(BuiltinOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

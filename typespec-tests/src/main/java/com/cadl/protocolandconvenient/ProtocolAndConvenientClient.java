@@ -18,7 +18,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
-import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenientClientImpl;
+import com.cadl.protocolandconvenient.implementation.ProtocolAndConvenienceOpsImpl;
 import com.cadl.protocolandconvenient.models.ResourceA;
 import com.cadl.protocolandconvenient.models.ResourceB;
 import com.cadl.protocolandconvenient.models.ResourceE;
@@ -32,7 +32,7 @@ import com.cadl.protocolandconvenient.models.ResourceJ;
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class)
 public final class ProtocolAndConvenientClient {
     @Generated
-    private final ProtocolAndConvenientClientImpl serviceClient;
+    private final ProtocolAndConvenienceOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ProtocolAndConvenientClient class.
@@ -40,7 +40,7 @@ public final class ProtocolAndConvenientClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ProtocolAndConvenientClient(ProtocolAndConvenientClientImpl serviceClient) {
+    ProtocolAndConvenientClient(ProtocolAndConvenienceOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

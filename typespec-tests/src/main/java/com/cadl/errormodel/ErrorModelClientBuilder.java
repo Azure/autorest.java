@@ -261,7 +261,7 @@ public final class ErrorModelClientBuilder implements HttpTrait<ErrorModelClient
      */
     @Generated
     public ErrorModelAsyncClient buildAsyncClient() {
-        return new ErrorModelAsyncClient(buildInnerClient());
+        return new ErrorModelAsyncClient(buildInnerClient().getErrorOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class ErrorModelClientBuilder implements HttpTrait<ErrorModelClient
      */
     @Generated
     public ErrorModelClient buildClient() {
-        return new ErrorModelClient(buildInnerClient());
+        return new ErrorModelClient(buildInnerClient().getErrorOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ErrorModelClientBuilder.class);

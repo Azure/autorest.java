@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.type.enums.extensible.implementation.ExtensibleClientImpl;
+import com.type.enums.extensible.implementation.StringOperationsImpl;
 import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 import reactor.core.publisher.Mono;
 
@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ExtensibleClientBuilder.class, isAsync = true)
 public final class ExtensibleAsyncClient {
     @Generated
-    private final ExtensibleClientImpl serviceClient;
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleAsyncClient class.
@@ -34,7 +34,7 @@ public final class ExtensibleAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ExtensibleAsyncClient(ExtensibleClientImpl serviceClient) {
+    ExtensibleAsyncClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

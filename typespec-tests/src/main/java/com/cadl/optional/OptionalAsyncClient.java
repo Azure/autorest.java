@@ -17,7 +17,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.optional.implementation.OptionalClientImpl;
+import com.cadl.optional.implementation.OptionalOpsImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
 import reactor.core.publisher.Mono;
@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class OptionalAsyncClient {
     @Generated
-    private final OptionalClientImpl serviceClient;
+    private final OptionalOpsImpl serviceClient;
 
     /**
      * Initializes an instance of OptionalAsyncClient class.
@@ -36,7 +36,7 @@ public final class OptionalAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    OptionalAsyncClient(OptionalClientImpl serviceClient) {
+    OptionalAsyncClient(OptionalOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

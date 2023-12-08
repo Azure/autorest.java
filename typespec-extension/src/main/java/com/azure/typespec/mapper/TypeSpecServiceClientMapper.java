@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -42,10 +43,13 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
             builder.clientMethods(Collections.emptyList());
         }
 
+        List<ServiceClientProperty> properties = processClientProperties(client,
+                client.getServiceVersion() == null ? null : client.getServiceVersion().getLanguage().getJava().getName());
+
         List<MethodGroupClient> methodGroupClients = new ArrayList<>();
         client.getOperationGroups().stream()
                 .filter(og -> !CoreUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
-                .forEach(og -> methodGroupClients.add(Mappers.getMethodGroupMapper().map(og)));
+                .forEach(og -> methodGroupClients.add(Mappers.getMethodGroupMapper().map(og, properties)));
         builder.methodGroupClients(methodGroupClients);
 
         if (proxy == null) {
@@ -53,9 +57,7 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
         }
 
         // TODO (weidxu): security definition could be different for different client
-        processParametersAndConstructors(builder, client, codeModel,
-                client.getServiceVersion() == null ? null : client.getServiceVersion().getLanguage().getJava().getName(),
-                proxy);
+        processParametersAndConstructors(builder, client, codeModel, properties, proxy);
 
         processPipelinePolicyDetails(builder, client);
 

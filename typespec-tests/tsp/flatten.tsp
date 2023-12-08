@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Flatten",
@@ -47,6 +49,10 @@ model User {
   user: string;
 }
 
+@client({
+  service: Cadl.Flatten,
+  name: "FlattenClient",
+})
 @route("/flatten")
 interface FlattenOp {
   @route("send")

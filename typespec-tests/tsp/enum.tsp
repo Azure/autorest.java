@@ -1,8 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "EnumService",
@@ -60,6 +62,10 @@ model Operation {
   unitValue: Unit.Milligram;
 }
 
+@client({
+  service: Cadl.EnumService,
+  name: "EnumServiceClient",
+})
 @route("/enum")
 interface EnumOp {
   @get
