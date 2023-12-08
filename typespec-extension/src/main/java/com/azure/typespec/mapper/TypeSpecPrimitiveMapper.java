@@ -21,9 +21,9 @@ public class TypeSpecPrimitiveMapper extends PrimitiveMapper {
     @Override
     protected IType createPrimitiveType(PrimitiveSchema primaryType) {
         if (primaryType.getType() == Schema.AllSchemaTypes.DATE) {
-            return ClassType.LocalDate;
+            return ClassType.LOCAL_DATE;
         } else if (primaryType.getType() == Schema.AllSchemaTypes.UNIXTIME) {
-            return PrimitiveType.UnixTimeLong;
+            return PrimitiveType.UNIX_TIME_LONG;
         } else {
             return super.createPrimitiveType(primaryType);
         }

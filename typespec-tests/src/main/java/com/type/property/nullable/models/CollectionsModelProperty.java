@@ -6,28 +6,29 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Model with collection models properties.
  */
 @Immutable
-public final class CollectionsModelProperty {
+public final class CollectionsModelProperty implements JsonSerializable<CollectionsModelProperty> {
     /*
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty")
-    private String requiredProperty;
+    private final String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty")
-    private List<InnerModel> nullableProperty;
+    private final List<InnerModel> nullableProperty;
 
     /**
      * Creates an instance of CollectionsModelProperty class.
@@ -36,9 +37,7 @@ public final class CollectionsModelProperty {
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    @JsonCreator
-    public CollectionsModelProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
-        @JsonProperty(value = "nullableProperty") List<InnerModel> nullableProperty) {
+    public CollectionsModelProperty(String requiredProperty, List<InnerModel> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -61,5 +60,43 @@ public final class CollectionsModelProperty {
     @Generated
     public List<InnerModel> getNullableProperty() {
         return this.nullableProperty;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+            (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of CollectionsModelProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of CollectionsModelProperty if the JsonReader was pointing to an instance of it, or null if
+     * it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the CollectionsModelProperty.
+     */
+    public static CollectionsModelProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String requiredProperty = null;
+            List<InnerModel> nullableProperty = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("requiredProperty".equals(fieldName)) {
+                    requiredProperty = reader.getString();
+                } else if ("nullableProperty".equals(fieldName)) {
+                    nullableProperty = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new CollectionsModelProperty(requiredProperty, nullableProperty);
+        });
     }
 }

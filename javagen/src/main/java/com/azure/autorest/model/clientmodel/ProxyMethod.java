@@ -335,7 +335,7 @@ public class ProxyMethod {
     }
 
     private ProxyMethodParameter mapToSyncParam(ProxyMethodParameter param) {
-        return param.toNewBuilder()
+        return param.newBuilder()
             .clientType(mapToSyncType(param.getClientType()))
             .rawType(mapToSyncType(param.getRawType()))
             .wireType(mapToSyncType(param.getWireType()))
@@ -343,8 +343,8 @@ public class ProxyMethod {
     }
 
     private IType mapToSyncType(IType type) {
-        if (type == GenericType.FluxByteBuffer) {
-            return ClassType.BinaryData;
+        if (type == GenericType.FLUX_BYTE_BUFFER) {
+            return ClassType.BINARY_DATA;
         }
 
         if (type instanceof GenericType) {
@@ -352,16 +352,16 @@ public class ProxyMethod {
             if (genericType.getName().equals("Mono")) {
                 if (genericType.getTypeArguments()[0] instanceof GenericType) {
                     GenericType innerGenericType = (GenericType) genericType.getTypeArguments()[0];
-                    if (innerGenericType.getName().equals("ResponseBase") && innerGenericType.getTypeArguments()[1] == GenericType.FluxByteBuffer) {
+                    if (innerGenericType.getName().equals("ResponseBase") && innerGenericType.getTypeArguments()[1] == GenericType.FLUX_BYTE_BUFFER) {
                         return GenericType.RestResponse(innerGenericType.getTypeArguments()[0],
                                 JavaSettings.getInstance().isInputStreamForBinary()
-                                        ? ClassType.InputStream : ClassType.BinaryData);
+                                        ? ClassType.INPUT_STREAM : ClassType.BINARY_DATA);
                     }
                 }
 
-                if (genericType.getTypeArguments()[0] == ClassType.StreamResponse) {
+                if (genericType.getTypeArguments()[0] == ClassType.STREAM_RESPONSE) {
                     return JavaSettings.getInstance().isInputStreamForBinary()
-                            ? GenericType.Response(ClassType.InputStream) : GenericType.Response(ClassType.BinaryData);
+                            ? GenericType.Response(ClassType.INPUT_STREAM) : GenericType.Response(ClassType.BINARY_DATA);
                 }
                 return genericType.getTypeArguments()[0];
             }

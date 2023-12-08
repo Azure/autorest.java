@@ -6,28 +6,29 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Model with collection bytes properties.
  */
 @Immutable
-public final class CollectionsByteProperty {
+public final class CollectionsByteProperty implements JsonSerializable<CollectionsByteProperty> {
     /*
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty")
-    private String requiredProperty;
+    private final String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty")
-    private List<byte[]> nullableProperty;
+    private final List<byte[]> nullableProperty;
 
     /**
      * Creates an instance of CollectionsByteProperty class.
@@ -36,9 +37,7 @@ public final class CollectionsByteProperty {
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    @JsonCreator
-    public CollectionsByteProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
-        @JsonProperty(value = "nullableProperty") List<byte[]> nullableProperty) {
+    public CollectionsByteProperty(String requiredProperty, List<byte[]> nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -61,5 +60,43 @@ public final class CollectionsByteProperty {
     @Generated
     public List<byte[]> getNullableProperty() {
         return this.nullableProperty;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+            (writer, element) -> writer.writeBinary(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of CollectionsByteProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of CollectionsByteProperty if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the CollectionsByteProperty.
+     */
+    public static CollectionsByteProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String requiredProperty = null;
+            List<byte[]> nullableProperty = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("requiredProperty".equals(fieldName)) {
+                    requiredProperty = reader.getString();
+                } else if ("nullableProperty".equals(fieldName)) {
+                    nullableProperty = reader.readArray(reader1 -> reader1.getBinary());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new CollectionsByteProperty(requiredProperty, nullableProperty);
+        });
     }
 }

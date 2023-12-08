@@ -47,14 +47,14 @@ public class FluentModelPropertyRegion {
         protected String getBaseMethodSignature() {
             return String.format("%1$s(%2$s %3$s)",
                     this.name,
-                    FluentType.Region,
+                    FluentType.REGION,
                     modelProperty.getName());
         }
 
         @Override
         public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
             super.addImportsTo(imports, includeImplementationImports);
-            FluentType.Region.addImportsTo(imports, false);
+            FluentType.REGION.addImportsTo(imports, false);
         }
     }
 

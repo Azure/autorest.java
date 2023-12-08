@@ -6,32 +6,21 @@ package com.type.model.inheritance.nesteddiscriminator.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "sharktype",
-    defaultImpl = Shark.class)
-@JsonTypeName("shark")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "saw", value = SawShark.class),
-    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class) })
 @Immutable
 public class Shark extends Fish {
     /*
      * The sharktype property.
      */
     @Generated
-    @JsonProperty(value = "sharktype")
-    private String sharktype;
+    private final String sharktype;
 
     /**
      * Creates an instance of Shark class.
@@ -40,8 +29,7 @@ public class Shark extends Fish {
      * @param sharktype the sharktype value to set.
      */
     @Generated
-    @JsonCreator
-    public Shark(@JsonProperty(value = "age") int age, @JsonProperty(value = "sharktype") String sharktype) {
+    public Shark(int age, String sharktype) {
         super(age);
         this.sharktype = sharktype;
     }
@@ -54,5 +42,72 @@ public class Shark extends Fish {
     @Generated
     public String getSharktype() {
         return this.sharktype;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("age", getAge());
+        jsonWriter.writeStringField("sharktype", this.sharktype);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Shark from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Shark.
+     */
+    public static Shark fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
+
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("sharktype".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
+                return fromJsonKnownDiscriminator(readerToUse);
+            } else if ("saw".equals(discriminatorValue)) {
+                return SawShark.fromJson(readerToUse.reset());
+            } else if ("goblin".equals(discriminatorValue)) {
+                return GoblinShark.fromJson(readerToUse.reset());
+            } else {
+                return fromJsonKnownDiscriminator(readerToUse.reset());
+            }
+        });
+    }
+
+    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int age = 0;
+            String sharktype = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("sharktype".equals(fieldName)) {
+                    sharktype = reader.getString();
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Shark(age, sharktype);
+        });
     }
 }

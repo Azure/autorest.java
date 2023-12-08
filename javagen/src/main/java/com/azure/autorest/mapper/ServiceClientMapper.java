@@ -110,33 +110,33 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         return new ClientMethodParameter.Builder()
                 .description("The serializer to serialize an object into a string")
                 .finalParameter(false)
-                .wireType(ClassType.SerializerAdapter)
+                .wireType(ClassType.SERIALIZER_ADAPTER)
                 .name("serializerAdapter")
                 .required(true)
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NON_NULL)
                         : new ArrayList<>())
                 .build();
     }
 
     protected IType getHttpPipelineClassType() {
-        return ClassType.HttpPipeline;
+        return ClassType.HTTP_PIPELINE;
     }
 
     protected void addSerializerAdapterProperty(List<ServiceClientProperty> serviceClientProperties, JavaSettings settings) {
         if (settings.isBranded()) {
             serviceClientProperties.add(new ServiceClientProperty("The serializer to serialize an object into a string.",
-                    ClassType.SerializerAdapter, "serializerAdapter", true, null,
+                    ClassType.SERIALIZER_ADAPTER, "serializerAdapter", true, null,
                     settings.isFluent() ? JavaVisibility.PackagePrivate : JavaVisibility.Public));
         }
     }
 
     protected void addHttpPipelineProperty(List<ServiceClientProperty> serviceClientProperties) {
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through.",
-                ClassType.HttpPipeline, "httpPipeline", true, null));
+                ClassType.HTTP_PIPELINE, "httpPipeline", true, null));
     }
 
     protected ServiceClient.Builder createClientBuilder() {
@@ -234,7 +234,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientPropertyRequired = false;
             }
 
-            if (serviceClientPropertyClientType != ClassType.TokenCredential) {
+            if (serviceClientPropertyClientType != ClassType.TOKEN_CREDENTIAL) {
                 ServiceClientProperty serviceClientProperty =
                         new ServiceClientProperty.Builder()
                                 .description(serviceClientPropertyDescription)
@@ -256,7 +256,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         if (settings.isFluent()) {
             serviceClientProperties.add(new ServiceClientProperty.Builder()
                     .description("The default poll interval for long-running operation.")
-                    .type(ClassType.Duration)
+                    .type(ClassType.DURATION)
                     .name("defaultPollInterval")
                     .readOnly(true)
                     .build());
@@ -267,14 +267,14 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()
                 .description("the credentials for Azure")
                 .finalParameter(false)
-                .wireType(ClassType.TokenCredential)
+                .wireType(ClassType.TOKEN_CREDENTIAL)
                 .name("credential")
                 .required(true)
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NON_NULL)
                         : new ArrayList<>())
                 .build();
 
@@ -288,7 +288,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .fromClient(true)
                 .defaultValue(null)
                 .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NonNull)
+                        ? Collections.singletonList(ClassType.NON_NULL)
                         : new ArrayList<>())
                 .build();
 
@@ -388,28 +388,28 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter.Builder()
                     .description("The Azure environment")
                     .finalParameter(false)
-                    .wireType(ClassType.AzureEnvironment)
+                    .wireType(ClassType.AZURE_ENVIRONMENT)
                     .name("environment")
                     .required(true)
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("AzureEnvironment.AZURE")
                     .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NonNull)
+                            ? Collections.singletonList(ClassType.NON_NULL)
                             : new ArrayList<>())
                     .build();
 
             ClientMethodParameter defaultPollIntervalParameter = new ClientMethodParameter.Builder()
                     .description("The default poll interval for long-running operation")
                     .finalParameter(false)
-                    .wireType(ClassType.Duration)
+                    .wireType(ClassType.DURATION)
                     .name("defaultPollInterval")
                     .required(true)
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("Duration.ofSeconds(30)")
                     .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NonNull)
+                            ? Collections.singletonList(ClassType.NON_NULL)
                             : new ArrayList<>())
                     .build();
 

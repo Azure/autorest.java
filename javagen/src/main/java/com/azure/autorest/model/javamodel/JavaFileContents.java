@@ -1,13 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-//====================================================================================================
-//The Free Edition of C# to Java Converter limits conversion output to 100 lines per snippet.
-
-//To subscribe to the Premium Edition, visit our website:
-//https://www.tangiblesoftwaresolutions.com/order/order-csharp-to-java.html
-//====================================================================================================
-
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.util.CodeNamer;
@@ -407,16 +400,6 @@ public class JavaFileContents {
     private enum CurrentLineType {
         Empty,
         AfterIf,
-        Text;
-
-        public static final int SIZE = java.lang.Integer.SIZE;
-
-        public static CurrentLineType forValue(int value) {
-            return values()[value];
-        }
-
-        public int getValue() {
-            return this.ordinal();
-        }
+        Text
     }
 }

@@ -23,12 +23,12 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     /*
      * The GoodApples property.
      */
-    private List<String> goodApples = new ArrayList<>();
+    private List<String> goodApples;
 
     /*
      * The BadApples property.
      */
-    private List<String> badApples = new ArrayList<>();
+    private List<String> badApples;
 
     /**
      * Creates an instance of AppleBarrel class.
@@ -146,24 +146,24 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
                 QName elementName = reader.getElementName();
 
                 if ("GoodApples".equals(elementName.getLocalPart())) {
-                    if (deserializedAppleBarrel.goodApples == null) {
-                        deserializedAppleBarrel.goodApples = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("Apple".equals(elementName.getLocalPart())) {
+                            if (deserializedAppleBarrel.goodApples == null) {
+                                deserializedAppleBarrel.goodApples = new ArrayList<>();
+                            }
                             deserializedAppleBarrel.goodApples.add(reader.getStringElement());
                         } else {
                             reader.skipElement();
                         }
                     }
                 } else if ("BadApples".equals(elementName.getLocalPart())) {
-                    if (deserializedAppleBarrel.badApples == null) {
-                        deserializedAppleBarrel.badApples = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("Apple".equals(elementName.getLocalPart())) {
+                            if (deserializedAppleBarrel.badApples == null) {
+                                deserializedAppleBarrel.badApples = new ArrayList<>();
+                            }
                             deserializedAppleBarrel.badApples.add(reader.getStringElement());
                         } else {
                             reader.skipElement();

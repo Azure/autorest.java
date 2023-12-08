@@ -18,12 +18,6 @@ public enum JavaModifier {
         this.keyword = keyword;
     }
 
-    public static final int SIZE = java.lang.Integer.SIZE;
-
-    public static JavaModifier forValue(int value) {
-        return values()[value];
-    }
-
     public int getValue() {
         return this.ordinal();
     }

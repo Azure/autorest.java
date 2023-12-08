@@ -7,40 +7,40 @@ package com.cadl.response.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.models.ResponseError;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import com.cadl.response.implementation.CoreToCodegenBridgeUtils;
+import java.io.IOException;
 
 /**
  * The OperationDetails2 model.
  */
 @Immutable
-public final class OperationDetails2 {
+public final class OperationDetails2 implements JsonSerializable<OperationDetails2> {
     /*
      * Operation ID
      */
     @Generated
-    @JsonProperty(value = "id")
-    private String id;
+    private final String id;
 
     /*
      * The status property.
      */
     @Generated
-    @JsonProperty(value = "status")
-    private OperationState status;
+    private final OperationState status;
 
     /*
      * The error property.
      */
     @Generated
-    @JsonProperty(value = "error")
     private ResponseError error;
 
     /*
      * The lroResult property.
      */
     @Generated
-    @JsonProperty(value = "lroResult")
     private Resource lroResult;
 
     /**
@@ -50,9 +50,7 @@ public final class OperationDetails2 {
      * @param status the status value to set.
      */
     @Generated
-    @JsonCreator
-    private OperationDetails2(@JsonProperty(value = "id") String id,
-        @JsonProperty(value = "status") OperationState status) {
+    private OperationDetails2(String id, OperationState status) {
         this.id = id;
         this.status = status;
     }
@@ -95,5 +93,55 @@ public final class OperationDetails2 {
     @Generated
     public Resource getLroResult() {
         return this.lroResult;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("id", this.id);
+        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
+        jsonWriter.writeFieldName("error");
+        CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, this.error);
+        jsonWriter.writeJsonField("lroResult", this.lroResult);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of OperationDetails2 from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of OperationDetails2 if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the OperationDetails2.
+     */
+    public static OperationDetails2 fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String id = null;
+            OperationState status = null;
+            ResponseError error = null;
+            Resource lroResult = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    id = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    status = OperationState.fromString(reader.getString());
+                } else if ("error".equals(fieldName)) {
+                    error = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);
+                } else if ("lroResult".equals(fieldName)) {
+                    lroResult = Resource.fromJson(reader);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            OperationDetails2 deserializedOperationDetails2 = new OperationDetails2(id, status);
+            deserializedOperationDetails2.error = error;
+            deserializedOperationDetails2.lroResult = lroResult;
+
+            return deserializedOperationDetails2;
+        });
     }
 }

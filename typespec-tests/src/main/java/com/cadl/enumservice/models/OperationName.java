@@ -4,56 +4,53 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
-
 /**
  * Defines values for OperationName.
  */
-public final class OperationName extends ExpandableStringEnum<OperationName> {
+public enum OperationName {
     /**
-     * Static value Read for OperationName.
+     * Enum value Read.
      */
-    @Generated
-    public static final OperationName READ = fromString("Read");
+    READ("Read"),
 
     /**
-     * Static value Write for OperationName.
+     * Enum value Write.
      */
-    @Generated
-    public static final OperationName WRITE = fromString("Write");
+    WRITE("Write");
 
     /**
-     * Creates a new instance of OperationName value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a OperationName instance.
      */
-    @Generated
-    @Deprecated
-    public OperationName() {
+    private final String value;
+
+    OperationName(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a OperationName from its string representation.
+     * Parses a serialized value to a OperationName instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding OperationName.
+     * @param value the serialized value to parse.
+     * @return the parsed OperationName object, or null if unable to parse.
      */
-    @Generated
-    @JsonCreator
-    public static OperationName fromString(String name) {
-        return fromString(name, OperationName.class);
+    public static OperationName fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        OperationName[] items = OperationName.values();
+        for (OperationName item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known OperationName values.
-     * 
-     * @return known OperationName values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<OperationName> values() {
-        return values(OperationName.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

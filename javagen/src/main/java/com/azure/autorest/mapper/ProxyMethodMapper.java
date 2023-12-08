@@ -53,17 +53,17 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodMapper.class);
 
     private static final List<IType> UNIX_TIME_TYPES = Arrays.asList(
-            PrimitiveType.UnixTimeLong,
-            ClassType.UnixTimeLong,
-            ClassType.UnixTimeDateTime);
+            PrimitiveType.UNIX_TIME_LONG,
+            ClassType.UNIX_TIME_LONG,
+            ClassType.UNIX_TIME_DATE_TIME);
     private static final List<IType> RETURN_VALUE_WIRE_TYPE_OPTIONS =
             Stream.concat(Stream.of(
-                    ClassType.Base64Url,
-                    ClassType.DateTimeRfc1123,
-                    PrimitiveType.DurationLong,
-                    PrimitiveType.DurationDouble,
-                    ClassType.DurationLong,
-                    ClassType.DurationDouble),
+                    ClassType.BASE_64_URL,
+                    ClassType.DATE_TIME_RFC_1123,
+                    PrimitiveType.DURATION_LONG,
+                    PrimitiveType.DURATION_DOUBLE,
+                    ClassType.DURATION_LONG,
+                    ClassType.DURATION_DOUBLE),
                     UNIX_TIME_TYPES.stream()).collect(Collectors.toList());
     private static final ProxyMethodMapper INSTANCE = new ProxyMethodMapper();
 
@@ -240,7 +240,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     asyncRestResponseReturnType, proxyMethods);
 
             ProxyMethodParameter fluxByteBufferParam = parameters.stream()
-                    .filter(parameter -> parameter.getClientType() == GenericType.FluxByteBuffer)
+                    .filter(parameter -> parameter.getClientType() == GenericType.FLUX_BYTE_BUFFER)
                     .findFirst()
                     .orElse(null);
 
@@ -249,10 +249,10 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 int i = parameters.indexOf(fluxByteBufferParam);
                 proxyMethodParameters.remove(i);
 
-                ProxyMethodParameter binaryDataParam = fluxByteBufferParam.toNewBuilder()
-                        .wireType(ClassType.BinaryData)
-                        .rawType(ClassType.BinaryData)
-                        .clientType(ClassType.BinaryData)
+                ProxyMethodParameter binaryDataParam = fluxByteBufferParam.newBuilder()
+                        .wireType(ClassType.BINARY_DATA)
+                        .rawType(ClassType.BINARY_DATA)
+                        .clientType(ClassType.BINARY_DATA)
                         .build();
 
                 proxyMethodParameters.add(i, binaryDataParam);
@@ -305,7 +305,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         for (ProxyMethod asyncProxyMethod : proxyMethods) {
             if (asyncProxyMethod.getParameters()
                     .stream()
-                    .anyMatch(param -> param.getClientType() == GenericType.FluxByteBuffer)) {
+                    .anyMatch(param -> param.getClientType() == GenericType.FLUX_BYTE_BUFFER)) {
                 continue;
             }
             syncProxyMethods.add(asyncProxyMethod.toSync());
@@ -340,7 +340,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     protected ClassType getContextClass() {
-        return ClassType.Context;
+        return ClassType.CONTEXT;
     }
 
     protected void appendCallbackParameter(List<ProxyMethodParameter> parameters, IType responseBodyType) {
@@ -374,8 +374,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                                                    boolean isProtocolMethod, JavaSettings settings, boolean ignoreTypedHeaders) {
         if (isProtocolMethod) {
             IType singleValueType;
-            if (responseBodyType.equals(PrimitiveType.Void)) {
-                singleValueType = GenericType.Response(ClassType.Void);
+            if (responseBodyType.equals(PrimitiveType.VOID)) {
+                singleValueType = GenericType.Response(ClassType.VOID);
             } else {
                 singleValueType = GenericType.Response(responseBodyType);
             }
@@ -390,14 +390,14 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             if (settings.isGenericResponseTypes()) {
                 // If the response body type is InputStream it needs to be converted to Flux<ByteBuffer> to be
                 // asynchronous, unless this is sync-stack.
-                if (responseBodyType == ClassType.InputStream) {
-                    responseBodyType = GenericType.FluxByteBuffer;
+                if (responseBodyType == ClassType.INPUT_STREAM) {
+                    responseBodyType = GenericType.FLUX_BYTE_BUFFER;
                 }
                 IType genericResponseType = GenericType.RestResponse(
                     Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)), responseBodyType);
 
                 if (ignoreTypedHeaders) {
-                    if (responseBodyType == GenericType.FluxByteBuffer) {
+                    if (responseBodyType == GenericType.FLUX_BYTE_BUFFER) {
                         return createStreamContentAsyncReturnType();
                     }
                     genericResponseType = GenericType.Response(responseBodyType);
@@ -409,11 +409,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 return createClientResponseAsyncReturnType(clientResponseClassType);
             }
         } else {
-            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && settings.isInputStreamForBinary() && responseBodyType.equals(ClassType.BinaryData))
-                || responseBodyType.equals(ClassType.InputStream)) {
+            if ((!settings.isDataPlaneClient() && !settings.isSyncStackEnabled() && settings.isInputStreamForBinary() && responseBodyType.equals(ClassType.BINARY_DATA))
+                || responseBodyType.equals(ClassType.INPUT_STREAM)) {
                 return createStreamContentAsyncReturnType();
-            } else if (responseBodyType.equals(PrimitiveType.Void)) {
-                IType singleValueType = GenericType.Response(ClassType.Void);
+            } else if (responseBodyType.equals(PrimitiveType.VOID)) {
+                IType singleValueType = GenericType.Response(ClassType.VOID);
                 return createSingleValueAsyncReturnType(singleValueType);
             } else {
                 IType singleValueType = GenericType.Response(responseBodyType);
@@ -431,12 +431,12 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     }
 
     protected IType createStreamContentAsyncReturnType() {
-        IType singleValueType = ClassType.StreamResponse;
+        IType singleValueType = ClassType.STREAM_RESPONSE;
         return GenericType.Mono(singleValueType);
     }
 
     protected IType createBinaryContentAsyncReturnType() {
-        IType returnType = GenericType.Response(GenericType.FluxByteBuffer);    // raw response for LRO
+        IType returnType = GenericType.Response(GenericType.FLUX_BYTE_BUFFER);    // raw response for LRO
         return GenericType.Mono(returnType);
     }
 
@@ -509,7 +509,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
         if (settings.isDataPlaneClient()) {
             // LLC does not use model, hence exception from swagger
-            swaggerDefaultExceptionType = ClassType.HttpResponseException;
+            swaggerDefaultExceptionType = ClassType.HTTP_RESPONSE_EXCEPTION;
             exceptionDefinitions.defaultExceptionType = swaggerDefaultExceptionType;
             exceptionDefinitions.exceptionTypeMapping = swaggerExceptionTypeMap;
         } else {
@@ -691,9 +691,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      */
     protected Map<Integer, ClassType> getDefaultHttpStatusCodeToExceptionTypeMapping() {
         Map<Integer, ClassType> defaultMapping = new HashMap<>();
-        defaultMapping.put(401, ClassType.ClientAuthenticationException);
-        defaultMapping.put(404, ClassType.ResourceNotFoundException);
-        defaultMapping.put(409, ClassType.ResourceModifiedException);
+        defaultMapping.put(401, ClassType.CLIENT_AUTHENTICATION_EXCEPTION);
+        defaultMapping.put(404, ClassType.RESOURCE_NOT_FOUND_EXCEPTION);
+        defaultMapping.put(409, ClassType.RESOURCE_MODIFIED_EXCEPTION);
 
         return defaultMapping;
     }
@@ -707,7 +707,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      * @return The default HTTP response exception type.
      */
     protected ClassType getHttpResponseExceptionType() {
-        return ClassType.HttpResponseException;
+        return ClassType.HTTP_RESPONSE_EXCEPTION;
     }
 
     /**
@@ -728,9 +728,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                         && specialHeaders.contains(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
                 if (supportRepeatabilityRequest) {
                     Function<ProxyMethodParameter.Builder, ProxyMethodParameter.Builder> commonBuilderSetting = builder -> {
-                        builder.rawType(ClassType.String)
-                                .wireType(ClassType.String)
-                                .clientType(ClassType.String)
+                        builder.rawType(ClassType.STRING)
+                                .wireType(ClassType.STRING)
+                                .clientType(ClassType.STRING)
                                 .requestParameterLocation(RequestParameterLocation.HEADER)
                                 .required(false)
                                 .nullable(true)

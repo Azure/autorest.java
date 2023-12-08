@@ -120,7 +120,7 @@ public class MockTestParser extends ExampleParser {
 
             Object jsonParam;
             if (methodParameter.getProxyMethodParameter().getCollectionFormat() != null
-                    && methodParameter.getProxyMethodParameter().getWireType() == ClassType.String
+                    && methodParameter.getProxyMethodParameter().getWireType() == ClassType.STRING
                     && methodParameter.getProxyMethodParameter().getClientType() instanceof ListType) {
                 // use element type without delimiter
                 jsonParam = ModelTestCaseUtil.jsonFromType(0, ((ListType) methodParameter.getProxyMethodParameter().getClientType()).getElementType()).toString();
@@ -213,7 +213,7 @@ public class MockTestParser extends ExampleParser {
                     // also azure-core-management does not support LRO from GET
                     && clientMethod.getProxyMethod().getHttpMethod() != HttpMethod.GET)) {
             // generate example for the method with full parameters
-            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.Context.equals(p.getClientType()));
+            return clientMethod.getParameters().stream().anyMatch(p -> ClassType.CONTEXT.equals(p.getClientType()));
         }
         return false;
     }

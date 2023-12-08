@@ -56,7 +56,7 @@ public class FluentClientMethodExample implements FluentMethodExample {
 
     @Override
     public ClassType getEntryType() {
-        return FluentType.AzureResourceManager;
+        return FluentType.AZURE_RESOURCE_MANAGER;
     }
 
     @Override

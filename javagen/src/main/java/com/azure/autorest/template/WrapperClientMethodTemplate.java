@@ -72,7 +72,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
             boolean shouldReturn = true;
             if (clientMethod.getReturnValue() != null && clientMethod.getReturnValue().getType() instanceof PrimitiveType) {
                 PrimitiveType type = (PrimitiveType) clientMethod.getReturnValue().getType();
-                if (type.asNullable() == ClassType.Void) {
+                if (type.asNullable() == ClassType.VOID) {
                     shouldReturn = false;
                 }
             }

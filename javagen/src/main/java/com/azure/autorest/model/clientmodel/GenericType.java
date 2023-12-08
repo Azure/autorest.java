@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * A generic type that is used by the client.
  */
 public class GenericType implements IType {
-    public static final GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
+    public static final GenericType FLUX_BYTE_BUFFER = Flux(ClassType.BYTE_BUFFER);
     /**
      * The main non-generic type of this generic type.
      */
@@ -28,12 +28,18 @@ public class GenericType implements IType {
      */
     private final IType[] typeArguments;
 
+    private final String jsonToken;
+
     /**
      * Create a new GenericType from the provided properties.
      * @param name The main non-generic type of this generic type.
      * @param typeArguments The type arguments of this generic type.
      */
     public GenericType(String packageKeyword, String name, IType... typeArguments) {
+        this(packageKeyword, name, null, typeArguments);
+    }
+
+    public GenericType(String packageKeyword, String name, String jsonToken, IType... typeArguments) {
         if (!JavaSettings.getInstance().isBranded()) {
             if (Objects.equals(packageKeyword + "." + name, com.azure.core.http.rest.Response.class.getName())) {
                 packageKeyword = "com.generic.core.http";
@@ -46,6 +52,7 @@ public class GenericType implements IType {
         this.name = name;
         this.packageName = packageKeyword;
         this.typeArguments = typeArguments;
+        this.jsonToken = jsonToken;
     }
 
     public static GenericType Flux(IType typeArgument) {
@@ -69,7 +76,7 @@ public class GenericType implements IType {
     }
 
     public static GenericType Response(IType bodyType) {
-        return new GenericType(ClassType.Response.getPackage(), ClassType.Response.getName(), bodyType);
+        return new GenericType(ClassType.RESPONSE.getPackage(), ClassType.RESPONSE.getName(), bodyType);
     }
 
     public static GenericType RestResponse(IType headersType, IType bodyType) {
@@ -162,8 +169,6 @@ public class GenericType implements IType {
     public boolean equals(Object rhs) {
         boolean tempVar = rhs instanceof GenericType;
         GenericType genericTypeRhs = tempVar ? (GenericType) rhs : null;
-//C# TO JAVA CONVERTER WARNING: Java Arrays.equals is not always identical to LINQ 'SequenceEqual':
-//ORIGINAL LINE: return rhs is GenericType genericTypeRhs && Package == genericTypeRhs.Package && Name == genericTypeRhs.Name && TypeArguments.SequenceEqual(genericTypeRhs.TypeArguments);
         return tempVar && getPackage().equals(genericTypeRhs.packageName) && getName().equals(genericTypeRhs.name) && Arrays.equals(getTypeArguments(), genericTypeRhs.typeArguments);
     }
 
@@ -211,7 +216,7 @@ public class GenericType implements IType {
                 } else if (this instanceof MapType) {
                     clientType = new MapType(clientTypeArguments[1]);
                 } else {
-                    clientType = new GenericType(getPackage(), getName(), clientTypeArguments);
+                    clientType = new GenericType(getPackage(), getName(), jsonToken(), clientTypeArguments);
                 }
                 break;
             }
@@ -283,6 +288,11 @@ public class GenericType implements IType {
     }
 
     @Override
+    public String jsonToken() {
+        return jsonToken;
+    }
+
+    @Override
     public final String jsonDeserializationMethod(String jsonReaderName) {
         return null;
     }
@@ -293,13 +303,14 @@ public class GenericType implements IType {
     }
 
     @Override
-    public final String xmlDeserializationMethod(String attributeName, String attributeNamespace) {
+    public final String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         return null;
     }
 
     @Override
     public final String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName,
-        String namespaceUri, String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String namespaceUri, String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         return null;
     }
 

@@ -71,6 +71,8 @@ public class Operation extends Metadata {
 
     private Boolean internalApi;
 
+    private String crossLanguageDefinitionId;
+
     // internal
     private OperationGroup operationGroup;
 
@@ -298,5 +300,13 @@ public class Operation extends Metadata {
 
     public void setInternalApi(Boolean internalApi) {
         this.internalApi = internalApi;
+    }
+
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
+    public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 }

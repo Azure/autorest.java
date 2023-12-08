@@ -46,6 +46,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -71,6 +72,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -96,6 +98,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -121,6 +124,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -146,6 +150,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -171,6 +176,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -196,6 +202,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -220,6 +227,7 @@ public final class EnumDiscriminatorAsyncClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     length: int (Required)
      * }
      * }</pre>

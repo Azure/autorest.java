@@ -8,6 +8,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
 } from "@azure-tools/typespec-client-generator-core";
+import { getAccess } from "./type-utils.js";
 
 export class ClientContext {
   baseUri: string;
@@ -54,7 +55,10 @@ export class ClientContext {
     for (const operation of operations) {
       const opLink = getOperationLink(sdkContext.program, operation, "polling");
       if (opLink && opLink.linkedOperation) {
-        this.ignoredOperations.add(opLink.linkedOperation);
+        const access = getAccess(opLink.linkedOperation);
+        if (access !== "public") {
+          this.ignoredOperations.add(opLink.linkedOperation);
+        }
       }
     }
 
@@ -63,7 +67,10 @@ export class ClientContext {
       for (const operation of operations) {
         const opLink = getOperationLink(sdkContext.program, operation, "polling");
         if (opLink && opLink.linkedOperation) {
-          this.ignoredOperations.add(opLink.linkedOperation);
+          const access = getAccess(opLink.linkedOperation);
+          if (access !== "public") {
+            this.ignoredOperations.add(opLink.linkedOperation);
+          }
         }
       }
     }

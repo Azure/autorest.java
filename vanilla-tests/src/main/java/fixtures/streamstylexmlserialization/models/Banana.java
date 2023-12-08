@@ -11,7 +11,7 @@ import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
@@ -120,7 +120,8 @@ public final class Banana implements XmlSerializable<Banana> {
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
-        xmlWriter.writeStringElement("expiration", Objects.toString(this.expiration, null));
+        xmlWriter.writeStringElement("expiration",
+            this.expiration == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expiration));
         return xmlWriter.writeEndElement();
     }
 
@@ -158,7 +159,8 @@ public final class Banana implements XmlSerializable<Banana> {
                 } else if ("flavor".equals(elementName.getLocalPart())) {
                     deserializedBanana.flavor = reader.getStringElement();
                 } else if ("expiration".equals(elementName.getLocalPart())) {
-                    deserializedBanana.expiration = reader.getNullableElement(OffsetDateTime::parse);
+                    deserializedBanana.expiration
+                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
                 } else {
                     reader.skipElement();
                 }

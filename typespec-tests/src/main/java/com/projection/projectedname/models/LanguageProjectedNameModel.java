@@ -6,20 +6,22 @@ package com.projection.projectedname.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The LanguageProjectedNameModel model.
  */
 @Immutable
-public final class LanguageProjectedNameModel {
+public final class LanguageProjectedNameModel implements JsonSerializable<LanguageProjectedNameModel> {
     /*
      * Pass in true
      */
     @Generated
-    @JsonProperty(value = "defaultName")
-    private boolean javaName;
+    private final boolean javaName;
 
     /**
      * Creates an instance of LanguageProjectedNameModel class.
@@ -27,8 +29,7 @@ public final class LanguageProjectedNameModel {
      * @param javaName the javaName value to set.
      */
     @Generated
-    @JsonCreator
-    public LanguageProjectedNameModel(@JsonProperty(value = "defaultName") boolean javaName) {
+    public LanguageProjectedNameModel(boolean javaName) {
         this.javaName = javaName;
     }
 
@@ -40,5 +41,38 @@ public final class LanguageProjectedNameModel {
     @Generated
     public boolean isJavaName() {
         return this.javaName;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeBooleanField("defaultName", this.javaName);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of LanguageProjectedNameModel from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of LanguageProjectedNameModel if the JsonReader was pointing to an instance of it, or null if
+     * it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the LanguageProjectedNameModel.
+     */
+    public static LanguageProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean javaName = false;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("defaultName".equals(fieldName)) {
+                    javaName = reader.getBoolean();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new LanguageProjectedNameModel(javaName);
+        });
     }
 }

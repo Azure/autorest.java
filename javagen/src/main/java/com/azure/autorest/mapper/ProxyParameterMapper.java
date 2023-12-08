@@ -86,15 +86,15 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 .build();
         } else if (wireType == ArrayType.BYTE_ARRAY) {
             if (parameterRequestLocation != RequestParameterLocation.BODY /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
-                wireType = ClassType.String;
+                wireType = ClassType.STRING;
             } else if (settings.isDataPlaneClient()) {
                 wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             if (parameter.getProtocol().getHttp().getExplode()) {
-                wireType = new ListType(ClassType.String);
+                wireType = new ListType(ClassType.STRING);
             } else {
-                wireType = ClassType.String;
+                wireType = ClassType.STRING;
             }
         } else if (settings.isDataPlaneClient()) {
             wireType = SchemaUtil.removeModelFromParameter(parameterRequestLocation, wireType);
@@ -128,7 +128,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
             }
             String prefix = "get";
-            if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
+            if (clientType == PrimitiveType.BOOLEAN || clientType == ClassType.BOOLEAN) {
                 prefix = "is";
                 if (CodeNamer.toCamelCase(parameterReference).startsWith(prefix)) {
                     prefix = "";
@@ -162,7 +162,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             }
         }
         if (collectionFormat == null && clientType instanceof ListType
-                && ClassType.String == wireType) {
+                && ClassType.STRING == wireType) {
             collectionFormat = CollectionFormat.CSV;
         }
         builder.collectionFormat(collectionFormat);

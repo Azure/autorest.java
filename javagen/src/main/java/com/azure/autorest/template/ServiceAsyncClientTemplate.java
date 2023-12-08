@@ -112,7 +112,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
             .filter(clientMethod -> !clientMethod.getMethodParameters()
                 .stream()
-                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
+                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.CONTEXT)))
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
@@ -123,7 +123,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .filter(clientMethod -> clientMethod.getType().name().contains("Async"))
             .filter(clientMethod -> !clientMethod.getMethodParameters()
                 .stream()
-                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.Context)))
+                .anyMatch(methodParam -> methodParam.getWireType().contains(ClassType.CONTEXT)))
             .forEach(clientMethod -> {
               Templates.getWrapperClientMethodTemplate().write(clientMethod, classBlock);
             });
@@ -166,10 +166,10 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
             .filter(p -> p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
             .filter(p -> baseUrl.contains(String.format("{%s}", p.getRequestParameterName())))
             .map(p -> String.format(".replace(%1$s, %2$s)",
-                ClassType.String.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
+                ClassType.STRING.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
                 p.getParameterReference()
             )).collect(Collectors.joining());
-        final String endpointExpr = ClassType.String.defaultValueExpression(baseUrl) + endpointReplacementExpr;
+        final String endpointExpr = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
 
         clientBuilder.getBuilderTraits().stream()
             .filter(t -> EndpointTrait.class.getSimpleName().equals(t.getTraitInterfaceName()))

@@ -77,7 +77,7 @@ public class FluentMethodTests {
 
         // constructor by name
         constructor = new FluentConstructorByName(lockModel, FluentMethodType.CONSTRUCTOR,
-                ClassType.String, "lockName",
+                ClassType.STRING, "lockName",
                 FluentStatic.getFluentManager().getType(), lockCreate.getResourceLocalVariables());
 
         Assertions.assertEquals("ManagementLockObjectImpl(String name, com.azure.resourcemanager.mock.ManagementLockManager serviceManager)", constructor.getImplementationMethodSignature());
@@ -216,7 +216,7 @@ public class FluentMethodTests {
         DefinitionStageCreate nextStage = new DefinitionStageCreate();
         stage.setNextStage(nextStage);
 
-        LocalVariable variable = new LocalVariable("lockName", ClassType.String, RequestParameterLocation.PATH, lockParameter);
+        LocalVariable variable = new LocalVariable("lockName", ClassType.STRING, RequestParameterLocation.PATH, lockParameter);
 
         FluentMethodParameterMethod parameterMethod = new FluentMethodParameterMethod(lockModel, FluentMethodType.CREATE_WITH, stage, lockParameter, variable);
         Assertions.assertEquals("WithCreate withLockName(String lockName)", parameterMethod.getInterfaceMethodSignature());

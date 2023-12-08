@@ -124,7 +124,7 @@ public class ResourceParser {
                         Map<String, MethodParameter> pathParametersMap = model.getResourceCreate().getPathParameters().stream()
                                 .collect(Collectors.toMap(p -> p.getClientMethodParameter().getName(), Function.identity()));
                         localVariables.getLocalVariablesMap().entrySet().stream()
-                                .filter(e -> e.getKey().getClientType() == ClassType.String)
+                                .filter(e -> e.getKey().getClientType() == ClassType.STRING)
                                 // match url path segment to method parameter to local variable
                                 .filter(e -> {
                                     MethodParameter pathParameter = pathParametersMap.get(e.getKey().getName());

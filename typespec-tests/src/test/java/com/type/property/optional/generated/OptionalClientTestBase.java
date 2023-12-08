@@ -13,14 +13,21 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.type.property.optional.BooleanLiteralClient;
 import com.type.property.optional.BytesClient;
 import com.type.property.optional.CollectionsByteClient;
 import com.type.property.optional.CollectionsModelClient;
 import com.type.property.optional.DatetimeOperationClient;
 import com.type.property.optional.DurationOperationClient;
+import com.type.property.optional.FloatLiteralClient;
+import com.type.property.optional.IntLiteralClient;
 import com.type.property.optional.OptionalClientBuilder;
 import com.type.property.optional.RequiredAndOptionalClient;
+import com.type.property.optional.StringLiteralClient;
 import com.type.property.optional.StringOperationClient;
+import com.type.property.optional.UnionFloatLiteralClient;
+import com.type.property.optional.UnionIntLiteralClient;
+import com.type.property.optional.UnionStringLiteralClient;
 
 class OptionalClientTestBase extends TestProxyTestBase {
     protected StringOperationClient stringOperationClient;
@@ -34,6 +41,20 @@ class OptionalClientTestBase extends TestProxyTestBase {
     protected CollectionsByteClient collectionsByteClient;
 
     protected CollectionsModelClient collectionsModelClient;
+
+    protected StringLiteralClient stringLiteralClient;
+
+    protected IntLiteralClient intLiteralClient;
+
+    protected FloatLiteralClient floatLiteralClient;
+
+    protected BooleanLiteralClient booleanLiteralClient;
+
+    protected UnionStringLiteralClient unionStringLiteralClient;
+
+    protected UnionIntLiteralClient unionIntLiteralClient;
+
+    protected UnionFloatLiteralClient unionFloatLiteralClient;
 
     protected RequiredAndOptionalClient requiredAndOptionalClient;
 
@@ -97,6 +118,76 @@ class OptionalClientTestBase extends TestProxyTestBase {
             collectionsModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
+
+        OptionalClientBuilder stringLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            stringLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            stringLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        stringLiteralClient = stringLiteralClientbuilder.buildStringLiteralClient();
+
+        OptionalClientBuilder intLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            intLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            intLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        intLiteralClient = intLiteralClientbuilder.buildIntLiteralClient();
+
+        OptionalClientBuilder floatLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            floatLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            floatLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        floatLiteralClient = floatLiteralClientbuilder.buildFloatLiteralClient();
+
+        OptionalClientBuilder booleanLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            booleanLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            booleanLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        booleanLiteralClient = booleanLiteralClientbuilder.buildBooleanLiteralClient();
+
+        OptionalClientBuilder unionStringLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            unionStringLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            unionStringLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        unionStringLiteralClient = unionStringLiteralClientbuilder.buildUnionStringLiteralClient();
+
+        OptionalClientBuilder unionIntLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            unionIntLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            unionIntLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        unionIntLiteralClient = unionIntLiteralClientbuilder.buildUnionIntLiteralClient();
+
+        OptionalClientBuilder unionFloatLiteralClientbuilder
+            = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            unionFloatLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            unionFloatLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        unionFloatLiteralClient = unionFloatLiteralClientbuilder.buildUnionFloatLiteralClient();
 
         OptionalClientBuilder requiredAndOptionalClientbuilder
             = new OptionalClientBuilder().httpClient(HttpClient.createDefault())

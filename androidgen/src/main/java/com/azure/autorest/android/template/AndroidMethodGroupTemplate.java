@@ -23,7 +23,7 @@ public class AndroidMethodGroupTemplate extends MethodGroupTemplate {
 
     @Override
     protected void writeServiceProxyConstruction(JavaBlock constructor, MethodGroupClient methodGroupClient) {
-        ClassType proxyType = ClassType.AndroidRestProxy;
+        ClassType proxyType = ClassType.ANDROID_REST_PROXY;
         constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getJacksonSerder());",
                 proxyType.getName(), methodGroupClient.getProxy().getName()));
     }

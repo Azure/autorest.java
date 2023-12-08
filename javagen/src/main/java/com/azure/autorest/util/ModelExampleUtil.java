@@ -93,7 +93,7 @@ public class ModelExampleUtil {
                     Object value = entry.getValue();
 
                     // redact possible credential
-                    if (elementType == ClassType.String && entry.getValue() instanceof String) {
+                    if (elementType == ClassType.STRING && entry.getValue() instanceof String) {
                         value = ModelTestCaseUtil.redactStringValue(Collections.singletonList(entry.getKey()), (String) value);
                     }
 
@@ -105,9 +105,9 @@ public class ModelExampleUtil {
                 LOGGER.error("Example value is not Map type: {}", objectValue);
                 node = new MapNode(elementType, null);
             }
-        } else if (type == ClassType.Object) {
+        } else if (type == ClassType.OBJECT) {
             node = new ObjectNode(type, objectValue);
-        } else if (type == ClassType.BinaryData && objectValue != null) {
+        } else if (type == ClassType.BINARY_DATA && objectValue != null) {
             node = new BinaryDataNode(type, objectValue);
         } else if (type instanceof ClassType && objectValue instanceof Map) {
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
@@ -152,7 +152,8 @@ public class ModelExampleUtil {
                         // redact possible credential
                         if (childNode instanceof LiteralNode && childObjectValue instanceof String) {
                             LiteralNode literalChildNode = (LiteralNode) childNode;
-                            if (literalChildNode.getClientType() == ClassType.String && literalChildNode.getLiteralsValue() != null) {
+                            if (literalChildNode.getClientType() == ClassType.STRING
+                                && literalChildNode.getLiteralsValue() != null) {
                                 literalChildNode.setLiteralsValue(ModelTestCaseUtil.redactStringValue(jsonPropertyNames, literalChildNode.getLiteralsValue()));
                             }
                         }
@@ -222,11 +223,11 @@ public class ModelExampleUtil {
     public static String convertLiteralToClientValue(IType wireType, String literalInWireType) {
         // see ClassType.convertToClientType and PrimitiveType.convertToClientType
         String literalValue = literalInWireType;
-        if (wireType == ClassType.DateTimeRfc1123) {
+        if (wireType == ClassType.DATE_TIME_RFC_1123) {
             literalValue = new DateTimeRfc1123(literalValue).getDateTime().toString();
-        } else if (wireType == ClassType.Base64Url) {
+        } else if (wireType == ClassType.BASE_64_URL) {
             literalValue = new Base64Url(literalValue).toString();
-        } else if (wireType == PrimitiveType.UnixTimeLong) {
+        } else if (wireType == PrimitiveType.UNIX_TIME_LONG) {
             literalValue = OffsetDateTime.from(Instant.ofEpochSecond(Long.parseLong(literalValue))).toString();
         }
         return literalValue;
@@ -273,8 +274,8 @@ public class ModelExampleUtil {
 
         ExampleNode node;
         if (exampleValue == null) {
-            if (ClassType.Context.equals(methodParameter.getClientMethodParameter().getClientType())) {
-                node = new LiteralNode(ClassType.Context, "").setLiteralsValue("");
+            if (ClassType.CONTEXT.equals(methodParameter.getClientMethodParameter().getClientType())) {
+                node = new LiteralNode(ClassType.CONTEXT, "").setLiteralsValue("");
             } else {
                 node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
             }

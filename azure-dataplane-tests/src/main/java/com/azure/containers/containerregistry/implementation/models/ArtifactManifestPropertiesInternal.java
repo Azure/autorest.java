@@ -14,8 +14,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Manifest attributes details.
@@ -394,10 +394,13 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
             jsonWriter.writeStartObject("manifest");
             jsonWriter.writeStringField("digest", this.digest);
             jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
-            jsonWriter.writeStringField("createdTime", Objects.toString(this.createdOn, null));
-            jsonWriter.writeStringField("lastUpdateTime", Objects.toString(this.lastUpdatedOn, null));
-            jsonWriter.writeStringField("architecture", Objects.toString(this.architecture, null));
-            jsonWriter.writeStringField("os", Objects.toString(this.operatingSystem, null));
+            jsonWriter.writeStringField("createdTime",
+                this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
+            jsonWriter.writeStringField("lastUpdateTime",
+                this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
+            jsonWriter.writeStringField("architecture",
+                this.architecture == null ? null : this.architecture.toString());
+            jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());
             jsonWriter.writeArrayField("references", this.relatedArtifacts,
                 (writer, element) -> writer.writeJson(element));
             jsonWriter.writeArrayField("tags", this.tags, (writer, element) -> writer.writeString(element));

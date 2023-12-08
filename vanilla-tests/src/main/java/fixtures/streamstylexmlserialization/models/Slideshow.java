@@ -192,12 +192,12 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
                 QName elementName = reader.getElementName();
 
                 if ("slides".equals(elementName.getLocalPart())) {
-                    if (deserializedSlideshow.slides == null) {
-                        deserializedSlideshow.slides = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("slide".equals(elementName.getLocalPart())) {
+                            if (deserializedSlideshow.slides == null) {
+                                deserializedSlideshow.slides = new ArrayList<>();
+                            }
                             deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
                         } else {
                             reader.skipElement();

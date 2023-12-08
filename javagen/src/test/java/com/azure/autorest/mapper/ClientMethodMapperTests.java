@@ -30,36 +30,36 @@ public class ClientMethodMapperTests {
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param0")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .required(true)
                 .build());
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param1")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .build());
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param2")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .versioning(new Versioning.Builder().added(Arrays.asList("v1", "v2", "v3", "v4", "v5")).build())
                 .build());
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param3")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .versioning(new Versioning.Builder().added(Arrays.asList("v2", "v3", "v4", "v5")).build())
                 .build());
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param4")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .versioning(new Versioning.Builder().added(Arrays.asList("v3", "v4", "v5")).build())
                 .build());
 
         parameters.add(new ClientMethodParameter.Builder()
                 .name("param5")
-                .wireType(ClassType.String)
+                .wireType(ClassType.STRING)
                 .versioning(new Versioning.Builder().added(Arrays.asList("v5")).build())
                 .build());
 

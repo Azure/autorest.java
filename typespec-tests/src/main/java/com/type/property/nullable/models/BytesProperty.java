@@ -7,27 +7,28 @@ package com.type.property.nullable.models;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
  */
 @Immutable
-public final class BytesProperty {
+public final class BytesProperty implements JsonSerializable<BytesProperty> {
     /*
      * Required property
      */
     @Generated
-    @JsonProperty(value = "requiredProperty")
-    private String requiredProperty;
+    private final String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "nullableProperty")
-    private byte[] nullableProperty;
+    private final byte[] nullableProperty;
 
     /**
      * Creates an instance of BytesProperty class.
@@ -36,9 +37,7 @@ public final class BytesProperty {
      * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    @JsonCreator
-    public BytesProperty(@JsonProperty(value = "requiredProperty") String requiredProperty,
-        @JsonProperty(value = "nullableProperty") byte[] nullableProperty) {
+    public BytesProperty(String requiredProperty, byte[] nullableProperty) {
         this.requiredProperty = requiredProperty;
         this.nullableProperty = nullableProperty;
     }
@@ -61,5 +60,42 @@ public final class BytesProperty {
     @Generated
     public byte[] getNullableProperty() {
         return CoreUtils.clone(this.nullableProperty);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeBinaryField("nullableProperty", this.nullableProperty);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of BytesProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of BytesProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the BytesProperty.
+     */
+    public static BytesProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String requiredProperty = null;
+            byte[] nullableProperty = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("requiredProperty".equals(fieldName)) {
+                    requiredProperty = reader.getString();
+                } else if ("nullableProperty".equals(fieldName)) {
+                    nullableProperty = reader.getBinary();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new BytesProperty(requiredProperty, nullableProperty);
+        });
     }
 }

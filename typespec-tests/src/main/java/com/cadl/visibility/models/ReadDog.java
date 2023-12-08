@@ -6,27 +6,28 @@ package com.cadl.visibility.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The ReadDog model.
  */
 @Immutable
-public final class ReadDog {
+public final class ReadDog implements JsonSerializable<ReadDog> {
     /*
      * The id property.
      */
     @Generated
-    @JsonProperty(value = "id")
-    private int id;
+    private final int id;
 
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private String name;
+    private final String name;
 
     /**
      * Creates an instance of ReadDog class.
@@ -35,8 +36,7 @@ public final class ReadDog {
      * @param name the name value to set.
      */
     @Generated
-    @JsonCreator
-    public ReadDog(@JsonProperty(value = "id") int id, @JsonProperty(value = "name") String name) {
+    public ReadDog(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -59,5 +59,42 @@ public final class ReadDog {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ReadDog from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ReadDog if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ReadDog.
+     */
+    public static ReadDog fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int id = 0;
+            String name = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    id = reader.getInt();
+                } else if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new ReadDog(id, name);
+        });
     }
 }

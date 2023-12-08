@@ -6,30 +6,22 @@ package com.type.model.inheritance.enumdiscriminator.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Test extensible enum type for discriminator.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "kind",
-    defaultImpl = Dog.class)
-@JsonTypeName("Dog")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "golden", value = Golden.class) })
 @Immutable
-public class Dog {
+public class Dog implements JsonSerializable<Dog> {
     /*
      * Weight of the dog
      */
     @Generated
-    @JsonProperty(value = "weight")
-    private int weight;
+    private final int weight;
 
     /**
      * Creates an instance of Dog class.
@@ -37,8 +29,7 @@ public class Dog {
      * @param weight the weight value to set.
      */
     @Generated
-    @JsonCreator
-    public Dog(@JsonProperty(value = "weight") int weight) {
+    public Dog(int weight) {
         this.weight = weight;
     }
 
@@ -50,5 +41,64 @@ public class Dog {
     @Generated
     public int getWeight() {
         return this.weight;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("weight", this.weight);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Dog from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Dog.
+     */
+    public static Dog fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
+
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("kind".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("golden".equals(discriminatorValue)) {
+                return Golden.fromJson(readerToUse.reset());
+            } else {
+                return fromJsonKnownDiscriminator(readerToUse.reset());
+            }
+        });
+    }
+
+    static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int weight = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("weight".equals(fieldName)) {
+                    weight = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Dog(weight);
+        });
     }
 }

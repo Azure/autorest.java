@@ -6,21 +6,23 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Model with collection string properties.
  */
 @Immutable
-public final class CollectionsStringProperty {
+public final class CollectionsStringProperty implements JsonSerializable<CollectionsStringProperty> {
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "property")
-    private List<String> property;
+    private final List<String> property;
 
     /**
      * Creates an instance of CollectionsStringProperty class.
@@ -28,8 +30,7 @@ public final class CollectionsStringProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public CollectionsStringProperty(@JsonProperty(value = "property") List<String> property) {
+    public CollectionsStringProperty(List<String> property) {
         this.property = property;
     }
 
@@ -41,5 +42,38 @@ public final class CollectionsStringProperty {
     @Generated
     public List<String> getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeArrayField("property", this.property, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of CollectionsStringProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of CollectionsStringProperty if the JsonReader was pointing to an instance of it, or null if
+     * it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the CollectionsStringProperty.
+     */
+    public static CollectionsStringProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            List<String> property = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    property = reader.readArray(reader1 -> reader1.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new CollectionsStringProperty(property);
+        });
     }
 }

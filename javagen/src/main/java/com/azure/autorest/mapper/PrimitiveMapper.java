@@ -51,64 +51,64 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
 //            case null:
 //                iType = PrimitiveType.Void;
 //                break;
-            case BOOLEAN: return PrimitiveType.Boolean;
+            case BOOLEAN: return PrimitiveType.BOOLEAN;
             case BYTE_ARRAY:
                 ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
                 return (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL)
-                    ? ClassType.Base64Url
+                    ? ClassType.BASE_64_URL
                     : ArrayType.BYTE_ARRAY;
-            case CHAR: return PrimitiveType.Char;
-            case DATE: return isLowLevelClient ? ClassType.String : ClassType.LocalDate;
+            case CHAR: return PrimitiveType.CHAR;
+            case DATE: return isLowLevelClient ? ClassType.STRING : ClassType.LOCAL_DATE;
             case DATE_TIME:
                 DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
                 return (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123)
-                    ? ClassType.DateTimeRfc1123
-                    : ClassType.DateTime;
+                    ? ClassType.DATE_TIME_RFC_1123
+                    : ClassType.DATE_TIME;
             case TIME:
 //                TimeSchema timeSchema = (TimeSchema) primaryType;
-                return ClassType.String;
+                return ClassType.STRING;
 //            case KnownPrimaryType.DateTimeRfc1123:
 //                iType = ClassType.DateTimeRfc1123;
 //                break;
             case NUMBER:
                 NumberSchema numberSchema = (NumberSchema) primaryType;
                 if (numberSchema.getPrecision() == 64) {
-                    return PrimitiveType.Double;
+                    return PrimitiveType.DOUBLE;
                 } else if (numberSchema.getPrecision() == 32) {
-                    return PrimitiveType.Float;
+                    return PrimitiveType.FLOAT;
                 } else {
-                    return ClassType.BigDecimal;
+                    return ClassType.BIG_DECIMAL;
                 }
             case INTEGER:
                 NumberSchema intSchema = (NumberSchema) primaryType;
                 return (intSchema.getPrecision() == 64)
-                    ? PrimitiveType.Long
-                    : PrimitiveType.Int;
+                    ? PrimitiveType.LONG
+                    : PrimitiveType.INT;
 //            case KnownPrimaryType.Long:
 //                iType = PrimitiveType.Long;
 //                break;
 //            case KnownPrimaryType.Stream:
 //                iType = GenericType.FluxByteBuffer;
 //                break;
-            case STRING: return ClassType.String;
-            case ARM_ID: return ClassType.String;
-            case URI: return isLowLevelClient || urlAsString ? ClassType.String : ClassType.URL;
+            case STRING: return ClassType.STRING;
+            case ARM_ID: return ClassType.STRING;
+            case URI: return isLowLevelClient || urlAsString ? ClassType.STRING : ClassType.URL;
             case DURATION:
                 DurationSchema durationSchema = (DurationSchema) primaryType;
-                IType durationType = ClassType.Duration;
+                IType durationType = ClassType.DURATION;
                 if (durationSchema.getFormat() != null) {
                     switch (durationSchema.getFormat()) {
                         case SECONDS_INTEGER:
-                            return PrimitiveType.DurationLong;
+                            return PrimitiveType.DURATION_LONG;
                         case SECONDS_NUMBER:
-                            return PrimitiveType.DurationDouble;
+                            return PrimitiveType.DURATION_DOUBLE;
                     }
                 }
                 return durationType;
-            case UNIXTIME: return isLowLevelClient ? PrimitiveType.Long : PrimitiveType.UnixTimeLong;
-            case UUID: return isLowLevelClient ? ClassType.String : ClassType.UUID;
-            case OBJECT: return ClassType.Object;
-            case CREDENTIAL: return ClassType.TokenCredential;
+            case UNIXTIME: return isLowLevelClient ? PrimitiveType.LONG : PrimitiveType.UNIX_TIME_LONG;
+            case UUID: return isLowLevelClient ? ClassType.STRING : ClassType.UUID;
+            case OBJECT: return ClassType.OBJECT;
+            case CREDENTIAL: return ClassType.TOKEN_CREDENTIAL;
             default:
                 throw new UnsupportedOperationException(String.format("Unrecognized AutoRest Primitive Type: %s",
                     primaryType.getType()));

@@ -106,8 +106,8 @@ public class FluentResourceCollection {
                 && (methodType == ClientMethodType.SimpleSync || methodType == ClientMethodType.LongRunningSync)
                 && !existingMethodNames.contains(WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName())
                 && methodParameters.size() == 2
-                && methodParameters.get(0).getClientType() == ClassType.String
-                && methodParameters.get(1).getClientType() == ClassType.String) {
+                && methodParameters.get(0).getClientType() == ClassType.STRING
+                && methodParameters.get(1).getClientType() == ClassType.STRING) {
                 // Transform "delete(String, String)" into "deleteByResourceGroup(String, String)"
                 fluentMethod = new FluentCollectionMethod(clientMethod, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName());
                 existingMethodNames.add(fluentMethod.getMethodName());
@@ -115,8 +115,8 @@ public class FluentResourceCollection {
                 && methodType == ClientMethodType.SimpleSyncRestResponse
                 && !existingMethodNames.contains(WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE)
                 && methodParameters.size() == 3
-                && methodParameters.get(0).getClientType() == ClassType.String
-                && methodParameters.get(1).getClientType() == ClassType.String) {
+                && methodParameters.get(0).getClientType() == ClassType.STRING
+                && methodParameters.get(1).getClientType() == ClassType.STRING) {
                 // Transform "deleteWithResponse(String, String, ?)" into "deleteByResourceGroupWithResponse(String, String, ?)"
                 fluentMethod = new FluentCollectionMethod(clientMethod, WellKnownMethodName.DELETE_BY_RESOURCE_GROUP.getMethodName() + Utils.METHOD_POSTFIX_WITH_RESPONSE);
                 existingMethodNames.add(fluentMethod.getMethodName());

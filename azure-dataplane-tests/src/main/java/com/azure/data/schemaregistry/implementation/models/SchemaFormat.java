@@ -5,7 +5,6 @@
 package com.azure.data.schemaregistry.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -44,7 +43,6 @@ public final class SchemaFormat extends ExpandableStringEnum<SchemaFormat> {
      * @param name a name to look for.
      * @return the corresponding SchemaFormat.
      */
-    @JsonCreator
     public static SchemaFormat fromString(String name) {
         return fromString(name, SchemaFormat.class);
     }

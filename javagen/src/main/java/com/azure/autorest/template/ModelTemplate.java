@@ -139,6 +139,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
+            // XML namespace constants
+            addXmlNamespaceConstants(model, classBlock);
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -299,15 +302,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // These are added to support adding the ClientLogger and then to JsonIgnore the ClientLogger so it isn't
         // included in serialization.
         if (settings.isClientSideValidations() && settings.isUseClientLogger()) {
-            ClassType.ClientLogger.addImportsTo(imports, false);
+            ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
 
         addSerializationImports(imports, model, settings);
 
         // Add HttpHeaders as an import when strongly-typed HTTP header objects use that as a constructor parameter.
         if (model.isStronglyTypedHeader()) {
-            ClassType.HttpHeaders.addImportsTo(imports, false);
-            ClassType.HttpHeaderName.addImportsTo(imports, false);
+            ClassType.HTTP_HEADERS.addImportsTo(imports, false);
+            ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.
@@ -493,6 +496,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         return classSignature;
     }
 
+    protected void addXmlNamespaceConstants(ClientModel model, JavaClass classBlock) {
+        // no-op as this is an entry point for subclasses of ModelTemplate that provide more specific code generation.
+    }
+
     /**
      * Adds the property fields to a class.
      *
@@ -511,12 +518,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             String fieldSignature;
             if (model.isUsedInXml()) {
-                if (property.isXmlWrapper() && !settings.isStreamStyleSerialization()) {
-                    String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
-                        innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+                if (property.isXmlWrapper()) {
+                    if (!settings.isStreamStyleSerialization()) {
+                        String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+                        classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
+                            innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
 
-                    fieldSignature = xmlWrapperClassName + " " + propertyName;
+                        fieldSignature = xmlWrapperClassName + " " + propertyName;
+                    } else {
+                        fieldSignature = propertyType + " " + propertyName;
+                    }
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
@@ -1072,20 +1083,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @return Whether to generate the constant.
      */
     private static boolean isGenerateConstantEmptyByteArray(ClientModel model, JavaSettings settings) {
-        boolean ret = false;
-        if (settings.isNullByteArrayMapsToEmptyArray()) {
-            ret = model.getProperties().stream()
-                    .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
-                            && property.getWireType() != property.getClientType());
-
-            // flatten properties
-            if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
-                ret = model.getPropertyReferences().stream()
-                        .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                        .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
-            }
+        if (!settings.isNullByteArrayMapsToEmptyArray()) {
+            return false;
         }
+
+        boolean ret = model.getProperties().stream()
+            .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                && property.getWireType() != property.getClientType());
+
+        // flatten properties
+        if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
+            ret = model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ArrayType.BYTE_ARRAY);
+        }
+
         return ret;
     }
 

@@ -6,20 +6,22 @@ package com.type.property.valuetypes.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Model with a int property.
  */
 @Immutable
-public final class IntProperty {
+public final class IntProperty implements JsonSerializable<IntProperty> {
     /*
      * Property
      */
     @Generated
-    @JsonProperty(value = "property")
-    private int property;
+    private final int property;
 
     /**
      * Creates an instance of IntProperty class.
@@ -27,8 +29,7 @@ public final class IntProperty {
      * @param property the property value to set.
      */
     @Generated
-    @JsonCreator
-    public IntProperty(@JsonProperty(value = "property") int property) {
+    public IntProperty(int property) {
         this.property = property;
     }
 
@@ -40,5 +41,38 @@ public final class IntProperty {
     @Generated
     public int getProperty() {
         return this.property;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("property", this.property);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of IntProperty from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of IntProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the IntProperty.
+     */
+    public static IntProperty fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int property = 0;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("property".equals(fieldName)) {
+                    property = reader.getInt();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new IntProperty(property);
+        });
     }
 }
