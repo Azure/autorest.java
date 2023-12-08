@@ -29,7 +29,7 @@ if (Test-Path package-lock.json) {
     Remove-Item package-lock.json
 }
 
-npm ci
+npm install
 
 # delete output
 if (Test-Path tsp-output) {
