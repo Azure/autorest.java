@@ -4,11 +4,9 @@
 package com.azure.autorest.model.projectmodel;
 
 import com.azure.autorest.Javagen;
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.template.TemplateHelper;
 import com.azure.autorest.util.ClientModelUtil;
@@ -128,9 +126,7 @@ public class Project {
     }
 
     // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
-    public void checkForAdditionalDependencies(List<ClientModel> models, CodeModel codeModel) {
-        Set<String> externalPackageNames = ClientModelUtil.getExternalPackageNamesUsedInClient(models, codeModel);
-
+    public void checkForAdditionalDependencies(Set<String> externalPackageNames) {
         // currently, only check for azure-core-experimental
         if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
             // add to pomDependencyIdentifiers is not already there

@@ -3,9 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.util.ClientModelUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -139,9 +136,7 @@ public class ModuleInfo {
     }
 
     // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
-    public void checkForAdditionalDependencies(List<ClientModel> models, CodeModel codeModel) {
-        Set<String> externalPackageNames = ClientModelUtil.getExternalPackageNamesUsedInClient(models, codeModel);
-
+    public void checkForAdditionalDependencies(Set<String> externalPackageNames) {
         // currently, only check for azure-core-experimental
         if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
             getRequireModules().add(new ModuleInfo.RequireModule("com.azure.core.experimental", true));
