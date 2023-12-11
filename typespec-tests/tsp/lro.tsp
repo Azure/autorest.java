@@ -1,0 +1,117 @@
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+
+@service({
+  title: "LongRunning",
+  version: "1.0.0",
+})
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@route("/long-running")
+namespace LongRunning {
+  // case of LRO having pollingOperation in non-service namespace
+  @pollingOperation(NonService.poll)
+  @post
+  @route("/post")
+  op longRunning(): AcceptedResponse;
+
+  // case of HealthInsights
+  @route("/jobs/{id}")
+  op getJob is LroLongRunningPollOperation<JobResult>;
+
+  @pollingOperation(LongRunning.getJob)
+  @route("/jobs")
+  op createJob is LroLongRunningRpcOperation<JobData, JobResult>;
+
+  model JobData {
+    configuration?: string;
+  }
+
+  model JobResult
+    is LroOperationStatus<{
+      data: string;
+    }>;
+
+  @lroStatus
+  enum JobStatus {
+    NotStarted: "notStarted",
+    Running: "running",
+    Succeeded: "succeeded",
+    Failed: "failed",
+    Canceled: "canceled",
+  }
+
+  model LroOperationStatus<TStatusResult = never, TStatusError = Foundations.Error> {
+    @key("operationId")
+    @visibility("read")
+    id: Azure.Core.uuid;
+
+    @visibility("read")
+    @lroStatus
+    status: JobStatus;
+
+    @visibility("read")
+    createdDateTime?: utcDateTime;
+
+    @visibility("read")
+    expirationDateTime?: utcDateTime;
+
+    @visibility("read")
+    lastUpdateDateTime?: utcDateTime;
+
+    error?: TStatusError;
+    result?: TStatusResult;
+  }
+
+  op LroLongRunningRpcOperation<
+    TParams extends TypeSpec.Reflection.Model,
+    TResponse extends TypeSpec.Reflection.Model,
+    Traits extends {} = {}
+  > is Azure.Core.RpcOperation<
+    TParams & RepeatabilityRequestHeaders,
+    Foundations.AcceptedResponse<LroLongRunningStatusLocation<TResponse> &
+      Foundations.RetryAfterHeader> &
+      RepeatabilityResponseHeaders &
+      LroOperationStatus,
+    Traits
+  >;
+
+  op LroLongRunningPollOperation<TResult extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
+    {
+      @path("id")
+      id: Azure.Core.uuid;
+    },
+    TResult,
+    LroRetryAfterTrait
+  >;
+
+  model LroLongRunningStatusLocation<TStatusResult = never> {
+    @pollingLocation
+    @TypeSpec.Http.header("Operation-Location")
+    operationLocation: LroResourceLocation<LroOperationStatus<TStatusResult>>;
+  }
+
+  scalar LroResourceLocation<TResource extends {}> extends url;
+
+  @trait("LroRetryAfterTrait")
+  model LroRetryAfterTrait {
+    retryAfter: {
+      @traitLocation(TraitLocation.Response)
+      response: Foundations.RetryAfterHeader;
+    };
+  }
+}
+
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+namespace NonService {
+  model PollResponse {
+    operationId: string;
+    status: Azure.Core.Foundations.OperationState;
+  }
+
+  op poll(): PollResponse;
+}
