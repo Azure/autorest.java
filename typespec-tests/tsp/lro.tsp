@@ -19,6 +19,11 @@ namespace LongRunning {
   @route("/post")
   op longRunning(): AcceptedResponse;
 
+  model PollResponse {
+    operationId: string;
+    status: Azure.Core.Foundations.OperationState;
+  }
+
   // case of HealthInsights
   @route("/jobs/{id}")
   op getJob is LroLongRunningPollOperation<JobResult>;
@@ -108,10 +113,7 @@ namespace LongRunning {
 
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace NonService {
-  model PollResponse {
-    operationId: string;
-    status: Azure.Core.Foundations.OperationState;
-  }
-
-  op poll(): PollResponse;
+  @route("/poll")
+  @get
+  op poll(): LongRunning.PollResponse;
 }
