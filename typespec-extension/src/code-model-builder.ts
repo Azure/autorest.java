@@ -628,11 +628,6 @@ export class CodeModelBuilder {
     if (getOverloadedOperation(this.program, operation)) {
       this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
       return true;
-    } else if (clientContext.ignoredOperations.has(operation)) {
-      this.trace(
-        `Operation '${operation.name}' is skipped, as it is used in '@pollingOperation' of a long running operation`,
-      );
-      return true;
     }
     return false;
   }

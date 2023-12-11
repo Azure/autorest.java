@@ -8,8 +8,10 @@ import com._specs_.azure.core.lro.rpc.legacy.LegacyServiceVersion;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobResult;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -76,6 +78,25 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "LegacyClientCreateRe")
     public interface CreateResourcePollViaOperationLocationsService {
+        @Get("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs/{jobId}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> getJob(@QueryParam("api-version") String apiVersion,
+            @PathParam("jobId") String jobId, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
+
+        @Get("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs/{jobId}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getJobSync(@QueryParam("api-version") String apiVersion, @PathParam("jobId") String jobId,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
         @Post("/azure/core/lro/rpc/legacy/create-resource-poll-via-operation-location/jobs")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -95,6 +116,100 @@ public final class CreateResourcePollViaOperationLocationsImpl {
         Response<BinaryData> createJobSync(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
             RequestOptions requestOptions, Context context);
+    }
+
+    /**
+     * Poll a Job.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
+     *         }
+     *     ]
+     *     results (Optional): [
+     *         String (Optional)
+     *     ]
+     * }
+     * }</pre>
+     * 
+     * @param jobId A processing job identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return result of the job along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getJobWithResponseAsync(String jobId, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getJob(this.client.getServiceVersion().getVersion(), jobId,
+            accept, requestOptions, context));
+    }
+
+    /**
+     * Poll a Job.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
+     *         }
+     *     ]
+     *     results (Optional): [
+     *         String (Optional)
+     *     ]
+     * }
+     * }</pre>
+     * 
+     * @param jobId A processing job identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return result of the job along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getJobWithResponse(String jobId, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.getJobSync(this.client.getServiceVersion().getVersion(), jobId, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
