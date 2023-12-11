@@ -33,11 +33,13 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -664,5 +666,33 @@ public class ClientModelUtil {
         }
 
         return model;
+    }
+
+    public static Set<String> getExternalPackageNamesUsedInClient(List<ClientModel> models, CodeModel codeModel) {
+        // models
+        Set<String> externalPackageNames = models == null ? new HashSet<>() : models.stream()
+                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
+                .map(ClientModel::getPackage)
+                .collect(Collectors.toSet());
+
+        // LongRunningMetadata in methods
+        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            for (Client client : codeModel.getClients()) {
+                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                    for (OperationGroup og : client.getOperationGroups()) {
+                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                            externalPackageNames.addAll(og.getOperations().stream()
+                                    .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
+                                    .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
+                                    .filter(Objects::nonNull)
+                                    .collect(Collectors.toSet()));
+                        }
+                    }
+                }
+            }
+        }
+
+        return externalPackageNames;
     }
 }

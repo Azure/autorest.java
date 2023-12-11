@@ -7,9 +7,7 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.template.TemplateHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
@@ -36,7 +34,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Project {
 
@@ -129,13 +126,7 @@ public class Project {
     }
 
     // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
-    public void checkForAdditionalDependencies(List<ClientModel> models) {
-        Set<String> externalPackageNames = models.stream()
-                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
-                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
-                .map(ClientModel::getPackage)
-                .collect(Collectors.toSet());
-
+    public void checkForAdditionalDependencies(Set<String> externalPackageNames) {
         // currently, only check for azure-core-experimental
         if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
             // add to pomDependencyIdentifiers is not already there

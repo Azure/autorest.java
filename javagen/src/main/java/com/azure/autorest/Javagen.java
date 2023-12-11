@@ -52,6 +52,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
@@ -275,8 +276,9 @@ public class Javagen extends NewPlugin {
                 project.integrateWithSdk();
             }
 
-            client.getModuleInfo().checkForAdditionalDependencies(client.getModels());
-            project.checkForAdditionalDependencies(client.getModels());
+            Set<String> externalPackageNames = ClientModelUtil.getExternalPackageNamesUsedInClient(client.getModels(), codeModel);
+            client.getModuleInfo().checkForAdditionalDependencies(externalPackageNames);
+            project.checkForAdditionalDependencies(externalPackageNames);
 
             // Module-info
             javaPackage.addModuleInfo(client.getModuleInfo());
