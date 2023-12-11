@@ -11,15 +11,12 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Properties of this repository.
  */
 @Fluent
 public class ContainerRepositoryProperties implements JsonSerializable<ContainerRepositoryProperties> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */

@@ -5,6 +5,8 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
+import com._specs_.azure.core.basic.models.ListItemInputBody;
+import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -317,6 +319,67 @@ public final class BasicAsyncClient {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> listWithParameters(BinaryData bodyInput, RequestOptions requestOptions) {
+        return this.serviceClient.listWithParametersAsync(bodyInput, requestOptions);
+    }
+
+    /**
      * List with custom page model.
      * <p>
      * <strong>Response Body Schema</strong>
@@ -586,6 +649,66 @@ public final class BasicAsyncClient {
         // Generated convenience method for listWithPage
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = listWithPage(requestOptions);
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
+     * @param bodyInput The body of the input.
+     * @param another Another query parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<User> listWithParameters(ListItemInputBody bodyInput, ListItemInputExtensibleEnum another) {
+        // Generated convenience method for listWithParameters
+        RequestOptions requestOptions = new RequestOptions();
+        if (another != null) {
+            requestOptions.addQueryParam("another", another.toString(), false);
+        }
+        PagedFlux<BinaryData> pagedFluxResponse = listWithParameters(BinaryData.fromObject(bodyInput), requestOptions);
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, User>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(User.class)).collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
+     * @param bodyInput The body of the input.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<User> listWithParameters(ListItemInputBody bodyInput) {
+        // Generated convenience method for listWithParameters
+        RequestOptions requestOptions = new RequestOptions();
+        PagedFlux<BinaryData> pagedFluxResponse = listWithParameters(BinaryData.fromObject(bodyInput), requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
             Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);

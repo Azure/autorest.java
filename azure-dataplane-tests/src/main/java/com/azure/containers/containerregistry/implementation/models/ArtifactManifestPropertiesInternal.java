@@ -22,8 +22,6 @@ import java.util.List;
  */
 @Fluent
 public class ArtifactManifestPropertiesInternal implements JsonSerializable<ArtifactManifestPropertiesInternal> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      */
@@ -396,9 +394,10 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
             jsonWriter.writeStartObject("manifest");
             jsonWriter.writeStringField("digest", this.digest);
             jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
-            jsonWriter.writeStringField("createdTime", this.createdOn == null ? null : ISO_8601.format(this.createdOn));
+            jsonWriter.writeStringField("createdTime",
+                this.createdOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdOn));
             jsonWriter.writeStringField("lastUpdateTime",
-                this.lastUpdatedOn == null ? null : ISO_8601.format(this.lastUpdatedOn));
+                this.lastUpdatedOn == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedOn));
             jsonWriter.writeStringField("architecture",
                 this.architecture == null ? null : this.architecture.toString());
             jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());

@@ -4,78 +4,53 @@
 
 package com.cadl.naming.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.Collection;
-
 /**
  * Defines values for RequestType.
  */
-public final class RequestType extends ExpandableStringEnum<RequestType> implements JsonSerializable<RequestType> {
+public enum RequestType {
     /**
-     * Static value Type1 for RequestType.
+     * Enum value Type1.
      */
-    @Generated
-    public static final RequestType TYPE1 = fromString("Type1");
+    TYPE1("Type1"),
 
     /**
-     * Static value Type2 for RequestType.
+     * Enum value Type2.
      */
-    @Generated
-    public static final RequestType TYPE2 = fromString("Type2");
+    TYPE2("Type2");
 
     /**
-     * Creates a new instance of RequestType value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a RequestType instance.
      */
-    @Generated
-    @Deprecated
-    public RequestType() {
+    private final String value;
+
+    RequestType(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a RequestType from its string representation.
+     * Parses a serialized value to a RequestType instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding RequestType.
+     * @param value the serialized value to parse.
+     * @return the parsed RequestType object, or null if unable to parse.
      */
-    @Generated
-    public static RequestType fromString(String name) {
-        return fromString(name, RequestType.class);
+    public static RequestType fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        RequestType[] items = RequestType.values();
+        for (RequestType item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known RequestType values.
-     * 
-     * @return known RequestType values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<RequestType> values() {
-        return values(RequestType.class);
-    }
-
-    @Generated
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a RequestType from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The RequestType that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a RequestType fails to be read from the JsonReader.
-     */
-    @Generated
-    public static RequestType fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), RequestType.class);
+    public String toString() {
+        return this.value;
     }
 }

@@ -1,5 +1,22 @@
 # Release History
 
+## 0.12.0 (Unreleased)
+
+Compatible with compiler 0.51.
+
+- Supported convenience API for "multipart/form-data".
+
+## 0.11.3 (2023-12-06)
+
+Compatible with compiler 0.50.
+
+- Supported `crossLanguageDefinitionId`.
+- Supported `decmial` scalar.
+
+## 0.11.2 (2023-11-16)
+
+Compatible with compiler 0.50.
+
 ## 0.11.1 (2023-11-14)
 
 Compatible with compiler 0.50.

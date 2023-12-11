@@ -39,6 +39,7 @@ org.apache.maven.plugins:maven-shade-plugin
 org.apache.maven.plugins:maven-site-plugin
 org.apache.maven.plugins:maven-source-plugin
 org.apache.maven.plugins:maven-surefire-plugin
+org.codehaus.mojo:exec-maven-plugin
 
 org.mockito:mockito-core;4.11.0
 

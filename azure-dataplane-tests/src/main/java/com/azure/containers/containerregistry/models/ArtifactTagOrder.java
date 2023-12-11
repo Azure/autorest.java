@@ -5,17 +5,12 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
  * Sort options for ordering tags in a collection.
  */
-public final class ArtifactTagOrder extends ExpandableStringEnum<ArtifactTagOrder>
-    implements JsonSerializable<ArtifactTagOrder> {
+public final class ArtifactTagOrder extends ExpandableStringEnum<ArtifactTagOrder> {
     /**
      * Do not provide an orderby value in the request.
      */
@@ -57,23 +52,5 @@ public final class ArtifactTagOrder extends ExpandableStringEnum<ArtifactTagOrde
      */
     public static Collection<ArtifactTagOrder> values() {
         return values(ArtifactTagOrder.class);
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a ArtifactTagOrder from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The ArtifactTagOrder that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a ArtifactTagOrder fails to be read from the JsonReader.
-     */
-    public static ArtifactTagOrder fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), ArtifactTagOrder.class);
     }
 }

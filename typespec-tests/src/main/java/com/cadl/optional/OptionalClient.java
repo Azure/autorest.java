@@ -16,7 +16,7 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.optional.implementation.OptionalClientImpl;
+import com.cadl.optional.implementation.OptionalOpsImpl;
 import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
 
@@ -26,7 +26,7 @@ import com.cadl.optional.models.Optional;
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class OptionalClient {
     @Generated
-    private final OptionalClientImpl serviceClient;
+    private final OptionalOpsImpl serviceClient;
 
     /**
      * Initializes an instance of OptionalClient class.
@@ -34,7 +34,7 @@ public final class OptionalClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    OptionalClient(OptionalClientImpl serviceClient) {
+    OptionalClient(OptionalOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

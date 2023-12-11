@@ -31,6 +31,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.paging.AutoRestPagingTestServiceVersion;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,6 +59,15 @@ public final class PagingsImpl {
     PagingsImpl(AutoRestPagingTestServiceClientImpl client) {
         this.service = RestProxy.create(PagingsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestPagingTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
-import com.cadl.union.implementation.UnionClientImpl;
+import com.cadl.union.implementation.UnionFlattenOpsImpl;
 import com.cadl.union.models.Result;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = UnionClientBuilder.class, isAsync = true)
 public final class UnionAsyncClient {
     @Generated
-    private final UnionClientImpl serviceClient;
+    private final UnionFlattenOpsImpl serviceClient;
 
     /**
      * Initializes an instance of UnionAsyncClient class.
@@ -40,7 +40,7 @@ public final class UnionAsyncClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    UnionAsyncClient(UnionClientImpl serviceClient) {
+    UnionAsyncClient(UnionFlattenOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

@@ -20,8 +20,6 @@ import java.util.Objects;
  */
 @Immutable
 public final class SubClassMismatch extends SuperClass {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The dateTimeRfc7231 property.
      */
@@ -56,7 +54,8 @@ public final class SubClassMismatch extends SuperClass {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("dateTime", getDateTime() == null ? null : ISO_8601.format(getDateTime()));
+        jsonWriter.writeStringField("dateTime",
+            getDateTime() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getDateTime()));
         jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
         return jsonWriter.writeEndObject();
     }

@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Immutable
 public class SuperClass implements JsonSerializable<SuperClass> {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The dateTime property.
      */
@@ -50,7 +48,8 @@ public class SuperClass implements JsonSerializable<SuperClass> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("dateTime", this.dateTime == null ? null : ISO_8601.format(this.dateTime));
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         return jsonWriter.writeEndObject();
     }
 

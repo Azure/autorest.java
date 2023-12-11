@@ -115,21 +115,24 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         if (attributeName == null) {
             return xmlReaderName + ".getBinaryElement()";
+        } else if (attributeNamespace == null) {
+            return xmlReaderName + ".getBinaryAttribute(null, \"" + attributeName + "\")";
         } else {
-            return (attributeNamespace == null)
-                ? xmlReaderName + ".getBinaryAttribute(null, \"" + attributeName + "\")"
+            return namespaceIsConstant
+                ? xmlReaderName + ".getBinaryAttribute(" + attributeNamespace + ", \"" + attributeName + "\")"
                 : xmlReaderName + ".getBinaryAttribute(\"" + attributeNamespace + "\", \"" + attributeName + "\")";
         }
     }
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         return ClassType.xmlSerializationCallHelper(xmlWriterName, "writeBinary", attributeOrElementName, namespaceUri,
-            valueGetter, isAttribute, nameIsVariable);
+            valueGetter, isAttribute, nameIsVariable, namespaceIsConstant);
     }
 
     @Override

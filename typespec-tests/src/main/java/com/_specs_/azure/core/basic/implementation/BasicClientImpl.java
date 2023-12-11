@@ -98,6 +98,20 @@ public final class BasicClientImpl {
     }
 
     /**
+     * The TwoModelsAsPageItemsImpl object to access its operations.
+     */
+    private final TwoModelsAsPageItemsImpl twoModelsAsPageItems;
+
+    /**
+     * Gets the TwoModelsAsPageItemsImpl object to access its operations.
+     * 
+     * @return the TwoModelsAsPageItemsImpl object.
+     */
+    public TwoModelsAsPageItemsImpl getTwoModelsAsPageItems() {
+        return this.twoModelsAsPageItems;
+    }
+
+    /**
      * Initializes an instance of BasicClient client.
      * 
      * @param serviceVersion Service version.
@@ -129,6 +143,7 @@ public final class BasicClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.serviceVersion = serviceVersion;
+        this.twoModelsAsPageItems = new TwoModelsAsPageItemsImpl(this);
         this.service = RestProxy.create(BasicClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -234,6 +249,26 @@ public final class BasicClientImpl {
         Response<BinaryData> listWithPageSync(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
+        @Get("/azure/core/basic/parameters")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> listWithParameters(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            RequestOptions requestOptions, Context context);
+
+        @Get("/azure/core/basic/parameters")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> listWithParametersSync(@QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            RequestOptions requestOptions, Context context);
+
         @Get("/azure/core/basic/custom-page")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -324,6 +359,25 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithPageNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> listWithParametersNext(
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> listWithParametersNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -1216,6 +1270,265 @@ public final class BasicClientImpl {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> listWithParametersSinglePageAsync(BinaryData bodyInput,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.listWithParameters(this.getServiceVersion().getVersion(), accept, bodyInput,
+                requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> listWithParametersAsync(BinaryData bodyInput, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedFlux<>(() -> listWithParametersSinglePageAsync(bodyInput, requestOptions),
+            nextLink -> listWithParametersNextSinglePageAsync(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> listWithParametersSinglePage(BinaryData bodyInput,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Response<BinaryData> res = service.listWithParametersSync(this.getServiceVersion().getVersion(), accept,
+            bodyInput, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
+    }
+
+    /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * <p>
+     * <strong>Query Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>another</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Another query parameter. Allowed values: "First", "Second".</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     inputName: String (Required)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param bodyInput The body of the input.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listWithParameters(BinaryData bodyInput, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(
+            requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
+        return new PagedIterable<>(() -> listWithParametersSinglePage(bodyInput, requestOptions),
+            nextLink -> listWithParametersNextSinglePage(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
      * List with custom page model.
      * <p>
      * <strong>Response Body Schema</strong>
@@ -1628,6 +1941,84 @@ public final class BasicClientImpl {
     private PagedResponse<BinaryData> listWithPageNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
         Response<BinaryData> res = service.listWithPageNextSync(nextLink, accept, requestOptions, Context.NONE);
+        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+            getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<PagedResponse<BinaryData>> listWithParametersNextSinglePageAsync(String nextLink,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.listWithParametersNext(nextLink, accept, requestOptions, context))
+            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
+                getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
+    }
+
+    /**
+     * Get the next page of items.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Required)
+     *             detail: String (Required)
+     *         }
+     *     ]
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param nextLink The URL to get the next list of items
+     * 
+     * The nextLink parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of User items along with {@link PagedResponse}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private PagedResponse<BinaryData> listWithParametersNextSinglePage(String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Response<BinaryData> res = service.listWithParametersNextSync(nextLink, accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }

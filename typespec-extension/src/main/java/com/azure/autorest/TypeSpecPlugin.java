@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -111,14 +112,6 @@ public class TypeSpecPlugin extends Javagen {
                     javaPackage.addModel(model.getPackage(), model.getName(), model);
                 });
 
-        // JsonMergePatchHelper
-        List<ClientModel> jsonMergePatchModels = client.getModels().stream()
-                .filter(ModelUtil::isGeneratingModel)
-                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
-        if (!jsonMergePatchModels.isEmpty()) {
-            javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
-        }
-
         // Enum
         client.getEnums().stream()
                 .filter(ModelUtil::isGeneratingModel)
@@ -136,6 +129,40 @@ public class TypeSpecPlugin extends Javagen {
         client.getUnionModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
                 .forEach(model -> javaPackage.addUnionModel(model));
+    }
+
+    @Override
+    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
+        // will serialize and deserialize ResponseError.
+        if (settings.isStreamStyleSerialization()) {
+            boolean generateCoreToCodegenBridgeUtils = false;
+            for (ClientModel model : client.getModels()) {
+                if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings) && ModelUtil.isGeneratingModel(model)) {
+                    generateCoreToCodegenBridgeUtils = true;
+                    break;
+                }
+            }
+            if (generateCoreToCodegenBridgeUtils) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
+            }
+        }
+
+        // JsonMergePatchHelper
+        List<ClientModel> jsonMergePatchModels = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
+//        if (!jsonMergePatchModels.isEmpty()) {
+//            javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
+//        }
+
+        // MultipartFormDataHelper
+        final boolean generateMultipartFormDataHelper = client.getModels().stream()
+                .filter(ModelUtil::isGeneratingModel)
+                .anyMatch(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA));
+        if (generateMultipartFormDataHelper) {
+            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+        }
     }
 
     @Override
@@ -260,7 +287,6 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
 
             SETTINGS_MAP.put("sync-methods", "sync-only");
-            SETTINGS_MAP.put("stream-style-serialization", true);
             SETTINGS_MAP.put("generate-samples", false);
             SETTINGS_MAP.put("generate-tests", false);
         }

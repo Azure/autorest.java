@@ -18,8 +18,6 @@ import java.util.List;
  */
 @Fluent
 public final class Goblinshark extends Shark {
-    private static final DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-
     /*
      * The jawsize property.
      */
@@ -136,7 +134,8 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("fishtype", "goblin");
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday", getBirthday() == null ? null : ISO_8601.format(getBirthday()));
+        jsonWriter.writeStringField("birthday",
+            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());

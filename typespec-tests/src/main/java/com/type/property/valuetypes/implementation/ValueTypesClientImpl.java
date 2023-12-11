@@ -114,6 +114,34 @@ public final class ValueTypesClientImpl {
     }
 
     /**
+     * The DecimalsImpl object to access its operations.
+     */
+    private final DecimalsImpl decimals;
+
+    /**
+     * Gets the DecimalsImpl object to access its operations.
+     * 
+     * @return the DecimalsImpl object.
+     */
+    public DecimalsImpl getDecimals() {
+        return this.decimals;
+    }
+
+    /**
+     * The Decimal128sImpl object to access its operations.
+     */
+    private final Decimal128sImpl decimal128s;
+
+    /**
+     * Gets the Decimal128sImpl object to access its operations.
+     * 
+     * @return the Decimal128sImpl object.
+     */
+    public Decimal128sImpl getDecimal128s() {
+        return this.decimal128s;
+    }
+
+    /**
      * The DatetimeOperationsImpl object to access its operations.
      */
     private final DatetimeOperationsImpl datetimeOperations;
@@ -310,6 +338,104 @@ public final class ValueTypesClientImpl {
     }
 
     /**
+     * The StringLiteralsImpl object to access its operations.
+     */
+    private final StringLiteralsImpl stringLiterals;
+
+    /**
+     * Gets the StringLiteralsImpl object to access its operations.
+     * 
+     * @return the StringLiteralsImpl object.
+     */
+    public StringLiteralsImpl getStringLiterals() {
+        return this.stringLiterals;
+    }
+
+    /**
+     * The IntLiteralsImpl object to access its operations.
+     */
+    private final IntLiteralsImpl intLiterals;
+
+    /**
+     * Gets the IntLiteralsImpl object to access its operations.
+     * 
+     * @return the IntLiteralsImpl object.
+     */
+    public IntLiteralsImpl getIntLiterals() {
+        return this.intLiterals;
+    }
+
+    /**
+     * The FloatLiteralsImpl object to access its operations.
+     */
+    private final FloatLiteralsImpl floatLiterals;
+
+    /**
+     * Gets the FloatLiteralsImpl object to access its operations.
+     * 
+     * @return the FloatLiteralsImpl object.
+     */
+    public FloatLiteralsImpl getFloatLiterals() {
+        return this.floatLiterals;
+    }
+
+    /**
+     * The BooleanLiteralsImpl object to access its operations.
+     */
+    private final BooleanLiteralsImpl booleanLiterals;
+
+    /**
+     * Gets the BooleanLiteralsImpl object to access its operations.
+     * 
+     * @return the BooleanLiteralsImpl object.
+     */
+    public BooleanLiteralsImpl getBooleanLiterals() {
+        return this.booleanLiterals;
+    }
+
+    /**
+     * The UnionStringLiteralsImpl object to access its operations.
+     */
+    private final UnionStringLiteralsImpl unionStringLiterals;
+
+    /**
+     * Gets the UnionStringLiteralsImpl object to access its operations.
+     * 
+     * @return the UnionStringLiteralsImpl object.
+     */
+    public UnionStringLiteralsImpl getUnionStringLiterals() {
+        return this.unionStringLiterals;
+    }
+
+    /**
+     * The UnionIntLiteralsImpl object to access its operations.
+     */
+    private final UnionIntLiteralsImpl unionIntLiterals;
+
+    /**
+     * Gets the UnionIntLiteralsImpl object to access its operations.
+     * 
+     * @return the UnionIntLiteralsImpl object.
+     */
+    public UnionIntLiteralsImpl getUnionIntLiterals() {
+        return this.unionIntLiterals;
+    }
+
+    /**
+     * The UnionFloatLiteralsImpl object to access its operations.
+     */
+    private final UnionFloatLiteralsImpl unionFloatLiterals;
+
+    /**
+     * Gets the UnionFloatLiteralsImpl object to access its operations.
+     * 
+     * @return the UnionFloatLiteralsImpl object.
+     */
+    public UnionFloatLiteralsImpl getUnionFloatLiterals() {
+        return this.unionFloatLiterals;
+    }
+
+    /**
      * Initializes an instance of ValueTypesClient client.
      */
     public ValueTypesClientImpl() {
@@ -340,6 +466,8 @@ public final class ValueTypesClientImpl {
         this.bytes = new BytesImpl(this);
         this.ints = new IntsImpl(this);
         this.floatOperations = new FloatOperationsImpl(this);
+        this.decimals = new DecimalsImpl(this);
+        this.decimal128s = new Decimal128sImpl(this);
         this.datetimeOperations = new DatetimeOperationsImpl(this);
         this.durationOperations = new DurationOperationsImpl(this);
         this.enums = new EnumsImpl(this);
@@ -354,5 +482,12 @@ public final class ValueTypesClientImpl {
         this.unknownInts = new UnknownIntsImpl(this);
         this.unknownDicts = new UnknownDictsImpl(this);
         this.unknownArrays = new UnknownArraysImpl(this);
+        this.stringLiterals = new StringLiteralsImpl(this);
+        this.intLiterals = new IntLiteralsImpl(this);
+        this.floatLiterals = new FloatLiteralsImpl(this);
+        this.booleanLiterals = new BooleanLiteralsImpl(this);
+        this.unionStringLiterals = new UnionStringLiteralsImpl(this);
+        this.unionIntLiterals = new UnionIntLiteralsImpl(this);
+        this.unionFloatLiterals = new UnionFloatLiteralsImpl(this);
     }
 }

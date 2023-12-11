@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.model.implementation.ModelClientImpl;
+import com.cadl.model.implementation.ModelOpsImpl;
 import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.Resource1;
 import com.cadl.model.models.Resource2;
@@ -27,7 +27,7 @@ import com.cadl.model.models.Resource3;
 @ServiceClient(builder = ModelClientBuilder.class)
 public final class ModelClient {
     @Generated
-    private final ModelClientImpl serviceClient;
+    private final ModelOpsImpl serviceClient;
 
     /**
      * Initializes an instance of ModelClient class.
@@ -35,7 +35,7 @@ public final class ModelClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelClient(ModelClientImpl serviceClient) {
+    ModelClient(ModelOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

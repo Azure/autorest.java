@@ -6,18 +6,18 @@ package com.cadl.specialheaders.generated;
 
 import com.azure.core.http.RequestConditions;
 import com.azure.core.util.Configuration;
-import com.cadl.specialheaders.SpecialHeadersClient;
+import com.cadl.specialheaders.EtagHeadersClient;
 import com.cadl.specialheaders.SpecialHeadersClientBuilder;
 import com.cadl.specialheaders.models.Resource;
 
 public class EtagHeadersPutWithRequestHeaders {
     public static void main(String[] args) {
-        SpecialHeadersClient specialHeadersClient = new SpecialHeadersClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
-        // BEGIN:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
-        Resource response = specialHeadersClient.putWithRequestHeaders("name",
+        EtagHeadersClient etagHeadersClient = new SpecialHeadersClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildEtagHeadersClient();
+        // BEGIN:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
+        Resource response = etagHeadersClient.putWithRequestHeaders("name",
             new Resource("myType").setDescription("This is sample for Etag headers"),
             new RequestConditions().setIfMatch("64e005"));
-        // END:com.cadl.specialheaders.generated.putwithrequestheaders.etagheadersputwithrequestheaders
+        // END:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
     }
 }

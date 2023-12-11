@@ -41,7 +41,14 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the ServiceClientClient type.
  */
-@ServiceClientBuilder(serviceClients = { ServiceClientClient.class, ServiceClientAsyncClient.class })
+@ServiceClientBuilder(
+    serviceClients = {
+        ServiceClientClient.class,
+        FooClient.class,
+        BarClient.class,
+        ServiceClientAsyncClient.class,
+        FooAsyncClient.class,
+        BarAsyncClient.class })
 public final class ServiceClientClientBuilder implements HttpTrait<ServiceClientClientBuilder>,
     ConfigurationTrait<ServiceClientClientBuilder>, EndpointTrait<ServiceClientClientBuilder> {
     @Generated
@@ -284,6 +291,26 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /**
+     * Builds an instance of FooAsyncClient class.
+     * 
+     * @return an instance of FooAsyncClient.
+     */
+    @Generated
+    public FooAsyncClient buildFooAsyncClient() {
+        return new FooAsyncClient(buildInnerClient().getFoos());
+    }
+
+    /**
+     * Builds an instance of BarAsyncClient class.
+     * 
+     * @return an instance of BarAsyncClient.
+     */
+    @Generated
+    public BarAsyncClient buildBarAsyncClient() {
+        return new BarAsyncClient(buildInnerClient().getBars());
+    }
+
+    /**
      * Builds an instance of ServiceClientClient class.
      * 
      * @return an instance of ServiceClientClient.
@@ -291,6 +318,26 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     @Generated
     public ServiceClientClient buildClient() {
         return new ServiceClientClient(buildInnerClient());
+    }
+
+    /**
+     * Builds an instance of FooClient class.
+     * 
+     * @return an instance of FooClient.
+     */
+    @Generated
+    public FooClient buildFooClient() {
+        return new FooClient(buildInnerClient().getFoos());
+    }
+
+    /**
+     * Builds an instance of BarClient class.
+     * 
+     * @return an instance of BarClient.
+     */
+    @Generated
+    public BarClient buildBarClient() {
+        return new BarClient(buildInnerClient().getBars());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ServiceClientClientBuilder.class);

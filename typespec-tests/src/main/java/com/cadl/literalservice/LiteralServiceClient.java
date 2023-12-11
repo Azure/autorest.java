@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.literalservice.implementation.LiteralServiceClientImpl;
+import com.cadl.literalservice.implementation.LiteralOpsImpl;
 import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParam;
 
@@ -25,7 +25,7 @@ import com.cadl.literalservice.models.OptionalLiteralParam;
 @ServiceClient(builder = LiteralServiceClientBuilder.class)
 public final class LiteralServiceClient {
     @Generated
-    private final LiteralServiceClientImpl serviceClient;
+    private final LiteralOpsImpl serviceClient;
 
     /**
      * Initializes an instance of LiteralServiceClient class.
@@ -33,7 +33,7 @@ public final class LiteralServiceClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    LiteralServiceClient(LiteralServiceClientImpl serviceClient) {
+    LiteralServiceClient(LiteralOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

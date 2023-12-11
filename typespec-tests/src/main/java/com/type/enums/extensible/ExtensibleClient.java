@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.type.enums.extensible.implementation.ExtensibleClientImpl;
+import com.type.enums.extensible.implementation.StringOperationsImpl;
 import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 
 /**
@@ -24,7 +24,7 @@ import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 @ServiceClient(builder = ExtensibleClientBuilder.class)
 public final class ExtensibleClient {
     @Generated
-    private final ExtensibleClientImpl serviceClient;
+    private final StringOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of ExtensibleClient class.
@@ -32,7 +32,7 @@ public final class ExtensibleClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ExtensibleClient(ExtensibleClientImpl serviceClient) {
+    ExtensibleClient(StringOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -180,7 +180,8 @@ public final class ExtensibleClient {
     public void putKnownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putKnownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putKnownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putKnownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 
     /**
@@ -199,6 +200,7 @@ public final class ExtensibleClient {
     public void putUnknownValue(DaysOfWeekExtensibleEnum body) {
         // Generated convenience method for putUnknownValueWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        putUnknownValueWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        putUnknownValueWithResponse(BinaryData.fromObject(body == null ? null : body.toString()), requestOptions)
+            .getValue();
     }
 }

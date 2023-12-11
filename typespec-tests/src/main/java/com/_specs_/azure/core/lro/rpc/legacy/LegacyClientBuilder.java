@@ -265,7 +265,7 @@ public final class LegacyClientBuilder
      */
     @Generated
     public LegacyAsyncClient buildAsyncClient() {
-        return new LegacyAsyncClient(buildInnerClient());
+        return new LegacyAsyncClient(buildInnerClient().getCreateResourcePollViaOperationLocations());
     }
 
     /**
@@ -275,7 +275,7 @@ public final class LegacyClientBuilder
      */
     @Generated
     public LegacyClient buildClient() {
-        return new LegacyClient(buildInnerClient());
+        return new LegacyClient(buildInnerClient().getCreateResourcePollViaOperationLocations());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(LegacyClientBuilder.class);

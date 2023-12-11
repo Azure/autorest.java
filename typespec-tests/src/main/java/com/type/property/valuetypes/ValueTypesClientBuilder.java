@@ -47,6 +47,8 @@ import java.util.Objects;
         BytesClient.class,
         IntClient.class,
         FloatOperationClient.class,
+        DecimalClient.class,
+        Decimal128Client.class,
         DatetimeOperationClient.class,
         DurationOperationClient.class,
         EnumClient.class,
@@ -61,11 +63,20 @@ import java.util.Objects;
         UnknownIntClient.class,
         UnknownDictClient.class,
         UnknownArrayClient.class,
+        StringLiteralClient.class,
+        IntLiteralClient.class,
+        FloatLiteralClient.class,
+        BooleanLiteralClient.class,
+        UnionStringLiteralClient.class,
+        UnionIntLiteralClient.class,
+        UnionFloatLiteralClient.class,
         BooleanOperationAsyncClient.class,
         StringOperationAsyncClient.class,
         BytesAsyncClient.class,
         IntAsyncClient.class,
         FloatOperationAsyncClient.class,
+        DecimalAsyncClient.class,
+        Decimal128AsyncClient.class,
         DatetimeOperationAsyncClient.class,
         DurationOperationAsyncClient.class,
         EnumAsyncClient.class,
@@ -79,7 +90,14 @@ import java.util.Objects;
         UnknownStringAsyncClient.class,
         UnknownIntAsyncClient.class,
         UnknownDictAsyncClient.class,
-        UnknownArrayAsyncClient.class })
+        UnknownArrayAsyncClient.class,
+        StringLiteralAsyncClient.class,
+        IntLiteralAsyncClient.class,
+        FloatLiteralAsyncClient.class,
+        BooleanLiteralAsyncClient.class,
+        UnionStringLiteralAsyncClient.class,
+        UnionIntLiteralAsyncClient.class,
+        UnionFloatLiteralAsyncClient.class })
 public final class ValueTypesClientBuilder
     implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
     @Generated
@@ -328,6 +346,26 @@ public final class ValueTypesClientBuilder
     }
 
     /**
+     * Builds an instance of DecimalAsyncClient class.
+     * 
+     * @return an instance of DecimalAsyncClient.
+     */
+    @Generated
+    public DecimalAsyncClient buildDecimalAsyncClient() {
+        return new DecimalAsyncClient(buildInnerClient().getDecimals());
+    }
+
+    /**
+     * Builds an instance of Decimal128AsyncClient class.
+     * 
+     * @return an instance of Decimal128AsyncClient.
+     */
+    @Generated
+    public Decimal128AsyncClient buildDecimal128AsyncClient() {
+        return new Decimal128AsyncClient(buildInnerClient().getDecimal128s());
+    }
+
+    /**
      * Builds an instance of DatetimeOperationAsyncClient class.
      * 
      * @return an instance of DatetimeOperationAsyncClient.
@@ -468,6 +506,76 @@ public final class ValueTypesClientBuilder
     }
 
     /**
+     * Builds an instance of StringLiteralAsyncClient class.
+     * 
+     * @return an instance of StringLiteralAsyncClient.
+     */
+    @Generated
+    public StringLiteralAsyncClient buildStringLiteralAsyncClient() {
+        return new StringLiteralAsyncClient(buildInnerClient().getStringLiterals());
+    }
+
+    /**
+     * Builds an instance of IntLiteralAsyncClient class.
+     * 
+     * @return an instance of IntLiteralAsyncClient.
+     */
+    @Generated
+    public IntLiteralAsyncClient buildIntLiteralAsyncClient() {
+        return new IntLiteralAsyncClient(buildInnerClient().getIntLiterals());
+    }
+
+    /**
+     * Builds an instance of FloatLiteralAsyncClient class.
+     * 
+     * @return an instance of FloatLiteralAsyncClient.
+     */
+    @Generated
+    public FloatLiteralAsyncClient buildFloatLiteralAsyncClient() {
+        return new FloatLiteralAsyncClient(buildInnerClient().getFloatLiterals());
+    }
+
+    /**
+     * Builds an instance of BooleanLiteralAsyncClient class.
+     * 
+     * @return an instance of BooleanLiteralAsyncClient.
+     */
+    @Generated
+    public BooleanLiteralAsyncClient buildBooleanLiteralAsyncClient() {
+        return new BooleanLiteralAsyncClient(buildInnerClient().getBooleanLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionStringLiteralAsyncClient class.
+     * 
+     * @return an instance of UnionStringLiteralAsyncClient.
+     */
+    @Generated
+    public UnionStringLiteralAsyncClient buildUnionStringLiteralAsyncClient() {
+        return new UnionStringLiteralAsyncClient(buildInnerClient().getUnionStringLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionIntLiteralAsyncClient class.
+     * 
+     * @return an instance of UnionIntLiteralAsyncClient.
+     */
+    @Generated
+    public UnionIntLiteralAsyncClient buildUnionIntLiteralAsyncClient() {
+        return new UnionIntLiteralAsyncClient(buildInnerClient().getUnionIntLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionFloatLiteralAsyncClient class.
+     * 
+     * @return an instance of UnionFloatLiteralAsyncClient.
+     */
+    @Generated
+    public UnionFloatLiteralAsyncClient buildUnionFloatLiteralAsyncClient() {
+        return new UnionFloatLiteralAsyncClient(buildInnerClient().getUnionFloatLiterals());
+    }
+
+    /**
      * Builds an instance of BooleanOperationClient class.
      * 
      * @return an instance of BooleanOperationClient.
@@ -515,6 +623,26 @@ public final class ValueTypesClientBuilder
     @Generated
     public FloatOperationClient buildFloatOperationClient() {
         return new FloatOperationClient(buildInnerClient().getFloatOperations());
+    }
+
+    /**
+     * Builds an instance of DecimalClient class.
+     * 
+     * @return an instance of DecimalClient.
+     */
+    @Generated
+    public DecimalClient buildDecimalClient() {
+        return new DecimalClient(buildInnerClient().getDecimals());
+    }
+
+    /**
+     * Builds an instance of Decimal128Client class.
+     * 
+     * @return an instance of Decimal128Client.
+     */
+    @Generated
+    public Decimal128Client buildDecimal128Client() {
+        return new Decimal128Client(buildInnerClient().getDecimal128s());
     }
 
     /**
@@ -655,6 +783,76 @@ public final class ValueTypesClientBuilder
     @Generated
     public UnknownArrayClient buildUnknownArrayClient() {
         return new UnknownArrayClient(buildInnerClient().getUnknownArrays());
+    }
+
+    /**
+     * Builds an instance of StringLiteralClient class.
+     * 
+     * @return an instance of StringLiteralClient.
+     */
+    @Generated
+    public StringLiteralClient buildStringLiteralClient() {
+        return new StringLiteralClient(buildInnerClient().getStringLiterals());
+    }
+
+    /**
+     * Builds an instance of IntLiteralClient class.
+     * 
+     * @return an instance of IntLiteralClient.
+     */
+    @Generated
+    public IntLiteralClient buildIntLiteralClient() {
+        return new IntLiteralClient(buildInnerClient().getIntLiterals());
+    }
+
+    /**
+     * Builds an instance of FloatLiteralClient class.
+     * 
+     * @return an instance of FloatLiteralClient.
+     */
+    @Generated
+    public FloatLiteralClient buildFloatLiteralClient() {
+        return new FloatLiteralClient(buildInnerClient().getFloatLiterals());
+    }
+
+    /**
+     * Builds an instance of BooleanLiteralClient class.
+     * 
+     * @return an instance of BooleanLiteralClient.
+     */
+    @Generated
+    public BooleanLiteralClient buildBooleanLiteralClient() {
+        return new BooleanLiteralClient(buildInnerClient().getBooleanLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionStringLiteralClient class.
+     * 
+     * @return an instance of UnionStringLiteralClient.
+     */
+    @Generated
+    public UnionStringLiteralClient buildUnionStringLiteralClient() {
+        return new UnionStringLiteralClient(buildInnerClient().getUnionStringLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionIntLiteralClient class.
+     * 
+     * @return an instance of UnionIntLiteralClient.
+     */
+    @Generated
+    public UnionIntLiteralClient buildUnionIntLiteralClient() {
+        return new UnionIntLiteralClient(buildInnerClient().getUnionIntLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionFloatLiteralClient class.
+     * 
+     * @return an instance of UnionFloatLiteralClient.
+     */
+    @Generated
+    public UnionFloatLiteralClient buildUnionFloatLiteralClient() {
+        return new UnionFloatLiteralClient(buildInnerClient().getUnionFloatLiterals());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ValueTypesClientBuilder.class);

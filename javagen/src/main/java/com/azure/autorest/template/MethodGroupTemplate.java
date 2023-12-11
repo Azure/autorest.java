@@ -7,12 +7,15 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -62,8 +65,12 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         });
         javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
         {
-            classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
-            classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
+            final boolean hasProxy = methodGroupClient.getProxy() != null;
+
+            if (hasProxy) {
+                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
+            }
 
             classBlock.javadocComment("The service client containing this operation class.");
             classBlock.privateFinalMemberVariable(methodGroupClient.getServiceClientName(), "client");
@@ -81,7 +88,24 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 constructor.line("this.client = client;");
             });
 
-            Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
+            if (!CoreUtils.isNullOrEmpty(methodGroupClient.getProperties())) {
+                for (ServiceClientProperty property : methodGroupClient.getProperties()) {
+                    classBlock.javadocComment(comment ->
+                    {
+                        comment.description(String.format("Gets %1$s", property.getDescription()));
+                        comment.methodReturns(String.format("the %1$s value.", property.getName()));
+                    });
+                    classBlock.method(property.getMethodVisibility(), null, String.format("%1$s %2$s()",
+                            property.getType(), new ModelNamer().modelPropertyGetterName(property)), function ->
+                    {
+                        function.methodReturn(String.format("client.%1$s()", new ModelNamer().modelPropertyGetterName(property)));
+                    });
+                }
+            }
+
+            if (hasProxy) {
+                Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
+            }
 
             TemplateUtil.writeClientMethodsAndHelpers(classBlock, methodGroupClient.getClientMethods());
 

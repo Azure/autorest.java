@@ -4,79 +4,53 @@
 
 package com.cadl.enumservice.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.Collection;
-
 /**
  * Defines values for OperationName.
  */
-public final class OperationName extends ExpandableStringEnum<OperationName>
-    implements JsonSerializable<OperationName> {
+public enum OperationName {
     /**
-     * Static value Read for OperationName.
+     * Enum value Read.
      */
-    @Generated
-    public static final OperationName READ = fromString("Read");
+    READ("Read"),
 
     /**
-     * Static value Write for OperationName.
+     * Enum value Write.
      */
-    @Generated
-    public static final OperationName WRITE = fromString("Write");
+    WRITE("Write");
 
     /**
-     * Creates a new instance of OperationName value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a OperationName instance.
      */
-    @Generated
-    @Deprecated
-    public OperationName() {
+    private final String value;
+
+    OperationName(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a OperationName from its string representation.
+     * Parses a serialized value to a OperationName instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding OperationName.
+     * @param value the serialized value to parse.
+     * @return the parsed OperationName object, or null if unable to parse.
      */
-    @Generated
-    public static OperationName fromString(String name) {
-        return fromString(name, OperationName.class);
+    public static OperationName fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        OperationName[] items = OperationName.values();
+        for (OperationName item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known OperationName values.
-     * 
-     * @return known OperationName values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<OperationName> values() {
-        return values(OperationName.class);
-    }
-
-    @Generated
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a OperationName from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The OperationName that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a OperationName fails to be read from the JsonReader.
-     */
-    @Generated
-    public static OperationName fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), OperationName.class);
+    public String toString() {
+        return this.value;
     }
 }

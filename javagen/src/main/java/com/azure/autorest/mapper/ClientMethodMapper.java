@@ -930,7 +930,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
     }
 
     private static ClientMethodParameter updateClientMethodParameter(ClientMethodParameter clientMethodParameter) {
-        return clientMethodParameter.toNewBuilder()
+        return clientMethodParameter.newBuilder()
             .rawType(ClassType.BINARY_DATA)
             .wireType(ClassType.BINARY_DATA)
             .build();
@@ -1016,7 +1016,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             .description("The context to associate with this operation.")
             .wireType(this.getContextType())
             .name("context")
-            .location(RequestParameterLocation.NONE)
+            .requestParameterLocation(RequestParameterLocation.NONE)
             .annotations(Collections.emptyList())
             .constant(false)
             .defaultValue(null)

@@ -261,7 +261,7 @@ public final class WireTypeClientBuilder implements HttpTrait<WireTypeClientBuil
      */
     @Generated
     public WireTypeAsyncClient buildAsyncClient() {
-        return new WireTypeAsyncClient(buildInnerClient());
+        return new WireTypeAsyncClient(buildInnerClient().getWireTypeOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class WireTypeClientBuilder implements HttpTrait<WireTypeClientBuil
      */
     @Generated
     public WireTypeClient buildClient() {
-        return new WireTypeClient(buildInnerClient());
+        return new WireTypeClient(buildInnerClient().getWireTypeOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(WireTypeClientBuilder.class);

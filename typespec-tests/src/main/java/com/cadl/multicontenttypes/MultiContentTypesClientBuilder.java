@@ -41,7 +41,14 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the MultiContentTypesClient type.
  */
-@ServiceClientBuilder(serviceClients = { MultiContentTypesClient.class, MultiContentTypesAsyncClient.class })
+@ServiceClientBuilder(
+    serviceClients = {
+        MultiContentTypesClient.class,
+        SingleContentTypeClient.class,
+        MultipleContentTypesOnRequestClient.class,
+        MultiContentTypesAsyncClient.class,
+        SingleContentTypeAsyncClient.class,
+        MultipleContentTypesOnRequestAsyncClient.class })
 public final class MultiContentTypesClientBuilder implements HttpTrait<MultiContentTypesClientBuilder>,
     ConfigurationTrait<MultiContentTypesClientBuilder>, EndpointTrait<MultiContentTypesClientBuilder> {
     @Generated
@@ -265,6 +272,26 @@ public final class MultiContentTypesClientBuilder implements HttpTrait<MultiCont
     }
 
     /**
+     * Builds an instance of SingleContentTypeAsyncClient class.
+     * 
+     * @return an instance of SingleContentTypeAsyncClient.
+     */
+    @Generated
+    public SingleContentTypeAsyncClient buildSingleContentTypeAsyncClient() {
+        return new SingleContentTypeAsyncClient(buildInnerClient().getSingleContentTypes());
+    }
+
+    /**
+     * Builds an instance of MultipleContentTypesOnRequestAsyncClient class.
+     * 
+     * @return an instance of MultipleContentTypesOnRequestAsyncClient.
+     */
+    @Generated
+    public MultipleContentTypesOnRequestAsyncClient buildMultipleContentTypesOnRequestAsyncClient() {
+        return new MultipleContentTypesOnRequestAsyncClient(buildInnerClient().getMultipleContentTypesOnRequests());
+    }
+
+    /**
      * Builds an instance of MultiContentTypesClient class.
      * 
      * @return an instance of MultiContentTypesClient.
@@ -272,6 +299,26 @@ public final class MultiContentTypesClientBuilder implements HttpTrait<MultiCont
     @Generated
     public MultiContentTypesClient buildClient() {
         return new MultiContentTypesClient(buildInnerClient());
+    }
+
+    /**
+     * Builds an instance of SingleContentTypeClient class.
+     * 
+     * @return an instance of SingleContentTypeClient.
+     */
+    @Generated
+    public SingleContentTypeClient buildSingleContentTypeClient() {
+        return new SingleContentTypeClient(buildInnerClient().getSingleContentTypes());
+    }
+
+    /**
+     * Builds an instance of MultipleContentTypesOnRequestClient class.
+     * 
+     * @return an instance of MultipleContentTypesOnRequestClient.
+     */
+    @Generated
+    public MultipleContentTypesOnRequestClient buildMultipleContentTypesOnRequestClient() {
+        return new MultipleContentTypesOnRequestClient(buildInnerClient().getMultipleContentTypesOnRequests());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(MultiContentTypesClientBuilder.class);

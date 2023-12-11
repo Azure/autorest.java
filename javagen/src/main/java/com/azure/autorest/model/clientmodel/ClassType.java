@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.client.traits.KeyCredentialTrait;
 import com.azure.core.credential.AzureKeyCredential;
@@ -273,7 +274,7 @@ public class ClassType implements IType {
     public static final ClassType DATE_TIME = new Builder(false).knownClass(OffsetDateTime.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "OffsetDateTime.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
-        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : ISO_8601.format(" + valueGetter + ")")
+        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
         .xmlElementDeserializationMethod("getNullableElement(dateString -> OffsetDateTime.parse(dateString))")
@@ -283,7 +284,7 @@ public class ClassType implements IType {
     public static final ClassType DURATION = new Builder(false).knownClass(Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "Duration.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
-        .serializationValueGetterModifier(valueGetter -> "CoreToCodegenBridgeUtils.durationToStringWithDays(" + valueGetter + ")")
+        .serializationValueGetterModifier(valueGetter -> ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".durationToStringWithDays(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
         .xmlElementDeserializationMethod("getNullableElement(Duration::parse)")
@@ -311,6 +312,10 @@ public class ClassType implements IType {
     public static final ClassType BIG_DECIMAL = new Builder(false).knownClass(BigDecimal.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "new BigDecimal(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.NUMBER")
+        .serializationMethodBase("writeNumber")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> new BigDecimal(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(BigDecimal::new)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, BigDecimal::new)")
         .build();
 
     public static final ClassType UUID = new Builder(false).knownClass(java.util.UUID.class)
@@ -737,11 +742,15 @@ public class ClassType implements IType {
     }
 
     @Override
-    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace) {
+    public String xmlDeserializationMethod(String xmlReaderName, String attributeName, String attributeNamespace,
+        boolean namespaceIsConstant) {
         if (attributeName == null) {
             return xmlReaderName + "." + xmlElementDeserializationMethod;
+        } else if (attributeNamespace == null) {
+            return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, "null",
+                "\"" + attributeName + "\"");
         } else {
-            String namespace = (attributeNamespace == null) ? "null" : "\"" + attributeNamespace + "\"";
+            String namespace = namespaceIsConstant ? attributeNamespace : "\"" + attributeNamespace + "\"";
             return String.format(xmlAttributeDeserializationTemplate, xmlReaderName, namespace,
                 "\"" + attributeName + "\"");
         }
@@ -749,7 +758,7 @@ public class ClassType implements IType {
 
     @Override
     public String xmlSerializationMethodCall(String xmlWriterName, String attributeOrElementName, String namespaceUri,
-        String valueGetter, boolean isAttribute, boolean nameIsVariable) {
+        String valueGetter, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         if (isSwaggerType) {
             if (isAttribute) {
                 throw new RuntimeException("Swagger types cannot be written as attributes.");
@@ -761,7 +770,7 @@ public class ClassType implements IType {
         String value = serializationValueGetterModifier != null
             ? serializationValueGetterModifier.apply(valueGetter) : valueGetter;
         return xmlSerializationCallHelper(xmlWriterName, serializationMethodBase, attributeOrElementName, namespaceUri,
-            value, isAttribute, nameIsVariable);
+            value, isAttribute, nameIsVariable, namespaceIsConstant);
     }
 
     @Override
@@ -904,10 +913,11 @@ public class ClassType implements IType {
     }
 
     static String xmlSerializationCallHelper(String writer, String method, String xmlName, String namespace,
-        String value, boolean isAttribute, boolean nameIsVariable) {
+        String value, boolean isAttribute, boolean nameIsVariable, boolean namespaceIsConstant) {
         String name = (xmlName == null) ? null
             : nameIsVariable ? xmlName : "\"" + xmlName + "\"";
-        namespace = (namespace == null) ? null : "\"" + namespace + "\"";
+        namespace = (namespace == null) ? null
+            : namespaceIsConstant ? namespace : "\"" + namespace + "\"";
 
         if (isAttribute) {
             method = method + "Attribute";

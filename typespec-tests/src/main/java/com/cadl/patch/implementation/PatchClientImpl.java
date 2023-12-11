@@ -4,46 +4,17 @@
 
 package com.cadl.patch.implementation;
 
-import com.azure.core.annotation.BodyParam;
-import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Patch;
-import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.QueryParam;
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ServiceInterface;
-import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.annotation.UnexpectedResponseExceptionType;
-import com.azure.core.exception.ClientAuthenticationException;
-import com.azure.core.exception.HttpResponseException;
-import com.azure.core.exception.ResourceModifiedException;
-import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.cadl.patch.PatchServiceVersion;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the PatchClient type.
  */
 public final class PatchClientImpl {
-    /**
-     * The proxy service used to perform REST calls.
-     */
-    private final PatchClientService service;
-
     /**
      * Server parameter.
      */
@@ -56,20 +27,6 @@ public final class PatchClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /**
-     * Service version.
-     */
-    private final PatchServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public PatchServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -101,14 +58,27 @@ public final class PatchClientImpl {
     }
 
     /**
+     * The PatchesImpl object to access its operations.
+     */
+    private final PatchesImpl patches;
+
+    /**
+     * Gets the PatchesImpl object to access its operations.
+     * 
+     * @return the PatchesImpl object.
+     */
+    public PatchesImpl getPatches() {
+        return this.patches;
+    }
+
+    /**
      * Initializes an instance of PatchClient client.
      * 
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(String endpoint, PatchServiceVersion serviceVersion) {
+    public PatchClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -116,10 +86,9 @@ public final class PatchClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(HttpPipeline httpPipeline, String endpoint, PatchServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public PatchClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -128,263 +97,11 @@ public final class PatchClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        PatchServiceVersion serviceVersion) {
+    public PatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
-        this.service = RestProxy.create(PatchClientService.class, this.httpPipeline, this.getSerializerAdapter());
-    }
-
-    /**
-     * The interface defining all the services for PatchClient to be used by the proxy service to perform REST calls.
-     */
-    @Host("{endpoint}")
-    @ServiceInterface(name = "PatchClient")
-    public interface PatchClientService {
-        @Patch("/patch/resource/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrUpdateResource(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
-
-        @Patch("/patch/resource/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrUpdateResourceSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
-
-        @Patch("/patch/fish/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrUpdateFish(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
-
-        @Patch("/patch/fish/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrUpdateFishSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
-    }
-
-    /**
-     * Create or update operation template.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Required): {
-     *         String: String (Required)
-     *     }
-     *     longValue: long (Required)
-     *     intValue: int (Required)
-     *     enumValue: String(a/b/c) (Optional)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Required): {
-     *         String: String (Required)
-     *     }
-     *     longValue: long (Required)
-     *     intValue: int (Required)
-     *     enumValue: String(a/b/c) (Optional)
-     * }
-     * }</pre>
-     * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateResourceWithResponseAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdateResource(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions, context));
-    }
-
-    /**
-     * Create or update operation template.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Required): {
-     *         String: String (Required)
-     *     }
-     *     longValue: long (Required)
-     *     intValue: int (Required)
-     *     enumValue: String(a/b/c) (Optional)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Required): {
-     *         String: String (Required)
-     *     }
-     *     longValue: long (Required)
-     *     intValue: int (Required)
-     *     enumValue: String(a/b/c) (Optional)
-     * }
-     * }</pre>
-     * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateResourceWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return service.createOrUpdateResourceSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name,
-            contentType, accept, resource, requestOptions, Context.NONE);
-    }
-
-    /**
-     * Create or update operation template.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     kind: String (Optional)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Required)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     kind: String (Optional)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Required)
-     * }
-     * }</pre>
-     * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdateFish(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions, context));
-    }
-
-    /**
-     * Create or update operation template.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     kind: String (Optional)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Required)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     kind: String (Optional)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Required)
-     * }
-     * }</pre>
-     * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateFishWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return service.createOrUpdateFishSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name,
-            contentType, accept, resource, requestOptions, Context.NONE);
+        this.patches = new PatchesImpl(this);
     }
 }

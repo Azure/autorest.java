@@ -139,9 +139,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.privateStaticFinalVariable("byte[] EMPTY_BYTE_ARRAY = new byte[0]");
             }
 
-            if (isStreamStyleWithIso8601DateTime(model, settings)) {
-                classBlock.privateStaticFinalVariable("DateTimeFormatter ISO_8601 = DateTimeFormatter.ofPattern(\"yyyy-MM-dd'T'HH:mm:ss.SSSX\")");
-            }
+            // XML namespace constants
+            addXmlNamespaceConstants(model, classBlock);
 
             // properties
             addProperties(model, classBlock, settings);
@@ -509,6 +508,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         return classSignature;
     }
 
+    protected void addXmlNamespaceConstants(ClientModel model, JavaClass classBlock) {
+        // no-op as this is an entry point for subclasses of ModelTemplate that provide more specific code generation.
+    }
+
     /**
      * Adds the property fields to a class.
      *
@@ -527,12 +530,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             String fieldSignature;
             if (model.isUsedInXml()) {
-                if (property.isXmlWrapper() && !settings.isStreamStyleSerialization()) {
-                    String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
-                        innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+                if (property.isXmlWrapper()) {
+                    if (!settings.isStreamStyleSerialization()) {
+                        String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+                        classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
+                            innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
 
-                    fieldSignature = xmlWrapperClassName + " " + propertyName;
+                        fieldSignature = xmlWrapperClassName + " " + propertyName;
+                    } else {
+                        fieldSignature = propertyType + " " + propertyName;
+                    }
                 } else if (propertyType instanceof ListType) {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
@@ -1110,15 +1117,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         return ret;
-    }
-
-    private static boolean isStreamStyleWithIso8601DateTime(ClientModel model, JavaSettings settings) {
-        if (!settings.isStreamStyleSerialization()) {
-            return false;
-        }
-
-        return model.getProperties().stream().anyMatch(property -> property.getWireType() == ClassType.DATE_TIME)
-            || ClientModelUtil.getParentProperties(model).stream().anyMatch(p -> p.getWireType() == ClassType.DATE_TIME);
     }
 
     /**
