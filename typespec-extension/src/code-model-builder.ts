@@ -169,7 +169,6 @@ import {
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
 import { getArmResourceKind } from "@azure-tools/typespec-azure-resource-manager";
-import { type } from "os";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -550,18 +549,13 @@ export class CodeModelBuilder {
       );
       clientContext.preProcessOperations(this.sdkContext, client);
 
-      const operationGroups = listOperationGroups(this.sdkContext, client, true);
+      const operationGroups = listOperationGroups(this.sdkContext, client);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
       for (const operation of operationWithoutGroup) {
         if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-          if (this.codeModel.arm && Boolean(operation.interface?.name)) {
-            codeModelGroup = new OperationGroup(operation.interface.name);
-            codeModelGroup.addOperation(this.processOperation(operation.interface.name, operation, clientContext));
-          } else {
-            codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
-          }
+          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
         }
       }
       if (codeModelGroup.operations?.length > 0) {
