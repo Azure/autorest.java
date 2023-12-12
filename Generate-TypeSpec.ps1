@@ -25,11 +25,11 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
 }
 
 Write-Host "Changing directory to './typespec-extension'"
-try {
-  Push-Location ./typespec-extension
+Push-Location ./typespec-extension
 
-  Write-Host "Installing dependencies for TypeSpec Java ('npm install')"
-  invokeExpressionAndCaptureOutput("npm install")
+try {
+  Write-Host "Installing dependencies for TypeSpec Java ('npm ci')"
+  invokeExpressionAndCaptureOutput("npm ci")
 
   Write-Host "Building TypeSpec Java ('npm run build')"
   invokeExpressionAndCaptureOutput("npm run build")
@@ -51,10 +51,10 @@ try {
 Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
 
-try {
-  Write-Host "Changing directory to './typespec-tests'"
-  Push-Location ./typespec-tests
+Write-Host "Changing directory to './typespec-tests'"
+Push-Location ./typespec-tests
 
+try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
   invokeExpressionAndCaptureOutput("./Generate.ps1 -Parallelization $Parallelization")
 
