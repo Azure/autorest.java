@@ -839,7 +839,7 @@ export class CodeModelBuilder {
         lroMetadata.finalResult !== "void" &&
         lroMetadata.finalEnvelopeResult !== "void"
       ) {
-        let finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
+        const finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
         const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
