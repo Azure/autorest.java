@@ -98,3 +98,6 @@ javagen/*.yaml
 
 # CI script output
 /artifacts
+
+# package-lock.json in test module
+typespec-tests/package-lock.json
