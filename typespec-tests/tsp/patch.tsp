@@ -26,16 +26,17 @@ model Resource {
   name: string;
 
   description?: string;
-  map: Record<A>;
-  longValue: int64;
-  intValue: int32;
+  map: Record<InnerModel>;
+
+  longValue?: int64;
+  intValue?: int32;
   enumValue?: "a" | "b" | "c";
 
-  @projectedName("json", "wireNameForA")
-  a?: A;
+  @projectedName("json", "wireNameForInnerModelProperty")
+  innerModelProperty?: InnerModel;
 }
 
-model A {
+model InnerModel {
   name: string;
 }
 
