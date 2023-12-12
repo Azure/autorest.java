@@ -30,7 +30,7 @@ jobs:
       - name: Install autorest
         run: |
           npm install -g autorest
-          npm install --no-bin-links
+          npm ci --no-bin-links
 
       - name: Setup jdk 11
         uses: actions/setup-java@v3

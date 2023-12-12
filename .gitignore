@@ -57,7 +57,6 @@ Thumbs.db
 # reduced pom files should not be included
 dependency-reduced-pom.xml
 
-package-lock.json
 preprocessor/*.yaml
 fluentnamer/*.yaml
 fluentgen/*.yaml
@@ -96,3 +95,9 @@ javagen/*.yaml
 
 # Language server
 /postprocessor/jdt-language-server/
+
+# CI script output
+/artifacts
+
+# package-lock.json in test module
+typespec-tests/package-lock.json

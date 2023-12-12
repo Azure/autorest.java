@@ -1,0 +1,41 @@
+schedules:
+- cron: '0 0 * * *'
+  displayName: Nightly dev build
+  branches:
+    include:
+    - main
+
+trigger: none
+pr: none
+
+parameters:
+- name: UseTypeSpecNext
+  displayName: Use TypeSpec "next" version
+  type: boolean
+  default: true
+
+resources:
+  repositories:
+    - repository: sdk-repository
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-for-java
+      ref: refs/heads/main
+    - repository: azure-sdk-tools
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-tools
+      ref: refs/heads/main
+
+extends:
+  template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
+  parameters:
+    RegenerationJobCount: 1
+    BuildPrereleaseVersion: true
+    UseTypeSpecNext: ${{ parameters.UseTypeSpecNext }}
+    EmitterPackageJsonPath: typespec-extension/package.json
+    PublishInternal: true
+    Packages:
+    - name: emitter
+      file: azure-tools-typespec-java-*.tgz
+      type: npm
