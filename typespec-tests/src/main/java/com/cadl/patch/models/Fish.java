@@ -4,8 +4,8 @@
 
 package com.cadl.patch.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
  */
-@Immutable
+@Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
      * The id property.
@@ -37,6 +37,12 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     private final int age;
+
+    /*
+     * The color property.
+     */
+    @Generated
+    private String color;
 
     @Generated
     private boolean jsonMergePatch;
@@ -120,6 +126,29 @@ public class Fish implements JsonSerializable<Fish> {
         return this.age;
     }
 
+    /**
+     * Get the color property: The color property.
+     * 
+     * @return the color value.
+     */
+    @Generated
+    public String getColor() {
+        return this.color;
+    }
+
+    /**
+     * Set the color property: The color property.
+     * 
+     * @param color the color value to set.
+     * @return the Fish object itself.
+     */
+    @Generated
+    public Fish setColor(String color) {
+        this.color = color;
+        this.updatedProperties.add("color");
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -127,6 +156,7 @@ public class Fish implements JsonSerializable<Fish> {
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeIntField("age", this.age);
+            jsonWriter.writeStringField("color", this.color);
             return jsonWriter.writeEndObject();
         }
     }
@@ -134,6 +164,11 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
+        if (this.color != null) {
+            jsonWriter.writeStringField("color", this.color);
+        } else if (updatedProperties.contains("color")) {
+            jsonWriter.writeNullField("color");
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -183,6 +218,7 @@ public class Fish implements JsonSerializable<Fish> {
             String id = null;
             String name = null;
             int age = 0;
+            String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -193,6 +229,8 @@ public class Fish implements JsonSerializable<Fish> {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("color".equals(fieldName)) {
+                    color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
@@ -200,6 +238,7 @@ public class Fish implements JsonSerializable<Fish> {
             Fish deserializedFish = new Fish(age);
             deserializedFish.id = id;
             deserializedFish.name = name;
+            deserializedFish.color = color;
 
             return deserializedFish;
         });

@@ -139,12 +139,12 @@ public final class Resource implements JsonSerializable<Resource> {
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (type != null) {
+        if (this.type != null) {
             jsonWriter.writeStringField("type", this.type);
         } else if (updatedProperties.contains("type")) {
             jsonWriter.writeNullField("type");
         }
-        if (description != null) {
+        if (this.description != null) {
             jsonWriter.writeStringField("description", this.description);
         } else if (updatedProperties.contains("description")) {
             jsonWriter.writeNullField("description");

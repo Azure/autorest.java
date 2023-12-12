@@ -15,7 +15,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import com.cadl.patch.implementation.PatchesImpl;
+import com.cadl.patch.models.Fish;
+import com.cadl.patch.models.Resource;
 import reactor.core.publisher.Mono;
 
 /**
@@ -37,7 +40,7 @@ public final class PatchAsyncClient {
     }
 
     /**
-     * The createOrUpdate operation.
+     * Create or update operation template.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -46,7 +49,15 @@ public final class PatchAsyncClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
      * }
      * }</pre>
      * <p>
@@ -57,12 +68,20 @@ public final class PatchAsyncClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
      * }
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * @param body The body parameter.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -72,9 +91,97 @@ public final class PatchAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateWithResponse(String name, BinaryData body,
+    public Mono<Response<BinaryData>> createOrUpdateResourceWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
-        return this.serviceClient.createOrUpdateWithResponseAsync(name, body, requestOptions);
+        return this.serviceClient.createOrUpdateResourceWithResponseAsync(name, resource, requestOptions);
+    }
+
+    /**
+     * Create or update operation template.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createOrUpdateFishWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateFishWithResponseAsync(name, resource, requestOptions);
+    }
+
+    /**
+     * Create or update operation template.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Resource> createOrUpdateResource(String name, Resource resource) {
+        // Generated convenience method for createOrUpdateResourceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateResourceWithResponse(name, BinaryData.fromObject(resource), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+    }
+
+    /**
+     * Create or update operation template.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
+     * completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Fish> createOrUpdateFish(String name, Fish resource) {
+        // Generated convenience method for createOrUpdateFishWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateFishWithResponse(name, BinaryData.fromObject(resource), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 }

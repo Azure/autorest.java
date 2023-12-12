@@ -113,7 +113,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("userId", this.userId);
-        if (detail != null) {
+        if (this.detail != null) {
             jsonWriter.writeStringField("detail", this.detail);
         } else if (updatedProperties.contains("detail")) {
             jsonWriter.writeNullField("detail");

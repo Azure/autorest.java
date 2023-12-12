@@ -99,12 +99,12 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (requiredProperty != null) {
+        if (this.requiredProperty != null) {
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
         } else if (updatedProperties.contains("requiredProperty")) {
             jsonWriter.writeNullField("requiredProperty");
         }
-        if (nullableProperty != null) {
+        if (this.nullableProperty != null) {
             jsonWriter.writeStringField("nullableProperty",
                 CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
         } else if (updatedProperties.contains("nullableProperty")) {

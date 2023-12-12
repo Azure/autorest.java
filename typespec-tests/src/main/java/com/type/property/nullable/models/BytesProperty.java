@@ -97,12 +97,12 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (requiredProperty != null) {
+        if (this.requiredProperty != null) {
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
         } else if (updatedProperties.contains("requiredProperty")) {
             jsonWriter.writeNullField("requiredProperty");
         }
-        if (nullableProperty != null) {
+        if (this.nullableProperty != null) {
             jsonWriter.writeBinaryField("nullableProperty", this.nullableProperty);
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");

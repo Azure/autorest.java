@@ -14,7 +14,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setResourceAccessor(ResourceAccessor accessor) {
-        setResourceAccessor = accessor;
+        resourceAccessor = accessor;
     }
 
     public static ResourceAccessor getResourceAccessor() {

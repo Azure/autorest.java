@@ -133,20 +133,33 @@ public final class User implements JsonSerializable<User> {
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("name", this.name);
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
+            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> {
+                if (element != null) {
+                    writer.writeJson(element);
+                } else {
+                    writer.writeNull();
+                }
+            });
             return jsonWriter.writeEndObject();
         }
     }
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (name != null) {
+        if (this.name != null) {
             jsonWriter.writeStringField("name", this.name);
         } else if (updatedProperties.contains("name")) {
             jsonWriter.writeNullField("name");
         }
-        if (orders != null) {
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
+        if (this.orders != null) {
+            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> {
+                if (element != null) {
+                    element.serializeAsJsonMergePatch(true);
+                    writer.writeJson(element);
+                } else {
+                    writer.writeNull();
+                }
+            });
         } else if (updatedProperties.contains("orders")) {
             jsonWriter.writeNullField("orders");
         }

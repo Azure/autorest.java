@@ -98,12 +98,12 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (requiredProperty != null) {
+        if (this.requiredProperty != null) {
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
         } else if (updatedProperties.contains("requiredProperty")) {
             jsonWriter.writeNullField("requiredProperty");
         }
-        if (nullableProperty != null) {
+        if (this.nullableProperty != null) {
             jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
                 (writer, element) -> writer.writeBinary(element));
         } else if (updatedProperties.contains("nullableProperty")) {

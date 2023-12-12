@@ -4,8 +4,8 @@
 
 package com.cadl.patch.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
  */
-@Immutable
+@Fluent
 public class Shark extends Fish {
     /*
      * The sharktype property.
@@ -65,14 +65,25 @@ public class Shark extends Fish {
         return this.sharktype;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Shark setColor(String color) {
+        super.setColor(color);
+        this.updatedProperties.add("color");
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("sharktype", "shark");
             jsonWriter.writeIntField("age", getAge());
+            jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeStringField("sharktype", this.sharktype);
             return jsonWriter.writeEndObject();
         }
@@ -80,13 +91,13 @@ public class Shark extends Fish {
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (sharktype != null) {
-            jsonWriter.writeStringField("sharktype", "shark");
-        } else if (updatedProperties.contains("sharktype")) {
-            jsonWriter.writeNullField("sharktype");
-        }
         jsonWriter.writeIntField("age", getAge());
-        if (sharktype != null) {
+        if (getColor() != null) {
+            jsonWriter.writeStringField("color", getColor());
+        } else if (updatedProperties.contains("color")) {
+            jsonWriter.writeNullField("color");
+        }
+        if (this.sharktype != null) {
             jsonWriter.writeStringField("sharktype", this.sharktype);
         } else if (updatedProperties.contains("sharktype")) {
             jsonWriter.writeNullField("sharktype");
@@ -138,6 +149,7 @@ public class Shark extends Fish {
             String id = null;
             String name = null;
             int age = 0;
+            String color = null;
             String sharktype = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -151,6 +163,8 @@ public class Shark extends Fish {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("color".equals(fieldName)) {
+                    color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
@@ -158,6 +172,7 @@ public class Shark extends Fish {
             Shark deserializedShark = new Shark(age, sharktype);
             deserializedShark.setId(id);
             deserializedShark.setName(name);
+            deserializedShark.setColor(color);
 
             return deserializedShark;
         });

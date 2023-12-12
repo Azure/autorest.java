@@ -6,6 +6,7 @@ package com.cadl.patch.implementation;
 
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.GoblinShark;
+import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
 import com.cadl.patch.models.Salmon;
 import com.cadl.patch.models.SawShark;
@@ -13,6 +14,8 @@ import com.cadl.patch.models.Shark;
 
 public class JsonMergePatchHelper {
     private static ResourceAccessor resourceAccessor;
+
+    private static InnerModelAccessor innerModelAccessor;
 
     private static FishAccessor fishAccessor;
 
@@ -26,6 +29,10 @@ public class JsonMergePatchHelper {
 
     public interface ResourceAccessor {
         Resource prepareModelForJsonMergePatch(Resource resource, boolean jsonMergePatchEnabled);
+    }
+
+    public interface InnerModelAccessor {
+        InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
     }
 
     public interface FishAccessor {
@@ -49,15 +56,23 @@ public class JsonMergePatchHelper {
     }
 
     public static void setResourceAccessor(ResourceAccessor accessor) {
-        setResourceAccessor = accessor;
+        resourceAccessor = accessor;
     }
 
     public static ResourceAccessor getResourceAccessor() {
         return resourceAccessor;
     }
 
+    public static void setInnerModelAccessor(InnerModelAccessor accessor) {
+        innerModelAccessor = accessor;
+    }
+
+    public static InnerModelAccessor getInnerModelAccessor() {
+        return innerModelAccessor;
+    }
+
     public static void setFishAccessor(FishAccessor accessor) {
-        setFishAccessor = accessor;
+        fishAccessor = accessor;
     }
 
     public static FishAccessor getFishAccessor() {
@@ -65,7 +80,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setSharkAccessor(SharkAccessor accessor) {
-        setSharkAccessor = accessor;
+        sharkAccessor = accessor;
     }
 
     public static SharkAccessor getSharkAccessor() {
@@ -73,7 +88,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setSawSharkAccessor(SawSharkAccessor accessor) {
-        setSawSharkAccessor = accessor;
+        sawSharkAccessor = accessor;
     }
 
     public static SawSharkAccessor getSawSharkAccessor() {
@@ -81,7 +96,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setGoblinSharkAccessor(GoblinSharkAccessor accessor) {
-        setGoblinSharkAccessor = accessor;
+        goblinSharkAccessor = accessor;
     }
 
     public static GoblinSharkAccessor getGoblinSharkAccessor() {
@@ -89,7 +104,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setSalmonAccessor(SalmonAccessor accessor) {
-        setSalmonAccessor = accessor;
+        salmonAccessor = accessor;
     }
 
     public static SalmonAccessor getSalmonAccessor() {

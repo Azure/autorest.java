@@ -4,85 +4,58 @@
 
 package com.cadl.patch.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.Collection;
-
 /**
  * Defines values for ResourceEnumValue.
  */
-public final class ResourceEnumValue extends ExpandableStringEnum<ResourceEnumValue>
-    implements JsonSerializable<ResourceEnumValue> {
+public enum ResourceEnumValue {
     /**
-     * Static value a for ResourceEnumValue.
+     * Enum value a.
      */
-    @Generated
-    public static final ResourceEnumValue A = fromString("a");
+    A("a"),
 
     /**
-     * Static value b for ResourceEnumValue.
+     * Enum value b.
      */
-    @Generated
-    public static final ResourceEnumValue B = fromString("b");
+    B("b"),
 
     /**
-     * Static value c for ResourceEnumValue.
+     * Enum value c.
      */
-    @Generated
-    public static final ResourceEnumValue C = fromString("c");
+    C("c");
 
     /**
-     * Creates a new instance of ResourceEnumValue value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a ResourceEnumValue instance.
      */
-    @Generated
-    @Deprecated
-    public ResourceEnumValue() {
+    private final String value;
+
+    ResourceEnumValue(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a ResourceEnumValue from its string representation.
+     * Parses a serialized value to a ResourceEnumValue instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding ResourceEnumValue.
+     * @param value the serialized value to parse.
+     * @return the parsed ResourceEnumValue object, or null if unable to parse.
      */
-    @Generated
-    public static ResourceEnumValue fromString(String name) {
-        return fromString(name, ResourceEnumValue.class);
+    public static ResourceEnumValue fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        ResourceEnumValue[] items = ResourceEnumValue.values();
+        for (ResourceEnumValue item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known ResourceEnumValue values.
-     * 
-     * @return known ResourceEnumValue values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<ResourceEnumValue> values() {
-        return values(ResourceEnumValue.class);
-    }
-
-    @Generated
     @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeString(toString());
-    }
-
-    /**
-     * Reads a ResourceEnumValue from the JSON stream.
-     * <p>
-     * The passed JsonReader must be positioned at a JsonToken.STRING value.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return The ResourceEnumValue that the JSON stream represented, may return null.
-     * @throws java.io.IOException If a ResourceEnumValue fails to be read from the JsonReader.
-     */
-    @Generated
-    public static ResourceEnumValue fromJson(JsonReader jsonReader) throws IOException {
-        return fromString(jsonReader.getString(), ResourceEnumValue.class);
+    public String toString() {
+        return this.value;
     }
 }

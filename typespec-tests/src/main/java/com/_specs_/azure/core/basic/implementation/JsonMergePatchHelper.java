@@ -21,7 +21,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setUserAccessor(UserAccessor accessor) {
-        setUserAccessor = accessor;
+        userAccessor = accessor;
     }
 
     public static UserAccessor getUserAccessor() {
@@ -29,7 +29,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setUserOrderAccessor(UserOrderAccessor accessor) {
-        setUserOrderAccessor = accessor;
+        userOrderAccessor = accessor;
     }
 
     public static UserOrderAccessor getUserOrderAccessor() {

@@ -90,22 +90,33 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeJson(element));
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
+                if (element != null) {
+                    writer.writeJson(element);
+                } else {
+                    writer.writeNull();
+                }
+            });
             return jsonWriter.writeEndObject();
         }
     }
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (requiredProperty != null) {
+        if (this.requiredProperty != null) {
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
         } else if (updatedProperties.contains("requiredProperty")) {
             jsonWriter.writeNullField("requiredProperty");
         }
-        if (nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeJson(element));
+        if (this.nullableProperty != null) {
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
+                if (element != null) {
+                    element.serializeAsJsonMergePatch(true);
+                    writer.writeJson(element);
+                } else {
+                    writer.writeNull();
+                }
+            });
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");
         }

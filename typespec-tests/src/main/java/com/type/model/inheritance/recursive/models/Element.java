@@ -56,7 +56,13 @@ public class Element implements JsonSerializable<Element> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("extension", this.extension, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("extension", this.extension, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         return jsonWriter.writeEndObject();
     }
 

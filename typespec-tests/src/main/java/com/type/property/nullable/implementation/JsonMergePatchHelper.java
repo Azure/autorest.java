@@ -60,7 +60,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setStringPropertyAccessor(StringPropertyAccessor accessor) {
-        setStringPropertyAccessor = accessor;
+        stringPropertyAccessor = accessor;
     }
 
     public static StringPropertyAccessor getStringPropertyAccessor() {
@@ -68,7 +68,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setBytesPropertyAccessor(BytesPropertyAccessor accessor) {
-        setBytesPropertyAccessor = accessor;
+        bytesPropertyAccessor = accessor;
     }
 
     public static BytesPropertyAccessor getBytesPropertyAccessor() {
@@ -76,7 +76,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setDatetimePropertyAccessor(DatetimePropertyAccessor accessor) {
-        setDatetimePropertyAccessor = accessor;
+        datetimePropertyAccessor = accessor;
     }
 
     public static DatetimePropertyAccessor getDatetimePropertyAccessor() {
@@ -84,7 +84,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setDurationPropertyAccessor(DurationPropertyAccessor accessor) {
-        setDurationPropertyAccessor = accessor;
+        durationPropertyAccessor = accessor;
     }
 
     public static DurationPropertyAccessor getDurationPropertyAccessor() {
@@ -92,7 +92,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setCollectionsBytePropertyAccessor(CollectionsBytePropertyAccessor accessor) {
-        setCollectionsBytePropertyAccessor = accessor;
+        collectionsBytePropertyAccessor = accessor;
     }
 
     public static CollectionsBytePropertyAccessor getCollectionsBytePropertyAccessor() {
@@ -100,7 +100,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setCollectionsModelPropertyAccessor(CollectionsModelPropertyAccessor accessor) {
-        setCollectionsModelPropertyAccessor = accessor;
+        collectionsModelPropertyAccessor = accessor;
     }
 
     public static CollectionsModelPropertyAccessor getCollectionsModelPropertyAccessor() {
@@ -108,7 +108,7 @@ public class JsonMergePatchHelper {
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {
-        setInnerModelAccessor = accessor;
+        innerModelAccessor = accessor;
     }
 
     public static InnerModelAccessor getInnerModelAccessor() {

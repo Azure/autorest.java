@@ -4,8 +4,8 @@
 
 package com.cadl.patch.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * The third level model SawShark in polymorphic multiple levels inheritance.
  */
-@Immutable
+@Fluent
 public final class SawShark extends Shark {
     @Generated
     private boolean jsonMergePatch;
@@ -48,31 +48,42 @@ public final class SawShark extends Shark {
         super(age, sharktype);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SawShark setColor(String color) {
+        super.setColor(color);
+        this.updatedProperties.add("color");
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("sharktype", "saw");
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("sharktype", getSharktype());
+            jsonWriter.writeStringField("color", getColor());
             return jsonWriter.writeEndObject();
         }
     }
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (sharktype != null) {
-            jsonWriter.writeStringField("sharktype", "saw");
+        jsonWriter.writeIntField("age", getAge());
+        if (getSharktype() != null) {
+            jsonWriter.writeStringField("sharktype", getSharktype());
         } else if (updatedProperties.contains("sharktype")) {
             jsonWriter.writeNullField("sharktype");
         }
-        jsonWriter.writeIntField("age", getAge());
-        if (sharktype != null) {
-            jsonWriter.writeStringField("sharktype", this.sharktype);
-        } else if (updatedProperties.contains("sharktype")) {
-            jsonWriter.writeNullField("sharktype");
+        if (getColor() != null) {
+            jsonWriter.writeStringField("color", getColor());
+        } else if (updatedProperties.contains("color")) {
+            jsonWriter.writeNullField("color");
         }
         return jsonWriter.writeEndObject();
     }
@@ -93,6 +104,7 @@ public final class SawShark extends Shark {
             String name = null;
             int age = 0;
             String sharktype = null;
+            String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -110,6 +122,8 @@ public final class SawShark extends Shark {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("color".equals(fieldName)) {
+                    color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
@@ -117,6 +131,7 @@ public final class SawShark extends Shark {
             SawShark deserializedSawShark = new SawShark(age, sharktype);
             deserializedSawShark.setId(id);
             deserializedSawShark.setName(name);
+            deserializedSawShark.setColor(color);
 
             return deserializedSawShark;
         });
