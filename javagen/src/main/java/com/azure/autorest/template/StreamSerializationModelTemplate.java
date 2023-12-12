@@ -322,8 +322,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         if (isJsonMergePatch) {
-            if (!property.isReadOnly() && property.getClientType().isNullable()) { // if it's readonly, then there is not setter, no need to serialize for null patch
-                // reuse getter logic
+            if (property.getClientType().isNullable()) {
                 methodBlock.ifBlock(String.format("%s !=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
                     serializeJsonProperty(codeBlock, property, serializedName,
                             fromSuperType, isJsonMergePatch);
@@ -472,13 +471,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
                 methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
-                if (isJsonMergePatch && elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) { // if it's swagger/tsp type, we need to check null, because it can be null, e.g. map entry value
                     methodBlock.block("", codeBlock -> {
                         codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
-                            codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                            if (isJsonMergePatch) {
+                                codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                            }
                             ifBlock.line(valueSerializationMethod + ";");
-                        }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNullField(\"" + serializedName + "\");")
-                        );
+                        }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNull();"));
                     });
                 } else {
                     methodBlock.line(valueSerializationMethod);
