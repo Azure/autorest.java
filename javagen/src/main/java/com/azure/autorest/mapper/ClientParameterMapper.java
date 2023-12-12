@@ -59,7 +59,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
                 .required(parameter.isRequired())
                 .fromClient(parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT);
         if (parameter.getProtocol() != null && parameter.getProtocol().getHttp() != null) {
-            builder.location(parameter.getProtocol().getHttp().getIn());
+            builder.requestParameterLocation(parameter.getProtocol().getHttp().getIn());
         }
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
@@ -74,7 +74,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         builder.wireType(wireType);
 
         builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
-            Collections.singletonList(ClassType.NonNull) : new ArrayList<>());
+            Collections.singletonList(ClassType.NON_NULL) : new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;

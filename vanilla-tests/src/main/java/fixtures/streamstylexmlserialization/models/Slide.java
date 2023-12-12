@@ -163,12 +163,12 @@ public final class Slide implements XmlSerializable<Slide> {
                 if ("title".equals(elementName.getLocalPart())) {
                     deserializedSlide.title = reader.getStringElement();
                 } else if ("items".equals(elementName.getLocalPart())) {
-                    if (deserializedSlide.items == null) {
-                        deserializedSlide.items = new ArrayList<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
                         elementName = reader.getElementName();
                         if ("item".equals(elementName.getLocalPart())) {
+                            if (deserializedSlide.items == null) {
+                                deserializedSlide.items = new ArrayList<>();
+                            }
                             deserializedSlide.items.add(reader.getStringElement());
                         } else {
                             reader.skipElement();

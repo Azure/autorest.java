@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.wiretype.implementation.WireTypeClientImpl;
+import com.cadl.wiretype.implementation.WireTypeOpsImpl;
 import com.cadl.wiretype.models.SubClass;
 import com.cadl.wiretype.models.SubClassBothMismatch;
 import com.cadl.wiretype.models.SubClassMismatch;
@@ -26,7 +26,7 @@ import com.cadl.wiretype.models.SubClassMismatch;
 @ServiceClient(builder = WireTypeClientBuilder.class)
 public final class WireTypeClient {
     @Generated
-    private final WireTypeClientImpl serviceClient;
+    private final WireTypeOpsImpl serviceClient;
 
     /**
      * Initializes an instance of WireTypeClient class.
@@ -34,7 +34,7 @@ public final class WireTypeClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    WireTypeClient(WireTypeClientImpl serviceClient) {
+    WireTypeClient(WireTypeOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

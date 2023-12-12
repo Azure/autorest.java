@@ -68,6 +68,7 @@ import {
   shouldGenerateProtocol,
   isInternal,
   SdkClient,
+  getCrossLanguageDefinitionId,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -113,7 +114,7 @@ import {
   Language,
 } from "@autorest/codemodel";
 import { CodeModel } from "./common/code-model.js";
-import { Client as CodeModelClient } from "./common/client.js";
+import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
@@ -253,6 +254,8 @@ export class CodeModelBuilder {
     if (this.options.namer) {
       this.codeModel = new PreNamer(this.codeModel).init().process();
     }
+
+    this.deduplicateSchemaName();
 
     return this.codeModel;
   }
@@ -446,13 +449,15 @@ export class CodeModelBuilder {
     this.codeModel.schemas.sealedChoices?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.ors?.forEach((it) => this.resolveSchemaUsage(it));
     this.codeModel.schemas.constants?.forEach((it) => this.resolveSchemaUsage(it));
+  }
 
+  private deduplicateSchemaName() {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
-      if (schema.language.default.name && schema.language.default.namespace?.startsWith("com.azure.core.")) {
+      if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
         if (!nameCount.has(name)) {
           nameCount.set(name, 1);
         } else {
@@ -463,10 +468,11 @@ export class CodeModelBuilder {
       }
     };
     this.codeModel.schemas.objects?.forEach((it) => deduplicateName(it));
-    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it has RequestConditions
+    this.codeModel.schemas.groups?.forEach((it) => deduplicateName(it)); // it may contain RequestConditions under "com.azure.core."
     this.codeModel.schemas.choices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.sealedChoices?.forEach((it) => deduplicateName(it));
     this.codeModel.schemas.ors?.forEach((it) => deduplicateName(it));
+    this.codeModel.schemas.constants?.forEach((it) => deduplicateName(it));
   }
 
   private resolveSchemaUsage(schema: Schema) {
@@ -501,6 +507,7 @@ export class CodeModelBuilder {
         // at present, use global security definition
         security: this.codeModel.security,
       });
+      codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
 
       // versioning
       const versioning = getVersion(this.program, client.service);
@@ -541,7 +548,7 @@ export class CodeModelBuilder {
       );
       clientContext.preProcessOperations(this.sdkContext, client);
 
-      const operationGroups = listOperationGroups(this.sdkContext, client);
+      const operationGroups = listOperationGroups(this.sdkContext, client, true);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");
@@ -556,13 +563,25 @@ export class CodeModelBuilder {
 
       for (const operationGroup of operationGroups) {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
-        codeModelGroup = new OperationGroup(operationGroup.type.name);
-        for (const operation of operations) {
-          if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-            codeModelGroup.addOperation(this.processOperation(operationGroup.type.name, operation, clientContext));
+        // operation group with no operation is skipped
+        if (operations.length > 0) {
+          const groupPath = operationGroup.groupPath.split(".");
+          let oprationGroupName: string;
+          if (groupPath.length > 1) {
+            // groupPath should be in format of "OpenAIClient.Chat.Completions"
+            oprationGroupName = groupPath.slice(1).join("");
+          } else {
+            // protection
+            oprationGroupName = operationGroup.type.name;
           }
+          codeModelGroup = new OperationGroup(oprationGroupName);
+          for (const operation of operations) {
+            if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+              codeModelGroup.addOperation(this.processOperation(oprationGroupName, operation, clientContext));
+            }
+          }
+          codeModelClient.operationGroups.push(codeModelGroup);
         }
-        codeModelClient.operationGroups.push(codeModelGroup);
       }
 
       this.codeModel.clients.push(codeModelClient);
@@ -609,11 +628,6 @@ export class CodeModelBuilder {
     if (getOverloadedOperation(this.program, operation)) {
       this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
       return true;
-    } else if (clientContext.ignoredOperations.has(operation)) {
-      this.trace(
-        `Operation '${operation.name}' is skipped, as it is used in '@pollingOperation' of a long running operation`,
-      );
-      return true;
     }
     return false;
   }
@@ -637,10 +651,12 @@ export class CodeModelBuilder {
       },
     });
 
+    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
+    let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -651,10 +667,8 @@ export class CodeModelBuilder {
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipart(op)) {
-        // do not generate convenience method for multipart/form-data
-        generateConvenienceApi = false;
-        // make it internal
-        codeModelOperation.internalApi = true;
+        // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
+        generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
@@ -685,8 +699,7 @@ export class CodeModelBuilder {
     }
 
     // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi =
-      shouldGenerateProtocol(this.sdkContext, operation) && !codeModelOperation.internalApi;
+    codeModelOperation.generateProtocolApi = generateProtocolApi && !codeModelOperation.internalApi;
 
     codeModelOperation.addRequest(
       new Request({
@@ -1238,6 +1251,9 @@ export class CodeModelBuilder {
     if (operationIsJsonMergePatch(httpOperation)) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
+    if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.MultipartFormData] });
+    }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
       // anonymous model
@@ -1637,7 +1653,7 @@ export class CodeModelBuilder {
 
       if (scalarName.startsWith("decimal")) {
         // decimal
-        return this.processNumberSchema(type, nameHint);
+        return this.processDecimalSchema(type, nameHint);
       } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
         // integer
         const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
@@ -1729,6 +1745,15 @@ export class CodeModelBuilder {
     );
   }
 
+  private processDecimalSchema(type: Scalar, name: string): NumberSchema {
+    // "Infinity" maps to "BigDecimal" in Java
+    return this.codeModel.schemas.add(
+      new NumberSchema(name, this.getDoc(type), SchemaType.Number, Infinity, {
+        summary: this.getSummary(type),
+      }),
+    );
+  }
+
   private processBooleanSchema(type: Scalar, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
       new BooleanSchema(name, this.getDoc(type), {
@@ -1781,39 +1806,23 @@ export class CodeModelBuilder {
     const choices: ChoiceValue[] = [];
     type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
 
-    if (sealed) {
-      return this.codeModel.schemas.add(
-        new SealedChoiceSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          choiceType: valueType as any,
-          choices: choices,
-          language: {
-            default: {
-              namespace: namespace,
-            },
-            java: {
-              namespace: getJavaNamespace(namespace),
-            },
-          },
-        }),
-      );
-    } else {
-      return this.codeModel.schemas.add(
-        new ChoiceSchema(name, this.getDoc(type), {
-          summary: this.getSummary(type),
-          choiceType: valueType as any,
-          choices: choices,
-          language: {
-            default: {
-              namespace: namespace,
-            },
-            java: {
-              namespace: getJavaNamespace(namespace),
-            },
-          },
-        }),
-      );
-    }
+    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
+
+    const schema = new schemaType(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      choiceType: valueType as any,
+      choices: choices,
+      language: {
+        default: {
+          namespace: namespace,
+        },
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    return this.codeModel.schemas.add(schema);
   }
 
   private processConstantSchemaForLiteral(
@@ -1850,8 +1859,17 @@ export class CodeModelBuilder {
     );
   }
 
-  private processChoiceSchemaForUnion(type: Union, variants: UnionVariant[], name: string): ChoiceSchema {
+  private processChoiceSchemaForUnion(
+    type: Union,
+    variants: UnionVariant[],
+    name: string,
+  ): ChoiceSchema | SealedChoiceSchema {
     // variants is Literal
+
+    const kindSet = new Set(variants.map((it) => it.type.kind));
+    // "choice1" | "choice2" is sealed
+    // "choice1" | "choice2" | string is extensible
+    const sealed = kindSet.size === 1;
 
     variants = variants.filter(
       (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
@@ -1872,21 +1890,23 @@ export class CodeModelBuilder {
     );
 
     const namespace = getNamespace(type);
-    return this.codeModel.schemas.add(
-      new ChoiceSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        choiceType: valueType as any,
-        choices: choices,
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+
+    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
+    const schema = new schemaType(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      choiceType: valueType as any,
+      choices: choices,
+      language: {
+        default: {
+          namespace: namespace,
         },
-      }),
-    );
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+    // schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    return this.codeModel.schemas.add(schema);
   }
 
   private processUnixTimeSchema(type: Scalar, name: string): UnixTimeSchema {
@@ -1945,19 +1965,19 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    const objectSchema = this.codeModel.schemas.add(
-      new ObjectSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+    const objectSchema = new ObjectScheme(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      language: {
+        default: {
+          namespace: namespace,
         },
-      }),
-    );
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+    objectSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, objectSchema);
@@ -2557,7 +2577,7 @@ export class CodeModelBuilder {
     // Exclude context that not to be propagated
     const schemaUsage = {
       usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous && it !== SchemaContext.MultipartFormData,
       ),
       serializationFormats: (schema as SchemaUsage).serializationFormats,
     };

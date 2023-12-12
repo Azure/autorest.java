@@ -130,7 +130,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const emitterOptions = JSON.stringify(options);
     program.trace("typespec-java", `Emitter options ${emitterOptions}`);
 
-    const jarFileName = resolvePath(moduleRoot, "target", "azure-typespec-extension-jar-with-dependencies.jar");
+    const jarFileName = resolvePath(moduleRoot, "target", "emitter.jar");
     program.trace("typespec-java", `Exec JAR ${jarFileName}`);
 
     const javaArgs: string[] = [];
@@ -139,7 +139,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
       javaArgs.push("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005");
     }
     if (options["dev-options"]?.loglevel) {
-      javaArgs.push("-Dloglevel=" + options["dev-options"]?.loglevel);
+      javaArgs.push("-Dorg.slf4j.simpleLogger.defaultLogLevel=" + options["dev-options"]?.loglevel);
     }
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);

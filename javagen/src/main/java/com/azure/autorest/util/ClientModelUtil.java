@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -27,12 +28,18 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.util.CoreUtils;
 
+import java.net.URI;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -43,6 +50,14 @@ import java.util.stream.Stream;
  * Utilities for client model.
  */
 public class ClientModelUtil {
+
+    // used for filename property of multipart/form-data
+    // e.g. if property for file is "BinaryData audio", a "String audioFilename" will be added to the ClientModel.
+    public static final String FILENAME_SUFFIX = "Filename";
+
+    public static final String MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "MultipartFormDataHelper";
+
+    public static final String CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME = "CoreToCodegenBridgeUtils";
 
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
@@ -65,7 +80,8 @@ public class ClientModelUtil {
         if (serviceClient.getProxy() != null) {
             AsyncSyncClient.Builder builder = new AsyncSyncClient.Builder()
                     .packageName(packageName)
-                    .serviceClient(serviceClient);
+                    .serviceClient(serviceClient)
+                    .crossLanguageDefinitionId(client.getCrossLanguageDefinitionId());
 
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
                     .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
@@ -546,5 +562,137 @@ public class ClientModelUtil {
                 return true;
             }
         }
+    }
+
+    /**
+     * Checks where {@code CoreToCodegenBridgeUtils} should be generated.
+     * <p>
+     * At this time it is required if {@link JavaSettings#isStreamStyleSerialization()} is true and the model uses
+     * either {@code ResponseError} or {@link Duration} as both types have special serialization requirements that
+     * aren't exposed by azure-core.
+     *
+     * @param model the model
+     * @param settings Java settings
+     * @return Whether to generate the {@code CoreToCodegenBridgeUtils} utility class.
+     */
+    public static boolean generateCoreToCodegenBridgeUtils(ClientModel model, JavaSettings settings) {
+        if (!settings.isStreamStyleSerialization()) {
+            return false;
+        }
+
+        // If any of the properties are ResponseError generate the bridge utils.
+        // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
+        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR
+            || p.getClientType() == ClassType.DURATION || p.getClientType().contains(ClassType.DURATION))) {
+            return true;
+        }
+
+        // flatten properties
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            return model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
+        }
+
+        return false;
+    }
+
+    /**
+     * Gets a mapping of XML namespace to constant name for XML namespaces used in the model.
+     *
+     * @param model The model to get the XML namespaces from.
+     * @return A mapping of XML namespace to constant name.
+     */
+    public static Map<String, String> xmlNamespaceToConstantMapping(ClientModel model) {
+        Map<String, String> xmlNamespaceConstantMap = new LinkedHashMap<>();
+        ClientModel rootModel = getRootParent(model);
+        if (rootModel.getXmlNamespace() != null) {
+            xmlNamespaceConstantMap.put(rootModel.getXmlNamespace(), xmlNamespaceToConstant(rootModel.getXmlNamespace()));
+        }
+
+        for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
+            if (property.getXmlNamespace() != null) {
+                xmlNamespaceConstantMap.put(property.getXmlNamespace(),
+                    xmlNamespaceToConstant(property.getXmlNamespace()));
+            }
+        }
+
+        for (ClientModelProperty property : model.getProperties()) {
+            if (property.getXmlNamespace() != null) {
+                xmlNamespaceConstantMap.put(property.getXmlNamespace(),
+                    xmlNamespaceToConstant(property.getXmlNamespace()));
+            }
+        }
+
+        return xmlNamespaceConstantMap;
+    }
+
+    private static String xmlNamespaceToConstant(String xmlNamespace) {
+        URI uri = URI.create(xmlNamespace);
+        String host = CodeNamer.getEnumMemberName(uri.getHost());
+        String path = uri.getPath();
+        String[] segments = path.split("/");
+
+        // XML namespaces are URIs, use the host and the last two segments of the path as the constant.
+        if (segments.length >= 2) {
+            // More than two path segments, use HOST_SEGMENT[COUNT - 2]_SEGMENT[COUNT - 1]
+            return host + "_" + CodeNamer.getEnumMemberName(segments[segments.length - 2]) + "_"
+                + CodeNamer.getEnumMemberName(segments[segments.length - 1]);
+        } else if (segments.length == 1) {
+            // Only one path segment, use HOST_SEGMENT[0]
+            return host + "_" + CodeNamer.getEnumMemberName(segments[0]);
+        } else {
+            // No path segments, just use HOST
+            return host;
+        }
+    }
+
+    /**
+     * Gets the root parent of the given model.
+     * <p>
+     * If the model isn't polymorphic or is the root parent the passed model will be returned.
+     *
+     * @param model The model to get the root parent of.
+     * @return The root parent of the given model, or the model itself if it's either not polymorphic or the root
+     * parent.
+     */
+    public static ClientModel getRootParent(ClientModel model) {
+        if (!model.isPolymorphic()) {
+            return model;
+        }
+
+        while (model.getParentModelName() != null) {
+            model = getClientModel(model.getParentModelName());
+        }
+
+        return model;
+    }
+
+    public static Set<String> getExternalPackageNamesUsedInClient(List<ClientModel> models, CodeModel codeModel) {
+        // models
+        Set<String> externalPackageNames = models == null ? new HashSet<>() : models.stream()
+                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
+                .map(ClientModel::getPackage)
+                .collect(Collectors.toSet());
+
+        // LongRunningMetadata in methods
+        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            for (Client client : codeModel.getClients()) {
+                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                    for (OperationGroup og : client.getOperationGroups()) {
+                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                            externalPackageNames.addAll(og.getOperations().stream()
+                                    .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
+                                    .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
+                                    .filter(Objects::nonNull)
+                                    .collect(Collectors.toSet()));
+                        }
+                    }
+                }
+            }
+        }
+
+        return externalPackageNames;
     }
 }

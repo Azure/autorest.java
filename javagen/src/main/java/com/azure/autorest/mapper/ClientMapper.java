@@ -91,7 +91,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Set<String> enumNames = new HashSet<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
+            if (iType != ClassType.STRING) {
                 EnumType enumType = (EnumType) iType;
                 if (!enumNames.contains(enumType.getName())) {
                     enumTypes.add(enumType);
@@ -101,7 +101,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
+            if (iType != ClassType.STRING) {
                 EnumType enumType = (EnumType) iType;
                 if (!enumNames.contains(enumType.getName())) {
                     enumTypes.add(enumType);
@@ -280,7 +280,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                         ClientBuilder clientBuilder = new ClientBuilder(
                             builderPackage, clientBuilderName, serviceClient,
                             (syncClient == null) ? Collections.emptyList() : Collections.singletonList(syncClient),
-                            Collections.singletonList(asyncClient));
+                            Collections.singletonList(asyncClient), serviceClient.getCrossLanguageDefinitionId());
 
                         addBuilderTraits(clientBuilder, serviceClient);
                         clientBuilders.add(clientBuilder);
@@ -294,7 +294,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 } else {
                     // service client builder
                     ClientBuilder clientBuilder = new ClientBuilder(builderPackage, builderName,
-                        serviceClient, syncClientsLocal, asyncClientsLocal);
+                        serviceClient, syncClientsLocal, asyncClientsLocal, serviceClient.getCrossLanguageDefinitionId());
                     addBuilderTraits(clientBuilder, serviceClient);
                     clientBuilders.add(clientBuilder);
 
@@ -308,6 +308,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             asyncClients.addAll(asyncClientsLocal);
         }
         builder.clientBuilders(clientBuilders);
+        builder.crossLanguageDefinitionId(codeModel.getLanguage().getJava().getName());
 
         // example/test
         if (settings.isDataPlaneClient() && (settings.isGenerateSamples() || settings.isGenerateTests())) {

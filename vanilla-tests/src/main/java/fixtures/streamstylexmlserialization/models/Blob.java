@@ -233,10 +233,10 @@ public final class Blob implements XmlSerializable<Blob> {
                 } else if ("Properties".equals(elementName.getLocalPart())) {
                     deserializedBlob.properties = BlobProperties.fromXml(reader, "Properties");
                 } else if ("Metadata".equals(elementName.getLocalPart())) {
-                    if (deserializedBlob.metadata == null) {
-                        deserializedBlob.metadata = new LinkedHashMap<>();
-                    }
                     while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        if (deserializedBlob.metadata == null) {
+                            deserializedBlob.metadata = new LinkedHashMap<>();
+                        }
                         deserializedBlob.metadata.put(reader.getElementName().getLocalPart(),
                             reader.getStringElement());
                     }

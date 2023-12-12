@@ -82,6 +82,20 @@ public final class ProjectedNameClientImpl {
     }
 
     /**
+     * The ModelsImpl object to access its operations.
+     */
+    private final ModelsImpl models;
+
+    /**
+     * Gets the ModelsImpl object to access its operations.
+     * 
+     * @return the ModelsImpl object.
+     */
+    public ModelsImpl getModels() {
+        return this.models;
+    }
+
+    /**
      * Initializes an instance of ProjectedNameClient client.
      */
     public ProjectedNameClientImpl() {
@@ -108,6 +122,7 @@ public final class ProjectedNameClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.properties = new PropertiesImpl(this);
+        this.models = new ModelsImpl(this);
         this.service
             = RestProxy.create(ProjectedNameClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }

@@ -39,9 +39,9 @@ public class PomMapper implements IMapper<Project, Pom> {
         List<String> dependencyIdentifiers = new ArrayList<>();
         if (JavaSettings.getInstance().isStreamStyleSerialization()) {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    Project.Dependency.AZURE_JSON, true);
+                    Project.Dependency.AZURE_JSON, false);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    Project.Dependency.AZURE_XML, true);
+                    Project.Dependency.AZURE_XML, false);
         }
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                 Project.Dependency.AZURE_CORE, false);

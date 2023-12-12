@@ -6,10 +6,10 @@ package com.type.model.inheritance.singlediscriminator.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,29 +17,24 @@ import java.util.Map;
  * The second level model in polymorphic single levels inheritance which contains references to other polymorphic
  * instances.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
-@JsonTypeName("eagle")
 @Fluent
 public final class Eagle extends Bird {
     /*
      * The friends property.
      */
     @Generated
-    @JsonProperty(value = "friends")
     private List<Bird> friends;
 
     /*
      * The hate property.
      */
     @Generated
-    @JsonProperty(value = "hate")
     private Map<String, Bird> hate;
 
     /*
      * The partner property.
      */
     @Generated
-    @JsonProperty(value = "partner")
     private Bird partner;
 
     /**
@@ -48,8 +43,7 @@ public final class Eagle extends Bird {
      * @param wingspan the wingspan value to set.
      */
     @Generated
-    @JsonCreator
-    public Eagle(@JsonProperty(value = "wingspan") int wingspan) {
+    public Eagle(int wingspan) {
         super(wingspan);
     }
 
@@ -117,5 +111,64 @@ public final class Eagle extends Bird {
     public Eagle setPartner(Bird partner) {
         this.partner = partner;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", "eagle");
+        jsonWriter.writeIntField("wingspan", getWingspan());
+        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeJsonField("partner", this.partner);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Eagle from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Eagle if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Eagle.
+     */
+    public static Eagle fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            int wingspan = 0;
+            List<Bird> friends = null;
+            Map<String, Bird> hate = null;
+            Bird partner = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"eagle".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'eagle'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("wingspan".equals(fieldName)) {
+                    wingspan = reader.getInt();
+                } else if ("friends".equals(fieldName)) {
+                    friends = reader.readArray(reader1 -> Bird.fromJson(reader1));
+                } else if ("hate".equals(fieldName)) {
+                    hate = reader.readMap(reader1 -> Bird.fromJson(reader1));
+                } else if ("partner".equals(fieldName)) {
+                    partner = Bird.fromJson(reader);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            Eagle deserializedEagle = new Eagle(wingspan);
+            deserializedEagle.friends = friends;
+            deserializedEagle.hate = hate;
+            deserializedEagle.partner = partner;
+
+            return deserializedEagle;
+        });
     }
 }

@@ -17,7 +17,7 @@ public class ModelTestCaseUtilTests {
     @Test
     public void testJsonFromEnumType() {
         EnumType type = new EnumType.Builder()
-                .elementType(ClassType.String)
+                .elementType(ClassType.STRING)
                 .values(Arrays.asList(
                         new ClientEnumValue("200", "200"),
                         new ClientEnumValue("404", "404")))
@@ -28,7 +28,7 @@ public class ModelTestCaseUtilTests {
         Assert.assertTrue(Objects.equals("200", jsonObject) || Objects.equals("404", jsonObject));
 
         type = new EnumType.Builder()
-                .elementType(ClassType.Integer)
+                .elementType(ClassType.INTEGER)
                 .values(Arrays.asList(
                         new ClientEnumValue("200", "200"),
                         new ClientEnumValue("404", "404")))

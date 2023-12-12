@@ -42,7 +42,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         }
 
         if (isPlainObject(compositeType)) {
-            return ClassType.Object;
+            return ClassType.OBJECT;
         }
 
         String classPackage;

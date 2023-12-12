@@ -261,7 +261,7 @@ public final class NamingClientBuilder implements HttpTrait<NamingClientBuilder>
      */
     @Generated
     public NamingAsyncClient buildAsyncClient() {
-        return new NamingAsyncClient(buildInnerClient());
+        return new NamingAsyncClient(buildInnerClient().getNamingOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class NamingClientBuilder implements HttpTrait<NamingClientBuilder>
      */
     @Generated
     public NamingClient buildClient() {
-        return new NamingClient(buildInnerClient());
+        return new NamingClient(buildInnerClient().getNamingOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(NamingClientBuilder.class);

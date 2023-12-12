@@ -13,6 +13,7 @@ import java.util.Set;
  * The details of a ServiceClient.
  */
 public class ServiceClient {
+    private final String crossLanguageDefinitionId;
     /**
      * The package that this service client belongs to.
      */
@@ -96,7 +97,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails) {
+                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails, String crossLanguageDefinitionId) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -116,6 +117,7 @@ public class ServiceClient {
         this.securityInfo = securityInfo;
         this.baseUrl = baseUrl;
         this.pipelinePolicyDetails = pipelinePolicyDetails;
+        this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
     public final String getPackage() {
@@ -200,6 +202,10 @@ public class ServiceClient {
         return pipelinePolicyDetails;
     }
 
+    public String getCrossLanguageDefinitionId() {
+        return crossLanguageDefinitionId;
+    }
+
     /**
      * Add this property's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
@@ -264,7 +270,7 @@ public class ServiceClient {
     }
 
     protected void addRestProxyImport(Set<String> imports) {
-        ClassType.RestProxy.addImportsTo(imports, false);
+        ClassType.REST_PROXY.addImportsTo(imports, false);
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
@@ -275,7 +281,7 @@ public class ServiceClient {
     }
 
     protected void addPipelineBuilderImport(Set<String> imports) {
-        ClassType.HttpPipelineBuilder.addImportsTo(imports, false);
+        ClassType.HTTP_PIPELINE_BUILDER.addImportsTo(imports, false);
     }
 
     public static class Builder {
@@ -297,6 +303,7 @@ public class ServiceClient {
         protected SecurityInfo securityInfo;
         protected String baseUrl;
         protected PipelinePolicyDetails pipelinePolicyDetails;
+        private String crossLanguageDefinitionId;
 
         /**
          * Sets the package that this service client belongs to.
@@ -497,7 +504,13 @@ public class ServiceClient {
                     builderDisabled,
                     securityInfo,
                     baseUrl,
-                    pipelinePolicyDetails);
+                    pipelinePolicyDetails,
+                    crossLanguageDefinitionId);
+        }
+
+        public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
+            this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+            return this;
         }
     }
 }

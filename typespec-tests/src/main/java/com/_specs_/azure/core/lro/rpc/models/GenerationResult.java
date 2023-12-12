@@ -6,20 +6,22 @@ package com._specs_.azure.core.lro.rpc.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Result of the generation.
  */
 @Immutable
-public final class GenerationResult {
+public final class GenerationResult implements JsonSerializable<GenerationResult> {
     /*
      * The data.
      */
     @Generated
-    @JsonProperty(value = "data")
-    private String data;
+    private final String data;
 
     /**
      * Creates an instance of GenerationResult class.
@@ -27,8 +29,7 @@ public final class GenerationResult {
      * @param data the data value to set.
      */
     @Generated
-    @JsonCreator
-    private GenerationResult(@JsonProperty(value = "data") String data) {
+    private GenerationResult(String data) {
         this.data = data;
     }
 
@@ -40,5 +41,38 @@ public final class GenerationResult {
     @Generated
     public String getData() {
         return this.data;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("data", this.data);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of GenerationResult from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of GenerationResult if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the GenerationResult.
+     */
+    public static GenerationResult fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String data = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("data".equals(fieldName)) {
+                    data = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new GenerationResult(data);
+        });
     }
 }

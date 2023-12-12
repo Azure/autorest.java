@@ -4,7 +4,7 @@
 
 package com._specs_.azure.clientgenerator.core.usage;
 
-import com._specs_.azure.clientgenerator.core.usage.implementation.UsageClientImpl;
+import com._specs_.azure.clientgenerator.core.usage.implementation.ModelInOperationsImpl;
 import com._specs_.azure.clientgenerator.core.usage.models.InputModel;
 import com._specs_.azure.clientgenerator.core.usage.models.OutputModel;
 import com.azure.core.annotation.Generated;
@@ -25,7 +25,7 @@ import com.azure.core.util.BinaryData;
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {
     @Generated
-    private final UsageClientImpl serviceClient;
+    private final ModelInOperationsImpl serviceClient;
 
     /**
      * Initializes an instance of UsageClient class.
@@ -33,7 +33,7 @@ public final class UsageClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    UsageClient(UsageClientImpl serviceClient) {
+    UsageClient(ModelInOperationsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

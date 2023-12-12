@@ -15,7 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.specialchars.implementation.SpecialCharsClientImpl;
+import com.cadl.specialchars.implementation.BuiltinOpsImpl;
 import com.cadl.specialchars.models.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ import java.util.Map;
 @ServiceClient(builder = SpecialCharsClientBuilder.class)
 public final class SpecialCharsClient {
     @Generated
-    private final SpecialCharsClientImpl serviceClient;
+    private final BuiltinOpsImpl serviceClient;
 
     /**
      * Initializes an instance of SpecialCharsClient class.
@@ -34,7 +34,7 @@ public final class SpecialCharsClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    SpecialCharsClient(SpecialCharsClientImpl serviceClient) {
+    SpecialCharsClient(BuiltinOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

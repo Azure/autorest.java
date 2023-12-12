@@ -117,17 +117,41 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                     readerToUse.skipChildren();
                 }
             }
-
-            if (discriminatorValue != null) {
-                readerToUse = readerToUse.reset();
-            }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("Kind1".equals(discriminatorValue)) {
-                return MyDerivedType.fromJson(readerToUse);
+                return MyDerivedType.fromJson(readerToUse.reset());
             } else {
-                throw new IllegalStateException(
-                    "Discriminator field 'kind' didn't match one of the expected values 'Kind1'");
+                return fromJsonKnownDiscriminator(readerToUse.reset());
             }
+        });
+    }
+
+    static MyBaseType fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            MyBaseType deserializedMyBaseType = new MyBaseType();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("propB1".equals(fieldName)) {
+                    deserializedMyBaseType.propB1 = reader.getString();
+                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("propBH1".equals(fieldName)) {
+                            deserializedMyBaseType.propBH1 = reader.getString();
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedMyBaseType;
         });
     }
 }

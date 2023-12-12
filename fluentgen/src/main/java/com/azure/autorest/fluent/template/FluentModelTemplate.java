@@ -74,7 +74,7 @@ public class FluentModelTemplate extends ModelTemplate {
 
     @Override
     protected String getGetterName(ClientModel model, ClientModelProperty property) {
-        if (FluentType.ManagementError.getName().equals(model.getParentModelName())) {
+        if (FluentType.MANAGEMENT_ERROR.getName().equals(model.getParentModelName())) {
             // subclass of ManagementError
 
             if (modelNamer == null) {

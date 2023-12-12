@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ModuleInfo {
     private final String moduleName;
@@ -137,13 +136,7 @@ public class ModuleInfo {
     }
 
     // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
-    public void checkForAdditionalDependencies(List<ClientModel> models) {
-        Set<String> externalPackageNames = models.stream()
-                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
-                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
-                .map(ClientModel::getPackage)
-                .collect(Collectors.toSet());
-
+    public void checkForAdditionalDependencies(Set<String> externalPackageNames) {
         // currently, only check for azure-core-experimental
         if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
             getRequireModules().add(new ModuleInfo.RequireModule("com.azure.core.experimental", true));

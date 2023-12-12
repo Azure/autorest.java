@@ -52,6 +52,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
@@ -253,6 +254,8 @@ public class Javagen extends NewPlugin {
 
         writeClientModels(client, javaPackage, settings);
 
+        writeHelperClasses(client, javaPackage, settings);
+
         // Unit tests on client model
         if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
             for (ClientModel model : client.getModels()) {
@@ -273,8 +276,9 @@ public class Javagen extends NewPlugin {
                 project.integrateWithSdk();
             }
 
-            client.getModuleInfo().checkForAdditionalDependencies(client.getModels());
-            project.checkForAdditionalDependencies(client.getModels());
+            Set<String> externalPackageNames = ClientModelUtil.getExternalPackageNamesUsedInClient(client.getModels(), codeModel);
+            client.getModuleInfo().checkForAdditionalDependencies(externalPackageNames);
+            project.checkForAdditionalDependencies(externalPackageNames);
 
             // Module-info
             javaPackage.addModuleInfo(client.getModuleInfo());
@@ -329,6 +333,23 @@ public class Javagen extends NewPlugin {
             for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
                 javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
                         xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+            }
+        }
+    }
+
+    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+        // While azure-core's ResponseError hasn't shipped implementing JsonSerializable add a utility method that
+        // will serialize and deserialize ResponseError.
+        if (settings.isStreamStyleSerialization()) {
+            boolean generateCoreToCodegenBridgeUtils = false;
+            for (ClientModel model : client.getModels()) {
+                if (ClientModelUtil.generateCoreToCodegenBridgeUtils(model, settings)) {
+                    generateCoreToCodegenBridgeUtils = true;
+                    break;
+                }
+            }
+            if (generateCoreToCodegenBridgeUtils) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
             }
         }
     }

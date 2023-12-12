@@ -112,7 +112,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             } else {
                 responseBodyType = clientMethod.getProxyMethod().getResponseBodyType();
             }
-            if (responseBodyType != null && !responseBodyType.equals(PrimitiveType.Void)) {
+            if (responseBodyType != null && !responseBodyType.equals(PrimitiveType.VOID)) {
                 responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
             }
         }
@@ -263,8 +263,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
      * 1. converts Flux<ByteBuffer> to BinaryData (applies to request body schema, since DPG response type can't be Flux<ByteBuffer>)
      */
     private static String convertToBodySchemaJavadoc(IType type) {
-        if (GenericType.FluxByteBuffer.equals(type)) {
-            return ClassType.BinaryData.toString();
+        if (GenericType.FLUX_BYTE_BUFFER.equals(type)) {
+            return ClassType.BINARY_DATA.toString();
         }
         return type.toString();
     }

@@ -6,83 +6,76 @@ package com.cadl.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Operation model.
  */
 @Immutable
-public final class Operation {
+public final class Operation implements JsonSerializable<Operation> {
     /*
      * The name property.
      */
     @Generated
-    @JsonProperty(value = "name")
-    private OperationName name;
+    private final OperationName name;
 
     /*
      * The best property.
      */
     @Generated
-    @JsonProperty(value = "best")
-    private boolean best = true;
+    private final boolean best = true;
 
     /*
      * The age property.
      */
     @Generated
-    @JsonProperty(value = "age")
-    private long age = 50L;
+    private final long age = 50L;
 
     /*
      * The priority property.
      */
     @Generated
-    @JsonProperty(value = "priority")
-    private Priority priority;
+    private final Priority priority;
 
     /*
      * The color property.
      */
     @Generated
-    @JsonProperty(value = "color")
-    private ColorModel color;
+    private final ColorModel color;
 
     /*
      * The unit property.
      */
     @Generated
-    @JsonProperty(value = "unit")
-    private Unit unit;
+    private final Unit unit;
 
     /*
      * The priorityValue property.
      */
     @Generated
-    @JsonProperty(value = "priorityValue")
-    private Priority priorityValue = Priority.LOW;
+    private final Priority priorityValue = Priority.LOW;
 
     /*
      * The colorValue property.
      */
     @Generated
-    @JsonProperty(value = "colorValue")
-    private Color colorValue = Color.GREEN;
+    private final Color colorValue = Color.GREEN;
 
     /*
      * The colorModelValue property.
      */
     @Generated
-    @JsonProperty(value = "colorModelValue")
-    private ColorModel colorModelValue = ColorModel.BLUE;
+    private final ColorModel colorModelValue = ColorModel.BLUE;
 
     /*
      * The unitValue property.
      */
     @Generated
-    @JsonProperty(value = "unitValue")
-    private Unit unitValue = Unit.MILLIGRAM;
+    private final Unit unitValue = Unit.MILLIGRAM;
 
     /**
      * Creates an instance of Operation class.
@@ -93,10 +86,7 @@ public final class Operation {
      * @param unit the unit value to set.
      */
     @Generated
-    @JsonCreator
-    private Operation(@JsonProperty(value = "name") OperationName name,
-        @JsonProperty(value = "priority") Priority priority, @JsonProperty(value = "color") ColorModel color,
-        @JsonProperty(value = "unit") Unit unit) {
+    private Operation(OperationName name, Priority priority, ColorModel color, Unit unit) {
         this.name = name;
         this.priority = priority;
         this.color = color;
@@ -201,5 +191,57 @@ public final class Operation {
     @Generated
     public Unit getUnitValue() {
         return this.unitValue;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name == null ? null : this.name.toString());
+        jsonWriter.writeBooleanField("best", this.best);
+        jsonWriter.writeLongField("age", this.age);
+        jsonWriter.writeNumberField("priority", this.priority == null ? null : this.priority.toLong());
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
+        jsonWriter.writeNumberField("unit", this.unit == null ? null : this.unit.toDouble());
+        jsonWriter.writeNumberField("priorityValue", this.priorityValue == null ? null : this.priorityValue.toLong());
+        jsonWriter.writeStringField("colorValue", this.colorValue == null ? null : this.colorValue.toString());
+        jsonWriter.writeStringField("colorModelValue",
+            this.colorModelValue == null ? null : this.colorModelValue.toString());
+        jsonWriter.writeNumberField("unitValue", this.unitValue == null ? null : this.unitValue.toDouble());
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Operation from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Operation if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Operation.
+     */
+    public static Operation fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            OperationName name = null;
+            Priority priority = null;
+            ColorModel color = null;
+            Unit unit = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    name = OperationName.fromString(reader.getString());
+                } else if ("priority".equals(fieldName)) {
+                    priority = Priority.fromLong(reader.getLong());
+                } else if ("color".equals(fieldName)) {
+                    color = ColorModel.fromString(reader.getString());
+                } else if ("unit".equals(fieldName)) {
+                    unit = Unit.fromDouble(reader.getDouble());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return new Operation(name, priority, color, unit);
+        });
     }
 }

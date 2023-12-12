@@ -261,7 +261,7 @@ public final class InternalClientBuilder implements HttpTrait<InternalClientBuil
      */
     @Generated
     public InternalAsyncClient buildAsyncClient() {
-        return new InternalAsyncClient(buildInnerClient());
+        return new InternalAsyncClient(buildInnerClient().getInternalOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class InternalClientBuilder implements HttpTrait<InternalClientBuil
      */
     @Generated
     public InternalClient buildClient() {
-        return new InternalClient(buildInnerClient());
+        return new InternalClient(buildInnerClient().getInternalOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(InternalClientBuilder.class);

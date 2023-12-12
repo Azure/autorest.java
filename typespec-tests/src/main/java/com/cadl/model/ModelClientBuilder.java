@@ -261,7 +261,7 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
      */
     @Generated
     public ModelAsyncClient buildAsyncClient() {
-        return new ModelAsyncClient(buildInnerClient());
+        return new ModelAsyncClient(buildInnerClient().getModelOps());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
      */
     @Generated
     public ModelClient buildClient() {
-        return new ModelClient(buildInnerClient());
+        return new ModelClient(buildInnerClient().getModelOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ModelClientBuilder.class);

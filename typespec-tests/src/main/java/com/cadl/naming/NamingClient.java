@@ -16,7 +16,7 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.cadl.naming.implementation.NamingClientImpl;
+import com.cadl.naming.implementation.NamingOpsImpl;
 import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
 import com.cadl.naming.models.GetAnonymouseResponse;
@@ -27,7 +27,7 @@ import com.cadl.naming.models.GetAnonymouseResponse;
 @ServiceClient(builder = NamingClientBuilder.class)
 public final class NamingClient {
     @Generated
-    private final NamingClientImpl serviceClient;
+    private final NamingOpsImpl serviceClient;
 
     /**
      * Initializes an instance of NamingClient class.
@@ -35,7 +35,7 @@ public final class NamingClient {
      * @param serviceClient the service client implementation.
      */
     @Generated
-    NamingClient(NamingClientImpl serviceClient) {
+    NamingClient(NamingOpsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 

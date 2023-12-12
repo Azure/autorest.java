@@ -35,12 +35,13 @@ public class AndroidMethodGroupClient extends MethodGroupClient {
                 supportedInterfaces,
                 classBaseName != null
                     ? classBaseName
-                    : (className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className));
+                    : (className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className),
+                null);
     }
 
     @Override
     protected ClassType getProxyClassType() {
-        return ClassType.AndroidRestProxy;
+        return ClassType.ANDROID_REST_PROXY;
     }
 
     public static class Builder extends MethodGroupClient.Builder {

@@ -261,7 +261,7 @@ public final class PatchClientBuilder implements HttpTrait<PatchClientBuilder>, 
      */
     @Generated
     public PatchAsyncClient buildAsyncClient() {
-        return new PatchAsyncClient(buildInnerClient());
+        return new PatchAsyncClient(buildInnerClient().getPatches());
     }
 
     /**
@@ -271,7 +271,7 @@ public final class PatchClientBuilder implements HttpTrait<PatchClientBuilder>, 
      */
     @Generated
     public PatchClient buildClient() {
-        return new PatchClient(buildInnerClient());
+        return new PatchClient(buildInnerClient().getPatches());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(PatchClientBuilder.class);

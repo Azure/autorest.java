@@ -6,17 +6,17 @@ package com.cadl.multicontenttypes.generated;
 
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
-import com.cadl.multicontenttypes.MultiContentTypesClient;
 import com.cadl.multicontenttypes.MultiContentTypesClientBuilder;
+import com.cadl.multicontenttypes.SingleContentTypeClient;
 import java.nio.charset.StandardCharsets;
 
 public class SingleContentTypeUploadImageForSingleContentType {
     public static void main(String[] args) {
-        MultiContentTypesClient multiContentTypesClient = new MultiContentTypesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
-        // BEGIN:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
-        multiContentTypesClient.uploadImageForSingleContentType(
+        SingleContentTypeClient singleContentTypeClient = new MultiContentTypesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildSingleContentTypeClient();
+        // BEGIN:com.cadl.multicontenttypes.generated.singlecontenttypeuploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
+        singleContentTypeClient.uploadImageForSingleContentType(
             BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));
-        // END:com.cadl.multicontenttypes.generated.uploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
+        // END:com.cadl.multicontenttypes.generated.singlecontenttypeuploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
     }
 }

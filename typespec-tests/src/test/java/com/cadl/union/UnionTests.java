@@ -13,25 +13,25 @@ import java.util.Collections;
 
 public class UnionTests {
 
-    private static final byte[] bytes = new byte[] { 'a' };
+    private static final byte[] BYTES = new byte[] { 'a' };
 
     @Test
     public void testSerialization() {
         // test non-null Union (required property)
-        Result result = new Result("name", BinaryData.fromObject(bytes));
+        Result result = new Result("name", BinaryData.fromObject(BYTES));
         BinaryData json = BinaryData.fromObject(result);
         result = json.toObject(Result.class);
         Assertions.assertNotNull(result.getData());
 
         // test null Union (optional property)
-        SubResult subResult = new SubResult("name", BinaryData.fromObject(bytes));
+        SubResult subResult = new SubResult("name", BinaryData.fromObject(BYTES));
         json = BinaryData.fromObject(subResult);
         subResult = json.toObject(SubResult.class);
         Assertions.assertNotNull(result.getData());
         Assertions.assertNull(subResult.getArrayData());
 
         // test non-null Union (optional property)
-        subResult = new SubResult("name", BinaryData.fromObject(bytes));
+        subResult = new SubResult("name", BinaryData.fromObject(BYTES));
         subResult.setArrayData(BinaryData.fromObject(Collections.singletonList("data1")));
         json = BinaryData.fromObject(subResult);
         subResult = json.toObject(SubResult.class);

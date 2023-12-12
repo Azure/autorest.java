@@ -46,7 +46,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
         javaFile.declareImport(xmlSequenceWrapper.getImports());
 
         if (settings.isStreamStyleSerialization()) {
-            javaFile.declareImport(ArrayList.class.getName(), ClassType.CoreUtils.getFullName(), QName.class.getName(),
+            javaFile.declareImport(ArrayList.class.getName(), ClassType.CORE_UTILS.getFullName(), QName.class.getName(),
                 XmlProviders.class.getName(), XmlReader.class.getName(), XmlSerializable.class.getName(),
                 XMLStreamException.class.getName(), XmlToken.class.getName(), XmlWriter.class.getName());
         }

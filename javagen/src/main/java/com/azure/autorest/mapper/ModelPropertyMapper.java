@@ -202,7 +202,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.getClientDefaultValue() != null &&
                 (propertyWireType instanceof PrimitiveType || propertyWireType instanceof EnumType ||
                         (propertyWireType instanceof ClassType && ((ClassType) propertyWireType).isBoxedType()) ||
-                        propertyWireType.equals(ClassType.String))) {
+                        propertyWireType.equals(ClassType.STRING))) {
             String autoRestPropertyDefaultValueExpression = propertyWireType.defaultValueExpression(property.getClientDefaultValue());
             builder.defaultValue(autoRestPropertyDefaultValueExpression);
         }

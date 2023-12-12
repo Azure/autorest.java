@@ -42,9 +42,14 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.PossibleCredentialException;
 import org.slf4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -212,6 +217,20 @@ public class JavaPackage {
         Templates.getPomTemplate().write(pom, xmlFile);
         this.checkDuplicateFile(xmlFile.getFilePath());
         xmlFiles.add(xmlFile);
+    }
+
+    public final void addJavaFromResources(String packageName, String name) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageName, name);
+        try (InputStream inputStream = JavaPackage.class.getClassLoader().getResourceAsStream(name + ".java");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            Iterator<String> linesIterator = bufferedReader.lines().iterator();
+            while (linesIterator.hasNext()) {
+                javaFile.line(linesIterator.next());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read " + name + ".java from resources.", e);
+        }
+        addJavaFile(javaFile);
     }
 
     protected void addJavaFile(JavaFile javaFile) {

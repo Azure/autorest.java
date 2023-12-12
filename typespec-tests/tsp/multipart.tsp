@@ -8,12 +8,24 @@ using TypeSpec.Http;
 })
 namespace Cadl.Multipart;
 
+enum ImageType {
+  JPEG,
+  PNG,
+}
+
 model FormData {
   name: string;
+  resolution: int32;
+  type: ImageType;
   image: bytes;
 }
 
 @doc("request is binary")
-@route("/upload/image")
+@route("/upload/images/{name}")
 @post
-op upload(@header contentType: "multipart/form-data", data: FormData): void;
+op upload(
+  @path name: string,
+  @query compress?: boolean,
+  @header contentType: "multipart/form-data",
+  @body data: FormData,
+): void;

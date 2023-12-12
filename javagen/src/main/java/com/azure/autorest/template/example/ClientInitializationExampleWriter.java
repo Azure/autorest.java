@@ -42,9 +42,9 @@ public class ClientInitializationExampleWriter {
 
         // credential
         imports.add("com.azure.identity.DefaultAzureCredentialBuilder");
-        ClassType.AzureKeyCredential.addImportsTo(imports, false);
-        ClassType.KeyCredential.addImportsTo(imports, false);
-        ClassType.Configuration.addImportsTo(imports, false);
+        ClassType.AZURE_KEY_CREDENTIAL.addImportsTo(imports, false);
+        ClassType.KEY_CREDENTIAL.addImportsTo(imports, false);
+        ClassType.CONFIGURATION.addImportsTo(imports, false);
 
         // client initialization
         List<String> clientParameterLines = new ArrayList<>();

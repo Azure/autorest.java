@@ -7,9 +7,7 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.template.TemplateHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
@@ -36,7 +34,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Project {
 
@@ -62,11 +59,11 @@ public class Project {
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
         AZURE_JSON("com.azure", "azure-json", "1.1.0"),
         AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
-        AZURE_CORE("com.azure", "azure-core", "1.45.0"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.8"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.10"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.22.0"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.0"),
+        AZURE_CORE("com.azure", "azure-core", "1.45.1"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.9"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.11"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.22.1"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.1"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.46"),
 
         GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
@@ -129,13 +126,7 @@ public class Project {
     }
 
     // TODO (weidxu): this method likely will get refactored when we support external model (hence external package)
-    public void checkForAdditionalDependencies(List<ClientModel> models) {
-        Set<String> externalPackageNames = models.stream()
-                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
-                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
-                .map(ClientModel::getPackage)
-                .collect(Collectors.toSet());
-
+    public void checkForAdditionalDependencies(Set<String> externalPackageNames) {
         // currently, only check for azure-core-experimental
         if (externalPackageNames.stream().anyMatch(p -> p.startsWith("com.azure.core.experimental"))) {
             // add to pomDependencyIdentifiers is not already there

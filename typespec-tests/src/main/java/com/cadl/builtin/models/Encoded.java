@@ -9,64 +9,63 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * The Encoded model.
  */
 @Fluent
-public final class Encoded {
+public final class Encoded implements JsonSerializable<Encoded> {
     /*
      * The timeInSeconds property.
      */
     @Generated
-    @JsonProperty(value = "timeInSeconds")
     private Long timeInSeconds;
 
     /*
      * The timeInSecondsFraction property.
      */
     @Generated
-    @JsonProperty(value = "timeInSecondsFraction")
     private Double timeInSecondsFraction;
 
     /*
      * The dateTime property.
      */
     @Generated
-    @JsonProperty(value = "dateTime")
     private OffsetDateTime dateTime;
 
     /*
      * The dateTimeRfc7231 property.
      */
     @Generated
-    @JsonProperty(value = "dateTimeRfc7231")
     private DateTimeRfc1123 dateTimeRfc7231;
 
     /*
      * The unixTimestamp property.
      */
     @Generated
-    @JsonProperty(value = "unixTimestamp")
     private Long unixTimestamp;
 
     /*
      * The base64 property.
      */
     @Generated
-    @JsonProperty(value = "base64")
     private byte[] base64;
 
     /*
      * The base64url property.
      */
     @Generated
-    @JsonProperty(value = "base64url")
     private Base64Url base64Url;
 
     /**
@@ -263,5 +262,60 @@ public final class Encoded {
             this.base64Url = Base64Url.encode(CoreUtils.clone(base64Url));
         }
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("timeInSeconds", this.timeInSeconds);
+        jsonWriter.writeNumberField("timeInSecondsFraction", this.timeInSecondsFraction);
+        jsonWriter.writeStringField("dateTime",
+            this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
+        jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
+        jsonWriter.writeNumberField("unixTimestamp", this.unixTimestamp);
+        jsonWriter.writeBinaryField("base64", this.base64);
+        jsonWriter.writeStringField("base64url", Objects.toString(this.base64Url, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Encoded from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Encoded if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IOException If an error occurs while reading the Encoded.
+     */
+    public static Encoded fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Encoded deserializedEncoded = new Encoded();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("timeInSeconds".equals(fieldName)) {
+                    deserializedEncoded.timeInSeconds = reader.getNullable(JsonReader::getLong);
+                } else if ("timeInSecondsFraction".equals(fieldName)) {
+                    deserializedEncoded.timeInSecondsFraction = reader.getNullable(JsonReader::getDouble);
+                } else if ("dateTime".equals(fieldName)) {
+                    deserializedEncoded.dateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("dateTimeRfc7231".equals(fieldName)) {
+                    deserializedEncoded.dateTimeRfc7231
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                } else if ("unixTimestamp".equals(fieldName)) {
+                    deserializedEncoded.unixTimestamp = reader.getNullable(JsonReader::getLong);
+                } else if ("base64".equals(fieldName)) {
+                    deserializedEncoded.base64 = reader.getBinary();
+                } else if ("base64url".equals(fieldName)) {
+                    deserializedEncoded.base64Url
+                        = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedEncoded;
+        });
     }
 }

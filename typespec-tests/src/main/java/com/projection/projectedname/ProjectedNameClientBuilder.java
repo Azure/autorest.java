@@ -44,8 +44,10 @@ import java.util.Objects;
     serviceClients = {
         ProjectedNameClient.class,
         PropertyClient.class,
+        ModelClient.class,
         ProjectedNameAsyncClient.class,
-        PropertyAsyncClient.class })
+        PropertyAsyncClient.class,
+        ModelAsyncClient.class })
 public final class ProjectedNameClientBuilder
     implements HttpTrait<ProjectedNameClientBuilder>, ConfigurationTrait<ProjectedNameClientBuilder> {
     @Generated
@@ -264,6 +266,16 @@ public final class ProjectedNameClientBuilder
     }
 
     /**
+     * Builds an instance of ModelAsyncClient class.
+     * 
+     * @return an instance of ModelAsyncClient.
+     */
+    @Generated
+    public ModelAsyncClient buildModelAsyncClient() {
+        return new ModelAsyncClient(buildInnerClient().getModels());
+    }
+
+    /**
      * Builds an instance of ProjectedNameClient class.
      * 
      * @return an instance of ProjectedNameClient.
@@ -281,6 +293,16 @@ public final class ProjectedNameClientBuilder
     @Generated
     public PropertyClient buildPropertyClient() {
         return new PropertyClient(buildInnerClient().getProperties());
+    }
+
+    /**
+     * Builds an instance of ModelClient class.
+     * 
+     * @return an instance of ModelClient.
+     */
+    @Generated
+    public ModelClient buildModelClient() {
+        return new ModelClient(buildInnerClient().getModels());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ProjectedNameClientBuilder.class);

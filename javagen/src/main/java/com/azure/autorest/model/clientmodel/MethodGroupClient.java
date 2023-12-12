@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.ClientModelUtil;
+import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -56,6 +57,8 @@ public class MethodGroupClient {
 
     private String classBaseName;
 
+    private List<ServiceClientProperty> properties;
+
     /**
      * Create a new MethodGroupClient with the provided properties.
      * @param className The name of the client's class.
@@ -68,7 +71,11 @@ public class MethodGroupClient {
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    protected MethodGroupClient(String packageKeyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName) {
+    protected MethodGroupClient(
+            String packageKeyword, String className, String interfaceName, List<String> implementedInterfaces,
+            Proxy proxy, String serviceClientName, String variableType, String variableName,
+            List<ClientMethod> clientMethods, List<IType> supportedInterfaces, String classBaseName,
+            List<ServiceClientProperty> properties) {
         packageName = packageKeyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -82,6 +89,7 @@ public class MethodGroupClient {
         this.classBaseName = classBaseName != null
                 ? classBaseName
                 : (className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className);
+        this.properties = properties;
     }
 
     public final String getPackage() {
@@ -128,6 +136,10 @@ public class MethodGroupClient {
         return classBaseName;
     }
 
+    public List<ServiceClientProperty> getProperties() {
+        return properties;
+    }
+
     /**
      * Add this property's imports to the provided ISet of imports.
      * @param imports The set of imports to add to.
@@ -153,15 +165,24 @@ public class MethodGroupClient {
             }
         }
 
-        getProxy().addImportsTo(imports, includeImplementationImports, settings);
+        Proxy proxy = getProxy();
+        if (proxy != null) {
+            proxy.addImportsTo(imports, includeImplementationImports, settings);
+        }
 
         for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
+
+        if (includeImplementationImports && !CoreUtils.isNullOrEmpty(getProperties())) {
+            for (ServiceClientProperty property : getProperties()) {
+                property.addImportsTo(imports, includeImplementationImports);
+            }
+        }
     }
 
     protected ClassType getProxyClassType() {
-        return ClassType.RestProxy;
+        return ClassType.REST_PROXY;
     }
 
     public static class Builder {
@@ -176,6 +197,7 @@ public class MethodGroupClient {
         protected List<ClientMethod> clientMethods;
         protected List<IType> supportedInterfaces;
         protected String classBaseName;
+        private List<ServiceClientProperty> properties;
 
         /**
          * Sets the name of the package.
@@ -287,6 +309,17 @@ public class MethodGroupClient {
             return this;
         }
 
+        /**
+         * Sets properties.
+         *
+         * @param properties the properties from ServiceClient.
+         * @return the Builder itself
+         */
+        public Builder properties(List<ServiceClientProperty> properties) {
+            this.properties = properties;
+            return this;
+        }
+
         public MethodGroupClient build() {
             return new MethodGroupClient(packageName,
                     className,
@@ -298,7 +331,8 @@ public class MethodGroupClient {
                     variableName,
                     clientMethods,
                     supportedInterfaces,
-                    classBaseName);
+                    classBaseName,
+                    properties);
         }
     }
 }

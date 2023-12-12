@@ -21,7 +21,7 @@ public class ModelNamer {
 
     public String modelPropertyGetterName(IType clientType, String propertyName) {
         String prefix = "get";
-        if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
+        if (clientType == PrimitiveType.BOOLEAN || clientType == ClassType.BOOLEAN) {
             prefix = "is";
             if (CodeNamer.toCamelCase(propertyName).startsWith(prefix)) {
                 return CodeNamer.toCamelCase(propertyName);

@@ -281,7 +281,7 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
      */
     @Generated
     public UnionAsyncClient buildAsyncClient() {
-        return new UnionAsyncClient(buildInnerClient());
+        return new UnionAsyncClient(buildInnerClient().getUnionFlattenOps());
     }
 
     /**
@@ -291,7 +291,7 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
      */
     @Generated
     public UnionClient buildClient() {
-        return new UnionClient(buildInnerClient());
+        return new UnionClient(buildInnerClient().getUnionFlattenOps());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(UnionClientBuilder.class);
