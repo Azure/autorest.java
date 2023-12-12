@@ -20,7 +20,8 @@ public class ModelUtil {
                 && !(isModelUsedOnlyInException(model.getImplementationDetails()))
                 && !(isAnonymousModel(model.getImplementationDetails()))
                 && !(isExternalModel(model.getImplementationDetails()))
-                && !(isPagedModel(model.getImplementationDetails()));
+                && !(isPagedModel(model.getImplementationDetails()))
+                && !(isArmBaseModel(model));
     }
 
     public static boolean isGeneratingModel(EnumType model) {
@@ -64,5 +65,11 @@ public class ModelUtil {
 
     private static boolean isExternalModel(ImplementationDetails implementationDetails) {
         return (implementationDetails.getUsages() != null && implementationDetails.getUsages().contains(ImplementationDetails.Usage.EXTERNAL));
+    }
+
+    private static boolean isArmBaseModel(ClientModel model) {
+        // TODO (xiaofei) replace temporary workaround
+        return model.getName() != null
+                && (model.getName().startsWith("TrackedResource") || model.getName().startsWith("ProxyResource") || model.getName().startsWith("ExtensionResource") || model.getName().equalsIgnoreCase("ArmResource"));
     }
 }

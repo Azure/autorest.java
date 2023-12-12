@@ -1976,6 +1976,20 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
+    if (this.isArm() && (name?.startsWith("TrackedResource") || name?.startsWith("ProxyResource") || name?.startsWith("ExtensionResource") || name === "ArmResource")) {
+      return new ObjectScheme("Resource", this.getDoc(type), {
+        summary: this.getSummary(type),
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+            name: "Resource"
+          },
+        },
+      });
+    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2131,7 +2145,9 @@ export class CodeModelBuilder {
 
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
-      if (effective.name) {
+      if (this.isArm() && getNamespace((effective as Model))?.startsWith("Azure.ResourceManager")) {
+        return type;
+      } else if (effective.name) {
         return effective;
       }
     }

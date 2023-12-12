@@ -105,6 +105,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("client-flattened-annotation-target", "none");
         SETTINGS_MAP.put("null-byte-array-maps-to-empty-array", true);
         SETTINGS_MAP.put("graal-vm-config", true);
+        SETTINGS_MAP.put("sync-methods", "all");
     }
 
     @SuppressWarnings("unchecked")
