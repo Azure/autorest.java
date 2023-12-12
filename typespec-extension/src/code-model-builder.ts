@@ -832,8 +832,14 @@ export class CodeModelBuilder {
       }
 
       // finalSchema
-      if (verb !== "delete" && lroMetadata.logicalResult) {
-        const finalResult = useNewPollStrategy ? lroMetadata.logicalResult : lroMetadata.envelopeResult;
+      if (
+        verb !== "delete" &&
+        lroMetadata.finalResult &&
+        lroMetadata.finalEnvelopeResult &&
+        lroMetadata.finalResult !== "void" &&
+        lroMetadata.finalEnvelopeResult !== "void"
+      ) {
+        let finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
         const finalType = this.findResponseBody(finalResult);
         finalSchema = this.processSchema(finalType, "finalResult");
       }
