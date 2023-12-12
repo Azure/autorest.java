@@ -165,6 +165,7 @@ import {
   operationIsMultipart,
   isKnownContentType,
   CONTENT_TYPE_KEY,
+  ORIGIN_SUBSCRIPTION_ID,
 } from "./operation-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
@@ -902,10 +903,15 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
+    function isSubscription(sdkContext: SdkContext, param: HttpOperationParameter): boolean {
+      return "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase();
+    }
     if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
+    } else if (isSubscription(this.sdkContext, param)) {
+      op.addParameter(this.subscriptionParameter);
     } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
@@ -2582,6 +2588,28 @@ export class CodeModelBuilder {
       this._apiVersionParameterInPath ||
       // TODO: hardcode as "apiVersion", as it is what we get from compiler
       (this._apiVersionParameterInPath = this.createApiVersionParameter("apiVersion", ParameterLocation.Path))
+    );
+  }
+
+  private _subscriptionParameter?: Parameter;
+  get subscriptionParameter(): Parameter {
+    return new Parameter(
+      "subscriptionId",
+      "subscription ID",
+      this.stringSchema,
+      {
+        implementation: ImplementationLocation.Client,
+        origin: ORIGIN_SUBSCRIPTION_ID,
+        required: true,
+        protocol: {
+          http: new HttpParameter(ParameterLocation.Path),
+        },
+        language: {
+          default: {
+            serializedName: "subscriptionId",
+          },
+        },
+      },
     );
   }
 
