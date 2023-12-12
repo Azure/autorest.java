@@ -86,7 +86,13 @@ public final class ManifestList extends Manifest {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("schemaVersion", getSchemaVersion());
         jsonWriter.writeStringField("mediaType", this.mediaType);
-        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         return jsonWriter.writeEndObject();
     }
 

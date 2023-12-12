@@ -188,9 +188,27 @@ public final class V1Manifest extends Manifest {
         jsonWriter.writeStringField("architecture", this.architecture);
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("tag", this.tag);
-        jsonWriter.writeArrayField("fsLayers", this.fsLayers, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("history", this.history, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("signatures", this.signatures, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("fsLayers", this.fsLayers, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
+        jsonWriter.writeArrayField("history", this.history, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
+        jsonWriter.writeArrayField("signatures", this.signatures, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         return jsonWriter.writeEndObject();
     }
 

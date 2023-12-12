@@ -130,7 +130,13 @@ public final class TagList implements JsonSerializable<TagList> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("registry", this.registryLoginServer);
         jsonWriter.writeStringField("imageName", this.repository);
-        jsonWriter.writeArrayField("tags", this.tagAttributeBases, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("tags", this.tagAttributeBases, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeStringField("link", this.link);
         return jsonWriter.writeEndObject();
     }

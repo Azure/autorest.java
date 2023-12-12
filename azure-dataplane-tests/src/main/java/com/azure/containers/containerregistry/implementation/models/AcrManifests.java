@@ -130,7 +130,13 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("registry", this.registryLoginServer);
         jsonWriter.writeStringField("imageName", this.repository);
-        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeStringField("link", this.link);
         return jsonWriter.writeEndObject();
     }

@@ -113,7 +113,13 @@ public final class V2Manifest extends Manifest {
         jsonWriter.writeNumberField("schemaVersion", getSchemaVersion());
         jsonWriter.writeStringField("mediaType", this.mediaType);
         jsonWriter.writeJsonField("config", this.config);
-        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         return jsonWriter.writeEndObject();
     }
 

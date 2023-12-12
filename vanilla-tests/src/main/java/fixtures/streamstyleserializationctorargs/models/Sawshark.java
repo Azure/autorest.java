@@ -100,7 +100,13 @@ public final class Sawshark extends Shark {
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeNumberField("age", getAge());
         jsonWriter.writeBinaryField("picture", this.picture);
         return jsonWriter.writeEndObject();

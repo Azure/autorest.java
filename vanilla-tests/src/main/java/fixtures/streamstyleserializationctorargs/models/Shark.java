@@ -110,7 +110,13 @@ public class Shark extends Fish {
         jsonWriter.writeStringField("fishtype", "shark");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
         jsonWriter.writeNumberField("age", this.age);

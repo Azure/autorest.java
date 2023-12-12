@@ -86,7 +86,13 @@ public final class OCIIndex extends Manifest {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("schemaVersion", getSchemaVersion());
-        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeJsonField("annotations", this.annotations);
         return jsonWriter.writeEndObject();
     }

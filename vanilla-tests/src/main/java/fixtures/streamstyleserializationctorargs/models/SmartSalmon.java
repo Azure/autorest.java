@@ -129,7 +129,13 @@ public final class SmartSalmon extends Salmon {
         jsonWriter.writeStringField("fishtype", "smart_salmon");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> {
+            if (element != null) {
+                writer.writeJson(element);
+            } else {
+                writer.writeNull();
+            }
+        });
         jsonWriter.writeStringField("location", getLocation());
         jsonWriter.writeBooleanField("iswild", iswild());
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
