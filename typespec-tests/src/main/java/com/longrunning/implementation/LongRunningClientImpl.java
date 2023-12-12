@@ -304,13 +304,13 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResponse, PollResponse> beginLongRunningWithModelAsync(RequestOptions requestOptions) {
+    public PollerFlux<PollResponse, Void> beginLongRunningWithModelAsync(RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.longRunningWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
                     : Context.NONE)),
-            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(PollResponse.class));
+            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -324,13 +324,13 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResponse, PollResponse> beginLongRunningWithModel(RequestOptions requestOptions) {
+    public SyncPoller<PollResponse, Void> beginLongRunningWithModel(RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.longRunningWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
                     : Context.NONE)),
-            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(PollResponse.class));
+            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
     }
 
     /**

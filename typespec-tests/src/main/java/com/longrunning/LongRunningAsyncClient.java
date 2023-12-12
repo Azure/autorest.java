@@ -186,7 +186,7 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResponse, PollResponse> beginLongRunning() {
+    public PollerFlux<PollResponse, Void> beginLongRunning() {
         // Generated convenience method for beginLongRunningWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLongRunningWithModelAsync(requestOptions);

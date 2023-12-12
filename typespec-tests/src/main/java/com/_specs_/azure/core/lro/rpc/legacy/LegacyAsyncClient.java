@@ -175,7 +175,7 @@ public final class LegacyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResult> beginCreateJob(JobData jobData) {
+    public PollerFlux<JobResult, Void> beginCreateJob(JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(jobData), requestOptions);

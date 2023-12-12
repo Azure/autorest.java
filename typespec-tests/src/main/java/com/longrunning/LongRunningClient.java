@@ -184,7 +184,7 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResponse, PollResponse> beginLongRunning() {
+    public SyncPoller<PollResponse, Void> beginLongRunning() {
         // Generated convenience method for beginLongRunningWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLongRunningWithModel(requestOptions);
