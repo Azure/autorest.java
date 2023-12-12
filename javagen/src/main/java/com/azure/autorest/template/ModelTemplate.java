@@ -227,6 +227,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
+            // add setters to override parent setters
             if (!immutableOutputModel) {
                 List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
                     propertyReferences);
@@ -242,6 +243,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         methodBlock -> {
                             methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
                                 parentProperty.getName()));
+                            if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
+                                methodBlock.line(String.format("this.updatedProperties.add(\"%s\");", parentProperty.getName()));
+                            }
                             methodBlock.methodReturn("this");
                         });
                 }
