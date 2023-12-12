@@ -3,22 +3,25 @@
 
 package com.payload.multipart;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import com.payload.FileUtils;
 import com.payload.multipart.models.MultiPartRequest;
+import com.payload.multipart.models.Size;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 
 public class MultipartTests {
 
-    private final MultiPartClient client = new MultiPartClientBuilder().buildClient();
+    private final MultiPartClient client = new MultiPartClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildClient();
     private final MultiPartAsyncClient asyncClient = new MultiPartClientBuilder().buildAsyncClient();
 
     @Test
     public void testBasic() {
         Path file = FileUtils.getJpgFile();
-        MultiPartRequest request = new MultiPartRequest("123", BinaryData.fromFile(file));
+        MultiPartRequest request = new MultiPartRequest("123", new Size(400, 300), BinaryData.fromFile(file));
 
         client.basic(request);
 

@@ -69,6 +69,10 @@ public final class MultipartAsyncClient {
      *     name: String (Required)
      *     resolution: int (Required)
      *     type: String(JPEG/PNG) (Required)
+     *     size (Required): {
+     *         width: int (Required)
+     *         height: int (Required)
+     *     }
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
@@ -114,10 +118,10 @@ public final class MultipartAsyncClient {
             requestOptions.addQueryParam("compress", String.valueOf(compress), false);
         }
         return uploadWithResponse(name,
-            new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
-                .serializeField("resolution", String.valueOf(data.getResolution()))
-                .serializeField("type", Objects.toString(data.getType()))
-                .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+            new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
+                .serializeTextField("resolution", String.valueOf(data.getResolution()))
+                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
+                .serializeFileField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 
@@ -140,10 +144,10 @@ public final class MultipartAsyncClient {
         // Generated convenience method for uploadWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return uploadWithResponse(name,
-            new MultipartFormDataHelper(requestOptions).serializeField("name", data.getName())
-                .serializeField("resolution", String.valueOf(data.getResolution()))
-                .serializeField("type", Objects.toString(data.getType()))
-                .serializeField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+            new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
+                .serializeTextField("resolution", String.valueOf(data.getResolution()))
+                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
+                .serializeFileField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 }

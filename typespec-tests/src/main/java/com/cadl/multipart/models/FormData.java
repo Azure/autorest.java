@@ -37,6 +37,12 @@ public final class FormData implements JsonSerializable<FormData> {
     private final ImageType type;
 
     /*
+     * The size property.
+     */
+    @Generated
+    private final Size size;
+
+    /*
      * The image property.
      */
     @Generated
@@ -54,13 +60,15 @@ public final class FormData implements JsonSerializable<FormData> {
      * @param name the name value to set.
      * @param resolution the resolution value to set.
      * @param type the type value to set.
+     * @param size the size value to set.
      * @param image the image value to set.
      */
     @Generated
-    public FormData(String name, int resolution, ImageType type, BinaryData image) {
+    public FormData(String name, int resolution, ImageType type, Size size, BinaryData image) {
         this.name = name;
         this.resolution = resolution;
         this.type = type;
+        this.size = size;
         this.image = image;
     }
 
@@ -92,6 +100,16 @@ public final class FormData implements JsonSerializable<FormData> {
     @Generated
     public ImageType getType() {
         return this.type;
+    }
+
+    /**
+     * Get the size property: The size property.
+     * 
+     * @return the size value.
+     */
+    @Generated
+    public Size getSize() {
+        return this.size;
     }
 
     /**
@@ -132,6 +150,7 @@ public final class FormData implements JsonSerializable<FormData> {
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeIntField("resolution", this.resolution);
         jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
+        jsonWriter.writeJsonField("size", this.size);
         jsonWriter.writeUntypedField("image", this.image.toObject(Object.class));
         jsonWriter.writeStringField("image", this.imageFilename);
         return jsonWriter.writeEndObject();
@@ -151,6 +170,7 @@ public final class FormData implements JsonSerializable<FormData> {
             String name = null;
             int resolution = 0;
             ImageType type = null;
+            Size size = null;
             BinaryData image = null;
             String imageFilename = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -163,6 +183,8 @@ public final class FormData implements JsonSerializable<FormData> {
                     resolution = reader.getInt();
                 } else if ("type".equals(fieldName)) {
                     type = ImageType.fromString(reader.getString());
+                } else if ("size".equals(fieldName)) {
+                    size = Size.fromJson(reader);
                 } else if ("image".equals(fieldName)) {
                     image = BinaryData.fromObject(reader.readUntyped());
                 } else if ("image".equals(fieldName)) {
@@ -171,7 +193,7 @@ public final class FormData implements JsonSerializable<FormData> {
                     reader.skipChildren();
                 }
             }
-            FormData deserializedFormData = new FormData(name, resolution, type, image);
+            FormData deserializedFormData = new FormData(name, resolution, type, size, image);
             deserializedFormData.imageFilename = imageFilename;
 
             return deserializedFormData;
