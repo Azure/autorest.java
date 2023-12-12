@@ -27,7 +27,6 @@ model Resource {
 
   description?: string;
   map: Record<InnerModel>;
-
   longValue?: int64;
   intValue?: int32;
   enumValue?: "a" | "b" | "c";
@@ -52,7 +51,6 @@ model Fish {
   name: string;
 
   age: int32;
-
   color?: string;
 }
 
