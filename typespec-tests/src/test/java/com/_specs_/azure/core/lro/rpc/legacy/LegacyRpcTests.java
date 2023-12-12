@@ -8,6 +8,7 @@ import com._specs_.azure.core.lro.rpc.legacy.models.JobResult;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobStatus;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
@@ -22,7 +23,8 @@ public class LegacyRpcTests {
 
     @Test
     public void testRpc() {
-        SyncPoller<JobResult, JobResult> poller = client.beginCreateJob(new JobData("async job"));
+        JobData jobData = new JobData("async job");
+        SyncPoller<JobResult, Void> poller = client.beginCreateJob(jobData);
 
         PollResponse<JobResult> response = poller.waitForCompletion();
 
@@ -30,8 +32,15 @@ public class LegacyRpcTests {
         Assertions.assertEquals(JobStatus.SUCCEEDED, response.getValue().getStatus());
         Assertions.assertNotNull(response.getValue().getResults());
 
-        JobResult finalResult = poller.getFinalResult();
-        Assertions.assertEquals(JobStatus.SUCCEEDED, finalResult.getStatus());
-        Assertions.assertNotNull(finalResult.getResults());
+        Void finalResult = poller.getFinalResult();
+//        Assertions.assertEquals(JobStatus.SUCCEEDED, finalResult.getStatus());
+//        Assertions.assertNotNull(finalResult.getResults());
+
+        // emitter need to have protocol API as SyncPoller<BinaryData, BinaryData>, to keep backward-compatible
+        SyncPoller<BinaryData, BinaryData> dpgPoller = client.beginCreateJob(BinaryData.fromObject(jobData), null);
+        BinaryData dpgFinalResult = dpgPoller.getFinalResult();
+        JobResult dpgFinalResultAsModel = dpgFinalResult.toObject(JobResult.class);
+        Assertions.assertEquals(JobStatus.SUCCEEDED, dpgFinalResultAsModel.getStatus());
+        Assertions.assertNotNull(dpgFinalResultAsModel.getResults());
     }
 }
