@@ -52,6 +52,7 @@ jobs:
         displayName: 'Bump TypeSpec Dependencies to dev'
 
       - task: PowerShell@2
+        retryCountOnTaskFailure: 1
         displayName: 'Generate Code'
         inputs:
           pwsh: true
