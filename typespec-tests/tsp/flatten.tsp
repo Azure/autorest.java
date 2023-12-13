@@ -59,6 +59,10 @@ interface FlattenOp {
   @post
   send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
 
+  @route("send-projected-name")
+  @post
+  sendProjectedName(@query id: string, @projectedName("json", "file_id") fileId: string): OkResponse;
+
   @route("send-long")
   @post
   sendLong(

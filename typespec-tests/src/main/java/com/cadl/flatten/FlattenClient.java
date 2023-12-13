@@ -69,6 +69,32 @@ public final class FlattenClient {
     }
 
     /**
+     * The sendProjectedName operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     file_id: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> sendProjectedNameWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.sendProjectedNameWithResponse(id, request, requestOptions);
+    }
+
+    /**
      * The sendLong operation.
      * <p>
      * <strong>Query Parameters</strong>
@@ -166,6 +192,29 @@ public final class FlattenClient {
         requestObj.put("input", input);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(id, request, requestOptions).getValue();
+    }
+
+    /**
+     * The sendProjectedName operation.
+     * 
+     * @param id A sequence of textual characters.
+     * @param fileId A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void sendProjectedName(String id, String fileId) {
+        // Generated convenience method for sendProjectedNameWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        Map<String, Object> requestObj = new HashMap<>();
+        requestObj.put("file_id", fileId);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        sendProjectedNameWithResponse(id, request, requestOptions).getValue();
     }
 
     /**
