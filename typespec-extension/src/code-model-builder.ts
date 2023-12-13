@@ -1985,6 +1985,7 @@ export class CodeModelBuilder {
 
     // discriminator
     let discriminatorPropertyName: string | undefined = undefined;
+    type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
     const discriminator = getDiscriminator(this.program, type);
     if (discriminator) {
       discriminatorPropertyName = discriminator.propertyName;
@@ -2019,7 +2020,7 @@ export class CodeModelBuilder {
           }),
         );
       }
-      (objectSchema.discriminator as any).propertyName = discriminatorPropertyName;
+      (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
     }
 
     // parent
@@ -2063,7 +2064,9 @@ export class CodeModelBuilder {
         (it) => it instanceof ObjectSchema && it.discriminator,
       );
       if (parentWithDiscriminator) {
-        discriminatorPropertyName = ((parentWithDiscriminator as ObjectSchema).discriminator as any).propertyName;
+        discriminatorPropertyName = (
+          (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
+        ).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
           (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
