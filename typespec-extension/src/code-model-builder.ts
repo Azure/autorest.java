@@ -2006,8 +2006,8 @@ export class CodeModelBuilder {
       }
       const discriminatorPropertySerializedName = discriminatorProperty
         ? this.getSerializedName(discriminatorProperty)
-        // fallback to property name, if cannot find the discriminator property
-        : discriminatorPropertyName;
+        : // fallback to property name, if cannot find the discriminator property
+          discriminatorPropertyName;
       objectSchema.discriminator = new Discriminator(
         new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
           required: true,
