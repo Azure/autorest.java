@@ -1984,7 +1984,7 @@ export class CodeModelBuilder {
     this.schemaCache.set(type, objectSchema);
 
     // discriminator
-    let discriminatorPropertyName: string | undefined = undefined;
+    let discriminatorPropertyName : string | undefined = undefined;
     const discriminator = getDiscriminator(this.program, type);
     if (discriminator) {
       discriminatorPropertyName = discriminator.propertyName;
@@ -2000,20 +2000,23 @@ export class CodeModelBuilder {
             (it) => it.name === discriminatorPropertyName,
           );
           if (discriminatorProperty) {
+            // found
             break;
           }
         }
       }
-      const discriminatorPropertySerializedName = discriminatorProperty
-        ? this.getSerializedName(discriminatorProperty)
-        : // fallback to property name, if cannot find the discriminator property
-          discriminatorPropertyName;
-      objectSchema.discriminator = new Discriminator(
-        new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
-          required: true,
-          serializedName: discriminatorPropertySerializedName,
-        }),
-      );
+      if (discriminatorProperty) {
+        objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+      } else {
+        // fallback to property name, if cannot find the discriminator property
+        objectSchema.discriminator = new Discriminator(
+          new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+            required: true,
+            serializedName: discriminatorPropertyName,
+          }),
+        );
+      }
+      (objectSchema.discriminator as any).propertyName = discriminatorPropertyName;
     }
 
     // parent
@@ -2057,8 +2060,7 @@ export class CodeModelBuilder {
         (it) => it instanceof ObjectSchema && it.discriminator,
       );
       if (parentWithDiscriminator) {
-        discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.language.default
-          .name;
+        discriminatorPropertyName = ((parentWithDiscriminator as ObjectSchema).discriminator as any).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
           (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
