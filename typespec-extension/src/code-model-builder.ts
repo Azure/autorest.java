@@ -1988,10 +1988,30 @@ export class CodeModelBuilder {
     const discriminator = getDiscriminator(this.program, type);
     if (discriminator) {
       discriminatorPropertyName = discriminator.propertyName;
+      // find the discriminator property from model
+      // the property is required for getting its serializedName
+      let discriminatorProperty = Array.from(type.properties.values()).find(
+        (it) => it.name === discriminatorPropertyName,
+      );
+      if (!discriminatorProperty) {
+        // try find the discriminator property from any of its derived models
+        for (const deriveModel of type.derivedModels) {
+          discriminatorProperty = Array.from(deriveModel.properties.values()).find(
+            (it) => it.name === discriminatorPropertyName,
+          );
+          if (discriminatorProperty) {
+            break;
+          }
+        }
+      }
+      const discriminatorPropertySerializedName = discriminatorProperty
+        ? this.getSerializedName(discriminatorProperty)
+        // fallback to property name, if cannot find the discriminator property
+        : discriminatorPropertyName;
       objectSchema.discriminator = new Discriminator(
         new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
           required: true,
-          serializedName: discriminatorPropertyName,
+          serializedName: discriminatorPropertySerializedName,
         }),
       );
     }
@@ -2037,7 +2057,8 @@ export class CodeModelBuilder {
         (it) => it instanceof ObjectSchema && it.discriminator,
       );
       if (parentWithDiscriminator) {
-        discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
+        discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.language.default
+          .name;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
           (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),

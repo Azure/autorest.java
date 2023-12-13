@@ -61,7 +61,10 @@ interface FlattenOp {
 
   @route("send-projected-name")
   @post
-  sendProjectedName(@query id: string, @projectedName("json", "file_id") fileId: string): OkResponse;
+  sendProjectedName(
+    @query id: string,
+    @projectedName("json", "file_id") fileId: string,
+  ): OkResponse;
 
   @route("send-long")
   @post
