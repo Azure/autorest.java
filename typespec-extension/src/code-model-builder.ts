@@ -361,7 +361,7 @@ export class CodeModelBuilder {
               const keyScheme = new KeySecurityScheme({
                 name: "authorization",
               });
-              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO: modify KeySecurityScheme, after design stable
               securitySchemes.push(keyScheme);
             }
             break;
@@ -1279,8 +1279,9 @@ export class CodeModelBuilder {
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
-        for (const [key, _] of parameters.properties) {
-          const existParameter = op.parameters.find((it) => it.language.default.serializedName === key);
+        for (const [_, opParameter] of parameters.properties) {
+          const serializedName = this.getSerializedName(opParameter);
+          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
           if (existParameter) {
             // parameter
             if (
@@ -1291,7 +1292,7 @@ export class CodeModelBuilder {
             }
           } else {
             // property from anonymous model
-            const existBodyProperty = schema.properties?.find((it) => it.serializedName === key);
+            const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
             if (existBodyProperty) {
               request.parameters.push(
                 new VirtualParameter(
@@ -1990,15 +1991,42 @@ export class CodeModelBuilder {
 
     // discriminator
     let discriminatorPropertyName: string | undefined = undefined;
+    type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
     const discriminator = getDiscriminator(this.program, type);
     if (discriminator) {
       discriminatorPropertyName = discriminator.propertyName;
-      objectSchema.discriminator = new Discriminator(
-        new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
-          required: true,
-          serializedName: discriminatorPropertyName,
-        }),
+      // find the discriminator property from model
+      // the property is required for getting its serializedName
+      let discriminatorProperty = Array.from(type.properties.values()).find(
+        (it) => it.name === discriminatorPropertyName,
       );
+      if (!discriminatorProperty) {
+        // try find the discriminator property from any of its derived models
+        for (const deriveModel of type.derivedModels) {
+          discriminatorProperty = Array.from(deriveModel.properties.values()).find(
+            (it) => it.name === discriminatorPropertyName,
+          );
+          if (discriminatorProperty) {
+            // found
+            break;
+          }
+        }
+      }
+      if (discriminatorProperty) {
+        objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
+        // TODO: support enum schema, if we expose the discriminator property
+        objectSchema.discriminator.property.schema = this.stringSchema;
+      } else {
+        // fallback to property name, if cannot find the discriminator property
+        objectSchema.discriminator = new Discriminator(
+          new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+            required: true,
+            serializedName: discriminatorPropertyName,
+          }),
+        );
+      }
+      (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
     }
 
     // parent
@@ -2042,7 +2070,9 @@ export class CodeModelBuilder {
         (it) => it instanceof ObjectSchema && it.discriminator,
       );
       if (parentWithDiscriminator) {
-        discriminatorPropertyName = (parentWithDiscriminator as ObjectSchema).discriminator!.property.serializedName;
+        discriminatorPropertyName = (
+          (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
+        ).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
           (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),

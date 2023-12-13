@@ -57,6 +57,7 @@ jobs:
         workingDirectory: ./typespec-extension
 
       - task: PowerShell@2
+        retryCountOnTaskFailure: 1
         displayName: 'Generate Code'
         inputs:
           pwsh: true

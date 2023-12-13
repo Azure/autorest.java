@@ -163,6 +163,26 @@ public final class FlattenClientImpl {
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
+        @Post("/flatten/send-projected-name")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> sendProjectedName(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
+
+        @Post("/flatten/send-projected-name")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> sendProjectedNameSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
+
         @Post("/flatten/send-long")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -242,6 +262,60 @@ public final class FlattenClientImpl {
         final String accept = "application/json";
         return service.sendSync(this.getEndpoint(), id, this.getServiceVersion().getVersion(), accept, request,
             requestOptions, Context.NONE);
+    }
+
+    /**
+     * The sendProjectedName operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     file_id: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> sendProjectedNameWithResponseAsync(String id, BinaryData request,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.sendProjectedName(this.getEndpoint(), id, accept, request, requestOptions, context));
+    }
+
+    /**
+     * The sendProjectedName operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     file_id: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> sendProjectedNameWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.sendProjectedNameSync(this.getEndpoint(), id, accept, request, requestOptions, Context.NONE);
     }
 
     /**

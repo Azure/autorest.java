@@ -141,7 +141,9 @@ public final class NamingOpsImpl {
      * {
      *     name: String (Required)
      *     data (Required): {
-     *         data: byte[] (Required)
+     *         data (Required): {
+     *             kind_id: String (Optional)
+     *         }
      *     }
      *     type: String(Blob/File) (Required)
      *     status: String(Running/Completed/Failed) (Required)
@@ -211,7 +213,9 @@ public final class NamingOpsImpl {
      * {
      *     name: String (Required)
      *     data (Required): {
-     *         data: byte[] (Required)
+     *         data (Required): {
+     *             kind_id: String (Optional)
+     *         }
      *     }
      *     type: String(Blob/File) (Required)
      *     status: String(Running/Completed/Failed) (Required)
