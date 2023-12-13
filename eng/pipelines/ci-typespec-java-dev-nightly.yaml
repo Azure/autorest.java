@@ -51,6 +51,11 @@ jobs:
           cat typespec-tests/package.json
         displayName: 'Bump TypeSpec Dependencies to dev'
 
+      - script: |
+          npm install
+        displayName: 'Install dev TypeSpec Dependencies'
+        workingDirectory: ./typespec-extension
+
       - task: PowerShell@2
         displayName: 'Generate Code'
         inputs:
