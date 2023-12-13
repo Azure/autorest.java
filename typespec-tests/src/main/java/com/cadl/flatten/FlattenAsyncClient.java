@@ -203,7 +203,7 @@ public final class FlattenAsyncClient {
      * The sendProjectedName operation.
      * 
      * @param id A sequence of textual characters.
-     * @param fileId A sequence of textual characters.
+     * @param fileIdentifier A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -214,11 +214,11 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> sendProjectedName(String id, String fileId) {
+    public Mono<Void> sendProjectedName(String id, String fileIdentifier) {
         // Generated convenience method for sendProjectedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
         Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("file_id", fileId);
+        requestObj.put("file_id", fileIdentifier);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendProjectedNameWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
