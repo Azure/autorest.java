@@ -1273,8 +1273,9 @@ export class CodeModelBuilder {
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
-        for (const [key, _] of parameters.properties) {
-          const existParameter = op.parameters.find((it) => it.language.default.serializedName === key);
+        for (const [_, opParameter] of parameters.properties) {
+          const serializedName = this.getSerializedName(opParameter);
+          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
           if (existParameter) {
             // parameter
             if (
@@ -1285,7 +1286,7 @@ export class CodeModelBuilder {
             }
           } else {
             // property from anonymous model
-            const existBodyProperty = schema.properties?.find((it) => it.serializedName === key);
+            const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
             if (existBodyProperty) {
               request.parameters.push(
                 new VirtualParameter(
