@@ -656,7 +656,7 @@ export class CodeModelBuilder {
 
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
-    let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
+    const generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -668,7 +668,8 @@ export class CodeModelBuilder {
         this.logWarning(apiComment);
       } else if (operationIsMultipart(op)) {
         // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
-        generateProtocolApi = false;
+        codeModelOperation.internalApi = true;
+        generateConvenienceApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
       } else if (operationIsMultipleContentTypes(op)) {
