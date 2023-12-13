@@ -29,7 +29,7 @@ public final class Cobra extends Snake {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", SnakeKind.COBRA == null ? null : SnakeKind.COBRA.toString());
+        jsonWriter.writeStringField("kind", "cobra");
         jsonWriter.writeIntField("length", getLength());
         return jsonWriter.writeEndObject();
     }

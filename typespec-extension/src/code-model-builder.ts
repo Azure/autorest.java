@@ -361,7 +361,7 @@ export class CodeModelBuilder {
               const keyScheme = new KeySecurityScheme({
                 name: "authorization",
               });
-              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO (weidxu): modify KeySecurityScheme, after design stable
+              (keyScheme as any).prefix = schemeOrApiKeyPrefix; // TODO: modify KeySecurityScheme, after design stable
               securitySchemes.push(keyScheme);
             }
             break;
@@ -1984,7 +1984,7 @@ export class CodeModelBuilder {
     this.schemaCache.set(type, objectSchema);
 
     // discriminator
-    let discriminatorPropertyName : string | undefined = undefined;
+    let discriminatorPropertyName: string | undefined = undefined;
     const discriminator = getDiscriminator(this.program, type);
     if (discriminator) {
       discriminatorPropertyName = discriminator.propertyName;
@@ -2007,6 +2007,9 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
+        // TODO: support enum schema, if we expose the discriminator property
+        objectSchema.discriminator.property.schema = this.stringSchema;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(

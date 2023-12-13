@@ -29,7 +29,7 @@ public final class Golden extends Dog {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", DogKind.GOLDEN == null ? null : DogKind.GOLDEN.toString());
+        jsonWriter.writeStringField("kind", "golden");
         jsonWriter.writeIntField("weight", getWeight());
         return jsonWriter.writeEndObject();
     }
