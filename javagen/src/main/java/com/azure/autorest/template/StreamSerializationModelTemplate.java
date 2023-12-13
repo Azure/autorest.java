@@ -471,14 +471,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
                 methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
-                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) { // if it's swagger/tsp type, we need to check null, because it can be null, e.g. map entry value
+                if (isJsonMergePatch && (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType())) {
                     methodBlock.block("", codeBlock -> {
-                        codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
-                            if (isJsonMergePatch) {
-                                codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
-                            }
-                            ifBlock.line(valueSerializationMethod + ";");
-                        }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNull();"));
+                        codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                        methodBlock.line(valueSerializationMethod + ";");
                     });
                 } else {
                     methodBlock.line(valueSerializationMethod);
