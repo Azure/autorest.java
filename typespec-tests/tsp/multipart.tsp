@@ -13,10 +13,16 @@ enum ImageType {
   PNG,
 }
 
+model Size {
+  width: int32;
+  height: int32;
+}
+
 model FormData {
   name: string;
   resolution: int32;
   type: ImageType;
+  size: Size;
   image: bytes;
 }
 

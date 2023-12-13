@@ -85,8 +85,8 @@ public final class MultiPartAsyncClient {
     public Mono<Void> basic(MultiPartRequest body) {
         // Generated convenience method for basicWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeField("id", body.getId())
-            .serializeField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
+        return basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
+            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
             .getRequestBody(), requestOptions).flatMap(FluxUtil::toMono);
     }
 }
