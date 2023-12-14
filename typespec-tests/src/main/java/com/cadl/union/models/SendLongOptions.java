@@ -228,8 +228,9 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
         jsonWriter.writeIntField("dataInt", this.dataInt);
         jsonWriter.writeStringField("filter", this.filter);
         jsonWriter.writeJsonField("user", this.user);
-        jsonWriter.writeUntypedField("dataUnion",
-            this.dataUnion == null ? null : this.dataUnion.toObject(Object.class));
+        if (this.dataUnion != null) {
+            jsonWriter.writeUntypedField("dataUnion", this.dataUnion.toObject(Object.class));
+        }
         jsonWriter.writeNumberField("dataLong", this.dataLong);
         jsonWriter.writeNumberField("data_float", this.dataFloat);
         return jsonWriter.writeEndObject();

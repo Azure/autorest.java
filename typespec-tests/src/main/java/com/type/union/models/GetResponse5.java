@@ -47,7 +47,7 @@ public final class GetResponse5 implements JsonSerializable<GetResponse5> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("prop", this.prop == null ? null : this.prop.toObject(Object.class));
+        jsonWriter.writeUntypedField("prop", this.prop.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
