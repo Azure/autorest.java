@@ -118,7 +118,7 @@ public final class BuiltinAsyncClient {
      *     }
      *     url: String (Required)
      *     nullableFloatDict (Required): {
-     *         String: double (Required)
+     *         String: Double (Required)
      *     }
      *     encoded (Required): {
      *         timeInSeconds: Long (Optional)
@@ -175,7 +175,7 @@ public final class BuiltinAsyncClient {
      *     }
      *     url: String (Required)
      *     nullableFloatDict (Required): {
-     *         String: double (Required)
+     *         String: Double (Required)
      *     }
      *     encoded (Required): {
      *         timeInSeconds: Long (Optional)
