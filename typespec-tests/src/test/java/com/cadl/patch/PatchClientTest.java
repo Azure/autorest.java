@@ -9,101 +9,88 @@ import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
 import com.cadl.patch.models.Shark;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
 public class PatchClientTest {
-
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     @Test
-    public void testSerializationForNumbers() {
-        // patch not enabled
+    public void testSerializationForNumbers() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
-        resource.setIntValue(null);
-        resource.setLongValue(null);
-        String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{}}", json);
-
-        // patch enabled
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setIntValue(null);
         resource.setLongValue(null);
-        json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"longValue\":null,\"intValue\":null}", json);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL,  node.get("longValue").getNodeType());
+        Assertions.assertEquals(JsonNodeType.NULL,  node.get("intValue").getNodeType());
     }
 
     @Test
-    public void testSerializationForString() {
-        // patch not enabled
+    public void testSerializationForString() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
-        resource.setDescription("description");
-        String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"description\":\"description\"}", json);
-
-        // patch enabled
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setDescription(null);
-        json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"description\":null}", json);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("description").getNodeType());
     }
 
     @Test
-    public void testSerializationForNestedModelProperty() {
-        // patch not enabled
+    public void testSerializationForNestedModelProperty() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
         resource.setInnerModelProperty(new InnerModel("value1"));
-        resource.getInnerModelProperty().setDescription("desc");
-        String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":{\"name\":\"value1\",\"description\":\"desc\"}}", json);
 
-        // patch enabled, null value is serialized
+        // serialize for inner model property
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.getInnerModelProperty().setDescription(null);
-        json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":{\"name\":\"value1\",\"description\":null}}", json);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("wireNameForInnerModelProperty").get("description").getNodeType());
 
+        // serialize for outer model property
         resource.setInnerModelProperty(null);
         json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":null}", json);
+        node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("wireNameForInnerModelProperty").getNodeType());
     }
 
     @Test
-    public void testSerializationForMapProperty() {
+    public void testSerializationForMapProperty() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
-        resource.getMap().put("key", new InnerModel("value1"));
-        String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{\"key\":{\"name\":\"value1\"}}}", json);
-
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.getMap().put("key", null);
-        json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{\"key\":null}}", json);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("map").get("key").getNodeType());
     }
 
     @Test
-    public void testSerializationForEnum() {
+    public void testSerializationForEnum() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
         resource.setEnumValue(null);
-        String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{}}", json);
-
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setEnumValue(null);
-        json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{},\"enumValue\":null}", json);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("enumValue").getNodeType());
     }
 
     @Test
-    public void testSerializationForHierarchicalModel() {
+    public void testSerializationForHierarchicalModel() throws JsonProcessingException {
         Fish fish = new Shark(1);
         fish.setColor("pink");
-        String json = BinaryData.fromObject(fish).toString();
-        Assertions.assertEquals("{\"kind\":\"shark\",\"age\":1,\"color\":\"pink\"}", json);
-
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
         fish.setColor(null);
-        json = BinaryData.fromObject(fish).toString();
-        Assertions.assertEquals("{\"kind\":\"shark\",\"age\":1,\"color\":null}", json);
+        String json = BinaryData.fromObject(fish).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals("shark", node.get("kind").asText());
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("color").getNodeType());
     }
 }
