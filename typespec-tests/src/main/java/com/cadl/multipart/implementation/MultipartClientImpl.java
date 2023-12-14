@@ -177,6 +177,10 @@ public final class MultipartClientImpl {
      *     name: String (Required)
      *     resolution: int (Required)
      *     type: String(JPEG/PNG) (Required)
+     *     size (Required): {
+     *         width: int (Required)
+     *         height: int (Required)
+     *     }
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }
@@ -228,6 +232,10 @@ public final class MultipartClientImpl {
      *     name: String (Required)
      *     resolution: int (Required)
      *     type: String(JPEG/PNG) (Required)
+     *     size (Required): {
+     *         width: int (Required)
+     *         height: int (Required)
+     *     }
      *     image: BinaryData (Required)
      *     image: String (Optional)
      * }

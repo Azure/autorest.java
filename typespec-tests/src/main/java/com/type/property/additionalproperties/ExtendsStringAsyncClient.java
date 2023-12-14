@@ -47,7 +47,7 @@ public final class ExtendsStringAsyncClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -74,7 +74,7 @@ public final class ExtendsStringAsyncClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>

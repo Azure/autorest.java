@@ -102,7 +102,7 @@ public final class NullableFloatValuesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -126,7 +126,7 @@ public final class NullableFloatValuesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -150,7 +150,7 @@ public final class NullableFloatValuesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -175,7 +175,7 @@ public final class NullableFloatValuesImpl {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 

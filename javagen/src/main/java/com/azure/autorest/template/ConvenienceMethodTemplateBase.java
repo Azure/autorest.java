@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.ParameterSynthesizedOrigin;
@@ -580,7 +581,7 @@ abstract class ConvenienceMethodTemplateBase {
                 }
 
                 builder.append(String.format(
-                        ".serializeField(%1$s, %2$s.%3$s(), %4$s)",
+                        ".serializeFileField(%1$s, %2$s.%3$s(), %4$s)",
                         ClassType.STRING.defaultValueExpression(property.getSerializedName()),
                         name,
                         property.getGetterName(),
@@ -588,6 +589,16 @@ abstract class ConvenienceMethodTemplateBase {
                 ));
             } else if (filePropertySerializedNames.contains(property.getSerializedName())) {
                 // skip filename property
+            } else if (ClientModelUtil.isClientModel(property.getWireType())
+                    || property.getWireType() instanceof MapType
+                    || property.getWireType() instanceof IterableType) {
+                // application/json
+                String stringExpression = name + "." + property.getGetterName() + "()";
+                builder.append(String.format(
+                        ".serializeJsonField(%1$s, %2$s)",
+                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                        stringExpression
+                ));
             } else {
                 // text/plain
                 String stringExpression = name + "." + property.getGetterName() + "()";
@@ -598,12 +609,11 @@ abstract class ConvenienceMethodTemplateBase {
                     stringExpression = String.format("Objects.toString(%s)", stringExpression);
                 }
                 builder.append(String.format(
-                        ".serializeField(%1$s, %2$s)",
+                        ".serializeTextField(%1$s, %2$s)",
                         ClassType.STRING.defaultValueExpression(property.getSerializedName()),
                         stringExpression
                 ));
             }
-            // TODO (weidxu): application/json
         }
         builder.append(".end().getRequestBody()");
         return builder.toString();

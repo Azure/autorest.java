@@ -6,7 +6,6 @@ package com.cadl.naming.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -26,7 +25,7 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
      * description of data property
      */
     @Generated
-    private final byte[] data;
+    private final Data data;
 
     /**
      * Creates an instance of BinaryData class.
@@ -34,7 +33,7 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
      * @param data the data value to set.
      */
     @Generated
-    private BinaryData(byte[] data) {
+    private BinaryData(Data data) {
         this.data = data;
     }
 
@@ -46,14 +45,14 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
      * @return the data value.
      */
     @Generated
-    public byte[] getData() {
-        return CoreUtils.clone(this.data);
+    public Data getData() {
+        return this.data;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeBinaryField("data", this.data);
+        jsonWriter.writeJsonField("data", this.data);
         return jsonWriter.writeEndObject();
     }
 
@@ -68,13 +67,13 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
      */
     public static BinaryData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            byte[] data = null;
+            Data data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("data".equals(fieldName)) {
-                    data = reader.getBinary();
+                    data = Data.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }

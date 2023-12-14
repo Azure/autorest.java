@@ -47,7 +47,7 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
+        jsonWriter.writeUntypedField("data", this.data == null ? null : this.data.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -68,7 +68,7 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
                 reader.nextToken();
 
                 if ("data".equals(fieldName)) {
-                    data = BinaryData.fromObject(reader.readUntyped());
+                    data = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

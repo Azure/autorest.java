@@ -116,7 +116,7 @@ public final class BuiltinClient {
      *     }
      *     url: String (Required)
      *     nullableFloatDict (Required): {
-     *         String: double (Required)
+     *         String: Double (Optional)
      *     }
      *     encoded (Required): {
      *         timeInSeconds: Long (Optional)
@@ -173,7 +173,7 @@ public final class BuiltinClient {
      *     }
      *     url: String (Required)
      *     nullableFloatDict (Required): {
-     *         String: double (Required)
+     *         String: Double (Optional)
      *     }
      *     encoded (Required): {
      *         timeInSeconds: Long (Optional)

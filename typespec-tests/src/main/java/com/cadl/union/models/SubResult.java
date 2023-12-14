@@ -98,12 +98,11 @@ public final class SubResult extends Result {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
+        jsonWriter.writeUntypedField("data", getData() == null ? null : getData().toObject(Object.class));
         jsonWriter.writeJsonField("result", getResult());
         jsonWriter.writeStringField("text", this.text);
-        if (this.arrayData != null) {
-            jsonWriter.writeUntypedField("arrayData", this.arrayData.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("arrayData",
+            this.arrayData == null ? null : this.arrayData.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -130,16 +129,13 @@ public final class SubResult extends Result {
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("data".equals(fieldName)) {
-                    data = BinaryData.fromObject(reader.readUntyped());
+                    data = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("result".equals(fieldName)) {
                     result = Result.fromJson(reader);
                 } else if ("text".equals(fieldName)) {
                     text = reader.getString();
                 } else if ("arrayData".equals(fieldName)) {
-                    Object arrayDataAsObject = reader.readUntyped();
-                    if (arrayDataAsObject != null) {
-                        arrayData = BinaryData.fromObject(arrayDataAsObject);
-                    }
+                    arrayData = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

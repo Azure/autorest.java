@@ -41,6 +41,18 @@ model Response {
 model DataModel {
   @summary("summary of data property")
   @doc("description of data property")
+  data: Data;
+}
+
+@discriminator("kind")
+model Data {
+  @projectedName("json", "kind_id")
+  @projectedName("client", "type")
+  kind: string;
+}
+
+model BytesData extends Data {
+  kind: "bytes";
   data: bytes;
 }
 

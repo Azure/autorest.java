@@ -263,7 +263,7 @@ public final class FormRecognizerAsyncClient {
      *                     (recursive schema, see above)
      *                 ]
      *                 fields (Optional): {
-     *                     String (Optional): {
+     *                     String (Required): {
      *                         type: String(string/date/time/phoneNumber/number/integer/selectionMark/countryRegion/signature/array/object/currency/address) (Required)
      *                         valueString: String (Optional)
      *                         valueDate: String (Optional)
@@ -278,7 +278,7 @@ public final class FormRecognizerAsyncClient {
      *                             (recursive schema, see above)
      *                         ]
      *                         valueObject (Optional): {
-     *                             String (Optional): (recursive schema, see String above)
+     *                             String (Required): (recursive schema, see String above)
      *                         }
      *                         valueCurrency (Optional): {
      *                             amount: double (Required)
@@ -344,7 +344,7 @@ public final class FormRecognizerAsyncClient {
      *         prefix: String (Optional)
      *     }
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -381,7 +381,7 @@ public final class FormRecognizerAsyncClient {
      *         }
      *     ]
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -414,7 +414,7 @@ public final class FormRecognizerAsyncClient {
      *     modelId: String (Required)
      *     description: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -500,7 +500,7 @@ public final class FormRecognizerAsyncClient {
      *     resourceLocation: String (Required)
      *     apiVersion: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -535,7 +535,7 @@ public final class FormRecognizerAsyncClient {
      *     resourceLocation: String (Required)
      *     apiVersion: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     error (Optional): {
      *         code: String (Required)
@@ -581,7 +581,7 @@ public final class FormRecognizerAsyncClient {
      *     createdDateTime: OffsetDateTime (Required)
      *     apiVersion: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -613,10 +613,10 @@ public final class FormRecognizerAsyncClient {
      *     createdDateTime: OffsetDateTime (Required)
      *     apiVersion: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     docTypes (Optional): {
-     *         String (Optional): {
+     *         String (Required): {
      *             description: String (Optional)
      *             buildMode: String(template/neural) (Optional)
      *             fieldSchema (Required): {
@@ -626,12 +626,12 @@ public final class FormRecognizerAsyncClient {
      *                     example: String (Optional)
      *                     items (Optional): (recursive schema, see items above)
      *                     properties (Optional): {
-     *                         String (Optional): (recursive schema, see String above)
+     *                         String (Required): (recursive schema, see String above)
      *                     }
      *                 }
      *             }
      *             fieldConfidence (Optional): {
-     *                 String: float (Optional)
+     *                 String: float (Required)
      *             }
      *         }
      *     }

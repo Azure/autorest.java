@@ -46,8 +46,8 @@ public final class ExtendsModelArrayAsyncClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]
@@ -76,8 +76,8 @@ public final class ExtendsModelArrayAsyncClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]

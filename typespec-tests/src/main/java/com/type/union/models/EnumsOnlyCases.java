@@ -65,8 +65,8 @@ public final class EnumsOnlyCases implements JsonSerializable<EnumsOnlyCases> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("lr", this.lr.toObject(Object.class));
-        jsonWriter.writeUntypedField("ud", this.ud.toObject(Object.class));
+        jsonWriter.writeUntypedField("lr", this.lr == null ? null : this.lr.toObject(Object.class));
+        jsonWriter.writeUntypedField("ud", this.ud == null ? null : this.ud.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -88,9 +88,9 @@ public final class EnumsOnlyCases implements JsonSerializable<EnumsOnlyCases> {
                 reader.nextToken();
 
                 if ("lr".equals(fieldName)) {
-                    lr = BinaryData.fromObject(reader.readUntyped());
+                    lr = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("ud".equals(fieldName)) {
-                    ud = BinaryData.fromObject(reader.readUntyped());
+                    ud = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

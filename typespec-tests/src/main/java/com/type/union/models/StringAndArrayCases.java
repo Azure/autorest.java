@@ -65,8 +65,8 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("string", this.string.toObject(Object.class));
-        jsonWriter.writeUntypedField("array", this.array.toObject(Object.class));
+        jsonWriter.writeUntypedField("string", this.string == null ? null : this.string.toObject(Object.class));
+        jsonWriter.writeUntypedField("array", this.array == null ? null : this.array.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -88,9 +88,9 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
                 reader.nextToken();
 
                 if ("string".equals(fieldName)) {
-                    string = BinaryData.fromObject(reader.readUntyped());
+                    string = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("array".equals(fieldName)) {
-                    array = BinaryData.fromObject(reader.readUntyped());
+                    array = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

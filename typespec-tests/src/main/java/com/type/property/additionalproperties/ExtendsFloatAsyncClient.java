@@ -47,7 +47,7 @@ public final class ExtendsFloatAsyncClient {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -74,7 +74,7 @@ public final class ExtendsFloatAsyncClient {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
