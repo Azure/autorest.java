@@ -46,7 +46,7 @@ public final class NullableFloatValueAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Required)
      * }
      * }</pre>
      * 
@@ -70,7 +70,7 @@ public final class NullableFloatValueAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Required)
      * }
      * }</pre>
      * 
