@@ -102,10 +102,14 @@ public final class MixedLiteralsCases implements JsonSerializable<MixedLiteralsC
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("stringLiteral", this.stringLiteral.toObject(Object.class));
-        jsonWriter.writeUntypedField("intLiteral", this.intLiteral.toObject(Object.class));
-        jsonWriter.writeUntypedField("floatLiteral", this.floatLiteral.toObject(Object.class));
-        jsonWriter.writeUntypedField("booleanLiteral", this.booleanLiteral.toObject(Object.class));
+        jsonWriter.writeUntypedField("stringLiteral",
+            this.stringLiteral == null ? null : this.stringLiteral.toObject(Object.class));
+        jsonWriter.writeUntypedField("intLiteral",
+            this.intLiteral == null ? null : this.intLiteral.toObject(Object.class));
+        jsonWriter.writeUntypedField("floatLiteral",
+            this.floatLiteral == null ? null : this.floatLiteral.toObject(Object.class));
+        jsonWriter.writeUntypedField("booleanLiteral",
+            this.booleanLiteral == null ? null : this.booleanLiteral.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -129,13 +133,17 @@ public final class MixedLiteralsCases implements JsonSerializable<MixedLiteralsC
                 reader.nextToken();
 
                 if ("stringLiteral".equals(fieldName)) {
-                    stringLiteral = BinaryData.fromObject(reader.readUntyped());
+                    stringLiteral
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("intLiteral".equals(fieldName)) {
-                    intLiteral = BinaryData.fromObject(reader.readUntyped());
+                    intLiteral
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("floatLiteral".equals(fieldName)) {
-                    floatLiteral = BinaryData.fromObject(reader.readUntyped());
+                    floatLiteral
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("booleanLiteral".equals(fieldName)) {
-                    booleanLiteral = BinaryData.fromObject(reader.readUntyped());
+                    booleanLiteral
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

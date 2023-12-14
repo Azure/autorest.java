@@ -47,7 +47,7 @@ public final class ExtendsUnknownAsyncClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
@@ -74,7 +74,7 @@ public final class ExtendsUnknownAsyncClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>

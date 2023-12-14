@@ -104,7 +104,7 @@ public final class IsStringsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -131,7 +131,7 @@ public final class IsStringsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -158,7 +158,7 @@ public final class IsStringsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -186,7 +186,7 @@ public final class IsStringsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>

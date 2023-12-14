@@ -44,8 +44,8 @@ public final class ExtendsModelArrayClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]
@@ -74,8 +74,8 @@ public final class ExtendsModelArrayClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]

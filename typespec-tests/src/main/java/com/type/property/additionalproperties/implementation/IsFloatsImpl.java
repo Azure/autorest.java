@@ -103,7 +103,7 @@ public final class IsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -130,7 +130,7 @@ public final class IsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -157,7 +157,7 @@ public final class IsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -185,7 +185,7 @@ public final class IsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>

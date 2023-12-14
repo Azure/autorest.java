@@ -101,10 +101,11 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("model", this.model.toObject(Object.class));
-        jsonWriter.writeUntypedField("literal", this.literal.toObject(Object.class));
-        jsonWriter.writeUntypedField("int", this.intProperty.toObject(Object.class));
-        jsonWriter.writeUntypedField("boolean", this.booleanProperty.toObject(Object.class));
+        jsonWriter.writeUntypedField("model", this.model == null ? null : this.model.toObject(Object.class));
+        jsonWriter.writeUntypedField("literal", this.literal == null ? null : this.literal.toObject(Object.class));
+        jsonWriter.writeUntypedField("int", this.intProperty == null ? null : this.intProperty.toObject(Object.class));
+        jsonWriter.writeUntypedField("boolean",
+            this.booleanProperty == null ? null : this.booleanProperty.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -128,13 +129,15 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
                 reader.nextToken();
 
                 if ("model".equals(fieldName)) {
-                    model = BinaryData.fromObject(reader.readUntyped());
+                    model = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("literal".equals(fieldName)) {
-                    literal = BinaryData.fromObject(reader.readUntyped());
+                    literal = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("int".equals(fieldName)) {
-                    intProperty = BinaryData.fromObject(reader.readUntyped());
+                    intProperty
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("boolean".equals(fieldName)) {
-                    booleanProperty = BinaryData.fromObject(reader.readUntyped());
+                    booleanProperty
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

@@ -46,7 +46,7 @@ public final class ExtendsModelAsyncClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): {
+     *         String (Required): {
      *             state: String (Required)
      *         }
      *     }
@@ -74,7 +74,7 @@ public final class ExtendsModelAsyncClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): {
+     *         String (Required): {
      *             state: String (Required)
      *         }
      *     }
