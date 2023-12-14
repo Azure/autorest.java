@@ -246,7 +246,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             } else {
                 commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
             }
-            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, isRequired, false);
+            final boolean valueRequired = !((MapType) type).isValueNullable();
+            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, valueRequired, false);
             commentBlock.line(indent + "}");
         } else {
             String javadoc = convertToBodySchemaJavadoc(type);

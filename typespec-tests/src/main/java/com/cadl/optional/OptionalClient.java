@@ -114,7 +114,7 @@ public final class OptionalClient {
      *         String (Optional)
      *     ]
      *     bytesDict (Optional): {
-     *         String: byte[] (Optional)
+     *         String: byte[] (Required)
      *     }
      * }
      * }</pre>
@@ -142,7 +142,7 @@ public final class OptionalClient {
      *         String (Optional)
      *     ]
      *     bytesDict (Optional): {
-     *         String: byte[] (Optional)
+     *         String: byte[] (Required)
      *     }
      *     immutable (Optional): {
      *         stringReadWriteRequired: String (Required)

@@ -228,9 +228,8 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
         jsonWriter.writeIntField("dataInt", this.dataInt);
         jsonWriter.writeStringField("filter", this.filter);
         jsonWriter.writeJsonField("user", this.user);
-        if (this.dataUnion != null) {
-            jsonWriter.writeUntypedField("dataUnion", this.dataUnion.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("dataUnion",
+            this.dataUnion == null ? null : this.dataUnion.toObject(Object.class));
         jsonWriter.writeNumberField("dataLong", this.dataLong);
         jsonWriter.writeNumberField("data_float", this.dataFloat);
         return jsonWriter.writeEndObject();
@@ -270,10 +269,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
                 } else if ("user".equals(fieldName)) {
                     user = User.fromJson(reader);
                 } else if ("dataUnion".equals(fieldName)) {
-                    Object dataUnionAsObject = reader.readUntyped();
-                    if (dataUnionAsObject != null) {
-                        dataUnion = BinaryData.fromObject(dataUnionAsObject);
-                    }
+                    dataUnion = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("dataLong".equals(fieldName)) {
                     dataLong = reader.getNullable(JsonReader::getLong);
                 } else if ("data_float".equals(fieldName)) {

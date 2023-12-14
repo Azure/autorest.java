@@ -48,7 +48,7 @@ public final class ModelValueClient {
      *     String (Required): {
      *         property: String (Required)
      *         children (Optional): {
-     *             String (Optional): (recursive schema, see String above)
+     *             String (Required): (recursive schema, see String above)
      *         }
      *     }
      * }
@@ -77,7 +77,7 @@ public final class ModelValueClient {
      *     String (Required): {
      *         property: String (Required)
      *         children (Optional): {
-     *             String (Optional): (recursive schema, see String above)
+     *             String (Required): (recursive schema, see String above)
      *         }
      *     }
      * }

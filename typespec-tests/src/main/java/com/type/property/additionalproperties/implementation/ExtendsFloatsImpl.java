@@ -104,7 +104,7 @@ public final class ExtendsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -131,7 +131,7 @@ public final class ExtendsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -158,7 +158,7 @@ public final class ExtendsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -186,7 +186,7 @@ public final class ExtendsFloatsImpl {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>

@@ -104,7 +104,7 @@ public final class IsUnknownsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
@@ -131,7 +131,7 @@ public final class IsUnknownsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
@@ -158,7 +158,7 @@ public final class IsUnknownsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
@@ -186,7 +186,7 @@ public final class IsUnknownsImpl {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
