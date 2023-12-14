@@ -364,7 +364,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         jsonWriter.writeStringField("url", this.url);
         jsonWriter.writeMapField("nullableFloatDict", this.nullableFloatDict,
-            (writer, element) -> writer.writeDouble(element));
+            (writer, element) -> writer.writeNumber(element));
         jsonWriter.writeJsonField("encoded", this.encoded);
         return jsonWriter.writeEndObject();
     }
@@ -432,7 +432,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
                 } else if ("url".equals(fieldName)) {
                     url = reader.getString();
                 } else if ("nullableFloatDict".equals(fieldName)) {
-                    nullableFloatDict = reader.readMap(reader1 -> reader1.getDouble());
+                    nullableFloatDict = reader.readMap(reader1 -> reader1.getNullable(JsonReader::getDouble));
                 } else if ("encoded".equals(fieldName)) {
                     encoded = Encoded.fromJson(reader);
                 } else {

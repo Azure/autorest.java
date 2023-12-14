@@ -44,7 +44,7 @@ public final class NullableFloatValueClient {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Required)
      * }
      * }</pre>
      * 
@@ -68,7 +68,7 @@ public final class NullableFloatValueClient {
      * </p>
      * <pre>{@code
      * {
-     *     String: double (Required)
+     *     String: Double (Required)
      * }
      * }</pre>
      * 
