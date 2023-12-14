@@ -1,7 +1,6 @@
 package com.type.property.additionalproperties;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.type.property.additionalproperties.models.ExtendsFloatAdditionalProperties;
@@ -39,7 +38,6 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testExtendsModelArrayClient() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));

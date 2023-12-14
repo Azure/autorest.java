@@ -11,6 +11,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,9 +91,14 @@ public final class ExtendsModelArrayAdditionalProperties
                 }
 
                 additionalProperties.put(fieldName, null);
+                if (reader.currentToken() == JsonToken.START_ARRAY) {
+                    additionalProperties.replace(fieldName, new ArrayList<>());
+                    while (reader.nextToken() != JsonToken.END_ARRAY) {
+                        additionalProperties.get(fieldName).add(ModelForRecord.fromJson(reader));
+                    }
+                }
             }
             deserializedExtendsModelArrayAdditionalProperties.additionalProperties = additionalProperties;
-
             return deserializedExtendsModelArrayAdditionalProperties;
         });
     }
