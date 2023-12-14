@@ -66,7 +66,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -84,7 +84,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -139,7 +139,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -157,7 +157,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -193,7 +193,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -281,7 +281,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)
@@ -336,7 +336,7 @@ public final class LroRetrysAsyncClient {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      *     location: String (Optional)
      *     name: String (Optional)

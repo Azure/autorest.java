@@ -44,7 +44,7 @@ public final class ExtendsModelClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): {
+     *         String (Required): {
      *             state: String (Required)
      *         }
      *     }
@@ -72,7 +72,7 @@ public final class ExtendsModelClient {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): {
+     *         String (Required): {
      *             state: String (Required)
      *         }
      *     }

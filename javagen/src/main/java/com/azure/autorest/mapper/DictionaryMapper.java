@@ -32,8 +32,12 @@ public class DictionaryMapper implements IMapper<DictionarySchema, IType> {
             return dictType;
         }
 
-        dictType = new MapType(Mappers.getSchemaMapper().map(dictionaryType.getElementType()),
-                dictionaryType.getNullableItems() != null && dictionaryType.getNullableItems());
+        IType elementType = Mappers.getSchemaMapper().map(dictionaryType.getElementType());
+        boolean elementNullable = dictionaryType.getNullableItems() != null && dictionaryType.getNullableItems();
+        if (elementNullable) {
+            elementType = elementType.asNullable();
+        }
+        dictType = new MapType(elementType, elementNullable);
         parsed.put(dictionaryType, dictType);
 
         return dictType;

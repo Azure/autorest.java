@@ -94,7 +94,8 @@ public final class MultiPartRequest implements JsonSerializable<MultiPartRequest
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("id", this.id);
-        jsonWriter.writeUntypedField("profileImage", this.profileImage.toObject(Object.class));
+        jsonWriter.writeUntypedField("profileImage",
+            this.profileImage == null ? null : this.profileImage.toObject(Object.class));
         jsonWriter.writeStringField("profileImage", this.profileImageFilename);
         return jsonWriter.writeEndObject();
     }
@@ -120,7 +121,8 @@ public final class MultiPartRequest implements JsonSerializable<MultiPartRequest
                 if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("profileImage".equals(fieldName)) {
-                    profileImage = BinaryData.fromObject(reader.readUntyped());
+                    profileImage
+                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else if ("profileImage".equals(fieldName)) {
                     profileImageFilename = reader.getString();
                 } else {

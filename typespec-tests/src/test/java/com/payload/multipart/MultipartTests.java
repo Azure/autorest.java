@@ -3,6 +3,8 @@
 
 package com.payload.multipart;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import com.payload.FileUtils;
 import com.payload.multipart.models.MultiPartRequest;
@@ -12,7 +14,7 @@ import java.nio.file.Path;
 
 public class MultipartTests {
 
-    private final MultiPartClient client = new MultiPartClientBuilder().buildClient();
+    private final MultiPartClient client = new MultiPartClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildClient();
     private final MultiPartAsyncClient asyncClient = new MultiPartClientBuilder().buildAsyncClient();
 
     @Test

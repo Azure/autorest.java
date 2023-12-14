@@ -45,7 +45,7 @@ public final class IsFloatClient {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>
@@ -72,7 +72,7 @@ public final class IsFloatClient {
      * {
      *     id: double (Required)
      *      (Optional): {
-     *         String: double (Optional)
+     *         String: double (Required)
      *     }
      * }
      * }</pre>

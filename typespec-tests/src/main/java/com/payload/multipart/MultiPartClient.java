@@ -82,8 +82,8 @@ public final class MultiPartClient {
     public void basic(MultiPartRequest body) {
         // Generated convenience method for basicWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeField("id", body.getId())
-            .serializeField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
+        basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
+            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
             .getRequestBody(), requestOptions).getValue();
     }
 }

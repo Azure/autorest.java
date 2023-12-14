@@ -45,7 +45,7 @@ public final class IsUnknownClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>
@@ -72,7 +72,7 @@ public final class IsUnknownClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: Object (Optional)
+     *         String: Object (Required)
      *     }
      * }
      * }</pre>

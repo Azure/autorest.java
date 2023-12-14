@@ -103,8 +103,8 @@ public final class ExtendsModelArraysImpl {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]
@@ -133,8 +133,8 @@ public final class ExtendsModelArraysImpl {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]
@@ -163,8 +163,8 @@ public final class ExtendsModelArraysImpl {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]
@@ -194,8 +194,8 @@ public final class ExtendsModelArraysImpl {
      * <pre>{@code
      * {
      *      (Optional): {
-     *         String (Optional): [
-     *              (Optional){
+     *         String (Required): [
+     *              (Required){
      *                 state: String (Required)
      *             }
      *         ]

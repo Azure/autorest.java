@@ -45,7 +45,7 @@ public final class IsStringClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -72,7 +72,7 @@ public final class IsStringClient {
      * {
      *     name: String (Required)
      *      (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
