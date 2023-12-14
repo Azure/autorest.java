@@ -68,14 +68,19 @@ model Salmon extends Fish {
   partner?: Fish;
 }
 
-
 @route("/patch")
 interface Patch {
   @patch
   @route("/resource")
-  op createOrUpdateResource( @header("content-type") contentType: "application/merge-patch+json", @body resource: Resource): Resource;
+  createOrUpdateResource(
+    @header("content-type") contentType: "application/merge-patch+json",
+    @body resource: Resource,
+  ): Resource;
 
   @patch
   @route("/fish")
-  op createOrUpdateFish(@header("content-type") contentType: "application/merge-patch+json", @body fish: Fish): Fish;
+  createOrUpdateFish(
+    @header("content-type") contentType: "application/merge-patch+json",
+    @body fish: Fish,
+  ): Fish;
 }
