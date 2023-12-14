@@ -342,13 +342,7 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
         jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
         jsonWriter.writeStringField("architecture", this.architecture == null ? null : this.architecture.toString());
         jsonWriter.writeStringField("os", this.operatingSystem == null ? null : this.operatingSystem.toString());
-        jsonWriter.writeArrayField("references", this.relatedArtifacts, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("references", this.relatedArtifacts, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeArrayField("tags", this.tags, (writer, element) -> writer.writeString(element));
         if (deleteEnabled != null || writeEnabled != null || listEnabled != null || readEnabled != null) {
             jsonWriter.writeStartObject("changeableAttributes");

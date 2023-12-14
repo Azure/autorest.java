@@ -128,13 +128,7 @@ public final class OciImageManifest implements JsonSerializable<OciImageManifest
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("schemaVersion", this.schemaVersion);
         jsonWriter.writeJsonField("config", this.configuration);
-        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("annotations", this.annotations);
         return jsonWriter.writeEndObject();
     }

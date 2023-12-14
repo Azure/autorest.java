@@ -118,20 +118,8 @@ public final class Eagle extends Bird {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", "eagle");
         jsonWriter.writeIntField("wingspan", getWingspan());
-        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
-        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("partner", this.partner);
         return jsonWriter.writeEndObject();
     }

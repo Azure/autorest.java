@@ -4,8 +4,8 @@
 
 package com.cadl.patch.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * The InnerModel model.
  */
-@Immutable
+@Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
      * The name property.
@@ -26,9 +26,18 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     private final String name;
 
+    /*
+     * The description property.
+     */
+    @Generated
+    private String description;
+
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -64,6 +73,29 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         return this.name;
     }
 
+    /**
+     * Get the description property: The description property.
+     * 
+     * @return the description value.
+     */
+    @Generated
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Set the description property: The description property.
+     * 
+     * @param description the description value to set.
+     * @return the InnerModel object itself.
+     */
+    @Generated
+    public InnerModel setDescription(String description) {
+        this.description = description;
+        this.updatedProperties.add("description");
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -71,6 +103,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("name", this.name);
+            jsonWriter.writeStringField("description", this.description);
             return jsonWriter.writeEndObject();
         }
     }
@@ -81,6 +114,11 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
             jsonWriter.writeStringField("name", this.name);
         } else if (updatedProperties.contains("name")) {
             jsonWriter.writeNullField("name");
+        }
+        if (this.description != null) {
+            jsonWriter.writeStringField("description", this.description);
+        } else if (updatedProperties.contains("description")) {
+            jsonWriter.writeNullField("description");
         }
         return jsonWriter.writeEndObject();
     }
@@ -97,17 +135,23 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
+            String description = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("description".equals(fieldName)) {
+                    description = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new InnerModel(name);
+            InnerModel deserializedInnerModel = new InnerModel(name);
+            deserializedInnerModel.description = description;
+
+            return deserializedInnerModel;
         });
     }
 }

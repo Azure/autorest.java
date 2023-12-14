@@ -103,13 +103,7 @@ public final class ErrorDetail implements JsonSerializable<ErrorDetail> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("code", this.code);
         jsonWriter.writeStringField("message", this.message);
-        jsonWriter.writeArrayField("details", this.details, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("details", this.details, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

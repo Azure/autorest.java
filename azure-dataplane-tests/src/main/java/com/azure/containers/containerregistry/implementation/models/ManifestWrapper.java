@@ -313,46 +313,16 @@ public final class ManifestWrapper extends Manifest {
         jsonWriter.writeStartObject();
         jsonWriter.writeNumberField("schemaVersion", getSchemaVersion());
         jsonWriter.writeStringField("mediaType", this.mediaType);
-        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("manifests", this.manifests, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("config", this.config);
-        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("layers", this.layers, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("annotations", this.annotations);
         jsonWriter.writeStringField("architecture", this.architecture);
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("tag", this.tag);
-        jsonWriter.writeArrayField("fsLayers", this.fsLayers, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
-        jsonWriter.writeArrayField("history", this.history, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
-        jsonWriter.writeArrayField("signatures", this.signatures, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("fsLayers", this.fsLayers, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("history", this.history, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("signatures", this.signatures, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

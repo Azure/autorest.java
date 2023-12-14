@@ -36,6 +36,9 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -104,8 +107,13 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
             jsonWriter.writeNullField("requiredProperty");
         }
         if (this.nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeBinary(element));
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
+                if (element != null) {
+                    writer.writeBinary(element);
+                } else {
+                    writer.writeNull();
+                }
+            });
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");
         }

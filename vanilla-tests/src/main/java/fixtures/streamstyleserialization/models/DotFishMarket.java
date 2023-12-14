@@ -147,21 +147,9 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeJsonField("sampleSalmon", this.sampleSalmon);
-        jsonWriter.writeArrayField("salmons", this.salmons, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("salmons", this.salmons, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("sampleFish", this.sampleFish);
-        jsonWriter.writeArrayField("fishes", this.fishes, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("fishes", this.fishes, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

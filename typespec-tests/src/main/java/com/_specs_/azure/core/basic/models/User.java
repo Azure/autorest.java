@@ -48,6 +48,9 @@ public final class User implements JsonSerializable<User> {
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -133,13 +136,7 @@ public final class User implements JsonSerializable<User> {
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("name", this.name);
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> {
-                if (element != null) {
-                    writer.writeJson(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
             return jsonWriter.writeEndObject();
         }
     }
@@ -156,6 +153,7 @@ public final class User implements JsonSerializable<User> {
                 if (element != null) {
                     element.serializeAsJsonMergePatch(true);
                     writer.writeJson(element);
+                    element.serializeAsJsonMergePatch(false);
                 } else {
                     writer.writeNull();
                 }

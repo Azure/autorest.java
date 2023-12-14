@@ -118,20 +118,8 @@ public final class Salmon extends Fish {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", "salmon");
         jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
-        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("partner", this.partner);
         return jsonWriter.writeEndObject();
     }

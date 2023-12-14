@@ -47,6 +47,9 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 

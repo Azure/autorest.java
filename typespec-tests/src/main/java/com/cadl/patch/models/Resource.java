@@ -72,6 +72,9 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -248,13 +251,7 @@ public final class Resource implements JsonSerializable<Resource> {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> {
-                if (element != null) {
-                    writer.writeJson(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeStringField("description", this.description);
             jsonWriter.writeNumberField("longValue", this.longValue);
             jsonWriter.writeNumberField("intValue", this.intValue);
@@ -271,6 +268,7 @@ public final class Resource implements JsonSerializable<Resource> {
                 if (element != null) {
                     element.serializeAsJsonMergePatch(true);
                     writer.writeJson(element);
+                    element.serializeAsJsonMergePatch(false);
                 } else {
                     writer.writeNull();
                 }
@@ -301,6 +299,7 @@ public final class Resource implements JsonSerializable<Resource> {
         if (this.innerModelProperty != null) {
             this.innerModelProperty.serializeAsJsonMergePatch(true);
             jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
+            this.innerModelProperty.serializeAsJsonMergePatch(false);
         } else if (updatedProperties.contains("innerModelProperty")) {
             jsonWriter.writeNullField("wireNameForInnerModelProperty");
         }

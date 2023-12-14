@@ -10,8 +10,6 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
-import com.azure.core.annotation.PathParam;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -26,7 +24,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.cadl.patch.PatchServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -54,72 +51,57 @@ public final class PatchesImpl {
     }
 
     /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public PatchServiceVersion getServiceVersion() {
-        return client.getServiceVersion();
-    }
-
-    /**
      * The interface defining all the services for PatchClientPatches to be used by the proxy service to perform REST
      * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PatchClientPatches")
     public interface PatchesService {
-        @Patch("/patch/resource/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
+        @Patch("/patch/resource")
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdateResource(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
-        @Patch("/patch/resource/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
+        @Patch("/patch/resource")
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrUpdateResourceSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
-        @Patch("/patch/fish/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
+        @Patch("/patch/fish")
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdateFish(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData fish, RequestOptions requestOptions, Context context);
 
-        @Patch("/patch/fish/resources/{name}")
-        @ExpectedResponses({ 200, 201 })
+        @Patch("/patch/fish")
+        @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrUpdateFishSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
-            Context context);
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData fish, RequestOptions requestOptions, Context context);
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateResource operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -131,6 +113,7 @@ public final class PatchesImpl {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -150,6 +133,7 @@ public final class PatchesImpl {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -159,8 +143,7 @@ public final class PatchesImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -169,17 +152,16 @@ public final class PatchesImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateResourceWithResponseAsync(String name, BinaryData resource,
+    public Mono<Response<BinaryData>> createOrUpdateResourceWithResponseAsync(BinaryData resource,
         RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdateResource(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
-            context));
+        return FluxUtil.withContext(context -> service.createOrUpdateResource(this.client.getEndpoint(), contentType,
+            accept, resource, requestOptions, context));
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateResource operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -191,6 +173,7 @@ public final class PatchesImpl {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -210,6 +193,7 @@ public final class PatchesImpl {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -219,8 +203,7 @@ public final class PatchesImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -229,17 +212,15 @@ public final class PatchesImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateResourceWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public Response<BinaryData> createOrUpdateResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.createOrUpdateResourceSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
-            Context.NONE);
+        return service.createOrUpdateResourceSync(this.client.getEndpoint(), contentType, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateFish operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -265,8 +246,7 @@ public final class PatchesImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -276,17 +256,16 @@ public final class PatchesImpl {
      * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(String name, BinaryData resource,
+    public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(BinaryData fish,
         RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdateFish(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
-            context));
+        return FluxUtil.withContext(context -> service.createOrUpdateFish(this.client.getEndpoint(), contentType,
+            accept, fish, requestOptions, context));
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateFish operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -312,8 +291,7 @@ public final class PatchesImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -323,11 +301,10 @@ public final class PatchesImpl {
      * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateFishWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public Response<BinaryData> createOrUpdateFishWithResponse(BinaryData fish, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.createOrUpdateFishSync(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(),
-            name, contentType, accept, resource, requestOptions, Context.NONE);
+        return service.createOrUpdateFishSync(this.client.getEndpoint(), contentType, accept, fish, requestOptions,
+            Context.NONE);
     }
 }

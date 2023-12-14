@@ -76,13 +76,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("property", this.property);
-        jsonWriter.writeArrayField("children", this.children, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("children", this.children, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

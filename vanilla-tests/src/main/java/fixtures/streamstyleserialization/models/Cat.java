@@ -109,13 +109,7 @@ public class Cat extends Pet {
         jsonWriter.writeNumberField("id", getId());
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeStringField("color", this.color);
-        jsonWriter.writeArrayField("hates", this.hates, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("hates", this.hates, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

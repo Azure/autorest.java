@@ -106,13 +106,7 @@ public class Fish implements JsonSerializable<Fish> {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("species", this.species);
-        jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

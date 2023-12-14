@@ -47,6 +47,9 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -200,11 +203,7 @@ public class Fish implements JsonSerializable<Fish> {
             }
             // Use the discriminator value to determine which subtype should be deserialized.
             if ("shark".equals(discriminatorValue)) {
-                return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
-            } else if ("saw".equals(discriminatorValue)) {
-                return SawShark.fromJson(readerToUse.reset());
-            } else if ("goblin".equals(discriminatorValue)) {
-                return GoblinShark.fromJson(readerToUse.reset());
+                return Shark.fromJson(readerToUse.reset());
             } else if ("salmon".equals(discriminatorValue)) {
                 return Salmon.fromJson(readerToUse.reset());
             } else {

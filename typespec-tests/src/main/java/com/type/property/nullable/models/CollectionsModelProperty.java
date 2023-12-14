@@ -36,6 +36,9 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -90,13 +93,8 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
-                if (element != null) {
-                    writer.writeJson(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                (writer, element) -> writer.writeJson(element));
             return jsonWriter.writeEndObject();
         }
     }
@@ -113,6 +111,7 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
                 if (element != null) {
                     element.serializeAsJsonMergePatch(true);
                     writer.writeJson(element);
+                    element.serializeAsJsonMergePatch(false);
                 } else {
                     writer.writeNull();
                 }

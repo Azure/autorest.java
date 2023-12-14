@@ -38,7 +38,7 @@ public final class PatchClient {
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateResource operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -50,6 +50,7 @@ public final class PatchClient {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -69,6 +70,7 @@ public final class PatchClient {
      *     map (Required): {
      *         String (Required): {
      *             name: String (Required)
+     *             description: String (Optional)
      *         }
      *     }
      *     longValue: Long (Optional)
@@ -78,8 +80,7 @@ public final class PatchClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,13 +90,12 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateResourceWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.createOrUpdateResourceWithResponse(name, resource, requestOptions);
+    public Response<BinaryData> createOrUpdateResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateResourceWithResponse(resource, requestOptions);
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateFish operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -121,8 +121,7 @@ public final class PatchClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -133,16 +132,14 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateFishWithResponse(String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.createOrUpdateFishWithResponse(name, resource, requestOptions);
+    public Response<BinaryData> createOrUpdateFishWithResponse(BinaryData fish, RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateFishWithResponse(fish, requestOptions);
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateResource operation.
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -153,18 +150,17 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource createOrUpdateResource(String name, Resource resource) {
+    public Resource createOrUpdateResource(Resource resource) {
         // Generated convenience method for createOrUpdateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateResourceWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+        return createOrUpdateResourceWithResponse(BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 
     /**
-     * Create or update operation template.
+     * The createOrUpdateFish operation.
      * 
-     * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -175,10 +171,10 @@ public final class PatchClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Fish createOrUpdateFish(String name, Fish resource) {
+    public Fish createOrUpdateFish(Fish fish) {
         // Generated convenience method for createOrUpdateFishWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateFishWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+        return createOrUpdateFishWithResponse(BinaryData.fromObject(fish), requestOptions).getValue()
             .toObject(Fish.class);
     }
 }

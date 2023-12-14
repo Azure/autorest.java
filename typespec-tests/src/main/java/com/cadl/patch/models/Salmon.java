@@ -43,6 +43,9 @@ public final class Salmon extends Fish {
     @Generated
     private boolean jsonMergePatch;
 
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
@@ -157,20 +160,8 @@ public final class Salmon extends Fish {
             jsonWriter.writeStringField("kind", "salmon");
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> {
-                if (element != null) {
-                    writer.writeJson(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
-            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-                if (element != null) {
-                    writer.writeJson(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeJsonField("partner", this.partner);
             return jsonWriter.writeEndObject();
         }
@@ -190,6 +181,7 @@ public final class Salmon extends Fish {
                 if (element != null) {
                     element.serializeAsJsonMergePatch(true);
                     writer.writeJson(element);
+                    element.serializeAsJsonMergePatch(false);
                 } else {
                     writer.writeNull();
                 }
@@ -202,6 +194,7 @@ public final class Salmon extends Fish {
                 if (element != null) {
                     element.serializeAsJsonMergePatch(true);
                     writer.writeJson(element);
+                    element.serializeAsJsonMergePatch(false);
                 } else {
                     writer.writeNull();
                 }
@@ -212,6 +205,7 @@ public final class Salmon extends Fish {
         if (this.partner != null) {
             this.partner.serializeAsJsonMergePatch(true);
             jsonWriter.writeJsonField("partner", this.partner);
+            this.partner.serializeAsJsonMergePatch(false);
         } else if (updatedProperties.contains("partner")) {
             jsonWriter.writeNullField("partner");
         }

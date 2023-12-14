@@ -47,13 +47,7 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("property", this.property, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("property", this.property, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

@@ -56,13 +56,7 @@ public final class Extension extends Element {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("extension", getExtension(), (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("extension", getExtension(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeIntField("level", this.level);
         return jsonWriter.writeEndObject();
     }

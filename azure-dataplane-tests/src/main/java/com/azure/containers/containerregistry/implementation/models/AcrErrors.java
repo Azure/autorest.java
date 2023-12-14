@@ -51,13 +51,7 @@ public final class AcrErrors implements JsonSerializable<AcrErrors> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("errors", this.errors, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("errors", this.errors, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

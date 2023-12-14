@@ -52,13 +52,7 @@ public final class ManifestAttributesManifest implements JsonSerializable<Manife
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("references", this.references, (writer, element) -> {
-            if (element != null) {
-                writer.writeJson(element);
-            } else {
-                writer.writeNull();
-            }
-        });
+        jsonWriter.writeArrayField("references", this.references, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 
