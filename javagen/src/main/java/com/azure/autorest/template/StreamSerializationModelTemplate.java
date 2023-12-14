@@ -315,15 +315,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
-        } else if (wireType == ClassType.BINARY_DATA) {
-            String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
-            if (!property.isRequired()) {
-                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
-                    ifAction.line(writeBinaryDataExpr);
-                });
-            } else {
-                methodBlock.line(writeBinaryDataExpr);
-            }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0);
@@ -1000,25 +991,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     "reader.readUntyped()", fromSuper);
             } else {
                 deserializationBlock.line(property.getName() + " = reader.readUntyped();");
-            }
-        } else if (wireType == ClassType.BINARY_DATA) {
-            BiConsumer<String, JavaBlock> binaryDataDeserializationConsumer = (logic, block) -> {
-                if (!hasConstructorArguments) {
-                    handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
-                        "BinaryData.fromObject(" + logic + ")", fromSuper);
-                } else {
-                    deserializationBlock.line(property.getName() + " = BinaryData.fromObject(" + logic + ");");
-                }
-            };
-
-            if (!property.isRequired()) {
-                String propertyNameAsObject = property.getName() + "AsObject";
-                deserializationBlock.line("Object " + propertyNameAsObject + " = reader.readUntyped();");
-                deserializationBlock.ifBlock(propertyNameAsObject + " != null", ifBlock -> {
-                    binaryDataDeserializationConsumer.accept(propertyNameAsObject, ifBlock);
-                });
-            } else {
-                binaryDataDeserializationConsumer.accept("reader.readUntyped()", deserializationBlock);
             }
         } else if (wireType instanceof IterableType) {
             if (!hasConstructorArguments) {
