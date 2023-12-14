@@ -42,7 +42,10 @@ alias LongRequest = {
   dataInt: int32;
   dataIntOptional?: int32;
   dataLong?: int64;
-  data_float?: float64;
+
+  @projectedName("json", "data_float")
+  @projectedName("client", "dataFloat")
+  float?: float64;
 };
 
 model User {
