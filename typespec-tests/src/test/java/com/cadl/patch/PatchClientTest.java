@@ -50,14 +50,19 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForNestedModelProperty() {
-        // patch not enabled, null value is not serialized
+        // patch not enabled
         Resource resource = new Resource(new HashMap<>());
-        resource.setInnerModelProperty(null);
+        resource.setInnerModelProperty(new InnerModel("value1"));
+        resource.getInnerModelProperty().setDescription("desc");
         String json = BinaryData.fromObject(resource).toString();
-        Assertions.assertEquals("{\"map\":{}}", json);
+        Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":{\"name\":\"value1\",\"description\":\"desc\"}}", json);
 
         // patch enabled, null value is serialized
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        resource.getInnerModelProperty().setDescription(null);
+        json = BinaryData.fromObject(resource).toString();
+        Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":{\"name\":\"value1\",\"description\":null}}", json);
+
         resource.setInnerModelProperty(null);
         json = BinaryData.fromObject(resource).toString();
         Assertions.assertEquals("{\"map\":{},\"wireNameForInnerModelProperty\":null}", json);
@@ -91,14 +96,14 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForHierarchicalModel() {
-        Fish fish = new Shark(1, "goblin");
+        Fish fish = new Shark(1);
         fish.setColor("pink");
         String json = BinaryData.fromObject(fish).toString();
-        Assertions.assertEquals("{\"age\":1,\"color\":\"pink\",\"sharktype\":\"goblin\"}", json);
+        Assertions.assertEquals("{\"kind\":\"shark\",\"age\":1,\"color\":\"pink\"}", json);
 
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
         fish.setColor(null);
         json = BinaryData.fromObject(fish).toString();
-        Assertions.assertEquals("{\"age\":1,\"color\":null,\"sharktype\":\"goblin\"}", json);
+        Assertions.assertEquals("{\"kind\":\"shark\",\"age\":1,\"color\":null}", json);
     }
 }

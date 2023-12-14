@@ -37,6 +37,7 @@ model Resource {
 
 model InnerModel {
   name: string;
+  description?: string;
 }
 
 @doc("This is base model for polymorphic multiple levels inheritance with a discriminator.")
@@ -55,10 +56,8 @@ model Fish {
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
-@discriminator("sharktype")
 model Shark extends Fish {
   kind: "shark";
-  sharktype: string;
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.")
@@ -69,23 +68,14 @@ model Salmon extends Fish {
   partner?: Fish;
 }
 
-@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
-model SawShark extends Shark {
-  sharktype: "saw";
-}
-
-@doc("The third level model GoblinShark in polymorphic multiple levels inheritance.")
-model GoblinShark extends Shark {
-  sharktype: "goblin";
-}
 
 @route("/patch")
 interface Patch {
   @patch
   @route("/resource")
-  createOrUpdateResource is ResourceOperations.ResourceCreateOrUpdate<Resource>;
+  op createOrUpdateResource( @header("content-type") contentType: "application/merge-patch+json", @body resource: Resource): Resource;
 
   @patch
   @route("/fish")
-  createOrUpdateFish is ResourceOperations.ResourceCreateOrUpdate<Fish>;
+  op createOrUpdateFish(@header("content-type") contentType: "application/merge-patch+json", @body fish: Fish): Fish;
 }

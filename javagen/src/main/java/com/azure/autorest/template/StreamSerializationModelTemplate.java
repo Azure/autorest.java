@@ -323,7 +323,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         if (isJsonMergePatch) {
             if (property.getClientType().isNullable()) {
-                methodBlock.ifBlock(String.format("%s !=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
+                methodBlock.ifBlock(String.format("%s!=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
                     serializeJsonProperty(codeBlock, property, serializedName,
                             fromSuperType, isJsonMergePatch);
                 }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
@@ -368,10 +368,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
             methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
         } else if (fieldSerializationMethod != null) {
-            if (isJsonMergePatch) {
-                if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-                    methodBlock.line(propertyValueGetter + ".serializeAsJsonMergePatch(true);");
-                }
+            if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
+                methodBlock.line(propertyValueGetter + ".serializeAsJsonMergePatch(true);");
             }
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -381,6 +379,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 });
             } else {
                 methodBlock.line(fieldSerializationMethod + ";");
+            }
+            if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
+                methodBlock.line(propertyValueGetter + ".serializeAsJsonMergePatch(false);");
             }
         } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");

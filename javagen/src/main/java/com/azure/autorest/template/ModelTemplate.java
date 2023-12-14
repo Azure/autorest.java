@@ -1188,6 +1188,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // properties
         addGeneratedAnnotation(classBlock);
         classBlock.privateMemberVariable("boolean jsonMergePatch");
+
+        classBlock.javadocComment(comment -> {
+            comment.description("Stores updated model property, the value is property name, not serialized name");
+        });
         addGeneratedAnnotation(classBlock);
         classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
 
@@ -1200,9 +1204,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // static code block to access jsonMergePatch setter
         classBlock.staticBlock(staticBlock -> {
             staticBlock.text(String.format("JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n" +
-                    "            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
-                    "            return model;\n" +
-                    "        });", model.getName()));
+                    "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
+                    "return model;\n" + "});", model.getName()));
         });
     }
 }
