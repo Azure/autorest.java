@@ -52,7 +52,7 @@ public final class RequiredOptionalBodyClient {
      *     isRetried: Boolean (Optional)
      *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -71,7 +71,7 @@ public final class RequiredOptionalBodyClient {
      *     isRetried: Boolean (Optional)
      *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -128,7 +128,7 @@ public final class RequiredOptionalBodyClient {
      *     isRetried: Boolean (Optional)
      *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
@@ -147,7 +147,7 @@ public final class RequiredOptionalBodyClient {
      *     isRetried: Boolean (Optional)
      *     OperationFilterStatus: String(Running/NotStarted) (Required)
      *     tags (Optional): {
-     *         String: String (Optional)
+     *         String: String (Required)
      *     }
      * }
      * }</pre>
