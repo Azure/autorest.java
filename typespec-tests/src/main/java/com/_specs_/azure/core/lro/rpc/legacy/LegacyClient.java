@@ -172,7 +172,7 @@ public final class LegacyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResult> beginCreateJob(JobData jobData) {
+    public SyncPoller<JobResult, Void> beginCreateJob(JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(jobData), requestOptions);

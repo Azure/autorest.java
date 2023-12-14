@@ -493,8 +493,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @return the {@link PollerFlux} for polling of result of the job.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResult> beginCreateJobWithModelAsync(BinaryData jobData,
-        RequestOptions requestOptions) {
+    public PollerFlux<JobResult, Void> beginCreateJobWithModelAsync(BinaryData jobData, RequestOptions requestOptions) {
         return PollerFlux.create(
             Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData,
                 requestOptions),
@@ -503,7 +502,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
-            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResult.class));
+            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(Void.class));
     }
 
     /**
@@ -555,7 +554,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @return the {@link SyncPoller} for polling of result of the job.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResult> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {
+    public SyncPoller<JobResult, Void> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {
         return SyncPoller.createPoller(
             Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData,
                 requestOptions),
@@ -564,6 +563,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
-            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResult.class));
+            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(Void.class));
     }
 }
