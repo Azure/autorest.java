@@ -471,11 +471,22 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
                 methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
-                if (isJsonMergePatch && (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType())) {
-                    methodBlock.block("", codeBlock -> {
-                        codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
-                        methodBlock.line(valueSerializationMethod + ";");
-                    });
+                if (isJsonMergePatch) {
+                    if (elementType.isNullable()) {
+                        methodBlock.block("", codeBlock -> {
+                            codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
+                                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                                    codeBlock.line(elementName + ".serializeAsJsonMergePatch(true);");
+                                }
+                                ifBlock.line(valueSerializationMethod + ";");
+                                if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
+                                    codeBlock.line(elementName + ".serializeAsJsonMergePatch(false);");
+                                }
+                            }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNull();"));
+                        });
+                    } else {
+                        methodBlock.line(valueSerializationMethod);
+                    }
                 } else {
                     methodBlock.line(valueSerializationMethod);
                 }
