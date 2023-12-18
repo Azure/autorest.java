@@ -47,7 +47,7 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("data", this.data == null ? null : this.data.toObject(Object.class));
+        jsonWriter.writeUntypedField("data", this.data.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 

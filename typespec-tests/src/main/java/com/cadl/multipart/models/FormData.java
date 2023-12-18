@@ -151,7 +151,7 @@ public final class FormData implements JsonSerializable<FormData> {
         jsonWriter.writeIntField("resolution", this.resolution);
         jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
         jsonWriter.writeJsonField("size", this.size);
-        jsonWriter.writeUntypedField("image", this.image == null ? null : this.image.toObject(Object.class));
+        jsonWriter.writeUntypedField("image", this.image.toObject(Object.class));
         jsonWriter.writeStringField("image", this.imageFilename);
         return jsonWriter.writeEndObject();
     }

@@ -467,8 +467,9 @@ public class ClassType implements IType {
 
     public static final ClassType BINARY_DATA = getClassTypeBuilder(BinaryData.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "BinaryData.fromObject(\"" + defaultValueExpression + "\")")
-        .serializationMethodBase("writeUntyped")
-        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : " + valueGetter + ".toObject(Object.class)")
+        // do not use the "writeUntyped(nullableVar)", because some backend would fail the request on "null" value
+//        .serializationMethodBase("writeUntyped")
+//        .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : " + valueGetter + ".toObject(Object.class)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()))")
         .xmlElementDeserializationMethod("getNullableElement(BinaryData::fromObject)")
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, BinaryData::fromObject)")
