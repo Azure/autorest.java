@@ -1,6 +1,6 @@
 # Release History
 
-## 0.12.1 (Unreleased)
+## 0.12.1 (2023-12-18)
 
 Compatible with compiler 0.51.
 

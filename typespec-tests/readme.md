@@ -38,6 +38,21 @@ This is usually to do a quick check whether the modified TypeSpec-Java works as 
 
 Generated code will be at `./typespec-tests/tsp-output/` folder for inspect.
 
+## Debugging Java code
+
+`tspconfig.yaml` already configured
+```yaml
+    dev-options:
+      generate-code-model: true
+```
+
+With this option, a `code-model.yaml` file is kept in `./typespec-tests/tsp-output/` folder after `tsp compile <target.tsp>`.
+
+`Main.java` under `./typespec-extension` would load this `code-model.yaml` file as default, and run the Java code to generate the code.
+At this stage, one can modify or debug the Java code (`./typespec-extension/src/main/java/`) in IDE. The code generated in `./typespec-tests/tsp-output/` would reflect the modified Java code.
+
+Notice: there maybe some difference of other option between `tspconfig.yaml` and `EmitterOptions.java`. Remember to temporary modify `EmitterOptions.java` to reflect the option in `tspconfig.yaml` when running `Main.java` this way. (e.g. set `streamStyleSerialization` to `true`)
+
 ## Troubleshooting
 
 ### New version of `@typespec/compiler` etc.
