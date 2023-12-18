@@ -24,7 +24,7 @@ public class StringClientTests {
 
         Assertions.assertNull(stringClient.getNull().getNullableProperty());
 
-        stringClient.patchNonNullWithResponse(BinaryData.fromObject(new StringProperty("foo", "hello")), null);
+        stringClient.patchNonNull(new StringProperty("foo", "hello"));
 
         StringWriter writer = new StringWriter();
         JsonWriter jsonWriter = JsonProviders.createWriter(writer);
