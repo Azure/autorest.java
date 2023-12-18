@@ -5,6 +5,7 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
+import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com._specs_.azure.core.basic.models.ListItemInputBody;
 import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
@@ -488,7 +489,10 @@ public final class BasicAsyncClient {
     public Mono<User> createOrUpdate(int id, User resource) {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateWithResponse(id, BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono)
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
+        return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
@@ -512,8 +516,11 @@ public final class BasicAsyncClient {
     public Mono<User> createOrReplace(int id, User resource) {
         // Generated convenience method for createOrReplaceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions)
-            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
+        return createOrReplaceWithResponse(id, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
     /**

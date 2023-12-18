@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.implementation.RepeatabilityHeadersImpl;
 import com.cadl.specialheaders.models.Resource;
 import reactor.core.publisher.Mono;
@@ -291,7 +292,10 @@ public final class RepeatabilityHeadersAsyncClient {
     public Mono<Resource> put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono)
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return putWithResponse(name, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
@@ -334,6 +338,9 @@ public final class RepeatabilityHeadersAsyncClient {
     public PollerFlux<PollOperationDetails, Resource> beginCreateLro(String name, Resource resource) {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateLroWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return serviceClient.beginCreateLroWithModelAsync(name, resourceInBinaryData, requestOptions);
     }
 }

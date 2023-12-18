@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.property.nullable.implementation.BytesImpl;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.models.BytesProperty;
 
 /**
@@ -193,7 +194,10 @@ public final class BytesClient {
     public void patchNonNull(BytesProperty body) {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        patchNonNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
 
     /**
@@ -213,6 +217,9 @@ public final class BytesClient {
     public void patchNull(BytesProperty body) {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        patchNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
 }

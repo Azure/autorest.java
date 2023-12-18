@@ -15,6 +15,7 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.cadl.patch.implementation.JsonMergePatchHelper;
 import com.cadl.patch.implementation.PatchesImpl;
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.Resource;
@@ -153,7 +154,10 @@ public final class PatchClient {
     public Resource createOrUpdateResource(Resource resource) {
         // Generated convenience method for createOrUpdateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateResourceWithResponse(BinaryData.fromObject(resource), requestOptions).getValue()
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return createOrUpdateResourceWithResponse(resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
     }
 
@@ -174,7 +178,9 @@ public final class PatchClient {
     public Fish createOrUpdateFish(Fish fish) {
         // Generated convenience method for createOrUpdateFishWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return createOrUpdateFishWithResponse(BinaryData.fromObject(fish), requestOptions).getValue()
-            .toObject(Fish.class);
+        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
+        BinaryData fishInBinaryData = BinaryData.fromObject(fish);
+        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, false);
+        return createOrUpdateFishWithResponse(fishInBinaryData, requestOptions).getValue().toObject(Fish.class);
     }
 }
