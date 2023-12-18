@@ -154,11 +154,21 @@ abstract class ConvenienceMethodTemplateBase {
         // invocation with protocol method parameters and RequestOptions
         String invocationExpression = protocolMethod.getMethodInputParameters().stream()
                 .map(p -> {
-                    String expression = parameterExpressionsMap.get(p.getName());
-                    if (expression == null) {
-                        expression = p.getName();
+                    String parameterName = p.getName();
+                    String expression = parameterExpressionsMap.get(parameterName);
+                    IType parameterClientType = p.getClientType();
+                    IType parameterRawType = p.getRawType();
+
+                    if (ClientModelUtil.isClientModel(parameterRawType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                        String parameterRawTypeName = ((ClassType) parameterRawType).getName();
+                        String variableName = expression == null ? parameterName : parameterName + "In" + parameterClientType.toString();
+                        methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", parameterRawTypeName, parameterName));
+                        methodBlock.line(String.format("%1$s %2$s = %3$s;", parameterClientType, variableName, expression));
+                        methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", parameterRawTypeName, parameterName));
+                        return variableName;
+                    } else {
+                        return expression == null ? parameterName : expression;
                     }
-                    return expression;
                 })
                 .collect(Collectors.joining(", "));
 
@@ -324,6 +334,9 @@ abstract class ConvenienceMethodTemplateBase {
 
         // versioning
         imports.add(Arrays.class.getName());
+
+        // JsonMergePatchHelper class
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
