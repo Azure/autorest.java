@@ -62,7 +62,7 @@ public interface IType {
     boolean contains(IType type);
 
     /**
-     * Add this type's imports to the provided ISet of imports.
+     * Add this type's imports to the provided set of imports.
      *
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether to include imports that are only necessary for method

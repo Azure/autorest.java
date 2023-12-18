@@ -146,10 +146,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addProperties(model, classBlock, settings);
 
             // constructor
-            JavaVisibility modelConstructorVisibility =
-                immutableOutputModel
-                    ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
-                    : JavaVisibility.Public;
+            JavaVisibility modelConstructorVisibility = immutableOutputModel
+                ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
+                : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
@@ -181,11 +180,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                         methodBlock, settings));
 
-                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
+                // Add a package-private setter for stream-style serialization when the model is a polymorphic parent
+                // and code is generating with immutable output models.
+                // When generating with immutable output models there will be no constructor parameters non-required
+                // properties and no setters at all. This breaks stream-style serialization as it requires access to
+                // setters for non-constructor properties in parent models.
+                boolean addPackagePrivateSetterForStreamStyleSerialization = !immutableOutputModel
+                    || (settings.isStreamStyleSerialization() && model.isPolymorphicParent());
+                if (ClientModelUtil.hasSetter(property, settings)
+                    && addPackagePrivateSetterForStreamStyleSerialization) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
-                    classBlock.method(methodVisibility, null,
+                    classBlock.method(immutableOutputModel ? JavaVisibility.PackagePrivate : methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));

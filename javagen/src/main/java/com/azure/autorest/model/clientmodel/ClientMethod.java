@@ -341,9 +341,9 @@ public class ClientMethod {
     }
 
     /**
-     * Add this ClientMethod's imports to the provided ISet of imports.
+     * Add this ClientMethod's imports to the provided set of imports.
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
