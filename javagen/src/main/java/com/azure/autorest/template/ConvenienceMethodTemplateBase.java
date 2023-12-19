@@ -159,7 +159,7 @@ abstract class ConvenienceMethodTemplateBase {
                     IType parameterClientType = p.getClientType();
                     IType parameterRawType = p.getRawType();
 
-                    if (ClientModelUtil.isClientModel(parameterRawType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                    if (ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
                         String parameterRawTypeName = ((ClassType) parameterRawType).getName();
                         String variableName = expression == null ? parameterName : parameterName + "In" + parameterClientType.toString();
                         methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", parameterRawTypeName, parameterName));
