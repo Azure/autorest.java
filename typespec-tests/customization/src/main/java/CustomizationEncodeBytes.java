@@ -24,11 +24,12 @@ public class CustomizationEncodeBytes extends Customization {
 
         classCustomization.getProperty("value").setModifier(Modifier.PRIVATE);
 
-        ConstructorCustomization constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
-        constructorCustomization.removeAnnotation("JsonCreator");
-        constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
-        constructorCustomization.addAnnotation("JsonCreator(mode=JsonCreator.Mode.DISABLED)");
-
-        classCustomization.addConstructor("@Generated private Base64UrlArrayBytesProperty() {}");
+        // as stream-serialization, we no longer need these Jackson annotations
+//        ConstructorCustomization constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
+//        constructorCustomization.removeAnnotation("JsonCreator");
+//        constructorCustomization = classCustomization.getConstructor("Base64UrlArrayBytesProperty");
+//        constructorCustomization.addAnnotation("JsonCreator(mode=JsonCreator.Mode.DISABLED)");
+//
+//        classCustomization.addConstructor("@Generated private Base64UrlArrayBytesProperty() {}");
     }
 }
