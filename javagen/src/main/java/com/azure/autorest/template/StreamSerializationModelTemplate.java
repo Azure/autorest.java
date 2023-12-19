@@ -385,6 +385,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
+        } else if (wireType == ClassType.BINARY_DATA) {
+            String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
+            if (!property.isRequired()) {
+                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
+                    ifAction.line(writeBinaryDataExpr);
+                });
+            } else {
+                methodBlock.line(writeBinaryDataExpr);
+            }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0, isJsonMergePatch);

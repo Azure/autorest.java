@@ -98,11 +98,12 @@ public final class SubResult extends Result {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeUntypedField("data", getData() == null ? null : getData().toObject(Object.class));
+        jsonWriter.writeUntypedField("data", getData().toObject(Object.class));
         jsonWriter.writeJsonField("result", getResult());
         jsonWriter.writeStringField("text", this.text);
-        jsonWriter.writeUntypedField("arrayData",
-            this.arrayData == null ? null : this.arrayData.toObject(Object.class));
+        if (this.arrayData != null) {
+            jsonWriter.writeUntypedField("arrayData", this.arrayData.toObject(Object.class));
+        }
         return jsonWriter.writeEndObject();
     }
 
