@@ -17,12 +17,12 @@ public final class FileUtils {
     /**
      * Creates a temporary directory.
      * <p>
-     * If the environment setting {@code autorest.java.temp.directory} is set, the directory will be created under the
+     * If the environment setting {@code codegen.java.temp.directory} is set, the directory will be created under the
      * specified path. Otherwise, the directory will be created under the system default temporary directory.
      * <p>
      * {@link System#getProperty(String)} is checked before {@link System#getenv(String)}.
      * <p>
-     * If {@code autorest.java.temp.directory} is set to a non-existent path, the directory will be created under the
+     * If {@code codegen.java.temp.directory} is set to a non-existent path, the directory will be created under the
      * system default temporary directory.
      *
      * @param prefix The prefix string to be used in generating the directory's name; may be {@code null}.
@@ -30,9 +30,9 @@ public final class FileUtils {
      * @throws IOException If an I/O error occurs.
      */
     public static Path createTempDirectory(String prefix) throws IOException {
-        String tempDirectory = System.getProperty("autorest.java.temp.directory");
+        String tempDirectory = System.getProperty("codegen.java.temp.directory");
         if (tempDirectory == null) {
-            tempDirectory = System.getenv("autorest.java.temp.directory");
+            tempDirectory = System.getenv("codegen.java.temp.directory");
         }
 
         if (tempDirectory != null) {
