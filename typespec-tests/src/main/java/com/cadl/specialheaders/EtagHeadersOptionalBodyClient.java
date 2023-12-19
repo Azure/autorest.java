@@ -19,6 +19,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.cadl.specialheaders.implementation.EtagHeadersOptionalBodiesImpl;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.models.Resource;
 import java.time.OffsetDateTime;
 
@@ -174,7 +175,10 @@ public final class EtagHeadersOptionalBodyClient {
             requestOptions.setHeader(HttpHeaderName.fromString("timestamp"), String.valueOf(timestamp.toEpochSecond()));
         }
         if (body != null) {
-            requestOptions.setBody(BinaryData.fromObject(body));
+            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(body, true);
+            BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(body, false);
+            requestOptions.setBody(bodyInBinaryData);
         }
         if (ifMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_MATCH, ifMatch);

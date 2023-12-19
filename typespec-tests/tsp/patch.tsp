@@ -78,6 +78,13 @@ interface Patch {
   ): Resource;
 
   @patch
+  @route("/resource/optional")
+  createOrUpdateOptionalResource(
+    @header("content-type") contentType: "application/merge-patch+json",
+    @body resource?: Resource,
+  ): Resource;
+
+  @patch
   @route("/fish")
   createOrUpdateFish(
     @header("content-type") contentType: "application/merge-patch+json",

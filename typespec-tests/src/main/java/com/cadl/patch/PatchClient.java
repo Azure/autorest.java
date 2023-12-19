@@ -96,6 +96,62 @@ public final class PatchClient {
     }
 
     /**
+     * The createOrUpdateOptionalResource operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrUpdateOptionalResourceWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.createOrUpdateOptionalResourceWithResponse(requestOptions);
+    }
+
+    /**
      * The createOrUpdateFish operation.
      * <p>
      * <strong>Request Body Schema</strong>
@@ -159,6 +215,50 @@ public final class PatchClient {
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return createOrUpdateResourceWithResponse(resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
+    }
+
+    /**
+     * The createOrUpdateOptionalResource operation.
+     * 
+     * @param resource The resource parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource createOrUpdateOptionalResource(Resource resource) {
+        // Generated convenience method for createOrUpdateOptionalResourceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (resource != null) {
+            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+            BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+            requestOptions.setBody(resourceInBinaryData);
+        }
+        return createOrUpdateOptionalResourceWithResponse(requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * The createOrUpdateOptionalResource operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource createOrUpdateOptionalResource() {
+        // Generated convenience method for createOrUpdateOptionalResourceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return createOrUpdateOptionalResourceWithResponse(requestOptions).getValue().toObject(Resource.class);
     }
 
     /**
