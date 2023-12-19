@@ -193,7 +193,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
                 } else if (settings.isStreamStyleSerialization() && model.isPolymorphicParent()
-                    && (property.isReadOnly() || immutableOutputOnlyModel)) {
+                    && (property.isReadOnly() || (immutableOutputOnlyModel && !property.isRequired()))) {
                     // If stream-style serialization is being generated, the model has derived types, and the property
                     // is readonly or is part of an immutable output model, generate a package-private setter method
                     // that uses the wire type for setting the value. This will be used in stream-style serialization as

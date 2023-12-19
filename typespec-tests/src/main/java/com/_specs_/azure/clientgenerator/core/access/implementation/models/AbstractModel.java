@@ -43,17 +43,6 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
         return this.name;
     }
 
-    /**
-     * Set the name property: The name property.
-     * 
-     * @param name the name value to set.
-     * @return the AbstractModel object itself.
-     */
-    AbstractModel setName(String name) {
-        this.name = name;
-        return this;
-    }
-
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
