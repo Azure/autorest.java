@@ -6,6 +6,9 @@ package com.cadl.specialheaders.implementation;
 
 import com.cadl.specialheaders.models.Resource;
 
+/**
+ * This is the Helper class to enable json merge patch serialization for a model.
+ */
 public class JsonMergePatchHelper {
     private static ResourceAccessor resourceAccessor;
 

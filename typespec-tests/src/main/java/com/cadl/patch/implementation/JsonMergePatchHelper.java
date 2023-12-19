@@ -10,6 +10,9 @@ import com.cadl.patch.models.Resource;
 import com.cadl.patch.models.Salmon;
 import com.cadl.patch.models.Shark;
 
+/**
+ * This is the Helper class to enable json merge patch serialization for a model.
+ */
 public class JsonMergePatchHelper {
     private static ResourceAccessor resourceAccessor;
 

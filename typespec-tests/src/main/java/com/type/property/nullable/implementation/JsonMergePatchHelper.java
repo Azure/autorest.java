@@ -12,6 +12,9 @@ import com.type.property.nullable.models.DurationProperty;
 import com.type.property.nullable.models.InnerModel;
 import com.type.property.nullable.models.StringProperty;
 
+/**
+ * This is the Helper class to enable json merge patch serialization for a model.
+ */
 public class JsonMergePatchHelper {
     private static StringPropertyAccessor stringPropertyAccessor;
 

@@ -7,6 +7,9 @@ package com._specs_.azure.core.basic.implementation;
 import com._specs_.azure.core.basic.models.User;
 import com._specs_.azure.core.basic.models.UserOrder;
 
+/**
+ * This is the Helper class to enable json merge patch serialization for a model.
+ */
 public class JsonMergePatchHelper {
     private static UserAccessor userAccessor;
 
