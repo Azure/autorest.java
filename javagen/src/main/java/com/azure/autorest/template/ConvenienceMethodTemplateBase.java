@@ -137,9 +137,17 @@ abstract class ConvenienceMethodTemplateBase {
                         break;
 
                     case BODY: {
-                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                String.format("requestOptions.setBody(%s);",
-                                        expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType())));
+                        Consumer<JavaBlock> writeLine = javaBlock -> {
+                            IType parameterType = parameter.getClientMethodParameter().getClientType();
+                            IType protocolParameterType = parameter.getProxyMethodParameter().getClientType();
+                            String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType());
+                            if (ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
+                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, protocolParameterType.toString(), parameterType.toString(), parameter.getName(), expression);
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
+                            } else {
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
+                            }
+                        };
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
                         } else {
@@ -158,14 +166,8 @@ abstract class ConvenienceMethodTemplateBase {
                     String expression = parameterExpressionsMap.get(parameterName);
                     IType parameterClientType = p.getClientType();
                     IType parameterRawType = p.getRawType();
-
                     if (ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
-                        String parameterRawTypeName = ((ClassType) parameterRawType).getName();
-                        String variableName = expression == null ? parameterName : parameterName + "In" + parameterClientType.toString();
-                        methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", parameterRawTypeName, parameterName));
-                        methodBlock.line(String.format("%1$s %2$s = %3$s;", parameterClientType, variableName, expression));
-                        methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", parameterRawTypeName, parameterName));
-                        return variableName;
+                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterClientType.toString(), parameterRawType.toString(), parameterName, expression);
                     } else {
                         return expression == null ? parameterName : expression;
                     }
@@ -659,6 +661,23 @@ abstract class ConvenienceMethodTemplateBase {
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Writes the expression to convert a convenience parameter to a protocol parameter and wrap it in JsonMergePatchHelper.
+     * @param javaBlock
+     * @param protocolParameterTypeName
+     * @param convenientParameterTypeName
+     * @param convenientParameterName
+     * @param expression
+     * @return the name of the variable that holds the converted parameter
+     */
+    private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String protocolParameterTypeName, String convenientParameterTypeName, String convenientParameterName, String expression) {
+            String variableName = convenientParameterName + "In" + protocolParameterTypeName;
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
+            javaBlock.line(String.format("%1$s %2$s = %3$s;", protocolParameterTypeName, variableName, expression));
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
+            return variableName;
     }
 
     protected static class MethodParameter {
