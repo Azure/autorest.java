@@ -43,6 +43,17 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
         return this.size;
     }
 
+    /**
+     * Set the size property: The size property.
+     * 
+     * @param size the size value to set.
+     * @return the Dinosaur object itself.
+     */
+    Dinosaur setSize(int size) {
+        this.size = size;
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

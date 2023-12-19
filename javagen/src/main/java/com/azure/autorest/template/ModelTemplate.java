@@ -180,29 +180,25 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                         methodBlock, settings));
 
-                // Add a package-private setter for stream-style serialization when the model is a polymorphic parent
-                // and code is generating with immutable output models.
-                // When generating with immutable output models there will be no constructor parameters non-required
-                // properties and no setters at all. This breaks stream-style serialization as it requires access to
-                // setters for non-constructor properties in parent models.
-                boolean addPackagePrivateSetterForStreamStyleSerialization = !immutableOutputModel
-                    || (settings.isStreamStyleSerialization() && model.isPolymorphicParent());
-                if (ClientModelUtil.hasSetter(property, settings)
-                    && addPackagePrivateSetterForStreamStyleSerialization) {
+                // The model is immutable output only if and only if the immutable output model setting is enabled and
+                // the usage of the model include output and does not include input.
+                boolean immutableOutputOnlyModel = immutableOutputModel && ClientModelUtil.isOutputOnly(model);
+
+                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputOnlyModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
-                    classBlock.method(immutableOutputModel ? JavaVisibility.PackagePrivate : methodVisibility, null,
+                    classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
-                } else if (settings.isStreamStyleSerialization() && property.isReadOnly()
-                    && !CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
+                } else if (settings.isStreamStyleSerialization() && model.isPolymorphicParent()
+                    && (property.isReadOnly() || immutableOutputOnlyModel)) {
                     // If stream-style serialization is being generated, the model has derived types, and the property
-                    // is readonly generate a package-private setter method that uses the wire type for setting the
-                    // value. This will be used in stream-style serialization as it doesn't perform reflective cracking
-                    // like Jackson Databind does, which means it needs a way to access the readonly property (aka one
-                    // without a public setter method).
+                    // is readonly or is part of an immutable output model, generate a package-private setter method
+                    // that uses the wire type for setting the value. This will be used in stream-style serialization as
+                    // it doesn't perform reflective cracking like Jackson Databind does, which means it needs a way to
+                    // access the readonly property (aka one without a public setter method).
                     generateSetterJavadoc(classBlock, model, property);
                     classBlock.method(JavaVisibility.PackagePrivate, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " " + property.getName() + ")",

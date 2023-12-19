@@ -99,6 +99,21 @@ public class TransformationAsRequiredFields {
     }
 
     /**
+     * Set the rfc1123NonRequired property: The rfc1123NonRequired property.
+     * 
+     * @param rfc1123NonRequired the rfc1123NonRequired value to set.
+     * @return the TransformationAsRequiredFields object itself.
+     */
+    public TransformationAsRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
+        if (rfc1123NonRequired == null) {
+            this.rfc1123NonRequired = null;
+        } else {
+            this.rfc1123NonRequired = new DateTimeRfc1123(rfc1123NonRequired);
+        }
+        return this;
+    }
+
+    /**
      * Get the rfc1123Required property: The rfc1123Required property.
      * 
      * @return the rfc1123Required value.
