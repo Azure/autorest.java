@@ -15,6 +15,7 @@ import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
@@ -68,7 +69,7 @@ public class Preprocessor extends NewPlugin {
 
         Path codeModelFolder;
         try {
-            codeModelFolder = Files.createTempDirectory("code-model" + UUID.randomUUID());
+            codeModelFolder = FileUtils.createTempDirectory("code-model" + UUID.randomUUID());
             logger.info("Created temp directory for code model: {}", codeModelFolder);
         } catch (IOException ex) {
             logger.error("Failed to create temp directory for code model.", ex);

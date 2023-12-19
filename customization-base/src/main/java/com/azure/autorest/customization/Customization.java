@@ -5,12 +5,12 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.extension.base.util.FileUtils;
 import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public abstract class Customization {
         // Populate editor
         Editor editor;
         try {
-            tempDirWithPrefix = Files.createTempDirectory("temp");
+            tempDirWithPrefix = FileUtils.createTempDirectory("temp");
             editor = new Editor(files, tempDirWithPrefix);
             InputStream pomStream = Customization.class.getResourceAsStream("/pom.xml");
             byte[] buffer = new byte[pomStream.available()];
