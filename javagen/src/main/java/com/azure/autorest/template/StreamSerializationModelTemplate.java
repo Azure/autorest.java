@@ -464,7 +464,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
                 if (isJsonMergePatch) {
-                    if (elementType.isNullable()) {
+                    if (containerType instanceof MapType) {
                         methodBlock.block("", codeBlock -> {
                             codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
                                 if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
@@ -476,8 +476,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                                 }
                             }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNull();"));
                         });
-                    } else {
-                        methodBlock.line(valueSerializationMethod);
                     }
                 } else {
                     methodBlock.line(valueSerializationMethod);
