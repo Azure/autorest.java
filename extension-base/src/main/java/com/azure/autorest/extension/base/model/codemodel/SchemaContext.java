@@ -30,7 +30,7 @@ public enum SchemaContext {
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();
 
     static {
-        for (SchemaContext c: values()) {
+        for (SchemaContext c : values()) {
             CONSTANTS.put(c.value, c);
         }
     }

@@ -37,8 +37,8 @@ public class ImplementationDetails {
         /**
          * Public model.
          * <p>
-         * Usually it means that the model is used in input or output of methods marked as convenience API (and that API is not marked as internal).
-         * Codegen should generate the class in models package.
+         * Usually it means that the model is used in input or output of methods marked as convenience API (and that API
+         * is not marked as internal). Codegen should generate the class in models package.
          */
         PUBLIC("public"),
 
@@ -59,9 +59,9 @@ public class ImplementationDetails {
         /**
          * External model.
          * <p>
-         * Codegen should not generate the class.
-         * Javadoc or test/sample generation will still need to process the model.
-         * Codegen likely need to have additional "require" clause in module-info.java, and additional dependency in pom.xml.
+         * Codegen should not generate the class. Javadoc or test/sample generation will still need to process the
+         * model. Codegen likely need to have additional "require" clause in module-info.java, and additional dependency
+         * in pom.xml.
          */
         EXTERNAL("external"),
 
@@ -85,21 +85,35 @@ public class ImplementationDetails {
         MULTIPART_FORM_DATA("multipart-form-data");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
+
         static {
-            for (Usage c: values()) {
+            for (Usage c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
+
         private final String value;
 
         Usage(String value) {
             this.value = value;
         }
 
+        /**
+         * Get the string value of the usage.
+         *
+         * @return the string value of the usage.
+         */
         public String value() {
             return this.value;
         }
 
+        /**
+         * Get the Usage instance from the string value.
+         *
+         * @param value the string value.
+         * @return the Usage instance.
+         * @throws IllegalArgumentException thrown if the string value doesn't match any Usage.
+         */
         public static Usage fromValue(String value) {
             Usage constant = CONSTANTS.get(value);
             if (constant == null) {
@@ -117,8 +131,8 @@ public class ImplementationDetails {
     private final String comment;
 
     /**
-     * Usually on a method, that it is only required in implementation class (FooClientImpl),
-     * but not in public class (FooClient).
+     * Usually on a method, that it is only required in implementation class (FooClientImpl), but not in public class
+     * (FooClient).
      *
      * @return whether only required in implementation class.
      */
@@ -127,6 +141,8 @@ public class ImplementationDetails {
     }
 
     /**
+     * Usage of the model or method. See {@link SchemaContext}.
+     *
      * @return the usage of the model or method.
      */
     public Set<Usage> getUsages() {
@@ -134,6 +150,8 @@ public class ImplementationDetails {
     }
 
     /**
+     * Whether the model need to be generated for public use.
+     *
      * @return whether the model need to be generated for public use.
      */
     public boolean isPublic() {
@@ -141,60 +159,115 @@ public class ImplementationDetails {
     }
 
     /**
+     * Whether the model need to be generated for internal use.
+     *
      * @return whether the model need to be generated for internal use.
      */
     public boolean isInternal() {
         return usages.contains(Usage.INTERNAL);
     }
 
+    /**
+     * Whether the model need to be generated for input use.
+     *
+     * @return whether the model need to be generated for input use.
+     */
     public boolean isInput() {
         return usages.contains(Usage.INPUT);
     }
 
+    /**
+     * Whether the model need to be generated for output use.
+     *
+     * @return whether the model need to be generated for output use.
+     */
     public boolean isOutput() {
         return usages.contains(Usage.OUTPUT);
     }
 
+    /**
+     * Whether the model need to be generated for exception use.
+     *
+     * @return whether the model need to be generated for exception use.
+     */
     public boolean isException() {
         return usages.contains(Usage.EXCEPTION);
     }
 
     /**
+     * Get the API comment.
+     *
      * @return API comment.
      */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * Creates an instance of ImplementationDetails class.
+     *
+     * @param implementationOnly whether only required in implementation class.
+     * @param usages usage of the model or method.
+     * @param comment API comment.
+     */
     protected ImplementationDetails(boolean implementationOnly, Set<Usage> usages, String comment) {
         this.implementationOnly = implementationOnly;
         this.usages = usages;
         this.comment = comment;
     }
 
+    /**
+     * Builder for {@link ImplementationDetails}.
+     */
     public static final class Builder {
         private boolean implementationOnly = false;
         private Set<Usage> usages = new HashSet<>();
         private String comment;
 
+        /**
+         * Creates an instance of Builder class.
+         */
         public Builder() {
         }
 
+        /**
+         * Set whether only required in implementation class.
+         *
+         * @param implementationOnly whether only required in implementation class.
+         * @return the Builder itself.
+         */
         public Builder implementationOnly(boolean implementationOnly) {
             this.implementationOnly = implementationOnly;
             return this;
         }
 
+        /**
+         * Sets usage of the model or method.
+         *
+         * @param usages usage of the model or method.
+         * @return the Builder itself.
+         */
         public Builder usages(Set<Usage> usages) {
             this.usages = usages;
             return this;
         }
 
+        /**
+         * Sets API comment.
+         *
+         * @param comment API comment.
+         * @return the Builder itself.
+         */
         public Builder comment(String comment) {
             this.comment = comment;
             return this;
         }
 
+        /**
+         * Builds an instance of ImplementationDetails class.
+         *
+         * @return the ImplementationDetails instance.
+         */
         public ImplementationDetails build() {
             return new ImplementationDetails(implementationOnly, usages, comment);
         }

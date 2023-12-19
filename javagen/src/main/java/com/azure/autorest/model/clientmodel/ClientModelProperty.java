@@ -281,7 +281,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     }
 
     /**
-     * Add this ServiceModelProperty's imports to the provided ISet of imports.
+     * Add this ServiceModelProperty's imports to the provided set of imports.
      * @param imports The set of imports to add to.
      */
     public final void addImportsTo(Set<String> imports, boolean shouldGenerateXmlSerialization) {
