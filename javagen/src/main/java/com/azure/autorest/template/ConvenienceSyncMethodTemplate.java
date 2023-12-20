@@ -104,7 +104,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     "serviceClient.%1$s(%2$s).mapPage(bodyItemValue -> %3$s)",
                     protocolMethod.getName(),
                     invocationExpression,
-                    expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, "bodyItemValue", typeReferenceStaticClasses)));
+                    expressionConvertFromBinaryData(
+                            responseBodyType, rawResponseBodyType, "bodyItemValue",
+                            protocolMethod.getProxyMethod().getResponseContentTypes(),
+                            typeReferenceStaticClasses)));
         } else if (convenienceMethod.getType() == ClientMethodType.LongRunningBeginSync){
             String methodName = protocolMethod.getName();
             methodBlock.methodReturn(String.format("serviceClient.%1$s(%2$s)", methodName, invocationExpression));
@@ -117,7 +120,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
             // e.g. protocolMethodResponse.getValue().toObject(...)
             String expressConversion = "protocolMethodResponse.getValue()";
             if (protocolResponseBodyType == ClassType.BINARY_DATA) {
-                expressConversion = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, expressConversion, typeReferenceStaticClasses);
+                expressConversion = expressionConvertFromBinaryData(
+                        responseBodyType, rawResponseBodyType, expressConversion,
+                        protocolMethod.getProxyMethod().getResponseContentTypes(),
+                        typeReferenceStaticClasses);
             }
 
             if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
@@ -134,7 +140,10 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
                     invocationExpression,
                     convertFromResponse);
             if (protocolResponseBodyType == ClassType.BINARY_DATA) {
-                statement = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, statement, typeReferenceStaticClasses);
+                statement = expressionConvertFromBinaryData(
+                        responseBodyType, rawResponseBodyType, statement,
+                        protocolMethod.getProxyMethod().getResponseContentTypes(),
+                        typeReferenceStaticClasses);
             }
             if (convenienceMethod.getType() == ClientMethodType.SimpleSyncRestResponse) {
                 if (isResponseBase(convenienceMethod.getReturnValue().getType())) {
@@ -201,30 +210,44 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         return type instanceof GenericType && ResponseBase.class.getSimpleName().equals(((GenericType) type).getName());
     }
 
-    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression, Set<GenericType> typeReferenceStaticClasses) {
-        if (responseBodyType instanceof EnumType) {
-            // enum
-            IType elementType = ((EnumType) responseBodyType).getElementType();
-            return String.format("%1$s.from%2$s(%3$s.toObject(%2$s.class))", responseBodyType, elementType, invocationExpression);
-        } else if (responseBodyType instanceof GenericType) {
-            // generic, e.g. list, map
-            typeReferenceStaticClasses.add((GenericType) responseBodyType);
-            return String.format("%2$s.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType), invocationExpression);
-        } else if (responseBodyType == ClassType.BINARY_DATA) {
-            // BinaryData
-            return invocationExpression;
-        } else if (isModelOrBuiltin(responseBodyType)) {
-            // class
-            return String.format("%2$s.toObject(%1$s.class)", responseBodyType.asNullable(), invocationExpression);
-        } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
-            // byte[]
-            if (rawType == ClassType.BASE_64_URL) {
-                return String.format("%1$s.toObject(Base64Url.class).decodedBytes()", invocationExpression);
-            } else {
-                return String.format("%1$s.toObject(byte[].class)", invocationExpression);
-            }
-        } else {
-            return invocationExpression;
+    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression,
+                                                   Set<String> mediaTypes,
+                                                   Set<GenericType> typeReferenceStaticClasses) {
+        SupportedMimeType mimeType = getResponseKnownMimeType(mediaTypes);
+        // TODO (weidxu): support XML etc.
+        switch (mimeType) {
+            case TEXT:
+                return String.format("%s.toString()", invocationExpression);
+
+            case BINARY:
+                return invocationExpression;
+
+            default:
+                // JSON etc.
+                if (responseBodyType instanceof EnumType) {
+                    // enum
+                    IType elementType = ((EnumType) responseBodyType).getElementType();
+                    return String.format("%1$s.from%2$s(%3$s.toObject(%2$s.class))", responseBodyType, elementType, invocationExpression);
+                } else if (responseBodyType instanceof GenericType) {
+                    // generic, e.g. List, Map
+                    typeReferenceStaticClasses.add((GenericType) responseBodyType);
+                    return String.format("%2$s.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType), invocationExpression);
+                } else if (responseBodyType == ClassType.BINARY_DATA) {
+                    // BinaryData
+                    return invocationExpression;
+                } else if (isModelOrBuiltin(responseBodyType)) {
+                    // class
+                    return String.format("%2$s.toObject(%1$s.class)", responseBodyType.asNullable(), invocationExpression);
+                } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
+                    // byte[]
+                    if (rawType == ClassType.BASE_64_URL) {
+                        return String.format("%1$s.toObject(Base64Url.class).decodedBytes()", invocationExpression);
+                    } else {
+                        return String.format("%1$s.toObject(byte[].class)", invocationExpression);
+                    }
+                } else {
+                    return invocationExpression;
+                }
         }
     }
 }

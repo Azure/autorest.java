@@ -117,7 +117,7 @@ public final class SingleContentTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>>
         downloadImageForSingleContentTypeWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return FluxUtil.withContext(context -> service.downloadImageForSingleContentType(this.client.getEndpoint(),
             accept, requestOptions, context));
     }
@@ -140,7 +140,7 @@ public final class SingleContentTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> downloadImageForSingleContentTypeWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return service.downloadImageForSingleContentTypeSync(this.client.getEndpoint(), accept, requestOptions,
             Context.NONE);
     }

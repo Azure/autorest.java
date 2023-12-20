@@ -96,6 +96,48 @@ public final class ServiceClientClientImpl {
     }
 
     /**
+     * The BazFoosImpl object to access its operations.
+     */
+    private final BazFoosImpl bazFoos;
+
+    /**
+     * Gets the BazFoosImpl object to access its operations.
+     * 
+     * @return the BazFoosImpl object.
+     */
+    public BazFoosImpl getBazFoos() {
+        return this.bazFoos;
+    }
+
+    /**
+     * The QuxesImpl object to access its operations.
+     */
+    private final QuxesImpl quxes;
+
+    /**
+     * Gets the QuxesImpl object to access its operations.
+     * 
+     * @return the QuxesImpl object.
+     */
+    public QuxesImpl getQuxes() {
+        return this.quxes;
+    }
+
+    /**
+     * The QuxBarsImpl object to access its operations.
+     */
+    private final QuxBarsImpl quxBars;
+
+    /**
+     * Gets the QuxBarsImpl object to access its operations.
+     * 
+     * @return the QuxBarsImpl object.
+     */
+    public QuxBarsImpl getQuxBars() {
+        return this.quxBars;
+    }
+
+    /**
      * The FoosImpl object to access its operations.
      */
     private final FoosImpl foos;
@@ -159,6 +201,9 @@ public final class ServiceClientClientImpl {
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.client = client;
+        this.bazFoos = new BazFoosImpl(this);
+        this.quxes = new QuxesImpl(this);
+        this.quxBars = new QuxBarsImpl(this);
         this.foos = new FoosImpl(this);
         this.bars = new BarsImpl(this);
         this.service
