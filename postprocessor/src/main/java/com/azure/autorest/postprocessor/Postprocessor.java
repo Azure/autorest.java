@@ -8,6 +8,7 @@ import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import org.slf4j.Logger;
 
@@ -119,7 +120,7 @@ public class Postprocessor {
         if (!settings.isSkipFormatting()) {
             Path tmpDir = null;
             try {
-                tmpDir = Files.createTempDirectory("spotless" + UUID.randomUUID());
+                tmpDir = FileUtils.createTempDirectory("spotless" + UUID.randomUUID());
 
                 for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
                     Path file = tmpDir.resolve(javaFile.getKey());
@@ -212,7 +213,7 @@ public class Postprocessor {
     public static Class<? extends Customization> loadCustomizationClass(String className, String code) {
         Path customizationCompile = null;
         try {
-            customizationCompile = Files.createTempDirectory("customizationCompile" + UUID.randomUUID());
+            customizationCompile = FileUtils.createTempDirectory("customizationCompile" + UUID.randomUUID());
 
             Path pomPath = customizationCompile.resolve("compile-pom.xml");
             Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
