@@ -325,7 +325,7 @@ public final class ResponseClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBinaryWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return FluxUtil.withContext(context -> service.getBinary(this.getEndpoint(), accept, requestOptions, context));
     }
 
@@ -347,7 +347,7 @@ public final class ResponseClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBinaryWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return service.getBinarySync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
