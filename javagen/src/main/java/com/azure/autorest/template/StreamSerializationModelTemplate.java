@@ -472,7 +472,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
                 methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
             } else if (valueSerializationMethod != null) {
-                if (isJsonMergePatch && elementType instanceof MapType) {
+                if (isJsonMergePatch && containerType instanceof MapType) {
                     methodBlock.block("", codeBlock -> {
                         codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
                             if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
