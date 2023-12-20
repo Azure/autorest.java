@@ -416,13 +416,16 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     protected static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+        // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
+        // This is mostly for the error response which is in JSON, and is not included in this calculation.
+
         for (String mediaType : mediaTypes) {
             SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
             if (type != null) {
                 return type;
             }
         }
-        return SupportedMimeType.BINARY;
+        return SupportedMimeType.BINARY;    // BINARY if not recognized
     }
 
     private static String expressionConvertToBinaryData(String name, IType type, String mediaType) {
@@ -435,6 +438,7 @@ abstract class ConvenienceMethodTemplateBase {
                 return name;
 
             default:
+                // JSON etc.
                 if (type == ClassType.BINARY_DATA) {
                     return name;
                 } else {
