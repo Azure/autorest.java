@@ -113,6 +113,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
+        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && protocolMethod.getProxyMethod().getRequestContentType().contains("application/merge-patch+json");
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -141,7 +142,7 @@ abstract class ConvenienceMethodTemplateBase {
                             IType parameterType = parameter.getClientMethodParameter().getClientType();
                             IType protocolParameterType = parameter.getProxyMethodParameter().getClientType();
                             String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType());
-                            if (ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
+                            if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
                                 String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, protocolParameterType.toString(), parameterType.toString(), parameter.getName(), expression);
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
                             } else {
@@ -166,7 +167,7 @@ abstract class ConvenienceMethodTemplateBase {
                     String expression = parameterExpressionsMap.get(parameterName);
                     IType parameterClientType = p.getClientType();
                     IType parameterRawType = p.getRawType();
-                    if (ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                    if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
                         return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterClientType.toString(), parameterRawType.toString(), parameterName, expression);
                     } else {
                         return expression == null ? parameterName : expression;
