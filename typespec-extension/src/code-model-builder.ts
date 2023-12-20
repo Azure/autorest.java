@@ -1045,13 +1045,16 @@ export class CodeModelBuilder {
       return;
     }
 
-    const produces = new Set<string>(["application/json"]);
+    const produces = new Set<string>();
     for (const resp of responses) {
       if (resp.responses && resp.responses.length > 0) {
         for (const response of resp.responses) {
           response.body?.contentTypes.forEach((it) => produces.add(it));
         }
       }
+    }
+    if (produces.size === 0) {
+      produces.add("application/json");
     }
     const acceptTypes = Array.from(produces.values()).join(", ");
 
