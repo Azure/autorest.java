@@ -107,13 +107,8 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
             jsonWriter.writeNullField("requiredProperty");
         }
         if (this.nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
-                if (element != null) {
-                    writer.writeBinary(element);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                (writer, element) -> writer.writeBinary(element));
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");
         }

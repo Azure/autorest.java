@@ -58,6 +58,9 @@ public final class PatchClient {
      *     intValue: Integer (Optional)
      *     enumValue: String(a/b/c) (Optional)
      *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * <p>
@@ -78,6 +81,9 @@ public final class PatchClient {
      *     intValue: Integer (Optional)
      *     enumValue: String(a/b/c) (Optional)
      *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -115,6 +121,9 @@ public final class PatchClient {
      *     intValue: Integer (Optional)
      *     enumValue: String(a/b/c) (Optional)
      *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * <p>
@@ -135,6 +144,9 @@ public final class PatchClient {
      *     intValue: Integer (Optional)
      *     enumValue: String(a/b/c) (Optional)
      *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 

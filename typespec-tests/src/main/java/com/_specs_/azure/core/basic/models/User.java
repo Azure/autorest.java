@@ -149,15 +149,7 @@ public final class User implements JsonSerializable<User> {
             jsonWriter.writeNullField("name");
         }
         if (this.orders != null) {
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
         } else if (updatedProperties.contains("orders")) {
             jsonWriter.writeNullField("orders");
         }

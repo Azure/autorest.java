@@ -508,10 +508,8 @@ public final class BasicClient {
     public User createOrReplace(int id, User resource) {
         // Generated convenience method for createOrReplaceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
-        return createOrReplaceWithResponse(id, resourceInBinaryData, requestOptions).getValue().toObject(User.class);
+        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions).getValue()
+            .toObject(User.class);
     }
 
     /**

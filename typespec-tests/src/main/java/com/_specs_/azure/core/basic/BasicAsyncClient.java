@@ -516,11 +516,8 @@ public final class BasicAsyncClient {
     public Mono<User> createOrReplace(int id, User resource) {
         // Generated convenience method for createOrReplaceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
-        return createOrReplaceWithResponse(id, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(User.class));
+        return createOrReplaceWithResponse(id, BinaryData.fromObject(resource), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
     /**

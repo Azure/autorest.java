@@ -107,15 +107,8 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
             jsonWriter.writeNullField("requiredProperty");
         }
         if (this.nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                (writer, element) -> writer.writeJson(element));
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");
         }

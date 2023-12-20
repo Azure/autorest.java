@@ -13,6 +13,7 @@ import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,6 +69,12 @@ public final class Resource implements JsonSerializable<Resource> {
      */
     @Generated
     private InnerModel innerModelProperty;
+
+    /*
+     * The array property.
+     */
+    @Generated
+    private List<InnerModel> array;
 
     @Generated
     private boolean jsonMergePatch;
@@ -245,6 +252,29 @@ public final class Resource implements JsonSerializable<Resource> {
         return this;
     }
 
+    /**
+     * Get the array property: The array property.
+     * 
+     * @return the array value.
+     */
+    @Generated
+    public List<InnerModel> getArray() {
+        return this.array;
+    }
+
+    /**
+     * Set the array property: The array property.
+     * 
+     * @param array the array value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setArray(List<InnerModel> array) {
+        this.array = array;
+        this.updatedProperties.add("array");
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -257,6 +287,7 @@ public final class Resource implements JsonSerializable<Resource> {
             jsonWriter.writeNumberField("intValue", this.intValue);
             jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
             jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
+            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
             return jsonWriter.writeEndObject();
         }
     }
@@ -303,6 +334,11 @@ public final class Resource implements JsonSerializable<Resource> {
         } else if (updatedProperties.contains("innerModelProperty")) {
             jsonWriter.writeNullField("wireNameForInnerModelProperty");
         }
+        if (this.array != null) {
+            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+        } else if (updatedProperties.contains("array")) {
+            jsonWriter.writeNullField("array");
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -325,6 +361,7 @@ public final class Resource implements JsonSerializable<Resource> {
             Integer intValue = null;
             ResourceEnumValue enumValue = null;
             InnerModel innerModelProperty = null;
+            List<InnerModel> array = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -345,6 +382,8 @@ public final class Resource implements JsonSerializable<Resource> {
                     enumValue = ResourceEnumValue.fromString(reader.getString());
                 } else if ("wireNameForInnerModelProperty".equals(fieldName)) {
                     innerModelProperty = InnerModel.fromJson(reader);
+                } else if ("array".equals(fieldName)) {
+                    array = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
                 } else {
                     reader.skipChildren();
                 }
@@ -357,6 +396,7 @@ public final class Resource implements JsonSerializable<Resource> {
             deserializedResource.intValue = intValue;
             deserializedResource.enumValue = enumValue;
             deserializedResource.innerModelProperty = innerModelProperty;
+            deserializedResource.array = array;
 
             return deserializedResource;
         });

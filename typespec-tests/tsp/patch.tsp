@@ -33,6 +33,7 @@ model Resource {
 
   @projectedName("json", "wireNameForInnerModelProperty")
   innerModelProperty?: InnerModel;
+  array?: InnerModel[];
 }
 
 model InnerModel {

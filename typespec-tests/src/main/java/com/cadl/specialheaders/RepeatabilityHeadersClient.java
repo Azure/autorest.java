@@ -289,10 +289,8 @@ public final class RepeatabilityHeadersClient {
     public Resource put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return putWithResponse(name, resourceInBinaryData, requestOptions).getValue().toObject(Resource.class);
+        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+            .toObject(Resource.class);
     }
 
     /**

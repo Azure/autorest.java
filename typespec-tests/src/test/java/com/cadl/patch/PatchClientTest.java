@@ -8,6 +8,7 @@ import com.cadl.patch.implementation.JsonMergePatchHelper;
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
+import com.cadl.patch.models.Salmon;
 import com.cadl.patch.models.Shark;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class PatchClientTest {
@@ -72,6 +74,20 @@ public class PatchClientTest {
     }
 
     @Test
+    public void testSerializationForArrayProperty() throws JsonProcessingException {
+        Resource resource = new Resource(new HashMap<>());
+        resource.setArray(Arrays.asList(new InnerModel("value1"), new InnerModel("value2")));
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        resource.getMap().put("key", null);
+        resource.getArray().set(0, null);
+        String json = BinaryData.fromObject(resource).toString(); // {"map":{"key":null},"array":[{"name":"value2"}]}
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("map").get("key").getNodeType());
+        Assertions.assertEquals(1, node.get("array").size());
+        Assertions.assertEquals("value2", node.get("array").get(0).get("name").asText());
+    }
+
+    @Test
     public void testSerializationForEnum() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
         resource.setEnumValue(null);
@@ -84,7 +100,7 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForHierarchicalModel() throws JsonProcessingException {
-        Fish fish = new Shark(1);
+        Fish fish = new Salmon(1);
         fish.setColor("pink");
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
         fish.setColor(null);

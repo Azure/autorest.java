@@ -292,10 +292,7 @@ public final class RepeatabilityHeadersAsyncClient {
     public Mono<Resource> put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return putWithResponse(name, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
+        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 

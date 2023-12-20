@@ -20,7 +20,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.cadl.specialheaders.implementation.EtagHeadersImpl;
-import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.models.Resource;
 import java.time.OffsetDateTime;
 
@@ -223,10 +222,7 @@ public final class EtagHeadersClient {
             requestOptions.setHeader(HttpHeaderName.IF_MODIFIED_SINCE,
                 String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return putWithRequestHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
+        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 
@@ -248,10 +244,7 @@ public final class EtagHeadersClient {
     public Resource putWithRequestHeaders(String name, Resource resource) {
         // Generated convenience method for putWithRequestHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return putWithRequestHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
+        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 
@@ -282,10 +275,7 @@ public final class EtagHeadersClient {
         if (ifNoneMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
+        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 
@@ -307,10 +297,7 @@ public final class EtagHeadersClient {
     public Resource patchWithMatchHeaders(String name, Resource resource) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
+        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 }

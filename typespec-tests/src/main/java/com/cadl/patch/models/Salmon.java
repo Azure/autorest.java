@@ -177,15 +177,7 @@ public final class Salmon extends Fish {
             jsonWriter.writeNullField("color");
         }
         if (this.friends != null) {
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
+            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         } else if (updatedProperties.contains("friends")) {
             jsonWriter.writeNullField("friends");
         }
