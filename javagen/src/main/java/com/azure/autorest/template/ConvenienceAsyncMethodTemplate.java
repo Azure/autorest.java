@@ -73,7 +73,10 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         IType rawResponseBodyType = convenienceMethod.getProxyMethod().getRawResponseBodyType();
 
         if (methodType == ClientMethodType.PagingAsync) {
-            String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, rawResponseBodyType, typeReferenceStaticClasses);
+            String expressionMapFromBinaryData = expressionMapFromBinaryData(
+                    responseBodyType, rawResponseBodyType,
+                    protocolMethod.getProxyMethod().getResponseContentTypes(),
+                    typeReferenceStaticClasses);
             if (expressionMapFromBinaryData == null) {
                 // no need to do the map
                 methodBlock.methodReturn(String.format("%1$s(%2$s)", getMethodName(protocolMethod), invocationExpression));
@@ -100,7 +103,10 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         } else {
             String returnTypeConversionExpression = "";
             if (protocolResponseBodyType == ClassType.BINARY_DATA) {
-                returnTypeConversionExpression = expressionConvertFromBinaryData(responseBodyType, rawResponseBodyType, typeReferenceStaticClasses);
+                returnTypeConversionExpression = expressionConvertFromBinaryData(
+                        responseBodyType, rawResponseBodyType,
+                        protocolMethod.getProxyMethod().getResponseContentTypes(),
+                        typeReferenceStaticClasses);
             }
 
             methodBlock.methodReturn(
@@ -133,8 +139,13 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         return type;
     }
 
-    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, Set<GenericType> typeReferenceStaticClasses) {
-        String expressionMapFromBinaryData = expressionMapFromBinaryData(responseBodyType, rawType, typeReferenceStaticClasses);
+    private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType,
+                                                   Set<String> mediaTypes,
+                                                   Set<GenericType> typeReferenceStaticClasses) {
+        String expressionMapFromBinaryData = expressionMapFromBinaryData(
+                responseBodyType, rawType,
+                mediaTypes,
+                typeReferenceStaticClasses);
         if (expressionMapFromBinaryData != null) {
             return String.format(".map(%s)", expressionMapFromBinaryData);
         } else {
@@ -143,28 +154,45 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
         }
     }
 
-    private String expressionMapFromBinaryData(IType responseBodyType, IType rawType, Set<GenericType> typeReferenceStaticClasses) {
+    private String expressionMapFromBinaryData(IType responseBodyType, IType rawType,
+                                               Set<String> mediaTypes,
+                                               Set<GenericType> typeReferenceStaticClasses) {
         String mapExpression = null;
-        if (responseBodyType instanceof EnumType) {
-            // enum
-            mapExpression = String.format("protocolMethodData -> %1$s.from%2$s(protocolMethodData.toObject(%2$s.class))", responseBodyType, ((EnumType) responseBodyType).getElementType());
-        } else if (responseBodyType instanceof GenericType) {
-            // generic, e.g. list, map
-            typeReferenceStaticClasses.add((GenericType) responseBodyType);
-            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType));
-        } else if (responseBodyType == ClassType.BINARY_DATA) {
-            // BinaryData, no need to do the map in expressionConvertFromBinaryData
-            mapExpression = null;
-        } else if (isModelOrBuiltin(responseBodyType)) {
-            // class
-            mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType.asNullable());
-        } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
-            // byte[]
-            if (rawType == ClassType.BASE_64_URL) {
-                return "protocolMethodData -> protocolMethodData.toObject(Base64Url.class).decodedBytes()";
-            } else {
-                return "protocolMethodData -> protocolMethodData.toObject(byte[].class)";
-            }
+        SupportedMimeType mimeType = getResponseKnownMimeType(mediaTypes);
+        // TODO (weidxu): support XML etc.
+        switch (mimeType) {
+            case TEXT:
+                mapExpression = "protocolMethodData -> protocolMethodData.toString()";
+                break;
+
+            case BINARY:
+                mapExpression = null;
+                break;
+
+            default:
+                // JSON etc.
+                if (responseBodyType instanceof EnumType) {
+                    // enum
+                    mapExpression = String.format("protocolMethodData -> %1$s.from%2$s(protocolMethodData.toObject(%2$s.class))", responseBodyType, ((EnumType) responseBodyType).getElementType());
+                } else if (responseBodyType instanceof GenericType) {
+                    // generic, e.g. list, map
+                    typeReferenceStaticClasses.add((GenericType) responseBodyType);
+                    mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s)", TemplateUtil.getTypeReferenceCreation(responseBodyType));
+                } else if (responseBodyType == ClassType.BINARY_DATA) {
+                    // BinaryData, no need to do the map in expressionConvertFromBinaryData
+                    mapExpression = null;
+                } else if (isModelOrBuiltin(responseBodyType)) {
+                    // class
+                    mapExpression = String.format("protocolMethodData -> protocolMethodData.toObject(%1$s.class)", responseBodyType.asNullable());
+                } else if (responseBodyType == ArrayType.BYTE_ARRAY) {
+                    // byte[]
+                    if (rawType == ClassType.BASE_64_URL) {
+                        return "protocolMethodData -> protocolMethodData.toObject(Base64Url.class).decodedBytes()";
+                    } else {
+                        return "protocolMethodData -> protocolMethodData.toObject(byte[].class)";
+                    }
+                }
+                break;
         }
         return mapExpression;
     }

@@ -209,7 +209,7 @@ public final class ResponseBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> octetStreamWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json, application/octet-stream";
+        final String accept = "application/octet-stream";
         return FluxUtil.withContext(context -> service.octetStream(accept, requestOptions, context));
     }
 
@@ -231,7 +231,7 @@ public final class ResponseBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> octetStreamWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json, application/octet-stream";
+        final String accept = "application/octet-stream";
         return service.octetStreamSync(accept, requestOptions, Context.NONE);
     }
 
@@ -253,7 +253,7 @@ public final class ResponseBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> customContentTypeWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return FluxUtil.withContext(context -> service.customContentType(accept, requestOptions, context));
     }
 
@@ -275,7 +275,7 @@ public final class ResponseBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> customContentTypeWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json, image/png";
+        final String accept = "image/png";
         return service.customContentTypeSync(accept, requestOptions, Context.NONE);
     }
 

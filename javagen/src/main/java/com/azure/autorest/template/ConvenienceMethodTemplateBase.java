@@ -39,6 +39,8 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.TypeReference;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -48,6 +50,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -124,7 +127,7 @@ abstract class ConvenienceMethodTemplateBase {
                 methodBlock.line(String.format("requestOptions.setContext(%s);", parameter.getName()));
             } else if (protocolParameter != null) {
                 // protocol method parameter exists
-                String expression = expressionConvertToType(parameter.getName(), parameter);
+                String expression = expressionConvertToType(parameter.getName(), parameter, protocolMethod.getProxyMethod().getRequestContentType());
                 parameterExpressionsMap.put(protocolParameter.getName(), expression);
             } else if (parameter.getProxyMethodParameter() != null) {
                 // protocol method parameter not exist, set the parameter via RequestOptions
@@ -141,7 +144,7 @@ abstract class ConvenienceMethodTemplateBase {
                         Consumer<JavaBlock> writeLine = javaBlock -> {
                             IType parameterType = parameter.getClientMethodParameter().getClientType();
                             IType protocolParameterType = parameter.getProxyMethodParameter().getClientType();
-                            String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType());
+                            String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
                             if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
                                 String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, protocolParameterType.toString(), parameterType.toString(), parameter.getName(), expression);
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
@@ -403,17 +406,64 @@ abstract class ConvenienceMethodTemplateBase {
             || ClientModelUtil.isClientModel(type); // client model
     }
 
-    private static String expressionConvertToBinaryData(String name, IType type) {
-        if (type == ClassType.BINARY_DATA) {
-            return name;
-        } else {
-            if (type == ClassType.BASE_64_URL) {
-                return "BinaryData.fromObject(Base64Url.encode(" + name + "))";
-            } else if (type instanceof EnumType) {
-                return "BinaryData.fromObject(" + name + " == null ? null : " + name + "." + ((EnumType) type).getToMethodName() + "())";
-            } else {
-                return "BinaryData.fromObject(" + name + ")";
+    protected enum SupportedMimeType {
+        TEXT,
+        XML,
+        MULTIPART,
+        BINARY,
+        JSON
+    }
+
+    // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+    private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    static {
+        SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
+        SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
+        SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
+        SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
+        SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
+        SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
+        SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
+        SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
+        // not in azure-core
+        SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
+    }
+
+    protected static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+        // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
+        // This is mostly for the error response which is in JSON, and is not included in this calculation.
+
+        for (String mediaType : mediaTypes) {
+            SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
+            if (type != null) {
+                return type;
             }
+        }
+        return SupportedMimeType.BINARY;    // BINARY if not recognized
+    }
+
+    private static String expressionConvertToBinaryData(String name, IType type, String mediaType) {
+        SupportedMimeType mimeType = getResponseKnownMimeType(Collections.singleton(mediaType));
+        switch (mimeType) {
+            case TEXT:
+                return "BinaryData.fromString(" + name + ")";
+
+            case BINARY:
+                return name;
+
+            default:
+                // JSON etc.
+                if (type == ClassType.BINARY_DATA) {
+                    return name;
+                } else {
+                    if (type == ClassType.BASE_64_URL) {
+                        return "BinaryData.fromObject(Base64Url.encode(" + name + "))";
+                    } else if (type instanceof EnumType) {
+                        return "BinaryData.fromObject(" + name + " == null ? null : " + name + "." + ((EnumType) type).getToMethodName() + "())";
+                    } else {
+                        return "BinaryData.fromObject(" + name + ")";
+                    }
+                }
         }
     }
 
@@ -541,7 +591,7 @@ abstract class ConvenienceMethodTemplateBase {
         }
     }
 
-    private static String expressionConvertToType(String name, MethodParameter convenienceParameter) {
+    private static String expressionConvertToType(String name, MethodParameter convenienceParameter, String mediaType) {
         if (convenienceParameter.getProxyMethodParameter().getRequestParameterLocation() == RequestParameterLocation.BODY) {
             IType bodyType = convenienceParameter.getProxyMethodParameter().getRawType();
             if (bodyType instanceof ClassType) {
@@ -551,7 +601,7 @@ abstract class ConvenienceMethodTemplateBase {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
-            return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getWireType());
+            return expressionConvertToBinaryData(name, convenienceParameter.getClientMethodParameter().getWireType(), mediaType);
         } else {
             IType type = convenienceParameter.getClientMethodParameter().getWireType();
             if (type instanceof EnumType) {

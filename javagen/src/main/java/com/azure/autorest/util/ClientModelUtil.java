@@ -440,6 +440,25 @@ public class ClientModelUtil {
     }
 
     /**
+     * Check if the type is an output only model.
+     * <p>
+     * A model is considered output only if and only if the model's usages contain either
+     * {@link ImplementationDetails#isOutput()} or {@link ImplementationDetails#isException()} and do not contain
+     * {@link ImplementationDetails#isInput()}.
+     *
+     * @param model the client model.
+     * @return whether the type is an output only model.
+     */
+    public static boolean isOutputOnly(ClientModel model) {
+        ImplementationDetails details = model.getImplementationDetails();
+        if (details == null || details.getUsages() == null) {
+            return false;
+        }
+
+        return (details.isOutput() || details.isException()) && !details.isInput();
+    }
+
+    /**
      * Check if the model is used in json-merge-patch operation
      */
     public static boolean isJsonMergePatchModel(ClientModel model) {

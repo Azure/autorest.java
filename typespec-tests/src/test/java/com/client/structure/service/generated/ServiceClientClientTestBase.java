@@ -15,12 +15,21 @@ import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
 import com.client.structure.service.BarClient;
+import com.client.structure.service.BazFooClient;
 import com.client.structure.service.FooClient;
+import com.client.structure.service.QuxBarClient;
+import com.client.structure.service.QuxClient;
 import com.client.structure.service.ServiceClientClient;
 import com.client.structure.service.ServiceClientClientBuilder;
 
 class ServiceClientClientTestBase extends TestProxyTestBase {
     protected ServiceClientClient serviceClientClient;
+
+    protected BazFooClient bazFooClient;
+
+    protected QuxClient quxClient;
+
+    protected QuxBarClient quxBarClient;
 
     protected FooClient fooClient;
 
@@ -39,6 +48,42 @@ class ServiceClientClientTestBase extends TestProxyTestBase {
             serviceClientClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         serviceClientClient = serviceClientClientbuilder.buildClient();
+
+        ServiceClientClientBuilder bazFooClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            bazFooClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            bazFooClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        bazFooClient = bazFooClientbuilder.buildBazFooClient();
+
+        ServiceClientClientBuilder quxClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            quxClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            quxClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        quxClient = quxClientbuilder.buildQuxClient();
+
+        ServiceClientClientBuilder quxBarClientbuilder = new ServiceClientClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .client(Configuration.getGlobalConfiguration().get("CLIENT", "client"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            quxBarClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            quxBarClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        quxBarClient = quxBarClientbuilder.buildQuxBarClient();
 
         ServiceClientClientBuilder fooClientbuilder = new ServiceClientClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))

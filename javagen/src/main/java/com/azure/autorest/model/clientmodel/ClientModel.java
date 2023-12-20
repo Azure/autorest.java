@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,8 @@ public class ClientModel {
      * Get the name of this model.
      */
     private final String name;
+
+    private final String fullName;
     /**
      * Get the imports for this model.
      */
@@ -31,9 +34,13 @@ public class ClientModel {
      */
     private final String description;
     /**
-     * Get whether this model has model types that derive from it.
+     * Get whether this model is part of a polymorphic hierarchy.
      */
     private final boolean isPolymorphic;
+    /**
+     * Get whether this model is a parent in a polymorphic hierarchy.
+     */
+    private final boolean isPolymorphicParent;
     /**
      * Get the name of the property that determines which polymorphic model type to create.
      */
@@ -60,7 +67,7 @@ public class ClientModel {
     private final String xmlName;
 
     /**
-     * The xml namesapce for a model.
+     * The xml namespace for a model.
      */
     private final String xmlNamespace;
 
@@ -69,23 +76,40 @@ public class ClientModel {
      */
     private final List<ClientModelProperty> properties;
 
+    /**
+     * Get the property references for this model. They are used to call property method from i.e. a parent model.
+     */
     private final List<ClientModelPropertyReference> propertyReferences;
 
+    /**
+     * The type of the model.
+     */
     private final IType modelType;
 
-    /*
+    /**
      * Whether this model is a strongly-typed HTTP headers class.
      */
     private final boolean stronglyTypedHeader;
 
+    /**
+     * The implementation details for the model.
+     */
     private final ImplementationDetails implementationDetails;
+
+    /**
+     * Whether the model is used in XML serialization.
+     */
     private final boolean usedInXml;
 
+    /**
+     * The cross language definition id for the model.
+     */
     private final String crossLanguageDefinitionId;
 
     /**
      * Create a new ServiceModel with the provided properties.
      *
+     * @param packageKeyword The package that this model class belongs to.
      * @param name The name of this model.
      * @param imports The imports for this model.
      * @param description The description of this model.
@@ -96,22 +120,28 @@ public class ClientModel {
      * @param parentModelName The parent model of this model.
      * @param derivedModels The models that derive from this model.
      * @param xmlName The name that will be used for this model's XML element representation.
+     * @param xmlNamespace The XML namespace that will be used for this model's XML element representation.
      * @param properties The properties for this model.
      * @param propertyReferences The property references for this model.
      * @param modelType the type of the model.
      * @param stronglyTypedHeader Whether this model is a strongly-typed HTTP headers class.
+     * @param implementationDetails The implementation details for the model.
      * @param usedInXml Whether the model is used in XML serialization.
+     * @param crossLanguageDefinitionId The cross language definition id for the model.
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
         boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
         String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
-        List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences,
-        IType modelType, boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml, String crossLanguageDefinitionId) {
-        packageName = packageKeyword;
+        List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences, IType modelType,
+        boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml,
+        String crossLanguageDefinitionId) {
+        this.packageName = packageKeyword;
         this.name = name;
+        this.fullName = packageName + "." + name;
         this.imports = imports;
         this.description = description;
         this.isPolymorphic = isPolymorphic;
+        this.isPolymorphicParent = isPolymorphic && !CoreUtils.isNullOrEmpty(derivedModels);
         this.polymorphicDiscriminator = polymorphicDiscriminator;
         this.serializedName = serializedName;
         this.needsFlatten = needsFlatten;
@@ -128,73 +158,164 @@ public class ClientModel {
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
 
+    /**
+     * Get the cross language definition id for the model.
+     *
+     * @return the cross language definition id for the model.
+     */
     public String getCrossLanguageDefinitionId() {
         return crossLanguageDefinitionId;
     }
 
+    /**
+     * Gets the package that this model class belongs to.
+     *
+     * @return The package that this model class belongs to.
+     */
     public final String getPackage() {
         return packageName;
     }
 
+    /**
+     * Gets the name of this model.
+     *
+     * @return The name of this model.
+     */
     public final String getName() {
         return name;
     }
 
     /**
-     * The full name of this model class (package and name).
+     * Gets the fully qualified name of this model.
+     *
+     * @return The fully qualified name of this model.
      */
     public final String getFullName() {
-        return String.format("%1$s.%2$s", getPackage(), getName());
+        return fullName;
     }
 
+    /**
+     * Gets the imports for this model.
+     *
+     * @return The imports for this model.
+     */
     public final List<String> getImports() {
         return imports;
     }
 
+    /**
+     * Gets the description of this model.
+     *
+     * @return The description of this model.
+     */
     public final String getDescription() {
         return description;
     }
 
+    /**
+     * Gets whether this model is part of a polymorphic hierarchy.
+     *
+     * @return Whether this model is part of a polymorphic hierarchy.
+     */
     public final boolean isPolymorphic() {
         return isPolymorphic;
     }
 
+    /**
+     * Gets whether this model is a parent in a polymorphic hierarchy.
+     *
+     * @return Whether this model is a parent in a polymorphic hierarchy.
+     */
+    public final boolean isPolymorphicParent() {
+        return isPolymorphicParent;
+    }
+
+    /**
+     * Gets the name of the property that determines which polymorphic model type to create.
+     *
+     * @return The name of the property that determines which polymorphic model type to create.
+     */
     public final String getPolymorphicDiscriminator() {
         return polymorphicDiscriminator;
     }
 
+    /**
+     * Gets the name that is used for this model when it is serialized.
+     *
+     * @return The name that is used for this model when it is serialized.
+     */
     public final String getSerializedName() {
         return serializedName;
     }
 
+    /**
+     * Gets whether this model needs serialization flattening.
+     *
+     * @return Whether this model needs serialization flattening.
+     */
     public final boolean getNeedsFlatten() {
         return needsFlatten;
     }
 
+    /**
+     * Gets the parent model of this model.
+     *
+     * @return The parent model of this model.
+     */
     public final String getParentModelName() {
         return parentModelName;
     }
 
+    /**
+     * Gets the models that derive from this model.
+     *
+     * @return The models that derive from this model.
+     */
     public final List<ClientModel> getDerivedModels() {
         return derivedModels;
     }
 
+    /**
+     * Gets the name that will be used for this model's XML element representation.
+     *
+     * @return The name that will be used for this model's XML element representation.
+     */
     public final String getXmlName() {
         return xmlName;
     }
 
+    /**
+     * Gets the XML namespace that will be used for this model's XML element representation.
+     *
+     * @return The XML namespace that will be used for this model's XML element representation.
+     */
     public String getXmlNamespace() {
         return xmlNamespace;
     }
 
+    /**
+     * Gets the properties for this model.
+     *
+     * @return The properties for this model.
+     */
     public final List<ClientModelProperty> getProperties() {
         return properties;
     }
 
+    /**
+     * Gets the type of the model.
+     *
+     * @return The type of the model.
+     */
     public IType getType() {
         return modelType;
     }
 
+    /**
+     * Gets the property references for this model. They are used to call property method from i.e. a parent model.
+     *
+     * @return The property references for this model.
+     */
     public List<ClientModelPropertyReference> getPropertyReferences() {
         return propertyReferences == null ? Collections.emptyList() : propertyReferences;
     }
@@ -208,6 +329,11 @@ public class ClientModel {
         return stronglyTypedHeader;
     }
 
+    /**
+     * Gets the implementation details for the model.
+     *
+     * @return The implementation details for the model.
+     */
     public ImplementationDetails getImplementationDetails() {
         return implementationDetails;
     }
@@ -241,7 +367,7 @@ public class ClientModel {
     }
 
     /**
-     * Add this ServiceModel's imports to the provided ISet of imports.
+     * Add this ServiceModel's imports to the provided set of imports.
      *
      * @param imports The set of imports to add to.
      * @param settings The settings for this Java generator session.
@@ -252,7 +378,8 @@ public class ClientModel {
         addFluentAnnotationImport(imports);
         addImmutableAnnotationImport(imports);
 
-        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE && needsFlatten) {
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE
+            && needsFlatten) {
             addJsonFlattenAnnotationImport(imports);
         }
 
@@ -273,14 +400,29 @@ public class ClientModel {
         }
     }
 
+    /**
+     * Add the Fluent annotation import to the provided set of imports.
+     *
+     * @param imports The set of imports to add to.
+     */
     protected void addJsonFlattenAnnotationImport(Set<String> imports) {
         imports.add("com.azure.core.annotation.JsonFlatten");
     }
 
+    /**
+     * Add the Immutable annotation import to the provided set of imports.
+     *
+     * @param imports The set of imports to add to.
+     */
     protected void addImmutableAnnotationImport(Set<String> imports) {
         Annotation.IMMUTABLE.addImportsTo(imports);
     }
 
+    /**
+     * Add the Fluent annotation import to the provided set of imports.
+     *
+     * @param imports The set of imports to add to.
+     */
     protected void addFluentAnnotationImport(Set<String> imports) {
         Annotation.FLUENT.addImportsTo(imports);
     }
@@ -294,6 +436,9 @@ public class ClientModel {
         return usedInXml;
     }
 
+    /**
+     * A builder for building a new ClientModel.
+     */
     public static class Builder {
         protected String packageName;
         protected String name;
@@ -514,30 +659,26 @@ public class ClientModel {
             return this;
         }
 
+        /**
+         * Sets the cross language definition id for the model.
+         *
+         * @param crossLanguageDefinitionId the cross language definition id for the model.
+         * @return the Builder itself
+         */
         public Builder crossLanguageDefinitionId(String crossLanguageDefinitionId) {
             this.crossLanguageDefinitionId = crossLanguageDefinitionId;
             return this;
         }
 
+        /**
+         * Build a new ClientModel instance with the provided properties.
+         *
+         * @return a new ClientModel instance with the provided properties
+         */
         public ClientModel build() {
-            return new ClientModel(packageName,
-                name,
-                imports,
-                description,
-                isPolymorphic,
-                polymorphicDiscriminator,
-                serializedName,
-                needsFlatten,
-                parentModelName,
-                derivedModels,
-                xmlName,
-                xmlNamespace,
-                properties,
-                propertyReferences,
-                modelType,
-                stronglyTypedHeader,
-                implementationDetails,
-                usedInXml,
+            return new ClientModel(packageName, name, imports, description, isPolymorphic, polymorphicDiscriminator,
+                serializedName, needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties,
+                propertyReferences, modelType, stronglyTypedHeader, implementationDetails, usedInXml,
                 crossLanguageDefinitionId);
         }
     }

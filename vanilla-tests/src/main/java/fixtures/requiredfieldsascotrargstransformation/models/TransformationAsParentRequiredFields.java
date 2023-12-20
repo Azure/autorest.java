@@ -85,6 +85,21 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
     }
 
     /**
+     * Set the rfc1123NonRequiredChild property: The rfc1123NonRequiredChild property.
+     * 
+     * @param rfc1123NonRequiredChild the rfc1123NonRequiredChild value to set.
+     * @return the TransformationAsParentRequiredFields object itself.
+     */
+    public TransformationAsParentRequiredFields setRfc1123NonRequiredChild(OffsetDateTime rfc1123NonRequiredChild) {
+        if (rfc1123NonRequiredChild == null) {
+            this.rfc1123NonRequiredChild = null;
+        } else {
+            this.rfc1123NonRequiredChild = new DateTimeRfc1123(rfc1123NonRequiredChild);
+        }
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.

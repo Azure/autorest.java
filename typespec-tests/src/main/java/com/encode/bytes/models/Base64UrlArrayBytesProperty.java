@@ -11,7 +11,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -33,13 +32,8 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
      * @param value the value value to set.
      */
     @Generated
-    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     public Base64UrlArrayBytesProperty(List<byte[]> value) {
         this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
-    }
-
-    @Generated
-    private Base64UrlArrayBytesProperty() {
     }
 
     /**
