@@ -207,7 +207,6 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("use-default-http-status-code-to-exception-type-mapping", true);
         SETTINGS_MAP.put("polling", new HashMap<String, Object>());
 
-        SETTINGS_MAP.put("models-subpackage", "models");
         SETTINGS_MAP.put("client-logger", true);
         SETTINGS_MAP.put("required-fields-as-ctor-args", true);
         SETTINGS_MAP.put("required-parameter-client-methods", true);
@@ -272,10 +271,16 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getCustomTypeSubpackage() != null) {
             SETTINGS_MAP.put("custom-types-subpackage", options.getCustomTypeSubpackage());
         }
+
+        if (options.getModelsSubpackage() != null) {
+            SETTINGS_MAP.put("models-subpackage", options.getModelsSubpackage());
+        }
+
         if (options.getCustomizationClass() != null) {
             SETTINGS_MAP.put("customization-class",
                 Paths.get(options.getOutputDir()).resolve(options.getCustomizationClass()).toAbsolutePath().toString());
         }
+
         if (emitterOptions.getPolling() != null) {
             SETTINGS_MAP.put("polling", options.getPolling());
         }
