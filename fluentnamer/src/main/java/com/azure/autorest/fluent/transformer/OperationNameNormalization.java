@@ -111,7 +111,7 @@ class OperationNameNormalization {
 
             String newName = null;
             if (HttpMethod.GET.name().equalsIgnoreCase(operation.getRequests().iterator().next().getProtocol().getHttp().getMethod())) {
-                if (urlSegments.length == 8
+                if (urlSegments.length == 8 // e.g. subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
                         && urlSegments[2].equalsIgnoreCase(SEGMENT_RESOURCE_GROUPS)
                         && urlSegments[4].equalsIgnoreCase(SEGMENT_PROVIDERS)) {
@@ -132,6 +132,7 @@ class OperationNameNormalization {
                     }
                     if (candidateWellKnownName.contains(WellKnownMethodName.LIST)) {
                         if (urlSegments.length == 5 && urlSegments[2].equalsIgnoreCase(SEGMENT_PROVIDERS)) {
+                            // e.g. subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/catalogs
                             newName = WellKnownMethodName.LIST.getMethodName();
                         }
                     }

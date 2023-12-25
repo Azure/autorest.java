@@ -656,15 +656,15 @@ export class CodeModelBuilder {
     codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
-    let convenienceApiName = this.getConvenienceApiName(operation);
-    if (this.isArm()) {
-      // replace workaround
-      if (convenienceApiName === "listBySubscription") {
-        convenienceApiName = "list";
-      } else if (groupName?.includes("atalog") && (convenienceApiName === "get" || convenienceApiName === "Get")) {
-        convenienceApiName = "getByResourceGroup";
-      }
-    }
+    const convenienceApiName = this.getConvenienceApiName(operation);
+    // if (this.isArm()) {
+    //   // replace workaround
+    //   if (convenienceApiName === "listBySubscription") {
+    //     convenienceApiName = "list";
+    //   } else if (groupName?.includes("rafficController") && (convenienceApiName === "get" || convenienceApiName === "Get")) {
+    //     convenienceApiName = "getByResourceGroup";
+    //   }
+    // }
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
     let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 

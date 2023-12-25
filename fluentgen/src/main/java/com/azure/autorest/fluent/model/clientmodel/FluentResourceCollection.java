@@ -79,7 +79,9 @@ public class FluentResourceCollection {
             .collect(Collectors.toSet());
 
         for (ClientMethod clientMethod : this.groupClient.getClientMethods()) {
-            if (clientMethod.isImplementationOnly() || clientMethod.getMethodVisibility() != JavaVisibility.Public || clientMethod.getName().endsWith("Next")) {
+            if (clientMethod.isImplementationOnly() || clientMethod.getMethodVisibility() != JavaVisibility.Public
+//                || clientMethod.getName().endsWith("Next")
+            ) {
                 continue;
             }
 

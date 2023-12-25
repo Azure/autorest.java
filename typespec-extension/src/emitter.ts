@@ -49,6 +49,7 @@ export interface DevOptions {
   "support-versioning"?: boolean;
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
+  "java-temp-dir"?: string; // working directory for java codegen, e.g. transformed code-model file
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -140,6 +141,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     }
     if (options["dev-options"]?.loglevel) {
       javaArgs.push("-Dorg.slf4j.simpleLogger.defaultLogLevel=" + options["dev-options"]?.loglevel);
+    }
+    if (options["dev-options"]?.["java-temp-dir"]) {
+      javaArgs.push("-Dcodegen.java.temp.directory=" + options["dev-options"]?.["java-temp-dir"]);
     }
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
