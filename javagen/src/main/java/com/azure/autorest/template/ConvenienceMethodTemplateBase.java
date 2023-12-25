@@ -116,7 +116,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
-        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && protocolMethod.getProxyMethod().getRequestContentType().contains("application/merge-patch+json");
+        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
