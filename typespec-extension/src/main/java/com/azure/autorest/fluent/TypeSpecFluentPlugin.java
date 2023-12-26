@@ -56,15 +56,17 @@ public class TypeSpecFluentPlugin extends FluentGen {
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
     }
 
-    public Client processClient(CodeModel codeModel) {
+    public CodeModel preProcess(CodeModel codeModel) {
         // transform code model
         FluentNamer fluentNamer = new TypeSpecFluentNamer(this, pluginName, sessionId, SETTINGS_MAP, codeModel);
-        codeModel = fluentNamer.processCodeModel();
+        return fluentNamer.processCodeModel();
+    }
+
+    public Client processClient(CodeModel codeModel) {
 
         // call FluentGen.handleMap
-        Client client = handleMap(codeModel);
 
-        return client;
+        return handleMap(codeModel);
     }
 
     public FluentJavaPackage processTemplates(CodeModel codeModel, Client client) {
