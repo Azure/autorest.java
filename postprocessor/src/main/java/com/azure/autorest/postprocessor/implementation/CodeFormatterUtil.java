@@ -31,13 +31,17 @@ public final class CodeFormatterUtil {
      * @throws Exception If code formatting fails.
      */
     public static void formatCode(Map<String, String> files, NewPlugin plugin) throws Exception {
-        CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(loadEclipseSettings());
-        for (Map.Entry<String, String> fileEntry : files.entrySet()) {
-            String file = removeUnusedImports(fileEntry.getValue());
-            file = formatCode(file, fileEntry.getKey(), codeFormatter);
+        Map<String, String> eclipseSettings = loadEclipseSettings();
+        files.entrySet().parallelStream().forEach(fileEntry -> {
+            try {
+                String file = removeUnusedImports(fileEntry.getValue());
+                file = formatCode(file, fileEntry.getKey(), ToolFactory.createCodeFormatter(eclipseSettings));
 
-            plugin.writeFile(fileEntry.getKey(), file, null);
-        }
+                plugin.writeFile(fileEntry.getKey(), file, null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**
