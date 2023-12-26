@@ -6,8 +6,8 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.GoblinSharkColor;
 import fixtures.bodycomplex.models.Goblinshark;
+import fixtures.bodycomplex.models.GoblinSharkColor;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
@@ -42,7 +42,8 @@ public final class GoblinsharkTests {
                             new Fish(29.16742f).setSpecies("tbzsgfyccs")
                                 .setSiblings(Arrays.asList(new Fish(54.53775f), new Fish(49.81202f),
                                     new Fish(1.0352552f), new Fish(70.25995f))),
-                            new Fish(57.38645f).setSpecies("iachbo")
+                            new Fish(57.38645f)
+                                .setSpecies("iachbo")
                                 .setSiblings(Arrays.asList(new Fish(55.106743f), new Fish(8.411604f))))),
                     new Fish(76.311905f).setSpecies("sfqpteehz")
                         .setSiblings(Arrays.asList(new Fish(23.06351f).setSpecies("qrimzinpv")

@@ -756,7 +756,7 @@ public final class EnumServiceAsyncClient {
         }
         return setStringEnumArrayWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -778,7 +778,7 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -810,7 +810,7 @@ public final class EnumServiceAsyncClient {
         return setIntEnumArrayWithResponse(priorityArray.stream()
             .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -833,7 +833,7 @@ public final class EnumServiceAsyncClient {
         return setIntEnumArrayWithResponse(priorityArray.stream()
             .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -958,7 +958,7 @@ public final class EnumServiceAsyncClient {
         }
         return setStringEnumMultiWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -980,7 +980,7 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumMultiWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -1011,7 +1011,7 @@ public final class EnumServiceAsyncClient {
         return setIntEnumMultiWithResponse(priorityArray.stream()
             .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -1034,7 +1034,7 @@ public final class EnumServiceAsyncClient {
         return setIntEnumMultiWithResponse(priorityArray.stream()
             .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -1159,7 +1159,7 @@ public final class EnumServiceAsyncClient {
         }
         return setStringEnumArrayHeaderWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 
     /**
@@ -1181,6 +1181,6 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayHeaderWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
 }

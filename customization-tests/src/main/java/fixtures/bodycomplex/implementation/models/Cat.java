@@ -4,10 +4,11 @@
 
 package fixtures.bodycomplex.implementation.models;
 
-import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import com.azure.core.annotation.Fluent;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Cat model.
