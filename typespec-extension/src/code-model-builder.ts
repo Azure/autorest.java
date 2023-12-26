@@ -657,14 +657,6 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
-    // if (this.isArm()) {
-    //   // replace workaround
-    //   if (convenienceApiName === "listBySubscription") {
-    //     convenienceApiName = "list";
-    //   } else if (groupName?.includes("rafficController") && (convenienceApiName === "get" || convenienceApiName === "Get")) {
-    //     convenienceApiName = "getByResourceGroup";
-    //   }
-    // }
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
     let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 

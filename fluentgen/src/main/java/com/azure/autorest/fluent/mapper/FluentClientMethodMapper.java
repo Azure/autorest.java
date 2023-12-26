@@ -3,6 +3,7 @@
 
 package com.azure.autorest.fluent.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
@@ -13,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaVisibility;
+import com.azure.autorest.util.MethodNamer;
 
 import java.util.List;
 
@@ -122,5 +124,10 @@ public class FluentClientMethodMapper extends ClientMethodMapper {
             }
         }
         return visibility;
+    }
+
+    @Override
+    protected MethodNamer resolveMethodNamer(ProxyMethod proxyMethod, ConvenienceApi convenienceApi, boolean isProtocolMethod) {
+        return super.resolveMethodNamer(proxyMethod);
     }
 }
