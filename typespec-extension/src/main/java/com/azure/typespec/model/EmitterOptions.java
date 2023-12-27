@@ -66,6 +66,9 @@ public class EmitterOptions {
     @JsonProperty(value = "arm")
     private Boolean arm = false;
 
+    @JsonProperty(value="models-subpackage")
+    private String modelsSubpackage;
+
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
 
@@ -149,6 +152,10 @@ public class EmitterOptions {
 
     public Boolean getArm() {
         return arm;
+    }
+
+    public String getModelsSubpackage() {
+        return modelsSubpackage;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {
