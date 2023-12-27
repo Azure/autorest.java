@@ -4,6 +4,7 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.extension.base.util.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.UUID;
@@ -32,7 +32,7 @@ public class AnnotationTests {
 
     @BeforeEach
     public void setup() throws IOException {
-        workingDir = Files.createTempDirectory("removeComplexAnnotation" + UUID.randomUUID());
+        workingDir = FileUtils.createTempDirectory("removeComplexAnnotation" + UUID.randomUUID());
     }
 
     @AfterEach
