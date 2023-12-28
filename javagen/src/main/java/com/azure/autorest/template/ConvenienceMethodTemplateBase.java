@@ -143,10 +143,9 @@ abstract class ConvenienceMethodTemplateBase {
                     case BODY: {
                         Consumer<JavaBlock> writeLine = javaBlock -> {
                             IType parameterType = parameter.getClientMethodParameter().getClientType();
-                            IType protocolParameterType = parameter.getProxyMethodParameter().getClientType();
                             String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
                             if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
-                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, protocolParameterType.toString(), parameterType.toString(), parameter.getName(), expression);
+                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, parameterType.toString(), parameter.getName(), expression);
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
                             } else {
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
@@ -168,10 +167,9 @@ abstract class ConvenienceMethodTemplateBase {
                 .map(p -> {
                     String parameterName = p.getName();
                     String expression = parameterExpressionsMap.get(parameterName);
-                    IType parameterClientType = p.getClientType();
                     IType parameterRawType = p.getRawType();
                     if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
-                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterClientType.toString(), parameterRawType.toString(), parameterName, expression);
+                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterRawType.toString(), parameterName, expression);
                     } else {
                         return expression == null ? parameterName : expression;
                     }
@@ -717,16 +715,15 @@ abstract class ConvenienceMethodTemplateBase {
     /**
      * Writes the expression to convert a convenience parameter to a protocol parameter and wrap it in JsonMergePatchHelper.
      * @param javaBlock
-     * @param protocolParameterTypeName
      * @param convenientParameterTypeName
      * @param convenientParameterName
      * @param expression
      * @return the name of the variable that holds the converted parameter
      */
-    private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String protocolParameterTypeName, String convenientParameterTypeName, String convenientParameterName, String expression) {
-            String variableName = convenientParameterName + "In" + protocolParameterTypeName;
+    private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
+            String variableName = convenientParameterName + "InBinaryData";
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
-            javaBlock.line(String.format("%1$s %2$s = %3$s;", protocolParameterTypeName, variableName, expression));
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromString(%2$s.toString());", variableName, expression)); // BinaryData.fromString() will not fire serialization, use toString() to fire serialization
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
             return variableName;
     }
