@@ -106,7 +106,7 @@ public class PatchClientTest {
         fish.setColor(null);
         String json = BinaryData.fromObject(fish).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
-        Assertions.assertEquals("shark", node.get("kind").asText());
+        Assertions.assertEquals("salmon", node.get("kind").asText());
         Assertions.assertEquals(JsonNodeType.NULL, node.get("color").getNodeType());
     }
 }
