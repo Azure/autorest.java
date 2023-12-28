@@ -208,7 +208,7 @@ public final class CollectionsModelClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -230,7 +230,7 @@ public final class CollectionsModelClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }

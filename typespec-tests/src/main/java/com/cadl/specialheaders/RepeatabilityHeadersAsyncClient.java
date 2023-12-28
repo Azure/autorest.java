@@ -336,7 +336,7 @@ public final class RepeatabilityHeadersAsyncClient {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return serviceClient.beginCreateLroWithModelAsync(name, resourceInBinaryData, requestOptions);
     }

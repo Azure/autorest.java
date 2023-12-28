@@ -202,7 +202,7 @@ public final class StringOperationAsyncClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         return patchNonNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -226,7 +226,7 @@ public final class StringOperationAsyncClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         return patchNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
     }

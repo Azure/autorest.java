@@ -192,7 +192,7 @@ public final class DurationOperationClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -214,7 +214,7 @@ public final class DurationOperationClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }

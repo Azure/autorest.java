@@ -192,7 +192,7 @@ public final class DatetimeOperationClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -214,7 +214,7 @@ public final class DatetimeOperationClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }

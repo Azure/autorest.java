@@ -483,7 +483,7 @@ public final class BasicClient {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
         JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
         return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).getValue().toObject(User.class);
     }

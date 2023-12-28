@@ -490,7 +490,7 @@ public final class BasicAsyncClient {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
         JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
         return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(User.class));

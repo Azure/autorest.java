@@ -195,7 +195,7 @@ public final class BytesClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -218,7 +218,7 @@ public final class BytesClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
         JsonMergePatchHelper.getBytesPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
