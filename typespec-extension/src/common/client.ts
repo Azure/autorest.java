@@ -52,7 +52,6 @@ export class ServiceVersion extends Metadata {
 
 export class ObjectScheme extends ObjectSchema {
   crossLanguageDefinitionId?: string;
-  armKind?: string;
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ObjectSchema>) {
     super(name, description, objectInitializer);
   }

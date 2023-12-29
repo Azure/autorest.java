@@ -169,7 +169,7 @@ import {
 } from "./operation-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
-import { getArmResourceKind, isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
+import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -2066,13 +2066,6 @@ export class CodeModelBuilder {
             }
           });
         }
-        
-      if (this.isArm()) {
-        const resourceType = this.getModelResourceType(type);
-        if (resourceType) {
-          (parentSchema as ObjectScheme).armKind = resourceType;
-        }
-    }
       } else {
         // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
         pushDistinct(objectSchema.parents.all, parentSchema);
@@ -2704,20 +2697,6 @@ export class CodeModelBuilder {
 
   private isArm() {
     return this.codeModel.arm;
-  }
-
-  private getModelResourceType(model: Model): string | null {
-    const resourceKind = getArmResourceKind(model);
-    if (!resourceKind) {
-      return null;
-    }
-    switch (resourceKind) {
-      case "Tracked":
-        return "TrackedResource";
-      case "Proxy":
-      case "Extension":
-        return "ProxyResource";
-    }
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

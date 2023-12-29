@@ -172,12 +172,4 @@ public class ObjectSchema extends ComplexSchema {
     public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
-
-    public String getArmKind() {
-        return armKind;
-    }
-
-    public void setArmKind(String armKind) {
-        this.armKind = armKind;
-    }
 }
