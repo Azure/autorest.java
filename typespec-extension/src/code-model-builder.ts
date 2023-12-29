@@ -169,7 +169,7 @@ import {
 } from "./operation-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
-import { getArmResourceKind } from "@azure-tools/typespec-azure-resource-manager";
+import { getArmResourceKind, isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -1982,19 +1982,8 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (this.isArm() && (name?.startsWith("TrackedResource") || name?.startsWith("ProxyResource") || name?.startsWith("ExtensionResource") || name === "ArmResource")) {
-      return new ObjectScheme("Resource", this.getDoc(type), {
-        summary: this.getSummary(type),
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-            name: "Resource"
-          },
-        },
-      });
+    if (this.isArm() && isArmCommonType(type) && (name?.includes("Resource"))) {
+      return this.dummyResourceSchema(type, name);
     }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
@@ -2158,6 +2147,18 @@ export class CodeModelBuilder {
       }
     }
     return type;
+  }
+
+  private dummyResourceSchema(type: Model, name?: string): ObjectSchema {
+    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
+    return new ObjectScheme(resourceModelName, this.getDoc(type), {
+        summary: this.getSummary(type),
+        language: {
+          java: {
+            name: resourceModelName
+          },
+        },
+      })
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
