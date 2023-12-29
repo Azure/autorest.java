@@ -903,15 +903,17 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    function isSubscription(sdkContext: SdkContext, param: HttpOperationParameter): boolean {
-      return "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase();
+    function isSubscriptionId(sdkContext: SdkContext, param: HttpOperationParameter): boolean {
+      return "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() && param.param && isArmCommonType(param.param);
     }
     if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
-    } else if (isSubscription(this.sdkContext, param)) {
-      op.addParameter(this.subscriptionParameter);
+    } else if (isSubscriptionId(this.sdkContext, param)) {
+      const parameter = this.subscriptionParameter;
+      op.addParameter(parameter);
+      clientContext.addGlobalParameter(parameter);
     } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
