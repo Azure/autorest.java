@@ -48,9 +48,6 @@ public class ObjectSchema extends ComplexSchema {
 
     private String crossLanguageDefinitionId;
 
-    // for TypeSpec mpg, mark ProxyResource, TrackedResource as standard ones
-    private String armKind;
-
     /**
      * a property is a child value in an object
      *
