@@ -165,7 +165,6 @@ import {
   operationIsMultipart,
   isKnownContentType,
   CONTENT_TYPE_KEY,
-  ORIGIN_SUBSCRIPTION_ID,
 } from "./operation-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
@@ -904,7 +903,11 @@ export class CodeModelBuilder {
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
     function isSubscriptionId(sdkContext: SdkContext, param: HttpOperationParameter): boolean {
-      return "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() && param.param && isArmCommonType(param.param);
+      return (
+        "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
+        param.param &&
+        isArmCommonType(param.param)
+      );
     }
     if (isApiVersion(this.sdkContext, param)) {
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
@@ -1984,9 +1987,14 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (this.isArm() && isArmCommonType(type) && (name?.includes("Resource"))) {
-      return this.dummyResourceSchema(type, name);
-    }
+    if (this.isArm() && isArmCommonType(type) && name?.includes("Resource")) {
+      const objectSchema = this.dummyResourceSchema(type, name);
+      this.codeModel.schemas.add(objectSchema);
+  
+      // cache this now before we accidentally recurse on this type
+      this.schemaCache.set(type, objectSchema);
+      return objectSchema;
+    } 
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2135,7 +2143,7 @@ export class CodeModelBuilder {
 
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
-      if (this.isArm() && getNamespace((effective as Model))?.startsWith("Azure.ResourceManager")) {
+      if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
         return type;
       } else if (effective.name) {
         return effective;
@@ -2146,14 +2154,39 @@ export class CodeModelBuilder {
 
   private dummyResourceSchema(type: Model, name?: string): ObjectSchema {
     const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    return new ObjectScheme(resourceModelName, this.getDoc(type), {
-        summary: this.getSummary(type),
-        language: {
-          java: {
-            name: resourceModelName
-          },
+    const resource = this.dummyObjectSchema(type, resourceModelName);
+    const declaredProperties = this.getDeclaredProperties(type);
+    for (const prop of declaredProperties) {
+      resource.addProperty(this.processModelProperty(prop));
+    }
+    return resource;
+  }
+
+  private getDeclaredProperties(type: Model): Array<ModelProperty> {
+    const properties = new Array();
+    for (const prop of Array.from(type.properties.values())) {
+      properties.push(prop);
+    }
+    // collect properties from all parent models
+    let baseModel = type.baseModel;
+    while (baseModel) {
+      for (const prop of Array.from(baseModel.properties.values())) {
+        properties.push(prop);
+      }
+      baseModel = baseModel.baseModel;
+    }
+    return properties;
+  }
+
+  private dummyObjectSchema(type: Model, name: string): ObjectSchema {
+    return new ObjectScheme(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      language: {
+        java: {
+          name: name,
         },
-      })
+      },
+    });
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
@@ -2589,24 +2622,18 @@ export class CodeModelBuilder {
 
   private _subscriptionParameter?: Parameter;
   get subscriptionParameter(): Parameter {
-    return new Parameter(
-      "subscriptionId",
-      "subscription ID",
-      this.stringSchema,
-      {
-        implementation: ImplementationLocation.Client,
-        origin: ORIGIN_SUBSCRIPTION_ID,
-        required: true,
-        protocol: {
-          http: new HttpParameter(ParameterLocation.Path),
-        },
-        language: {
-          default: {
-            serializedName: "subscriptionId",
-          },
+    return new Parameter("subscriptionId", "subscription ID", this.stringSchema, {
+      implementation: ImplementationLocation.Client,
+      required: true,
+      protocol: {
+        http: new HttpParameter(ParameterLocation.Path),
+      },
+      language: {
+        default: {
+          serializedName: "subscriptionId",
         },
       },
-    );
+    });
   }
 
   private propagateSchemaUsage(schema: Schema): void {

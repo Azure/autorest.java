@@ -26,7 +26,6 @@ export const SPECIAL_HEADER_NAMES = new Set([
 ]);
 
 export const ORIGIN_API_VERSION = "modelerfour:synthesized/api-version";
-export const ORIGIN_SUBSCRIPTION_ID = "modelerfour:synthesized/subscription-id";
 
 export const CONTENT_TYPE_KEY = "content-type";
 
