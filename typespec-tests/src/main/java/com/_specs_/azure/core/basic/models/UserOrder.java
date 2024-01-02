@@ -4,6 +4,7 @@
 
 package com._specs_.azure.core.basic.models;
 
+import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
@@ -11,6 +12,8 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * UserOrder for testing list with expand.
@@ -34,6 +37,27 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
      */
     @Generated
     private final String detail;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setUserOrderAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of UserOrder class.
@@ -79,9 +103,24 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeIntField("userId", this.userId);
+            jsonWriter.writeStringField("detail", this.detail);
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("userId", this.userId);
-        jsonWriter.writeStringField("detail", this.detail);
+        if (this.detail != null) {
+            jsonWriter.writeStringField("detail", this.detail);
+        } else if (updatedProperties.contains("detail")) {
+            jsonWriter.writeNullField("detail");
+        }
         return jsonWriter.writeEndObject();
     }
 

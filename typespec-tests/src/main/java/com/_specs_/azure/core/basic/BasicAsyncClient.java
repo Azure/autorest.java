@@ -5,6 +5,7 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
+import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com._specs_.azure.core.basic.models.ListItemInputBody;
 import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
@@ -98,7 +99,6 @@ public final class BasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateWithResponse(int id, BinaryData resource,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createOrUpdate' is 'application/merge-patch+json'
         return this.serviceClient.createOrUpdateWithResponseAsync(id, resource, requestOptions);
     }
 
@@ -467,6 +467,33 @@ public final class BasicAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> exportWithResponse(int id, String format, RequestOptions requestOptions) {
         return this.serviceClient.exportWithResponseAsync(id, format, requestOptions);
+    }
+
+    /**
+     * Adds a user or updates a user's fields.
+     * 
+     * Creates or updates a User.
+     * 
+     * @param id The user's id.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return details about a user on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<User> createOrUpdate(int id, User resource) {
+        // Generated convenience method for createOrUpdateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
+        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
+        return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(User.class));
     }
 
     /**

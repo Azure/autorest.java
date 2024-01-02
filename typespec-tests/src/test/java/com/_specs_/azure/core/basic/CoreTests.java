@@ -36,14 +36,12 @@ public class CoreTests {
     public void testCreateOrUpdate() {
         Map<String, String> body = new HashMap<>();
         body.put("name", "Madge");
-        Mono<Response<BinaryData>> response = client.createOrUpdateWithResponse(1, BinaryData.fromObject(body), null);
+        Mono<User> response = client.createOrUpdate(1, new User("Madge"));
 
         StepVerifier.create(response)
-                .assertNext(r -> {
-                    Assertions.assertEquals(200, r.getStatusCode());
-                    Map<String, Object> responseBody = r.getValue().toObject(Map.class);
-                    Assertions.assertEquals(1, responseBody.get("id"));
-                    Assertions.assertEquals("Madge", responseBody.get("name"));
+                .assertNext(user -> {
+                    Assertions.assertEquals(1, user.getId());
+                    Assertions.assertEquals("Madge", user.getName());
                 })
                 .expectComplete()
                 .verify();
