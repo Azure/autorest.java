@@ -94,35 +94,6 @@ public final class LegacyClient {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -130,7 +101,7 @@ public final class LegacyClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -168,7 +139,7 @@ public final class LegacyClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)

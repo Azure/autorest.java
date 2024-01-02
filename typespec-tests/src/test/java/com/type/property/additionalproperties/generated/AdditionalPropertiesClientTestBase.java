@@ -19,16 +19,28 @@ import com.type.property.additionalproperties.ExtendsModelArrayClient;
 import com.type.property.additionalproperties.ExtendsModelClient;
 import com.type.property.additionalproperties.ExtendsStringClient;
 import com.type.property.additionalproperties.ExtendsUnknownClient;
+import com.type.property.additionalproperties.ExtendsUnknownDerivedClient;
+import com.type.property.additionalproperties.ExtendsUnknownDiscriminatedClient;
 import com.type.property.additionalproperties.IsFloatClient;
 import com.type.property.additionalproperties.IsModelArrayClient;
 import com.type.property.additionalproperties.IsModelClient;
 import com.type.property.additionalproperties.IsStringClient;
 import com.type.property.additionalproperties.IsUnknownClient;
+import com.type.property.additionalproperties.IsUnknownDerivedClient;
+import com.type.property.additionalproperties.IsUnknownDiscriminatedClient;
 
 class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
     protected ExtendsUnknownClient extendsUnknownClient;
 
+    protected ExtendsUnknownDerivedClient extendsUnknownDerivedClient;
+
+    protected ExtendsUnknownDiscriminatedClient extendsUnknownDiscriminatedClient;
+
     protected IsUnknownClient isUnknownClient;
+
+    protected IsUnknownDerivedClient isUnknownDerivedClient;
+
+    protected IsUnknownDiscriminatedClient isUnknownDiscriminatedClient;
 
     protected ExtendsStringClient extendsStringClient;
 
@@ -58,6 +70,27 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsUnknownClient = extendsUnknownClientbuilder.buildExtendsUnknownClient();
 
+        AdditionalPropertiesClientBuilder extendsUnknownDerivedClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsUnknownDerivedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsUnknownDerivedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsUnknownDerivedClient = extendsUnknownDerivedClientbuilder.buildExtendsUnknownDerivedClient();
+
+        AdditionalPropertiesClientBuilder extendsUnknownDiscriminatedClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsUnknownDiscriminatedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsUnknownDiscriminatedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsUnknownDiscriminatedClient
+            = extendsUnknownDiscriminatedClientbuilder.buildExtendsUnknownDiscriminatedClient();
+
         AdditionalPropertiesClientBuilder isUnknownClientbuilder
             = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -67,6 +100,26 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             isUnknownClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         isUnknownClient = isUnknownClientbuilder.buildIsUnknownClient();
+
+        AdditionalPropertiesClientBuilder isUnknownDerivedClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            isUnknownDerivedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            isUnknownDerivedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        isUnknownDerivedClient = isUnknownDerivedClientbuilder.buildIsUnknownDerivedClient();
+
+        AdditionalPropertiesClientBuilder isUnknownDiscriminatedClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            isUnknownDiscriminatedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            isUnknownDiscriminatedClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        isUnknownDiscriminatedClient = isUnknownDiscriminatedClientbuilder.buildIsUnknownDiscriminatedClient();
 
         AdditionalPropertiesClientBuilder extendsStringClientbuilder
             = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())

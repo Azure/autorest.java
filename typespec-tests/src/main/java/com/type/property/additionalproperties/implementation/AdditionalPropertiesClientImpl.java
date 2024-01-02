@@ -58,6 +58,34 @@ public final class AdditionalPropertiesClientImpl {
     }
 
     /**
+     * The ExtendsUnknownDerivedsImpl object to access its operations.
+     */
+    private final ExtendsUnknownDerivedsImpl extendsUnknownDeriveds;
+
+    /**
+     * Gets the ExtendsUnknownDerivedsImpl object to access its operations.
+     * 
+     * @return the ExtendsUnknownDerivedsImpl object.
+     */
+    public ExtendsUnknownDerivedsImpl getExtendsUnknownDeriveds() {
+        return this.extendsUnknownDeriveds;
+    }
+
+    /**
+     * The ExtendsUnknownDiscriminatedsImpl object to access its operations.
+     */
+    private final ExtendsUnknownDiscriminatedsImpl extendsUnknownDiscriminateds;
+
+    /**
+     * Gets the ExtendsUnknownDiscriminatedsImpl object to access its operations.
+     * 
+     * @return the ExtendsUnknownDiscriminatedsImpl object.
+     */
+    public ExtendsUnknownDiscriminatedsImpl getExtendsUnknownDiscriminateds() {
+        return this.extendsUnknownDiscriminateds;
+    }
+
+    /**
      * The IsUnknownsImpl object to access its operations.
      */
     private final IsUnknownsImpl isUnknowns;
@@ -69,6 +97,34 @@ public final class AdditionalPropertiesClientImpl {
      */
     public IsUnknownsImpl getIsUnknowns() {
         return this.isUnknowns;
+    }
+
+    /**
+     * The IsUnknownDerivedsImpl object to access its operations.
+     */
+    private final IsUnknownDerivedsImpl isUnknownDeriveds;
+
+    /**
+     * Gets the IsUnknownDerivedsImpl object to access its operations.
+     * 
+     * @return the IsUnknownDerivedsImpl object.
+     */
+    public IsUnknownDerivedsImpl getIsUnknownDeriveds() {
+        return this.isUnknownDeriveds;
+    }
+
+    /**
+     * The IsUnknownDiscriminatedsImpl object to access its operations.
+     */
+    private final IsUnknownDiscriminatedsImpl isUnknownDiscriminateds;
+
+    /**
+     * Gets the IsUnknownDiscriminatedsImpl object to access its operations.
+     * 
+     * @return the IsUnknownDiscriminatedsImpl object.
+     */
+    public IsUnknownDiscriminatedsImpl getIsUnknownDiscriminateds() {
+        return this.isUnknownDiscriminateds;
     }
 
     /**
@@ -210,7 +266,11 @@ public final class AdditionalPropertiesClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.extendsUnknowns = new ExtendsUnknownsImpl(this);
+        this.extendsUnknownDeriveds = new ExtendsUnknownDerivedsImpl(this);
+        this.extendsUnknownDiscriminateds = new ExtendsUnknownDiscriminatedsImpl(this);
         this.isUnknowns = new IsUnknownsImpl(this);
+        this.isUnknownDeriveds = new IsUnknownDerivedsImpl(this);
+        this.isUnknownDiscriminateds = new IsUnknownDiscriminatedsImpl(this);
         this.extendsStrings = new ExtendsStringsImpl(this);
         this.isStrings = new IsStringsImpl(this);
         this.extendsFloats = new ExtendsFloatsImpl(this);

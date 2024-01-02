@@ -15,10 +15,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * The model extends from Record&lt;unknown&gt; type.
+ * The model is Record&lt;unknown&gt; with a discriminator.
  */
 @Fluent
-public class ExtendsUnknownAdditionalProperties implements JsonSerializable<ExtendsUnknownAdditionalProperties> {
+public final class IsUnknownAdditionalPropertiesDiscriminated
+    implements JsonSerializable<IsUnknownAdditionalPropertiesDiscriminated> {
     /*
      * The name property
      */
@@ -26,18 +27,18 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     private final String name;
 
     /*
-     * Dictionary of any
+     * The model is Record<unknown> with a discriminator.
      */
     @Generated
     private Map<String, Object> additionalProperties;
 
     /**
-     * Creates an instance of ExtendsUnknownAdditionalProperties class.
+     * Creates an instance of IsUnknownAdditionalPropertiesDiscriminated class.
      * 
      * @param name the name value to set.
      */
     @Generated
-    public ExtendsUnknownAdditionalProperties(String name) {
+    public IsUnknownAdditionalPropertiesDiscriminated(String name) {
         this.name = name;
     }
 
@@ -52,7 +53,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of any.
+     * Get the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
      * 
      * @return the additionalProperties value.
      */
@@ -62,13 +63,14 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of any.
+     * Set the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
      * 
      * @param additionalProperties the additionalProperties value to set.
-     * @return the ExtendsUnknownAdditionalProperties object itself.
+     * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.
      */
     @Generated
-    public ExtendsUnknownAdditionalProperties setAdditionalProperties(Map<String, Object> additionalProperties) {
+    public IsUnknownAdditionalPropertiesDiscriminated
+        setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
@@ -86,15 +88,16 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Reads an instance of ExtendsUnknownAdditionalProperties from the JsonReader.
+     * Reads an instance of IsUnknownAdditionalPropertiesDiscriminated from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ExtendsUnknownAdditionalProperties if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ExtendsUnknownAdditionalProperties.
+     * @return An instance of IsUnknownAdditionalPropertiesDiscriminated if the JsonReader was pointing to an instance
+     * of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDiscriminated.
      */
-    public static ExtendsUnknownAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
+    public static IsUnknownAdditionalPropertiesDiscriminated fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
             Map<String, Object> additionalProperties = null;
@@ -102,7 +105,14 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("name".equals(fieldName)) {
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"IsUnknownAdditionalPropertiesDiscriminated".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'IsUnknownAdditionalPropertiesDiscriminated'. The found 'kind' was '"
+                                + kind + "'.");
+                    }
+                } else if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else {
                     if (additionalProperties == null) {
@@ -112,11 +122,11 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
                     additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
-            ExtendsUnknownAdditionalProperties deserializedExtendsUnknownAdditionalProperties
-                = new ExtendsUnknownAdditionalProperties(name);
-            deserializedExtendsUnknownAdditionalProperties.additionalProperties = additionalProperties;
+            IsUnknownAdditionalPropertiesDiscriminated deserializedIsUnknownAdditionalPropertiesDiscriminated
+                = new IsUnknownAdditionalPropertiesDiscriminated(name);
+            deserializedIsUnknownAdditionalPropertiesDiscriminated.additionalProperties = additionalProperties;
 
-            return deserializedExtendsUnknownAdditionalProperties;
+            return deserializedIsUnknownAdditionalPropertiesDiscriminated;
         });
     }
 }
