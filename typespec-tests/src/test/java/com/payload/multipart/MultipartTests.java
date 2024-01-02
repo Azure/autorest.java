@@ -48,6 +48,7 @@ public class MultipartTests {
     public void testMultipleFiles() {
         client.multiBinaryParts(new MultiBinaryPartsRequest(BinaryData.fromFile(FILE)).setPicture(BinaryData.fromFile(FileUtils.getPngFile())));
 
-        asyncClient.multiBinaryParts(new MultiBinaryPartsRequest(BinaryData.fromFile(FILE)).setPicture(BinaryData.fromFile(FileUtils.getPngFile())));
+        // "picture" be optional
+        asyncClient.multiBinaryParts(new MultiBinaryPartsRequest(BinaryData.fromFile(FILE))).block();
     }
 }
