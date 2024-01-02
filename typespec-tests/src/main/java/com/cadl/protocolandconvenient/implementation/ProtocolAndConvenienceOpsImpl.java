@@ -38,7 +38,6 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
-import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
 import com.cadl.protocolandconvenient.models.ResourceI;
 import java.time.Duration;
 import java.util.List;
@@ -69,15 +68,6 @@ public final class ProtocolAndConvenienceOpsImpl {
         this.service = RestProxy.create(ProtocolAndConvenienceOpsService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
-    }
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public ProtocolAndConvenientServiceVersion getServiceVersion() {
-        return client.getServiceVersion();
     }
 
     /**
@@ -541,6 +531,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -551,11 +542,11 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String apiVersion, String name,
+        BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrReplace(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.client.getEndpoint(), apiVersion, name,
+            accept, resource, requestOptions, context));
     }
 
     /**
@@ -581,6 +572,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -591,11 +583,11 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource,
+    private Response<BinaryData> createOrReplaceWithResponse(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(),
-            name, accept, resource, requestOptions, Context.NONE);
+        return service.createOrReplaceSync(this.client.getEndpoint(), apiVersion, name, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -621,6 +613,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -631,16 +624,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String apiVersion, String name,
+        BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
+            () -> this.createOrReplaceWithResponseAsync(apiVersion, name, resource, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -667,6 +659,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -677,16 +670,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+            () -> this.createOrReplaceWithResponse(apiVersion, name, resource, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -713,6 +705,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -723,16 +716,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModelAsync(String name,
-        BinaryData resource, RequestOptions requestOptions) {
+    public PollerFlux<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModelAsync(String apiVersion,
+        String name, BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
+            () -> this.createOrReplaceWithResponseAsync(apiVersion, name, resource, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ResourceI.class));
     }
 
@@ -759,6 +751,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -769,16 +762,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModel(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public SyncPoller<PollOperationDetails, ResourceI> beginCreateOrReplaceWithModel(String apiVersion, String name,
+        BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
+            () -> this.createOrReplaceWithResponse(apiVersion, name, resource, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.client.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ResourceI.class));
     }
 
@@ -815,6 +807,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -824,11 +817,11 @@ public final class ProtocolAndConvenienceOpsImpl {
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
+    private Mono<PagedResponse<BinaryData>> listSinglePageAsync(String apiVersion, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.list(this.client.getEndpoint(),
-                this.client.getServiceVersion().getVersion(), accept, requestOptions, context))
+            .withContext(
+                context -> service.list(this.client.getEndpoint(), apiVersion, accept, requestOptions, context))
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
@@ -866,6 +859,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -874,7 +868,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return paged collection of ResourceJ items as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> listAsync(RequestOptions requestOptions) {
+    public PagedFlux<BinaryData> listAsync(String apiVersion, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
             requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
@@ -887,7 +881,7 @@ public final class ProtocolAndConvenienceOpsImpl {
                     requestLocal.setUrl(urlBuilder.toString());
                 });
             }
-            return listSinglePageAsync(requestOptionsLocal);
+            return listSinglePageAsync(apiVersion, requestOptionsLocal);
         }, (nextLink, pageSize) -> {
             RequestOptions requestOptionsLocal = new RequestOptions();
             requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());
@@ -935,6 +929,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -943,10 +938,10 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return paged collection of ResourceJ items along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
+    private PagedResponse<BinaryData> listSinglePage(String apiVersion, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res = service.listSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        Response<BinaryData> res
+            = service.listSync(this.client.getEndpoint(), apiVersion, accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
@@ -984,6 +979,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -992,7 +988,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @return paged collection of ResourceJ items as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> list(RequestOptions requestOptions) {
+    public PagedIterable<BinaryData> list(String apiVersion, RequestOptions requestOptions) {
         RequestOptions requestOptionsForNextPage = new RequestOptions();
         requestOptionsForNextPage.setContext(
             requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext() : Context.NONE);
@@ -1005,7 +1001,7 @@ public final class ProtocolAndConvenienceOpsImpl {
                     requestLocal.setUrl(urlBuilder.toString());
                 });
             }
-            return listSinglePage(requestOptionsLocal);
+            return listSinglePage(apiVersion, requestOptionsLocal);
         }, (nextLink, pageSize) -> {
             RequestOptions requestOptionsLocal = new RequestOptions();
             requestOptionsLocal.setContext(requestOptionsForNextPage.getContext());

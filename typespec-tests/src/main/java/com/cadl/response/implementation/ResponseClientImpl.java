@@ -41,7 +41,6 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
-import com.cadl.response.ResponseServiceVersion;
 import com.cadl.response.models.OperationDetails1;
 import com.cadl.response.models.OperationDetails2;
 import java.time.Duration;
@@ -68,20 +67,6 @@ public final class ResponseClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /**
-     * Service version.
-     */
-    private final ResponseServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public ResponseServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -116,11 +101,10 @@ public final class ResponseClientImpl {
      * Initializes an instance of ResponseClient client.
      * 
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(String endpoint, ResponseServiceVersion serviceVersion) {
+    public ResponseClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -128,10 +112,9 @@ public final class ResponseClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint, ResponseServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public ResponseClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -140,14 +123,11 @@ public final class ResponseClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ResponseClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        ResponseServiceVersion serviceVersion) {
+    public ResponseClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ResponseClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -565,6 +545,7 @@ public final class ResponseClientImpl {
      * boolean
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -572,10 +553,10 @@ public final class ResponseClientImpl {
      * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> existsWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Boolean>> existsWithResponseAsync(String apiVersion, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.exists(this.getEndpoint(), this.getServiceVersion().getVersion(),
-            accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.exists(this.getEndpoint(), apiVersion, accept, requestOptions, context));
     }
 
     /**
@@ -587,6 +568,7 @@ public final class ResponseClientImpl {
      * boolean
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -594,9 +576,70 @@ public final class ResponseClientImpl {
      * @return whether resource exists along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> existsWithResponse(RequestOptions requestOptions) {
+    public Response<Boolean> existsWithResponse(String apiVersion, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.existsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions,
+        return service.existsSync(this.getEndpoint(), apiVersion, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion The API version to use for this operation.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> lroInvalidPollResponseWithResponseAsync(String apiVersion, BinaryData resource,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.lroInvalidPollResponse(this.getEndpoint(), apiVersion, accept,
+            resource, requestOptions, context));
+    }
+
+    /**
+     * The most basic operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion The API version to use for this operation.
+     * @param resource The resource parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<Void> lroInvalidPollResponseWithResponse(String apiVersion, BinaryData resource,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.lroInvalidPollResponseSync(this.getEndpoint(), apiVersion, accept, resource, requestOptions,
             Context.NONE);
     }
 
@@ -614,65 +657,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
-     * @param resource The resource parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> lroInvalidPollResponseWithResponseAsync(BinaryData resource,
-        RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.lroInvalidPollResponse(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, resource, requestOptions, context));
-    }
-
-    /**
-     * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param resource The resource parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<Void> lroInvalidPollResponseWithResponse(BinaryData resource, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.lroInvalidPollResponseSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
-            resource, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
-     * }
-     * }</pre>
-     * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -682,15 +667,14 @@ public final class ResponseClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponseAsync(BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponseAsync(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
+            () -> this.lroInvalidPollResponseWithResponseAsync(apiVersion, resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -708,6 +692,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -717,15 +702,14 @@ public final class ResponseClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
+            () -> this.lroInvalidPollResponseWithResponse(apiVersion, resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -743,6 +727,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -752,15 +737,14 @@ public final class ResponseClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails1, OperationDetails1>
-        beginLroInvalidPollResponseWithModelAsync(BinaryData resource, RequestOptions requestOptions) {
+    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponseWithModelAsync(String apiVersion,
+        BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
+            () -> this.lroInvalidPollResponseWithResponseAsync(apiVersion, resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(OperationDetails1.class),
             TypeReference.createInstance(OperationDetails1.class));
     }
@@ -779,6 +763,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -788,15 +773,14 @@ public final class ResponseClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponseWithModel(BinaryData resource,
-        RequestOptions requestOptions) {
+    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponseWithModel(String apiVersion,
+        BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
+            () -> this.lroInvalidPollResponseWithResponse(apiVersion, resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(OperationDetails1.class),
             TypeReference.createInstance(OperationDetails1.class));
     }
@@ -815,6 +799,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -824,10 +809,11 @@ public final class ResponseClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> lroInvalidResultWithResponseAsync(BinaryData resource, RequestOptions requestOptions) {
+    private Mono<Response<Void>> lroInvalidResultWithResponseAsync(String apiVersion, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.lroInvalidResult(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.lroInvalidResult(this.getEndpoint(), apiVersion, accept,
+            resource, requestOptions, context));
     }
 
     /**
@@ -844,6 +830,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -853,10 +840,11 @@ public final class ResponseClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<Void> lroInvalidResultWithResponse(BinaryData resource, RequestOptions requestOptions) {
+    private Response<Void> lroInvalidResultWithResponse(String apiVersion, BinaryData resource,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.lroInvalidResultSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, resource,
-            requestOptions, Context.NONE);
+        return service.lroInvalidResultSync(this.getEndpoint(), apiVersion, accept, resource, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -873,6 +861,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -882,15 +871,14 @@ public final class ResponseClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResultAsync(BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResultAsync(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
+            () -> this.lroInvalidResultWithResponseAsync(apiVersion, resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -908,6 +896,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -917,15 +906,14 @@ public final class ResponseClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.lroInvalidResultWithResponse(resource, requestOptions),
+            () -> this.lroInvalidResultWithResponse(apiVersion, resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -943,6 +931,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -952,15 +941,14 @@ public final class ResponseClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModelAsync(BinaryData resource,
-        RequestOptions requestOptions) {
+    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModelAsync(String apiVersion,
+        BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
+            () -> this.lroInvalidResultWithResponseAsync(apiVersion, resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(OperationDetails2.class),
             TypeReference.createInstance(OperationDetails2.class));
     }
@@ -979,6 +967,7 @@ public final class ResponseClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -988,15 +977,14 @@ public final class ResponseClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModel(BinaryData resource,
-        RequestOptions requestOptions) {
+    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResultWithModel(String apiVersion,
+        BinaryData resource, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.lroInvalidResultWithResponse(resource, requestOptions),
+            () -> this.lroInvalidResultWithResponse(apiVersion, resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                 .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)
-                .setServiceVersion(this.getServiceVersion().getVersion())),
+                    : Context.NONE)),
             TypeReference.createInstance(OperationDetails2.class),
             TypeReference.createInstance(OperationDetails2.class));
     }

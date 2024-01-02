@@ -24,7 +24,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.cadl.specialheaders.SpecialHeadersServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,15 +49,6 @@ public final class SkipSpecialHeadersImpl {
         this.service = RestProxy.create(SkipSpecialHeadersService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
-    }
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public SpecialHeadersServiceVersion getServiceVersion() {
-        return client.getServiceVersion();
     }
 
     /**
@@ -94,6 +84,7 @@ public final class SkipSpecialHeadersImpl {
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -104,16 +95,17 @@ public final class SkipSpecialHeadersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteWithSpecialHeadersWithResponseAsync(String name, String foo,
+    public Mono<Response<Void>> deleteWithSpecialHeadersWithResponseAsync(String apiVersion, String name, String foo,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteWithSpecialHeaders(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, foo, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.deleteWithSpecialHeaders(this.client.getEndpoint(), apiVersion,
+            name, foo, accept, requestOptions, context));
     }
 
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -124,9 +116,10 @@ public final class SkipSpecialHeadersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteWithSpecialHeadersWithResponse(String name, String foo, RequestOptions requestOptions) {
+    public Response<Void> deleteWithSpecialHeadersWithResponse(String apiVersion, String name, String foo,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.deleteWithSpecialHeadersSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, foo, accept, requestOptions, Context.NONE);
+        return service.deleteWithSpecialHeadersSync(this.client.getEndpoint(), apiVersion, name, foo, accept,
+            requestOptions, Context.NONE);
     }
 }

@@ -10,12 +10,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The Resource model.
@@ -76,27 +73,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private List<InnerModel> array;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    /**
-     * Stores updated model property, the value is property name, not serialized name.
-     */
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setResourceAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
-
     /**
      * Creates an instance of Resource class.
      * 
@@ -146,7 +122,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
         return this;
     }
 
@@ -179,7 +154,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setLongValue(Long longValue) {
         this.longValue = longValue;
-        this.updatedProperties.add("longValue");
         return this;
     }
 
@@ -202,7 +176,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setIntValue(Integer intValue) {
         this.intValue = intValue;
-        this.updatedProperties.add("intValue");
         return this;
     }
 
@@ -225,7 +198,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setEnumValue(ResourceEnumValue enumValue) {
         this.enumValue = enumValue;
-        this.updatedProperties.add("enumValue");
         return this;
     }
 
@@ -248,7 +220,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setInnerModelProperty(InnerModel innerModelProperty) {
         this.innerModelProperty = innerModelProperty;
-        this.updatedProperties.add("innerModelProperty");
         return this;
     }
 
@@ -271,74 +242,19 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setArray(List<InnerModel> array) {
         this.array = array;
-        this.updatedProperties.add("array");
         return this;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
-            return toJsonMergePatch(jsonWriter);
-        } else {
-            jsonWriter.writeStartObject();
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
-            jsonWriter.writeStringField("description", this.description);
-            jsonWriter.writeNumberField("longValue", this.longValue);
-            jsonWriter.writeNumberField("intValue", this.intValue);
-            jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
-            jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
-            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
-            return jsonWriter.writeEndObject();
-        }
-    }
-
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.map != null) {
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("map")) {
-            jsonWriter.writeNullField("map");
-        }
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
-        }
-        if (this.longValue != null) {
-            jsonWriter.writeNumberField("longValue", this.longValue);
-        } else if (updatedProperties.contains("longValue")) {
-            jsonWriter.writeNullField("longValue");
-        }
-        if (this.intValue != null) {
-            jsonWriter.writeNumberField("intValue", this.intValue);
-        } else if (updatedProperties.contains("intValue")) {
-            jsonWriter.writeNullField("intValue");
-        }
-        if (this.enumValue != null) {
-            jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
-        } else if (updatedProperties.contains("enumValue")) {
-            jsonWriter.writeNullField("enumValue");
-        }
-        if (this.innerModelProperty != null) {
-            this.innerModelProperty.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
-            this.innerModelProperty.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("innerModelProperty")) {
-            jsonWriter.writeNullField("wireNameForInnerModelProperty");
-        }
-        if (this.array != null) {
-            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("array")) {
-            jsonWriter.writeNullField("array");
-        }
+        jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("description", this.description);
+        jsonWriter.writeNumberField("longValue", this.longValue);
+        jsonWriter.writeNumberField("intValue", this.intValue);
+        jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
+        jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
+        jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

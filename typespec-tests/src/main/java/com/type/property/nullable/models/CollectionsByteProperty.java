@@ -10,11 +10,8 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Model with collection bytes properties.
@@ -32,27 +29,6 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
      */
     @Generated
     private final List<byte[]> nullableProperty;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    /**
-     * Stores updated model property, the value is property name, not serialized name.
-     */
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setCollectionsBytePropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of CollectionsByteProperty class.
@@ -88,30 +64,10 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
-            return toJsonMergePatch(jsonWriter);
-        } else {
-            jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeBinary(element));
-            return jsonWriter.writeEndObject();
-        }
-    }
-
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.requiredProperty != null) {
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        } else if (updatedProperties.contains("requiredProperty")) {
-            jsonWriter.writeNullField("requiredProperty");
-        }
-        if (this.nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeBinary(element));
-        } else if (updatedProperties.contains("nullableProperty")) {
-            jsonWriter.writeNullField("nullableProperty");
-        }
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+            (writer, element) -> writer.writeBinary(element));
         return jsonWriter.writeEndObject();
     }
 

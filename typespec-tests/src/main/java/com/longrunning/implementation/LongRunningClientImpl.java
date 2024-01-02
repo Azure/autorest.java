@@ -42,7 +42,6 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
-import com.longrunning.LongRunningServiceVersion;
 import com.longrunning.models.JobResultResult;
 import com.longrunning.models.PollResponse;
 import java.time.Duration;
@@ -71,20 +70,6 @@ public final class LongRunningClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /**
-     * Service version.
-     */
-    private final LongRunningServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public LongRunningServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -119,11 +104,10 @@ public final class LongRunningClientImpl {
      * Initializes an instance of LongRunningClient client.
      * 
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public LongRunningClientImpl(String endpoint, LongRunningServiceVersion serviceVersion) {
+    public LongRunningClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -131,10 +115,9 @@ public final class LongRunningClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public LongRunningClientImpl(HttpPipeline httpPipeline, String endpoint, LongRunningServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public LongRunningClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -143,14 +126,11 @@ public final class LongRunningClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public LongRunningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        LongRunningServiceVersion serviceVersion) {
+    public LongRunningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(LongRunningClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -363,6 +343,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -372,10 +353,11 @@ public final class LongRunningClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getJobWithResponseAsync(String id, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getJobWithResponseAsync(String apiVersion, String id,
+        RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getJob(this.getEndpoint(), this.getServiceVersion().getVersion(),
-            id, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.getJob(this.getEndpoint(), apiVersion, id, accept, requestOptions, context));
     }
 
     /**
@@ -408,6 +390,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -417,9 +400,187 @@ public final class LongRunningClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getJobWithResponse(String id, RequestOptions requestOptions) {
+    public Response<BinaryData> getJobWithResponse(String apiVersion, String id, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, accept, requestOptions,
+        return service.getJobSync(this.getEndpoint(), apiVersion, id, accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * A remote procedure call (RPC) operation.
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     configuration: String (Optional)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion The API version to use for this operation.
+     * @param jobData The jobData parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return status details for long running operations along with {@link Response} on successful completion of
+     * {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<BinaryData>> createJobWithResponseAsync(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
+            }
+        });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
+            }
+        });
+        return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(), apiVersion, accept, jobData,
+            requestOptionsLocal, context));
+    }
+
+    /**
+     * A remote procedure call (RPC) operation.
+     * <p>
+     * <strong>Header Parameters</strong>
+     * </p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr>
+     * <th>Name</th>
+     * <th>Type</th>
+     * <th>Required</th>
+     * <th>Description</th>
+     * </tr>
+     * <tr>
+     * <td>repeatability-request-id</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability request ID header</td>
+     * </tr>
+     * <tr>
+     * <td>repeatability-first-sent</td>
+     * <td>String</td>
+     * <td>No</td>
+     * <td>Repeatability first sent header as HTTP-date</td>
+     * </tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     configuration: String (Optional)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param apiVersion The API version to use for this operation.
+     * @param jobData The jobData parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return status details for long running operations along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Response<BinaryData> createJobWithResponse(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
+                    repeatabilityRequestId);
+            }
+        });
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
+                    repeatabilityFirstSent);
+            }
+        });
+        return service.createJobSync(this.getEndpoint(), apiVersion, accept, jobData, requestOptionsLocal,
             Context.NONE);
     }
 
@@ -480,181 +641,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        requestOptionsLocal.addRequestCallback(requestLocal -> {
-            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
-                    repeatabilityRequestId);
-            }
-        });
-        requestOptionsLocal.addRequestCallback(requestLocal -> {
-            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
-                    repeatabilityFirstSent);
-            }
-        });
-        return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, jobData, requestOptionsLocal, context));
-    }
-
-    /**
-     * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     configuration: String (Optional)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param jobData The jobData parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
-        requestOptionsLocal.addRequestCallback(requestLocal -> {
-            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
-                    repeatabilityRequestId);
-            }
-        });
-        requestOptionsLocal.addRequestCallback(requestLocal -> {
-            if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
-                    repeatabilityFirstSent);
-            }
-        });
-        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, jobData,
-            requestOptionsLocal, Context.NONE);
-    }
-
-    /**
-     * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     configuration: String (Optional)
-     * }
-     * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     * }
-     * }</pre>
-     * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -664,14 +651,15 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+    public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.createJobWithResponseAsync(apiVersion, jobData, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -732,6 +720,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -741,14 +730,15 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+    public SyncPoller<BinaryData, BinaryData> beginCreateJob(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.createJobWithResponse(apiVersion, jobData, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -809,6 +799,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -818,15 +809,15 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJobWithModelAsync(BinaryData jobData,
-        RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJobWithModelAsync(String apiVersion,
+        BinaryData jobData, RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.createJobWithResponseAsync(apiVersion, jobData, requestOptions),
             new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(JobResultResult.class));
     }
@@ -888,6 +879,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -897,15 +889,15 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, JobResultResult> beginCreateJobWithModel(BinaryData jobData,
-        RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+    public SyncPoller<PollOperationDetails, JobResultResult> beginCreateJobWithModel(String apiVersion,
+        BinaryData jobData, RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1),
+            () -> this.createJobWithResponse(apiVersion, jobData, requestOptions),
             new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                        ? requestOptions.getContext() : Context.NONE)),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(JobResultResult.class));
     }

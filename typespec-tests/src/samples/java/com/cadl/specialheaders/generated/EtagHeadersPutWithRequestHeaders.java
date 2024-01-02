@@ -15,7 +15,7 @@ public class EtagHeadersPutWithRequestHeaders {
         EtagHeadersClient etagHeadersClient = new SpecialHeadersClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildEtagHeadersClient();
         // BEGIN:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
-        Resource response = etagHeadersClient.putWithRequestHeaders("name",
+        Resource response = etagHeadersClient.putWithRequestHeaders(null, "name",
             new Resource("myType").setDescription("This is sample for Etag headers"),
             new RequestConditions().setIfMatch("64e005"));
         // END:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders

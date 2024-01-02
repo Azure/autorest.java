@@ -191,24 +191,6 @@ public final class LongRunningClientBuilder implements HttpTrait<LongRunningClie
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private LongRunningServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the LongRunningClientBuilder.
-     */
-    @Generated
-    public LongRunningClientBuilder serviceVersion(LongRunningServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -234,10 +216,8 @@ public final class LongRunningClientBuilder implements HttpTrait<LongRunningClie
     @Generated
     private LongRunningClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        LongRunningServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : LongRunningServiceVersion.getLatest();
-        LongRunningClientImpl client = new LongRunningClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+        LongRunningClientImpl client
+            = new LongRunningClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

@@ -25,7 +25,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.cadl.specialheaders.SpecialHeadersServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -51,15 +50,6 @@ public final class EtagHeadersOptionalBodiesImpl {
         this.service = RestProxy.create(EtagHeadersOptionalBodiesService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
-    }
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public SpecialHeadersServiceVersion getServiceVersion() {
-        return client.getServiceVersion();
     }
 
     /**

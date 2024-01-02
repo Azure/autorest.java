@@ -191,24 +191,6 @@ public final class ResponseClientBuilder implements HttpTrait<ResponseClientBuil
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private ResponseServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the ResponseClientBuilder.
-     */
-    @Generated
-    public ResponseClientBuilder serviceVersion(ResponseServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -234,10 +216,8 @@ public final class ResponseClientBuilder implements HttpTrait<ResponseClientBuil
     @Generated
     private ResponseClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ResponseServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
-        ResponseClientImpl client = new ResponseClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+        ResponseClientImpl client
+            = new ResponseClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

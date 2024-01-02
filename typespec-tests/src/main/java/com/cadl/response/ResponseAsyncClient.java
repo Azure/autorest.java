@@ -175,6 +175,7 @@ public final class ResponseAsyncClient {
      * boolean
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -183,8 +184,8 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Boolean>> existsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.existsWithResponseAsync(requestOptions);
+    public Mono<Response<Boolean>> existsWithResponse(String apiVersion, RequestOptions requestOptions) {
+        return this.serviceClient.existsWithResponseAsync(apiVersion, requestOptions);
     }
 
     /**
@@ -201,6 +202,7 @@ public final class ResponseAsyncClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -211,9 +213,9 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponse(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidPollResponseAsync(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidPollResponseAsync(apiVersion, resource, requestOptions);
     }
 
     /**
@@ -230,6 +232,7 @@ public final class ResponseAsyncClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -240,9 +243,9 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResult(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidResultAsync(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidResultAsync(apiVersion, resource, requestOptions);
     }
 
     /**
@@ -341,6 +344,8 @@ public final class ResponseAsyncClient {
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -349,15 +354,16 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Boolean> exists() {
+    public Mono<Boolean> exists(String apiVersion) {
         // Generated convenience method for existsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return existsWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return existsWithResponse(apiVersion, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -369,15 +375,18 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(String apiVersion,
+        Resource resource) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidPollResponseWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidPollResponseWithModelAsync(apiVersion, BinaryData.fromObject(resource),
+            requestOptions);
     }
 
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -389,10 +398,12 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(String apiVersion,
+        Resource resource) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidResultWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidResultWithModelAsync(apiVersion, BinaryData.fromObject(resource),
+            requestOptions);
     }
 
     @Generated

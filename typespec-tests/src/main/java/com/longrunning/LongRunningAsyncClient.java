@@ -89,6 +89,7 @@ public final class LongRunningAsyncClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -99,8 +100,8 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getJobWithResponse(String id, RequestOptions requestOptions) {
-        return this.serviceClient.getJobWithResponseAsync(id, requestOptions);
+    public Mono<Response<BinaryData>> getJobWithResponse(String apiVersion, String id, RequestOptions requestOptions) {
+        return this.serviceClient.getJobWithResponseAsync(apiVersion, id, requestOptions);
     }
 
     /**
@@ -160,6 +161,7 @@ public final class LongRunningAsyncClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -170,8 +172,9 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateJobAsync(jobData, requestOptions);
+    public PollerFlux<BinaryData, BinaryData> beginCreateJob(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateJobAsync(apiVersion, jobData, requestOptions);
     }
 
     /**
@@ -195,6 +198,7 @@ public final class LongRunningAsyncClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -206,16 +210,17 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<JobResult> getJob(String id) {
+    public Mono<JobResult> getJob(String apiVersion, String id) {
         // Generated convenience method for getJobWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getJobWithResponse(id, requestOptions).flatMap(FluxUtil::toMono)
+        return getJobWithResponse(apiVersion, id, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(JobResult.class));
     }
 
     /**
      * A remote procedure call (RPC) operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -227,9 +232,9 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJob(JobData jobData) {
+    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJob(String apiVersion, JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(jobData), requestOptions);
+        return serviceClient.beginCreateJobWithModelAsync(apiVersion, BinaryData.fromObject(jobData), requestOptions);
     }
 }

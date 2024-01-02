@@ -37,6 +37,7 @@ public final class SkipSpecialHeadersClient {
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -48,13 +49,15 @@ public final class SkipSpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteWithSpecialHeadersWithResponse(String name, String foo, RequestOptions requestOptions) {
-        return this.serviceClient.deleteWithSpecialHeadersWithResponse(name, foo, requestOptions);
+    public Response<Void> deleteWithSpecialHeadersWithResponse(String apiVersion, String name, String foo,
+        RequestOptions requestOptions) {
+        return this.serviceClient.deleteWithSpecialHeadersWithResponse(apiVersion, name, foo, requestOptions);
     }
 
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -66,9 +69,9 @@ public final class SkipSpecialHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void deleteWithSpecialHeaders(String name, String foo) {
+    public void deleteWithSpecialHeaders(String apiVersion, String name, String foo) {
         // Generated convenience method for deleteWithSpecialHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        deleteWithSpecialHeadersWithResponse(name, foo, requestOptions).getValue();
+        deleteWithSpecialHeadersWithResponse(apiVersion, name, foo, requestOptions).getValue();
     }
 }

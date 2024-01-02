@@ -10,7 +10,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
 
 /**
  * Initializes a new instance of the ProtocolAndConvenientClient type.
@@ -28,20 +27,6 @@ public final class ProtocolAndConvenientClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
-    }
-
-    /**
-     * Service version.
-     */
-    private final ProtocolAndConvenientServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public ProtocolAndConvenientServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -90,11 +75,10 @@ public final class ProtocolAndConvenientClientImpl {
      * Initializes an instance of ProtocolAndConvenientClient client.
      * 
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ProtocolAndConvenientClientImpl(String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
+    public ProtocolAndConvenientClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -102,11 +86,9 @@ public final class ProtocolAndConvenientClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
-    public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, String endpoint,
-        ProtocolAndConvenientServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
+    public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -115,14 +97,12 @@ public final class ProtocolAndConvenientClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
-     * @param serviceVersion Service version.
      */
     public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.serviceVersion = serviceVersion;
         this.protocolAndConvenienceOps = new ProtocolAndConvenienceOpsImpl(this);
     }
 }

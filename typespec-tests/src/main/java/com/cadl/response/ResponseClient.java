@@ -173,6 +173,7 @@ public final class ResponseClient {
      * boolean
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -181,8 +182,8 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Boolean> existsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.existsWithResponse(requestOptions);
+    public Response<Boolean> existsWithResponse(String apiVersion, RequestOptions requestOptions) {
+        return this.serviceClient.existsWithResponse(apiVersion, requestOptions);
     }
 
     /**
@@ -199,6 +200,7 @@ public final class ResponseClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -209,9 +211,9 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidPollResponse(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidPollResponse(apiVersion, resource, requestOptions);
     }
 
     /**
@@ -228,6 +230,7 @@ public final class ResponseClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -238,9 +241,9 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(String apiVersion, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidResult(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidResult(apiVersion, resource, requestOptions);
     }
 
     /**
@@ -335,6 +338,8 @@ public final class ResponseClient {
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
@@ -343,15 +348,16 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public boolean exists() {
+    public boolean exists(String apiVersion) {
         // Generated convenience method for existsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return existsWithResponse(requestOptions).getValue();
+        return existsWithResponse(apiVersion, requestOptions).getValue();
     }
 
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -363,15 +369,18 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(String apiVersion,
+        Resource resource) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidPollResponseWithModel(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidPollResponseWithModel(apiVersion, BinaryData.fromObject(resource),
+            requestOptions);
     }
 
     /**
      * The most basic operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -383,10 +392,12 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(String apiVersion,
+        Resource resource) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidResultWithModel(apiVersion, BinaryData.fromObject(resource),
+            requestOptions);
     }
 
     @Generated

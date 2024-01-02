@@ -11,11 +11,8 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.type.property.nullable.implementation.CoreToCodegenBridgeUtils;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Model with a duration property.
@@ -33,27 +30,6 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      */
     @Generated
     private final Duration nullableProperty;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    /**
-     * Stores updated model property, the value is property name, not serialized name.
-     */
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setDurationPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of DurationProperty class.
@@ -89,30 +65,10 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
-            return toJsonMergePatch(jsonWriter);
-        } else {
-            jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeStringField("nullableProperty",
-                CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
-            return jsonWriter.writeEndObject();
-        }
-    }
-
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.requiredProperty != null) {
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        } else if (updatedProperties.contains("requiredProperty")) {
-            jsonWriter.writeNullField("requiredProperty");
-        }
-        if (this.nullableProperty != null) {
-            jsonWriter.writeStringField("nullableProperty",
-                CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
-        } else if (updatedProperties.contains("nullableProperty")) {
-            jsonWriter.writeNullField("nullableProperty");
-        }
+        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        jsonWriter.writeStringField("nullableProperty",
+            CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
         return jsonWriter.writeEndObject();
     }
 

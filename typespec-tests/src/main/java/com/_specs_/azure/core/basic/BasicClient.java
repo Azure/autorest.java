@@ -5,7 +5,6 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.implementation.BasicClientImpl;
-import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com._specs_.azure.core.basic.models.ListItemInputBody;
 import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
@@ -482,10 +481,8 @@ public final class BasicClient {
     public User createOrUpdate(int id, User resource) {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
-        return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).getValue().toObject(User.class);
+        return createOrUpdateWithResponse(id, BinaryData.fromObject(resource), requestOptions).getValue()
+            .toObject(User.class);
     }
 
     /**

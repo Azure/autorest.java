@@ -4,7 +4,6 @@
 
 package com._specs_.azure.core.basic.models;
 
-import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
@@ -12,9 +11,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Details about a user.
@@ -44,27 +41,6 @@ public final class User implements JsonSerializable<User> {
      */
     @Generated
     private String etag;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    /**
-     * Stores updated model property, the value is property name, not serialized name.
-     */
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setUserAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of User class.
@@ -115,7 +91,6 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public User setOrders(List<UserOrder> orders) {
         this.orders = orders;
-        this.updatedProperties.add("orders");
         return this;
     }
 
@@ -131,28 +106,9 @@ public final class User implements JsonSerializable<User> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
-            return toJsonMergePatch(jsonWriter);
-        } else {
-            jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("name", this.name);
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
-            return jsonWriter.writeEndObject();
-        }
-    }
-
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.name != null) {
-            jsonWriter.writeStringField("name", this.name);
-        } else if (updatedProperties.contains("name")) {
-            jsonWriter.writeNullField("name");
-        }
-        if (this.orders != null) {
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("orders")) {
-            jsonWriter.writeNullField("orders");
-        }
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
     }
 

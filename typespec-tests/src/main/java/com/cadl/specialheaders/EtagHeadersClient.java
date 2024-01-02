@@ -103,6 +103,7 @@ public final class EtagHeadersClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -114,9 +115,9 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithRequestHeadersWithResponse(String name, BinaryData resource,
+    public Response<BinaryData> putWithRequestHeadersWithResponse(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.putWithRequestHeadersWithResponse(name, resource, requestOptions);
+        return this.serviceClient.putWithRequestHeadersWithResponse(apiVersion, name, resource, requestOptions);
     }
 
     /**
@@ -169,6 +170,7 @@ public final class EtagHeadersClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -180,14 +182,15 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> patchWithMatchHeadersWithResponse(String name, BinaryData resource,
+    public Response<BinaryData> patchWithMatchHeadersWithResponse(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.patchWithMatchHeadersWithResponse(name, resource, requestOptions);
+        return this.serviceClient.patchWithMatchHeadersWithResponse(apiVersion, name, resource, requestOptions);
     }
 
     /**
      * Create or replace operation template.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
@@ -201,7 +204,8 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource putWithRequestHeaders(String name, Resource resource, RequestConditions requestConditions) {
+    public Resource putWithRequestHeaders(String apiVersion, String name, Resource resource,
+        RequestConditions requestConditions) {
         // Generated convenience method for putWithRequestHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         String ifMatch = requestConditions == null ? null : requestConditions.getIfMatch();
@@ -222,13 +226,14 @@ public final class EtagHeadersClient {
             requestOptions.setHeader(HttpHeaderName.IF_MODIFIED_SINCE,
                 String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
-        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
-            .toObject(Resource.class);
+        return putWithRequestHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+            .getValue().toObject(Resource.class);
     }
 
     /**
      * Create or replace operation template.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -241,16 +246,17 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource putWithRequestHeaders(String name, Resource resource) {
+    public Resource putWithRequestHeaders(String apiVersion, String name, Resource resource) {
         // Generated convenience method for putWithRequestHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
-            .toObject(Resource.class);
+        return putWithRequestHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+            .getValue().toObject(Resource.class);
     }
 
     /**
      * Create or replace operation template.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param matchConditions Specifies HTTP options for conditional requests.
@@ -264,7 +270,8 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource patchWithMatchHeaders(String name, Resource resource, MatchConditions matchConditions) {
+    public Resource patchWithMatchHeaders(String apiVersion, String name, Resource resource,
+        MatchConditions matchConditions) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         String ifMatch = matchConditions == null ? null : matchConditions.getIfMatch();
@@ -275,13 +282,14 @@ public final class EtagHeadersClient {
         if (ifNoneMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
-            .toObject(Resource.class);
+        return patchWithMatchHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+            .getValue().toObject(Resource.class);
     }
 
     /**
      * Create or replace operation template.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -294,10 +302,10 @@ public final class EtagHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource patchWithMatchHeaders(String name, Resource resource) {
+    public Resource patchWithMatchHeaders(String apiVersion, String name, Resource resource) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
-            .toObject(Resource.class);
+        return patchWithMatchHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+            .getValue().toObject(Resource.class);
     }
 }

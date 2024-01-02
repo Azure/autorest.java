@@ -9,12 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
@@ -39,27 +36,6 @@ public final class Salmon extends Fish {
      */
     @Generated
     private Fish partner;
-
-    @Generated
-    private boolean jsonMergePatch;
-
-    /**
-     * Stores updated model property, the value is property name, not serialized name.
-     */
-    @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setSalmonAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of Salmon class.
@@ -90,7 +66,6 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setFriends(List<Fish> friends) {
         this.friends = friends;
-        this.updatedProperties.add("friends");
         return this;
     }
 
@@ -113,7 +88,6 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setHate(Map<String, Fish> hate) {
         this.hate = hate;
-        this.updatedProperties.add("hate");
         return this;
     }
 
@@ -136,7 +110,6 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setPartner(Fish partner) {
         this.partner = partner;
-        this.updatedProperties.add("partner");
         return this;
     }
 
@@ -147,60 +120,18 @@ public final class Salmon extends Fish {
     @Override
     public Salmon setColor(String color) {
         super.setColor(color);
-        this.updatedProperties.add("color");
         return this;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
-            return toJsonMergePatch(jsonWriter);
-        } else {
-            jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "salmon");
-            jsonWriter.writeIntField("age", getAge());
-            jsonWriter.writeStringField("color", getColor());
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
-            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
-            jsonWriter.writeJsonField("partner", this.partner);
-            return jsonWriter.writeEndObject();
-        }
-    }
-
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", "salmon");
         jsonWriter.writeIntField("age", getAge());
-        if (getColor() != null) {
-            jsonWriter.writeStringField("color", getColor());
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
-        }
-        if (this.friends != null) {
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("friends")) {
-            jsonWriter.writeNullField("friends");
-        }
-        if (this.hate != null) {
-            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("hate")) {
-            jsonWriter.writeNullField("hate");
-        }
-        if (this.partner != null) {
-            this.partner.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("partner", this.partner);
-            this.partner.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("partner")) {
-            jsonWriter.writeNullField("partner");
-        }
+        jsonWriter.writeStringField("color", getColor());
+        jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeJsonField("partner", this.partner);
         return jsonWriter.writeEndObject();
     }
 

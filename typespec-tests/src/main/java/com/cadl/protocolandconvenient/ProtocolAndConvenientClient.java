@@ -208,6 +208,7 @@ public final class ProtocolAndConvenientClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -219,9 +220,9 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
+    SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateOrReplace(name, resource, requestOptions);
+        return this.serviceClient.beginCreateOrReplace(apiVersion, name, resource, requestOptions);
     }
 
     /**
@@ -257,6 +258,7 @@ public final class ProtocolAndConvenientClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -266,8 +268,8 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<BinaryData> list(RequestOptions requestOptions) {
-        return this.serviceClient.list(requestOptions);
+    PagedIterable<BinaryData> list(String apiVersion, RequestOptions requestOptions) {
+        return this.serviceClient.list(apiVersion, requestOptions);
     }
 
     /**
@@ -315,6 +317,7 @@ public final class ProtocolAndConvenientClient {
     /**
      * Long running operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -327,15 +330,19 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, ResourceI> beginCreateOrReplace(String name, ResourceI resource) {
+    public SyncPoller<PollOperationDetails, ResourceI> beginCreateOrReplace(String apiVersion, String name,
+        ResourceI resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateOrReplaceWithModel(name, BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginCreateOrReplaceWithModel(apiVersion, name, BinaryData.fromObject(resource),
+            requestOptions);
     }
 
     /**
      * Paging operation.
      * 
+     * @param apiVersion The API version to use for this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -345,9 +352,10 @@ public final class ProtocolAndConvenientClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ResourceJ> list() {
+    public PagedIterable<ResourceJ> list(String apiVersion) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.list(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(ResourceJ.class));
+        return serviceClient.list(apiVersion, requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(ResourceJ.class));
     }
 }

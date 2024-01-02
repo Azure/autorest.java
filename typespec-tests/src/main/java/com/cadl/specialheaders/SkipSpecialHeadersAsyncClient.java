@@ -39,6 +39,7 @@ public final class SkipSpecialHeadersAsyncClient {
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -50,14 +51,15 @@ public final class SkipSpecialHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> deleteWithSpecialHeadersWithResponse(String name, String foo,
+    public Mono<Response<Void>> deleteWithSpecialHeadersWithResponse(String apiVersion, String name, String foo,
         RequestOptions requestOptions) {
-        return this.serviceClient.deleteWithSpecialHeadersWithResponseAsync(name, foo, requestOptions);
+        return this.serviceClient.deleteWithSpecialHeadersWithResponseAsync(apiVersion, name, foo, requestOptions);
     }
 
     /**
      * skip special headers.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param foo A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -70,9 +72,9 @@ public final class SkipSpecialHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> deleteWithSpecialHeaders(String name, String foo) {
+    public Mono<Void> deleteWithSpecialHeaders(String apiVersion, String name, String foo) {
         // Generated convenience method for deleteWithSpecialHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return deleteWithSpecialHeadersWithResponse(name, foo, requestOptions).flatMap(FluxUtil::toMono);
+        return deleteWithSpecialHeadersWithResponse(apiVersion, name, foo, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

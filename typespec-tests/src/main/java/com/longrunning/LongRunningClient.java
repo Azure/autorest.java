@@ -87,6 +87,7 @@ public final class LongRunningClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -97,8 +98,8 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getJobWithResponse(String id, RequestOptions requestOptions) {
-        return this.serviceClient.getJobWithResponse(id, requestOptions);
+    public Response<BinaryData> getJobWithResponse(String apiVersion, String id, RequestOptions requestOptions) {
+        return this.serviceClient.getJobWithResponse(apiVersion, id, requestOptions);
     }
 
     /**
@@ -158,6 +159,7 @@ public final class LongRunningClient {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -168,8 +170,9 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateJob(jobData, requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginCreateJob(String apiVersion, BinaryData jobData,
+        RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateJob(apiVersion, jobData, requestOptions);
     }
 
     /**
@@ -193,6 +196,7 @@ public final class LongRunningClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param id Universally Unique Identifier.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -204,15 +208,16 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public JobResult getJob(String id) {
+    public JobResult getJob(String apiVersion, String id) {
         // Generated convenience method for getJobWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getJobWithResponse(id, requestOptions).getValue().toObject(JobResult.class);
+        return getJobWithResponse(apiVersion, id, requestOptions).getValue().toObject(JobResult.class);
     }
 
     /**
      * A remote procedure call (RPC) operation.
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param jobData The jobData parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -224,9 +229,9 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, JobResultResult> beginCreateJob(JobData jobData) {
+    public SyncPoller<PollOperationDetails, JobResultResult> beginCreateJob(String apiVersion, JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(jobData), requestOptions);
+        return serviceClient.beginCreateJobWithModel(apiVersion, BinaryData.fromObject(jobData), requestOptions);
     }
 }

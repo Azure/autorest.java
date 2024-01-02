@@ -17,7 +17,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.property.nullable.implementation.DurationOperationsImpl;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.models.DurationProperty;
 import reactor.core.publisher.Mono;
 
@@ -198,10 +197,7 @@ public final class DurationOperationAsyncClient {
     public Mono<Void> patchNonNull(DurationProperty body) {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
-        return patchNonNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
+        return patchNonNullWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -221,9 +217,6 @@ public final class DurationOperationAsyncClient {
     public Mono<Void> patchNull(DurationProperty body) {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
-        return patchNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
+        return patchNullWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

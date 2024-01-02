@@ -192,24 +192,6 @@ public final class ProtocolAndConvenientClientBuilder implements HttpTrait<Proto
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private ProtocolAndConvenientServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the ProtocolAndConvenientClientBuilder.
-     */
-    @Generated
-    public ProtocolAndConvenientClientBuilder serviceVersion(ProtocolAndConvenientServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -235,10 +217,8 @@ public final class ProtocolAndConvenientClientBuilder implements HttpTrait<Proto
     @Generated
     private ProtocolAndConvenientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ProtocolAndConvenientServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
         ProtocolAndConvenientClientImpl client = new ProtocolAndConvenientClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

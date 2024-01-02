@@ -27,7 +27,6 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.cadl.specialheaders.SpecialHeadersServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -53,15 +52,6 @@ public final class EtagHeadersImpl {
         this.service
             = RestProxy.create(EtagHeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
-    }
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public SpecialHeadersServiceVersion getServiceVersion() {
-        return client.getServiceVersion();
     }
 
     /**
@@ -178,6 +168,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -188,11 +179,11 @@ public final class EtagHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithRequestHeadersWithResponseAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> putWithRequestHeadersWithResponseAsync(String apiVersion, String name,
+        BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putWithRequestHeaders(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putWithRequestHeaders(this.client.getEndpoint(), apiVersion,
+            name, accept, resource, requestOptions, context));
     }
 
     /**
@@ -257,6 +248,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -267,11 +259,11 @@ public final class EtagHeadersImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithRequestHeadersWithResponse(String name, BinaryData resource,
+    public Response<BinaryData> putWithRequestHeadersWithResponse(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.putWithRequestHeadersSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, Context.NONE);
+        return service.putWithRequestHeadersSync(this.client.getEndpoint(), apiVersion, name, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -324,6 +316,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -334,11 +327,11 @@ public final class EtagHeadersImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patchWithMatchHeadersWithResponseAsync(String name, BinaryData resource,
-        RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> patchWithMatchHeadersWithResponseAsync(String apiVersion, String name,
+        BinaryData resource, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.patchWithMatchHeaders(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.patchWithMatchHeaders(this.client.getEndpoint(), apiVersion,
+            name, accept, resource, requestOptions, context));
     }
 
     /**
@@ -391,6 +384,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
+     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -401,10 +395,10 @@ public final class EtagHeadersImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> patchWithMatchHeadersWithResponse(String name, BinaryData resource,
+    public Response<BinaryData> patchWithMatchHeadersWithResponse(String apiVersion, String name, BinaryData resource,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.patchWithMatchHeadersSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, Context.NONE);
+        return service.patchWithMatchHeadersSync(this.client.getEndpoint(), apiVersion, name, accept, resource,
+            requestOptions, Context.NONE);
     }
 }

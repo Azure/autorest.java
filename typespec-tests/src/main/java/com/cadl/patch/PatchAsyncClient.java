@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.cadl.patch.implementation.JsonMergePatchHelper;
 import com.cadl.patch.implementation.PatchesImpl;
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.Resource;
@@ -225,11 +224,8 @@ public final class PatchAsyncClient {
     public Mono<Resource> createOrUpdateResource(Resource resource) {
         // Generated convenience method for createOrUpdateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
-        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return createOrUpdateResourceWithResponse(resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        return createOrUpdateResourceWithResponse(BinaryData.fromObject(resource), requestOptions)
+            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
@@ -250,10 +246,7 @@ public final class PatchAsyncClient {
         // Generated convenience method for createOrUpdateOptionalResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (resource != null) {
-            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-            BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
-            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-            requestOptions.setBody(resourceInBinaryData);
+            requestOptions.setBody(BinaryData.fromObject(resource));
         }
         return createOrUpdateOptionalResourceWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
@@ -296,10 +289,7 @@ public final class PatchAsyncClient {
     public Mono<Fish> createOrUpdateFish(Fish fish) {
         // Generated convenience method for createOrUpdateFishWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
-        BinaryData fishInBinaryData = BinaryData.fromString(BinaryData.fromObject(fish).toString());
-        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, false);
-        return createOrUpdateFishWithResponse(fishInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
+        return createOrUpdateFishWithResponse(BinaryData.fromObject(fish), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Fish.class));
     }
 }

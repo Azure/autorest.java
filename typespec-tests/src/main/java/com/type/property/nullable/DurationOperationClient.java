@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.property.nullable.implementation.DurationOperationsImpl;
-import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.models.DurationProperty;
 
 /**
@@ -191,10 +190,7 @@ public final class DurationOperationClient {
     public void patchNonNull(DurationProperty body) {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
-        patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
+        patchNonNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
@@ -213,9 +209,6 @@ public final class DurationOperationClient {
     public void patchNull(DurationProperty body) {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
-        JsonMergePatchHelper.getDurationPropertyAccessor().prepareModelForJsonMergePatch(body, false);
-        patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
+        patchNullWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

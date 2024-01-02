@@ -200,24 +200,6 @@ public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeade
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private SpecialHeadersServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the SpecialHeadersClientBuilder.
-     */
-    @Generated
-    public SpecialHeadersClientBuilder serviceVersion(SpecialHeadersServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -243,10 +225,8 @@ public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeade
     @Generated
     private SpecialHeadersClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        SpecialHeadersServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : SpecialHeadersServiceVersion.getLatest();
         SpecialHeadersClientImpl client = new SpecialHeadersClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
