@@ -10,8 +10,11 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Model with collection models properties.
@@ -29,6 +32,27 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
      */
     @Generated
     private final List<InnerModel> nullableProperty;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setCollectionsModelPropertyAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of CollectionsModelProperty class.
@@ -64,10 +88,30 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                (writer, element) -> writer.writeJson(element));
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-            (writer, element) -> writer.writeJson(element));
+        if (this.requiredProperty != null) {
+            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        } else if (updatedProperties.contains("requiredProperty")) {
+            jsonWriter.writeNullField("requiredProperty");
+        }
+        if (this.nullableProperty != null) {
+            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                (writer, element) -> writer.writeJson(element));
+        } else if (updatedProperties.contains("nullableProperty")) {
+            jsonWriter.writeNullField("nullableProperty");
+        }
         return jsonWriter.writeEndObject();
     }
 

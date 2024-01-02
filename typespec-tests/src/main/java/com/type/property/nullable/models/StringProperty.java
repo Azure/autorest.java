@@ -10,7 +10,10 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
@@ -28,6 +31,27 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
      */
     @Generated
     private final String nullableProperty;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setStringPropertyAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of StringProperty class.
@@ -63,9 +87,28 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+            jsonWriter.writeStringField("nullableProperty", this.nullableProperty);
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        jsonWriter.writeStringField("nullableProperty", this.nullableProperty);
+        if (this.requiredProperty != null) {
+            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+        } else if (updatedProperties.contains("requiredProperty")) {
+            jsonWriter.writeNullField("requiredProperty");
+        }
+        if (this.nullableProperty != null) {
+            jsonWriter.writeStringField("nullableProperty", this.nullableProperty);
+        } else if (updatedProperties.contains("nullableProperty")) {
+            jsonWriter.writeNullField("nullableProperty");
+        }
         return jsonWriter.writeEndObject();
     }
 

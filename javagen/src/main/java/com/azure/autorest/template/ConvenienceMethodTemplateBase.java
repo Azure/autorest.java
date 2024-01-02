@@ -116,6 +116,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
+        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -140,11 +141,16 @@ abstract class ConvenienceMethodTemplateBase {
                         break;
 
                     case BODY: {
-                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                String.format("requestOptions.setBody(%s);",
-                                        expressionConvertToBinaryData(
-                                                parameter.getName(), parameter.getClientMethodParameter().getWireType(),
-                                                protocolMethod.getProxyMethod().getRequestContentType())));
+                        Consumer<JavaBlock> writeLine = javaBlock -> {
+                            IType parameterType = parameter.getClientMethodParameter().getClientType();
+                            String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
+                            if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
+                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, parameterType.toString(), parameter.getName(), expression);
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
+                            } else {
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
+                            }
+                        };
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
                         } else {
@@ -159,11 +165,14 @@ abstract class ConvenienceMethodTemplateBase {
         // invocation with protocol method parameters and RequestOptions
         String invocationExpression = protocolMethod.getMethodInputParameters().stream()
                 .map(p -> {
-                    String expression = parameterExpressionsMap.get(p.getName());
-                    if (expression == null) {
-                        expression = p.getName();
+                    String parameterName = p.getName();
+                    String expression = parameterExpressionsMap.get(parameterName);
+                    IType parameterRawType = p.getRawType();
+                    if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterRawType.toString(), parameterName, expression);
+                    } else {
+                        return expression == null ? parameterName : expression;
                     }
-                    return expression;
                 })
                 .collect(Collectors.joining(", "));
 
@@ -329,6 +338,9 @@ abstract class ConvenienceMethodTemplateBase {
 
         // versioning
         imports.add(Arrays.class.getName());
+
+        // JsonMergePatchHelper class
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
@@ -698,6 +710,22 @@ abstract class ConvenienceMethodTemplateBase {
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Writes the expression to convert a convenience parameter to a protocol parameter and wrap it in JsonMergePatchHelper.
+     * @param javaBlock
+     * @param convenientParameterTypeName
+     * @param convenientParameterName
+     * @param expression
+     * @return the name of the variable that holds the converted parameter
+     */
+    private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
+            String variableName = convenientParameterName + "InBinaryData";
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromString(%2$s.toString());", variableName, expression)); // BinaryData.fromString() will not fire serialization, use toString() to fire serialization
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
+            return variableName;
     }
 
     protected static class MethodParameter {
