@@ -9,10 +9,14 @@ using Azure.Core.Traits;
 
 @service({
   title: "SpecialHeaders",
-  version: "1.0.0",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(ApiVersions)
 namespace Cadl.SpecialHeaders;
+
+enum ApiVersions {
+  @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
+  v2022_06_01_preview: "2022-06-01-preview",
+}
 
 @resource("resources")
 model Resource {

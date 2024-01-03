@@ -4,14 +4,9 @@ using TypeSpec.Http;
 
 @service({
   title: "SpecialChars",
+  version: "1.0.0",
 })
-@versioned(ApiVersions)
 namespace Cadl.SpecialChars;
-
-enum ApiVersions {
-  @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
-  v2022_06_01_preview: "2022-06-01-preview",
-}
 
 model Resource {
   @doc("id")
