@@ -10,7 +10,10 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
@@ -41,6 +44,27 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     private String color;
 
+    @Generated
+    private boolean jsonMergePatch;
+
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setFishAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
+
     /**
      * Creates an instance of Fish class.
      * 
@@ -69,6 +93,7 @@ public class Fish implements JsonSerializable<Fish> {
      */
     Fish setId(String id) {
         this.id = id;
+        this.updatedProperties.add("id");
         return this;
     }
 
@@ -90,6 +115,7 @@ public class Fish implements JsonSerializable<Fish> {
      */
     Fish setName(String name) {
         this.name = name;
+        this.updatedProperties.add("name");
         return this;
     }
 
@@ -122,14 +148,30 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public Fish setColor(String color) {
         this.color = color;
+        this.updatedProperties.add("color");
         return this;
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeIntField("age", this.age);
+            jsonWriter.writeStringField("color", this.color);
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
-        jsonWriter.writeStringField("color", this.color);
+        if (this.color != null) {
+            jsonWriter.writeStringField("color", this.color);
+        } else if (updatedProperties.contains("color")) {
+            jsonWriter.writeNullField("color");
+        }
         return jsonWriter.writeEndObject();
     }
 

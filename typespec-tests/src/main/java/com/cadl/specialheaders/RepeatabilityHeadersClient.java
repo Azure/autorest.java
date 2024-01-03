@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.implementation.RepeatabilityHeadersImpl;
 import com.cadl.specialheaders.models.Resource;
 
@@ -340,6 +341,9 @@ public final class RepeatabilityHeadersClient {
         Resource resource) {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateLroWithModel(apiVersion, name, BinaryData.fromObject(resource), requestOptions);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return serviceClient.beginCreateLroWithModel(apiVersion, name, resourceInBinaryData, requestOptions);
     }
 }

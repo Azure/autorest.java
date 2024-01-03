@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.implementation.RepeatabilityHeadersImpl;
 import com.cadl.specialheaders.models.Resource;
 import reactor.core.publisher.Mono;
@@ -344,7 +345,9 @@ public final class RepeatabilityHeadersAsyncClient {
         Resource resource) {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateLroWithModelAsync(apiVersion, name, BinaryData.fromObject(resource),
-            requestOptions);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return serviceClient.beginCreateLroWithModelAsync(apiVersion, name, resourceInBinaryData, requestOptions);
     }
 }

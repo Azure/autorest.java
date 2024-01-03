@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.property.nullable.implementation.CollectionsBytesImpl;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.models.CollectionsByteProperty;
 import reactor.core.publisher.Mono;
 
@@ -205,7 +206,10 @@ public final class CollectionsByteAsyncClient {
     public Mono<Void> patchNonNull(CollectionsByteProperty body) {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchNonNullWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+        JsonMergePatchHelper.getCollectionsBytePropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        JsonMergePatchHelper.getCollectionsBytePropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        return patchNonNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -225,6 +229,9 @@ public final class CollectionsByteAsyncClient {
     public Mono<Void> patchNull(CollectionsByteProperty body) {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchNullWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+        JsonMergePatchHelper.getCollectionsBytePropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        JsonMergePatchHelper.getCollectionsBytePropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        return patchNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

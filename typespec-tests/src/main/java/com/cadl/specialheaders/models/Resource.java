@@ -10,7 +10,10 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The Resource model.
@@ -40,6 +43,27 @@ public final class Resource implements JsonSerializable<Resource> {
      */
     @Generated
     private final String type;
+
+    @Generated
+    private boolean jsonMergePatch;
+
+    /**
+     * Stores updated model property, the value is property name, not serialized name.
+     */
+    @Generated
+    private final Set<String> updatedProperties = new HashSet<>();
+
+    @Generated
+    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+        this.jsonMergePatch = jsonMergePatch;
+    }
+
+    static {
+        JsonMergePatchHelper.setResourceAccessor((model, jsonMergePatchEnabled) -> {
+            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+            return model;
+        });
+    }
 
     /**
      * Creates an instance of Resource class.
@@ -90,6 +114,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setDescription(String description) {
         this.description = description;
+        this.updatedProperties.add("description");
         return this;
     }
 
@@ -105,9 +130,28 @@ public final class Resource implements JsonSerializable<Resource> {
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        if (jsonMergePatch) {
+            return toJsonMergePatch(jsonWriter);
+        } else {
+            jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("type", this.type);
+            jsonWriter.writeStringField("description", this.description);
+            return jsonWriter.writeEndObject();
+        }
+    }
+
+    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("type", this.type);
-        jsonWriter.writeStringField("description", this.description);
+        if (this.type != null) {
+            jsonWriter.writeStringField("type", this.type);
+        } else if (updatedProperties.contains("type")) {
+            jsonWriter.writeNullField("type");
+        }
+        if (this.description != null) {
+            jsonWriter.writeStringField("description", this.description);
+        } else if (updatedProperties.contains("description")) {
+            jsonWriter.writeNullField("description");
+        }
         return jsonWriter.writeEndObject();
     }
 
