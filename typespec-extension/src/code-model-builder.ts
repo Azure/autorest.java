@@ -549,7 +549,7 @@ export class CodeModelBuilder {
       );
       clientContext.preProcessOperations(this.sdkContext, client);
 
-      const operationGroups = listOperationGroups(this.sdkContext, client);
+      const operationGroups = listOperationGroups(this.sdkContext, client, true);
 
       const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
       let codeModelGroup = new OperationGroup("");

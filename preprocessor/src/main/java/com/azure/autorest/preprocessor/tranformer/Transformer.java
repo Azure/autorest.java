@@ -263,6 +263,14 @@ public class Transformer {
   // Operation -> next page operation
   private final Map<OperationSignature, Operation> operationNextPageOperationMap = new HashMap<>();
 
+  /**
+   * Adds next page operation for the given operation.
+   * If the same operation instance is provided, same nextOperation will be returned.
+   *
+   * @param client code model client object
+   * @param operationGroup operation group of the operation
+   * @param operation pageable operation to add next page operation
+   */
   private void addPagingNextOperation(Client client, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
@@ -401,7 +409,8 @@ public class Transformer {
         nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
         operationNextPageOperationMap.put(operationSignature, nextOperation);
       } else {
-        // Same pageable operation should always share the same next link operation
+        // In case the same operation instance is processed more than once(both in "transformOperationGroups" and "transformClients"),
+        // we share the same next-page operation for the same operation instance.
         nextOperation = operationNextPageOperationMap.get(operationSignature);
       }
       operationGroup.getOperations().add(nextOperation);
