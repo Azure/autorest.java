@@ -8,11 +8,15 @@ using Azure.Core.Traits;
 
 @service({
   title: "LongRunning",
-  version: "1.0.0",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(ApiVersions)
 @route("/long-running")
-namespace LongRunning {
+namespace Cadl.LongRunning {
+  enum ApiVersions {
+    @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
+    v2022_06_01_preview: "2022-06-01-preview",
+  }
+
   // case of LRO having pollingOperation in non-service namespace
   @pollingOperation(NonService.poll)
   @post
@@ -111,9 +115,9 @@ namespace LongRunning {
   }
 }
 
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace NonService {
+@useDependency(Azure.Core.Versions.v1_0_Preview_2, Cadl.LongRunning.ApiVersions.v2022_06_01_preview)
+namespace Cadl.NonService {
   @route("/poll")
   @get
-  op poll(): LongRunning.PollResponse;
+  op poll(): Cadl.LongRunning.PollResponse;
 }

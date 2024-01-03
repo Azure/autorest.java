@@ -12,10 +12,14 @@ using Azure.ClientGenerator.Core;
 
 @service({
   title: "ProtocolAndConvenient",
-  version: "1.0.0",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(ApiVersions)
 namespace Cadl.ProtocolAndConvenient;
+
+enum ApiVersions {
+  @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
+  v2022_06_01_preview: "2022-06-01-preview",
+}
 
 model ResourceA {
   @visibility("read")
