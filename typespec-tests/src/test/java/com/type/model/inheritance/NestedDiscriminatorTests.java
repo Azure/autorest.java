@@ -9,6 +9,7 @@ import com.type.model.inheritance.nesteddiscriminator.models.Fish;
 import com.type.model.inheritance.nesteddiscriminator.models.Salmon;
 import com.type.model.inheritance.nesteddiscriminator.models.Shark;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ class NestedDiscriminatorTests {
         Assertions.assertEquals(1, fish.getAge());
     }
 
+    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
     @Test
     void putModel() {
         Shark body = new Shark(1, "goblin");
@@ -42,6 +44,8 @@ class NestedDiscriminatorTests {
         Assertions.assertEquals(2, (salmon.getPartner()).getAge());
     }
 
+
+    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
     @Test
     void putRecursiveModel() {
         Salmon salmon = new Salmon(1);

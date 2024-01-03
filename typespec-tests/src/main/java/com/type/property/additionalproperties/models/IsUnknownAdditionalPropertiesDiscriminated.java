@@ -105,21 +105,20 @@ public final class IsUnknownAdditionalPropertiesDiscriminated
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (additionalProperties == null) {
-                    additionalProperties = new LinkedHashMap<>();
-                }
-
                 if ("kind".equals(fieldName)) {
                     String kind = reader.getString();
-                    if (!"derived".equals(kind)) {
+                    if (!"IsUnknownAdditionalPropertiesDiscriminated".equals(kind)) {
                         throw new IllegalStateException(
                             "'kind' was expected to be non-null and equal to 'IsUnknownAdditionalPropertiesDiscriminated'. The found 'kind' was '"
                                 + kind + "'.");
                     }
-                    additionalProperties.put(fieldName, reader.readUntyped());
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else {
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
+                    }
+
                     additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }

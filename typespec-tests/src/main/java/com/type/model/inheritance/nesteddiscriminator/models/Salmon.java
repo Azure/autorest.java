@@ -116,11 +116,11 @@ public final class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("age", getAge());
         jsonWriter.writeStringField("kind", "salmon");
-        jsonWriter.writeJsonField("partner", this.partner);
+        jsonWriter.writeIntField("age", getAge());
         jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeJsonField("partner", this.partner);
         return jsonWriter.writeEndObject();
     }
 

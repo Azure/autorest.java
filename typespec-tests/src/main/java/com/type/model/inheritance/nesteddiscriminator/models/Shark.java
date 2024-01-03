@@ -48,7 +48,6 @@ public class Shark extends Fish {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeStringField("kind", "shark");
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }

@@ -9,10 +9,7 @@ import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * The derived discriminated type.
@@ -83,11 +80,6 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
-        if (getAdditionalProperties() != null) {
-            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -107,15 +99,9 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
             String name = null;
             int index = 0;
             Double age = null;
-            Map<String, Object> additionalProperties = null;
-
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
-
-                if (additionalProperties == null) {
-                    additionalProperties = new LinkedHashMap<>();
-                }
 
                 if ("kind".equals(fieldName)) {
                     String kind = reader.getString();
@@ -131,13 +117,12 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
-                    additionalProperties.put(fieldName, reader.getNullable(JsonReader::readUntyped));
+                    reader.skipChildren();
                 }
             }
             ExtendsUnknownAdditionalPropertiesDiscriminatedDerived deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
             deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
-            deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived;
         });
