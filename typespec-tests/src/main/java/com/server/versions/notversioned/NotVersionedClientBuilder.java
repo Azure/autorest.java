@@ -192,24 +192,6 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private NotVersionedServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the NotVersionedClientBuilder.
-     */
-    @Generated
-    public NotVersionedClientBuilder serviceVersion(NotVersionedServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -235,10 +217,8 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
     @Generated
     private NotVersionedClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        NotVersionedServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : NotVersionedServiceVersion.getLatest();
-        NotVersionedClientImpl client = new NotVersionedClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+        NotVersionedClientImpl client
+            = new NotVersionedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 

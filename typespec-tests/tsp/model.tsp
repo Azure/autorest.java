@@ -5,7 +5,6 @@ using TypeSpec.Http;
 
 @service({
   title: "Model",
-  version: "1.0.0",
 })
 namespace Cadl.Model;
 

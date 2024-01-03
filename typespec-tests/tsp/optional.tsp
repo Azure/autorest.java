@@ -4,7 +4,6 @@ using TypeSpec.Http;
 
 @service({
   title: "Optional",
-  version: "1.0.0",
 })
 namespace Cadl.Optional;
 

@@ -34,7 +34,6 @@ import {
   getTypeName,
   EmitContext,
   getProjectedName,
-  getService,
   getEncode,
   getOverloadedOperation,
   isErrorModel,
@@ -519,18 +518,19 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
-      } else {
-        // fallback to @service.version
-        const service = getService(this.program, client.service);
-        if (service?.version) {
-          codeModelClient.apiVersions = [];
-          const apiVersion = new ApiVersion();
-          apiVersion.version = service.version;
-          codeModelClient.apiVersions.push(apiVersion);
-        } else {
-          throw new Error(`API version not available for client ${client.name}.`);
-        }
       }
+      // } else {
+      //   // fallback to @service.version
+      //   const service = getService(this.program, client.service);
+      //   if (service?.version) {
+      //     codeModelClient.apiVersions = [];
+      //     const apiVersion = new ApiVersion();
+      //     apiVersion.version = service.version;
+      //     codeModelClient.apiVersions.push(apiVersion);
+      //   } else {
+      //     throw new Error(`API version not available for client ${client.name}.`);
+      //   }
+      // }
 
       // server
       let baseUri = "{endpoint}";
@@ -896,7 +896,8 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    if (isApiVersion(this.sdkContext, param)) {
+    if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
+      // pre-condition for "isApiVersion": the client supports ApiVersions
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);

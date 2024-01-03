@@ -7,4 +7,4 @@
  * Package containing the data models for LongRunning.
  * <!-- end generated doc -->
  */
-package com.longrunning.models;
+package com.cadl.longrunning.models;
