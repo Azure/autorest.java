@@ -215,7 +215,6 @@ public final class ProtocolAndConvenientAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -227,9 +226,9 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String apiVersion, String name, BinaryData resource,
+    PollerFlux<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateOrReplaceAsync(apiVersion, name, resource, requestOptions);
+        return this.serviceClient.beginCreateOrReplaceAsync(name, resource, requestOptions);
     }
 
     /**
@@ -265,7 +264,6 @@ public final class ProtocolAndConvenientAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -275,8 +273,8 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedFlux<BinaryData> list(String apiVersion, RequestOptions requestOptions) {
-        return this.serviceClient.listAsync(apiVersion, requestOptions);
+    PagedFlux<BinaryData> list(RequestOptions requestOptions) {
+        return this.serviceClient.listAsync(requestOptions);
     }
 
     /**
@@ -324,7 +322,6 @@ public final class ProtocolAndConvenientAsyncClient {
     /**
      * Long running operation.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -337,19 +334,15 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, ResourceI> beginCreateOrReplace(String apiVersion, String name,
-        ResourceI resource) {
+    public PollerFlux<PollOperationDetails, ResourceI> beginCreateOrReplace(String name, ResourceI resource) {
         // Generated convenience method for beginCreateOrReplaceWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateOrReplaceWithModelAsync(apiVersion, name, BinaryData.fromObject(resource),
-            requestOptions);
+        return serviceClient.beginCreateOrReplaceWithModelAsync(name, BinaryData.fromObject(resource), requestOptions);
     }
 
     /**
      * Paging operation.
      * 
-     * @param apiVersion The API version to use for this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -359,10 +352,10 @@ public final class ProtocolAndConvenientAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<ResourceJ> list(String apiVersion) {
+    public PagedFlux<ResourceJ> list() {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        PagedFlux<BinaryData> pagedFluxResponse = list(apiVersion, requestOptions);
+        PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
             Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);

@@ -4,7 +4,7 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the classes for LongRunning.
+ * Package containing the implementations for LongRunning.
  * <!-- end generated doc -->
  */
-package com.longrunning;
+package com.cadl.longrunning.implementation;

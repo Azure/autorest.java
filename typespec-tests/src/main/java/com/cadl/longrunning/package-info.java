@@ -4,7 +4,7 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the implementations for SpecialChars.
+ * Package containing the classes for LongRunning.
  * <!-- end generated doc -->
  */
-package com.cadl.specialchars.implementation;
+package com.cadl.longrunning;
