@@ -7,7 +7,6 @@ using Azure.ClientGenerator.Core;
 
 @service({
   title: "MultiContentTypes",
-  version: "1.0.0",
 })
 namespace Cadl.MultiContentTypes;
 

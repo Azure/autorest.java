@@ -7,7 +7,6 @@ using TypeSpec.Versioning;
 
 @service({
   title: "HttpbinServer",
-  version: "1.0.0",
 })
 @server(
   "https://{domain}.{tld}",
