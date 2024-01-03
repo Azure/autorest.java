@@ -105,7 +105,6 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -117,9 +116,9 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithRequestHeadersWithResponse(String apiVersion, String name,
-        BinaryData resource, RequestOptions requestOptions) {
-        return this.serviceClient.putWithRequestHeadersWithResponseAsync(apiVersion, name, resource, requestOptions);
+    public Mono<Response<BinaryData>> putWithRequestHeadersWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.putWithRequestHeadersWithResponseAsync(name, resource, requestOptions);
     }
 
     /**
@@ -172,7 +171,6 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -184,15 +182,14 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> patchWithMatchHeadersWithResponse(String apiVersion, String name,
-        BinaryData resource, RequestOptions requestOptions) {
-        return this.serviceClient.patchWithMatchHeadersWithResponseAsync(apiVersion, name, resource, requestOptions);
+    public Mono<Response<BinaryData>> patchWithMatchHeadersWithResponse(String name, BinaryData resource,
+        RequestOptions requestOptions) {
+        return this.serviceClient.patchWithMatchHeadersWithResponseAsync(name, resource, requestOptions);
     }
 
     /**
      * Create or replace operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
@@ -206,8 +203,7 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> putWithRequestHeaders(String apiVersion, String name, Resource resource,
-        RequestConditions requestConditions) {
+    public Mono<Resource> putWithRequestHeaders(String name, Resource resource, RequestConditions requestConditions) {
         // Generated convenience method for putWithRequestHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         String ifMatch = requestConditions == null ? null : requestConditions.getIfMatch();
@@ -228,14 +224,13 @@ public final class EtagHeadersAsyncClient {
             requestOptions.setHeader(HttpHeaderName.IF_MODIFIED_SINCE,
                 String.valueOf(new DateTimeRfc1123(ifModifiedSince)));
         }
-        return putWithRequestHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
             .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Create or replace operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -248,17 +243,16 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> putWithRequestHeaders(String apiVersion, String name, Resource resource) {
+    public Mono<Resource> putWithRequestHeaders(String name, Resource resource) {
         // Generated convenience method for putWithRequestHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithRequestHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+        return putWithRequestHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
             .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Create or replace operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param matchConditions Specifies HTTP options for conditional requests.
@@ -272,8 +266,7 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> patchWithMatchHeaders(String apiVersion, String name, Resource resource,
-        MatchConditions matchConditions) {
+    public Mono<Resource> patchWithMatchHeaders(String name, Resource resource, MatchConditions matchConditions) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         String ifMatch = matchConditions == null ? null : matchConditions.getIfMatch();
@@ -284,14 +277,13 @@ public final class EtagHeadersAsyncClient {
         if (ifNoneMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
-        return patchWithMatchHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
             .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Create or replace operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -304,10 +296,10 @@ public final class EtagHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> patchWithMatchHeaders(String apiVersion, String name, Resource resource) {
+    public Mono<Resource> patchWithMatchHeaders(String name, Resource resource) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchWithMatchHeadersWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
+        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
             .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

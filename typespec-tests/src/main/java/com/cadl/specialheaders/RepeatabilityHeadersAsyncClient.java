@@ -55,7 +55,6 @@ public final class RepeatabilityHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -66,8 +65,8 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getWithResponse(String apiVersion, String name, RequestOptions requestOptions) {
-        return this.serviceClient.getWithResponseAsync(apiVersion, name, requestOptions);
+    public Mono<Response<BinaryData>> getWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponseAsync(name, requestOptions);
     }
 
     /**
@@ -120,7 +119,6 @@ public final class RepeatabilityHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -132,9 +130,8 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithResponse(String apiVersion, String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponseAsync(apiVersion, name, resource, requestOptions);
+    public Mono<Response<BinaryData>> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponseAsync(name, resource, requestOptions);
     }
 
     /**
@@ -176,7 +173,6 @@ public final class RepeatabilityHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -187,8 +183,8 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponse(String apiVersion, String name, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponseAsync(apiVersion, name, requestOptions);
+    public Mono<Response<BinaryData>> postWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponseAsync(name, requestOptions);
     }
 
     /**
@@ -241,7 +237,6 @@ public final class RepeatabilityHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -253,15 +248,14 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateLro(String apiVersion, String name, BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginCreateLro(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateLroAsync(apiVersion, name, resource, requestOptions);
+        return this.serviceClient.beginCreateLroAsync(name, resource, requestOptions);
     }
 
     /**
      * Resource read operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -273,17 +267,16 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> get(String apiVersion, String name) {
+    public Mono<Resource> get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(apiVersion, name, requestOptions).flatMap(FluxUtil::toMono)
+        return getWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -296,17 +289,16 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> put(String apiVersion, String name, Resource resource) {
+    public Mono<Resource> put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions)
-            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -318,17 +310,16 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Resource> post(String apiVersion, String name) {
+    public Mono<Resource> post(String name) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(apiVersion, name, requestOptions).flatMap(FluxUtil::toMono)
+        return postWithResponse(name, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -341,13 +332,12 @@ public final class RepeatabilityHeadersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, Resource> beginCreateLro(String apiVersion, String name,
-        Resource resource) {
+    public PollerFlux<PollOperationDetails, Resource> beginCreateLro(String name, Resource resource) {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return serviceClient.beginCreateLroWithModelAsync(apiVersion, name, resourceInBinaryData, requestOptions);
+        return serviceClient.beginCreateLroWithModelAsync(name, resourceInBinaryData, requestOptions);
     }
 }

@@ -53,7 +53,6 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,8 +63,8 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getWithResponse(String apiVersion, String name, RequestOptions requestOptions) {
-        return this.serviceClient.getWithResponse(apiVersion, name, requestOptions);
+    public Response<BinaryData> getWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponse(name, requestOptions);
     }
 
     /**
@@ -118,7 +117,6 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -130,9 +128,8 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(String apiVersion, String name, BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponse(apiVersion, name, resource, requestOptions);
+    public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponse(name, resource, requestOptions);
     }
 
     /**
@@ -174,7 +171,6 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -185,8 +181,8 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String apiVersion, String name, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponse(apiVersion, name, requestOptions);
+    public Response<BinaryData> postWithResponse(String name, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponse(name, requestOptions);
     }
 
     /**
@@ -239,7 +235,6 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -251,15 +246,14 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateLro(String apiVersion, String name, BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginCreateLro(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateLro(apiVersion, name, resource, requestOptions);
+        return this.serviceClient.beginCreateLro(name, resource, requestOptions);
     }
 
     /**
      * Resource read operation template.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -271,16 +265,15 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource get(String apiVersion, String name) {
+    public Resource get(String name) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(apiVersion, name, requestOptions).getValue().toObject(Resource.class);
+        return getWithResponse(name, requestOptions).getValue().toObject(Resource.class);
     }
 
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -293,17 +286,16 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource put(String apiVersion, String name, Resource resource) {
+    public Resource put(String name, Resource resource) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(apiVersion, name, BinaryData.fromObject(resource), requestOptions).getValue()
+        return putWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
             .toObject(Resource.class);
     }
 
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -315,16 +307,15 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Resource post(String apiVersion, String name) {
+    public Resource post(String name) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(apiVersion, name, requestOptions).getValue().toObject(Resource.class);
+        return postWithResponse(name, requestOptions).getValue().toObject(Resource.class);
     }
 
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param apiVersion The API version to use for this operation.
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -337,13 +328,12 @@ public final class RepeatabilityHeadersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, Resource> beginCreateLro(String apiVersion, String name,
-        Resource resource) {
+    public SyncPoller<PollOperationDetails, Resource> beginCreateLro(String name, Resource resource) {
         // Generated convenience method for beginCreateLroWithModel
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
-        return serviceClient.beginCreateLroWithModel(apiVersion, name, resourceInBinaryData, requestOptions);
+        return serviceClient.beginCreateLroWithModel(name, resourceInBinaryData, requestOptions);
     }
 }
