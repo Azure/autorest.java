@@ -13,7 +13,7 @@ public class ResponseOpExists {
         ResponseClient responseClient = new ResponseClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.response.generated.exists.responseopexists
-        boolean response = responseClient.exists(null);
+        boolean response = responseClient.exists();
         // END:com.cadl.response.generated.exists.responseopexists
     }
 }

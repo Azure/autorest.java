@@ -14,7 +14,7 @@ public final class ResponseOpExistsTests extends ResponseClientTestBase {
     @Disabled
     public void testResponseOpExistsTests() {
         // method invocation
-        boolean response = responseClient.exists(null);
+        boolean response = responseClient.exists();
 
         // response assertion
         Assertions.assertTrue(response);
