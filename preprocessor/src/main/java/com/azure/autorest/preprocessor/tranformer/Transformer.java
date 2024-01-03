@@ -266,6 +266,8 @@ public class Transformer {
   /**
    * Adds next page operation for the given operation.
    * If the same operation instance is provided, same nextOperation will be returned.
+   * Current operation and generated nextOperation share the same extension instance. next page operation's nextOperation property should
+   * always point to itself for it to be recognized as the next page operation(see ClientMethodMapper#createPageableClientMethods in javagen module).
    *
    * @param client code model client object
    * @param operationGroup operation group of the operation
