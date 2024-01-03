@@ -110,7 +110,7 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
+    @Disabled("`AdditionalProperties` is not json serialized, so body provided doesn't match expected body.")
     public void testExtendsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);
@@ -130,7 +130,7 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
+    @Disabled("`AdditionalProperties` is not json serialized, so body provided doesn't match expected body.")
     public void testExtendsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);

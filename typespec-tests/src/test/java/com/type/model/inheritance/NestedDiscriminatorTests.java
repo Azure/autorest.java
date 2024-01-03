@@ -27,8 +27,8 @@ class NestedDiscriminatorTests {
         Assertions.assertEquals(1, fish.getAge());
     }
 
-    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
     @Test
+    @Disabled("The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`.")
     void putModel() {
         Shark body = new Shark(1, "goblin");
         client.putModel(body);
@@ -45,8 +45,9 @@ class NestedDiscriminatorTests {
     }
 
 
-    @Disabled("Polymorphic deserialization doesn't support multiple levels of inheritance in Jackson, https://github.com/FasterXML/jackson-databind/issues/1188")
     @Test
+    @Disabled("1. The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`. " +
+            "2. The output order of each item in the generated json file by the method `toJson` of the class `Salmon` is incorrect.")
     void putRecursiveModel() {
         Salmon salmon = new Salmon(1);
         salmon.setPartner(new Shark(2, "saw"));
