@@ -260,8 +260,8 @@ public class Transformer {
 
   private final Map<OperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
 
-  // Operation -> NextOperation
-  private final Map<OperationSignature, Operation> operationNextOperationMap = new HashMap<>();
+  // Operation -> next page operation
+  private final Map<OperationSignature, Operation> operationNextPageOperationMap = new HashMap<>();
 
   private void addPagingNextOperation(Client client, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
@@ -319,7 +319,7 @@ public class Transformer {
       OperationSignature operationSignature = new OperationSignature(
               operation.getOperationGroup().getLanguage().getJava().getName(),
               operation.getLanguage().getJava().getName());
-      if (!operationNextOperationMap.containsKey(operationSignature)) {
+      if (!operationNextPageOperationMap.containsKey(operationSignature)) {
         nextOperation.setOperationGroup(operationGroup);
         nextOperation.set$key(operationName);
         nextOperation.setLanguage(new Languages());
@@ -399,10 +399,10 @@ public class Transformer {
         }
         operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
         nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
-        operationNextOperationMap.put(operationSignature, nextOperation);
+        operationNextPageOperationMap.put(operationSignature, nextOperation);
       } else {
         // Same pageable operation should always share the same next link operation
-        nextOperation = operationNextOperationMap.get(operationSignature);
+        nextOperation = operationNextPageOperationMap.get(operationSignature);
       }
       operationGroup.getOperations().add(nextOperation);
     } else {
