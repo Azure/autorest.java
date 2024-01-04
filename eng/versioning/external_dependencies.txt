@@ -41,6 +41,8 @@ org.apache.maven.plugins:maven-source-plugin
 org.apache.maven.plugins:maven-surefire-plugin
 org.codehaus.mojo:exec-maven-plugin
 
-org.mockito:mockito-core;4.11.0
+org.mockito:mockito-core
+net.bytebuddy:byte-buddy
+net.bytebuddy:byte-buddy-agent
 
 com.azure.tools:codesnippet-maven-plugin

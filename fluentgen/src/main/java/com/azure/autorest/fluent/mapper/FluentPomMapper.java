@@ -48,6 +48,10 @@ public class FluentPomMapper extends PomMapper {
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.MOCKITO_CORE, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.BYTE_BUDDY, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.BYTE_BUDDY_AGENT, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.SLF4J_SIMPLE, true);
         }
 
