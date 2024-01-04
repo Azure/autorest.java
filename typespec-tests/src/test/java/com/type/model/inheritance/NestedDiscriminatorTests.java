@@ -46,8 +46,7 @@ class NestedDiscriminatorTests {
 
 
     @Test
-    @Disabled("1. The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`. " +
-            "2. The output order of each item in the generated json file by the method `toJson` of the class `Salmon` is incorrect.")
+    @Disabled("The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`. ")
     void putRecursiveModel() {
         Salmon salmon = new Salmon(1);
         salmon.setPartner(new Shark(2, "saw"));
