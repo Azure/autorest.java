@@ -6,7 +6,6 @@ using Azure.Core;
 
 @service({
   title: "LiteralService",
-  version: "1.0.0",
 })
 namespace Cadl.LiteralService;
 

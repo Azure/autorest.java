@@ -103,7 +103,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createJob(@QueryParam("api-version") String apiVersion,
+        Mono<Response<Void>> createJob(@QueryParam("api-version") String apiVersion,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
             RequestOptions requestOptions, Context context);
 
@@ -113,9 +113,8 @@ public final class CreateResourcePollViaOperationLocationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createJobSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData jobData,
-            RequestOptions requestOptions, Context context);
+        Response<Void> createJobSync(@QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -222,35 +221,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -258,10 +228,10 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return result of the job along with {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
+    private Mono<Response<Void>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.createJob(this.client.getServiceVersion().getVersion(), accept,
             jobData, requestOptions, context));
@@ -277,35 +247,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -313,10 +254,10 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return result of the job along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
+    private Response<Void> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.createJobSync(this.client.getServiceVersion().getVersion(), accept, jobData, requestOptions,
             Context.NONE);
@@ -332,35 +273,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -368,7 +280,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of result of the job.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
@@ -393,35 +305,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -429,7 +312,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
@@ -454,35 +337,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -490,7 +344,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of result of the job.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<JobResult, Void> beginCreateJobWithModelAsync(BinaryData jobData, RequestOptions requestOptions) {
@@ -515,35 +369,6 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      *     comment: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     jobId: String (Required)
-     *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
-     *     errors (Optional): [
-     *          (Optional){
-     *             error (Required): {
-     *                 code: String (Required)
-     *                 message: String (Required)
-     *                 target: String (Optional)
-     *                 details (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 innererror (Optional): {
-     *                     code: String (Optional)
-     *                     innererror (Optional): (recursive schema, see innererror above)
-     *                 }
-     *             }
-     *         }
-     *     ]
-     *     results (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -551,7 +376,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of result of the job.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobResult, Void> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {

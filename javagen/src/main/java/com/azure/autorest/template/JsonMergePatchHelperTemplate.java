@@ -34,7 +34,10 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
         addImports(imports, models, settings);
         javaFile.declareImport(imports);
 
-
+        // class javadoc
+        javaFile.javadocComment(comment ->
+            comment.description("This is the Helper class to enable json merge patch serialization for a model"));
+        // class code
         javaFile.publicClass(null, ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME, javaClass -> {
             addAccessorProperties(models, javaClass);
             addAccessorInterfaces(models, javaClass);
@@ -98,7 +101,7 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
             models.forEach(model -> {
                 // setters
                 javaClass.publicStaticMethod(String.format("void set%1$sAccessor(%1$sAccessor accessor)", model.getName()),methodBlock -> {
-                    methodBlock.line(String.format("%sAccessor = accessor;", CodeNamer.getModelNamer().modelPropertySetterName(model.getName())));
+                    methodBlock.line(String.format("%sAccessor = accessor;", CodeNamer.toCamelCase(model.getName())));
                 });
                 // getters
                 javaClass.publicStaticMethod(String.format("%1$sAccessor get%1$sAccessor()", model.getName()), methodBlock -> {

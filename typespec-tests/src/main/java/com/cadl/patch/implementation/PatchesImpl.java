@@ -10,7 +10,6 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
-import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -19,6 +18,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
@@ -58,31 +58,71 @@ public final class PatchesImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "PatchClientPatches")
     public interface PatchesService {
-        @Patch("/patch/{name}")
+        @Patch("/patch/resource")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrUpdate(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @PathParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Mono<Response<BinaryData>> createOrUpdateResource(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
+            Context context);
+
+        @Patch("/patch/resource")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrUpdateResourceSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
+            Context context);
+
+        @Patch("/patch/resource/optional")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> createOrUpdateOptionalResource(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
-        @Patch("/patch/{name}")
+        @Patch("/patch/resource/optional")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrUpdateSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @PathParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Response<BinaryData> createOrUpdateOptionalResourceSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
+
+        @Patch("/patch/fish")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> createOrUpdateFish(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData fish, RequestOptions requestOptions, Context context);
+
+        @Patch("/patch/fish")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> createOrUpdateFishSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData fish, RequestOptions requestOptions, Context context);
     }
 
     /**
-     * The createOrUpdate operation.
+     * The createOrUpdateResource operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -91,7 +131,19 @@ public final class PatchesImpl {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * <p>
@@ -102,12 +154,23 @@ public final class PatchesImpl {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param body The body parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -116,16 +179,16 @@ public final class PatchesImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> createOrUpdateWithResponseAsync(String name, BinaryData body,
+    public Mono<Response<BinaryData>> createOrUpdateResourceWithResponseAsync(BinaryData resource,
         RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdate(this.client.getEndpoint(), contentType, name,
-            accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrUpdateResource(this.client.getEndpoint(), contentType,
+            accept, resource, requestOptions, context));
     }
 
     /**
-     * The createOrUpdate operation.
+     * The createOrUpdateResource operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -134,7 +197,19 @@ public final class PatchesImpl {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * <p>
@@ -145,12 +220,23 @@ public final class PatchesImpl {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param body The body parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,11 +245,239 @@ public final class PatchesImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> createOrUpdateWithResponse(String name, BinaryData body,
+    public Response<BinaryData> createOrUpdateResourceWithResponse(BinaryData resource, RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.createOrUpdateResourceSync(this.client.getEndpoint(), contentType, accept, resource,
+            requestOptions, Context.NONE);
+    }
+
+    /**
+     * The createOrUpdateOptionalResource operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createOrUpdateOptionalResourceWithResponseAsync(RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
+            }
+        });
+        return FluxUtil.withContext(context -> service.createOrUpdateOptionalResource(this.client.getEndpoint(),
+            contentType, accept, requestOptionsLocal, context));
+    }
+
+    /**
+     * The createOrUpdateOptionalResource operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Required): {
+     *         String (Required): {
+     *             name: String (Required)
+     *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrUpdateOptionalResourceWithResponse(RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
+        requestOptionsLocal.addRequestCallback(requestLocal -> {
+            if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
+                requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
+            }
+        });
+        return service.createOrUpdateOptionalResourceSync(this.client.getEndpoint(), contentType, accept,
+            requestOptionsLocal, Context.NONE);
+    }
+
+    /**
+     * The createOrUpdateFish operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(BinaryData fish,
         RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.createOrUpdateSync(this.client.getEndpoint(), contentType, name, accept, body, requestOptions,
+        return FluxUtil.withContext(context -> service.createOrUpdateFish(this.client.getEndpoint(), contentType,
+            accept, fish, requestOptions, context));
+    }
+
+    /**
+     * The createOrUpdateFish operation.
+     * <p>
+     * <strong>Request Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * {
+     *     kind: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     color: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> createOrUpdateFishWithResponse(BinaryData fish, RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.createOrUpdateFishSync(this.client.getEndpoint(), contentType, accept, fish, requestOptions,
             Context.NONE);
     }
 }

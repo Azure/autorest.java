@@ -9,7 +9,6 @@ using Azure.Core.Foundations;
 @doc("description of Naming")
 @service({
   title: "Naming",
-  version: "1.0.0",
 })
 namespace Cadl.Naming;
 

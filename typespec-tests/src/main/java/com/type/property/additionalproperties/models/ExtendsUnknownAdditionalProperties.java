@@ -18,7 +18,7 @@ import java.util.Map;
  * The model extends from Record&lt;unknown&gt; type.
  */
 @Fluent
-public final class ExtendsUnknownAdditionalProperties implements JsonSerializable<ExtendsUnknownAdditionalProperties> {
+public class ExtendsUnknownAdditionalProperties implements JsonSerializable<ExtendsUnknownAdditionalProperties> {
     /*
      * The name property
      */

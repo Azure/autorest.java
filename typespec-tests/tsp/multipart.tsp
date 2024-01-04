@@ -4,7 +4,6 @@ using TypeSpec.Http;
 
 @service({
   title: "Multipart",
-  version: "1.0.0",
 })
 namespace Cadl.Multipart;
 

@@ -34,7 +34,6 @@ import {
   getTypeName,
   EmitContext,
   getProjectedName,
-  getService,
   getEncode,
   getOverloadedOperation,
   isErrorModel,
@@ -520,18 +519,19 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
-      } else {
-        // fallback to @service.version
-        const service = getService(this.program, client.service);
-        if (service?.version) {
-          codeModelClient.apiVersions = [];
-          const apiVersion = new ApiVersion();
-          apiVersion.version = service.version;
-          codeModelClient.apiVersions.push(apiVersion);
-        } else {
-          throw new Error(`API version not available for client ${client.name}.`);
-        }
       }
+      // } else {
+      //   // fallback to @service.version
+      //   const service = getService(this.program, client.service);
+      //   if (service?.version) {
+      //     codeModelClient.apiVersions = [];
+      //     const apiVersion = new ApiVersion();
+      //     apiVersion.version = service.version;
+      //     codeModelClient.apiVersions.push(apiVersion);
+      //   } else {
+      //     throw new Error(`API version not available for client ${client.name}.`);
+      //   }
+      // }
 
       // server
       let baseUri = "{endpoint}";
@@ -662,12 +662,7 @@ export class CodeModelBuilder {
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
       // check if the convenience API need to be disabled for some special cases
-      if (operationIsJsonMergePatch(op)) {
-        // do not generate convenience method for JSON Merge Patch
-        generateConvenienceApi = false;
-        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json'`;
-        this.logWarning(apiComment);
-      } else if (operationIsMultipart(op)) {
+      if (operationIsMultipart(op)) {
         // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
         generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
@@ -909,7 +904,8 @@ export class CodeModelBuilder {
         isArmCommonType(param.param)
       );
     }
-    if (isApiVersion(this.sdkContext, param)) {
+    if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
+      // pre-condition for "isApiVersion": the client supports ApiVersions
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
