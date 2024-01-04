@@ -38,6 +38,7 @@ import {
   getOverloadedOperation,
   isErrorModel,
   EnumMember,
+  walkPropertiesInherited,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -455,6 +456,9 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
+      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
+        return;
+      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
@@ -1983,12 +1987,10 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (this.isArm() && isArmCommonType(type) && name?.includes("Resource")) {
-      const objectSchema = this.dummyResourceSchema(type, name);
+    if (this.isArm() && namespace?.startsWith("Azure.ResourceManager") && name?.includes("Resource")) {
+      const objectSchema = this.dummyResourceSchema(type, name, namespace);
       this.codeModel.schemas.add(objectSchema);
   
-      // cache this now before we accidentally recurse on this type
-      this.schemaCache.set(type, objectSchema);
       return objectSchema;
     } 
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
@@ -2141,45 +2143,35 @@ export class CodeModelBuilder {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
       if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
         return type;
-      } else if (effective.name) {
+      } else 
+      if (effective.name) {
         return effective;
       }
     }
     return type;
   }
 
-  private dummyResourceSchema(type: Model, name?: string): ObjectSchema {
+  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
     const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    const resource = this.dummyObjectSchema(type, resourceModelName);
-    const declaredProperties = this.getDeclaredProperties(type);
+    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
+    const declaredProperties = walkPropertiesInherited(type);
     for (const prop of declaredProperties) {
       resource.addProperty(this.processModelProperty(prop));
     }
     return resource;
   }
 
-  private getDeclaredProperties(type: Model): Array<ModelProperty> {
-    const properties = new Array();
-    for (const prop of Array.from(type.properties.values())) {
-      properties.push(prop);
-    }
-    // collect properties from all parent models
-    let baseModel = type.baseModel;
-    while (baseModel) {
-      for (const prop of Array.from(baseModel.properties.values())) {
-        properties.push(prop);
-      }
-      baseModel = baseModel.baseModel;
-    }
-    return properties;
-  }
-
-  private dummyObjectSchema(type: Model, name: string): ObjectSchema {
+  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
     return new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
+        default: {
+          name: name,
+          namespace: namespace
+        },
         java: {
           name: name,
+          namespace: getJavaNamespace(namespace)
         },
       },
     });
