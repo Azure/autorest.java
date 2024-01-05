@@ -54,6 +54,7 @@ import {
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
+  isPathParam,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
@@ -166,9 +167,9 @@ import {
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
+import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
-import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -901,20 +902,13 @@ export class CodeModelBuilder {
   }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    function isSubscriptionId(sdkContext: SdkContext, param: HttpOperationParameter): boolean {
-      return (
-        "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
-        param.param &&
-        isArmCommonType(param.param)
-      );
-    }
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
-    } else if (isSubscriptionId(this.sdkContext, param)) {
-      const parameter = this.subscriptionParameter;
+    } else if (this.isSubscriptionId(param)) {
+      const parameter = this.subscriptionIdParameter(param);
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
     } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
@@ -2608,21 +2602,36 @@ export class CodeModelBuilder {
     );
   }
 
-  private _subscriptionParameter?: Parameter;
-  get subscriptionParameter(): Parameter {
-    return new Parameter("subscriptionId", "subscription ID", this.stringSchema, {
-      implementation: ImplementationLocation.Client,
-      required: true,
-      protocol: {
-        http: new HttpParameter(ParameterLocation.Path),
-      },
-      language: {
-        default: {
-          serializedName: "subscriptionId",
-        },
-      },
-    });
+  private isSubscriptionId(param: HttpOperationParameter): boolean {
+    return (
+      "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
+      param.param &&
+      isArmCommonType(param.param) &&
+      isPathParam(this.program, param.param)
+    );
   }
+
+  private subscriptionIdParameter(parameter: HttpOperationParameter): Parameter {
+    if (!this._subscriptionParameter) {
+      const param = parameter.param;
+      const description = getDoc(this.program, param);
+      this._subscriptionParameter = new Parameter("subscriptionId", description ? description: "The ID of the target subscription.", this.stringSchema, {
+        implementation: ImplementationLocation.Client,
+        required: true,
+        protocol: {
+          http: new HttpParameter(ParameterLocation.Path),
+        },
+        language: {
+          default: {
+            serializedName: "subscriptionId",
+          },
+        },
+      });
+    }
+    return this._subscriptionParameter;
+  }
+
+  private _subscriptionParameter?: Parameter;
 
   private propagateSchemaUsage(schema: Schema): void {
     const processedSchemas = new Set<Schema>();
