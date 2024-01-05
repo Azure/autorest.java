@@ -36,6 +36,7 @@ def load_versions(content: str) -> Dict[Package, str]:
             segments = line.split(';')
             package = segments[0]
             if ('_' in package):
+                # fix e.g. "testdep_net.bytebuddy:byte-buddy;1.14.8"
                 package = package.split('_')[1]
             version = None if len(segments) == 1 else segments[1]
             package_segments = package.split(':')
