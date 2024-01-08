@@ -19,10 +19,10 @@ public class AndroidClientModel extends ClientModel {
         String parentModelName, List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName,
         String xmlNamespace, List<ClientModelProperty> properties,
         List<ClientModelPropertyReference> propertyReferences, IType modelType, boolean stronglyTypedHeader,
-        boolean usedInXml) {
+        boolean usedInXml, Set<String> serializationFormats) {
         super(packageKeyword, name, imports, description, isPolymorphic, polymorphicDiscriminator, serializedName,
             needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties, propertyReferences,
-            modelType, stronglyTypedHeader, null, usedInXml, null);
+            modelType, stronglyTypedHeader, null, usedInXml, serializationFormats, null);
     }
 
     @Override
@@ -55,7 +55,8 @@ public class AndroidClientModel extends ClientModel {
         public ClientModel build() {
             return new AndroidClientModel(packageName, name, imports, description, isPolymorphic,
                 polymorphicDiscriminator, serializedName, needsFlatten, parentModelName, derivedModels, xmlName,
-                xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader, usedInXml);
+                xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader, usedInXml,
+                serializationFormats);
         }
     }
 }

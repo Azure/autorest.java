@@ -77,12 +77,7 @@ public class ImplementationDetails {
          * <p>
          * Codegen should handle serialization and deserialization specially for json-merge-patch model
          */
-        JSON_MERGE_PATCH("json-merge-patch"),
-
-        /**
-         * Model used in multipart/form-data operation.
-         */
-        MULTIPART_FORM_DATA("multipart-form-data");
+        JSON_MERGE_PATCH("json-merge-patch");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
 
