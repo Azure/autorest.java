@@ -52,12 +52,6 @@ public class PomMapper implements IMapper<Project, Pom> {
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                 Project.Dependency.JUNIT_JUPITER_ENGINE, true);
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.MOCKITO_CORE, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.BYTE_BUDDY, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                Project.Dependency.BYTE_BUDDY_AGENT, true);
-        addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                 Project.Dependency.AZURE_CORE_TEST, true);
         addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                 Project.Dependency.AZURE_IDENTITY, true);
