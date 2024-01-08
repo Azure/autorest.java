@@ -1984,9 +1984,9 @@ export class CodeModelBuilder {
     if (this.isArm() && namespace?.startsWith("Azure.ResourceManager") && name?.includes("Resource")) {
       const objectSchema = this.dummyResourceSchema(type, name, namespace);
       this.codeModel.schemas.add(objectSchema);
-  
+
       return objectSchema;
-    } 
+    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2137,8 +2137,7 @@ export class CodeModelBuilder {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
       if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
         return type;
-      } else 
-      if (effective.name) {
+      } else if (effective.name) {
         return effective;
       }
     }
@@ -2161,11 +2160,11 @@ export class CodeModelBuilder {
       language: {
         default: {
           name: name,
-          namespace: namespace
+          namespace: namespace,
         },
         java: {
           name: name,
-          namespace: getJavaNamespace(namespace)
+          namespace: getJavaNamespace(namespace),
         },
       },
     });
@@ -2615,18 +2614,23 @@ export class CodeModelBuilder {
     if (!this._subscriptionParameter) {
       const param = parameter.param;
       const description = getDoc(this.program, param);
-      this._subscriptionParameter = new Parameter("subscriptionId", description ? description: "The ID of the target subscription.", this.stringSchema, {
-        implementation: ImplementationLocation.Client,
-        required: true,
-        protocol: {
-          http: new HttpParameter(ParameterLocation.Path),
-        },
-        language: {
-          default: {
-            serializedName: "subscriptionId",
+      this._subscriptionParameter = new Parameter(
+        "subscriptionId",
+        description ? description : "The ID of the target subscription.",
+        this.stringSchema,
+        {
+          implementation: ImplementationLocation.Client,
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Path),
+          },
+          language: {
+            default: {
+              serializedName: "subscriptionId",
+            },
           },
         },
-      });
+      );
     }
     return this._subscriptionParameter;
   }
