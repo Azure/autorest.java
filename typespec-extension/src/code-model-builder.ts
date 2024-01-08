@@ -112,6 +112,7 @@ import {
   UnixTimeSchema,
   Language,
 } from "@autorest/codemodel";
+import { KnownMediaType } from "@azure-tools/codegen";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
@@ -1257,7 +1258,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.MultipartFormData] });
+      this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1422,7 +1423,7 @@ export class CodeModelBuilder {
               statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
-              knownMediaType: "binary",
+              knownMediaType: KnownMediaType.Binary,
             },
           },
           language: {
@@ -2612,9 +2613,11 @@ export class CodeModelBuilder {
     // Exclude context that not to be propagated
     const schemaUsage = {
       usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous && it !== SchemaContext.MultipartFormData,
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
       ),
-      serializationFormats: (schema as SchemaUsage).serializationFormats,
+      serializationFormats: (schema as SchemaUsage).serializationFormats?.filter(
+        (it) => it !== KnownMediaType.Multipart,
+      ),
     };
     // Propagate the usage of the initial schema itself
     innerPropagateSchemaUsage(schema, schemaUsage);

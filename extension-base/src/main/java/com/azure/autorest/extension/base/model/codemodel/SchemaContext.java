@@ -22,9 +22,7 @@ public enum SchemaContext {
 
     INTERNAL("internal"),
 
-    JSON_MERGE_PATCH("json-merge-patch"),
-
-    MULTIPART_FORM_DATA("multipart-form-data");
+    JSON_MERGE_PATCH("json-merge-patch");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();

@@ -5,12 +5,12 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -82,6 +82,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 .type(modelType)
                 .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
                 .usedInXml(SchemaUtil.treatAsXml(compositeType))
+                .serializationFormats(compositeType.getSerializationFormats())
                 .implementationDetails(new ImplementationDetails.Builder()
                     .usages(usages)
                     .build());
@@ -300,7 +301,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             // handle multipart/form-data
-            if (!CoreUtils.isNullOrEmpty(compositeType.getUsage()) && compositeType.getUsage().contains(SchemaContext.MULTIPART_FORM_DATA)) {
+            if (!CoreUtils.isNullOrEmpty(compositeType.getUsage()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
                 processMultipartFormDataProperties(properties);
             }
 

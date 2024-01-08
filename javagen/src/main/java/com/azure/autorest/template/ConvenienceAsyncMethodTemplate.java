@@ -158,7 +158,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
                                                Set<String> mediaTypes,
                                                Set<GenericType> typeReferenceStaticClasses) {
         String mapExpression = null;
-        SupportedMimeType mimeType = getResponseKnownMimeType(mediaTypes);
+        SupportedMimeType mimeType = SupportedMimeType.getResponseKnownMimeType(mediaTypes);
         // TODO (weidxu): support XML etc.
         switch (mimeType) {
             case TEXT:

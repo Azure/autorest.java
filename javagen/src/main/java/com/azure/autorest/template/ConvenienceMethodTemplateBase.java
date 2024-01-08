@@ -16,7 +16,6 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
@@ -404,44 +403,44 @@ abstract class ConvenienceMethodTemplateBase {
             || ClientModelUtil.isClientModel(type); // client model
     }
 
-    protected enum SupportedMimeType {
+    enum SupportedMimeType {
         TEXT,
         XML,
         MULTIPART,
         BINARY,
-        JSON
-    }
+        JSON;
 
-    // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
-    private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-    static {
-        SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
-        SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
-        // not in azure-core
-        SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
-    }
-
-    protected static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
-        // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
-        // This is mostly for the error response which is in JSON, and is not included in this calculation.
-
-        for (String mediaType : mediaTypes) {
-            SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
-            if (type != null) {
-                return type;
-            }
+        // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+        private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        static {
+            SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
+            SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
+            // not in azure-core
+            SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
         }
-        return SupportedMimeType.BINARY;    // BINARY if not recognized
+
+        public static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+            // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
+            // This is mostly for the error response which is in JSON, and is not included in this calculation.
+
+            for (String mediaType : mediaTypes) {
+                SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
+                if (type != null) {
+                    return type;
+                }
+            }
+            return SupportedMimeType.BINARY;    // BINARY if not recognized
+        }
     }
 
     private static String expressionConvertToBinaryData(String name, IType type, String mediaType) {
-        SupportedMimeType mimeType = getResponseKnownMimeType(Collections.singleton(mediaType));
+        SupportedMimeType mimeType = SupportedMimeType.getResponseKnownMimeType(Collections.singleton(mediaType));
         switch (mimeType) {
             case TEXT:
                 return "BinaryData.fromString(" + name + ")";
@@ -595,7 +594,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (bodyType instanceof ClassType) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
                 // serialize model for multipart/form-data
-                if (model != null && model.getImplementationDetails() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
+                if (model != null && model.getSerializationFormats().contains(SupportedMimeType.MULTIPART.name())) {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
