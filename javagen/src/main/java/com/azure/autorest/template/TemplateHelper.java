@@ -79,9 +79,9 @@ public final class TemplateHelper {
         function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
                 + ".getGlobalConfiguration() : configuration;");
 
-        String localHttpOptionsName = "local" + CodeNamer.toPascalCase("httpLogOptions");
+        String localHttpLogOptionsName = "local" + CodeNamer.toPascalCase("httpLogOptions");
         String localClientOptionsName = "local" + CodeNamer.toPascalCase("ClientOptions");
-        function.line(String.format("HttpLogOptions %s = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;", localHttpOptionsName));
+        function.line(String.format("HttpLogOptions %s = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;", localHttpLogOptionsName));
         function.line(String.format("ClientOptions %s = this.clientOptions == null ? new ClientOptions() : this.clientOptions;", localClientOptionsName));
 
         function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
@@ -89,7 +89,7 @@ public final class TemplateHelper {
         function.line("String clientName = PROPERTIES.getOrDefault(SDK_NAME, \"UnknownName\");");
         function.line("String clientVersion = PROPERTIES.getOrDefault(SDK_VERSION, \"UnknownVersion\");");
 
-        function.line(String.format("String applicationId = CoreUtils.getApplicationId(%s, %s);", localClientOptionsName, localHttpOptionsName));
+        function.line(String.format("String applicationId = CoreUtils.getApplicationId(%s, %s);", localClientOptionsName, localHttpLogOptionsName));
         function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                 + "clientVersion, buildConfiguration));");
 
@@ -161,7 +161,7 @@ public final class TemplateHelper {
                 ".forEach(p -> policies.add(p));");
         function.line("HttpPolicyProviders.addAfterRetryPolicies(policies);");
 
-        function.line("policies.add(new HttpLoggingPolicy(httpLogOptions));");
+        function.line("policies.add(new HttpLoggingPolicy(%s));", localHttpLogOptionsName);
 
         function.line("HttpPipeline httpPipeline = new HttpPipelineBuilder()" +
                 ".policies(policies.toArray(new HttpPipelinePolicy[0]))" +
