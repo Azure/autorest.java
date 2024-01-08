@@ -403,7 +403,7 @@ abstract class ConvenienceMethodTemplateBase {
             || ClientModelUtil.isClientModel(type); // client model
     }
 
-    enum SupportedMimeType {
+    protected enum SupportedMimeType {
         TEXT,
         XML,
         MULTIPART,
