@@ -159,7 +159,7 @@ public class TypeSpecPlugin extends Javagen {
         // MultipartFormDataHelper
         final boolean generateMultipartFormDataHelper = client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .anyMatch(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA));
+                .anyMatch(m -> m.getSerializationFormats().contains("multipart"));
         if (generateMultipartFormDataHelper) {
             javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
         }

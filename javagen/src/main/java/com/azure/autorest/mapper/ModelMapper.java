@@ -301,7 +301,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             // handle multipart/form-data
-            if (!CoreUtils.isNullOrEmpty(compositeType.getUsage()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
+            if (!CoreUtils.isNullOrEmpty(compositeType.getSerializationFormats()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
                 processMultipartFormDataProperties(properties);
             }
 

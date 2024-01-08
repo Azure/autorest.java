@@ -471,7 +471,7 @@ public class ClientModel {
         protected ImplementationDetails implementationDetails;
         protected boolean usedInXml;
         protected String crossLanguageDefinitionId;
-        private Set<String> serializationFormats = Collections.emptySet();
+        protected Set<String> serializationFormats = Collections.emptySet();
 
         /**
          * Sets the package that this model class belongs to.
@@ -690,7 +690,7 @@ public class ClientModel {
          * @return the Builder itself
          */
         public Builder serializationFormats(Set<String> serializationFormats) {
-            this.serializationFormats = serializationFormats;
+            this.serializationFormats = serializationFormats == null ? Collections.emptySet() : serializationFormats;
             return this;
         }
 

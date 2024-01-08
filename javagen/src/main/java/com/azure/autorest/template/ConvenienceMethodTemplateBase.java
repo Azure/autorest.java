@@ -594,7 +594,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (bodyType instanceof ClassType) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
                 // serialize model for multipart/form-data
-                if (model != null && model.getSerializationFormats().contains(SupportedMimeType.MULTIPART.name())) {
+                if (model != null && model.getSerializationFormats().contains(SupportedMimeType.MULTIPART.name().toLowerCase(Locale.ROOT))) {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
