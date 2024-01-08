@@ -723,7 +723,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
             String variableName = convenientParameterName + "InBinaryData";
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
-            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromString(%2$s.toString());", variableName, expression)); // BinaryData.fromString() will not fire serialization, use toString() to fire serialization
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression)); // BinaryData.fromString() will not fire serialization, use toBytes() to fire serialization
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
             return variableName;
     }
