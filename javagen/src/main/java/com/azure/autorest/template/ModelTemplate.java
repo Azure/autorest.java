@@ -74,6 +74,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             throw new IllegalStateException("Parent model name is same as model name: " + model.getName());
         }
 
+        final boolean requireSerialization = modelRequireSerialization(model);
+
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = settings.isStreamStyleSerialization() ? new StreamStyleImports() : new HashSet<>();
 
@@ -116,7 +118,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         String classNameWithBaseType = model.getName();
         if (model.getParentModelName() != null) {
             classNameWithBaseType += " extends " + model.getParentModelName();
-        } else {
+        } else if (requireSerialization) {
             classNameWithBaseType = addSerializationImplementations(classNameWithBaseType, model, settings);
         }
 
@@ -302,7 +304,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 TemplateUtil.addClientLogger(classBlock, model.getName(), javaFile.getContents());
             }
 
-            writeStreamStyleSerialization(classBlock, model, settings);
+            if (requireSerialization) {
+                writeStreamStyleSerialization(classBlock, model, settings);
+            }
         });
     }
 
@@ -660,20 +664,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         boolean treatAsXml = model.isUsedInXml();
-        if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
-            classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
-        } else if (treatAsXml && property.isXmlAttribute()) {
-            classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
-        } else if (treatAsXml && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
-            classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
-        } else if (treatAsXml && property.isXmlText()) {
-            classBlock.annotation("JacksonXmlText");
-        } else if (property.isAdditionalProperties()) {
-            classBlock.annotation("JsonIgnore");
-        } else if (treatAsXml && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
-            classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
-        } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
-            classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
+        if (modelRequireSerialization(model)) {
+            if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+                classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
+            } else if (treatAsXml && property.isXmlAttribute()) {
+                classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
+            } else if (treatAsXml && property.getXmlNamespace() != null && !property.getXmlNamespace().isEmpty()) {
+                classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", namespace = \"" + property.getXmlNamespace() + "\")");
+            } else if (treatAsXml && property.isXmlText()) {
+                classBlock.annotation("JacksonXmlText");
+            } else if (property.isAdditionalProperties()) {
+                classBlock.annotation("JsonIgnore");
+            } else if (treatAsXml && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
+                classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
+            } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
+                classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
+            }
         }
     }
 
@@ -686,6 +692,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param classBlock The Java class file.
      */
     private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings, JavaClass classBlock) {
+        final boolean requireSerialization = modelRequireSerialization(model);
+
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
         // inspecting the required and constant properties.
         if (model.isStronglyTypedHeader()) {
@@ -740,10 +748,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     || requiredParentProperties.stream().anyMatch(p -> ClientModelUtil.isWireTypeMismatch(p, true));
 
             if (constructorParametersContainsMismatchWireType && !settings.isStreamStyleSerialization()) {
-                generatePrivateConstructorForJackson = true;
+                generatePrivateConstructorForJackson = requireSerialization;
             }
 
-            final boolean addJsonPropertyAnnotation = !(settings.isStreamStyleSerialization() || generatePrivateConstructorForJackson);
+            final boolean addJsonPropertyAnnotation = !(settings.isStreamStyleSerialization() || generatePrivateConstructorForJackson || !requireSerialization);
 
             // Properties required by the super class structure come first.
             for (ClientModelProperty property : requiredParentProperties) {
@@ -782,9 +790,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addGeneratedAnnotation(classBlock);
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
         // implicitly used as the JsonCreator if the class doesn't indicate one.
-        if (constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()
-                // @JsonCreator will be on the other private constructor
-                && !generatePrivateConstructorForJackson) {
+        if (requireSerialization
+            && constructorProperties.length() > 0 && !settings.isStreamStyleSerialization()
+            // @JsonCreator will be on the other private constructor
+            && !generatePrivateConstructorForJackson) {
             classBlock.annotation("JsonCreator");
         }
 
@@ -1124,6 +1133,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         return ret;
+    }
+
+    /**
+     * Checks whether the serialization code is required for the model.
+     *
+     * @param model the model.
+     * @return whether the serialization code is required for the model.
+     */
+    private static boolean modelRequireSerialization(ClientModel model) {
+        // TODO (weidxu): any other case? "binary"?
+        return !model.getSerializationFormats().contains("multipart");
     }
 
     /**
