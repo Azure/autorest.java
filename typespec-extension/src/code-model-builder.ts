@@ -2635,6 +2635,12 @@ export class CodeModelBuilder {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
       }
+      if (schemaUsage.serializationFormats) {
+        pushDistinct(
+          (schema.serializationFormats = schema.serializationFormats || []),
+          ...schemaUsage.serializationFormats,
+        );
+      }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     } else if (schema instanceof ArraySchema) {
