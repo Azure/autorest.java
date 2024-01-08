@@ -10,7 +10,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
