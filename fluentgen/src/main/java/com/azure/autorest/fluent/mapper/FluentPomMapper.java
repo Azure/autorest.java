@@ -45,8 +45,15 @@ public class FluentPomMapper extends PomMapper {
                     Project.Dependency.JUNIT_JUPITER_API, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.JUNIT_JUPITER_ENGINE, true);
+
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.MOCKITO_CORE, true);
+            // bytebuddy dependencies are required for mockito 4.11.0 to work with Java 21
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.BYTE_BUDDY, true);
+            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
+                    Project.Dependency.BYTE_BUDDY_AGENT, true);
+
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.SLF4J_SIMPLE, true);
         }
