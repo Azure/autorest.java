@@ -684,7 +684,7 @@ public class ClientModel {
         }
 
         /**
-         * Sets the cross language definition id for the model.
+         * Sets the Set of serialization format of this model.
          *
          * @param serializationFormats the Set of serialization format of this model.
          * @return the Builder itself

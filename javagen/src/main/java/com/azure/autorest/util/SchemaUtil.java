@@ -327,7 +327,7 @@ public class SchemaUtil {
     }
 
     public static boolean treatAsXml(Schema schema) {
-        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains(KnownMediaType.XML))
+        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains(KnownMediaType.XML.value()))
             || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
     }
 }
