@@ -3,18 +3,20 @@
 
 package com.type.property.additionalproperties;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalProperties;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDerived;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminated;
+import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminatedDerived;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class IsUnknownClientTest {
-    private final IsUnknownClient client = new AdditionalPropertiesClientBuilder().buildIsUnknownClient();
+    private final IsUnknownClient client = new AdditionalPropertiesClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildIsUnknownClient();
     private final IsUnknownDerivedClient isUnknownDerivedClient = new AdditionalPropertiesClientBuilder().buildIsUnknownDerivedClient();
     private final IsUnknownDiscriminatedClient isUnknownDiscriminatedClient = new AdditionalPropertiesClientBuilder().buildIsUnknownDiscriminatedClient();
 
@@ -33,19 +35,18 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("IsUnknownAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
     @Test
     public void testIsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
-        additionalProperty.put("name", "IsUnknownAdditionalProperties");
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
 
-        IsUnknownAdditionalPropertiesDerived body = new IsUnknownAdditionalPropertiesDerived(314);
-        body.setAge(2.71828);
+        IsUnknownAdditionalPropertiesDerived body = new IsUnknownAdditionalPropertiesDerived("IsUnknownAdditionalProperties", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDerivedClient.put(body);
 
@@ -54,21 +55,18 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals(2.71828, properties.getAge());
         Assertions.assertEquals(314, properties.getIndex());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 
     @Test
-    @Disabled("'kind' was expected to be non-null and equal to 'IsUnknownAdditionalPropertiesDiscriminated'. The found 'kind' was 'derived'.")
     public void testIsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
-        additionalProperty.put("kind", "derived");
-        additionalProperty.put("index", 314);
-        additionalProperty.put("age", 2.71828) ;
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
 
-        IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminated("Derived");
+        IsUnknownAdditionalPropertiesDiscriminatedDerived body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDiscriminatedClient.put(body);
 
@@ -76,6 +74,6 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("Derived", properties.getName());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 }
