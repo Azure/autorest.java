@@ -101,6 +101,8 @@ public class ClientModel {
      */
     private final boolean usedInXml;
 
+    private final Set<String> serializationFormats;
+
     /**
      * The cross language definition id for the model.
      */
@@ -134,7 +136,7 @@ public class ClientModel {
         String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
         List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences, IType modelType,
         boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml,
-        String crossLanguageDefinitionId) {
+        Set<String> serializationFormats, String crossLanguageDefinitionId) {
         this.packageName = packageKeyword;
         this.name = name;
         this.fullName = packageName + "." + name;
@@ -156,6 +158,7 @@ public class ClientModel {
         this.implementationDetails = implementationDetails;
         this.usedInXml = usedInXml;
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+        this.serializationFormats = serializationFormats;
     }
 
     /**
@@ -437,6 +440,15 @@ public class ClientModel {
     }
 
     /**
+     * Gets the Set of serialization format of the model.
+     *
+     * @return the Set of serialization format of the model.
+     */
+    public Set<String> getSerializationFormats() {
+        return serializationFormats;
+    }
+
+    /**
      * A builder for building a new ClientModel.
      */
     public static class Builder {
@@ -459,6 +471,7 @@ public class ClientModel {
         protected ImplementationDetails implementationDetails;
         protected boolean usedInXml;
         protected String crossLanguageDefinitionId;
+        protected Set<String> serializationFormats = Collections.emptySet();
 
         /**
          * Sets the package that this model class belongs to.
@@ -671,6 +684,17 @@ public class ClientModel {
         }
 
         /**
+         * Sets the Set of serialization format of this model.
+         *
+         * @param serializationFormats the Set of serialization format of this model.
+         * @return the Builder itself
+         */
+        public Builder serializationFormats(Set<String> serializationFormats) {
+            this.serializationFormats = serializationFormats == null ? Collections.emptySet() : serializationFormats;
+            return this;
+        }
+
+        /**
          * Build a new ClientModel instance with the provided properties.
          *
          * @return a new ClientModel instance with the provided properties
@@ -679,7 +703,7 @@ public class ClientModel {
             return new ClientModel(packageName, name, imports, description, isPolymorphic, polymorphicDiscriminator,
                 serializedName, needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties,
                 propertyReferences, modelType, stronglyTypedHeader, implementationDetails, usedInXml,
-                crossLanguageDefinitionId);
+                serializationFormats, crossLanguageDefinitionId);
         }
     }
 }
