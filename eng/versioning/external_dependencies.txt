@@ -18,6 +18,13 @@ org.junit.jupiter:junit-jupiter-engine
 org.junit.jupiter:junit-jupiter-params
 io.projectreactor:reactor-test
 
+com.azure.tools:codesnippet-maven-plugin
+
+com.github.spotbugs:spotbugs
+com.github.spotbugs:spotbugs-annotations
+com.github.spotbugs:spotbugs-maven-plugin
+com.puppycrawl.tools:checkstyle
+
 org.apache.maven.plugins:maven-antrun-plugin
 org.apache.maven.plugins:maven-assembly-plugin
 org.apache.maven.plugins:maven-checkstyle-plugin
@@ -44,5 +51,3 @@ org.codehaus.mojo:exec-maven-plugin
 org.mockito:mockito-core
 net.bytebuddy:byte-buddy
 net.bytebuddy:byte-buddy-agent
-
-com.azure.tools:codesnippet-maven-plugin
