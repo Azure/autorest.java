@@ -24,9 +24,6 @@ export enum SchemaContext {
 
   /** Schema is used in json-merge-patch operation */
   JsonMergePatch = "json-merge-patch",
-
-  /** Schema is used in multipart/form-data operation */
-  MultipartFormData = "multipart-form-data",
 }
 
 export interface SchemaUsage {

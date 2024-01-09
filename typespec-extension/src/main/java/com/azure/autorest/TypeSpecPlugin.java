@@ -6,11 +6,11 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -159,7 +159,7 @@ public class TypeSpecPlugin extends Javagen {
         // MultipartFormDataHelper
         final boolean generateMultipartFormDataHelper = client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .anyMatch(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA));
+                .anyMatch(m -> m.getSerializationFormats().contains(KnownMediaType.MULTIPART.value()));
         if (generateMultipartFormDataHelper) {
             javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
         }

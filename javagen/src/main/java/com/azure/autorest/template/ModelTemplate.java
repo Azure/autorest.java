@@ -59,7 +59,7 @@ import java.util.stream.Stream;
  */
 public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
-    public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
+    private static final String MISSING_SCHEMA = "MISSING·SCHEMA";
     private static final ModelTemplate INSTANCE = new ModelTemplate();
 
     protected ModelTemplate() {
