@@ -18,7 +18,7 @@ import java.util.Map;
  * The model is Record&lt;unknown&gt; with a discriminator.
  */
 @Fluent
-public final class IsUnknownAdditionalPropertiesDiscriminated
+public class IsUnknownAdditionalPropertiesDiscriminated
     implements JsonSerializable<IsUnknownAdditionalPropertiesDiscriminated> {
     /*
      * The name property
@@ -27,7 +27,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminated
     private final String name;
 
     /*
-     * The model is Record<unknown> with a discriminator.
+     * Dictionary of any
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -53,7 +53,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
+     * Get the additionalProperties property: Dictionary of any.
      * 
      * @return the additionalProperties value.
      */
@@ -63,7 +63,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Set the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
+     * Set the additionalProperties property: Dictionary of any.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.
@@ -99,20 +99,39 @@ public final class IsUnknownAdditionalPropertiesDiscriminated
      */
     public static IsUnknownAdditionalPropertiesDiscriminated fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            JsonReader readerToUse = reader.bufferObject();
+
+            readerToUse.nextToken(); // Prepare for reading
+            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = readerToUse.getFieldName();
+                readerToUse.nextToken();
+                if ("kind".equals(fieldName)) {
+                    discriminatorValue = readerToUse.getString();
+                    break;
+                } else {
+                    readerToUse.skipChildren();
+                }
+            }
+            // Use the discriminator value to determine which subtype should be deserialized.
+            if ("derived".equals(discriminatorValue)) {
+                return IsUnknownAdditionalPropertiesDiscriminatedDerived.fromJson(readerToUse.reset());
+            } else {
+                return fromJsonKnownDiscriminator(readerToUse.reset());
+            }
+        });
+    }
+
+    static IsUnknownAdditionalPropertiesDiscriminated fromJsonKnownDiscriminator(JsonReader jsonReader)
+        throws IOException {
+        return jsonReader.readObject(reader -> {
             String name = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"IsUnknownAdditionalPropertiesDiscriminated".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'IsUnknownAdditionalPropertiesDiscriminated'. The found 'kind' was '"
-                                + kind + "'.");
-                    }
-                } else if ("name".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else {
                     if (additionalProperties == null) {
