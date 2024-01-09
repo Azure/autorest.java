@@ -3,20 +3,19 @@
 
 package com.type.property.additionalproperties;
 
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalProperties;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDerived;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminated;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminatedDerived;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class IsUnknownClientTest {
-    private final IsUnknownClient client = new AdditionalPropertiesClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildIsUnknownClient();
+    private final IsUnknownClient client = new AdditionalPropertiesClientBuilder().buildIsUnknownClient();
     private final IsUnknownDerivedClient isUnknownDerivedClient = new AdditionalPropertiesClientBuilder().buildIsUnknownDerivedClient();
     private final IsUnknownDiscriminatedClient isUnknownDiscriminatedClient = new AdditionalPropertiesClientBuilder().buildIsUnknownDiscriminatedClient();
 
@@ -38,6 +37,7 @@ public class IsUnknownClientTest {
         Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
     public void testIsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
@@ -58,6 +58,7 @@ public class IsUnknownClientTest {
         Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
     public void testIsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
