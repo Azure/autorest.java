@@ -2062,8 +2062,16 @@ export class CodeModelBuilder {
       }
     } else if (isRecordModelType(this.program, type)) {
       // "pure" Record processed elsewhere
+
       // "mixed" Record that have properties, treat the model as "additionalProperties"
-      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      /* type should have sourceModel, as
+      model Type is Record<> {
+        prop1: string
+      }
+      */
+      const parentSchema = type.sourceModel
+        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
+        : this.processDictionarySchema(type, this.getName(type));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
