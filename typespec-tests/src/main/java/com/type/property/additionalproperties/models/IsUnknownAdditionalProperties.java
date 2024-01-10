@@ -26,7 +26,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     private final String name;
 
     /*
-     * The property.
+     * additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -52,7 +52,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     }
 
     /**
-     * Get the additionalProperties property: The property.
+     * Get the additionalProperties property: additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     }
 
     /**
-     * Set the additionalProperties property: The property.
+     * Set the additionalProperties property: additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalProperties object itself.

@@ -27,7 +27,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
     private final String name;
 
     /*
-     * The property.
+     * additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -53,7 +53,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the additionalProperties property: The property.
+     * Get the additionalProperties property: additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -63,7 +63,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Set the additionalProperties property: The property.
+     * Set the additionalProperties property: additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsUnknownAdditionalPropertiesDiscriminated object itself.

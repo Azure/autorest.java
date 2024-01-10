@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class ExtendsModelAdditionalProperties implements JsonSerializable<ExtendsModelAdditionalProperties> {
     /*
-     * The property.
+     * additional properties
      */
     @Generated
     private Map<String, ModelForRecord> additionalProperties;
@@ -33,7 +33,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: The property.
+     * Get the additionalProperties property: additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -43,7 +43,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Set the additionalProperties property: The property.
+     * Set the additionalProperties property: additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsModelAdditionalProperties object itself.

@@ -26,7 +26,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     private final double id;
 
     /*
-     * The property.
+     * additional properties
      */
     @Generated
     private Map<String, Double> additionalProperties;
@@ -52,7 +52,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     }
 
     /**
-     * Get the additionalProperties property: The property.
+     * Get the additionalProperties property: additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     }
 
     /**
-     * Set the additionalProperties property: The property.
+     * Set the additionalProperties property: additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsFloatAdditionalProperties object itself.

@@ -26,7 +26,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     private final String name;
 
     /*
-     * The property.
+     * additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -52,7 +52,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Get the additionalProperties property: The property.
+     * Get the additionalProperties property: additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Set the additionalProperties property: The property.
+     * Set the additionalProperties property: additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsUnknownAdditionalProperties object itself.
