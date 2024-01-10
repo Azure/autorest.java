@@ -101,7 +101,7 @@ interface NamingOp {
   @post
   post(...Request): Response | ErrorResponse;
 
-  getAnonymouse(): {
+  getAnonymous(): {
     name: string;
   };
 }
