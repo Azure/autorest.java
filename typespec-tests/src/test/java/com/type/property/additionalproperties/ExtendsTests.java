@@ -1,5 +1,6 @@
 package com.type.property.additionalproperties;
 
+import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDiscriminated;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -88,7 +89,7 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("ExtendsStringAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
     @Test
@@ -106,19 +107,18 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("ExtendsUnknownAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
     @Test
-    @Disabled("`AdditionalProperties` is not json serialized, so body provided doesn't match expected body.")
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     public void testExtendsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
-        ExtendsUnknownAdditionalPropertiesDerived body =
-                new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314);
-        body.setAge(2.71828);
+        ExtendsUnknownAdditionalPropertiesDerived body = new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         extendsUnknownDerivedClient.put(body);
 
@@ -126,25 +126,25 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("ExtendsUnknownAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 
     @Test
-    @Disabled("`AdditionalProperties` is not json serialized, so body provided doesn't match expected body.")
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     public void testExtendsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
-        ExtendsUnknownAdditionalPropertiesDiscriminatedDerived body = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314);
-        body.setAge(2.71828);
+        ExtendsUnknownAdditionalPropertiesDiscriminatedDerived body = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         extendsUnknownDiscriminatedClient.put(body);
 
-        ExtendsUnknownAdditionalPropertiesDiscriminatedDerived properties = (ExtendsUnknownAdditionalPropertiesDiscriminatedDerived) extendsUnknownDiscriminatedClient.get();
+        ExtendsUnknownAdditionalPropertiesDiscriminated properties = extendsUnknownDiscriminatedClient.get();
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("Derived", properties.getName());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 }
