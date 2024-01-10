@@ -458,6 +458,7 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
+      // skip models under "Azure.ResourceManager"
       if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
         return;
       }
@@ -1981,7 +1982,15 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (this.isArm() && namespace?.startsWith("Azure.ResourceManager") && name?.includes("Resource")) {
+    if (this.isArm() 
+      && namespace?.startsWith("Azure.ResourceManager") 
+      // there's ResourceListResult under Azure.ResourceManager namespace,
+      // which shouldn't be considered Resource schema parent
+      && (name?.startsWith("TrackedResource") 
+        || name?.startsWith("ExtensionResource") 
+        || name?.startsWith("ProxyResource"))
+        || name === "ArmResource"
+      ) {
       const objectSchema = this.dummyResourceSchema(type, name, namespace);
       this.codeModel.schemas.add(objectSchema);
 
@@ -2136,6 +2145,7 @@ export class CodeModelBuilder {
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
       if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
+        // Catalog is TrackedResource<CatalogProperties>
         return type;
       } else if (effective.name) {
         return effective;
