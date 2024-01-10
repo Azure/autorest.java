@@ -7,18 +7,13 @@ package com.payload.multipart.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * The JsonArrayPartsRequest model.
  */
 @Fluent
-public final class JsonArrayPartsRequest implements JsonSerializable<JsonArrayPartsRequest> {
+public final class JsonArrayPartsRequest {
     /*
      * The profileImage property.
      */
@@ -89,52 +84,5 @@ public final class JsonArrayPartsRequest implements JsonSerializable<JsonArrayPa
     @Generated
     public List<Address> getPreviousAddresses() {
         return this.previousAddresses;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("profileImage", this.profileImage.toObject(Object.class));
-        jsonWriter.writeArrayField("previousAddresses", this.previousAddresses,
-            (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("profileImage", this.profileImageFilename);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of JsonArrayPartsRequest from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of JsonArrayPartsRequest if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the JsonArrayPartsRequest.
-     */
-    public static JsonArrayPartsRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            BinaryData profileImage = null;
-            List<Address> previousAddresses = null;
-            String profileImageFilename = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("profileImage".equals(fieldName)) {
-                    profileImage
-                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("previousAddresses".equals(fieldName)) {
-                    previousAddresses = reader.readArray(reader1 -> Address.fromJson(reader1));
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImageFilename = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            JsonArrayPartsRequest deserializedJsonArrayPartsRequest
-                = new JsonArrayPartsRequest(profileImage, previousAddresses);
-            deserializedJsonArrayPartsRequest.profileImageFilename = profileImageFilename;
-
-            return deserializedJsonArrayPartsRequest;
-        });
     }
 }

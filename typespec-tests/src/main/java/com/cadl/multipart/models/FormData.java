@@ -7,17 +7,12 @@ package com.cadl.multipart.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 /**
  * The FormData model.
  */
 @Fluent
-public final class FormData implements JsonSerializable<FormData> {
+public final class FormData {
     /*
      * The name property.
      */
@@ -142,61 +137,5 @@ public final class FormData implements JsonSerializable<FormData> {
     public FormData setImageFilename(String imageFilename) {
         this.imageFilename = imageFilename;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", this.name);
-        jsonWriter.writeIntField("resolution", this.resolution);
-        jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
-        jsonWriter.writeJsonField("size", this.size);
-        jsonWriter.writeUntypedField("image", this.image.toObject(Object.class));
-        jsonWriter.writeStringField("image", this.imageFilename);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of FormData from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of FormData if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the FormData.
-     */
-    public static FormData fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String name = null;
-            int resolution = 0;
-            ImageType type = null;
-            Size size = null;
-            BinaryData image = null;
-            String imageFilename = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("name".equals(fieldName)) {
-                    name = reader.getString();
-                } else if ("resolution".equals(fieldName)) {
-                    resolution = reader.getInt();
-                } else if ("type".equals(fieldName)) {
-                    type = ImageType.fromString(reader.getString());
-                } else if ("size".equals(fieldName)) {
-                    size = Size.fromJson(reader);
-                } else if ("image".equals(fieldName)) {
-                    image = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("image".equals(fieldName)) {
-                    imageFilename = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            FormData deserializedFormData = new FormData(name, resolution, type, size, image);
-            deserializedFormData.imageFilename = imageFilename;
-
-            return deserializedFormData;
-        });
     }
 }
