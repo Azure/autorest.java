@@ -7,18 +7,13 @@ package com.payload.multipart.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * The ComplexPartsRequest model.
  */
 @Fluent
-public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsRequest> {
+public final class ComplexPartsRequest {
     /*
      * The id property.
      */
@@ -144,64 +139,5 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
     @Generated
     public List<byte[]> getPictures() {
         return this.pictures;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
-        jsonWriter.writeJsonField("address", this.address);
-        jsonWriter.writeUntypedField("profileImage", this.profileImage.toObject(Object.class));
-        jsonWriter.writeArrayField("previousAddresses", this.previousAddresses,
-            (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("pictures", this.pictures, (writer, element) -> writer.writeBinary(element));
-        jsonWriter.writeStringField("profileImage", this.profileImageFilename);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ComplexPartsRequest from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ComplexPartsRequest if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ComplexPartsRequest.
-     */
-    public static ComplexPartsRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String id = null;
-            Address address = null;
-            BinaryData profileImage = null;
-            List<Address> previousAddresses = null;
-            List<byte[]> pictures = null;
-            String profileImageFilename = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    id = reader.getString();
-                } else if ("address".equals(fieldName)) {
-                    address = Address.fromJson(reader);
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImage
-                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("previousAddresses".equals(fieldName)) {
-                    previousAddresses = reader.readArray(reader1 -> Address.fromJson(reader1));
-                } else if ("pictures".equals(fieldName)) {
-                    pictures = reader.readArray(reader1 -> reader1.getBinary());
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImageFilename = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            ComplexPartsRequest deserializedComplexPartsRequest
-                = new ComplexPartsRequest(id, address, profileImage, previousAddresses, pictures);
-            deserializedComplexPartsRequest.profileImageFilename = profileImageFilename;
-
-            return deserializedComplexPartsRequest;
-        });
     }
 }
