@@ -39,7 +39,7 @@ import {
   isErrorModel,
   EnumMember,
   walkPropertiesInherited,
-  getService
+  getService,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -527,7 +527,8 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
-      } else if (this.isArm()) { // todo: there's ongoing discussion of whether to apply it to DPG as well
+      } else if (this.isArm()) {
+        // todo: there's ongoing discussion of whether to apply it to DPG as well
         // fallback to @service.version
         const service = getService(this.program, client.service);
         if (service?.version) {
@@ -1988,15 +1989,16 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (this.isArm() 
-      && namespace?.startsWith("Azure.ResourceManager") 
-      // there's ResourceListResult under Azure.ResourceManager namespace,
-      // which shouldn't be considered Resource schema parent
-      && (name?.startsWith("TrackedResource") 
-        || name?.startsWith("ExtensionResource") 
-        || name?.startsWith("ProxyResource"))
-        || name === "ArmResource"
-      ) {
+    if (
+      (this.isArm() &&
+        namespace?.startsWith("Azure.ResourceManager") &&
+        // there's ResourceListResult under Azure.ResourceManager namespace,
+        // which shouldn't be considered Resource schema parent
+        (name?.startsWith("TrackedResource") ||
+          name?.startsWith("ExtensionResource") ||
+          name?.startsWith("ProxyResource"))) ||
+      name === "ArmResource"
+    ) {
       const objectSchema = this.dummyResourceSchema(type, name, namespace);
       this.codeModel.schemas.add(objectSchema);
 
