@@ -21,7 +21,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * Property
      */
     @Generated
-    private StringLiteralProperty1 property;
+    private StringLiteralPropertyProperty property;
 
     /**
      * Creates an instance of StringLiteralProperty class.
@@ -36,7 +36,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * @return the property value.
      */
     @Generated
-    public StringLiteralProperty1 getProperty() {
+    public StringLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,7 +47,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * @return the StringLiteralProperty object itself.
      */
     @Generated
-    public StringLiteralProperty setProperty(StringLiteralProperty1 property) {
+    public StringLiteralProperty setProperty(StringLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
@@ -75,7 +75,8 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedStringLiteralProperty.property = StringLiteralProperty1.fromString(reader.getString());
+                    deserializedStringLiteralProperty.property
+                        = StringLiteralPropertyProperty.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

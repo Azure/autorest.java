@@ -66,7 +66,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
      * The base64url property.
      */
     @Generated
-    private Base64Url base64Url;
+    private Base64Url base64url;
 
     /**
      * Creates an instance of Encoded class.
@@ -236,30 +236,30 @@ public final class Encoded implements JsonSerializable<Encoded> {
     }
 
     /**
-     * Get the base64Url property: The base64url property.
+     * Get the base64url property: The base64url property.
      * 
-     * @return the base64Url value.
+     * @return the base64url value.
      */
     @Generated
-    public byte[] getBase64Url() {
-        if (this.base64Url == null) {
+    public byte[] getBase64url() {
+        if (this.base64url == null) {
             return null;
         }
-        return this.base64Url.decodedBytes();
+        return this.base64url.decodedBytes();
     }
 
     /**
-     * Set the base64Url property: The base64url property.
+     * Set the base64url property: The base64url property.
      * 
-     * @param base64Url the base64Url value to set.
+     * @param base64url the base64url value to set.
      * @return the Encoded object itself.
      */
     @Generated
-    public Encoded setBase64Url(byte[] base64Url) {
-        if (base64Url == null) {
-            this.base64Url = null;
+    public Encoded setBase64url(byte[] base64url) {
+        if (base64url == null) {
+            this.base64url = null;
         } else {
-            this.base64Url = Base64Url.encode(CoreUtils.clone(base64Url));
+            this.base64url = Base64Url.encode(CoreUtils.clone(base64url));
         }
         return this;
     }
@@ -274,7 +274,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
         jsonWriter.writeStringField("dateTimeRfc7231", Objects.toString(this.dateTimeRfc7231, null));
         jsonWriter.writeNumberField("unixTimestamp", this.unixTimestamp);
         jsonWriter.writeBinaryField("base64", this.base64);
-        jsonWriter.writeStringField("base64url", Objects.toString(this.base64Url, null));
+        jsonWriter.writeStringField("base64url", Objects.toString(this.base64url, null));
         return jsonWriter.writeEndObject();
     }
 
@@ -308,7 +308,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
                 } else if ("base64".equals(fieldName)) {
                     deserializedEncoded.base64 = reader.getBinary();
                 } else if ("base64url".equals(fieldName)) {
-                    deserializedEncoded.base64Url
+                    deserializedEncoded.base64url
                         = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();

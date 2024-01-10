@@ -19,7 +19,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.naming.implementation.NamingOpsImpl;
 import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
-import com.cadl.naming.models.GetAnonymouseResponse;
+import com.cadl.naming.models.GetAnonymousResponse;
 
 /**
  * Initializes a new instance of the synchronous NamingClient type.
@@ -61,7 +61,7 @@ public final class NamingClient {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * <p>
      * <strong>Response Body Schema</strong>
      * </p>
@@ -80,8 +80,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getAnonymouseWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getAnonymouseWithResponse(requestOptions);
+    public Response<BinaryData> getAnonymousWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getAnonymousWithResponse(requestOptions);
     }
 
     /**
@@ -147,7 +147,7 @@ public final class NamingClient {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -158,9 +158,9 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetAnonymouseResponse getAnonymouse() {
-        // Generated convenience method for getAnonymouseWithResponse
+    public GetAnonymousResponse getAnonymous() {
+        // Generated convenience method for getAnonymousWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAnonymouseWithResponse(requestOptions).getValue().toObject(GetAnonymouseResponse.class);
+        return getAnonymousWithResponse(requestOptions).getValue().toObject(GetAnonymousResponse.class);
     }
 }

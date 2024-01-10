@@ -294,7 +294,7 @@ public final class QueriesImpl {
     /**
      * The int32SecondsArray operation.
      * 
-     * @param input Array of Input.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -316,7 +316,7 @@ public final class QueriesImpl {
     /**
      * The int32SecondsArray operation.
      * 
-     * @param input Array of Input.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

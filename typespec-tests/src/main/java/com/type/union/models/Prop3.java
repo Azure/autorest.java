@@ -11,17 +11,17 @@ public enum Prop3 {
     /**
      * Enum value 1.1.
      */
-    ONE1(1.1),
+    ONE_ONE(1.1),
 
     /**
      * Enum value 2.2.
      */
-    TWO2(2.2),
+    TWO_TWO(2.2),
 
     /**
      * Enum value 3.3.
      */
-    THREE3(3.3);
+    THREE_THREE(3.3);
 
     /**
      * The actual serialized value for a Prop3 instance.

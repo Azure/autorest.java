@@ -9,49 +9,49 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * Defines values for Ud.
+ * Defines values for UD.
  */
-public final class Ud extends ExpandableStringEnum<Ud> {
+public final class UD extends ExpandableStringEnum<UD> {
     /**
-     * Static value up for Ud.
+     * Static value up for UD.
      */
     @Generated
-    public static final Ud UP = fromString("up");
+    public static final UD UP = fromString("up");
 
     /**
-     * Static value down for Ud.
+     * Static value down for UD.
      */
     @Generated
-    public static final Ud DOWN = fromString("down");
+    public static final UD DOWN = fromString("down");
 
     /**
-     * Creates a new instance of Ud value.
+     * Creates a new instance of UD value.
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public Ud() {
+    public UD() {
     }
 
     /**
-     * Creates or finds a Ud from its string representation.
+     * Creates or finds a UD from its string representation.
      * 
      * @param name a name to look for.
-     * @return the corresponding Ud.
+     * @return the corresponding UD.
      */
     @Generated
-    public static Ud fromString(String name) {
-        return fromString(name, Ud.class);
+    public static UD fromString(String name) {
+        return fromString(name, UD.class);
     }
 
     /**
-     * Gets known Ud values.
+     * Gets known UD values.
      * 
-     * @return known Ud values.
+     * @return known UD values.
      */
     @Generated
-    public static Collection<Ud> values() {
-        return values(Ud.class);
+    public static Collection<UD> values() {
+        return values(UD.class);
     }
 }

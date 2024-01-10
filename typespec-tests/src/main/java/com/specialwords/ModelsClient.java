@@ -844,7 +844,7 @@ public final class ModelsClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -864,8 +864,8 @@ public final class ModelsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.withWithResponse(body, requestOptions);
+    public Response<Void> withWithWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.withWithWithResponse(body, requestOptions);
     }
 
     /**
@@ -1483,7 +1483,7 @@ public final class ModelsClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1495,10 +1495,10 @@ public final class ModelsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void with(With body) {
-        // Generated convenience method for withWithResponse
+    public void withWith(With body) {
+        // Generated convenience method for withWithWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        withWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        withWithWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**

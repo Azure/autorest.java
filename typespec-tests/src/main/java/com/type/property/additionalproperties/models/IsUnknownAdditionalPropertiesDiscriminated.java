@@ -27,7 +27,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     private final String name;
 
     /*
-     * Dictionary of any
+     * The property.
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -53,7 +53,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of any.
+     * Get the additionalProperties property: The property.
      * 
      * @return the additionalProperties value.
      */
@@ -63,7 +63,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of any.
+     * Set the additionalProperties property: The property.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.

@@ -620,8 +620,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> with(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withWith(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/with")
         @ExpectedResponses({ 204 })
@@ -629,8 +629,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Response<Void> withWithSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/yield")
         @ExpectedResponses({ 204 })
@@ -2202,7 +2202,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -2221,13 +2221,13 @@ public final class ModelsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<Void>> withWithWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.with(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.withWith(accept, body, requestOptions, context));
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -2246,9 +2246,9 @@ public final class ModelsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> withWithWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.withSync(accept, body, requestOptions, Context.NONE);
+        return service.withWithSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**

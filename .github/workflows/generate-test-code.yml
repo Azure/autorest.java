@@ -46,14 +46,14 @@ jobs:
         if: ${{ inputs.scope == 'all' || inputs.scope == 'autorest' }}
         shell: pwsh
         run: |
-          ./Generate.ps1 -notimeout
+          ./Generate.ps1 -Parallelization 1
 
       - name: Generate test code for typespec-java
         if: ${{ inputs.scope == 'all' || inputs.scope == 'typespec' }}
         shell: pwsh
         run: |
           cd typespec-tests
-          ./Generate.ps1
+          ./Generate.ps1 -Parallelization 1
           cd ..
 
       - name: Commit generated code

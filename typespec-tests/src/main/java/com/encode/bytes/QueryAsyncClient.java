@@ -72,7 +72,7 @@ public final class QueryAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -84,14 +84,14 @@ public final class QueryAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponse(byte[] value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponseAsync(value, requestOptions);
+    public Mono<Response<Void>> base64urlWithResponse(byte[] value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponseAsync(value, requestOptions);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,8 +101,8 @@ public final class QueryAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlArrayWithResponseAsync(value, requestOptions);
+    public Mono<Response<Void>> base64urlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlArrayWithResponseAsync(value, requestOptions);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class QueryAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -159,16 +159,16 @@ public final class QueryAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> base64Url(byte[] value) {
-        // Generated convenience method for base64UrlWithResponse
+    public Mono<Void> base64url(byte[] value) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
+        return base64urlWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -179,9 +179,9 @@ public final class QueryAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> base64UrlArray(List<byte[]> value) {
-        // Generated convenience method for base64UrlArrayWithResponse
+    public Mono<Void> base64urlArray(List<byte[]> value) {
+        // Generated convenience method for base64urlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlArrayWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
+        return base64urlArrayWithResponse(value, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
