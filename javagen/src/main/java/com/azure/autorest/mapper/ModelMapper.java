@@ -297,7 +297,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 additionalProperties.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
                 String additionalPropertiesDescription = schema.getLanguage().getJava().getDescription();
                 if (CoreUtils.isNullOrEmpty(additionalPropertiesDescription)) {
-                    additionalPropertiesDescription = "additional properties";
+                    additionalPropertiesDescription = "Additional properties";
                 }
                 additionalProperties.getLanguage().getJava().setDescription(additionalPropertiesDescription);
 

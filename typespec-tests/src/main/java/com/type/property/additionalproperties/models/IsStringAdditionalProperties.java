@@ -26,7 +26,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     private final String name;
 
     /*
-     * additional properties
+     * Additional properties
      */
     @Generated
     private Map<String, String> additionalProperties;
@@ -52,7 +52,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Get the additionalProperties property: additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Set the additionalProperties property: additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsStringAdditionalProperties object itself.
