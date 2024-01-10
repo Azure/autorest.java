@@ -157,12 +157,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.3.1</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>9.2</version>
+              <version>9.3</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -170,7 +170,7 @@
             <configLocation>checkstyle.xml</configLocation>
             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
             <propertyExpansion>samedir=</propertyExpansion>
-            <encoding>UTF-8</encoding>
+            <inputEncoding>UTF-8</inputEncoding>
             <consoleOutput>true</consoleOutput>
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
             <linkXRef>true</linkXRef>
