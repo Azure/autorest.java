@@ -96,7 +96,7 @@ if (Test-Path ./tsp-output) {
 }
 
 # run other local tests except partial update
-$job = (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*") | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+$job = $((Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*"); (Get-Item ./tsp/arm/* -Filter "*.tsp")) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 600
 $job | Receive-Job
@@ -117,5 +117,8 @@ $job | Receive-Job
 Remove-Item ./http -Recurse -Force
 
 Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
+
+# copy arm related code
+Copy-Item -Path ./tsp/arm/tsp-output/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
 Remove-Item ./tsp-output -Recurse -Force
