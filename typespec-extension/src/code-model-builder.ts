@@ -115,6 +115,7 @@ import {
   UnixTimeSchema,
   Language,
 } from "@autorest/codemodel";
+import { KnownMediaType } from "@azure-tools/codegen";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
@@ -678,6 +679,11 @@ export class CodeModelBuilder {
         // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
+        this.logWarning(apiComment);
+      } else if (operationIsJsonMergePatch(op) && !this.options["stream-style-serialization"]) {
+        // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
         this.logWarning(apiComment);
       }
       // else {
@@ -1268,7 +1274,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.MultipartFormData] });
+      this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
     if (!schema.language.default.name && schema instanceof ObjectSchema) {
@@ -1433,7 +1439,7 @@ export class CodeModelBuilder {
               statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
-              knownMediaType: "binary",
+              knownMediaType: KnownMediaType.Binary,
             },
           },
           language: {
@@ -2702,9 +2708,11 @@ export class CodeModelBuilder {
     // Exclude context that not to be propagated
     const schemaUsage = {
       usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous && it !== SchemaContext.MultipartFormData,
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
       ),
-      serializationFormats: (schema as SchemaUsage).serializationFormats,
+      serializationFormats: (schema as SchemaUsage).serializationFormats?.filter(
+        (it) => it !== KnownMediaType.Multipart,
+      ),
     };
     // Propagate the usage of the initial schema itself
     innerPropagateSchemaUsage(schema, schemaUsage);
@@ -2721,6 +2729,12 @@ export class CodeModelBuilder {
     ) {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
+      }
+      if (schemaUsage.serializationFormats) {
+        pushDistinct(
+          (schema.serializationFormats = schema.serializationFormats || []),
+          ...schemaUsage.serializationFormats,
+        );
       }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);

@@ -1,5 +1,11 @@
 # Release History
 
+## 0.12.2 (2024-01-09)
+
+Compatible with compiler 0.51.
+
+- Supported convenience API for "application/merge-patch+json" (basic functionality), only available when stream-style-serialization is enabled.
+
 ## 0.12.1 (2023-12-18)
 
 Compatible with compiler 0.51.

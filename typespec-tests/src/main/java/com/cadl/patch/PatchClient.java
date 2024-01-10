@@ -223,7 +223,7 @@ public final class PatchClient {
         // Generated convenience method for createOrUpdateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return createOrUpdateResourceWithResponse(resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
@@ -248,7 +248,7 @@ public final class PatchClient {
         RequestOptions requestOptions = new RequestOptions();
         if (resource != null) {
             JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-            BinaryData resourceInBinaryData = BinaryData.fromString(BinaryData.fromObject(resource).toString());
+            BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
             JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
             requestOptions.setBody(resourceInBinaryData);
         }
@@ -291,7 +291,7 @@ public final class PatchClient {
         // Generated convenience method for createOrUpdateFishWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
-        BinaryData fishInBinaryData = BinaryData.fromString(BinaryData.fromObject(fish).toString());
+        BinaryData fishInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(fish).toBytes());
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, false);
         return createOrUpdateFishWithResponse(fishInBinaryData, requestOptions).getValue().toObject(Fish.class);
     }

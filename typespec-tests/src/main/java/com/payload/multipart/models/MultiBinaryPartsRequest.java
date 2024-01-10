@@ -7,17 +7,12 @@ package com.payload.multipart.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 /**
  * The MultiBinaryPartsRequest model.
  */
 @Fluent
-public final class MultiBinaryPartsRequest implements JsonSerializable<MultiBinaryPartsRequest> {
+public final class MultiBinaryPartsRequest {
     /*
      * The profileImage property.
      */
@@ -126,58 +121,5 @@ public final class MultiBinaryPartsRequest implements JsonSerializable<MultiBina
     public MultiBinaryPartsRequest setPictureFilename(String pictureFilename) {
         this.pictureFilename = pictureFilename;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeUntypedField("profileImage", this.profileImage.toObject(Object.class));
-        jsonWriter.writeStringField("profileImage", this.profileImageFilename);
-        if (this.picture != null) {
-            jsonWriter.writeUntypedField("picture", this.picture.toObject(Object.class));
-        }
-        jsonWriter.writeStringField("picture", this.pictureFilename);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of MultiBinaryPartsRequest from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of MultiBinaryPartsRequest if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the MultiBinaryPartsRequest.
-     */
-    public static MultiBinaryPartsRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            BinaryData profileImage = null;
-            String profileImageFilename = null;
-            BinaryData picture = null;
-            String pictureFilename = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("profileImage".equals(fieldName)) {
-                    profileImage
-                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImageFilename = reader.getString();
-                } else if ("picture".equals(fieldName)) {
-                    picture = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("picture".equals(fieldName)) {
-                    pictureFilename = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            MultiBinaryPartsRequest deserializedMultiBinaryPartsRequest = new MultiBinaryPartsRequest(profileImage);
-            deserializedMultiBinaryPartsRequest.profileImageFilename = profileImageFilename;
-            deserializedMultiBinaryPartsRequest.picture = picture;
-            deserializedMultiBinaryPartsRequest.pictureFilename = pictureFilename;
-
-            return deserializedMultiBinaryPartsRequest;
-        });
     }
 }
