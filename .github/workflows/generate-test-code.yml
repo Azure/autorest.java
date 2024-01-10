@@ -6,7 +6,7 @@ on:
         type: choice
         description: scope of the test code to generate
         required: true
-        default: autorest
+        default: typespec
         options:
           - all
           - autorest

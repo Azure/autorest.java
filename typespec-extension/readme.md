@@ -61,8 +61,8 @@ options:
     generate-samples: true
     generate-tests: true
     examples-directory: "./examples"
-    namer: false
     partial-update: false
+    models-subpackage: "models"
     custom-types-subpackage: "implementation.models"
     custom-types: InternalModel1,InternalModel2
 ```
