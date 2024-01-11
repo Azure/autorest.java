@@ -5,35 +5,35 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for StringLiteralProperty1.
+ * Defines values for StringLiteralPropertyProperty.
  */
-public enum StringLiteralProperty1 {
+public enum StringLiteralPropertyProperty {
     /**
      * Enum value hello.
      */
     HELLO("hello");
 
     /**
-     * The actual serialized value for a StringLiteralProperty1 instance.
+     * The actual serialized value for a StringLiteralPropertyProperty instance.
      */
     private final String value;
 
-    StringLiteralProperty1(String value) {
+    StringLiteralPropertyProperty(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a StringLiteralProperty1 instance.
+     * Parses a serialized value to a StringLiteralPropertyProperty instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed StringLiteralProperty1 object, or null if unable to parse.
+     * @return the parsed StringLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static StringLiteralProperty1 fromString(String value) {
+    public static StringLiteralPropertyProperty fromString(String value) {
         if (value == null) {
             return null;
         }
-        StringLiteralProperty1[] items = StringLiteralProperty1.values();
-        for (StringLiteralProperty1 item : items) {
+        StringLiteralPropertyProperty[] items = StringLiteralPropertyProperty.values();
+        for (StringLiteralPropertyProperty item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

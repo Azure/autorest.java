@@ -43,11 +43,12 @@ public final class IsUnknownDerivedClient {
      * </p>
      * <pre>{@code
      * {
-     *     index: int (Required)
-     *     age: Double (Optional)
+     *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)
      *     }
+     *     index: int (Required)
+     *     age: Double (Optional)
      * }
      * }</pre>
      * 
@@ -71,11 +72,12 @@ public final class IsUnknownDerivedClient {
      * </p>
      * <pre>{@code
      * {
-     *     index: int (Required)
-     *     age: Double (Optional)
+     *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)
      *     }
+     *     index: int (Required)
+     *     age: Double (Optional)
      * }
      * }</pre>
      * 

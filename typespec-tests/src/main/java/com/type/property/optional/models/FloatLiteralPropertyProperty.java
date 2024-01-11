@@ -5,32 +5,32 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for FloatLiteralProperty1.
+ * Defines values for FloatLiteralPropertyProperty.
  */
-public enum FloatLiteralProperty1 {
+public enum FloatLiteralPropertyProperty {
     /**
      * Enum value 1.2.
      */
     ONE_TWO(1.2);
 
     /**
-     * The actual serialized value for a FloatLiteralProperty1 instance.
+     * The actual serialized value for a FloatLiteralPropertyProperty instance.
      */
     private final double value;
 
-    FloatLiteralProperty1(double value) {
+    FloatLiteralPropertyProperty(double value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a FloatLiteralProperty1 instance.
+     * Parses a serialized value to a FloatLiteralPropertyProperty instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed FloatLiteralProperty1 object, or null if unable to parse.
+     * @return the parsed FloatLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static FloatLiteralProperty1 fromDouble(double value) {
-        FloatLiteralProperty1[] items = FloatLiteralProperty1.values();
-        for (FloatLiteralProperty1 item : items) {
+    public static FloatLiteralPropertyProperty fromDouble(double value) {
+        FloatLiteralPropertyProperty[] items = FloatLiteralPropertyProperty.values();
+        for (FloatLiteralPropertyProperty item : items) {
             if (Double.doubleToLongBits(item.toDouble()) == Double.doubleToLongBits(value)) {
                 return item;
             }

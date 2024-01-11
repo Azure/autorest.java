@@ -4,7 +4,7 @@
 package com.type.property.optional;
 
 import com.type.property.optional.models.FloatLiteralProperty;
-import com.type.property.optional.models.FloatLiteralProperty1;
+import com.type.property.optional.models.FloatLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class FloatLiteralClientTests {
     @Test
     public void getAll() {
         FloatLiteralProperty floatLiteralProperty = client.getAll();
-        Assertions.assertEquals(FloatLiteralProperty1.ONE_TWO, floatLiteralProperty.getProperty());
+        Assertions.assertEquals(FloatLiteralPropertyProperty.ONE_TWO, floatLiteralProperty.getProperty());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class FloatLiteralClientTests {
     @Test
     public void putAll() {
         FloatLiteralProperty floatLiteralProperty = new FloatLiteralProperty();
-        floatLiteralProperty.setProperty(FloatLiteralProperty1.ONE_TWO);
+        floatLiteralProperty.setProperty(FloatLiteralPropertyProperty.ONE_TWO);
         client.putAll(floatLiteralProperty);
     }
 
