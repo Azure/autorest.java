@@ -121,7 +121,4 @@ Remove-Item ./http -Recurse -Force
 
 Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
-# copy ARM related code
-Copy-Item -Path ./tsp/arm/tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
-
 Remove-Item ./tsp-output -Recurse -Force

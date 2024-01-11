@@ -89,7 +89,6 @@ javagen/*.yaml
 /typespec-tests/cadl-ranch-coverage.json
 /typespec-tests/cadl-ranch-coverage-java.json
 /typespec-tests/tsp-src/
-/typespec-tests/tsp/arm/tsp-output
 
 # Coverage report
 /coverage/

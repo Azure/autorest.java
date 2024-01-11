@@ -11,8 +11,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 })
 @doc("Arm Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace Cadl.ArmResource;
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+namespace Cadl.ArmResourceProvider;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -58,30 +58,17 @@ model TopLevelArmResourceProperties {
   configurationEndpoints?: string[];
 
   @visibility("read")
-  @doc("ChildResources References List")
-  childResources?: ResourceId[];
-
-  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
 enum ProvisioningState {
+  ...ResourceProvisioningState,
   Provisioning,
   Updating,
   Deleting,
   Accepted,
-  Succeeded,
-  Failed,
-  Canceled,
-}
-
-@doc("Resource ID definition used by parent to reference child resources.")
-model ResourceId {
-  @doc("Resource ID of child resource.")
-  id: string;
 }
 
 //----------------------- Paths -----------------------
