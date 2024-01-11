@@ -7,7 +7,7 @@ import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
-import com.encode.duration.models.Iso8601DurationProperty;
+import com.encode.duration.models.ISO8601DurationProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -62,7 +62,7 @@ public class EncodeDurationTests {
         Assertions.assertEquals(SECOND36,
                 propertyClient.int32Seconds(new Int32SecondsDurationProperty(SECOND36)).getValue());
 
-        propertyClient.iso8601(new Iso8601DurationProperty(DAY40));
+        propertyClient.iso8601(new ISO8601DurationProperty(DAY40));
 
         List<Duration> array = Arrays.asList(SECOND35, Duration.ofSeconds(46, 781_000_000));
         FloatSecondsDurationArrayProperty ret = propertyClient.floatSecondsArray(new FloatSecondsDurationArrayProperty(array));

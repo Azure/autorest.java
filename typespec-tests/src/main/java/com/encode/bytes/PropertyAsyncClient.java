@@ -18,8 +18,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.encode.bytes.implementation.PropertiesImpl;
 import com.encode.bytes.models.Base64BytesProperty;
-import com.encode.bytes.models.Base64UrlArrayBytesProperty;
-import com.encode.bytes.models.Base64UrlBytesProperty;
+import com.encode.bytes.models.Base64urlArrayBytesProperty;
+import com.encode.bytes.models.Base64urlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 import reactor.core.publisher.Mono;
 
@@ -108,7 +108,7 @@ public final class PropertyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -136,12 +136,12 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponseAsync(body, requestOptions);
+    public Mono<Response<BinaryData>> base64urlWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponseAsync(body, requestOptions);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -173,8 +173,8 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlArrayWithResponseAsync(body, requestOptions);
+    public Mono<Response<BinaryData>> base64urlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlArrayWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -220,7 +220,7 @@ public final class PropertyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -233,15 +233,15 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Base64UrlBytesProperty> base64Url(Base64UrlBytesProperty body) {
-        // Generated convenience method for base64UrlWithResponse
+    public Mono<Base64urlBytesProperty> base64url(Base64urlBytesProperty body) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Base64UrlBytesProperty.class));
+        return base64urlWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Base64urlBytesProperty.class));
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -254,10 +254,10 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Base64UrlArrayBytesProperty> base64UrlArray(Base64UrlArrayBytesProperty body) {
-        // Generated convenience method for base64UrlArrayWithResponse
+    public Mono<Base64urlArrayBytesProperty> base64urlArray(Base64urlArrayBytesProperty body) {
+        // Generated convenience method for base64urlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Base64UrlArrayBytesProperty.class));
+        return base64urlArrayWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Base64urlArrayBytesProperty.class));
     }
 }

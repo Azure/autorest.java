@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.time.Duration;
 
 /**
- * The Iso8601DurationProperty model.
+ * The ISO8601DurationProperty model.
  */
 @Immutable
-public final class Iso8601DurationProperty implements JsonSerializable<Iso8601DurationProperty> {
+public final class ISO8601DurationProperty implements JsonSerializable<ISO8601DurationProperty> {
     /*
      * The value property.
      */
@@ -26,12 +26,12 @@ public final class Iso8601DurationProperty implements JsonSerializable<Iso8601Du
     private final Duration value;
 
     /**
-     * Creates an instance of Iso8601DurationProperty class.
+     * Creates an instance of ISO8601DurationProperty class.
      * 
      * @param value the value value to set.
      */
     @Generated
-    public Iso8601DurationProperty(Duration value) {
+    public ISO8601DurationProperty(Duration value) {
         this.value = value;
     }
 
@@ -53,15 +53,15 @@ public final class Iso8601DurationProperty implements JsonSerializable<Iso8601Du
     }
 
     /**
-     * Reads an instance of Iso8601DurationProperty from the JsonReader.
+     * Reads an instance of ISO8601DurationProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Iso8601DurationProperty if the JsonReader was pointing to an instance of it, or null if it
+     * @return An instance of ISO8601DurationProperty if the JsonReader was pointing to an instance of it, or null if it
      * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Iso8601DurationProperty.
+     * @throws IOException If an error occurs while reading the ISO8601DurationProperty.
      */
-    public static Iso8601DurationProperty fromJson(JsonReader jsonReader) throws IOException {
+    public static ISO8601DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -74,7 +74,7 @@ public final class Iso8601DurationProperty implements JsonSerializable<Iso8601Du
                     reader.skipChildren();
                 }
             }
-            return new Iso8601DurationProperty(value);
+            return new ISO8601DurationProperty(value);
         });
     }
 }

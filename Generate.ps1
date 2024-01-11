@@ -5,7 +5,6 @@
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 
 param (
-    [switch]$notimeout = $false,
     [int] $Parallelization = [Environment]::ProcessorCount - 1
 )
 

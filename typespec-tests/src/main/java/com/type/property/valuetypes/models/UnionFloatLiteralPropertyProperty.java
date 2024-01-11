@@ -11,12 +11,12 @@ public enum UnionFloatLiteralPropertyProperty {
     /**
      * Enum value 42.42.
      */
-    FORTY_TWO42(42.42),
+    FOUR_TWO_FOUR_TWO(42.42),
 
     /**
      * Enum value 43.43.
      */
-    FORTY_THREE43(43.43);
+    FOUR_THREE_FOUR_THREE(43.43);
 
     /**
      * The actual serialized value for a UnionFloatLiteralPropertyProperty instance.

@@ -48,7 +48,7 @@ public class WireTypeTests {
         BinaryData json = BinaryData.fromObject(model);
         SubClassBothMismatch model1 = json.toObject(SubClassBothMismatch.class);
 
-        Assertions.assertArrayEquals(BYTES, model1.getBase64Url());
+        Assertions.assertArrayEquals(BYTES, model1.getBase64url());
         Assertions.assertEquals(NOW, model1.getDateTimeRfc7231());
     }
 }

@@ -34,6 +34,7 @@ export interface EmitterOptions {
   "stream-style-serialization"?: boolean;
 
   "partial-update"?: boolean;
+  "models-subpackage"?: string;
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
@@ -81,6 +82,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
+    "models-subpackage": { type: "string", nullable: true },
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },

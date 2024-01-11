@@ -7,7 +7,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.serializer.TypeReference;
 import com.type.union.models.Cat;
 import com.type.union.models.EnumsOnlyCases;
-import com.type.union.models.Lr;
+import com.type.union.models.LR;
 import com.type.union.models.MixedLiteralsCases;
 import com.type.union.models.MixedTypesCases;
 import com.type.union.models.Prop;
@@ -16,7 +16,7 @@ import com.type.union.models.Prop2;
 import com.type.union.models.Prop3;
 import com.type.union.models.StringAndArrayCases;
 import com.type.union.models.StringExtensibleNamedUnion;
-import com.type.union.models.Ud;
+import com.type.union.models.UD;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -81,8 +81,8 @@ public class UnionsClientTest {
     @Test
     public void testEnumsOnlyClient() {
         EnumsOnlyCases prop = client7.get().getProp();
-        Assertions.assertEquals(Lr.RIGHT, Lr.fromString(prop.getLr().toObject(String.class)));
-        Assertions.assertEquals(Ud.UP, Ud.fromString(prop.getUd().toObject(String.class)));
+        Assertions.assertEquals(LR.RIGHT, LR.fromString(prop.getLr().toObject(String.class)));
+        Assertions.assertEquals(UD.UP, UD.fromString(prop.getUd().toObject(String.class)));
         client7.send(prop);
     }
 

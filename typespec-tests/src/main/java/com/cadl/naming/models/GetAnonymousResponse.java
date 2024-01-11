@@ -13,10 +13,10 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The GetAnonymouseResponse model.
+ * The GetAnonymousResponse model.
  */
 @Immutable
-public final class GetAnonymouseResponse implements JsonSerializable<GetAnonymouseResponse> {
+public final class GetAnonymousResponse implements JsonSerializable<GetAnonymousResponse> {
     /*
      * The name property.
      */
@@ -24,12 +24,12 @@ public final class GetAnonymouseResponse implements JsonSerializable<GetAnonymou
     private final String name;
 
     /**
-     * Creates an instance of GetAnonymouseResponse class.
+     * Creates an instance of GetAnonymousResponse class.
      * 
      * @param name the name value to set.
      */
     @Generated
-    private GetAnonymouseResponse(String name) {
+    private GetAnonymousResponse(String name) {
         this.name = name;
     }
 
@@ -51,15 +51,15 @@ public final class GetAnonymouseResponse implements JsonSerializable<GetAnonymou
     }
 
     /**
-     * Reads an instance of GetAnonymouseResponse from the JsonReader.
+     * Reads an instance of GetAnonymousResponse from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GetAnonymouseResponse if the JsonReader was pointing to an instance of it, or null if it
+     * @return An instance of GetAnonymousResponse if the JsonReader was pointing to an instance of it, or null if it
      * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the GetAnonymouseResponse.
+     * @throws IOException If an error occurs while reading the GetAnonymousResponse.
      */
-    public static GetAnonymouseResponse fromJson(JsonReader jsonReader) throws IOException {
+    public static GetAnonymousResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -72,7 +72,7 @@ public final class GetAnonymouseResponse implements JsonSerializable<GetAnonymou
                     reader.skipChildren();
                 }
             }
-            return new GetAnonymouseResponse(name);
+            return new GetAnonymousResponse(name);
         });
     }
 }

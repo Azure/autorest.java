@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The Base64UrlArrayBytesProperty model.
+ * The Base64urlArrayBytesProperty model.
  */
 @Immutable
-public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base64UrlArrayBytesProperty> {
+public final class Base64urlArrayBytesProperty implements JsonSerializable<Base64urlArrayBytesProperty> {
     /*
      * The value property.
      */
@@ -27,12 +27,12 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
     private List<Base64Url> value;
 
     /**
-     * Creates an instance of Base64UrlArrayBytesProperty class.
+     * Creates an instance of Base64urlArrayBytesProperty class.
      * 
      * @param value the value value to set.
      */
     @Generated
-    public Base64UrlArrayBytesProperty(List<byte[]> value) {
+    public Base64urlArrayBytesProperty(List<byte[]> value) {
         this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
     }
 
@@ -58,15 +58,15 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
     }
 
     /**
-     * Reads an instance of Base64UrlArrayBytesProperty from the JsonReader.
+     * Reads an instance of Base64urlArrayBytesProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Base64UrlArrayBytesProperty if the JsonReader was pointing to an instance of it, or null
+     * @return An instance of Base64urlArrayBytesProperty if the JsonReader was pointing to an instance of it, or null
      * if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Base64UrlArrayBytesProperty.
+     * @throws IOException If an error occurs while reading the Base64urlArrayBytesProperty.
      */
-    public static Base64UrlArrayBytesProperty fromJson(JsonReader jsonReader) throws IOException {
+    public static Base64urlArrayBytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<byte[]> value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -87,7 +87,7 @@ public final class Base64UrlArrayBytesProperty implements JsonSerializable<Base6
                     reader.skipChildren();
                 }
             }
-            return new Base64UrlArrayBytesProperty(value);
+            return new Base64urlArrayBytesProperty(value);
         });
     }
 }

@@ -1614,7 +1614,10 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          const schemaNameHint = pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
+          const schemaNameHint =
+            type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
+              ? nameHint // std scalar won't need a nameHint
+              : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
           schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
@@ -1643,6 +1646,7 @@ export class CodeModelBuilder {
   private processScalar(type: Scalar, formatFromDerived: string | undefined, nameHint: string): Schema {
     const scalarName = type.name;
     if (this.program.checker.isStdType(type)) {
+      nameHint = scalarName;
       switch (scalarName) {
         case "string": {
           const format = formatFromDerived ?? getFormat(this.program, type);
@@ -2089,8 +2093,16 @@ export class CodeModelBuilder {
       }
     } else if (isRecordModelType(this.program, type)) {
       // "pure" Record processed elsewhere
+
       // "mixed" Record that have properties, treat the model as "additionalProperties"
-      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      /* type should have sourceModel, as
+      model Type is Record<> {
+        prop1: string
+      }
+      */
+      const parentSchema = type.sourceModel
+        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
+        : this.processDictionarySchema(type, this.getName(type));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);

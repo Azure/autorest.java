@@ -125,7 +125,7 @@ public final class ResponseBodyClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * <p>
      * <strong>Response Body Schema</strong>
      * </p>
@@ -142,8 +142,8 @@ public final class ResponseBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponse(requestOptions);
+    public Response<BinaryData> base64urlWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponse(requestOptions);
     }
 
     /**
@@ -219,7 +219,7 @@ public final class ResponseBodyClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -230,9 +230,9 @@ public final class ResponseBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public byte[] base64Url() {
-        // Generated convenience method for base64UrlWithResponse
+    public byte[] base64url() {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(requestOptions).getValue().toObject(Base64Url.class).decodedBytes();
+        return base64urlWithResponse(requestOptions).getValue().toObject(Base64Url.class).decodedBytes();
     }
 }

@@ -26,7 +26,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     private final double id;
 
     /*
-     * Dictionary of ExtendsUnknownAdditionalPropertiesDerivedAge
+     * Additional properties
      */
     @Generated
     private Map<String, Double> additionalProperties;
@@ -52,7 +52,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of ExtendsUnknownAdditionalPropertiesDerivedAge.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of ExtendsUnknownAdditionalPropertiesDerivedAge.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsFloatAdditionalProperties object itself.

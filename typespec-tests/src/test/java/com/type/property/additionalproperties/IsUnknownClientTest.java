@@ -6,6 +6,7 @@ package com.type.property.additionalproperties;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalProperties;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDerived;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminated;
+import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminatedDerived;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -33,19 +34,19 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("IsUnknownAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
     public void testIsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
-        additionalProperty.put("name", "IsUnknownAdditionalProperties");
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
 
-        IsUnknownAdditionalPropertiesDerived body = new IsUnknownAdditionalPropertiesDerived(314);
-        body.setAge(2.71828);
+        IsUnknownAdditionalPropertiesDerived body = new IsUnknownAdditionalPropertiesDerived("IsUnknownAdditionalProperties", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDerivedClient.put(body);
 
@@ -54,21 +55,19 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals(2.71828, properties.getAge());
         Assertions.assertEquals(314, properties.getIndex());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 
+    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
-    @Disabled("'kind' was expected to be non-null and equal to 'IsUnknownAdditionalPropertiesDiscriminated'. The found 'kind' was 'derived'.")
     public void testIsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
-        additionalProperty.put("kind", "derived");
-        additionalProperty.put("index", 314);
-        additionalProperty.put("age", 2.71828) ;
         additionalProperty.put("prop1", 32);
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
 
-        IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminated("Derived");
+        IsUnknownAdditionalPropertiesDiscriminatedDerived body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+                .setAge(2.71828);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDiscriminatedClient.put(body);
 
@@ -76,6 +75,6 @@ public class IsUnknownClientTest {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("Derived", properties.getName());
-        Assertions.assertIterableEquals(additionalProperty.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 }

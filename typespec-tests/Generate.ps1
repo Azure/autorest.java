@@ -111,7 +111,7 @@ Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ 
 
 $job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
-$job | Wait-Job -Timeout 600
+$job | Wait-Job -Timeout 1200
 $job | Receive-Job
 
 Remove-Item ./http -Recurse -Force
