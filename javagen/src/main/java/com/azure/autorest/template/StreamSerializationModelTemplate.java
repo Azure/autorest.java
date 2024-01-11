@@ -87,6 +87,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(Base64.class.getName());
         imports.add(LinkedHashMap.class.getName());
         imports.add(List.class.getName());
+        imports.add(Map.class.getName());
         imports.add(Objects.class.getName());
         imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
     }
@@ -278,11 +279,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree(), isJsonMergePatch);
 
-        ClientModelProperty additionalProperties = propertiesManager.getAdditionalProperties();
-        if (additionalProperties != null) {
-            methodBlock.ifBlock(additionalProperties.getName() + " != null", ifAction -> {
-                IType valueType = ((MapType) additionalProperties.getWireType()).getValueType().asNullable();
-                ifAction.line("for (Map.Entry<String, %s> additionalProperty : %s.entrySet()) {", valueType, additionalProperties.getName());
+        if (getAdditionalPropertyInModelOrFromSuper(propertiesManager) != null) {
+            String additionalPropertiesAccessExpr = propertiesManager.getAdditionalProperties() != null
+                    ? propertiesManager.getAdditionalProperties().getName()
+                    : propertiesManager.getSuperAdditionalProperties().getGetterName() + "()";
+            IType wireType = propertiesManager.getAdditionalProperties() != null
+                    ? propertiesManager.getAdditionalProperties().getWireType()
+                    : propertiesManager.getSuperAdditionalProperties().getWireType();
+
+            methodBlock.ifBlock(additionalPropertiesAccessExpr + " != null", ifAction -> {
+                IType valueType = ((MapType) wireType).getValueType().asNullable();
+                ifAction.line("for (Map.Entry<String, %s> additionalProperty : %s.entrySet()) {", valueType, additionalPropertiesAccessExpr);
                 ifAction.indent(() ->
                         ifAction.line("jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());"));
                 ifAction.line("}");
@@ -723,6 +730,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         return childTypes;
     }
 
+    private static ClientModelProperty getAdditionalPropertyInModelOrFromSuper(ClientModelPropertiesManager propertiesManager) {
+        return propertiesManager.getAdditionalProperties() != null
+                ? propertiesManager.getAdditionalProperties()
+                : propertiesManager.getSuperAdditionalProperties();
+    }
+
     /**
      * Writes a terminal type's {@code fromJson(JsonReader)} method.
      * <p>
@@ -815,7 +828,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties
                 // or add them into an additional properties bag.
-                handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, propertiesManager.getAdditionalProperties(),
+                ClientModelProperty additionalProperty = getAdditionalPropertyInModelOrFromSuper(propertiesManager);
+                handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, additionalProperty,
                     propertiesManager.getJsonReaderFieldNameVariableName());
             });
         });
@@ -929,8 +943,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 + modelName + "();");
         }
 
-        if (propertiesManager.getAdditionalProperties() != null) {
-            initializeLocalVariable(methodBlock, propertiesManager.getAdditionalProperties(), settings);
+        ClientModelProperty additionalProperty = getAdditionalPropertyInModelOrFromSuper(propertiesManager);
+        if (additionalProperty != null) {
+            initializeLocalVariable(methodBlock, additionalProperty, settings);
         }
     }
 
@@ -1345,6 +1360,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             handleSettingDeserializedValue(methodBlock, propertiesManager.getDeserializedModelName(),
                 propertiesManager.getAdditionalProperties(), propertiesManager.getAdditionalProperties().getName(),
                 false);
+        } else if (propertiesManager.getSuperAdditionalProperties() != null) {
+            handleSettingDeserializedValue(methodBlock, propertiesManager.getDeserializedModelName(),
+                propertiesManager.getSuperAdditionalProperties(), propertiesManager.getSuperAdditionalProperties().getName(),
+                true);
         }
 
         methodBlock.line();
@@ -1841,7 +1860,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
                 // All properties have been checked for, add an else block that will either ignore unknown properties
                 // or add them into an additional properties bag.
-                handleUnknownXmlFieldDeserialization(whileBlock, ifBlock, propertiesManager.getAdditionalProperties(),
+                ClientModelProperty additionalProperty = getAdditionalPropertyInModelOrFromSuper(propertiesManager);
+                handleUnknownXmlFieldDeserialization(whileBlock, ifBlock, additionalProperty,
                     propertiesManager.getXmlReaderNameVariableName());
             });
         });
