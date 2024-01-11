@@ -17,10 +17,10 @@ public class CustomizationEncodeBytes extends Customization {
 
     @Override
     public void customize(LibraryCustomization customization, Logger logger) {
-        logger.info("Customizing the Base64UrlArrayBytesPropert");
+        logger.info("Customizing the Base64urlArrayBytesProperty");
 
         PackageCustomization packageCustomization = customization.getPackage("com.encode.bytes.models");
-        ClassCustomization classCustomization = packageCustomization.getClass("Base64UrlArrayBytesProperty");
+        ClassCustomization classCustomization = packageCustomization.getClass("Base64urlArrayBytesProperty");
 
         classCustomization.getProperty("value").setModifier(Modifier.PRIVATE);
 

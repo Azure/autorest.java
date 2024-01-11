@@ -5,32 +5,32 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for IntLiteralProperty1.
+ * Defines values for IntLiteralPropertyProperty.
  */
-public enum IntLiteralProperty1 {
+public enum IntLiteralPropertyProperty {
     /**
      * Enum value 1.
      */
     ONE(1L);
 
     /**
-     * The actual serialized value for a IntLiteralProperty1 instance.
+     * The actual serialized value for a IntLiteralPropertyProperty instance.
      */
     private final long value;
 
-    IntLiteralProperty1(long value) {
+    IntLiteralPropertyProperty(long value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a IntLiteralProperty1 instance.
+     * Parses a serialized value to a IntLiteralPropertyProperty instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed IntLiteralProperty1 object, or null if unable to parse.
+     * @return the parsed IntLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static IntLiteralProperty1 fromLong(long value) {
-        IntLiteralProperty1[] items = IntLiteralProperty1.values();
-        for (IntLiteralProperty1 item : items) {
+    public static IntLiteralPropertyProperty fromLong(long value) {
+        IntLiteralPropertyProperty[] items = IntLiteralPropertyProperty.values();
+        for (IntLiteralPropertyProperty item : items) {
             if (item.toLong() == value) {
                 return item;
             }

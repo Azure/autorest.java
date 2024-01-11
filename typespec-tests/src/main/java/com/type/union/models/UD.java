@@ -9,49 +9,49 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * Defines values for Lr.
+ * Defines values for UD.
  */
-public final class Lr extends ExpandableStringEnum<Lr> {
+public final class UD extends ExpandableStringEnum<UD> {
     /**
-     * Static value left for Lr.
+     * Static value up for UD.
      */
     @Generated
-    public static final Lr LEFT = fromString("left");
+    public static final UD UP = fromString("up");
 
     /**
-     * Static value right for Lr.
+     * Static value down for UD.
      */
     @Generated
-    public static final Lr RIGHT = fromString("right");
+    public static final UD DOWN = fromString("down");
 
     /**
-     * Creates a new instance of Lr value.
+     * Creates a new instance of UD value.
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
     @Generated
     @Deprecated
-    public Lr() {
+    public UD() {
     }
 
     /**
-     * Creates or finds a Lr from its string representation.
+     * Creates or finds a UD from its string representation.
      * 
      * @param name a name to look for.
-     * @return the corresponding Lr.
+     * @return the corresponding UD.
      */
     @Generated
-    public static Lr fromString(String name) {
-        return fromString(name, Lr.class);
+    public static UD fromString(String name) {
+        return fromString(name, UD.class);
     }
 
     /**
-     * Gets known Lr values.
+     * Gets known UD values.
      * 
-     * @return known Lr values.
+     * @return known UD values.
      */
     @Generated
-    public static Collection<Lr> values() {
-        return values(Lr.class);
+    public static Collection<UD> values() {
+        return values(UD.class);
     }
 }

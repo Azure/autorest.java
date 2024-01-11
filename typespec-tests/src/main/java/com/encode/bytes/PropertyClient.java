@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.implementation.PropertiesImpl;
 import com.encode.bytes.models.Base64BytesProperty;
-import com.encode.bytes.models.Base64UrlArrayBytesProperty;
-import com.encode.bytes.models.Base64UrlBytesProperty;
+import com.encode.bytes.models.Base64urlArrayBytesProperty;
+import com.encode.bytes.models.Base64urlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 
 /**
@@ -106,7 +106,7 @@ public final class PropertyClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -134,12 +134,12 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponse(body, requestOptions);
+    public Response<BinaryData> base64urlWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponse(body, requestOptions);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -171,8 +171,8 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlArrayWithResponse(body, requestOptions);
+    public Response<BinaryData> base64urlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlArrayWithResponse(body, requestOptions);
     }
 
     /**
@@ -218,7 +218,7 @@ public final class PropertyClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -231,15 +231,15 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Base64UrlBytesProperty base64Url(Base64UrlBytesProperty body) {
-        // Generated convenience method for base64UrlWithResponse
+    public Base64urlBytesProperty base64url(Base64urlBytesProperty body) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
-            .toObject(Base64UrlBytesProperty.class);
+        return base64urlWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Base64urlBytesProperty.class);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -252,10 +252,10 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Base64UrlArrayBytesProperty base64UrlArray(Base64UrlArrayBytesProperty body) {
-        // Generated convenience method for base64UrlArrayWithResponse
+    public Base64urlArrayBytesProperty base64urlArray(Base64urlArrayBytesProperty body) {
+        // Generated convenience method for base64urlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
-            .toObject(Base64UrlArrayBytesProperty.class);
+        return base64urlArrayWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(Base64urlArrayBytesProperty.class);
     }
 }

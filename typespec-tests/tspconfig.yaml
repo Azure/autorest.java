@@ -4,7 +4,6 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/tsp-output"
     partial-update: true
-    namer: true
     generate-samples: true
     generate-tests: true
     examples-directory: "{project-root}/tsp/examples"

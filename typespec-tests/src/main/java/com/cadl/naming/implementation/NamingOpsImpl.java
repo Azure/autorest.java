@@ -86,7 +86,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAnonymouse(@HostParam("endpoint") String endpoint,
+        Mono<Response<BinaryData>> getAnonymous(@HostParam("endpoint") String endpoint,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/naming")
@@ -95,7 +95,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAnonymouseSync(@HostParam("endpoint") String endpoint,
+        Response<BinaryData> getAnonymousSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -242,7 +242,7 @@ public final class NamingOpsImpl {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * <p>
      * <strong>Response Body Schema</strong>
      * </p>
@@ -260,14 +260,14 @@ public final class NamingOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getAnonymouseWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getAnonymousWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.getAnonymouse(this.client.getEndpoint(), accept, requestOptions, context));
+            .withContext(context -> service.getAnonymous(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * <p>
      * <strong>Response Body Schema</strong>
      * </p>
@@ -285,8 +285,8 @@ public final class NamingOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getAnonymouseWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getAnonymousWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAnonymouseSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.getAnonymousSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

@@ -562,7 +562,7 @@ public final class ParametersClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -574,8 +574,8 @@ public final class ParametersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withWithResponse(String with, RequestOptions requestOptions) {
-        return this.serviceClient.withWithResponse(with, requestOptions);
+    public Response<Void> withWithWithResponse(String with, RequestOptions requestOptions) {
+        return this.serviceClient.withWithWithResponse(with, requestOptions);
     }
 
     /**
@@ -1202,7 +1202,7 @@ public final class ParametersClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1214,10 +1214,10 @@ public final class ParametersClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void with(String with) {
-        // Generated convenience method for withWithResponse
+    public void withWith(String with) {
+        // Generated convenience method for withWithWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        withWithResponse(with, requestOptions).getValue();
+        withWithWithResponse(with, requestOptions).getValue();
     }
 
     /**

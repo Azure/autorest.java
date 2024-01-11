@@ -12,10 +12,11 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The model extends from a type that is Record&lt;unknown&gt; type.
+ * The derived discriminated type.
  */
 @Fluent
-public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditionalProperties {
+public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
+    extends IsUnknownAdditionalPropertiesDiscriminated {
     /*
      * The index property
      */
@@ -29,13 +30,13 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
     private Double age;
 
     /**
-     * Creates an instance of IsUnknownAdditionalPropertiesDerived class.
+     * Creates an instance of IsUnknownAdditionalPropertiesDiscriminatedDerived class.
      * 
      * @param name the name value to set.
      * @param index the index value to set.
      */
     @Generated
-    public IsUnknownAdditionalPropertiesDerived(String name, int index) {
+    public IsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
         super(name);
         this.index = index;
     }
@@ -64,10 +65,10 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
      * Set the age property: The age property.
      * 
      * @param age the age value to set.
-     * @return the IsUnknownAdditionalPropertiesDerived object itself.
+     * @return the IsUnknownAdditionalPropertiesDiscriminatedDerived object itself.
      */
     @Generated
-    public IsUnknownAdditionalPropertiesDerived setAge(Double age) {
+    public IsUnknownAdditionalPropertiesDiscriminatedDerived setAge(Double age) {
         this.age = age;
         return this;
     }
@@ -75,6 +76,7 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", "derived");
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
@@ -82,15 +84,16 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
     }
 
     /**
-     * Reads an instance of IsUnknownAdditionalPropertiesDerived from the JsonReader.
+     * Reads an instance of IsUnknownAdditionalPropertiesDiscriminatedDerived from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of IsUnknownAdditionalPropertiesDerived if the JsonReader was pointing to an instance of it,
-     * or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDerived.
+     * @return An instance of IsUnknownAdditionalPropertiesDiscriminatedDerived if the JsonReader was pointing to an
+     * instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDiscriminatedDerived.
      */
-    public static IsUnknownAdditionalPropertiesDerived fromJson(JsonReader jsonReader) throws IOException {
+    public static IsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
             int index = 0;
@@ -99,7 +102,14 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("name".equals(fieldName)) {
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"derived".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'derived'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("index".equals(fieldName)) {
                     index = reader.getInt();
@@ -109,11 +119,11 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
                     reader.skipChildren();
                 }
             }
-            IsUnknownAdditionalPropertiesDerived deserializedIsUnknownAdditionalPropertiesDerived
-                = new IsUnknownAdditionalPropertiesDerived(name, index);
-            deserializedIsUnknownAdditionalPropertiesDerived.age = age;
+            IsUnknownAdditionalPropertiesDiscriminatedDerived deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived
+                = new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
+            deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
 
-            return deserializedIsUnknownAdditionalPropertiesDerived;
+            return deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived;
         });
     }
 }

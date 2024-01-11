@@ -20,7 +20,7 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.naming.implementation.NamingOpsImpl;
 import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
-import com.cadl.naming.models.GetAnonymouseResponse;
+import com.cadl.naming.models.GetAnonymousResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -113,7 +113,7 @@ public final class NamingAsyncClient {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * <p>
      * <strong>Response Body Schema</strong>
      * </p>
@@ -132,8 +132,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getAnonymouseWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getAnonymouseWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> getAnonymousWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getAnonymousWithResponseAsync(requestOptions);
     }
 
     /**
@@ -199,7 +199,7 @@ public final class NamingAsyncClient {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -210,10 +210,10 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetAnonymouseResponse> getAnonymouse() {
-        // Generated convenience method for getAnonymouseWithResponse
+    public Mono<GetAnonymousResponse> getAnonymous() {
+        // Generated convenience method for getAnonymousWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAnonymouseWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetAnonymouseResponse.class));
+        return getAnonymousWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(GetAnonymousResponse.class));
     }
 }
