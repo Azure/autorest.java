@@ -79,9 +79,6 @@ interface ChildResourcesInterface
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
-  extends TrackedResourceOperations<
-      TopLevelArmResource,
-      TopLevelArmResourceProperties
-    > {}
+  extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
 
 interface Operations extends Azure.ResourceManager.Operations {}
