@@ -38,6 +38,9 @@ $generateScript = {
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
+  } elseif ($tspFile -match "arm.tsp") {
+    # for mgmt, do not generate tests due to random mock values
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
@@ -96,7 +99,7 @@ if (Test-Path ./tsp-output) {
 }
 
 # run other local tests except partial update
-$job = $((Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*"); (Get-Item ./tsp/arm/* -Filter "*.tsp")) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+$job = Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*" | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 600
 $job | Receive-Job
@@ -122,4 +125,3 @@ Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("R
 Copy-Item -Path ./tsp/arm/tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
 Remove-Item ./tsp-output -Recurse -Force
-Remove-Item ./tsp/arm/tsp-output -Recurse -Force

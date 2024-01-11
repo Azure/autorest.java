@@ -690,7 +690,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             generateClientMethodWithOnlyRequiredParameters, defaultOverloadType);
     }
 
-    private void createPageableClientMethods(Operation operation, boolean isProtocolMethod, JavaSettings settings,
+    private static void createPageableClientMethods(Operation operation, boolean isProtocolMethod, JavaSettings settings,
         List<ClientMethod> methods, Builder builder, ProxyMethod proxyMethod, List<ClientMethodParameter> parameters,
         String pageableItemName, boolean isSync, ReturnValue singlePageReturnValue, ReturnValue nextPageReturnValue,
         MethodVisibilityFunction visibilityFunction, ClientMethodParameter contextParameter,
@@ -826,7 +826,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             returnValue, visibilityFunction, getContextParameter(isProtocolMethod), generateClientMethodWithOnlyRequiredParameters, defaultOverloadType);
     }
 
-    private void createSimpleClientMethods(Operation operation, boolean isProtocolMethod,
+    private static void createSimpleClientMethods(Operation operation, boolean isProtocolMethod,
         List<ClientMethod> methods, Builder builder,
         ProxyMethod proxyMethod, List<ClientMethodParameter> parameters, boolean isSync,
         ReturnValue responseReturnValue, ReturnValue returnValue,
@@ -1703,19 +1703,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return new ClassType.Builder().packageName(finalTypePackage).name(finalTypeName).build();
     }
 
-    protected MethodNamer resolveMethodNamer(ProxyMethod proxyMethod, ConvenienceApi convenienceApi, boolean isProtocolMethod) {
+    private static MethodNamer resolveMethodNamer(ProxyMethod proxyMethod, ConvenienceApi convenienceApi, boolean isProtocolMethod) {
         if (!isProtocolMethod && convenienceApi != null) {
             return new MethodNamer(SchemaUtil.getJavaName(convenienceApi));
         } else {
-            return resolveMethodNamer(proxyMethod);
+            if (proxyMethod.isSync()) {
+                return new MethodNamer(proxyMethod.getBaseName());
+            }
+            return new MethodNamer(proxyMethod.getName());
         }
-    }
-
-    protected final MethodNamer resolveMethodNamer(ProxyMethod proxyMethod) {
-        if (proxyMethod.isSync()) {
-            return new MethodNamer(proxyMethod.getBaseName());
-        }
-        return new MethodNamer(proxyMethod.getName());
     }
 
     private static final class ReturnTypeHolder {

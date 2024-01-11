@@ -89,6 +89,9 @@ class OperationNameNormalization {
                     String newName = renamePlan.get(Utils.getJavaName(operation));
                     LOGGER.info("Rename operation from '{}' to '{}', in operation group '{}'", Utils.getJavaName(operation), newName, Utils.getJavaName(operationGroup));
                     operation.getLanguage().getJava().setName(newName);
+                    if (operation.getConvenienceApi() != null) {
+                        operation.getConvenienceApi().getLanguage().getJava().setName(newName);
+                    }
                 });
     }
 
