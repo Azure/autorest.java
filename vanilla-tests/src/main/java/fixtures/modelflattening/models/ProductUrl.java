@@ -5,7 +5,10 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The product URL.
@@ -15,7 +18,6 @@ public final class ProductUrl extends GenericUrl {
     /*
      * URL value.
      */
-    @JsonProperty(value = "@odata.value")
     private String odataValue;
 
     /**
@@ -61,5 +63,41 @@ public final class ProductUrl extends GenericUrl {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("generic_value", getGenericValue());
+        jsonWriter.writeStringField("@odata.value", this.odataValue);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ProductUrl from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ProductUrl if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IOException If an error occurs while reading the ProductUrl.
+     */
+    public static ProductUrl fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            ProductUrl deserializedProductUrl = new ProductUrl();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("generic_value".equals(fieldName)) {
+                    deserializedProductUrl.setGenericValue(reader.getString());
+                } else if ("@odata.value".equals(fieldName)) {
+                    deserializedProductUrl.odataValue = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedProductUrl;
+        });
     }
 }

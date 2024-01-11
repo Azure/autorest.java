@@ -5,22 +5,20 @@
 package fixtures.discriminatorflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Specifies the metric alert criteria for a single resource that has multiple metric criteria.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "odata.type")
-@JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
 @Fluent
 public final class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
      * The list of metric criteria for this 'all of' operation.
      */
-    @JsonProperty(value = "allOf")
     private List<String> allOf;
 
     /**
@@ -57,5 +55,51 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("odata.type",
+            Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA == null ? null
+                : Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString());
+        jsonWriter.writeArrayField("allOf", this.allOf, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of MetricAlertSingleResourceMultipleMetricCriteria from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MetricAlertSingleResourceMultipleMetricCriteria if the JsonReader was pointing to an
+     * instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the MetricAlertSingleResourceMultipleMetricCriteria.
+     */
+    public static MetricAlertSingleResourceMultipleMetricCriteria fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            MetricAlertSingleResourceMultipleMetricCriteria deserializedMetricAlertSingleResourceMultipleMetricCriteria
+                = new MetricAlertSingleResourceMultipleMetricCriteria();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("odata.type".equals(fieldName)) {
+                    String odataType = reader.getString();
+                    if (!"Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria".equals(odataType)) {
+                        throw new IllegalStateException(
+                            "'odata.type' was expected to be non-null and equal to 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'. The found 'odata.type' was '"
+                                + odataType + "'.");
+                    }
+                } else if ("allOf".equals(fieldName)) {
+                    List<String> allOf = reader.readArray(reader1 -> reader1.getString());
+                    deserializedMetricAlertSingleResourceMultipleMetricCriteria.allOf = allOf;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedMetricAlertSingleResourceMultipleMetricCriteria;
+        });
     }
 }

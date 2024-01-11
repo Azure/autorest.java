@@ -21,7 +21,6 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,6 +43,14 @@ public abstract class NewPlugin {
 
     public <T> T getValue(Type type, String key) {
         return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
+    }
+
+    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
+        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
+    }
+
+    public <T> List<T> getListValue(Class<T> valueType, String key) {
+        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
     }
 
     public String getStringValue(String key) {
@@ -142,22 +149,7 @@ public abstract class NewPlugin {
     }
 
     public String getConfigurationFile(String fileName) {
-        Map<String, String> configurations = getValue(new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return new Type[]{String.class, String.class};
-            }
-
-            @Override
-            public Type getRawType() {
-                return Map.class;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
-        }, "configurationFiles");
+        Map<String, String> configurations = getMapValue(String.class, String.class, "configurationFiles");
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();
             if (it.hasNext()) {

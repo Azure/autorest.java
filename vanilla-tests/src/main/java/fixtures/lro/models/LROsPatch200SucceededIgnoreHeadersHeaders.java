@@ -7,7 +7,6 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LROsPatch200SucceededIgnoreHeadersHeaders model.
@@ -17,7 +16,6 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
     /*
      * The Azure-AsyncOperation property.
      */
-    @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
     private static final HttpHeaderName AZURE_ASYNC_OPERATION = HttpHeaderName.fromString("Azure-AsyncOperation");

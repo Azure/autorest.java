@@ -7,7 +7,6 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LRORetrysPost202Retry200Headers model.
@@ -17,13 +16,11 @@ public final class LRORetrysPost202Retry200Headers {
     /*
      * The Retry-After property.
      */
-    @JsonProperty(value = "Retry-After")
     private Integer retryAfter;
 
     /*
      * The Location property.
      */
-    @JsonProperty(value = "Location")
     private String location;
 
     // HttpHeaders containing the raw property values.

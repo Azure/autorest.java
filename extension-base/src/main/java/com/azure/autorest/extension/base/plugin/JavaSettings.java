@@ -4,7 +4,6 @@
 package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -87,25 +86,22 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             // input-file
-            List<Object> inputFiles = host.getValue(List.class, "input-file");
+            List<String> inputFiles = host.getListValue(String.class, "input-file");
             if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(
-                    inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getInputFiles().addAll(inputFiles);
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
             }
             // require (readme.md etc.)
-            List<Object> require = host.getValue(List.class, "require");
+            List<String> require = host.getListValue(String.class, "require");
             if (require != null) {
-                autorestSettings.getRequire().addAll(
-                        require.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getRequire().addAll(require);
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
-                host.getValue(new TypeReference<Map<String, Object>>() {
-                }.getType(), "modelerfour"),
+                host.getMapValue(String.class, Object.class, "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
@@ -114,7 +110,6 @@ public class JavaSettings {
                 120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
-                getBooleanValue(host, "enable-xml", false),
                 getBooleanValue(host, "non-null-annotations", false),
                 getBooleanValue(host, "client-side-validations", false),
                 getStringValue(host, "client-type-prefix"),
@@ -146,8 +141,7 @@ public class JavaSettings {
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
                 getBooleanValue(host, "skip-formatting", false),
-                host.getValue(new TypeReference<Map<String, PollingDetails>>() {
-                }.getType(), "polling"),
+                host.getMapValue(String.class, PollingDetails.class, "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
@@ -156,11 +150,10 @@ public class JavaSettings {
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
-                host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
-                    "http-status-code-to-exception-type-mapping"),
+                host.getMapValue(Integer.class, String.class, "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
-                getBooleanValue(host, "stream-style-serialization", false),
+                getBooleanValue(host, "stream-style-serialization", true),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
@@ -195,7 +188,6 @@ public class JavaSettings {
      * @param maximumJavadocCommentWidth
      * @param serviceName
      * @param packageKeyword
-     * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientSideValidations
      * @param clientTypePrefix The prefix that will be added to each generated client type.
@@ -278,7 +270,6 @@ public class JavaSettings {
         int maximumJavadocCommentWidth,
         String serviceName,
         String packageKeyword,
-        boolean shouldGenerateXmlSerialization,
         boolean nonNullAnnotations,
         boolean clientSideValidations,
         String clientTypePrefix,
@@ -346,7 +337,6 @@ public class JavaSettings {
         this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
         this.serviceName = serviceName;
         this.packageName = packageKeyword;
-        this.shouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
         this.nonNullAnnotations = nonNullAnnotations;
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
@@ -635,12 +625,6 @@ public class JavaSettings {
             }
         }
         return packageBuilder.toString();
-    }
-
-    private final boolean shouldGenerateXmlSerialization;
-
-    public final boolean isGenerateXmlSerialization() {
-        return shouldGenerateXmlSerialization;
     }
 
     /**

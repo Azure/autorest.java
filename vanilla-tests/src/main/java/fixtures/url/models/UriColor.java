@@ -4,9 +4,6 @@
 
 package fixtures.url.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Defines values for UriColor.
  */
@@ -41,7 +38,6 @@ public enum UriColor {
      * @param value the serialized value to parse.
      * @return the parsed UriColor object, or null if unable to parse.
      */
-    @JsonCreator
     public static UriColor fromString(String value) {
         if (value == null) {
             return null;
@@ -58,7 +54,6 @@ public enum UriColor {
     /**
      * {@inheritDoc}
      */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

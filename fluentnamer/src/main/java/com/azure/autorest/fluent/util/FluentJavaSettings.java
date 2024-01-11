@@ -7,11 +7,9 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class FluentJavaSettings {
 
@@ -204,9 +201,9 @@ public class FluentJavaSettings {
 
         loadStringSetting("rename-operation-group", s -> {
             if (!CoreUtils.isNullOrEmpty(s)) {
-                String[] renamePairs = s.split(Pattern.quote(","));
+                String[] renamePairs = s.split(",");
                 for (String pair : renamePairs) {
-                    String[] fromAndTo = pair.split(Pattern.quote(":"));
+                    String[] fromAndTo = pair.split(":");
                     if (fromAndTo.length == 2) {
                         String from = fromAndTo[0];
                         String to = fromAndTo[1];
@@ -237,7 +234,7 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
-        Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentgen.naming.override");
+        Map<String, String> namingOverride = host.getMapValue(String.class, String.class, "pipeline.fluentgen.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
@@ -245,10 +242,12 @@ public class FluentJavaSettings {
 
     private void splitStringToSet(String s, Set<String> set) {
         if (!CoreUtils.isNullOrEmpty(s)) {
-            set.addAll(Arrays.stream(s.split(Pattern.quote(",")))
-                    .map(String::trim)
-                    .filter(s1 -> !s1.isEmpty())
-                    .collect(Collectors.toSet()));
+            for (String split : s.split(",")) {
+                split = split.trim();
+                if (!split.isEmpty()) {
+                    set.add(split);
+                }
+            }
         }
     }
 
@@ -270,7 +269,7 @@ public class FluentJavaSettings {
 
     private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
         String settingName = "resource-collection-associations";
-        List<ResourceCollectionAssociation> settingValue = host.getValue(new TypeReference<List<ResourceCollectionAssociation>>() {}.getType(), settingName);
+        List<ResourceCollectionAssociation> settingValue = host.getListValue(ResourceCollectionAssociation.class, settingName);
         if (settingValue != null) {
             logger.debug("Option, array, {} : {}", settingName, settingValue);
             action.accept(settingValue);

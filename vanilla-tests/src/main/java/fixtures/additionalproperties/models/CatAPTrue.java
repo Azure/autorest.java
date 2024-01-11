@@ -5,7 +5,10 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The CatAPTrue model.
@@ -15,7 +18,6 @@ public final class CatAPTrue extends PetAPTrue {
     /*
      * The friendly property.
      */
-    @JsonProperty(value = "friendly")
     private Boolean friendly;
 
     /**
@@ -70,5 +72,47 @@ public final class CatAPTrue extends PetAPTrue {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeBooleanField("friendly", this.friendly);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of CatAPTrue from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of CatAPTrue if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the CatAPTrue.
+     */
+    public static CatAPTrue fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            CatAPTrue deserializedCatAPTrue = new CatAPTrue();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedCatAPTrue.setId(reader.getInt());
+                } else if ("name".equals(fieldName)) {
+                    deserializedCatAPTrue.setName(reader.getString());
+                } else if ("status".equals(fieldName)) {
+                    deserializedCatAPTrue.setStatus(reader.getNullable(JsonReader::getBoolean));
+                } else if ("friendly".equals(fieldName)) {
+                    deserializedCatAPTrue.friendly = reader.getNullable(JsonReader::getBoolean);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedCatAPTrue;
+        });
     }
 }

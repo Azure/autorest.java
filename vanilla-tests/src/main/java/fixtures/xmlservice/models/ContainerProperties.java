@@ -5,51 +5,50 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * Properties of a container.
  */
-@JacksonXmlRootElement(localName = "ContainerProperties")
 @Fluent
-public final class ContainerProperties {
+public final class ContainerProperties implements XmlSerializable<ContainerProperties> {
     /*
      * The Last-Modified property.
      */
-    @JsonProperty(value = "Last-Modified", required = true)
     private DateTimeRfc1123 lastModified;
 
     /*
      * The Etag property.
      */
-    @JsonProperty(value = "Etag", required = true)
     private String etag;
 
     /*
      * The LeaseStatus property.
      */
-    @JsonProperty(value = "LeaseStatus")
     private LeaseStatusType leaseStatus;
 
     /*
      * The LeaseState property.
      */
-    @JsonProperty(value = "LeaseState")
     private LeaseStateType leaseState;
 
     /*
      * The LeaseDuration property.
      */
-    @JsonProperty(value = "LeaseDuration")
     private LeaseDurationType leaseDuration;
 
     /*
      * The PublicAccess property.
      */
-    @JsonProperty(value = "PublicAccess")
     private PublicAccessType publicAccess;
 
     /**
@@ -197,5 +196,79 @@ public final class ContainerProperties {
         if (getEtag() == null) {
             throw new IllegalArgumentException("Missing required property etag in model ContainerProperties");
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
+        xmlWriter.writeStringElement("Etag", this.etag);
+        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
+        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
+        xmlWriter.writeStringElement("LeaseDuration",
+            this.leaseDuration == null ? null : this.leaseDuration.toString());
+        xmlWriter.writeStringElement("PublicAccess", this.publicAccess == null ? null : this.publicAccess.toString());
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ContainerProperties from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
+     * pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
+     */
+    public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ContainerProperties from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     * cases where the model can deserialize from different root element names.
+     * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
+     * pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
+     */
+    public static ContainerProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName
+            = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ContainerProperties deserializedContainerProperties = new ContainerProperties();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("Last-Modified".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("Etag".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.etag = reader.getStringElement();
+                } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseStatus = LeaseStatusType.fromString(reader.getStringElement());
+                } else if ("LeaseState".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseState = LeaseStateType.fromString(reader.getStringElement());
+                } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.leaseDuration
+                        = LeaseDurationType.fromString(reader.getStringElement());
+                } else if ("PublicAccess".equals(elementName.getLocalPart())) {
+                    deserializedContainerProperties.publicAccess
+                        = PublicAccessType.fromString(reader.getStringElement());
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedContainerProperties;
+        });
     }
 }

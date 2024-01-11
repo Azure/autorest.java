@@ -7,7 +7,6 @@ package fixtures.lro.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LROsPost202ListHeaders model.
@@ -17,13 +16,11 @@ public final class LROsPost202ListHeaders {
     /*
      * The Azure-AsyncOperation property.
      */
-    @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
     /*
      * The Location property.
      */
-    @JsonProperty(value = "Location")
     private String location;
 
     private static final HttpHeaderName AZURE_ASYNC_OPERATION = HttpHeaderName.fromString("Azure-AsyncOperation");

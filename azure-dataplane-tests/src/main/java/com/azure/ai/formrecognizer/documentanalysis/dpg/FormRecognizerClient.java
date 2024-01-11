@@ -526,6 +526,7 @@ public final class FormRecognizerClient {
      * </p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)

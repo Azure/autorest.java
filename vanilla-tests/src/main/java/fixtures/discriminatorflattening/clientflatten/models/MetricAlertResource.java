@@ -5,17 +5,20 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The metric alert resource.
  */
 @Fluent
-public final class MetricAlertResource {
+public final class MetricAlertResource implements JsonSerializable<MetricAlertResource> {
     /*
      * The alert rule properties of the resource.
      */
-    @JsonProperty(value = "properties", required = true)
     private MetricAlertProperties innerProperties = new MetricAlertProperties();
 
     /**
@@ -68,5 +71,39 @@ public final class MetricAlertResource {
         } else {
             getInnerProperties().validate();
         }
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeJsonField("properties", this.innerProperties);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of MetricAlertResource from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MetricAlertResource if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the MetricAlertResource.
+     */
+    public static MetricAlertResource fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            MetricAlertResource deserializedMetricAlertResource = new MetricAlertResource();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("properties".equals(fieldName)) {
+                    deserializedMetricAlertResource.innerProperties = MetricAlertProperties.fromJson(reader);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedMetricAlertResource;
+        });
     }
 }

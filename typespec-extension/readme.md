@@ -57,7 +57,7 @@ options:
     service-versions:
       - "2022-05-15-preview"
     enable-sync-stack: true
-    stream-style-serialization: false
+    stream-style-serialization: true
     generate-samples: true
     generate-tests: true
     examples-directory: "./examples"

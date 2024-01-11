@@ -5,7 +5,6 @@
 package fixtures.lro.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -83,7 +82,6 @@ public final class ProductPropertiesProvisioningStateValues
      * @param name a name to look for.
      * @return the corresponding ProductPropertiesProvisioningStateValues.
      */
-    @JsonCreator
     public static ProductPropertiesProvisioningStateValues fromString(String name) {
         return fromString(name, ProductPropertiesProvisioningStateValues.class);
     }

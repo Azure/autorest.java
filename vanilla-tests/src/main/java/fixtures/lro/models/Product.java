@@ -5,26 +5,25 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Map;
 
 /**
  * The Product model.
  */
-@JsonFlatten
 @Fluent
 public class Product extends Resource {
     /*
      * The provisioningState property.
      */
-    @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
     /*
      * The provisioningStateValues property.
      */
-    @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private ProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /**
@@ -88,5 +87,67 @@ public class Product extends Resource {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
+        jsonWriter.writeStringField("location", getLocation());
+        if (provisioningState != null || provisioningStateValues != null) {
+            jsonWriter.writeStartObject("properties");
+            jsonWriter.writeStringField("provisioningState", this.provisioningState);
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Product from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Product if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IOException If an error occurs while reading the Product.
+     */
+    public static Product fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Product deserializedProduct = new Product();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedProduct.setId(reader.getString());
+                } else if ("type".equals(fieldName)) {
+                    deserializedProduct.setType(reader.getString());
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedProduct.setTags(tags);
+                } else if ("location".equals(fieldName)) {
+                    deserializedProduct.setLocation(reader.getString());
+                } else if ("name".equals(fieldName)) {
+                    deserializedProduct.setName(reader.getString());
+                } else if ("properties".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("provisioningState".equals(fieldName)) {
+                            deserializedProduct.provisioningState = reader.getString();
+                        } else if ("provisioningStateValues".equals(fieldName)) {
+                            deserializedProduct.provisioningStateValues
+                                = ProductPropertiesProvisioningStateValues.fromString(reader.getString());
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedProduct;
+        });
     }
 }
