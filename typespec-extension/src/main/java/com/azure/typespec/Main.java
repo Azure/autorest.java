@@ -95,6 +95,8 @@ public class Main {
         // initialize plugin
         TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
 
+        codeModel = fluentPlugin.preProcess(codeModel);
+
         // client
         Client client = fluentPlugin.processClient(codeModel);
 

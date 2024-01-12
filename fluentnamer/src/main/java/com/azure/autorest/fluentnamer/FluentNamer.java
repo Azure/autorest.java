@@ -52,11 +52,6 @@ public class FluentNamer extends Preprocessor {
         this.clear();
 
         try {
-            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-            if (files.size() != 1) {
-                throw new RuntimeException(String
-                        .format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-            }
 
             Path codeModelFolder;
             try {
@@ -67,12 +62,7 @@ public class FluentNamer extends Preprocessor {
                 throw new RuntimeException("Failed to create temp directory for code model.", ex);
             }
 
-            // Read input file
-            String file = readFile(files.get(0));
-            // Write the input code model file to a local code model file to help debugging
-            Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
-            // Deserialize the input code model string to CodeModel object
-            CodeModel codeModel = loadCodeModel(file);
+            CodeModel codeModel = getCodeModelAndWriteToTargetFolder(codeModelFolder);
             // Do necessary transformation
             codeModel = transform(codeModel);
             // Write to local file (for debugging)
@@ -87,6 +77,21 @@ public class FluentNamer extends Preprocessor {
             logger.error("Failed to successfully run fluentnamer plugin.", e);
             throw new RuntimeException("Failed to successfully run fluentnamer plugin.", e);
         }
+    }
+
+    protected CodeModel getCodeModelAndWriteToTargetFolder(Path codeModelFolder) throws IOException {
+        List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+        if (files.size() != 1) {
+            throw new RuntimeException(String
+                .format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
+        }
+        // Read input file
+        String file = readFile(files.get(0));
+        // Write the input code model file to a local code model file to help debugging
+        Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
+        // Deserialize the input code model string to CodeModel object
+        CodeModel codeModel = loadCodeModel(file);
+        return codeModel;
     }
 
     private CodeModel loadCodeModel(String file) throws com.fasterxml.jackson.core.JsonProcessingException {

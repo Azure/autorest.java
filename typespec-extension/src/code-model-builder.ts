@@ -38,6 +38,8 @@ import {
   getOverloadedOperation,
   isErrorModel,
   EnumMember,
+  walkPropertiesInherited,
+  getService,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -53,6 +55,7 @@ import {
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
+  isPathParam,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
@@ -166,6 +169,7 @@ import {
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
+import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
@@ -455,6 +459,10 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
+      // skip models under "Azure.ResourceManager"
+      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
+        return;
+      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
@@ -519,19 +527,19 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
+      } else if (this.isArm()) {
+        // todo: there's ongoing discussion of whether to apply it to DPG as well
+        // fallback to @service.version
+        const service = getService(this.program, client.service);
+        if (service?.version) {
+          codeModelClient.apiVersions = [];
+          const apiVersion = new ApiVersion();
+          apiVersion.version = service.version;
+          codeModelClient.apiVersions.push(apiVersion);
+        } else {
+          throw new Error(`API version not available for client ${client.name}.`);
+        }
       }
-      // } else {
-      //   // fallback to @service.version
-      //   const service = getService(this.program, client.service);
-      //   if (service?.version) {
-      //     codeModelClient.apiVersions = [];
-      //     const apiVersion = new ApiVersion();
-      //     apiVersion.version = service.version;
-      //     codeModelClient.apiVersions.push(apiVersion);
-      //   } else {
-      //     throw new Error(`API version not available for client ${client.name}.`);
-      //   }
-      // }
 
       // server
       let baseUri = "{endpoint}";
@@ -905,6 +913,10 @@ export class CodeModelBuilder {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+      op.addParameter(parameter);
+      clientContext.addGlobalParameter(parameter);
+    } else if (this.isSubscriptionId(param)) {
+      const parameter = this.subscriptionIdParameter(param);
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
     } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
@@ -1981,6 +1993,21 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
+    if (
+      (this.isArm() &&
+        namespace?.startsWith("Azure.ResourceManager") &&
+        // there's ResourceListResult under Azure.ResourceManager namespace,
+        // which shouldn't be considered Resource schema parent
+        (name?.startsWith("TrackedResource") ||
+          name?.startsWith("ExtensionResource") ||
+          name?.startsWith("ProxyResource"))) ||
+      name === "ArmResource"
+    ) {
+      const objectSchema = this.dummyResourceSchema(type, name, namespace);
+      this.codeModel.schemas.add(objectSchema);
+
+      return objectSchema;
+    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2137,11 +2164,40 @@ export class CodeModelBuilder {
 
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
-      if (effective.name) {
+      if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
+        // Catalog is TrackedResource<CatalogProperties>
+        return type;
+      } else if (effective.name) {
         return effective;
       }
     }
     return type;
+  }
+
+  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
+    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
+    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
+    const declaredProperties = walkPropertiesInherited(type);
+    for (const prop of declaredProperties) {
+      resource.addProperty(this.processModelProperty(prop));
+    }
+    return resource;
+  }
+
+  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
+    return new ObjectScheme(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      language: {
+        default: {
+          name: name,
+          namespace: namespace,
+        },
+        java: {
+          name: name,
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
@@ -2575,6 +2631,42 @@ export class CodeModelBuilder {
     );
   }
 
+  private isSubscriptionId(param: HttpOperationParameter): boolean {
+    return (
+      "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
+      param.param &&
+      isArmCommonType(param.param) &&
+      isPathParam(this.program, param.param)
+    );
+  }
+
+  private subscriptionIdParameter(parameter: HttpOperationParameter): Parameter {
+    if (!this._subscriptionParameter) {
+      const param = parameter.param;
+      const description = getDoc(this.program, param);
+      this._subscriptionParameter = new Parameter(
+        "subscriptionId",
+        description ? description : "The ID of the target subscription.",
+        this.stringSchema,
+        {
+          implementation: ImplementationLocation.Client,
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Path),
+          },
+          language: {
+            default: {
+              serializedName: "subscriptionId",
+            },
+          },
+        },
+      );
+    }
+    return this._subscriptionParameter;
+  }
+
+  private _subscriptionParameter?: Parameter;
+
   private propagateSchemaUsage(schema: Schema): void {
     const processedSchemas = new Set<Schema>();
 
@@ -2666,7 +2758,11 @@ export class CodeModelBuilder {
   }
 
   private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
+    return this.isArm() && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
+  }
+
+  private isArm() {
+    return this.codeModel.arm;
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {
