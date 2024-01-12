@@ -235,11 +235,11 @@ public class Transformer {
     return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 
-  private static class PagingNextOperationSignature {
+  private static class OperationSignature {
     private final String operationGroup;
     private final String operationName;
 
-    private PagingNextOperationSignature(String operationGroup, String operationName) {
+    private OperationSignature(String operationGroup, String operationName) {
       this.operationGroup = operationGroup;
       this.operationName = operationName;
     }
@@ -248,7 +248,7 @@ public class Transformer {
     public boolean equals(Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
-      PagingNextOperationSignature that = (PagingNextOperationSignature) o;
+      OperationSignature that = (OperationSignature) o;
       return Objects.equals(operationGroup, that.operationGroup) && Objects.equals(operationName, that.operationName);
     }
 
@@ -258,8 +258,21 @@ public class Transformer {
     }
   }
 
-  private final Map<PagingNextOperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
+  private final Map<OperationSignature, Schema> pagingNextOperationResponseSchemaMap = new HashMap<>();
 
+  // Operation -> next page operation
+  private final Map<OperationSignature, Operation> operationNextPageOperationMap = new HashMap<>();
+
+  /**
+   * Adds next page operation for the given operation.
+   * If the same operation instance is provided, same nextOperation will be returned.
+   * Current operation and generated nextOperation share the same extension instance. next page operation's nextOperation property should
+   * always point to itself for it to be recognized as the next page operation(see ClientMethodMapper#createPageableClientMethods in javagen module).
+   *
+   * @param client code model client object
+   * @param operationGroup operation group of the operation
+   * @param operation pageable operation to add next page operation
+   */
   private void addPagingNextOperation(Client client, OperationGroup operationGroup, Operation operation) {
     String operationGroupName;
     String operationName;
@@ -277,11 +290,11 @@ public class Transformer {
 
       if (!operation.getResponses().isEmpty() && operation.getResponses().iterator().next().getSchema() != null) {
         Schema responseSchema = operation.getResponses().iterator().next().getSchema();
-        PagingNextOperationSignature signature = new PagingNextOperationSignature(operationGroupName, operationNameTmp);
+        OperationSignature signature = new OperationSignature(operationGroupName, operationNameTmp);
         if (pagingNextOperationResponseSchemaMap.containsKey(signature) && pagingNextOperationResponseSchemaMap.get(signature) != responseSchema) {
           // method signature conflict for different response schema, try a different operation name
           operationName = operation.getLanguage().getJava().getName() + "Next";
-          signature = new PagingNextOperationSignature(operationGroupName, operationName);
+          signature = new OperationSignature(operationGroupName, operationName);
         } else {
           operationName = operationNameTmp;
         }
@@ -293,8 +306,8 @@ public class Transformer {
       operationGroupName = operationGroup.getLanguage().getJava().getName();
       operationName = operation.getLanguage().getJava().getName() + "Next";
     }
-    if (!client.getOperationGroups().stream()
-        .anyMatch(og -> og.getLanguage().getJava().getName().equals(operationGroupName))) {
+    if (client.getOperationGroups().stream()
+        .noneMatch(og -> og.getLanguage().getJava().getName().equals(operationGroupName))) {
       OperationGroup newOg = new OperationGroup();
       newOg.setCodeModel(client);
       newOg.set$key(operationGroupName);
@@ -310,86 +323,98 @@ public class Transformer {
       operationGroup = newOg;
     }
 
-    if (!operationGroup.getOperations().stream()
-        .anyMatch(o -> o.getLanguage().getJava().getName().equals(operationName))) {
+    if (operationGroup.getOperations().stream()
+        .noneMatch(o -> o.getLanguage().getJava().getName().equals(operationName))) {
       Operation nextOperation = new Operation();
-      nextOperation.setOperationGroup(operationGroup);
-      nextOperation.set$key(operationName);
-      nextOperation.setLanguage(new Languages());
-      nextOperation.getLanguage().setJava(new Language());
-      nextOperation.getLanguage().getJava().setName(operationName);
-      nextOperation.getLanguage().getJava().setDescription("Get the next page of items");
-      nextOperation.setRequests(new ArrayList<>());
-      Request request = new Request();
-      nextOperation.getRequests().add(request);
-      nextOperation.getRequests().get(0).setProtocol(new Protocols());
-      nextOperation.getRequests().get(0).getProtocol().setHttp(new Protocol());
-      nextOperation.getRequests().get(0).getProtocol().getHttp().setPath("{nextLink}");
-      nextOperation.getRequests().get(0).getProtocol().getHttp()
-          .setUri(operation.getRequests().get(0).getProtocol().getHttp().getUri());
-      nextOperation.getRequests().get(0).getProtocol().getHttp().setMethod("get");
-      nextOperation.getRequests().get(0).setExtensions(operation.getRequests().get(0).getExtensions());
-      nextOperation.getRequests().get(0).setLanguage(operation.getLanguage());
-      Parameter nextLink = new Parameter();
-      nextLink.setOperation(nextOperation);
-      nextLink.setImplementation(Parameter.ImplementationLocation.METHOD);
-      nextLink.set$key("nextLink");
-      nextLink.setNullable(false);
-      nextLink.setSummary("The URL to get the next list of items");
-      nextLink.setSchema(new StringSchema());
-      nextLink.setRequired(true);
-      nextLink.setLanguage(new Languages());
-      nextLink.getLanguage().setJava(new Language());
-      nextLink.getLanguage().getJava().setName("nextLink");
-      nextLink.getLanguage().getJava().setSerializedName("nextLink");
-      nextLink.getLanguage().setDefault(nextLink.getLanguage().getJava());
-      nextLink.setProtocol(new Protocols());
-      nextLink.getProtocol().setHttp(new Protocol());
-      nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.PATH);
-      nextLink.setExtensions(new XmsExtensions());
-      nextLink.getExtensions().setXmsSkipUrlEncoding(true);
-      List<Parameter> requestParams = new ArrayList<>();
-      requestParams.add(nextLink);
-      nextOperation.getRequests().get(0).setParameters(requestParams);
-      List<Parameter> signatureParams = new ArrayList<>();
-      signatureParams.add(nextLink);
-      nextOperation.getRequests().get(0).setSignatureParameters(signatureParams);
-      nextOperation.setApiVersions(operation.getApiVersions());
-      nextOperation.setDeprecated(operation.getDeprecated());
-      nextOperation.setDescription(operation.getDescription());
-      nextOperation.setExceptions(operation.getExceptions());
-      nextOperation.setExtensions(operation.getExtensions());
-      nextOperation.setExternalDocs(operation.getExternalDocs());
-      nextOperation.setProfile(operation.getProfile());
-      nextOperation.setResponses(operation.getResponses());
-      nextOperation.setSummary(operation.getSummary());
-      nextOperation.setUid(operation.getUid());
+      OperationSignature operationSignature = new OperationSignature(
+              operation.getOperationGroup().getLanguage().getJava().getName(),
+              operation.getLanguage().getJava().getName());
+      if (!operationNextPageOperationMap.containsKey(operationSignature)) {
+        nextOperation.setOperationGroup(operationGroup);
+        nextOperation.set$key(operationName);
+        nextOperation.setLanguage(new Languages());
+        nextOperation.getLanguage().setJava(new Language());
+        nextOperation.getLanguage().getJava().setName(operationName);
+        nextOperation.getLanguage().getJava().setDescription("Get the next page of items");
+        nextOperation.setRequests(new ArrayList<>());
+        Request request = new Request();
+        nextOperation.getRequests().add(request);
+        nextOperation.getRequests().get(0).setProtocol(new Protocols());
+        nextOperation.getRequests().get(0).getProtocol().setHttp(new Protocol());
+        nextOperation.getRequests().get(0).getProtocol().getHttp().setPath("{nextLink}");
+        nextOperation.getRequests().get(0).getProtocol().getHttp()
+                .setUri(operation.getRequests().get(0).getProtocol().getHttp().getUri());
+        nextOperation.getRequests().get(0).getProtocol().getHttp().setMethod("get");
+        nextOperation.getRequests().get(0).setExtensions(operation.getRequests().get(0).getExtensions());
+        nextOperation.getRequests().get(0).setLanguage(operation.getLanguage());
+        Parameter nextLink = new Parameter();
+        nextLink.setOperation(nextOperation);
+        nextLink.setImplementation(Parameter.ImplementationLocation.METHOD);
+        nextLink.set$key("nextLink");
+        nextLink.setNullable(false);
+        nextLink.setSummary("The URL to get the next list of items");
+        nextLink.setSchema(new StringSchema());
+        nextLink.setRequired(true);
+        nextLink.setLanguage(new Languages());
+        nextLink.getLanguage().setJava(new Language());
+        nextLink.getLanguage().getJava().setName("nextLink");
+        nextLink.getLanguage().getJava().setSerializedName("nextLink");
+        nextLink.getLanguage().setDefault(nextLink.getLanguage().getJava());
+        nextLink.setProtocol(new Protocols());
+        nextLink.getProtocol().setHttp(new Protocol());
+        nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.PATH);
+        nextLink.setExtensions(new XmsExtensions());
+        nextLink.getExtensions().setXmsSkipUrlEncoding(true);
+        List<Parameter> requestParams = new ArrayList<>();
+        requestParams.add(nextLink);
+        nextOperation.getRequests().get(0).setParameters(requestParams);
+        List<Parameter> signatureParams = new ArrayList<>();
+        signatureParams.add(nextLink);
+        nextOperation.getRequests().get(0).setSignatureParameters(signatureParams);
+        nextOperation.setApiVersions(operation.getApiVersions());
+        nextOperation.setDeprecated(operation.getDeprecated());
+        nextOperation.setDescription(operation.getDescription());
+        nextOperation.setExceptions(operation.getExceptions());
+        nextOperation.setExtensions(operation.getExtensions());
+        nextOperation.setExternalDocs(operation.getExternalDocs());
+        nextOperation.setProfile(operation.getProfile());
+        nextOperation.setResponses(operation.getResponses());
+        nextOperation.setSummary(operation.getSummary());
+        nextOperation.setUid(operation.getUid());
 
-      if (operation.getExtensions().getXmsPageable().getOperationName() == null) {
-        operation.getRequests().stream().flatMap(r -> r.getParameters().stream())
-                .filter(parameter -> {
-                  return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
-                          || (parameter.getProtocol().getHttp().getIn() != null
-                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
-                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
-                })
-                .forEach(param -> {
-                  nextOperation.getRequests().get(0).getParameters().add(param);
-                });
+        Operation nextOperationLocal = nextOperation;
 
-        operation.getRequests().stream().flatMap(r -> r.getSignatureParameters().stream())
-                .filter(parameter -> {
-                  return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
-                          || (parameter.getProtocol().getHttp().getIn() != null
-                          && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
-                          || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
-                })
-                .forEach(param -> {
-                  nextOperation.getRequests().get(0).getSignatureParameters().add(param);
-                });
+        if (operation.getExtensions().getXmsPageable().getOperationName() == null) {
+          operation.getRequests().stream().flatMap(r -> r.getParameters().stream())
+                  .filter(parameter -> {
+                    return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
+                            || (parameter.getProtocol().getHttp().getIn() != null
+                            && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
+                            || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
+                  })
+                  .forEach(param -> {
+                    nextOperationLocal.getRequests().get(0).getParameters().add(param);
+                  });
+
+          operation.getRequests().stream().flatMap(r -> r.getSignatureParameters().stream())
+                  .filter(parameter -> {
+                    return parameter.getProtocol() == null || parameter.getProtocol().getHttp() == null
+                            || (parameter.getProtocol().getHttp().getIn() != null
+                            && (parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.HEADER)
+                            || parameter.getProtocol().getHttp().getIn().equals(RequestParameterLocation.URI)));
+                  })
+                  .forEach(param -> {
+                    nextOperationLocal.getRequests().get(0).getSignatureParameters().add(param);
+                  });
+        }
+        operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
+        nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
+        operationNextPageOperationMap.put(operationSignature, nextOperation);
+      } else {
+        // In case the same operation instance is processed more than once(both in "transformOperationGroups" and "transformClients"),
+        // we share the same next-page operation for the same operation instance.
+        nextOperation = operationNextPageOperationMap.get(operationSignature);
       }
-      operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
-      nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
       operationGroup.getOperations().add(nextOperation);
     } else {
       Operation nextOperation = operationGroup.getOperations().stream()
