@@ -56,15 +56,17 @@ public class TypeSpecFluentPlugin extends FluentGen {
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
     }
 
-    public Client processClient(CodeModel codeModel) {
+    public CodeModel preProcess(CodeModel codeModel) {
         // transform code model
-        FluentNamer fluentNamer = new TypeSpecFluentNamer(this, pluginName, sessionId, SETTINGS_MAP);
-        codeModel = fluentNamer.transform(codeModel);
+        FluentNamer fluentNamer = new TypeSpecFluentNamer(this, pluginName, sessionId, SETTINGS_MAP, codeModel);
+        return fluentNamer.processCodeModel();
+    }
+
+    public Client processClient(CodeModel codeModel) {
 
         // call FluentGen.handleMap
-        Client client = handleMap(codeModel);
 
-        return client;
+        return handleMap(codeModel);
     }
 
     public FluentJavaPackage processTemplates(CodeModel codeModel, Client client) {
@@ -105,6 +107,8 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("client-flattened-annotation-target", "none");
         SETTINGS_MAP.put("null-byte-array-maps-to-empty-array", true);
         SETTINGS_MAP.put("graal-vm-config", true);
+        SETTINGS_MAP.put("sync-methods", "all");
+        SETTINGS_MAP.put("client-side-validations", true);
     }
 
     @SuppressWarnings("unchecked")

@@ -4,17 +4,26 @@
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.TypeSpecPlugin;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluentnamer.FluentNamer;
 
 import java.lang.reflect.Type;
+import java.nio.file.Path;
 import java.util.Map;
 
 public class TypeSpecFluentNamer extends FluentNamer {
     private final Map<String, Object> settingsMap;
-    public TypeSpecFluentNamer(NewPlugin plugin, String pluginName, String sessionId, Map<String, Object> settingsMap) {
+    private final CodeModel codeModel;
+    public TypeSpecFluentNamer(NewPlugin plugin, String pluginName, String sessionId, Map<String, Object> settingsMap, CodeModel codeModel) {
         super(plugin, new TypeSpecPlugin.MockConnection(), pluginName, sessionId);
         this.settingsMap = settingsMap;
+        this.codeModel = codeModel;
+    }
+
+    @Override
+    protected CodeModel getCodeModelAndWriteToTargetFolder(Path codeModelFolder) {
+        return this.codeModel;
     }
 
     @Override
