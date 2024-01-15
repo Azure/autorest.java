@@ -52,7 +52,7 @@ public final class ClientModelPropertiesManager {
     private final List<ClientModelProperty> superRequiredProperties;
     private final List<ClientModelProperty> superSetterProperties;
     private final List<ClientModelProperty> superReadOnlyProperties;
-    private final ClientModelProperty superAdditionalProperties;
+    private final ClientModelProperty superAdditionalPropertiesProperty;
     private final List<ClientModelProperty> constructorProperties;
     private final List<ClientModelProperty> requiredProperties;
     private final List<ClientModelProperty> setterProperties;
@@ -178,7 +178,7 @@ public final class ClientModelPropertiesManager {
             }
         }
 
-        this.superAdditionalProperties = superAdditionalProperties;
+        this.superAdditionalPropertiesProperty = superAdditionalProperties;
 
         constructorProperties = new ArrayList<>();
         requiredProperties = new ArrayList<>();
@@ -432,8 +432,8 @@ public final class ClientModelPropertiesManager {
      * @return The {@link ClientModelProperty} that defines the additional properties property in superclass, or null if
      * no superclass defines additional properties.
      */
-    public ClientModelProperty getSuperAdditionalProperties() {
-        return superAdditionalProperties;
+    public ClientModelProperty getSuperAdditionalPropertiesProperty() {
+        return superAdditionalPropertiesProperty;
     }
 
     /**

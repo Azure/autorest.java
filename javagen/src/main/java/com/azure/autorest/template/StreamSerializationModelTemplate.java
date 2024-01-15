@@ -282,10 +282,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager) != null) {
             String additionalPropertiesAccessExpr = propertiesManager.getAdditionalProperties() != null
                     ? propertiesManager.getAdditionalProperties().getName()
-                    : propertiesManager.getSuperAdditionalProperties().getGetterName() + "()";
+                    : propertiesManager.getSuperAdditionalPropertiesProperty().getGetterName() + "()";
             IType wireType = propertiesManager.getAdditionalProperties() != null
                     ? propertiesManager.getAdditionalProperties().getWireType()
-                    : propertiesManager.getSuperAdditionalProperties().getWireType();
+                    : propertiesManager.getSuperAdditionalPropertiesProperty().getWireType();
 
             methodBlock.ifBlock(additionalPropertiesAccessExpr + " != null", ifAction -> {
                 IType valueType = ((MapType) wireType).getValueType().asNullable();
@@ -739,7 +739,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static ClientModelProperty getAdditionalPropertiesPropertyInModelOrFromSuper(ClientModelPropertiesManager propertiesManager) {
         return propertiesManager.getAdditionalProperties() != null
                 ? propertiesManager.getAdditionalProperties()
-                : propertiesManager.getSuperAdditionalProperties();
+                : propertiesManager.getSuperAdditionalPropertiesProperty();
     }
 
     /**
@@ -1366,9 +1366,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             handleSettingDeserializedValue(methodBlock, propertiesManager.getDeserializedModelName(),
                 propertiesManager.getAdditionalProperties(), propertiesManager.getAdditionalProperties().getName(),
                 false);
-        } else if (propertiesManager.getSuperAdditionalProperties() != null) {
+        } else if (propertiesManager.getSuperAdditionalPropertiesProperty() != null) {
             handleSettingDeserializedValue(methodBlock, propertiesManager.getDeserializedModelName(),
-                propertiesManager.getSuperAdditionalProperties(), propertiesManager.getSuperAdditionalProperties().getName(),
+                propertiesManager.getSuperAdditionalPropertiesProperty(), propertiesManager.getSuperAdditionalPropertiesProperty().getName(),
                 true);
         }
 
