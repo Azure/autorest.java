@@ -135,13 +135,13 @@ public final class MultipartFormDataHelper {
 
     // application/octet-stream, multiple files
     /**
-     * Formats a application/octet-stream field for a multipart HTTP request.
+     * Formats a application/octet-stream field (potentially multiple files) for a multipart HTTP request.
      *
      * @param fieldName the field name
      * @param files the List of BinaryData of the files
      * @param filenames the List of filenames.
-     * If it is null, or the size of the List is smaller than that of "files", an implementation-specific filename is
-     * used.
+     * If it is {@code null}, or the size of the List is smaller than that of "files", implementation-specific filename
+     * is used.
      * @return the MultipartFormDataHelper instance
      */
     public MultipartFormDataHelper serializeFileFields(String fieldName, List<BinaryData> files,
