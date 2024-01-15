@@ -262,7 +262,10 @@ public final class FormDatasImpl {
      *         (recursive schema, see above)
      *     ]
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -299,7 +302,10 @@ public final class FormDatasImpl {
      *         (recursive schema, see above)
      *     ]
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -388,7 +394,10 @@ public final class FormDatasImpl {
      * {
      *     id: String (Required)
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -418,7 +427,10 @@ public final class FormDatasImpl {
      * {
      *     id: String (Required)
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>

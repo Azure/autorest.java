@@ -6,22 +6,20 @@ package com.payload.multipart.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Address model.
  */
 @Immutable
-public final class Address implements JsonSerializable<Address> {
+public final class Address {
     /*
      * The city property.
      */
     @Generated
-    private final String city;
+    @JsonProperty(value = "city")
+    private String city;
 
     /**
      * Creates an instance of Address class.
@@ -29,7 +27,8 @@ public final class Address implements JsonSerializable<Address> {
      * @param city the city value to set.
      */
     @Generated
-    public Address(String city) {
+    @JsonCreator
+    public Address(@JsonProperty(value = "city") String city) {
         this.city = city;
     }
 
@@ -41,38 +40,5 @@ public final class Address implements JsonSerializable<Address> {
     @Generated
     public String getCity() {
         return this.city;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("city", this.city);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of Address from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of Address if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Address.
-     */
-    public static Address fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String city = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("city".equals(fieldName)) {
-                    city = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            return new Address(city);
-        });
     }
 }

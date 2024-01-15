@@ -90,7 +90,10 @@ public final class MultiPartAsyncClient {
      *         (recursive schema, see above)
      *     ]
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -151,7 +154,10 @@ public final class MultiPartAsyncClient {
      * {
      *     id: String (Required)
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -278,8 +284,8 @@ public final class MultiPartAsyncClient {
             .serializeJsonField("address", body.getAddress())
             .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
             .serializeJsonField("previousAddresses", body.getPreviousAddresses())
-            .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -323,9 +329,9 @@ public final class MultiPartAsyncClient {
     public Mono<Void> binaryArrayParts(BinaryArrayPartsRequest body) {
         // Generated convenience method for binaryArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return binaryArrayPartsWithResponse(
-            new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-                .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(),
+        return binaryArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeTextField("id", body.getId())
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 

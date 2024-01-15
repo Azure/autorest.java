@@ -18,7 +18,7 @@ public final class JsonArrayPartsRequest {
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
+    private BinaryData profileImage;
 
     /*
      * The filename for profileImage
@@ -30,7 +30,7 @@ public final class JsonArrayPartsRequest {
      * The previousAddresses property.
      */
     @Generated
-    private final List<Address> previousAddresses;
+    private List<Address> previousAddresses;
 
     /**
      * Creates an instance of JsonArrayPartsRequest class.

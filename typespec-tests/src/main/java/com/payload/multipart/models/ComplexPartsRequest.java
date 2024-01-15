@@ -18,19 +18,19 @@ public final class ComplexPartsRequest {
      * The id property.
      */
     @Generated
-    private final String id;
+    private String id;
 
     /*
      * The address property.
      */
     @Generated
-    private final Address address;
+    private Address address;
 
     /*
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
+    private BinaryData profileImage;
 
     /*
      * The filename for profileImage
@@ -42,13 +42,19 @@ public final class ComplexPartsRequest {
      * The previousAddresses property.
      */
     @Generated
-    private final List<Address> previousAddresses;
+    private List<Address> previousAddresses;
 
     /*
      * The pictures property.
      */
     @Generated
-    private final List<byte[]> pictures;
+    private List<BinaryData> pictures;
+
+    /*
+     * The filenames for pictures
+     */
+    @Generated
+    private List<String> picturesFilenames;
 
     /**
      * Creates an instance of ComplexPartsRequest class.
@@ -61,7 +67,7 @@ public final class ComplexPartsRequest {
      */
     @Generated
     public ComplexPartsRequest(String id, Address address, BinaryData profileImage, List<Address> previousAddresses,
-        List<byte[]> pictures) {
+        List<BinaryData> pictures) {
         this.id = id;
         this.address = address;
         this.profileImage = profileImage;
@@ -137,7 +143,29 @@ public final class ComplexPartsRequest {
      * @return the pictures value.
      */
     @Generated
-    public List<byte[]> getPictures() {
+    public List<BinaryData> getPictures() {
         return this.pictures;
+    }
+
+    /**
+     * Get the picturesFilenames property: The filenames for pictures.
+     * 
+     * @return the picturesFilenames value.
+     */
+    @Generated
+    public List<String> getPicturesFilenames() {
+        return this.picturesFilenames;
+    }
+
+    /**
+     * Set the picturesFilenames property: The filenames for pictures.
+     * 
+     * @param picturesFilenames the picturesFilenames value to set.
+     * @return the ComplexPartsRequest object itself.
+     */
+    @Generated
+    public ComplexPartsRequest setPicturesFilenames(List<String> picturesFilenames) {
+        this.picturesFilenames = picturesFilenames;
+        return this;
     }
 }

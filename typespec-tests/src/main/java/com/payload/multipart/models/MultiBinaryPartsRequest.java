@@ -17,7 +17,7 @@ public final class MultiBinaryPartsRequest {
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
+    private BinaryData profileImage;
 
     /*
      * The filename for profileImage

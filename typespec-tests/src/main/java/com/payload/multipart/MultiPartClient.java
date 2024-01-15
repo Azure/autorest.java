@@ -88,7 +88,10 @@ public final class MultiPartClient {
      *         (recursive schema, see above)
      *     ]
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -149,7 +152,10 @@ public final class MultiPartClient {
      * {
      *     id: String (Required)
      *     pictures (Required): [
-     *         byte[] (Required)
+     *         BinaryData (Required)
+     *     ]
+     *     pictures (Optional): [
+     *         String (Optional)
      *     ]
      * }
      * }</pre>
@@ -274,7 +280,8 @@ public final class MultiPartClient {
             .serializeJsonField("address", body.getAddress())
             .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
             .serializeJsonField("previousAddresses", body.getPreviousAddresses())
-            .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(), requestOptions).getValue();
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
+            requestOptions).getValue();
     }
 
     /**
@@ -317,7 +324,8 @@ public final class MultiPartClient {
         // Generated convenience method for binaryArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         binaryArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-            .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(), requestOptions).getValue();
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
+            requestOptions).getValue();
     }
 
     /**
