@@ -17,13 +17,13 @@ public final class MultiPartRequest {
      * The id property.
      */
     @Generated
-    private String id;
+    private final String id;
 
     /*
      * The profileImage property.
      */
     @Generated
-    private BinaryData profileImage;
+    private final BinaryData profileImage;
 
     /*
      * The filename for profileImage

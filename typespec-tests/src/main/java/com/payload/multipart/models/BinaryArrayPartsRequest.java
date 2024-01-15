@@ -18,13 +18,13 @@ public final class BinaryArrayPartsRequest {
      * The id property.
      */
     @Generated
-    private String id;
+    private final String id;
 
     /*
      * The pictures property.
      */
     @Generated
-    private List<BinaryData> pictures;
+    private final List<BinaryData> pictures;
 
     /*
      * The filenames for pictures

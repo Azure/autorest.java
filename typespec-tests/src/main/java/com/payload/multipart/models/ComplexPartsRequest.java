@@ -18,19 +18,19 @@ public final class ComplexPartsRequest {
      * The id property.
      */
     @Generated
-    private String id;
+    private final String id;
 
     /*
      * The address property.
      */
     @Generated
-    private Address address;
+    private final Address address;
 
     /*
      * The profileImage property.
      */
     @Generated
-    private BinaryData profileImage;
+    private final BinaryData profileImage;
 
     /*
      * The filename for profileImage
@@ -42,13 +42,13 @@ public final class ComplexPartsRequest {
      * The previousAddresses property.
      */
     @Generated
-    private List<Address> previousAddresses;
+    private final List<Address> previousAddresses;
 
     /*
      * The pictures property.
      */
     @Generated
-    private List<BinaryData> pictures;
+    private final List<BinaryData> pictures;
 
     /*
      * The filenames for pictures

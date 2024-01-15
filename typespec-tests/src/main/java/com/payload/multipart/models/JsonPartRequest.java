@@ -17,13 +17,13 @@ public final class JsonPartRequest {
      * The address property.
      */
     @Generated
-    private Address address;
+    private final Address address;
 
     /*
      * The profileImage property.
      */
     @Generated
-    private BinaryData profileImage;
+    private final BinaryData profileImage;
 
     /*
      * The filename for profileImage
