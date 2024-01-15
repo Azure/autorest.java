@@ -8,7 +8,6 @@ import com.type.property.additionalproperties.models.IsUnknownAdditionalProperti
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminated;
 import com.type.property.additionalproperties.models.IsUnknownAdditionalPropertiesDiscriminatedDerived;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
@@ -37,7 +36,6 @@ public class IsUnknownClientTest {
         Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
-    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
     public void testIsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
@@ -58,7 +56,6 @@ public class IsUnknownClientTest {
         Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 
-    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     @Test
     public void testIsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
