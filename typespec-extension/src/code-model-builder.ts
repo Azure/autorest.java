@@ -915,8 +915,8 @@ export class CodeModelBuilder {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
       if (this.isArm()) {
-        // In ARM, we yet don't know how service will define mixed api-versions(like those in Compute RP).
         // Currently we assume ARM tsp only have one client and one api-version.
+        // TODO: How will service define mixed api-versions(like those in Compute RP)?
         const apiVersion = clientContext.apiVersions[0];
         if (!this._armApiVersionParameter) {
           this._armApiVersionParameter = this.createApiVersionParameter(
